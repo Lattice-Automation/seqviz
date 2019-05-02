@@ -1,0 +1,63 @@
+#part-explorer {
+  height: 100%;
+  .seq-viewers-container {
+    display: flex;
+    height: inherit;
+  }
+}
+
+label {
+  width: 100%;
+  font-weight: $regular;
+}
+
+.select {
+  background-color: transparent;
+  outline: none;
+  font-size: 13px;
+  height: 30px;
+  width: 168px;
+  padding-left: 5px;
+  border: 1px solid #bebebe;
+  padding: 5px 10px;
+  color: black;
+  float: right;
+}
+
+.input {
+  width: auto;
+  padding-left: 5px;
+  color: black;
+  background-color: $inputbkg;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 1px;
+  margin-left: auto;
+  outline: none;
+}
+
+.modal {
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background-color: white;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border-radius: 7px;
+  background-color: $scrollthumbsidebar;
+}
+
+.scroll::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+.scroll::-webkit-scrollbar-track-piece {
+  background-clip: padding-box;
+  border-radius: 7px;
+  background-color: $scrolltracksidebar;
+}

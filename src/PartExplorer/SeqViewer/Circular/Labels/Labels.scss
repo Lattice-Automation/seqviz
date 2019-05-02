@@ -1,0 +1,13 @@
+.label-line {
+  stroke: #9eaab8;
+  stroke-width: 1;
+  fill: none;
+}
+
+.circular-label {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

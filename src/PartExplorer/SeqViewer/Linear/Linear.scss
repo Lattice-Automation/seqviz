@@ -1,0 +1,46 @@
+#Linear-scroller {
+  height: 100%;
+  width: 100%;
+  outline: none !important;
+  position: relative;
+  font-weight: 300;
+  padding: 1%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-right: solid 1px gray;
+  top: 45px;
+
+  cursor: text;
+  .SeqBlock {
+    margin: 4px 0;
+  }
+}
+
+.cutSite-text {
+  font-family: "Roboto", sans-serif;
+}
+
+.linear-sel-block {
+  //fill: rgba(197, 220, 255, 0.56);
+  fill: lightBlue;
+}
+
+#Linear-scroller.scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+#Linear-scroller.scroll::-webkit-scrollbar-thumb {
+  background-color: #b7b9bd;
+  border-color: #b7b9bd;
+  border-radius: 5px;
+}
+
+#Linear-scroller.scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-color: transparent;
+}
+
+#Linear-scroller.scroll::-webkit-scrollbar-track-piece {
+  background-color: #f7f7f7;
+  border-color: transparent;
+}

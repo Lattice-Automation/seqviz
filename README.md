@@ -1,4 +1,5 @@
 # dna-sequence-vizualizer
+
 A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client’s website or application.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

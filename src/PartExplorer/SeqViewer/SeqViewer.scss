@@ -1,0 +1,19 @@
+.SeqViewer-container {
+  height: 100%;
+  min-height: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 2 !important;
+  .noSeq {
+    position: relative;
+    top: 45px;
+    left: 5px;
+  }
+}
+
+.SeqViewer-eventRouter {
+  position: absolute;
+  outline: none;
+  height: calc(100% - 45px);
+  width: inherit;
+}

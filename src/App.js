@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import PartExplorer from "../src/PartExplorer/PartExplorer";
+import pUC from "./DefaultParts/pUC";
+const Viewer = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Route exact path="/" component={Circular} />
+        <Route path="/linear" component={Linear} />
+      </div>
+    </Router>
   );
-}
+};
 
-export default App;
+const Circular = () => {
+  const part = pUC;
+  return <PartExplorer circular={true} part={part} />;
+};
+
+const Linear = () => {
+  const part = pUC;
+  return <PartExplorer circular={false} part={part} />;
+};
+
+export default Viewer;

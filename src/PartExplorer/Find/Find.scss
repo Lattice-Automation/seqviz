@@ -1,0 +1,89 @@
+.search-message {
+  padding-right: 10px;
+  color: brown;
+}
+.search-message-tooltip {
+  padding-right: 10px;
+  color: darkblue;
+  cursor: pointer;
+}
+
+.dropdown-find {
+  margin: 16px;
+  margin-left: 6px;
+  color: #d0d0d0;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.dropdown-find-form {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  width: 395px;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  top: 45px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  background-color: white;
+}
+
+.Find-container {
+  display: flex;
+  flex-direction: row;
+
+  &.upper {
+    input {
+      padding-left: 5px;
+      margin-right: 5px;
+      width: 300px;
+    }
+
+    label {
+      color: gray;
+      position: absolute;
+      font-weight: normal;
+      top: 13px;
+      right: 95px;
+      width: auto;
+    }
+
+    span {
+      padding: 5px;
+      opacity: 0.7;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+
+    .nextButton-active {
+      opacity: 1;
+    }
+  }
+
+  &.lower {
+    margin-top: 10px;
+
+    label {
+      margin-top: 5px;
+      margin-right: 10px;
+      padding-left: 0px;
+      font-size: 11px;
+    }
+
+    input {
+      padding-left: 5px;
+      width: 80px;
+      outline: none;
+    }
+
+    .Find-range {
+      margin-left: auto;
+    }
+  }
+}

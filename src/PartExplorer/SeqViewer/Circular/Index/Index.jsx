@@ -1,0 +1,234 @@
+import * as React from "react";
+
+/**
+ * this component renders the following:
+ * 		1. the Name of the part (center or bottom)
+ * 		2. the number of bps (center or bottom)
+ * 		3. the plasmid circle
+ * 		4. the index numbers along the plasmid circle
+ *
+ * center or bottom here refers to the fact that the name/bps of the
+ * part need to be pushed to the bottom of the circular viewer if there
+ * are too many elements in the circular viewer and the name won't fit
+ */
+export default class Index extends React.PureComponent {
+  static getDerivedStateFromProps = nextProps => {
+    const { circularCentralIndex: centralIndex, seqLength, Zoom } = nextProps;
+    // equation of a line from (0, 6) to (100, seqLength / 10) (Zoom, tickCount)
+    // ie, at min zoom, 6 ticks. at max zoom, one tick every 10 bps
+    const tickCount = ((seqLength / 10.0 - 6.0) / 100.0) * Zoom + 6;
+
+    // make each increment a multiple of 10 with two sig figs
+    const increments = Math.floor(seqLength / tickCount);
+    let indexInc = Math.max(+increments.toPrecision(2), 10);
+    while (indexInc % 10 !== 0) indexInc += 1;
+
+    // make all the ticks. Also, only keep ticks that are +/- 6 tick incremenets from the top
+    // centralIndex, as the others won't be shown/rendered anyway
+    let ticks = [];
+    for (let i = 0; i <= seqLength - indexInc / 2; i += indexInc) {
+      ticks.push(i === 0 ? 1 : i);
+    }
+    const tickTolerance = indexInc * 6;
+    ticks = ticks.filter(
+      t =>
+        Math.abs(centralIndex - t) < tickTolerance ||
+        Math.abs(centralIndex + seqLength - t) < tickTolerance ||
+        Math.abs(centralIndex - seqLength - t) < tickTolerance
+    );
+    return { ticks, indexInc };
+  };
+
+  state = {
+    ticks: [],
+    indexInc: 10
+  };
+
+  /**
+   * return a react element for the basepairs along the surface of the plasmid viewer
+   */
+  renderBasepairs = () => {
+    const {
+      seq,
+      compSeq,
+      circularCentralIndex: centralIndex,
+      seqLength,
+      lineHeight,
+      radius,
+      findCoor,
+      getRotation
+    } = this.props;
+    const { indexInc } = this.state;
+
+    // at max zoom we should show ~50 basepairs across the width of the viewer,
+    // 	with a tick every 10bps
+    // at min zoom we should show all basepairs, with only 4 ticks
+    const seqForCircular = seq + seq;
+    const compSeqForCircular = compSeq + compSeq;
+    let firstBase = centralIndex - indexInc * 5;
+    let lastBase = centralIndex + indexInc * 5;
+    if (centralIndex < seqLength / 2) {
+      firstBase += seqLength;
+      lastBase += seqLength;
+    }
+    const basepairsToRender = [];
+    for (let i = firstBase; i <= lastBase; i += 1) {
+      basepairsToRender.push(
+        <text
+          key={`base_${i}`}
+          {...findCoor(0, radius + 2 * lineHeight)}
+          transform={getRotation(i + 0.25)}
+        >
+          {seqForCircular.charAt(i)}
+        </text>,
+        <text
+          key={`base_comp_${i}`}
+          {...findCoor(0, radius + lineHeight)}
+          transform={getRotation(i + 0.25)}
+        >
+          {compSeqForCircular.charAt(i)}
+        </text>
+      );
+    }
+    return basepairsToRender;
+  };
+
+  render() {
+    const {
+      seq,
+      name,
+      Zoom,
+      radius,
+      center,
+      size,
+      yDiff,
+      seqLength,
+      lineHeight,
+      getRotation,
+      generateArc,
+      findCoor,
+      resizing,
+      totalRows
+    } = this.props;
+    const { ticks } = this.state;
+    // split up the name so it fits within spans in the center
+    // 30 letters is arbitrary. would be better to first search for "cleaveable characters"
+    // like "|" or "," and revert to all chars if those aren't found. Or to decrease
+    // name size first before cleaving, etc
+    const mostInwardElementRadius = radius - totalRows * lineHeight;
+    const cutoff = 30;
+    const nameSpans = [];
+    let nameIndex = 0;
+    // TODO: react freaks out when the circ viewer is small and each line is one char
+    // bc there are shared keys (also it's just not a good look)
+    while (nameIndex < name.length) {
+      nameSpans.push(name.substring(nameIndex, nameIndex + cutoff).trim());
+      nameIndex += cutoff;
+    }
+
+    // generate the name text for the middle of the plasmid
+    const spanCountAdjust = 20 * nameSpans.length; // adjust for each tspan off name
+    const nameYAdjust = 14 + spanCountAdjust; // correct for both
+    const nameCoorRadius = (nameSpans[0].length / 2) * 12; // 12 px per character
+
+    // if the viewer is at all zoomed, or if the elements will begin to overlap with the
+    // name, move the name downward to the bottom of the viewer
+    const nameCoor =
+      Zoom > 2 || nameCoorRadius > mostInwardElementRadius
+        ? {
+            x: center.x,
+            y: size.height - nameYAdjust - yDiff
+          }
+        : {
+            x: center.x,
+            y: center.y - ((nameSpans.length - 1) / 2) * 25 // shift the name up for >1 rows of text
+          };
+
+    // these are just created once, but are rotated to each position along the plasmid
+    const tickCoorStart = findCoor(0, radius);
+    // constant tick height, doesn't scale w/ lineHeight/Zoom
+    const tickCoorEnd = findCoor(0, radius - 10);
+
+    // create tick and text style
+    const nameStyle = {
+      fontSize: 20,
+      textAnchor: "middle",
+      fontWeight: 500
+    };
+    const subtitleStyle = {
+      fontSize: 14,
+      textAnchor: "middle",
+      alignmentBaseline: "hanging",
+      fill: "gray"
+    };
+    const indexCircleStyle = {
+      fill: "transparent",
+      stroke: "#73777D",
+      strokeWidth: 3
+    };
+    const tickLineStyle = {
+      fill: "transparent",
+      stroke: "black",
+      strokeWidth: 2.5,
+      shapeRendering: resizing ? "optimizeSpeed" : "geometricPrecision"
+    };
+    const tickTextStyle = {
+      textAnchor: "middle",
+      alignmentBaseline: "hanging",
+      fontWeight: 500
+    };
+
+    // generate the full circle around the edge of the plasmid (when too zoomed out to see DNA)
+    const indexCurve = generateArc({
+      innerRadius: radius,
+      outerRadius: radius,
+      length: seqLength / 2,
+      largeArc: true
+    });
+    return (
+      <g id="circular-index">
+        <text {...nameStyle}>
+          {nameSpans.map((n, i) => (
+            <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
+              {n}
+            </tspan>
+          ))}
+        </text>
+        <text
+          x={nameCoor.x}
+          y={nameCoor.y + 14 + 25 * (nameSpans.length - 1)}
+          {...subtitleStyle}
+        >
+          {`${seqLength} bp`}
+        </text>
+        {Zoom > 60 || seq.length < 200 ? (
+          <g className="circular-bps">{this.renderBasepairs()}</g>
+        ) : null}
+        {ticks.map(t => (
+          <g key={`${t}_tick`} transform={getRotation(t - 0.5)}>
+            <path
+              d={`M ${tickCoorStart.x} ${tickCoorStart.y}
+                L ${tickCoorEnd.x} ${tickCoorEnd.y}`}
+              {...tickLineStyle}
+            />
+            <text x={tickCoorEnd.x} y={tickCoorEnd.y + 4} {...tickTextStyle}>
+              {t}
+            </text>
+          </g>
+        ))}
+        <g>
+          <path
+            d={indexCurve}
+            transform={getRotation(seqLength * 0.75)}
+            {...indexCircleStyle}
+          />
+          <path
+            d={indexCurve}
+            transform={getRotation(seqLength * 0.25)}
+            {...indexCircleStyle}
+          />
+        </g>
+      </g>
+    );
+  }
+}

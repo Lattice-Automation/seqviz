@@ -1,0 +1,43 @@
+.Seq-Header-container {
+  z-index: 2;
+  display: inline-flex;
+  justify-content: center;
+  height: 45px;
+  background-color: darkgrey;
+  border-right: solid 1px gray;
+  position: absolute;
+  width: 100%;
+  color: white;
+  padding-left: 8px;
+  padding-right: 5px;
+  .header-name-input:focus {
+    background-color: #353f4b;
+  }
+}
+
+.header-name-container {
+  max-width: calc(95% - 130px);
+  flex-grow: 2;
+  &.extra {
+    max-width: calc(95% - 15px);
+  }
+}
+
+.header-options-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 0px;
+  margin-left: auto;
+  flex-grow: 0;
+}
+
+.header-sliders-container {
+  padding: 10px 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  flex-grow: 0;
+}
+
+.header-find-container {
+  flex-grow: 0;
+}
