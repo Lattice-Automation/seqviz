@@ -1,26 +1,38 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import PartExplorer from "../src/PartExplorer/PartExplorer";
-import pUC from "./DefaultParts/pUC";
-const Viewer = () => {
+import PartExplorer from "./PartExplorer/PartExplorer";
+let lattice = {};
+const Viewer = (part, options) => {
+  const { annotate } = options;
   return (
     <Router>
       <div>
-        <Route exact path="/" component={Circular} />
-        <Route path="/linear" component={Linear} />
+        <Route
+          exact
+          path="/"
+          render={props => (
+            <Circular {...props} part={part} annotate={annotate} />
+          )}
+        />
+        <Route
+          path="/linear"
+          render={props => (
+            <Linear {...props} part={part} annotate={annotate} />
+          )}
+        />
       </div>
     </Router>
   );
 };
 
-const Circular = () => {
-  const part = pUC;
-  return <PartExplorer circular={true} part={part} />;
+const Circular = props => {
+  const { part, annotate } = props;
+  return <PartExplorer circular={true} part={part} annotate={annotate} />;
 };
 
-const Linear = () => {
-  const part = pUC;
-  return <PartExplorer circular={false} part={part} />;
+const Linear = props => {
+  const { part, annotate } = props;
+  return <PartExplorer circular={false} part={part} annotate={annotate} />;
 };
-
-export default Viewer;
+lattice.Viewer = Viewer;
+export default lattice;

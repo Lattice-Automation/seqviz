@@ -3,6 +3,9 @@ import SeqViewer from "./SeqViewer/SeqViewer";
 import "./PartExplorer.scss";
 import SelectionMetaInfo from "./SelectionMetaInfo/SelectionMetaInfo";
 import BlankPage from "../BlankPage/BlankPage";
+import request from "request";
+import shortid from "shortid";
+import { annotationFactory } from "../Utils/sequence";
 
 /**
  * a container for investigating the meta and sequence information of a part
@@ -32,9 +35,62 @@ class PartExplorer extends React.PureComponent {
     this.setState({ ...rest, ...newState });
   };
 
+  lambdaAnnotate = async part => {
+    const result = await new Promise((resolve, reject) => {
+      request.post(
+        {
+          uri: `${String(process.env.REACT_APP_LAMBDA_URL)}/annotate`,
+          method: "POST",
+          json: JSON.stringify({
+            part: { id: shortid.generate(), seq: part.seq }
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        },
+        (err, resp) => {
+          if (err) {
+            console.log(err);
+            return reject(err);
+          }
+          return resolve(resp.toJSON());
+        }
+      );
+    });
+
+    if (result.statusCode !== 200) {
+      const err = JSON.stringify(result.body);
+      throw new Error(`Lambda annotations failed. Server response: ${err}`);
+    }
+
+    return result;
+  };
+
+  autoAnnotate = async part => {
+    const result = await this.lambdaAnnotate(part);
+    let annotations = result.body.map(a => ({ ...annotationFactory(), ...a }));
+    // add in the annotations already on the part
+    annotations = part.annotations.concat(annotations);
+    // filter out duplicates
+    annotations = annotations.reduce((acc, a) => {
+      if (
+        !acc.find(
+          ann =>
+            ann.name === a.name && ann.start === a.start && ann.end === a.end
+        )
+      ) {
+        return acc.concat(a);
+      }
+      return acc;
+    }, []);
+    return { ...part, annotations };
+  };
+
   render() {
-    const { circular, part } = this.props;
+    const { circular, annotate } = this.props;
+    let { part } = this.props;
     const partState = this.state;
+    part = annotate ? this.autoAnnotate(part) : part;
     return (
       <div className="part-explorer-container" id="part-explorer">
         <div className="seq-viewers-container">

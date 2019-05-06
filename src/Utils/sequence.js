@@ -1,3 +1,6 @@
+import shortid from "shortid";
+import { genRandomColor } from "./colors";
+
 /**
  * Resources shareable throughout Loom
  */
@@ -34,15 +37,14 @@ export const nucleotideWildCards = {
  * @param {String} query
  * @return {String} [/regex/]
  */
-export const translateWildNucleotides = (nucleotideSequence) =>
+export const translateWildNucleotides = nucleotideSequence =>
   nucleotideSequence
     .toLowerCase()
     .split("")
-    .map(
-      letter =>
-        nucleotideWildCards[letter]
-          ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})`
-          : letter
+    .map(letter =>
+      nucleotideWildCards[letter]
+        ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})`
+        : letter
     )
     .join("");
 
@@ -68,7 +70,7 @@ export const getMismatchIndices = (sequence, match) =>
  * @param {array} indices
  * @return {array} array of ranges stored as arrays with start [0] and end [1]
  */
-export const returnRanges = (indices) => {
+export const returnRanges = indices => {
   let currStart = indices[0];
   let currCount = indices[0] - 1;
   const ranges = [];
@@ -90,8 +92,10 @@ export const returnRanges = (indices) => {
  * Calculate the GC% of a sequence
  * @param {string} sequence
  */
-export const calcGC = (sequence) =>
-  sequence === "" ? 0 : ((sequence.match(/[CG]/gi) || []).length / sequence.length) * 100;
+export const calcGC = sequence =>
+  sequence === ""
+    ? 0
+    : ((sequence.match(/[CG]/gi) || []).length / sequence.length) * 100;
 
 /**
  * Calculate the melting temp for a given sequence
@@ -119,7 +123,8 @@ export const calcTm = (sequence, match = sequence) => {
     sequence.slice(0, 1) in { G: "G", C: "C" }
   ) {
     return (
-      (100 / numberbps) * (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75)
+      (100 / numberbps) *
+      (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75)
     );
   }
 
@@ -144,7 +149,7 @@ export const calcLength = (start, end, seqLength) => {
  * Reverses a string sequence
  * @param {string} sequence
  */
-export const reverse = (sequence) =>
+export const reverse = sequence =>
   sequence
     .split("")
     .reverse()
@@ -164,7 +169,7 @@ export const primerPcrSelectionLimits = { min: 23 };
  * reverse the direction
  * @param direction
  */
-export const reverseDirection = (direction) => {
+export const reverseDirection = direction => {
   if (direction === "FORWARD") {
     return "REVERSE";
   }
@@ -186,3 +191,16 @@ export const defaultSelection = {
   end: 0,
   clockwise: true
 };
+
+/**
+ * a default annotation generator
+ */
+export const annotationFactory = () => ({
+  id: shortid.generate(),
+  color: genRandomColor(),
+  name: "Untitled",
+  type: "",
+  start: 0,
+  end: 0,
+  direction: "NONE"
+});

@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
-import App from "./App";
+import lattice from "./App";
 import * as serviceWorker from "./serviceWorker";
+import pUC from "./DefaultParts/pUC";
 
-ReactDOM.render(<App />, document.getElementById("app-root"));
+const part = pUC;
+
+ReactDOM.render(
+  lattice.Viewer(part, { annotate: false }),
+  document.getElementById("app-root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
