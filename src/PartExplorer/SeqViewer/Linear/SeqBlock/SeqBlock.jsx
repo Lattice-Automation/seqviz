@@ -102,7 +102,7 @@ export default class SeqBlock extends React.PureComponent {
 
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -111,7 +111,7 @@ export default class SeqBlock extends React.PureComponent {
     const partState = {
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState

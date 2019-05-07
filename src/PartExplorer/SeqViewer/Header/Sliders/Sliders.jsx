@@ -108,7 +108,7 @@ class SliderRow extends React.PureComponent {
       seqLength,
       Zoom,
       circularCentralIndex: centralIndex,
-      type
+      Linear
     } = this.props;
     const centralIndexInc = seqLength > 200 ? Math.floor(seqLength / 50) : 1;
     const centralIndexMax = seqLength > 200 ? centralIndexInc * 50 : seqLength;
@@ -120,7 +120,7 @@ class SliderRow extends React.PureComponent {
           width: `${120 * sliders.length}px`
         }}
       >
-        {type === "CIRCULAR" && (
+        {!Linear && (
           <SingleSlider
             name="centralIndex"
             value={centralIndex}

@@ -45,7 +45,6 @@ class Circular extends React.PureComponent {
         // how large is the name of the annotation horizontally (with two char padding)
         const annNameLengthPixels = (ann.name.length + 2) * CHAR_WIDTH;
         // how large would part be if it were wrapped around the plasmid
-        // I honestly dont' know why the "2 *" is needed here (JT)
         let annLengthBases = ann.end - ann.start;
         if (ann.start >= ann.end) annLengthBases += seqLength; // crosses zero-index
         const annLengthPixels = 2 * circumf * (annLengthBases / seqLength);
@@ -248,13 +247,15 @@ class Circular extends React.PureComponent {
       center,
       radius,
       yDiff,
-      seq,
-      compSeq,
       resizing,
       size,
+
+      seq,
+      compSeq,
+
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -263,7 +264,7 @@ class Circular extends React.PureComponent {
     const partState = {
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -277,9 +278,9 @@ class Circular extends React.PureComponent {
       outerLabels
     } = this.state;
 
-    // general values/functions used in many/all children
     const { getRotation, generateArc, findCoor, rotateCoor } = this;
 
+    // general values/functions used in many/all children
     const general = {
       Zoom,
       radius,
@@ -299,7 +300,6 @@ class Circular extends React.PureComponent {
     // eq of a line between (0, lineHeight), (100, height / totalRows)
     let vAdjust = 0;
 
-    // this has to be fixed
     const plasmidId = `${name}-viewer-circular`;
     const selectionId = shortid.generate();
     if (size.height <= 0) return null;

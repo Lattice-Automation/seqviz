@@ -3,34 +3,22 @@ import Find from "../../Find/Find";
 import "./Header.scss";
 import OptionsDropdown from "./OptionsDropdown/OptionsDropdown";
 import Sliders from "./Sliders/Sliders";
-
-/**
- * Header
- *
- * Options for the linear sequence viewer. Includes, right now:
- * 		a slider for zoom between 0 and 100
- * 		a checkbox for whether or not to show the axis
- * 		a checkbox for whether or not to show the complement sequence
- *
- * If this should only be one row, pull the name of the part way to the left
- * of the sequence, as well as the dropdown box. There should be no slider
- * on with one row (there should be a draggable width view)
- *
- */
 class Header extends React.PureComponent {
   render() {
     const {
       seq,
       compSeq,
       name,
+
       sliders,
       seqLength,
-      type,
+      Linear,
       Zoom,
       seqStateChange,
+
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -39,7 +27,7 @@ class Header extends React.PureComponent {
     const partState = {
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -53,12 +41,12 @@ class Header extends React.PureComponent {
           className={`header-name-container ${headerSliders.length < 1 &&
             "extra"}`}
         >
-          <div>{name}</div>
+          <h3>{name}</h3>
         </div>
         <div className="header-sliders-container">
           {headerSliders.length > 0 ? (
             <Sliders
-              type={type}
+              Linear={Linear}
               Zoom={Zoom}
               sliders={headerSliders}
               seqLength={seqLength}

@@ -12,58 +12,40 @@ import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
 
 /**
- * Linear
- *
- * A linear sequence viewer. Meant to be reused in any location where
- * a sequence is viewed. May include parts, oligos, primers (oligos),
- * etc. Might need to be extendable to include annotations (tags tied
- * to particular sequences), coding regions, and RNA in addition to DNA.
- *
+ * A linear sequence viewer.
  *
  * Comprised of SeqBlock(s), which are themselves comprised of:
  * 	SeqBlock:
  * 		SeqRow
  * 		IndexRow (axis)
- * 		CutSites (enzyme recognition sites)
  * 		Annotations
- * 		ORFrames (open reading frames)
  *
  * the width, sequence of each seqBlock, annotations,
  * indexRow, is passed in the child component
  *
  * seq: a string of the DNA/RNA to be displayed/manipulated
- * seqChange: a function for changing the DNA/RNA. run in parent
  * Zoom: a number (1-100) for the sizing of the sequence
  * comp: whether or not to show complement
  * compSeq: the complement sequence to the orig sequence
  * annotations: an array of annotations to show above the seq
- *
- * TODO: add back shouldComponentUpdate
- *
  */
 class Linear extends React.Component {
   shouldComponentUpdate = nextProps => {
     // check whether we even want to update props. Don't do anything if relevant prop
     // have not changed
-
-    const { name, date, ...rest } = nextProps;
-    const { name: origName, date: origDate, ...origRest } = this.props;
-
+    const { name, ...rest } = nextProps;
+    const { name: origName, ...origRest } = this.props;
     return !isEqual(rest, origRest);
   };
 
   /**
    * given all the information needed to render all the seqblocks (ie, sequence, compSeq
-   * list of annotations, enzymes, etc), cut up all that information into an array.
+   * list of annotations), cut up all that information into an array.
    * Each element in that array pertaining to one SeqBlock
    *
    * For example, if each seqblock has 2 bps, and the seq is "ATGCAG", this should first
    * make an array of ["AT", "GC", "AG"], and then pass "AT" to the first SeqBlock, "GC" to
-   * the second seqBlock, and "AG" to the third seqBlock. While it would be simple to pass
-   * bounds to each seqBlock, and have them substring the whole part's sequence, this array
-   * slicing is needed for the more complex ranged elements like open reading frames. It
-   * would be massively polynomial to have every seqBlock search through the array of ORFs
-   * to find those that are relevant to it.
+   * the second seqBlock, and "AG" to the third seqBlock.
    */
   render() {
     const {
@@ -73,12 +55,14 @@ class Linear extends React.Component {
       Axis,
       Annotations,
       annotations,
+
       lineHeight,
       elementHeight,
       bpsPerBlock,
       size,
       onUnMount,
-      findSelection: { searchResults = [], searchIndex },
+
+      findState: { searchResults = [], searchIndex },
       showSearch,
       seqSelection,
       circularCentralIndex,
@@ -124,7 +108,6 @@ class Linear extends React.Component {
 
     let yDiffCumm = 0; // cummulative y differential tracker
     for (let i = 0; i < arrSize; i += 1) {
-      // TODO: cut down on multiplication operations here
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
       ids[i] = shortid.generate();

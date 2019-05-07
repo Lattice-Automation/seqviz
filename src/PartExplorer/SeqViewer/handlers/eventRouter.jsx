@@ -132,9 +132,9 @@ const withEventRouter = WrappedComp =>
      * current central index
      */
     handleScrollEvent = e => {
-      const { type, circularCentralIndex, seq, setPartState } = this.props;
+      const { Linear, circularCentralIndex, seq, setPartState } = this.props;
 
-      if (type === "CIRCULAR") {
+      if (!Linear) {
         // a "large scroll" (1000) should rotate through 20% of the plasmid
         let delta = seq.length * (e.deltaY / 5000);
         delta = Math.floor(delta);
@@ -148,7 +148,11 @@ const withEventRouter = WrappedComp =>
         let newCentralIndex = circularCentralIndex + delta;
         newCentralIndex = (newCentralIndex + seq.length) % seq.length;
 
-        setPartState({ circularCentralIndex: newCentralIndex });
+        setPartState({
+          circularCentralIndex: newCentralIndex,
+          findState: { searchResults: [], searchIndex: 0 },
+          showSearch: false
+        });
       }
     };
 
@@ -192,7 +196,6 @@ const withEventRouter = WrappedComp =>
      */
     keypressMap = e => {
       const { key, shiftKey, metaKey, ctrlKey } = e;
-
       switch (key) {
         case "ArrowLeft":
         case "ArrowRight":
@@ -207,6 +210,10 @@ const withEventRouter = WrappedComp =>
           return "Input";
         case "c":
           return metaKey || ctrlKey ? "Copy" : null;
+        case "Escape":
+          return "Clear";
+        case "Enter":
+          return "ArrowDown";
         default:
           return null;
       }
@@ -221,7 +228,7 @@ const withEventRouter = WrappedComp =>
      * @param {String} i  		  one of the commands listed above
      */
     handleSeqInteraction = async type => {
-      const { seq } = this.props;
+      const { seq, Linear } = this.props;
       const seqLength = seq.length;
       const {
         bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1)
@@ -235,6 +242,30 @@ const withEventRouter = WrappedComp =>
           this.clipboardCopy();
           break;
         }
+        case "Clear": {
+          const {
+            seqSelection: selection,
+            showSearch,
+            setPartState
+          } = this.props;
+          const { type: selectionType } = selection;
+
+          if (selectionType === "FIND") {
+            if (showSearch) {
+              setPartState({
+                findState: {
+                  searchIndex: 0,
+                  searchResults: []
+                }
+              });
+            } else {
+              setPartState({
+                showSearch: false
+              });
+            }
+          }
+          break;
+        }
         case "ArrowUp":
         case "ArrowRight":
         case "ArrowDown":
@@ -243,62 +274,95 @@ const withEventRouter = WrappedComp =>
         case "ShiftArrowRight":
         case "ShiftArrowDown":
         case "ShiftArrowLeft": {
-          const { seqSelection: selection, setPartState } = this.props;
-          const { start, end } = selection;
-          let { clockwise } = selection;
-          let newPos = end;
-          if (type === "ArrowUp" || type === "ShiftArrowUp") {
-            // if there are multiple blocks or just one. If one, just inc by one
-            if (seqLength / bpsPerBlock > 1) {
-              newPos -= bpsPerBlock;
-            } else {
+          const {
+            seqSelection: selection,
+            findState: { searchIndex: currIdx, searchResults },
+            setPartState
+          } = this.props;
+          const { start, end, type: selectionType } = selection;
+          if (selectionType === "FIND") {
+            let nextIdx = currIdx;
+            let nextResults = searchResults;
+            if (type === "ArrowUp") {
+              nextIdx = currIdx <= 0 ? searchResults.length - 1 : currIdx - 1;
+            } else if (type === "ArrowDown") {
+              nextIdx = currIdx >= searchResults.length - 1 ? 0 : currIdx + 1;
+            }
+            const nextSelectStart =
+              nextIdx >= 0 ? searchResults[nextIdx].start : start;
+            const nextSelectEnd =
+              nextIdx >= 0 ? searchResults[nextIdx].end : end;
+            setPartState({
+              findState: {
+                searchIndex: nextIdx,
+                searchResults: nextResults
+              },
+              seqSelection: {
+                start: nextSelectStart,
+                end: nextSelectEnd
+              },
+              linearCentralIndex: nextSelectStart,
+              circularCentralIndex: nextSelectStart
+            });
+            break;
+          }
+          if (Linear) {
+            let { clockwise } = selection;
+            let newPos = end;
+            if (type === "ArrowUp" || type === "ShiftArrowUp") {
+              // if there are multiple blocks or just one. If one, just inc by one
+              if (seqLength / bpsPerBlock > 1) {
+                newPos -= bpsPerBlock;
+              } else {
+                newPos -= 1;
+              }
+            } else if (type === "ArrowRight" || type === "ShiftArrowRight") {
+              newPos += 1;
+            } else if (type === "ArrowDown" || type === "ShiftArrowDown") {
+              // if there are multiple blocks or just one. If one, just inc by one
+              if (seqLength / bpsPerBlock > 1) {
+                newPos += bpsPerBlock;
+              } else {
+                newPos += 1;
+              }
+            } else if (type === "ArrowLeft" || type === "ShiftArrowLeft") {
               newPos -= 1;
             }
-          } else if (type === "ArrowRight" || type === "ShiftArrowRight") {
-            newPos += 1;
-          } else if (type === "ArrowDown" || type === "ShiftArrowDown") {
-            // if there are multiple blocks or just one. If one, just inc by one
-            if (seqLength / bpsPerBlock > 1) {
-              newPos += bpsPerBlock;
-            } else {
-              newPos += 1;
-            }
-          } else if (type === "ArrowLeft" || type === "ShiftArrowLeft") {
-            newPos -= 1;
-          }
 
-          if (newPos <= -1) {
-            newPos = seqLength + newPos;
-          }
-          if (newPos >= seqLength + 1) {
-            newPos -= seqLength;
-          }
-          const selectionLength = Math.abs(start - end);
-          clockwise =
-            selectionLength === 0
-              ? type === "ArrowRight" ||
-                type === "ShiftArrowRight" ||
-                type === "ArrowDown" ||
-                type === "ShiftArrowDown"
-              : clockwise;
-          if (newPos !== start && !type.startsWith("Shift")) {
-            setPartState({
-              seqSelection: {
-                start: newPos,
-                end: newPos,
-                clockwise: true,
-                ref: ""
-              }
-            });
-          } else if (type.startsWith("Shift")) {
-            setPartState({
-              seqSelection: {
-                start: start,
-                end: newPos,
-                clockwise: clockwise,
-                ref: ""
-              }
-            });
+            if (newPos <= -1) {
+              newPos = seqLength + newPos;
+            }
+            if (newPos >= seqLength + 1) {
+              newPos -= seqLength;
+            }
+            const selectionLength = Math.abs(start - end);
+            clockwise =
+              selectionLength === 0
+                ? type === "ArrowRight" ||
+                  type === "ShiftArrowRight" ||
+                  type === "ArrowDown" ||
+                  type === "ShiftArrowDown"
+                : clockwise;
+            if (newPos !== start && !type.startsWith("Shift")) {
+              setPartState({
+                seqSelection: {
+                  start: newPos,
+                  end: newPos,
+                  clockwise: true,
+                  ref: ""
+                }
+              });
+            } else if (type.startsWith("Shift")) {
+              setPartState({
+                seqSelection: {
+                  start: start,
+                  end: newPos,
+                  clockwise: clockwise,
+                  ref: ""
+                }
+              });
+            }
+            break;
           }
           break;
         }
@@ -315,14 +379,11 @@ const withEventRouter = WrappedComp =>
      * @param  {React.SyntheticEvent} e   keypress
      */
     handleKeyPress = e => {
-      const { type } = this.props;
-      if (type === "LINEAR") {
-        const keyType = this.keypressMap(e);
-        if (!keyType) {
-          return; // not recognized key
-        }
-        this.handleSeqInteraction(keyType);
+      const keyType = this.keypressMap(e);
+      if (!keyType) {
+        return; // not recognized key
       }
+      this.handleSeqInteraction(keyType);
     };
 
     /** a reference used only so we can focus on the event router after mounting */

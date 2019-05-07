@@ -65,7 +65,7 @@ export default props => {
     .trim();
 
   return (
-    <div className="dropdown-find-form modal" key="dropdown-find-form">
+    <div className="dropdown-find-form" key="dropdown-find-form">
       <div className="Find-container upper">
         <input
           id="searchForm"
@@ -87,7 +87,7 @@ export default props => {
         />
         <label id="results" htmlFor="searchForm">
           {totalResults > 0 &&
-            `${searchIndex === 0 ? totalResults : searchIndex}/${totalResults}`}
+            `${searchIndex === 0 ? 1 : searchIndex + 1}/${totalResults}`}
         </label>
         <FontAwesomeIcon
           icon={faChevronUp}

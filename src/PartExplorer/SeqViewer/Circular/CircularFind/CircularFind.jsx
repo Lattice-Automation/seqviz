@@ -4,9 +4,9 @@ import shortid from "shortid";
 
 class CircularFind extends React.Component {
   shouldComponentUpdate = nextProps => {
-    const { findSelection } = this.props;
+    const { findState } = this.props;
 
-    return !isEqual(findSelection, nextProps.findSelection);
+    return !isEqual(findState, nextProps.findState);
   };
 
   createHighlight = result => {
@@ -20,9 +20,8 @@ class CircularFind extends React.Component {
       generateArc,
       resizing,
       inputRef,
-      findSelection: { searchIndex }
+      findState: { searchIndex }
     } = this.props;
-    console.log("FFKF");
     let { start, end } = result;
     // crosses the zero index
     if (end < start) end += seqLength;
@@ -90,7 +89,7 @@ class CircularFind extends React.Component {
       Zoom,
       seqLength,
       circularCentralIndex: centralIndex,
-      findSelection: { searchResults }
+      findState: { searchResults }
     } = this.props;
     const threshold =
       seqLength >= 200 ? searchResults.length / seqLength <= 0.01 : true;

@@ -19,8 +19,7 @@ class Find extends React.Component {
       largeSearch: false,
       invalidSearch: false,
       noResults: false,
-      searching: false,
-      searchIndex: 0
+      searching: false
     };
     this.searchSeq = debounce(this.searchSeq, 450);
     this.generateSearchWarnings = debounce(this.generateSearchWarnings, 350);
@@ -35,17 +34,12 @@ class Find extends React.Component {
   };
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    const {
-      findSelection: { searchIndex },
-      seqSelection,
-      showSearch
-    } = this.props;
-
+    const { findState, seqSelection, showSearch } = this.props;
     if (showSearch !== nextProps.showSearch) return true;
 
     if (!showSearch) return false; // this needs to come second or we might prematurely lock out Find during renderiwng
 
-    if (searchIndex !== nextProps.searchIndex) return true;
+    if (!isEqual(findState, nextProps.findState)) return true;
 
     if (!isEqual(this.state, nextState)) return true;
 
@@ -69,12 +63,11 @@ class Find extends React.Component {
    * The SetCentralIndex allows the jumping to search selection
    * The target param skips focuses directly to the selected highlight.
    */
-  searchController = (searchResArray, target) => {
+  searchController = (searchResArray, newSearchIndex, target) => {
     const {
-      findSelection: { searchResults },
+      findState: { searchResults },
       setPartState
     } = this.props;
-    let { searchIndex: newSearchIndex } = this.state;
     const newSearchResults = searchResArray || searchResults;
     if (target) {
       const result = newSearchResults.find(s => s.start === target);
@@ -89,12 +82,19 @@ class Find extends React.Component {
     ) {
       const { start: newCentralIndex } = newSearchResults[newSearchIndex];
       setPartState({
-        findSelection: {
+        findState: {
           searchResults: newSearchResults,
           searchIndex: newSearchIndex
         },
         circularCentralIndex: newCentralIndex,
         linearCentralIndex: newCentralIndex
+      });
+    } else {
+      setPartState({
+        findState: {
+          searchResults: newSearchResults,
+          searchIndex: newSearchIndex
+        }
       });
     }
     this.clearMessages();
@@ -353,8 +353,7 @@ class Find extends React.Component {
         index: i
       };
     });
-    this.setState({ searchIndex: 0 });
-    this.searchController(preProcessSearch, null);
+    this.searchController(preProcessSearch, 0, null);
   };
 
   /**
@@ -365,9 +364,9 @@ class Find extends React.Component {
   incrementResults = fwd => {
     this.clearMessages();
     const {
-      findSelection: { searchResults = [] }
+      findState: { searchResults = [], searchIndex }
     } = this.props;
-    let { searchIndex: newSearchIndex } = this.state;
+    let newSearchIndex = searchIndex;
     if (searchResults.length) {
       const lastIndex = searchResults.length - 1;
       if (fwd) {
@@ -377,8 +376,7 @@ class Find extends React.Component {
         newSearchIndex -= 1;
         if (newSearchIndex < 0) newSearchIndex = lastIndex;
       }
-      this.setState({ searchIndex: newSearchIndex });
-      this.searchController(searchResults, null);
+      this.searchController(searchResults, newSearchIndex, null);
     }
   };
 
@@ -408,8 +406,7 @@ class Find extends React.Component {
    * Clear search results
    */
   clearResults = () => {
-    this.setState({ searchIndex: 0 });
-    this.searchController([], null);
+    this.searchController([], 0, null);
   };
 
   searchForm;
@@ -418,7 +415,7 @@ class Find extends React.Component {
 
   render() {
     const {
-      findSelection: { searchResults = [] },
+      findState: { searchResults = [], searchIndex },
       seq,
       showSearch,
       seqSelection
@@ -429,8 +426,7 @@ class Find extends React.Component {
       largeSearch,
       invalidSearch,
       noResults,
-      searching,
-      searchIndex
+      searching
     } = this.state;
 
     return (

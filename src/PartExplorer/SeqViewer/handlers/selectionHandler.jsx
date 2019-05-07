@@ -208,17 +208,33 @@ const withSelectionHandler = WrappedComp =>
 
     /** set the selection for the current part */
     setSequenceSelection = selectRange => {
-      const { seqSelection, setPartState } = this.props;
-      const { clockwise = true, start = 0, end = 0, ref = "" } = selectRange;
+      const {
+        seqSelection,
+        setPartState,
+        findState: { searchIndex }
+      } = this.props;
+      const {
+        clockwise = true,
+        start = 0,
+        end = 0,
+        ref = "",
+        type = "",
+        searchIndex: newSearchIndex = null
+      } = selectRange;
       const newSelection = {
+        type,
         ref,
         clockwise,
         start,
         end
       };
-
+      const findStateIndex =
+        newSearchIndex === null ? searchIndex : newSearchIndex;
       if (!isEqual(seqSelection, newSelection)) {
-        setPartState({ seqSelection: newSelection });
+        setPartState({
+          seqSelection: newSelection,
+          findState: { searchIndex: findStateIndex }
+        });
 
         if (this.workspace) {
           this.workspace.focus();
@@ -236,9 +252,13 @@ const withSelectionHandler = WrappedComp =>
      * @param {React.SyntheticEvent} e  		the mouseEvent
      */
     updateSelectionWithknownRange = e => {
-      const { seq, type, setPartState } = this.props;
+      const {
+        seq,
+        Linear,
+        findState: { searchResults },
+        setPartState
+      } = this.props;
 
-      // a rate limiter needed because the SeqSelect in cache is accessed async
       if (!this.allowSetSelection) return;
       // should not be updating selection since it's not a drag event time
       if ((e.type === "mousemove" || e.type === "mouseup") && !this.dragEvent) {
@@ -258,17 +278,21 @@ const withSelectionHandler = WrappedComp =>
         case "FIND": {
           // Annotation or find selection range
           const clockwise = !(knownRange.direction && direction === "REVERSE");
+          const selectionStart = clockwise ? start : end;
+          const selectionEnd = clockwise ? end : start;
+          const newSearchIndex = searchResults.findIndex(
+            res => res.start === selectionStart
+          );
           this.setSequenceSelection({
             ...knownRange,
-            start: clockwise ? start : end,
-            end: clockwise ? end : start,
-            clockwise: clockwise
+            start: selectionStart,
+            end: selectionEnd,
+            clockwise: clockwise,
+            searchIndex: newSearchIndex
           });
           this.dragEvent = false;
 
-          // if it was clicked on in circular, update the central index
-          // of the part in linear (scroll to it in linear)
-          if (type === "CIRCULAR") {
+          if (!Linear && knownRange.type === "ANNOTATION") {
             setPartState({
               circularCentralIndex: knownRange.start || 0
             });
@@ -279,7 +303,7 @@ const withSelectionHandler = WrappedComp =>
           // SeqBlock or anything on Circular (not already described above)
           let currBase = null;
           const { seqSelection: currSelection } = this.props;
-          if (type === "LINEAR") {
+          if (Linear) {
             currBase = this.calculateBaseLinear(e, knownRange);
             const clockwiseDrag =
               currSelection &&
@@ -301,7 +325,7 @@ const withSelectionHandler = WrappedComp =>
                 clockwise: clockwiseDrag
               });
             }
-          } else if (type === "CIRCULAR") {
+          } else if (!Linear) {
             let {
               start: newStart,
               end: newEnd,

@@ -13,8 +13,8 @@ import { annotationFactory } from "../Utils/sequence";
 class PartExplorer extends React.PureComponent {
   state = {
     showSearch: false,
-    seqSelection: { ref: null, start: 0, end: 0, clockwise: true },
-    findSelection: {
+    seqSelection: { type: "", ref: null, start: 0, end: 0, clockwise: true },
+    findState: {
       searchResults: [],
       searchIndex: 0
     },
@@ -50,7 +50,7 @@ class PartExplorer extends React.PureComponent {
         },
         (err, resp) => {
           if (err) {
-            console.log(err);
+            console.log("Error with automatic annotation: ", err);
             return reject(err);
           }
           return resolve(resp.toJSON());

@@ -123,9 +123,6 @@ class SeqViewer extends React.Component {
     }
 
     const charWidth = size.width / bpsPerBlock; // width of each basepair
-    const type = "LINEAR"; // needed for selectionHandler (to guess current base during
-    // a click/drag event, needs to know the parent type. Could use
-    // wrappedComponent.type.displayName, but this is marginally more robust)
 
     const lineHeight = 1.4 * seqFontSize; // aspect ratio is 1.4 for roboto mono
     const elementHeight = 16; // the height, in pixels, of annotations, ORFs, etc
@@ -137,7 +134,7 @@ class SeqViewer extends React.Component {
       bpsPerBlock,
       charWidth,
       size,
-      type
+      Linear: true
     };
   };
 
@@ -204,10 +201,7 @@ class SeqViewer extends React.Component {
     if (Zoom === 0) {
       yDiff = 0; // stupid hack
     }
-
-    const type = "CIRCULAR";
-
-    return { radius, yDiff, type, size, bpsOnArc, center };
+    return { radius, yDiff, Linear: false, size, bpsOnArc, center };
   };
 
   render() {
@@ -221,7 +215,7 @@ class SeqViewer extends React.Component {
       size,
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -229,7 +223,7 @@ class SeqViewer extends React.Component {
     const partState = {
       showSearch,
       seqSelection,
-      findSelection,
+      findState,
       circularCentralIndex,
       linearCentralIndex,
       setPartState
@@ -252,7 +246,7 @@ class SeqViewer extends React.Component {
           seqLength={seqLength}
           seqStateChange={this.seqStateChange}
           PartName={PartName}
-          type={CircularProp ? "CIRCULAR" : "LINEAR"}
+          Linear={CircularProp ? false : true}
           {...partState}
         />
         {CircularProp && (

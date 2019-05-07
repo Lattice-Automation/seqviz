@@ -29,7 +29,6 @@ const countable = {
 export default class OptionsDropdown extends React.PureComponent {
   render() {
     const { checkBoxes, seqStateChange, ...rest } = this.props;
-
     return (
       <Dropdown
         title={
@@ -53,7 +52,9 @@ export default class OptionsDropdown extends React.PureComponent {
               onChange={seqStateChange}
             />
             {optionsNameMap[b] || b}
-            {countable[b] ? <Badge>{rest[countable[b]].length}</Badge> : null}
+            {countable[b] ? (
+              <Badge pill="true">{rest[countable[b]].length}</Badge>
+            ) : null}
           </label>
         ))}
       </Dropdown>
