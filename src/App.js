@@ -1,30 +1,15 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import PartExplorer from "./PartExplorer/PartExplorer";
 import "./App.scss";
 
 let lattice = {};
 const Viewer = (part, options) => {
-  const { annotate } = options;
-  return (
-    <Router>
-      <div>
-        <Route
-          exact
-          path="/"
-          render={props => (
-            <Circular {...props} part={part} annotate={annotate} />
-          )}
-        />
-        <Route
-          path="/linear"
-          render={props => (
-            <Linear {...props} part={part} annotate={annotate} />
-          )}
-        />
-      </div>
-    </Router>
-  );
+  const { annotate, circular } = options;
+  if (circular) {
+    return <Circular part={part} annotate={annotate} />;
+  } else {
+    return <Linear part={part} annotate={annotate} />;
+  }
 };
 
 const Circular = props => {

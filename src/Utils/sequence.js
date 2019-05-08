@@ -156,16 +156,6 @@ export const reverse = sequence =>
     .join("");
 
 /**
- * Minimum and maximum size of a selection used to create a primer
- */
-export const primerSizeLimits = { min: 10, max: 500 };
-
-/**
- * Minumum size of selection used to generate PCR primer pairs
- */
-export const primerPcrSelectionLimits = { min: 23 };
-
-/**
  * reverse the direction
  * @param direction
  */

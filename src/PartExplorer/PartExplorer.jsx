@@ -1,7 +1,6 @@
 import * as React from "react";
 import SeqViewer from "./SeqViewer/SeqViewer";
 import "./PartExplorer.scss";
-import SelectionMetaInfo from "./SelectionMetaInfo/SelectionMetaInfo";
 import BlankPage from "../BlankPage/BlankPage";
 import request from "request";
 import shortid from "shortid";
@@ -20,6 +19,12 @@ class PartExplorer extends React.PureComponent {
     },
     circularCentralIndex: 0,
     linearCentralIndex: 0
+  };
+
+  onSelection = onSelectionFunction => {
+    const { seqSelection } = this.state;
+    onSelectionFunction(seqSelection);
+    return seqSelection;
   };
 
   setPartState = state => {
@@ -113,11 +118,6 @@ class PartExplorer extends React.PureComponent {
               )}
           {part.seq.length < 1 && <BlankPage />}
         </div>
-        <SelectionMetaInfo
-          part={part}
-          {...partState}
-          setPartState={this.setPartState}
-        />
       </div>
     );
   }

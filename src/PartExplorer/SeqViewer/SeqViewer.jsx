@@ -1,7 +1,6 @@
 import { isEqual } from "lodash";
 import * as React from "react";
 import sizeMe from "react-sizeme";
-import Header from "./Header/Header";
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
@@ -207,7 +206,6 @@ class SeqViewer extends React.Component {
   render() {
     const {
       Circular: CircularProp,
-      PartName,
       part,
       part: {
         seq: { length: seqLength } // determine the length of the currently active part
@@ -229,26 +227,11 @@ class SeqViewer extends React.Component {
       setPartState
     };
 
-    // find the type of available options
-    const options = CircularProp
-      ? { ...SeqViewer.options.circular }
-      : { ...SeqViewer.options.linear };
-
     return (
       <div
         className="SeqViewer-container"
         style={{ zIndex: CircularProp ? 2 : 3 }}
       >
-        <Header
-          {...options}
-          {...part}
-          {...this.state}
-          seqLength={seqLength}
-          seqStateChange={this.seqStateChange}
-          PartName={PartName}
-          Linear={CircularProp ? false : true}
-          {...partState}
-        />
         {CircularProp && (
           <CircularViewer
             {...part}

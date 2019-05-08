@@ -1,6 +1,5 @@
 import { COLOR_BORDER_MAP } from "../../../../../Utils/colors";
 import * as React from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import shortid from "shortid";
 const tinycolor = require("tinycolor2");
 
@@ -235,17 +234,7 @@ class AnnotationRow extends React.PureComponent {
         id={a.id}
         transform={`translate(${x}, 0)`}
       >
-        {resizing || nameFits ? (
-          annotationPath
-        ) : (
-          <OverlayTrigger
-            placement="top"
-            overlay={<Tooltip id={a.id}>{name}</Tooltip>}
-          >
-            {annotationPath}
-          </OverlayTrigger>
-        )}
-        ,
+        {annotationPath},
         {nameFits ? (
           <text
             fontSize={11}
