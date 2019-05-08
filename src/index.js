@@ -7,7 +7,7 @@ import pUC from "./DefaultParts/pUC";
 const part = pUC;
 
 ReactDOM.render(
-  lattice.Viewer(part, { annotate: false }),
+  lattice.Viewer(part, { annotate: false, circular: true }),
   document.getElementById("app-root")
 );
 

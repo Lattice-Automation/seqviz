@@ -56,7 +56,7 @@ const withEventRouter = WrappedComp =>
     };
 
     /**
-     * window wide listener for cmd+a, ie, select all
+     * select all
      */
     selectAllHotkey = () => {
       const {
@@ -195,28 +195,39 @@ const withEventRouter = WrappedComp =>
      * ["All", "Copy", "Up", "Right", "Down", "Left"]
      */
     keypressMap = e => {
-      const { key, shiftKey, metaKey, ctrlKey } = e;
+      const { key, shiftKey } = e;
       switch (key) {
         case "ArrowLeft":
         case "ArrowRight":
         case "ArrowUp":
         case "ArrowDown":
           return shiftKey ? `Shift${key}` : key;
-        case "a":
-          if (metaKey || ctrlKey) {
-            e.preventDefault();
-            return "SelectAll";
-          }
-          return "Input";
-        case "c":
-          return metaKey || ctrlKey ? "Copy" : null;
-        case "Escape":
-          return "Clear";
-        case "Enter":
-          return "ArrowDown";
         default:
           return null;
       }
+      // Sample key mappings
+      // const { key, shiftKey, metaKey, ctrlKey } = e;
+      //   switch (key) {
+      //     case "ArrowLeft":
+      //     case "ArrowRight":
+      //     case "ArrowUp":
+      //     case "ArrowDown":
+      //       return shiftKey ? `Shift${key}` : key;
+      //     case "a":
+      //       if (metaKey || ctrlKey) {
+      //         e.preventDefault();
+      //         return "SelectAll";
+      //       }
+      //       return null;
+      //     case "c":
+      //       return metaKey || ctrlKey ? "Copy" : null;
+      //     case "Escape":
+      //       return "Clear";
+      //     case "Enter":
+      //       return "ArrowDown";
+      //     default:
+      //       return null;
+      //   }
     };
 
     /**

@@ -6,7 +6,7 @@
   z-index: 2 !important;
   .noSeq {
     position: relative;
-    top: 45px;
+    height: 100%;
     left: 5px;
   }
 }
@@ -14,6 +14,6 @@
 .SeqViewer-eventRouter {
   position: absolute;
   outline: none;
-  height: calc(100% - 45px);
+  height: 100%;
   width: inherit;
 }
