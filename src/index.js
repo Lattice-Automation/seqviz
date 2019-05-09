@@ -1,6 +1,19 @@
 import VIEWER from "./App";
 import PUC from "./DefaultParts/pUC";
 
+/**
+ * CODE TO TEST VIEWER
+ */
+// import "./index.css";
+// const viewer = VIEWER("app-root", PUC, {
+//   annotate: false,
+//   circular: true,
+//   onSelection: selection => {
+//     console.log("Your Selection: ", selection);
+//   }
+// });
+// viewer.render();
+
 export const pUC = () => {
   return PUC;
 };

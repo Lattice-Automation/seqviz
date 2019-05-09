@@ -1,6 +1,5 @@
 import { isEqual } from "lodash";
 import * as React from "react";
-import sizeMe from "react-sizeme";
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
@@ -96,16 +95,9 @@ class SeqViewer extends React.Component {
   linearProps = () => {
     const { Zoom = 50 } = this.state;
 
-    const {
-      size: { height, width }
-    } = this.props;
+    const { size } = this.props;
 
     const seqFontSize = Math.min(Math.round(Zoom * 0.1 + 9.5), 18); // max 18px
-
-    const size = {
-      height: height - 35 || 0,
-      width: width * SeqViewer.WIDTH_MULTIPLIER
-    };
 
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of Zoom currently active
@@ -149,18 +141,12 @@ class SeqViewer extends React.Component {
   circularProps = () => {
     const { Zoom = 0 } = this.state;
     const {
-      size: oldSize,
+      size,
       part: {
         seq: { length: seqLength }
       }
     } = this.props;
 
-    // adjust for the header above the Circular component
-    const newSize = oldSize.height - 45;
-    const size = {
-      height: newSize || 0,
-      width: oldSize.width
-    };
     const center = {
       x: size.width / 2,
       y: size.height / 2
@@ -258,4 +244,4 @@ class SeqViewer extends React.Component {
   }
 }
 
-export default sizeMe({ monitorWidth: true, monitorHeight: true })(SeqViewer);
+export default SeqViewer;

@@ -302,7 +302,7 @@ class Circular extends React.PureComponent {
 
     const plasmidId = `${name}-viewer-circular`;
     const selectionId = shortid.generate();
-    if (size.height <= 0) return null;
+    if (!size.height) return null;
 
     return (
       <svg
