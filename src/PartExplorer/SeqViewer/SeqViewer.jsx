@@ -216,7 +216,8 @@ class SeqViewer extends React.Component {
       findState,
       circularCentralIndex,
       linearCentralIndex,
-      setPartState
+      setPartState,
+      onSelection
     } = this.props;
     const partState = {
       showSearch,
@@ -224,7 +225,8 @@ class SeqViewer extends React.Component {
       findState,
       circularCentralIndex,
       linearCentralIndex,
-      setPartState
+      setPartState,
+      onSelection
     };
 
     return (

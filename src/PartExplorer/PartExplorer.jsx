@@ -21,12 +21,6 @@ class PartExplorer extends React.PureComponent {
     linearCentralIndex: 0
   };
 
-  onSelection = onSelectionFunction => {
-    const { seqSelection } = this.state;
-    onSelectionFunction(seqSelection);
-    return seqSelection;
-  };
-
   setPartState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
       if (typeof state[key] === "object") {
@@ -93,7 +87,7 @@ class PartExplorer extends React.PureComponent {
 
   render() {
     const { circular, annotate } = this.props;
-    let { part } = this.props;
+    let { part, onSelection } = this.props;
     const partState = this.state;
     part = annotate ? this.autoAnnotate(part) : part;
     return (
@@ -105,6 +99,7 @@ class PartExplorer extends React.PureComponent {
                   part={part}
                   {...partState}
                   setPartState={this.setPartState}
+                  onSelection={onSelection}
                   Circular
                 />
               )
@@ -113,6 +108,7 @@ class PartExplorer extends React.PureComponent {
                   part={part}
                   {...partState}
                   setPartState={this.setPartState}
+                  onSelection={onSelection}
                   Circular={false}
                 />
               )}
