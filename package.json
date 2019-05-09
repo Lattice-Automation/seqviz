@@ -1,6 +1,6 @@
 {
   "name": "visualizer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client’s website or application.",
   "author": "Lattice Automation (https://latticeautomation.com/)",
   "main": "src/index.js",

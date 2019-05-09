@@ -24,7 +24,10 @@ export default class Labels extends React.Component {
     // leaving a hover both trigger a change in whether to render and show
     // the annotation block, it would be expensive to regroup labels
     // on every hover event
-    return { labelGroups: Labels.groupOverlappingLabels(nextProps), hoveredGroup: prevState.hoveredGroup };
+    return {
+      labelGroups: Labels.groupOverlappingLabels(nextProps),
+      hoveredGroup: prevState.hoveredGroup
+    };
   };
 
   /**
@@ -37,7 +40,7 @@ export default class Labels extends React.Component {
    * this should return all the informaiton needed to render the
    * name by itself or in a grouping
    */
-  static groupOverlappingLabels = (props) => {
+  static groupOverlappingLabels = props => {
     const {
       radius,
       labels,
@@ -63,33 +66,31 @@ export default class Labels extends React.Component {
      */
     const labelsWithCoordinates = labels
       .reduce((acc, labelRow) => acc.concat(labelRow), []) // flatten the rows
-      .map(
-        (a) => {
-          // find the mid-point, vertically, for the label, correcting for entities
-          // that cross the zero-index
-          let annCenter;
-          if (a.type === "enzyme") {
-            annCenter = a.start;
-          } else if (a.end > a.start) {
-            const annMidSum = a.end + a.start;
-            annCenter = annMidSum / 2;
-          } else {
-            const annStart = a.start - seqLength;
-            const annMidSum = annStart + a.end;
-            annCenter = annMidSum / 2;
-          }
-
-          // find the seed-points
-          const lineCoor = findCoor(annCenter, radius, true);
-          const textCoor = findCoor(annCenter, textRadius, true);
-          const left = textCoor.x <= center.x;
-
-          // find the textAnchor, based on which side of plasmid it's on
-          const textAnchor = left ? "end" : "start";
-          const label = a; // just to keep short-hand in return
-          return { label, lineCoor, textCoor, textAnchor };
+      .map(a => {
+        // find the mid-point, vertically, for the label, correcting for entities
+        // that cross the zero-index
+        let annCenter;
+        if (a.type === "enzyme") {
+          annCenter = a.start;
+        } else if (a.end > a.start) {
+          const annMidSum = a.end + a.start;
+          annCenter = annMidSum / 2;
+        } else {
+          const annStart = a.start - seqLength;
+          const annMidSum = annStart + a.end;
+          annCenter = annMidSum / 2;
         }
-      );
+
+        // find the seed-points
+        const lineCoor = findCoor(annCenter, radius, true);
+        const textCoor = findCoor(annCenter, textRadius, true);
+        const left = textCoor.x <= center.x;
+
+        // find the textAnchor, based on which side of plasmid it's on
+        const textAnchor = left ? "end" : "start";
+        const label = a; // just to keep short-hand in return
+        return { label, lineCoor, textCoor, textAnchor };
+      });
 
     // a utility function for checking whether a label and textCoor will overflow
     const groupOverflows = (label, textCoor) => {
@@ -99,7 +100,10 @@ export default class Labels extends React.Component {
       const heightYPos = textCoor.y + yDiff;
       if (heightYPos < 0 || heightYPos > size.height) {
         overflow = true; // vertical overflow
-      } else if (textCoor.x - nameLength < 0 || textCoor.x + nameLength > size.width) {
+      } else if (
+        textCoor.x - nameLength < 0 ||
+        textCoor.x + nameLength > size.width
+      ) {
         overflow = true; // horizontal overflow
       }
       return overflow;
@@ -247,7 +251,7 @@ export default class Labels extends React.Component {
   };
 
   // set the currently hovered group
-  setHoveredGroup = (hoveredGroup) => {
+  setHoveredGroup = hoveredGroup => {
     if (hoveredGroup !== this.state.hoveredGroup) {
       this.setState({ hoveredGroup });
     }
@@ -255,6 +259,7 @@ export default class Labels extends React.Component {
 
   render() {
     const { labelGroups, hoveredGroup } = this.state;
+    const { size, lineHeight, Zoom } = this.props;
 
     // find the currently hovered group
     const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
@@ -321,10 +326,10 @@ export default class Labels extends React.Component {
         {hovered && (
           <WrappedGroupLabel
             group={hovered}
-            size={this.props.size}
+            size={size}
             setHoveredGroup={this.setHoveredGroup}
-            lineHeight={this.props.lineHeight}
-            Zoom={this.props.Zoom}
+            lineHeight={lineHeight}
+            Zoom={Zoom}
           />
         )}
       </g>

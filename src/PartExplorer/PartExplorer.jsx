@@ -87,7 +87,7 @@ class PartExplorer extends React.PureComponent {
 
   render() {
     const { circular, annotate } = this.props;
-    let { part, onSelection } = this.props;
+    let { part, onSelection, size } = this.props;
     const partState = this.state;
     part = annotate ? this.autoAnnotate(part) : part;
     return (
@@ -100,6 +100,7 @@ class PartExplorer extends React.PureComponent {
                   {...partState}
                   setPartState={this.setPartState}
                   onSelection={onSelection}
+                  size={size}
                   Circular
                 />
               )
@@ -109,6 +110,7 @@ class PartExplorer extends React.PureComponent {
                   {...partState}
                   setPartState={this.setPartState}
                   onSelection={onSelection}
+                  size={size}
                   Circular={false}
                 />
               )}
