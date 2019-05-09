@@ -1,25 +1,22 @@
+import ReactDOM from "react-dom";
 import React from "react";
-import PartExplorer from "./PartExplorer/PartExplorer";
+import PartExplorer from "./PartExplorer/PartExplorer.jsx";
 import "./App.scss";
 
-let lattice = {};
-const Viewer = (part, options) => {
-  const { annotate, circular } = options;
-  if (circular) {
-    return <Circular part={part} annotate={annotate} />;
-  } else {
-    return <Linear part={part} annotate={annotate} />;
-  }
+const Viewer = (element, part, options) => {
+  const { annotate, circular, onSelection } = options;
+  const viewer = (
+    <PartExplorer
+      circular={circular}
+      part={part}
+      annotate={annotate}
+      onSelection={onSelection}
+    />
+  );
+  const render = () => {
+    ReactDOM.render(viewer, document.getElementById(element));
+  };
+  return { viewer: viewer, render: render };
 };
 
-const Circular = props => {
-  const { part, annotate } = props;
-  return <PartExplorer circular={true} part={part} annotate={annotate} />;
-};
-
-const Linear = props => {
-  const { part, annotate } = props;
-  return <PartExplorer circular={false} part={part} annotate={annotate} />;
-};
-lattice.Viewer = Viewer;
-export default lattice;
+export default Viewer;

@@ -211,6 +211,7 @@ const withSelectionHandler = WrappedComp =>
       const {
         seqSelection,
         setPartState,
+        onSelection,
         findState: { searchIndex }
       } = this.props;
       const {
@@ -240,6 +241,7 @@ const withSelectionHandler = WrappedComp =>
           this.workspace.focus();
         }
       }
+      onSelection(newSelection);
     };
 
     /**

@@ -24,26 +24,6 @@ label {
   float: right;
 }
 
-.input {
-  width: auto;
-  padding-left: 5px;
-  color: black;
-  background-color: #f0f0f0;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 1px;
-  margin-left: auto;
-  outline: none;
-}
-
-.modal {
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-  background-color: white;
-  height: fit-content;
-  padding-bottom: 0px;
-}
-
 .scroll::-webkit-scrollbar {
   width: 7px;
 }
@@ -64,6 +44,18 @@ label {
   background-color: #ececec;
 }
 
-.badge {
-  margin-left: 15px;
+// done to prevent the text from being highlighted in the sequence viewer
+svg text {
+  user-select: none;
+  fill: #2a2a2a;
+  font-family: Roboto Mono, Monaco, monospace;
+}
+
+svg text::selection {
+  background: none;
+}
+
+html,
+body {
+  overscroll-behavior: none;
 }

@@ -1,6 +1,9 @@
 {
   "name": "visualizer",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client’s website or application.",
+  "author": "Lattice Automation (https://latticeautomation.com/)",
+  "main": "src/index.js",
   "private": true,
   "dependencies": {
     "babel-eslint": "^10.0.1",
@@ -17,7 +20,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose",
+    "build:react": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -34,6 +38,34 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-imports": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "fs": "0.0.1-security",
+    "image-webpack-loader": "^4.6.0",
+    "net": "^1.0.2",
+    "tls": "0.0.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack-cli": "^3.3.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "babel-plugin-module-resolver",
+      "babel-plugin-transform-imports"
     ]
   }
 }
