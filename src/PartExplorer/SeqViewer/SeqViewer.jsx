@@ -205,6 +205,7 @@ class SeqViewer extends React.Component {
       setPartState,
       onSelection
     } = this.props;
+
     const partState = {
       showSearch,
       seqSelection,

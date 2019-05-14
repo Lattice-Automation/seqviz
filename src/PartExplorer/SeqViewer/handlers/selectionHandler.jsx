@@ -220,14 +220,16 @@ const withSelectionHandler = WrappedComp =>
         end = 0,
         ref = "",
         type = "",
-        searchIndex: newSearchIndex = null
+        searchIndex: newSearchIndex = null,
+        feature
       } = selectRange;
       const newSelection = {
         type,
         ref,
         clockwise,
         start,
-        end
+        end,
+        feature
       };
       const findStateIndex =
         newSearchIndex === null ? searchIndex : newSearchIndex;
@@ -256,6 +258,7 @@ const withSelectionHandler = WrappedComp =>
     updateSelectionWithknownRange = e => {
       const {
         seq,
+        annotations,
         Linear,
         findState: { searchResults },
         setPartState
@@ -272,8 +275,6 @@ const withSelectionHandler = WrappedComp =>
         : this.elementIdsToRanges.get(e.target.id) || // elements and SeqBlocks
           this.elementIdsToRanges.get(e.currentTarget.id);
       if (!knownRange) return; // there isn't a known range with the id of the element
-      // clicked (this shouldn't happen)
-
       const { start, end, direction } = knownRange;
       switch (knownRange.type) {
         case "ANNOTATION":
@@ -285,20 +286,18 @@ const withSelectionHandler = WrappedComp =>
           const newSearchIndex = searchResults.findIndex(
             res => res.start === selectionStart
           );
+          const feature = knownRange.ref
+            ? annotations.find(annotation => annotation.id === knownRange.ref)
+            : null;
           this.setSequenceSelection({
             ...knownRange,
             start: selectionStart,
             end: selectionEnd,
             clockwise: clockwise,
-            searchIndex: newSearchIndex
+            searchIndex: newSearchIndex,
+            feature: feature
           });
           this.dragEvent = false;
-
-          if (!Linear && knownRange.type === "ANNOTATION") {
-            setPartState({
-              circularCentralIndex: knownRange.start || 0
-            });
-          }
           break;
         }
         case "SEQ": {

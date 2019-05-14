@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import ReactDOMServer from "react-dom/server";
 import React from "react";
 import PartExplorer from "./PartExplorer/PartExplorer.jsx";
 import { SizeMe } from "react-sizeme";
@@ -24,11 +25,11 @@ const Viewer = (element, part, options) => {
       }}
     />
   );
-
+  const viewerHTML = ReactDOMServer.renderToStaticMarkup(viewer);
   const render = () => {
     ReactDOM.render(viewer, document.getElementById(element));
   };
-  return { viewer: viewer, render: render };
+  return { viewer: viewerHTML, render: render };
 };
 
 export default Viewer;

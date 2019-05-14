@@ -5,11 +5,12 @@ import BlankPage from "../BlankPage/BlankPage";
 import request from "request";
 import shortid from "shortid";
 import { annotationFactory } from "../Utils/sequence";
+import { isEqual } from "lodash";
 
 /**
  * a container for investigating the meta and sequence information of a part
  */
-class PartExplorer extends React.PureComponent {
+class PartExplorer extends React.Component {
   state = {
     showSearch: false,
     seqSelection: { type: "", ref: null, start: 0, end: 0, clockwise: true },
@@ -18,8 +19,18 @@ class PartExplorer extends React.PureComponent {
       searchIndex: 0
     },
     circularCentralIndex: 0,
-    linearCentralIndex: 0
+    linearCentralIndex: 0,
+    part: {}
   };
+
+  componentDidMount = async () => {
+    let { part, annotate } = this.props;
+    part = annotate ? await this.autoAnnotate(part) : part;
+    this.setState({ part: part });
+  };
+
+  shouldComponentUpdate = (nextProps, nextState) =>
+    !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   setPartState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
@@ -56,7 +67,6 @@ class PartExplorer extends React.PureComponent {
         }
       );
     });
-
     if (result.statusCode !== 200) {
       const err = JSON.stringify(result.body);
       throw new Error(`Lambda annotations failed. Server response: ${err}`);
@@ -86,36 +96,39 @@ class PartExplorer extends React.PureComponent {
   };
 
   render() {
-    const { circular, annotate } = this.props;
-    let { part, onSelection, size } = this.props;
+    const { circular } = this.props;
+    let { onSelection, size } = this.props;
+    const { part } = this.state;
     const partState = this.state;
-    part = annotate ? this.autoAnnotate(part) : part;
+    const partAvailable = part.seq || false;
     return (
       <div className="part-explorer-container" id="part-explorer">
-        <div className="seq-viewers-container">
-          {circular
-            ? part.seq.length > 0 && (
-                <SeqViewer
-                  part={part}
-                  {...partState}
-                  setPartState={this.setPartState}
-                  onSelection={onSelection}
-                  size={size}
-                  Circular
-                />
-              )
-            : part.seq.length > 0 && (
-                <SeqViewer
-                  part={part}
-                  {...partState}
-                  setPartState={this.setPartState}
-                  onSelection={onSelection}
-                  size={size}
-                  Circular={false}
-                />
-              )}
-          {part.seq.length < 1 && <BlankPage />}
-        </div>
+        {partAvailable && (
+          <div className="seq-viewers-container">
+            {circular
+              ? part.seq.length > 0 && (
+                  <SeqViewer
+                    part={part}
+                    {...partState}
+                    setPartState={this.setPartState}
+                    onSelection={onSelection}
+                    size={size}
+                    Circular
+                  />
+                )
+              : part.seq.length > 0 && (
+                  <SeqViewer
+                    part={part}
+                    {...partState}
+                    setPartState={this.setPartState}
+                    onSelection={onSelection}
+                    size={size}
+                    Circular={false}
+                  />
+                )}
+            {part.seq.length < 1 && <BlankPage />}
+          </div>
+        )}
       </div>
     );
   }

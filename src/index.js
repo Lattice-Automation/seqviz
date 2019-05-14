@@ -7,8 +7,8 @@ import PUC from "./DefaultParts/pUC";
  */
 // import "./index.css";
 // const viewer = VIEWER("app-root", PUC, {
-//   annotate: false,
-//   circular: true,
+//   annotate: true,
+//   circular: false,
 //   onSelection: selection => {
 //     console.log("Your Selection: ", selection);
 //   }
