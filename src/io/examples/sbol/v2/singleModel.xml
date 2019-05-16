@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:grn="urn:bbn.com:tasbe:grn/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:annot="http://myannotation.org/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Model rdf:about="http://www.async.ece.utah.edu/ToggleModel/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/ToggleModel"/>
+    <sbol:displayId>ToggleModel</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:source rdf:resource="ToggleModel_source"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+  </sbol:Model>
+</rdf:RDF>

@@ -1,0 +1,97 @@
+<!--
+Parts from the iGEM Registry of Standard Biological Parts
+-->
+<rsbpml>
+<part_list>
+<part>
+<part_id>151</part_id>
+<part_name>BBa_B0034</part_name>
+<part_short_name>B0034</part_short_name>
+<part_short_desc>RBS (Elowitz 1999) -- defines RBS efficiency</part_short_desc>
+<part_type>RBS</part_type>
+<release_status>Released HQ 2013</release_status>
+<sample_status>In stock</sample_status>
+<part_results>Works</part_results>
+<part_nickname/>
+<part_rating>1</part_rating>
+<part_url>http://parts.igem.org/Part:BBa_B0034</part_url>
+<part_entered>2003-01-31</part_entered>
+<part_author>
+Vinay S Mahajan, Voichita D. Marinescu, Brian Chow, Alexander D Wissner-Gross and Peter Carr IAP, 2003.
+</part_author>
+<deep_subparts/>
+<specified_subparts/>
+<specified_subscars/>
+<sequences>
+<seq_data>aaagaggagaaa</seq_data>
+</sequences>
+<features>
+<feature>
+<id>23325</id>
+<title/>
+<type>conserved</type>
+<direction>forward</direction>
+<startpos>5</startpos>
+<endpos>8</endpos>
+</feature>
+</features>
+<parameters>
+<!--
+ NOTE: Currently, each parameter name can have only one value.
+-->
+<!--
+This will change as we fully support the context of a parameter. RDR 4/2010 
+-->
+<parameter>
+<name>efficiency</name>
+<value>1</value>
+<units/>
+<url/>
+<id>2480</id>
+<m_date>2008-11-29 13:15:14</m_date>
+<user_id>24</user_id>
+<user_name>registry</user_name>
+</parameter>
+<parameter>
+<name>biology</name>
+<value>NA</value>
+<units/>
+<url/>
+<id>3314</id>
+<m_date>2008-11-29 13:15:14</m_date>
+<user_id>24</user_id>
+<user_name>registry</user_name>
+</parameter>
+</parameters>
+<categories>
+<category>//chassis/prokaryote/ecoli</category>
+<category>//direction/forward</category>
+<category>//function/coliroid</category>
+<category>//rbs/prokaryote/constitutive/community</category>
+<category>//regulation/constitutive</category>
+<category>//ribosome/prokaryote/ecoli</category>
+</categories>
+<twins>
+<twin>BBa_J34801</twin>
+<twin>BBa_J70591</twin>
+<twin>BBa_K773001</twin>
+<twin>BBa_K783051</twin>
+<twin>BBa_K1529997</twin>
+<twin>BBa_K1325011</twin>
+<twin>BBa_K1583061</twin>
+<twin>BBa_K2149018</twin>
+</twins>
+<samples>
+<!-- Samples have been turned off for now - rdr 2013 -->
+</samples>
+<references>
+<!-- References are not available yet - rdr 2013 -->
+</references>
+<groups>
+<!--
+ Group access information is not yet available - rdr 2013
+-->
+</groups>
+</part>
+</part_list>
+</rsbpml>

@@ -1,0 +1,195 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+    <sbol:displayId>BBa_C0012</sbol:displayId>
+    <dcterms:title>lacI</dcterms:title>
+    <dcterms:description>lacI repressor from E. coli (+LVA)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/partseq_153"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="urn:2c324e1d-484e-4597-b92c-657b82eb8483">
+    <sbol:persistentIdentity rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483"/>
+    <sbol:displayId>Repressor2</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000110"/>
+    <sbol:component>
+      <sbol:Component rdf:about="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component1">
+        <sbol:persistentIdentity rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component0">
+        <sbol:persistentIdentity rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="urn:7376e955-1f10-411b-b123-ac37410d81f2"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="urn:3408ce9e-135e-4fb3-ba0f-42f8eb43dd33">
+        <sbol:persistentIdentity rdf:resource="urn:3408ce9e-135e-4fb3-ba0f-42f8eb43dd33"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:GenericLocation rdf:about="urn:3408ce9e-135e-4fb3-ba0f-42f8eb43dd33/genericLocation">
+            <sbol:persistentIdentity rdf:resource="urn:3408ce9e-135e-4fb3-ba0f-42f8eb43dd33/genericLocation"/>
+            <sbol:displayId>genericLocation</sbol:displayId>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:GenericLocation>
+        </sbol:location>
+        <sbol:component rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="urn:dd9e467e-eb95-4bda-8788-c13a08e745c9">
+        <sbol:persistentIdentity rdf:resource="urn:dd9e467e-eb95-4bda-8788-c13a08e745c9"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:GenericLocation rdf:about="urn:dd9e467e-eb95-4bda-8788-c13a08e745c9/genericLocation">
+            <sbol:persistentIdentity rdf:resource="urn:dd9e467e-eb95-4bda-8788-c13a08e745c9/genericLocation"/>
+            <sbol:displayId>genericLocation</sbol:displayId>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:GenericLocation>
+        </sbol:location>
+        <sbol:component rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="urn:2c324e1d-484e-4597-b92c-657b82eb8483/sequenceConstraint1">
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component0"/>
+        <sbol:object rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483/component1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="urn:7376e955-1f10-411b-b123-ac37410d81f2">
+    <sbol:persistentIdentity rdf:resource="urn:7376e955-1f10-411b-b123-ac37410d81f2"/>
+    <sbol:displayId>RBS</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="urn:49f0ad6c-dec4-4b82-a989-d9ce22ac8c58">
+    <sbol:persistentIdentity rdf:resource="urn:49f0ad6c-dec4-4b82-a989-d9ce22ac8c58"/>
+    <sbol:displayId>Terminator</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_R0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+    <sbol:displayId>BBa_R0040</sbol:displayId>
+    <dcterms:title>p(tetR)</dcterms:title>
+    <dcterms:description>TetR repressible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/partseq_187"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b">
+    <sbol:persistentIdentity rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b"/>
+    <sbol:displayId>pIKELeftCasette</sbol:displayId>
+    <dcterms:title>pIKE Left Casette</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000110"/>
+    <sbol:component>
+      <sbol:Component rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component2">
+        <sbol:persistentIdentity rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="urn:49f0ad6c-dec4-4b82-a989-d9ce22ac8c58"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component0">
+        <sbol:persistentIdentity rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component1">
+        <sbol:persistentIdentity rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="urn:2c324e1d-484e-4597-b92c-657b82eb8483"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="urn:678f5ee4-ef38-4c8e-a235-145a459b2128">
+        <sbol:persistentIdentity rdf:resource="urn:678f5ee4-ef38-4c8e-a235-145a459b2128"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:GenericLocation rdf:about="urn:678f5ee4-ef38-4c8e-a235-145a459b2128/genericLocation">
+            <sbol:persistentIdentity rdf:resource="urn:678f5ee4-ef38-4c8e-a235-145a459b2128/genericLocation"/>
+            <sbol:displayId>genericLocation</sbol:displayId>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:GenericLocation>
+        </sbol:location>
+        <sbol:component rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="urn:14dfcbba-9c70-43de-8e14-b3d7c5d88ee7">
+        <sbol:persistentIdentity rdf:resource="urn:14dfcbba-9c70-43de-8e14-b3d7c5d88ee7"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="urn:14dfcbba-9c70-43de-8e14-b3d7c5d88ee7/range">
+            <sbol:persistentIdentity rdf:resource="urn:14dfcbba-9c70-43de-8e14-b3d7c5d88ee7/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="urn:2bc8890b-9fc3-44e8-9606-6b5e7dd7a690">
+        <sbol:persistentIdentity rdf:resource="urn:2bc8890b-9fc3-44e8-9606-6b5e7dd7a690"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:GenericLocation rdf:about="urn:2bc8890b-9fc3-44e8-9606-6b5e7dd7a690/genericLocation">
+            <sbol:persistentIdentity rdf:resource="urn:2bc8890b-9fc3-44e8-9606-6b5e7dd7a690/genericLocation"/>
+            <sbol:displayId>genericLocation</sbol:displayId>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:GenericLocation>
+        </sbol:location>
+        <sbol:component rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/sequenceConstraint2">
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component1"/>
+        <sbol:object rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component2"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/sequenceConstraint1">
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component0"/>
+        <sbol:object rdf:resource="urn:f71298e4-a79b-4f94-ae8a-22b1f6d11d8b/component1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/partseq_153">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/partseq_153"/>
+    <sbol:elements>atggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/partseq_187">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/partseq_187"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Promoters/Catalog/Anderson"/>
+    <sbol:displayId>Anderson</sbol:displayId>
+    <dcterms:title>Anderson promoters</dcterms:title>
+    <dcterms:description>The Anderson promoter collection</dcterms:description>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23119"/>
+    <sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23118"/>
+  </sbol:Collection>
+</rdf:RDF>

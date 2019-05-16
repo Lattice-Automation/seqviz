@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/dna_construct">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/dna_construct"/>
+    <sbol:displayId>dna_construct</sbol:displayId>
+    <dcterms:title>dna_construct</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000984"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/my_amplified_dna">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/my_amplified_dna"/>
+    <sbol:displayId>my_amplified_dna</sbol:displayId>
+    <prov:wasGeneratedBy rdf:resource="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer"/>
+    <dcterms:title>my_amplified_dna</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000006"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000985"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/five_primer">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/five_primer"/>
+    <sbol:displayId>five_primer</sbol:displayId>
+    <dcterms:title>five_primer</dcterms:title>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000121"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/three_primer">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/three_primer"/>
+    <sbol:displayId>three_primer</sbol:displayId>
+    <dcterms:title>three_primer</dcterms:title>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000132"/>
+  </sbol:ComponentDefinition>
+  <prov:Activity rdf:about="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer"/>
+    <sbol:displayId>amplify_dna_construct_with_five_primer_and_three_primer</sbol:displayId>
+    <dcterms:title>amplify(dna_construct, five_primer, three_primer)</dcterms:title>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/reverse_primer">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/reverse_primer"/>
+        <sbol:displayId>reverse_primer</sbol:displayId>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0000132"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/three_primer"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/dna_construct">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/dna_construct"/>
+        <sbol:displayId>dna_construct</sbol:displayId>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0000006"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/dna_construct"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/forward_primer">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/amplify_dna_construct_with_five_primer_and_three_primer/forward_primer"/>
+        <sbol:displayId>forward_primer</sbol:displayId>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0000121"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/five_primer"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+</rdf:RDF>

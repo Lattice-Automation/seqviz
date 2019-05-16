@@ -13,11 +13,10 @@ import * as React from "react";
  */
 export default class Index extends React.PureComponent {
   static getDerivedStateFromProps = nextProps => {
-    const { circularCentralIndex: centralIndex, seqLength, Zoom } = nextProps;
-    // equation of a line from (0, 6) to (100, seqLength / 10) (Zoom, tickCount)
+    const { circularCentralIndex: centralIndex, seqLength, zoom } = nextProps;
+    // equation of a line from (0, 6) to (100, seqLength / 10) (zoom, tickCount)
     // ie, at min zoom, 6 ticks. at max zoom, one tick every 10 bps
-    const tickCount = ((seqLength / 10.0 - 6.0) / 100.0) * Zoom + 6;
-
+    const tickCount = ((seqLength / 10.0 - 6.0) / 100.0) * zoom.circular + 6;
     // make each increment a multiple of 10 with two sig figs
     const increments = Math.floor(seqLength / tickCount);
     let indexInc = Math.max(+increments.toPrecision(2), 10);
@@ -97,7 +96,7 @@ export default class Index extends React.PureComponent {
     const {
       seq,
       name,
-      Zoom,
+      zoom,
       radius,
       center,
       size,
@@ -134,7 +133,7 @@ export default class Index extends React.PureComponent {
     // if the viewer is at all zoomed, or if the elements will begin to overlap with the
     // name, move the name downward to the bottom of the viewer
     const nameCoor =
-      Zoom > 2 || nameCoorRadius > mostInwardElementRadius
+      zoom.circular > 2 || nameCoorRadius > mostInwardElementRadius
         ? {
             x: center.x,
             y: size.height - nameYAdjust - yDiff
@@ -146,7 +145,7 @@ export default class Index extends React.PureComponent {
 
     // these are just created once, but are rotated to each position along the plasmid
     const tickCoorStart = findCoor(0, radius);
-    // constant tick height, doesn't scale w/ lineHeight/Zoom
+    // constant tick height, doesn't scale w/ lineHeight/zoom
     const tickCoorEnd = findCoor(0, radius - 10);
 
     // create tick and text style
@@ -201,7 +200,7 @@ export default class Index extends React.PureComponent {
         >
           {`${seqLength} bp`}
         </text>
-        {Zoom > 60 || seq.length < 200 ? (
+        {zoom.circular > 60 || seq.length < 200 ? (
           <g className="circular-bps">{this.renderBasepairs()}</g>
         ) : null}
         {ticks.map(t => (

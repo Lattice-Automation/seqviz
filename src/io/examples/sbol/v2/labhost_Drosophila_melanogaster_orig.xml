@@ -1,0 +1,194 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Collection:Drosophila_melanogaster">
+    <sbol:displayId>Drosophila_melanogaster</sbol:displayId>
+    <dcterms:title>Collection of Drosophila melanogaster features</dcterms:title>
+    <dcterms:description>This is a collection of features that have been associated with Drosophila melanogaster plasmids downloaded from the SnapGene Resources repository (http://www.snapgene.com).</dcterms:description>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001"/>
+    <sbol:displayId>Gal4_UAS_001</sbol:displayId>
+    <dcterms:title>Gal4 UAS-001</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000410"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002"/>
+    <sbol:displayId>white_linker_sequence_002</sbol:displayId>
+    <dcterms:title>white linker sequence-002</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:displayId>AmpR_promoter_009</sbol:displayId>
+    <dcterms:title>AmpR promoter-009</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001"/>
+    <sbol:displayId>white_linker_sequence_001</sbol:displayId>
+    <dcterms:title>white linker sequence-001</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end"/>
+    <sbol:displayId>P_element_3__end</sbol:displayId>
+    <dcterms:title>P element 3' end</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box"/>
+    <sbol:displayId>Hsp70_TATA_box</sbol:displayId>
+    <dcterms:title>Hsp70 TATA box</dcterms:title>
+    <dcterms:description>TATA element from the Drosophila Hsp70Bb promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000174"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016"/>
+    <sbol:displayId>AmpR_016</sbol:displayId>
+    <dcterms:title>AmpR-016</dcterms:title>
+    <dcterms:description>confers resistance to ampicillin, carbenicillin, and related antibiotics</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010"/>
+    <sbol:displayId>MCS_010</sbol:displayId>
+    <dcterms:title>MCS-010</dcterms:title>
+    <dcterms:description>multiple cloning site</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004"/>
+    <sbol:displayId>SV40_poly_A__signal_004</sbol:displayId>
+    <dcterms:title>SV40 poly(A) signal-004</dcterms:title>
+    <dcterms:description>SV40 polyadenylation signal</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000551"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009"/>
+    <sbol:displayId>ori_009</sbol:displayId>
+    <dcterms:title>ori-009</dcterms:title>
+    <dcterms:description>high-copy-number ColE1/pMB1/pBR322/pUC origin of replication</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000296"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001"/>
+    <sbol:displayId>small_t_intron_001</sbol:displayId>
+    <dcterms:title>small t intron-001</dcterms:title>
+    <dcterms:description>simian virus 40 (SV40) small t antigen intron</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000188"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end"/>
+    <sbol:displayId>P_element_5__end</sbol:displayId>
+    <dcterms:title>P element 5' end</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_5'_end#seq"/>
+    <sbol:elements>gctgctgctctaaacgacgcatttcgtactccaaagtacgaattttttccctcaagctcttattttcattaaacaatgaacaggacctaacgcacagtcacgttattgtttacataaatgattttttttactattcaaacttactctgtttgtgtactcccactggtatagccttcttttatcttttctggttcaggctctatcactttactaggtacggcatctgcgttgagtcgcctccttttaaatgtctgaccttttgcaggtgcagccttccactgcgaatcattaaagtgggtatcacaaatttgggagttttcaccaaggctgcacccaaggctctgctcccacaattttctcttaatagcacacttcggcacgtgaattaattttactccagtcacagctttgcagcaaaatttgcaatatttcatttttttttattccacgtaagggttaatgttttcaaaaaaaaattcgtccgcacacaacctttcctctcaacaagcaaacgtgcactgaatttaagtgtatacttcggtaagcttcggctatcgacgggaccaccttatgttatttcatcatg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+    <sbol:elements>cgcggaacccctatttgtttatttttctaaatacattcaaatatgtatccgctcatgagacaataaccctgataaatgcttcaataatattgaaaaaggaagagt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-002#seq"/>
+    <sbol:elements>ccgaatcgcgcggaactaacgacagtcgctccaaggtcgtcgaacaaaaggtgaatgtgttgcggagagcgggtgggagacagcgaaagagcaactacgaaacgtggtgtggtggaggtgaattatgaagagggcgcgcgatttgaaaagtatgtatataaaaaatatatcccggtgttttatgtagcgataaacgagtttttgatgtaaggtatgcaggtgtgtaagtcttttggttagaagacaaatccaaagtctacttgtggggatgttcgaaggggaaatacttgtattctataggtcatatcttgtttttattggcacaaatataattacattagctttttgagggggcaataaacagtaaacacgatggtaataatggtaaaaaaaaaaacaagcagttatttcggatatatgtcggctactccttgcgtcgggcccgaagtcttagagccagatatgcgagcacccggaagctcacgatgagaatggccagac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Gal4_UAS-001#seq"/>
+    <sbol:elements>cggagtactgtcctccg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:white_linker_sequence-001#seq"/>
+    <sbol:elements>ggccagacccacgtagtccagcggcagatcggcggcggagaagttaagcgtctccaggatgaccttgcccgaactggggcacgtggtgttcgacgatgtgcagctaatttcgcccggctccacgtccgcccattggttaatcagcagaccctcgttggcgtaacggaaccatgagaggtacgacaaccatttgaggtatactggcaccgagcccgagttcaagaagaag</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SV40_poly(A)_signal-004#seq"/>
+    <sbol:elements>aacttgtttattgcagcttataatggttacaaataaagcaatagcatcacaaatttcacaaataaagcatttttttcactgcattctagttgtggtttgtccaaactcatcaatgtatcttatcatgtctggatc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq"/>
+    <sbol:elements>ttgagatcctttttttctgcgcgtaatctgctgcttgcaaacaaaaaaaccaccgctaccagcggtggtttgtttgccggatcaagagctaccaactctttttccgaaggtaactggcttcagcagagcgcagataccaaatactgtccttctagtgtagccgtagttaggccaccacttcaagaactctgtagcaccgcctacatacctcgctctgctaatcctgttaccagtggctgctgccagtggcgataagtcgtgtcttaccgggttggactcaagacgatagttaccggataaggcgcagcggtcgggctgaacggggggttcgtgcacacagcccagcttggagcgaacgacctacaccgaactgagatacctacagcgtgagcattgagaaagcgccacgcttcccgaagggagaaaggcggacaggtatccggtaagcggcagggtcggaacaggagagcgcacgagggagcttccagggggaaacgcctggtatctttatagtcctgtcgggtttcgccacctctgacttgagcgtcgatttttgtgatgctcgtcaggggggcggagcctatggaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:Hsp70_TATA_box#seq"/>
+    <sbol:elements>gagcgccggagtataaatagaggcgcttcgtctacggagcgacaattcaattcaaacaagcaaagtgaacacgtcgctaagcgaaagctaagcaaataaacaagcgcagctgaacaagctaaacaatctgcagtaaagtgcaagttaaagtgaatcaattaaaagtaaccagcaaccaagtaaatcaactgcaactactgaaatctgccaagaagtaattattgaatacaagaagagaactctgaat</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:P_element_3'_end#seq"/>
+    <sbol:elements>catgatgaaataacataaggtggtcccgtcggcaagagacatccacttaacgtatgcttgcaataagtgcgagtgaaaggaatagtattctgagtgtcgtattgagtctgagtgagacagcgatatgattgttgattaacccttagcatgtccgtggggtttgaattaactcataatattaattagacgaaattatttttaaagttttatttttaataatttgcgagtacgca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-010#seq"/>
+    <sbol:elements>gaattcgttaacagatctgcggccgcggctcgagggtacctctaga</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:small_t_intron-001#seq"/>
+    <sbol:elements>ctaaaatacacaaacaattagaatcagtagtttaacacattatacacttaaaaattttatattta</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-016#seq"/>
+    <sbol:elements>atgagtattcaacatttccgtgtcgcccttattcccttttttgcggcattttgccttcctgtttttgctcacccagaaacgctggtgaaagtaaaagatgctgaagatcagttgggtgcacgagtgggttacatcgaactggatctcaacagcggtaagatccttgagagttttcgccccgaagaacgttttccaatgatgagcacttttaaagttctgctatgtggcgcggtattatcccgtgttgacgccgggcaagagcaactcggtcgccgcatacactattctcagaatgacttggttgagtactcaccagtcacagaaaagcatcttacggatggcatgacagtaagagaattatgcagtgctgccataaccatgagtgataacactgcggccaacttacttctgacaacgatcggaggaccgaaggagctaaccgcttttttgcacaacatgggggatcatgtaactcgccttgatcgttgggaaccggagctgaatgaagccataccaaacgacgagcgtgacaccacgatgcctgtagcaatggcaacaacgttgcgcaaactattaactggcgaactacttactctagcttcccggcaacaattaatagactggatggaggcggataaagttgcaggaccacttctgcgctcggcccttccggctggctggtttattgctgataaatctggagccggtgagcgtgggtctcgcggtatcattgcagcactggggccagatggtaagccctcccgtatcgtagttatctacacgacggggagtcaggcaactatggatgaacgaaatagacagatcgctgagataggtgcctcactgattaagcattggtaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

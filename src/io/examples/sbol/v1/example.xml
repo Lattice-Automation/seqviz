@@ -1,0 +1,38 @@
+<?xml version=“1.0”?>
+<rdf:RDF
+xmlns:rdf=“http://www.w3.org/1999/02/22-rdf-syntax-ns#”
+xmlns:s=“http://sbols.org/v1#”
+xmlns:so=“http://purl.obolibrary.org/obo/”
+xmlns:d=“http://sbols.org/data#”>
+ 
+  <s:DnaComponent rdf:about=“http://sbols.org/data#BBa_T9002”>
+    <s:displayId>BBa_T9002</s:displayId>
+    <s:name>T9002</s:name>
+    <s:description>GFP Producer Controlled by 3OC6HSL Receiver Device</s:description>
+    <s:dnaSequence>
+ 
+      <s:DnaSequence rdf:about=“http://sbols.org/data#partseq_5591”>
+        <s:nucleotides>tcc</s:nucleotides>
+      </s:DnaSequence>
+ 
+    </s:dnaSequence>
+    <s:annotation>
+ 
+      <s:SequenceAnnotation rdf:about=" http://sbols.org/data#a_1565164">
+        <s:bioStart>1</s:bioStart>
+        <s:bioEnd>19</s:bioEnd>
+        <s:strand>+</s:strand>
+        <s:subComponent>
+ 
+          <s:DnaComponent rdf:about=" http://sbols.org/data#f_1565164">
+            <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000409"/>
+            <s:displayId>f_1565164</s:displayId>
+            <s:name>TetR 1</s:name>
+          </s:DnaComponent>
+ 
+        </s:subComponent>
+      </s:SequenceAnnotation>
+ 
+    </s:annotation>
+  </s:DnaComponent>
+</rdf:RDF>

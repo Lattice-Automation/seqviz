@@ -49,13 +49,13 @@ export default class Labels extends React.Component {
       findCoor,
       lineHeight,
       size,
-      Zoom,
+      zoom,
       yDiff
     } = props;
 
     // create a radius outside the plasmid map for placing the names
     const textRadiusAdjust =
-      Zoom < 60 && seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
+      zoom.circular < 60 && seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
     const textRadius = radius + textRadiusAdjust;
 
     /**
@@ -232,7 +232,7 @@ export default class Labels extends React.Component {
      * this pushes their textCoors inward to prevent that
      */
     return labelsGrouped.map(g => {
-      if (Zoom > 0) return g; // this adjustment is only for fully zoomed out state
+      if (zoom.circular > 0) return g; // this adjustment is only for fully zoomed out state
 
       let { x, y } = g.textCoor;
       // prevent the text label from overflowing the sides (w/ one char padding)
@@ -259,7 +259,7 @@ export default class Labels extends React.Component {
 
   render() {
     const { labelGroups, hoveredGroup } = this.state;
-    const { size, lineHeight, Zoom } = this.props;
+    const { size, lineHeight, zoom } = this.props;
 
     // find the currently hovered group
     const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
@@ -329,7 +329,7 @@ export default class Labels extends React.Component {
             size={size}
             setHoveredGroup={this.setHoveredGroup}
             lineHeight={lineHeight}
-            Zoom={Zoom}
+            zoom={zoom}
           />
         )}
       </g>

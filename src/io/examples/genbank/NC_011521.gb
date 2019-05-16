@@ -1,0 +1,75 @@
+LOCUS       NC_011521                717 bp    DNA     linear   CON 16-DEC-2014
+DEFINITION  Neisseria gonorrhoeae plasmid pCmGFP, complete sequence.
+ACCESSION   NC_011521 REGION: 4419..5135
+VERSION     NC_011521.1
+DBLINK      BioProject: PRJNA178868
+KEYWORDS    RefSeq.
+SOURCE      Neisseria gonorrhoeae
+  ORGANISM  Neisseria gonorrhoeae
+            Bacteria; Proteobacteria; Betaproteobacteria; Neisseriales;
+            Neisseriaceae; Neisseria.
+REFERENCE   1  (bases 1 to 717)
+  AUTHORS   Srikhanta,Y.N., Dowideit,S.J., Edwards,J.L., Falsetta,M.L.,
+            Wu,H.J., Harrison,O.B., Fox,K.L., Seib,K.L., Maguire,T.L.,
+            Wang,A.H., Maiden,M.C., Grimmond,S.M., Apicella,M.A. and
+            Jennings,M.P.
+  TITLE     Phasevarions mediate random switching of gene expression in
+            pathogenic Neisseria
+  JOURNAL   PLoS Pathog. 5 (4), E1000400 (2009)
+   PUBMED   19390608
+REFERENCE   2  (bases 1 to 717)
+  CONSRTM   NCBI Genome Project
+  TITLE     Direct Submission
+  JOURNAL   Submitted (04-NOV-2008) National Center for Biotechnology
+            Information, NIH, Bethesda, MD 20894, USA
+REFERENCE   3  (bases 1 to 717)
+  AUTHORS   Dowideit,S.J., Eckert,A.M. and Jennings,M.P.
+  TITLE     Direct Submission
+  JOURNAL   Submitted (30-AUG-2008) School of Molecular and Microbial Sciences,
+            The University of Queensland, 11 Cooper Rd, St Lucia Campus, St
+            Lucia, QLD 4072, Australia
+COMMENT     PROVISIONAL REFSEQ: This record has not yet been subject to final
+            NCBI review. The reference sequence was derived from FJ172221.
+            COMPLETENESS: full length.
+FEATURES             Location/Qualifiers
+     source          1..717
+                     /organism="Neisseria gonorrhoeae"
+                     /mol_type="genomic DNA"
+                     /db_xref="taxon:485"
+                     /plasmid="pCmGFP"
+     gene            1..717
+                     /gene="gfp"
+                     /locus_tag="pCmGFP_001"
+                     /db_xref="GeneID:7011691"
+     CDS             1..717
+                     /gene="gfp"
+                     /locus_tag="pCmGFP_001"
+                     /codon_start=1
+                     /transl_table=11
+                     /product="green fluorescent protein"
+                     /protein_id="YP_002302326.1"
+                     /db_xref="GeneID:7011691"
+                     /translation="MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTL
+                     KFICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKD
+                     DGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNG
+                     IKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHM
+                     VLLEFVTAAGITHGMDELYK"
+     primer_bind     1..22
+                     /label=Primer 1
+     primer_bind     complement(697..717)
+                     /label=Primer 2
+CONTIG      join(FJ172221.1:1..6062)
+ORIGIN      
+        1 atgagtaaag gagaagaact tttcactgga gttgtcccaa ttcttgttga attagatggt
+       61 gatgttaatg ggcacaaatt ttctgtcagt ggagagggtg aaggtgatgc aacatacgga
+      121 aaacttaccc ttaaatttat ttgcactact ggaaaactac ctgttccatg gccaacactt
+      181 gtcactactt tcggttatgg tgttcaatgc tttgcgagat acccagatca tatgaaacag
+      241 catgactttt tcaagagtgc catgcctgaa ggttatgtac aggaaagaac tatatttttc
+      301 aaagatgacg ggaactacaa gacacgtgct gaagtcaagt ttgaaggtga tacccttgtt
+      361 aatagaatcg agttaaaagg tattgatttt aaagaagatg gaaacattct tggacacaaa
+      421 ttggaataca actataactc acacaatgta tacatcatgg cagacaaaca aaagaatgga
+      481 atcaaagtta acttcaaaat tagacacaac attgaagatg gaagcgttca actagcagac
+      541 cattatcaac aaaatactcc aattggcgat ggccctgtcc ttttaccaga caaccattac
+      601 ctgtccacac aatctgccct ttcgaaagat cccaacgaaa agagagacca catggtcctt
+      661 cttgagtttg taacagctgc tgggattaca catggcatgg atgaactata caaataa
+//

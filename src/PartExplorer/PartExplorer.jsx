@@ -4,16 +4,19 @@ import "./PartExplorer.scss";
 import BlankPage from "../BlankPage/BlankPage";
 import request from "request";
 import shortid from "shortid";
-import { annotationFactory } from "../Utils/sequence";
+import { annotationFactory, defaultSelection } from "../Utils/sequence";
 import { isEqual } from "lodash";
+import processPartInput from "../io/processPartInput";
+import { SizeMe } from "react-sizeme";
+import sizeMe from "react-sizeme";
+sizeMe.noPlaceholders = true;
 
 /**
  * a container for investigating the meta and sequence information of a part
  */
 class PartExplorer extends React.Component {
   state = {
-    showSearch: false,
-    seqSelection: { type: "", ref: null, start: 0, end: 0, clockwise: true },
+    seqSelection: defaultSelection,
     findState: {
       searchResults: [],
       searchIndex: 0
@@ -24,7 +27,8 @@ class PartExplorer extends React.Component {
   };
 
   componentDidMount = async () => {
-    let { part, annotate } = this.props;
+    const { part: partInput, annotate, colors } = this.props;
+    let part = await processPartInput(partInput, colors);
     part = annotate ? await this.autoAnnotate(part) : part;
     this.setState({ part: part });
   };
@@ -52,7 +56,7 @@ class PartExplorer extends React.Component {
           uri: `${String(process.env.REACT_APP_LAMBDA_URL)}/annotate`,
           method: "POST",
           json: JSON.stringify({
-            part: { id: shortid.generate(), seq: part.seq }
+            part: { id: shortid.generate(), seq: part.seq.toLowerCase() }
           }),
           headers: {
             "Content-Type": "application/json"
@@ -75,9 +79,12 @@ class PartExplorer extends React.Component {
     return result;
   };
 
-  autoAnnotate = async part => {
+  autoAnnotate = async (part, colors = []) => {
     const result = await this.lambdaAnnotate(part);
-    let annotations = result.body.map(a => ({ ...annotationFactory(), ...a }));
+    let annotations = result.body.map(a => ({
+      ...annotationFactory(colors),
+      ...a
+    }));
     // add in the annotations already on the part
     annotations = part.annotations.concat(annotations);
     // filter out duplicates
@@ -96,36 +103,52 @@ class PartExplorer extends React.Component {
   };
 
   render() {
-    const { circular } = this.props;
-    let { onSelection, size } = this.props;
+    const { viewer, onSelection } = this.props;
     const { part } = this.state;
     const partState = this.state;
     const partAvailable = part.seq || false;
+    const linear = viewer === "linear" || viewer === "both";
+    const circular = viewer === "circular" || viewer === "both";
     return (
       <div className="part-explorer-container" id="part-explorer">
         {partAvailable && (
           <div className="seq-viewers-container">
-            {circular
-              ? part.seq.length > 0 && (
-                  <SeqViewer
-                    part={part}
-                    {...partState}
-                    setPartState={this.setPartState}
-                    onSelection={onSelection}
-                    size={size}
-                    Circular
-                  />
-                )
-              : part.seq.length > 0 && (
-                  <SeqViewer
-                    part={part}
-                    {...partState}
-                    setPartState={this.setPartState}
-                    onSelection={onSelection}
-                    size={size}
-                    Circular={false}
-                  />
-                )}
+            {circular && part.seq.length > 0 && (
+              <SizeMe
+                monitorHeight
+                render={({ size }) => {
+                  return (
+                    <SeqViewer
+                      {...this.props}
+                      part={part}
+                      {...partState}
+                      setPartState={this.setPartState}
+                      onSelection={onSelection}
+                      size={size}
+                      Circular
+                    />
+                  );
+                }}
+              />
+            )}
+            {linear && part.seq.length > 0 && (
+              <SizeMe
+                monitorHeight
+                render={({ size }) => {
+                  return (
+                    <SeqViewer
+                      {...this.props}
+                      {...part}
+                      {...partState}
+                      setPartState={this.setPartState}
+                      onSelection={onSelection}
+                      size={size}
+                      Circular={false}
+                    />
+                  );
+                }}
+              />
+            )}
             {part.seq.length < 1 && <BlankPage />}
           </div>
         )}

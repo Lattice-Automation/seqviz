@@ -34,10 +34,7 @@ class Find extends React.Component {
   };
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    const { findState, seqSelection, showSearch } = this.props;
-    if (showSearch !== nextProps.showSearch) return true;
-
-    if (!showSearch) return false; // this needs to come second or we might prematurely lock out Find during renderiwng
+    const { findState, seqSelection } = this.props;
 
     if (!isEqual(findState, nextProps.findState)) return true;
 
@@ -380,15 +377,6 @@ class Find extends React.Component {
     }
   };
 
-  /** Toggle whether the search modal is visible */
-  toggleSearch = bool => {
-    const { showSearch, setPartState } = this.props;
-    const show = bool === null ? !showSearch : bool;
-    this.clearResults();
-    this.clearMessages();
-    setPartState({ showSearch: show });
-  };
-
   /**
    * Clear search messages
    */
@@ -417,7 +405,6 @@ class Find extends React.Component {
     const {
       findState: { searchResults = [], searchIndex },
       seq,
-      showSearch,
       seqSelection
     } = this.props;
     const {
@@ -437,7 +424,7 @@ class Find extends React.Component {
           role="button"
           onClick={() => this.toggleSearch(!showSearch)}
         />
-        {showSearch && (
+        {
           <FindRange
             form={this.searchForm}
             seqSelection={seqSelection}
@@ -459,7 +446,7 @@ class Find extends React.Component {
             clearMessages={this.clearMessages}
             onClick={this.clearMessages}
           />
-        )}
+        }
       </React.Fragment>
     );
   }

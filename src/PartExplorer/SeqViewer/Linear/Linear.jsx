@@ -24,7 +24,7 @@ import SeqBlock from "./SeqBlock/SeqBlock";
  * indexRow, is passed in the child component
  *
  * seq: a string of the DNA/RNA to be displayed/manipulated
- * Zoom: a number (1-100) for the sizing of the sequence
+ * zoom: a number (1-100) for the sizing of the sequence
  * comp: whether or not to show complement
  * compSeq: the complement sequence to the orig sequence
  * annotations: an array of annotations to show above the seq
@@ -51,9 +51,10 @@ class Linear extends React.Component {
     const {
       seq,
       compSeq,
-      Zoom,
-      Axis,
-      Annotations,
+      zoom,
+      showIndex,
+      showComplement,
+      showAnnotations,
       annotations,
 
       lineHeight,
@@ -62,24 +63,11 @@ class Linear extends React.Component {
       size,
       onUnMount,
 
-      findState: { searchResults = [], searchIndex },
-      showSearch,
-      seqSelection,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
+      findState: { searchResults = [], searchIndex }
     } = this.props;
 
-    const partState = {
-      showSearch,
-      seqSelection,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
-    };
-
-    // un-official definition for being Zoomed in. Being over 10 seems like a decent cut-off
-    const Zoomed = Zoom > 10;
+    // un-official definition for being zoomed in. Being over 10 seems like a decent cut-off
+    const zoomed = zoom.linear > 10;
 
     // the actual fragmenting of the sequence into subblocks. generates all info that will be needed
     // including sequence blocks, complement blocks, annotations, blockHeights, yDifferentials,
@@ -93,7 +81,7 @@ class Linear extends React.Component {
     const blockHeights = new Array(arrSize); // block heights...
     const yDiffs = new Array(arrSize); // y differentials...
 
-    const annotationRows = Annotations // annotations...
+    const annotationRows = showAnnotations // annotations...
       ? createMultiRows(
           stackElements(annotations, seq.length),
           bpsPerBlock,
@@ -119,14 +107,14 @@ class Linear extends React.Component {
       const spacingHeight = 0.25 * elementHeight;
       // find the line height for the seq block based on how many rows need to be shown
       let blockHeight = lineHeight; // this is for padding between the rows
-      if (Zoomed) {
-        blockHeight += lineHeight; // is Zoomed in enough + 2px margin
-        blockHeight += lineHeight; // double for complement + 2px margin
+      if (zoomed) {
+        blockHeight += lineHeight; // is zoomed in enough + 2px margin
+        blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
       }
-      if (Axis) {
+      if (showIndex) {
         blockHeight += 25; // another for index row (height is fixed right now)
       }
-      if (Annotations && annotationRows[i].length) {
+      if (showAnnotations && annotationRows[i].length) {
         blockHeight += annotationRows[i].length * elementHeight + spacingHeight;
       }
       blockHeights[i] = blockHeight;
@@ -162,8 +150,7 @@ class Linear extends React.Component {
           onUnmount={onUnMount}
           fullSeq={seq}
           size={blockSize}
-          zoomed={Zoomed}
-          {...partState}
+          zoomed={zoomed}
         />
       );
 
@@ -173,6 +160,7 @@ class Linear extends React.Component {
     return (
       seqBlocks.length && (
         <InfiniteScroll
+          {...this.props}
           seqBlocks={seqBlocks}
           blockHeights={blockHeights}
           totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}

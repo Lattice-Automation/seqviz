@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:myapp="http://www.myapp.org/">
+  <sbol:ComponentDefinition rdf:about="http://www.partsregistry.org/cd/BBa_J23119">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/cd/BBa_J23119"/>
+    <sbol:displayId>BBa_J23119</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://www.partsregistry.org/Part:BBa_J23119"/>
+    <dcterms:title>J23119</dcterms:title>
+    <dcterms:description>Constitutive promoter</dcterms:description>
+    <myapp:datasheet rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <myapp:Datasheet rdf:about="http://www.partsregistry.org/gen/datasheet1">
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <sbol:displayId>datasheet1</sbol:displayId>
+    <dcterms:title>Datasheet 1</dcterms:title>
+    <myapp:characterizationData rdf:resource="http://www.myapp.org//measurement/1"/>
+    <myapp:transcriptionRate>1</myapp:transcriptionRate>
+  </myapp:Datasheet>
+</rdf:RDF>

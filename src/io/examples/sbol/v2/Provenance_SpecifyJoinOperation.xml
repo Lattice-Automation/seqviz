@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/dna_part_1">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/dna_part_1"/>
+    <sbol:displayId>dna_part_1</sbol:displayId>
+    <dcterms:title>dna_part_1</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000985"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/joined_dna_part">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/joined_dna_part"/>
+    <sbol:displayId>joined_dna_part</sbol:displayId>
+    <prov:wasGeneratedBy rdf:resource="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2"/>
+    <dcterms:title>joined_dna_part</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000985"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/dna_part_2">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/dna_part_2"/>
+    <sbol:displayId>dna_part_2</sbol:displayId>
+    <dcterms:title>dna_part_2</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000985"/>
+  </sbol:ComponentDefinition>
+  <prov:Activity rdf:about="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2"/>
+    <sbol:displayId>join_dna_part_1_with_dna_part_2</sbol:displayId>
+    <dcterms:title>join(dna_part_1, dna_part_2)</dcterms:title>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2/dna_part_1">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2/dna_part_1"/>
+        <sbol:displayId>dna_part_1</sbol:displayId>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0001631"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/dna_part_1"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2/dna_part_2">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/join_dna_part_1_with_dna_part_2/dna_part_2"/>
+        <sbol:displayId>dna_part_2</sbol:displayId>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0001632"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/dna_part_2"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+</rdf:RDF>

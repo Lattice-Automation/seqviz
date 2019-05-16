@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:grn="urn:bbn.com:tasbe:grn/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:annot="http://myannotation.org/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ModuleDefinition rdf:about="http://www.async.ece.utah.edu/LacI_Inv/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/LacI_Inv"/>
+    <sbol:displayId>LacI_Inv</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:role rdf:resource="http://some.ontology.org/Inverter"/>
+  </sbol:ModuleDefinition>
+</rdf:RDF>
