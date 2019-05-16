@@ -10,7 +10,7 @@ export default class Index extends React.PureComponent {
   genTicks = () => {
     const {
       seq,
-      Zoom,
+      zoom,
       firstBase,
       lineHeight,
       size,
@@ -19,23 +19,23 @@ export default class Index extends React.PureComponent {
     } = this.props;
     const seqLength = seq.length;
 
-    // the number of tallies on the x-axis is Zoom dependent:
+    // the number of tallies on the x-axis is zoom dependent:
     // (0, 10]: every 50
     // (10, 40]: every 20
     // (40, 70]: every 10
     // (70, 100] every 5
     let tallies = 0;
     switch (true) {
-      case Zoom > 85:
+      case zoom.linear > 85:
         tallies = 5;
         break;
-      case Zoom > 40:
+      case zoom.linear > 40:
         tallies = 10;
         break;
-      case Zoom > 10:
+      case zoom.linear > 10:
         tallies = 20;
         break;
-      case Zoom >= 0:
+      case zoom.linear >= 0:
         tallies = 50;
         break;
       default:
@@ -88,7 +88,9 @@ export default class Index extends React.PureComponent {
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
       return (
         <React.Fragment key={p}>
-          {!resizing && <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />}
+          {!resizing && (
+            <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />
+          )}
           <text style={textStyle} transform={transText}>
             {p}
           </text>
@@ -98,9 +100,9 @@ export default class Index extends React.PureComponent {
   };
 
   render() {
-    const { lineHeight, size, transform, Axis, resizing } = this.props;
+    const { lineHeight, size, transform, showIndex, resizing } = this.props;
 
-    if (!Axis) return null;
+    if (!showIndex) return null;
 
     const axisStyle = {
       width: size.width,

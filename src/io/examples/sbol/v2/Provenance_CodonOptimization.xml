@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:myapp="http://myapp.com/">
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/codon_optimized">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimized"/>
+    <sbol:displayId>codon_optimized</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://myapp.com/non_codon_optimized"/>
+    <prov:wasGeneratedBy rdf:resource="http://myapp.com/codon_optimization_activity"/>
+    <dcterms:title>Codon optimised CDS</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://myapp.com/non_codon_optimized">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/non_codon_optimized"/>
+    <sbol:displayId>non_codon_optimized</sbol:displayId>
+    <dcterms:title>Non Codon optimised CDS</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <prov:Activity rdf:about="http://myapp.com/codon_optimization_activity">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity"/>
+    <sbol:displayId>codon_optimization_activity</sbol:displayId>
+    <dcterms:title>Codon Optimization Activity</dcterms:title>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://myapp.com/codon_optimization_activity/association">
+        <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity/association"/>
+        <sbol:displayId>association</sbol:displayId>
+        <prov:hadRole rdf:resource="http://myapp.com/codonoptimiser"/>
+        <prov:agent rdf:resource="http://myapp.com/codon_optimization_software"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://myapp.com/codon_optimization_activity/usage">
+        <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity/usage"/>
+        <sbol:displayId>usage</sbol:displayId>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#source"/>
+        <prov:entity rdf:resource="http://myapp.com/non_codon_optimized"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+  <prov:Agent rdf:about="http://myapp.com/codon_optimization_software">
+    <sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_software"/>
+    <sbol:displayId>codon_optimization_software</sbol:displayId>
+    <dcterms:title>Codon Optimization Software</dcterms:title>
+  </prov:Agent>
+</rdf:RDF>

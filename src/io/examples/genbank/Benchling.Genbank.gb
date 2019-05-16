@@ -1,0 +1,61 @@
+LOCUS       J23102_AB               2143 bp ds-DNA     circular     21-NOV-2017
+DEFINITION  .
+KEYWORDS    "Antibiotic:Ampicillin (AMP)" "Backbone:DVA_AB" "Cloned by         
+            (Date):SI 4/6/2014" "Fusion site(s):AB" "Glycerol:--" "Part
+            Source:CIDAR" "Part subtype:Constitutive" "Part type:Promoter"
+            "Plasmid:--" "Seq Source:parts.igem.org/Part\:Bba_J23102" "Seq
+            Verify:--"
+FEATURES             Location/Qualifiers
+     source          1..2143
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     promoter        5..39
+                     /label=J23102
+     primer_bind     5..39
+                     /label=Primer 1
+     primer_bind     complement(11..40)
+                     /label=Primer 1
+     misc_feature    44..2143
+                     /label=DVA
+     primer_bind     complement(179..209)
+                     /label=Primer 2
+     CDS             complement(1007..1867)
+                     /label=bla
+ORIGIN
+        1 ggagttgaca gctagctcag tcctaggtac tgtgctagct actagagacc tactagtagc
+       61 ggccgctgca ggcttcctcg ctcactgact cgctgcgctc ggtcgttcgg ctgcggcgag
+      121 cggtatcagc tcactcaaag gcggtaatac ggttatccac agaatcaggg gataacgcag
+      181 gaaagaacat gtgagcaaaa ggccagcaaa aggccaggaa ccgtaaaaag gccgcgttgc
+      241 tggcgttttt ccacaggctc cgcccccctg acgagcatca caaaaatcga cgctcaagtc
+      301 agaggtggcg aaacccgaca ggactataaa gataccaggc gtttccccct ggaagctccc
+      361 tcgtgcgctc tcctgttccg accctgccgc ttaccggata cctgtccgcc tttctccctt
+      421 cgggaagcgt ggcgctttct catagctcac gctgtaggta tctcagttcg gtgtaggtcg
+      481 ttcgctccaa gctgggctgt gtgcacgaac cccccgttca gcccgaccgc tgcgccttat
+      541 ccggtaacta tcgtcttgag tccaacccgg taagacacga cttatcgcca ctggcagcag
+      601 ccactggtaa caggattagc agagcgaggt atgtaggcgg tgctacagag ttcttgaagt
+      661 ggtggcctaa ctacggctac actagaagaa cagtatttgg tatctgcgct ctgctgaagc
+      721 cagttacctt cggaaaaaga gttggtagct cttgatccgg caaacaaacc accgctggta
+      781 gcggtggttt ttttgtttgc aagcagcaga ttacgcgcag aaaaaaagga tctcaagaag
+      841 atcctttgat cttttctacg gggtctgacg ctcagtggaa cgaaaactca cgttaaggga
+      901 ttttggtcat gagattatca aaaaggatct tcacctagat ccttttaaat taaaaatgaa
+      961 gttttaaatc aatctaaagt atatatgagt aaacttggtc tgacagttac caatgcttaa
+     1021 tcagtgaggc acctatctca gcgatctgtc tatttcgttc atccatagtt gcctgactcc
+     1081 ccgtcgtgta gataactacg atacgggagg gcttaccatc tggccccagt gctgcaatga
+     1141 taccgcgcga cccacgctca ccggctccag atttatcagc aataaaccag ccagccggaa
+     1201 gggccgagcg cagaagtggt cctgcaactt tatccgcctc catccagtct attaattgtt
+     1261 gccgggaagc tagagtaagt agttcgccag ttaatagttt gcgcaacgtt gttgccattg
+     1321 ctacaggcat cgtggtgtca cgctcgtcgt ttggtatggc ttcattcagc tccggttccc
+     1381 aacgatcaag gcgagttaca tgatccccca tgttgtgcaa aaaagcggtt agctccttcg
+     1441 gtcctccgat cgttgtcaga agtaagttgg ccgcagtgtt atcactcatg gttatggcag
+     1501 cactgcataa ttctcttact gtcatgccat ccgtaagatg cttttctgtg actggtgagt
+     1561 actcaaccaa gtcattctga gaatagtgta tgcggcgacc gagttgctct tgcccggcgt
+     1621 caatacggga taataccgcg ccacatagca gaactttaaa agtgctcatc attggaaaac
+     1681 gttcttcggg gcgaaaactc tcaaggatct taccgctgtt gagatccagt tcgatgtaac
+     1741 ccactcgtgc acccaactga tcttcagcat cttttacttt caccagcgtt tctgggtgag
+     1801 caaaaacagg aaggcaaaat gccgcaaaaa agggaataag ggcgacacgg aaatgttgaa
+     1861 tactcatact cttccttttt caatattatt gaagcattta tcagggttat tgtctcatga
+     1921 gcggatacat atttgaatgt atttagaaaa ataaacaaat aggggttccg cgcacatttc
+     1981 cccgaaaagt gccacctgac gtctaagaaa ccattattat catgacatta acctataaaa
+     2041 ataggcgtat cacgaggcag aatttcagat aaaaaaaatc cttagctttc gctaaggatg
+     2101 atttctggaa ttcgcggccg cttctagaga ctagtgggtc tca
+//

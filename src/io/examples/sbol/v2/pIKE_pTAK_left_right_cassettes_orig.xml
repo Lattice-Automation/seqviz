@@ -1,0 +1,2496 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://www.eugenecad.org/ToggleSwitchCassettes">
+    <sbol:displayId>ToggleSwitchCassettes</sbol:displayId>
+    <dcterms:description>ToggleSwitchCassettes</dcterms:description>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKERightCassette_1"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKERightCassette_3"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKERightCassette_2"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1"/>
+    <sbol:member rdf:resource="http://www.eugenecad.org/pIKERightCassette_4"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/parts/ECK120033737">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120033737"/>
+    <sbol:displayId>ECK120033737</sbol:displayId>
+    <dcterms:title>ECK120033737</dcterms:title>
+    <dcterms:description>Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/parts/ECK120033737_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61101">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61101"/>
+    <sbol:displayId>BBa_J61101</sbol:displayId>
+    <dcterms:title>BBa_J61101</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61101_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_R0010">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+    <sbol:displayId>BBa_R0010</sbol:displayId>
+    <dcterms:title>BBa_R0010</dcterms:title>
+    <dcterms:description>promoter (lacI regulated)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_R0010_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKELeftCassette_3">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3"/>
+    <sbol:displayId>pIKELeftCassette_3</sbol:displayId>
+    <dcterms:description>pIKELeftCassette_3</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/pheA-1"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1195</sbol:start>
+            <sbol:end>1246</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>55</sbol:start>
+            <sbol:end>1194</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_3/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/parts/ECK120034435">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120034435"/>
+    <sbol:displayId>ECK120034435</sbol:displayId>
+    <dcterms:title>ECK120034435</dcterms:title>
+    <dcterms:description>Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/parts/ECK120034435_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKERightCassette_4">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4"/>
+    <sbol:displayId>pIKERightCassette_4</sbol:displayId>
+    <dcterms:description>pIKERightCassette_4</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_4/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61053"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_4/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_4/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_4/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>873</sbol:start>
+            <sbol:end>1604</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1605</sbol:start>
+            <sbol:end>1656</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_4/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>872</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_4/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKERightCassette_4_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012"/>
+    <sbol:displayId>BBa_J61101_BBa_C0012</sbol:displayId>
+    <dcterms:description>Repressor2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61101"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>1140</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/Repressor2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040"/>
+    <sbol:displayId>BBa_J61120_BBa_C0040</sbol:displayId>
+    <dcterms:description>Repressor1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61120"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/Repressor1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>672</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61104">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61104"/>
+    <sbol:displayId>BBa_J61104</sbol:displayId>
+    <dcterms:title>BBa_J61104</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61104_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/parts/ECK120033736">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120033736"/>
+    <sbol:displayId>ECK120033736</sbol:displayId>
+    <dcterms:title>ECK120033736</dcterms:title>
+    <dcterms:description>Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/parts/ECK120033736_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKERightCassette_2">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2"/>
+    <sbol:displayId>pIKERightCassette_2</sbol:displayId>
+    <dcterms:description>pIKERightCassette_2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_2/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_2/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61053"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_2/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_2/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>873</sbol:start>
+            <sbol:end>1604</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1605</sbol:start>
+            <sbol:end>1656</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>872</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_2/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKERightCassette_2_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61053">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61053"/>
+    <sbol:displayId>BBa_J61053</sbol:displayId>
+    <dcterms:title>BBa_J61053</dcterms:title>
+    <dcterms:description>FMN-T1 Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61053_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_K121014">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_K121014"/>
+    <sbol:displayId>BBa_K121014</sbol:displayId>
+    <dcterms:title>BBa_K121014</dcterms:title>
+    <dcterms:description>promoter (lambda cI regulated)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_K121014_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKRightCassette_3">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3"/>
+    <sbol:displayId>pTAKRightCassette_3</sbol:displayId>
+    <dcterms:description>pTAKRightCassette_3</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033736"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1695</sbol:start>
+            <sbol:end>1747</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>962</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>963</sbol:start>
+            <sbol:end>1694</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012"/>
+    <sbol:displayId>BBa_J61107_BBa_C0012</sbol:displayId>
+    <dcterms:description>Repressor2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61107"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/Repressor2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>1140</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4"/>
+    <sbol:displayId>pTAKLeftCassette_4</sbol:displayId>
+    <dcterms:description>pTAKLeftCassette_4</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120034435"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_K121014"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>90</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>91</sbol:start>
+            <sbol:end>1230</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1231</sbol:start>
+            <sbol:end>1287</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040"/>
+    <sbol:displayId>BBa_J61130_BBa_E0040</sbol:displayId>
+    <dcterms:description>Reporter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61130"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Reporter/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>732</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040"/>
+    <sbol:displayId>BBa_J61120_BBa_E0040</sbol:displayId>
+    <dcterms:description>Reporter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61120"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Reporter/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>732</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040"/>
+    <sbol:displayId>BBa_J61130_BBa_C0040</sbol:displayId>
+    <dcterms:description>Repressor1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61130"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/Repressor1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>672</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051"/>
+    <sbol:displayId>BBa_J61120_BBa_C0051</sbol:displayId>
+    <dcterms:description>Repressor1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61120"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/Repressor1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>762</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2"/>
+    <sbol:displayId>pTAKLeftCassette_2</sbol:displayId>
+    <dcterms:description>pTAKLeftCassette_2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033737"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_K121014"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1231</sbol:start>
+            <sbol:end>1287</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>90</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>91</sbol:start>
+            <sbol:end>1230</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKELeftCassette_4">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4"/>
+    <sbol:displayId>pIKELeftCassette_4</sbol:displayId>
+    <dcterms:description>pIKELeftCassette_4</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120034435"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>55</sbol:start>
+            <sbol:end>1194</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_4/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1195</sbol:start>
+            <sbol:end>1251</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3"/>
+    <sbol:displayId>pTAKLeftCassette_3</sbol:displayId>
+    <dcterms:description>pTAKLeftCassette_3</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_K121014"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/pheA-1"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1231</sbol:start>
+            <sbol:end>1282</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>91</sbol:start>
+            <sbol:end>1230</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>90</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKERightCassette_3">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3"/>
+    <sbol:displayId>pIKERightCassette_3</sbol:displayId>
+    <dcterms:description>pIKERightCassette_3</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_3/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_3/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_3/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033736"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_3/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>873</sbol:start>
+            <sbol:end>1604</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1605</sbol:start>
+            <sbol:end>1657</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>872</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_3/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_3/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKERightCassette_3_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61107">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61107"/>
+    <sbol:displayId>BBa_J61107</sbol:displayId>
+    <dcterms:title>BBa_J61107</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61107_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_C0051">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0051"/>
+    <sbol:displayId>BBa_C0051</sbol:displayId>
+    <dcterms:title>BBa_C0051</dcterms:title>
+    <dcterms:description>cI repressor from E. coli phage lambda (+LVA)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_C0051_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012"/>
+    <sbol:displayId>BBa_J61115_BBa_C0012</sbol:displayId>
+    <dcterms:description>Repressor2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61115"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>1140</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4/Repressor2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+    <sbol:displayId>BBa_C0012</sbol:displayId>
+    <dcterms:title>BBa_C0012</dcterms:title>
+    <dcterms:description>lacI repressor from E. coli (+LVA)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_C0012_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61130">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61130"/>
+    <sbol:displayId>BBa_J61130</sbol:displayId>
+    <dcterms:title>BBa_J61130</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61130_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7">
+    <sbol:persistentIdentity rdf:resource="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7"/>
+    <sbol:displayId>BBa_E0040</sbol:displayId>
+    <dcterms:title>BBa_E0040</dcterms:title>
+    <dcterms:description>green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKERightCassette_1">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1"/>
+    <sbol:displayId>pIKERightCassette_1</sbol:displayId>
+    <dcterms:description>pIKERightCassette_1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_1/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_1/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033736"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_1/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKERightCassette_1/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>872</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1605</sbol:start>
+            <sbol:end>1657</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKERightCassette_1/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>873</sbol:start>
+            <sbol:end>1604</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKERightCassette_1/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKERightCassette_1_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKELeftCassette_2">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2"/>
+    <sbol:displayId>pIKELeftCassette_2</sbol:displayId>
+    <dcterms:description>pIKELeftCassette_2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033737"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1195</sbol:start>
+            <sbol:end>1251</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>55</sbol:start>
+            <sbol:end>1194</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKRightCassette_2">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2"/>
+    <sbol:displayId>pTAKRightCassette_2</sbol:displayId>
+    <dcterms:description>pTAKRightCassette_2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61053"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1695</sbol:start>
+            <sbol:end>1746</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>962</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_2/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>963</sbol:start>
+            <sbol:end>1694</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012"/>
+    <sbol:displayId>BBa_J61104_BBa_C0012</sbol:displayId>
+    <dcterms:description>Repressor2</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61104"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2/Repressor2/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>1140</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_C0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0040"/>
+    <sbol:displayId>BBa_C0040</sbol:displayId>
+    <dcterms:title>BBa_C0040</dcterms:title>
+    <dcterms:description>tetracycline repressor from transposon Tn10 (+LVA)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_C0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pIKELeftCassette_1">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1"/>
+    <sbol:displayId>pIKELeftCassette_1</sbol:displayId>
+    <dcterms:description>pIKELeftCassette_1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120029600"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1195</sbol:start>
+            <sbol:end>1284</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pIKELeftCassette_1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>55</sbol:start>
+            <sbol:end>1194</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKRightCassette_4">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4"/>
+    <sbol:displayId>pTAKRightCassette_4</sbol:displayId>
+    <dcterms:description>pTAKRightCassette_4</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61053"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1695</sbol:start>
+            <sbol:end>1746</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>963</sbol:start>
+            <sbol:end>1694</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_4/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>962</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61115">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61115"/>
+    <sbol:displayId>BBa_J61115</sbol:displayId>
+    <dcterms:title>BBa_J61115</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61115_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/parts/ECK120029600">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120029600"/>
+    <sbol:displayId>ECK120029600</sbol:displayId>
+    <dcterms:title>ECK120029600</dcterms:title>
+    <dcterms:description>Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/parts/ECK120029600_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_J61120">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61120"/>
+    <sbol:displayId>BBa_J61120</sbol:displayId>
+    <dcterms:title>BBa_J61120</dcterms:title>
+    <dcterms:description>Ribosome Binding Site Family Member</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_J61120_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051"/>
+    <sbol:displayId>BBa_J61130_BBa_C0051</sbol:displayId>
+    <dcterms:description>Repressor1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_J61130"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3/Repressor1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>13</sbol:start>
+            <sbol:end>762</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/parts/pheA-1">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/pheA-1"/>
+    <sbol:displayId>pheA1</sbol:displayId>
+    <dcterms:title>pheA1</dcterms:title>
+    <dcterms:description>Terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/parts/pheA-1_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1"/>
+    <sbol:displayId>pTAKLeftCassette_1</sbol:displayId>
+    <dcterms:description>pTAKLeftCassette_1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120029600"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_K121014"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>90</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>91</sbol:start>
+            <sbol:end>1230</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1231</sbol:start>
+            <sbol:end>1320</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/part/BBa_R0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_R0040"/>
+    <sbol:displayId>BBa_R0040</sbol:displayId>
+    <dcterms:title>BBa_R0040</dcterms:title>
+    <dcterms:description>TetR repressible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/part/BBa_R0040_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.eugenecad.org/pTAKRightCassette_1">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1"/>
+    <sbol:displayId>pTAKRightCassette_1</sbol:displayId>
+    <dcterms:description>pTAKRightCassette_1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000805"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/component2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component2"/>
+        <sbol:displayId>component2</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/component3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component3"/>
+        <sbol:displayId>component3</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/parts/ECK120033736"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/component1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component1"/>
+        <sbol:displayId>component1</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/component0">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component0"/>
+        <sbol:displayId>component0</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/part/BBa_R0010"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_3">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_3/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>963</sbol:start>
+            <sbol:end>1694</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component2"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_4">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_4/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1695</sbol:start>
+            <sbol:end>1747</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component3"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_1">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_1/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>200</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component0"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_2">
+        <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.eugenecad.org/pTAKRightCassette_1/annotation_2/range">
+            <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/annotation_2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>201</sbol:start>
+            <sbol:end>962</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1/component1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1_sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0051_sequence"/>
+    <sbol:elements>aaagaaacgacaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_C0040_sequence"/>
+    <sbol:elements>aaagaaacgacaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61107_BBa_C0012_sequence"/>
+    <sbol:elements>aaagaagagactatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61115_BBa_C0012_sequence"/>
+    <sbol:elements>aaagaagggataatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKELeftCassette_2_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_2_sequence"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaagggacaatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataaggaaacacagaaaaaagcccgcacctgacagtgcgggctttttttttcgaccaaagg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKERightCassette_1_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_1_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagacgcgagaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataaaaagaaacgacaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataaaacgcatgagaaagcccccggaagatcaccttccgggggcttttttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61053_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61053_sequence"/>
+    <sbol:elements>gcttgctgaggatcctaaagccccgaattttttataaattcggggctttttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKLeftCassette_2_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_2_sequence"/>
+    <sbol:elements>gcatgcacagataaccatctgcggtgataaattatctctggcggtgttgacataaataccactggcggttataatgagcacatcagcaggaaagaagggacaatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataaggaaacacagaaaaaagcccgcacctgacagtgcgggctttttttttcgaccaaagg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0051_sequence"/>
+    <sbol:elements>aaagacgcgagaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61104_BBa_C0012_sequence"/>
+    <sbol:elements>aaagaagggacaatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/parts/ECK120033736_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120033736_sequence"/>
+    <sbol:elements>aacgcatgagaaagcccccggaagatcaccttccgggggcttttttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61107_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61107_sequence"/>
+    <sbol:elements>aaagaagagact</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_C0040_sequence"/>
+    <sbol:elements>aaagacgcgagaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKRightCassette_2_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_2_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagacgcgagaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataaaaagaaacgacaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataagcttgctgaggatcctaaagccccgaattttttataaattcggggctttttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKELeftCassette_1_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_1_sequence"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagacaggaccatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataattcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggttttcttttctcttctcaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKLeftCassette_3_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_3_sequence"/>
+    <sbol:elements>gcatgcacagataaccatctgcggtgataaattatctctggcggtgttgacataaataccactggcggttataatgagcacatcagcaggaaagaagagactatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataagacgaacaataaggcctcccaaatcggggggccttttttattgataacaaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61115_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61115_sequence"/>
+    <sbol:elements>aaagaagggata</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_C0012_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0012_sequence"/>
+    <sbol:elements>atggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKELeftCassette_4_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_4_sequence"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaagggataatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataactcggtaccaaattccagaaaagagacgctgaaaagcgtcttttttcgttttggtcc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKERightCassette_3_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_3_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagaaacgacaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataaaaagacgcgagaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataaaacgcatgagaaagcccccggaagatcaccttccgggggcttttttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKERightCassette_4_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_4_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagaaacgacaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataaaaagacgcgagaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataagcttgctgaggatcctaaagccccgaattttttataaattcggggctttttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/parts/ECK120034435_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120034435_sequence"/>
+    <sbol:elements>ctcggtaccaaattccagaaaagagacgctgaaaagcgtcttttttcgttttggtcc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/parts/pheA-1_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/pheA-1_sequence"/>
+    <sbol:elements>gacgaacaataaggcctcccaaatcggggggccttttttattgataacaaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61101_BBa_C0012_sequence"/>
+    <sbol:elements>aaagacaggaccatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61120_BBa_E0040_sequence"/>
+    <sbol:elements>aaagacgcgagaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/device/BBa_J61130_BBa_E0040_sequence"/>
+    <sbol:elements>aaagaaacgacaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKRightCassette_1_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_1_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagacgcgagaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataaaaagaaacgacaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataaaacgcatgagaaagcccccggaagatcaccttccgggggcttttttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/parts/ECK120033737_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120033737_sequence"/>
+    <sbol:elements>ggaaacacagaaaaaagcccgcacctgacagtgcgggctttttttttcgaccaaagg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_C0051_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0051_sequence"/>
+    <sbol:elements>atgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKLeftCassette_1_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_1_sequence"/>
+    <sbol:elements>gcatgcacagataaccatctgcggtgataaattatctctggcggtgttgacataaataccactggcggttataatgagcacatcagcaggaaagacaggaccatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataattcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggttttcttttctcttctcaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61120_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61120_sequence"/>
+    <sbol:elements>aaagacgcgaga</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_R0010_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_R0010_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61104_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61104_sequence"/>
+    <sbol:elements>aaagaagggaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_K121014_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_K121014_sequence"/>
+    <sbol:elements>gcatgcacagataaccatctgcggtgataaattatctctggcggtgttgacataaataccactggcggttataatgagcacatcagcagg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKLeftCassette_4_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKLeftCassette_4_sequence"/>
+    <sbol:elements>gcatgcacagataaccatctgcggtgataaattatctctggcggtgttgacataaataccactggcggttataatgagcacatcagcaggaaagaagggataatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataactcggtaccaaattccagaaaagagacgctgaaaagcgtcttttttcgttttggtcc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7_sequence">
+    <sbol:persistentIdentity rdf:resource="urn:0fb4a103-86c4-4d90-8e73-d35ca45b4cf7_sequence"/>
+    <sbol:elements>atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKELeftCassette_3_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKELeftCassette_3_sequence"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcacaaagaagagactatggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataagacgaacaataaggcctcccaaatcggggggccttttttattgataacaaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/parts/ECK120029600_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/parts/ECK120029600_sequence"/>
+    <sbol:elements>ttcagccaaaaaacttaagaccgccggtcttgtccactaccttgcagtaatgcggtggacaggatcggcggttttcttttctcttctcaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61130_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61130_sequence"/>
+    <sbol:elements>aaagaaacgaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_J61101_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_J61101_sequence"/>
+    <sbol:elements>aaagacaggacc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pIKERightCassette_2_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pIKERightCassette_2_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagacgcgagaatgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataaaaagaaacgacaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataagcttgctgaggatcctaaagccccgaattttttataaattcggggctttttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKRightCassette_3_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_3_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagaaacgacaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataaaaagacgcgagaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataaaacgcatgagaaagcccccggaagatcaccttccgggggcttttttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://www.eugenecad.org/pTAKRightCassette_4_sequence">
+    <sbol:persistentIdentity rdf:resource="http://www.eugenecad.org/pTAKRightCassette_4_sequence"/>
+    <sbol:elements>caatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcagtgagcgcaacgcaattaatgtgagttagctcactcattaggcaccccaggctttacactttatgcttccggctcgtatgttgtgtggaattgtgagcggataacaatttcacacaaaagaaacgacaatgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataaaaagacgcgagaatgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtgttcaatgctttgcgagatacccagatcatatgaaacagcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtccacacaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataagcttgctgaggatcctaaagccccgaattttttataaattcggggctttttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_R0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_R0040_sequence"/>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/part/BBa_C0040_sequence">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/part/BBa_C0040_sequence"/>
+    <sbol:elements>atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

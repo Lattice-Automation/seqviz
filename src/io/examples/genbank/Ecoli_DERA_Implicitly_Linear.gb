@@ -1,0 +1,70 @@
+LOCUS       E.coli DERA             1024 bp    DNA      01-SEP-2015
+FEATURES             Location/Qualifiers
+     misc_feature    1..40
+                     /label="UNS7"
+     protein_bind    41..62
+                     /label="CRP-cAMP binding site"
+                     /ApEinfo_revcolor=#d59687
+                     /ApEinfo_fwdcolor=#d59687
+     promoter        41..183
+                     /label="rhaBADp"
+                     /ApEinfo_revcolor=#b1ff67
+                     /ApEinfo_fwdcolor=#b1ff67
+     protein_bind    71..92
+                     /label="CRP-cAMP binding site"
+                     /ApEinfo_revcolor=#ffef86
+                     /ApEinfo_fwdcolor=#ffef86
+     protein_bind    93..109
+                     /label="RhaS binding site"
+                     /ApEinfo_revcolor=#faac61
+                     /ApEinfo_fwdcolor=#faac61
+     protein_bind    126..142
+                     /label="RhaS binding site"
+                     /ApEinfo_revcolor=#d59687
+                     /ApEinfo_fwdcolor=#d59687
+     -35_signal      141..146
+                     /label="-35 region"
+                     /ApEinfo_revcolor=#faac61
+                     /ApEinfo_fwdcolor=#faac61
+     misc_signal     146..151
+                     /label="EcoRI site"
+                     /ApEinfo_revcolor=#d59687
+                     /ApEinfo_fwdcolor=#d59687
+     misc_feature    147..147
+                     /label="mutation"
+     -10_signal      162..167
+                     /label="-10 region"
+                     /ApEinfo_revcolor=#ffef86
+                     /ApEinfo_fwdcolor=#ffef86
+     misc_signal     174..174
+                     /label="TSS"
+                     /ApEinfo_revcolor=#9eafd2
+                     /ApEinfo_fwdcolor=#9eafd2
+     RBS             184..217
+                     /label="syn-RBS-66K"
+     start           218..220
+                     /label="start codon"
+     misc_feature    221..244
+                     /label="8His"
+     misc_feature    245..1024
+                     /label="E. coli MG1655 DERA"
+ORIGIN      
+        1 caagacgctg gctctgacat ttccgctact gaactactcg cggtgagcat cacatcacca
+       61 caattcagca aattgtgaac atcatcacgt tcatctttcc ctggttgcca atggcccatt
+      121 ttcctgtcag taacgagaag gtcgcgtatt caggcgcttt ttagactggt cgtaatgaaa
+      181 ttcTAGGGCT ACGAGCCGAC ATTAGGCGAG GAAGAAAatg catcatcatc accatcatca
+      241 tcatATGACT GATCTGAAAG CAAGCAGCCT GCGTGCACTG AAATTGATGG ACCTGACCAC
+      301 CCTGAATGAC GACGACACCG ACGAGAAAGT GATCGCCCTG TGTCATCAGG CCAAAACTCC
+      361 GGTCGGCAAT ACCGCCGCTA TCTGTATCTA TCCTCGCTTT ATCCCGATTG CTCGCAAAAC
+      421 TCTGAAAGAG CAGGGCACCC CGGAAATCCG TATCGCTACG GTAACCAACT TCCCACACGG
+      481 TAACGACGAC ATCGACATCG CGCTGGCAGA AACCCGTGCG GCAATCGCCT ACGGTGCTGA
+      541 TGAAGTTGAC GTTGTGTTCC CGTACCGCGC GCTGATGGCG GGTAACGAGC AGGTTGGTTT
+      601 TGACCTGGTG AAAGCCTGTA AAGAGGCTTG CGCGGCAGCG AATGTACTGC TGAAAGTGAT
+      661 CATCGAAACC GGCGAACTGA AAGACGAAGC GCTGATCCGT AAAGCGTCTG AAATCTCCAT
+      721 CAAAGCGGGT GCGGACTTCA TCAAAACCTC TACCGGTAAA GTGGCTGTGA ACGCGACGCC
+      781 GGAAAGCGCG CGCATCATGA TGGAAGTGAT CCGTGATATG GGCGTAGAAA AAACCGTTGG
+      841 TTTCAAACCG GCGGGCGGCG TGCGTACTGC GGAAGATGCG CAGAAATATC TCGCCATTGC
+      901 AGATGAACTG TTCGGTGCTG ACTGGGCAGA TGCGCGTCAC TACCGCTTTG GCGCTTCCAG
+      961 CCTGCTGGCA AGCCTGCTGA AAGCGCTGGG TCACGGCGAC GGTAAGAGCG CCAGCAGCTA
+     1021 CTAA     
+//

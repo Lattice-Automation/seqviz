@@ -1,0 +1,171 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns="http://sbols.org/v1#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/BBa_B0015">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_B0015"/>
+    <sbol:displayId>BBa_B0015</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_B0015"/>
+    <dcterms:title>B0015</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/BBa_B0034">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_B0034"/>
+    <sbol:displayId>BBa_B0034</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_B0034"/>
+    <dcterms:title>B0034</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/BBa_C0062">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_C0062"/>
+    <sbol:displayId>BBa_C0062</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_C0062"/>
+    <dcterms:title>luxR</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/BBa_I0462">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462"/>
+    <sbol:displayId>BBa_I0462</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_I0462"/>
+    <dcterms:title>I0462</dcterms:title>
+    <dcterms:description>LuxR protein generator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062"/>
+        <sbol:displayId>BBa_C0062</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/BBa_C0062"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034"/>
+        <sbol:displayId>BBa_B0034</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/BBa_B0034"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015"/>
+        <sbol:displayId>BBa_B0015</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/BBa_B0015"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015_annotation">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015_annotation"/>
+        <sbol:displayId>BBa_B0015_annotation</sbol:displayId>
+        <prov:wasDerivedFrom rdf:resource="http://sbols.org/anot#3456789"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015_annotation/range">
+            <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015_annotation/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>808</sbol:start>
+            <sbol:end>936</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0015"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062_annotation">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062_annotation"/>
+        <sbol:displayId>BBa_C0062_annotation</sbol:displayId>
+        <prov:wasDerivedFrom rdf:resource="http://sbols.org/anot#2345678"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062_annotation/range">
+            <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062_annotation/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>19</sbol:start>
+            <sbol:end>774</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_C0062"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034_annotation">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034_annotation"/>
+        <sbol:displayId>BBa_B0034_annotation</sbol:displayId>
+        <prov:wasDerivedFrom rdf:resource="http://sbols.org/anot#1234567"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034_annotation/range">
+            <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034_annotation/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>12</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://www.async.ece.utah.edu/BBa_I0462/BBa_B0034"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://www.async.ece.utah.edu/seq_d23749adb3a7e0e2f09168cb7267a6113b238973"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://www.async.ece.utah.edu/seq_d23749adb3a7e0e2f09168cb7267a6113b238973">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/seq_d23749adb3a7e0e2f09168cb7267a6113b238973"/>
+    <sbol:displayId>seq_d23749adb3a7e0e2f09168cb7267a6113b238973</sbol:displayId>
+    <prov:wasDerivedFrom rdf:resource="http://sbols.org/seq#d23749adb3a7e0e2f09168cb7267a6113b238973"/>
+    <sbol:elements>aaagaggagaaatactagatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcactactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <DnaComponent rdf:about="http://partsregistry.org/Part:BBa_I0462">
+    <displayId>BBa_I0462</displayId>
+    <name>I0462</name>
+    <description>LuxR protein generator</description>
+    <dnaSequence>
+      <DnaSequence rdf:about="http://sbols.org/seq#d23749adb3a7e0e2f09168cb7267a6113b238973">
+        <nucleotides>aaagaggagaaatactagatgaaaaacataaatgccgacgacacatacagaataattaataaaattaaagcttgtagaagcaataatgatattaatcaatgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcactactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</nucleotides>
+      </DnaSequence>
+    </dnaSequence>
+    <annotation>
+      <SequenceAnnotation rdf:about="http://sbols.org/anot#1234567">
+        <bioStart>1</bioStart>
+        <bioEnd>12</bioEnd>
+        <strand>+</strand>
+        <subComponent>
+          <DnaComponent rdf:about="http://partsregistry.org/Part:BBa_B0034">
+            <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000139"/>
+            <displayId>BBa_B0034</displayId>
+            <name>B0034</name>
+          </DnaComponent>
+        </subComponent>
+      </SequenceAnnotation>
+    </annotation>
+    <annotation>
+      <SequenceAnnotation rdf:about="http://sbols.org/anot#2345678">
+        <bioStart>19</bioStart>
+        <bioEnd>774</bioEnd>
+        <strand>+</strand>
+        <subComponent>
+          <DnaComponent rdf:about="http://partsregistry.org/Part:BBa_C0062">
+            <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000316"/>
+            <displayId>BBa_C0062</displayId>
+            <name>luxR</name>
+          </DnaComponent>
+        </subComponent>
+      </SequenceAnnotation>
+    </annotation>
+    <annotation>
+      <SequenceAnnotation rdf:about="http://sbols.org/anot#3456789">
+        <bioStart>808</bioStart>
+        <bioEnd>936</bioEnd>
+        <strand>+</strand>
+        <subComponent>
+          <DnaComponent rdf:about="http://partsregistry.org/Part:BBa_B0015">
+            <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000141"/>
+            <displayId>BBa_B0015</displayId>
+            <name>B0015</name>
+          </DnaComponent>
+        </subComponent>
+      </SequenceAnnotation>
+    </annotation>
+  </DnaComponent>
+</rdf:RDF>

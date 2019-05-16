@@ -1,0 +1,206 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:pr="http://partsregistry.org/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0040"/>
+    <sbol:displayId>BBa_R0040</sbol:displayId>
+    <dcterms:title>BBa_R0040</dcterms:title>
+    <dcterms:description>TetR repressible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0040"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_R0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
+    <sbol:displayId>BBa_R0062</sbol:displayId>
+    <dcterms:title>BBa_R0062</dcterms:title>
+    <dcterms:description>LuxR inducible promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_R0062"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0034">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
+    <sbol:displayId>BBa_B0034</sbol:displayId>
+    <dcterms:title>BBa_B0034</dcterms:title>
+    <dcterms:description>RBS based on Elowitz repressilator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0034"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_B0015">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_B0015"/>
+    <sbol:displayId>BBa_B0015</sbol:displayId>
+    <dcterms:title>BBa_B0015</dcterms:title>
+    <dcterms:description>Double terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_B0015"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_F2620">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620"/>
+    <sbol:displayId>BBa_F2620</sbol:displayId>
+    <dcterms:title>BBa_F2620</dcterms:title>
+    <dcterms:description>3OC6HSL -&gt; PoPS Receiver</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001411"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/rbs">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
+        <sbol:displayId>rbs</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/pLuxR">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/pLuxR"/>
+        <sbol:displayId>pLuxR</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_R0062"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/ter">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/ter"/>
+        <sbol:displayId>ter</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_B0015"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/luxR">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/luxR"/>
+        <sbol:displayId>luxR</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_B0034"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://partsregistry.org/cd/BBa_F2620/pTetR">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/pTetR"/>
+        <sbol:displayId>pTetR</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://partsregistry.org/cd/BBa_R0040"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno3">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno3"/>
+        <sbol:displayId>anno3</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno3/range">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>69</sbol:start>
+            <sbol:end>770</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/luxR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4"/>
+        <sbol:displayId>anno4</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno4/range">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>771</sbol:start>
+            <sbol:end>900</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/ter"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1"/>
+        <sbol:displayId>anno1</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno1/range">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>1</sbol:start>
+            <sbol:end>55</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/pTetR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno5">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno5"/>
+        <sbol:displayId>anno5</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno5/range">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno5/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>901</sbol:start>
+            <sbol:end>956</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/pLuxR"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2">
+        <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2"/>
+        <sbol:displayId>anno2</sbol:displayId>
+        <sbol:location>
+          <sbol:Range rdf:about="http://partsregistry.org/cd/BBa_F2620/anno2/range">
+            <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_F2620/anno2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:start>56</sbol:start>
+            <sbol:end>68</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://partsregistry.org/cd/BBa_F2620/rbs"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_C0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_C0062"/>
+    <sbol:displayId>BBa_C0062</sbol:displayId>
+    <dcterms:title>BBa_C0062</dcterms:title>
+    <dcterms:description>luxR coding sequence</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_C0062"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_R0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_R0062"/>
+    <sbol:displayId>BBa_R0062</sbol:displayId>
+    <sbol:elements>acctgtaggatcgtacaggtttacgcaagaaaatggtttgttatagtcgaataaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_B0015">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_B0015"/>
+    <sbol:displayId>BBa_B0015</sbol:displayId>
+    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_C0062">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_C0062"/>
+    <sbol:displayId>BBa_C0062</sbol:displayId>
+    <sbol:elements>atgcttatctgatatgactaaaatggtacattgtgaatattatttactcgcgatcatttatcctcattctatggttaaatctgatatttcaatcctagataattaccctaaaaaatggaggcaatattatgatgacgctaatttaataaaatatgatcctatagtagattattctaactccaatcattcaccaattaattggaatatatttgaaaacaatgctgtaaataaaaaatctccaaatgtaattaaagaagcgaaaacatcaggtcttatcactgggtttagtttccctattcatacggctaacaatggcttcggaatgcttagttttgcacattcagaaaaagacaactatatagatagtttatttttacatgcgtgtatgaacataccattaattgttccttctctagttgataattatcgaaaaataaatatagcaaataataaatcaaacaacgatttaaccaaaagagaaaaagaatgtttagcgtgggcatgcgaaggaaaaagctcttgggatatttcaaaaatattaggttgcagtgagcgtactgtcactttccatttaaccaatgcgcaaatgaaactcaatacaacaaaccgctgccaaagtatttctaaagcaattttaacaggagcaattgattgcccatactttaaaaattaataacactgatagtgctagtgtagatcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_R0040">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_R0040"/>
+    <sbol:displayId>BBa_R0040</sbol:displayId>
+    <sbol:elements>tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_B0034">
+    <sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_B0034"/>
+    <sbol:displayId>BBa_B0034</sbol:displayId>
+    <sbol:elements>aaagaggagaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

@@ -1,0 +1,2576 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:igem="http://parts.igem.org/#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:fn="http://www.w3.org/2005/xpath-functions#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:sesame="http://www.openrdf.org/schema/sesame#" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbolhub="http://sbolhub.org/">
+  <sbol:Collection rdf:about="http://sbolhub.org/col/igem_sbol2_151015212715">
+    <sbol:persistentIdentity rdf:resource="http://sbolhub.org/col/igem_sbol2_151015212715"/>
+    <sbol:displayId>igem_sbol2_151015212715</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Collection"/>
+    <dcterms:creator>sbolhub</dcterms:creator>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766201"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952301"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766206"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766202#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952297"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952306"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712074#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742129"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712009#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712078"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742134#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712074"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766205"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766207#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742126#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766200"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253076"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952302"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766203#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742134"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712022"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712022#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712069"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766204"/>
+    <sbol:member rdf:resource="http://sbolhub.org/gen/igem_sbol2_151015212715"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I763026"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742131#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I763039"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766204#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742135"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952303"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712069#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742131#feature1956553"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952304"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952300"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766200#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766205#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712009"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742130"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766203"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712078#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742129#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766207"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766202"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742126"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742130#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952299"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742135#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952295"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952298"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766201#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I766206#sequence"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952305"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952296"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I742131"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712077"/>
+    <sbol:member rdf:resource="http://parts.igem.org/Part:BBa_I712077#sequence"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712074">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712074"/>
+    <sbol:displayId>BBa_I712074</sbol:displayId>
+    <dcterms:title>BBa_I712074</dcterms:title>
+    <dcterms:description>T7 promoter (strong promoter from T7 bacteriophage)</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>T7 promoter is very specific promoter which is transcribed only by specific T7 RNA polymerase. Usually this promoter is used in expression systems where T7 promoter is cotransfected with T7 RNA polymerase. That ensures strong transcription of desired genes.</igem:description>
+    <igem:author>Rok Gaber</igem:author>
+    <igem:source>T7 bacteriophage</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712074#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I763026#feature2253076">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253076"/>
+    <sbol:displayId>lacI_LVA</sbol:displayId>
+    <dcterms:title>lacI-LVA</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766205">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766205"/>
+    <sbol:displayId>BBa_I766205</sbol:displayId>
+    <dcterms:title>BBa_I766205</dcterms:title>
+    <dcterms:description>XhoI</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Restriction Site.</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>synthetic</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766205#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742131">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131"/>
+    <sbol:displayId>BBa_I742131</sbol:displayId>
+    <dcterms:title>BBa_I742131</dcterms:title>
+    <dcterms:description>Inverse cI repressor coding sequence.</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>This sequence encodes the cl repressor, only it encodes it in the 'non-default', bottom strand, rather than the straight-forward top one. When combined with the cl-responsive promoter, it enables regulatory control of both strands.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>Please refer to the original, BBa_C0051.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>As above.</igem:note>
+    <igem:status>Planning</igem:status>
+    <igem:nickname>rev.cI</igem:nickname>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742131#component1956553">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131#component1956553"/>
+        <sbol:displayId>cI_repressor_coding_sequence</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742131#feature1956553"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742131#annotation1956553">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131#annotation1956553"/>
+        <sbol:displayId>annotation1956553</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742131#range1956553">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131#range1956553"/>
+            <sbol:displayId>range1956553</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>4</sbol:start>
+            <sbol:end>750</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742131#component1956553"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742131#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I763039">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039"/>
+    <sbol:displayId>BBa_I763039</sbol:displayId>
+    <dcterms:title>BBa_I763039</dcterms:title>
+    <dcterms:description>pTeTR-LacI-plamda-RFP</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Composite device for the Genetic Schmitt trigger (I763029).</igem:description>
+    <igem:author>Alice Pasini</igem:author>
+    <igem:source>Igem 2007 plates</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>----</igem:note>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280605">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280605"/>
+        <sbol:displayId>TetR_1</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280605"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280621">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280621"/>
+        <sbol:displayId>T7_TE</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280621"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280608">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280608"/>
+        <sbol:displayId>TetR_2</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280608"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280636">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280636"/>
+        <sbol:displayId>BBa_B0010</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280636"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280610">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280610"/>
+        <sbol:displayId>BBa_S0100</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280610"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280607">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280607"/>
+        <sbol:displayId>_35</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280607"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280629">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280629"/>
+        <sbol:displayId>_10</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280629"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280627">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280627"/>
+        <sbol:displayId>_35</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280627"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280637">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280637"/>
+        <sbol:displayId>component2280637</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280637"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280606">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280606"/>
+        <sbol:displayId>BBa_R0040</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280606"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280631">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280631"/>
+        <sbol:displayId>BBa_B0034</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280631"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280611">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280611"/>
+        <sbol:displayId>BBa_B0034</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280611"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280639">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280639"/>
+        <sbol:displayId>T7_TE</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280639"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280626">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280626"/>
+        <sbol:displayId>BBa_R0051</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280626"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280622">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280622"/>
+        <sbol:displayId>component2280622</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280622"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280634">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280634"/>
+        <sbol:displayId>BBa_E1010</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280634"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280642">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280642"/>
+        <sbol:displayId>BBa_I763007</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280642"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280633">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280633"/>
+        <sbol:displayId>mrfp1</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280633"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280614">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280614"/>
+        <sbol:displayId>lacI_LVA</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280614"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280620">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280620"/>
+        <sbol:displayId>BBa_B0012</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280620"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280618">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280618"/>
+        <sbol:displayId>BBa_B0015</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280618"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280638">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280638"/>
+        <sbol:displayId>BBa_B0012</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280638"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280641">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280641"/>
+        <sbol:displayId>component2280641</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280641"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280604">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280604"/>
+        <sbol:displayId>BBa_I763025</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280604"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280625">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280625"/>
+        <sbol:displayId>OR2</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280625"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280613">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280613"/>
+        <sbol:displayId>BBa_C0012</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280613"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280619">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280619"/>
+        <sbol:displayId>component2280619</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280619"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280630">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280630"/>
+        <sbol:displayId>BBa_I13507</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280630"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280617">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280617"/>
+        <sbol:displayId>BBa_B0010</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280617"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280632">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280632"/>
+        <sbol:displayId>component2280632</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280632"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280616">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280616"/>
+        <sbol:displayId>Help_Barcodes</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280616"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280640">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280640"/>
+        <sbol:displayId>component2280640</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280640"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280635">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280635"/>
+        <sbol:displayId>component2280635</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280635"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280628">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280628"/>
+        <sbol:displayId>OR1</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280628"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280612">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280612"/>
+        <sbol:displayId>component2280612</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280612"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280615">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280615"/>
+        <sbol:displayId>LVA</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280615"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280623">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280623"/>
+        <sbol:displayId>component2280623</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280623"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280624">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280624"/>
+        <sbol:displayId>BBa_I763026</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280624"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763039#component2280609">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280609"/>
+        <sbol:displayId>_10</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763039#feature2280609"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280624">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280624"/>
+        <sbol:displayId>annotation2280624</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280624">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280624"/>
+            <sbol:displayId>range2280624</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280624"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280631">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280631"/>
+        <sbol:displayId>annotation2280631</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280631">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280631"/>
+            <sbol:displayId>range2280631</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1436</sbol:start>
+            <sbol:end>1447</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280631"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280639">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280639"/>
+        <sbol:displayId>annotation2280639</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280639">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280639"/>
+            <sbol:displayId>range2280639</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2263</sbol:start>
+            <sbol:end>2282</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280639"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280641">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280641"/>
+        <sbol:displayId>annotation2280641</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280641">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280641"/>
+            <sbol:displayId>range2280641</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2289</sbol:start>
+            <sbol:end>2289</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280641"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280608">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280608"/>
+        <sbol:displayId>annotation2280608</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280608">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280608"/>
+            <sbol:displayId>range2280608</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>26</sbol:start>
+            <sbol:end>44</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280608"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280614">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280614"/>
+        <sbol:displayId>annotation2280614</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280614">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280614"/>
+            <sbol:displayId>range2280614</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>81</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280614"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280636">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280636"/>
+        <sbol:displayId>annotation2280636</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280636">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280636"/>
+            <sbol:displayId>range2280636</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2168</sbol:start>
+            <sbol:end>2247</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280636"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280640">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280640"/>
+        <sbol:displayId>annotation2280640</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280640">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280640"/>
+            <sbol:displayId>range2280640</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2283</sbol:start>
+            <sbol:end>2296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280640"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280619">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280619"/>
+        <sbol:displayId>annotation2280619</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280619">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280619"/>
+            <sbol:displayId>range2280619</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1253</sbol:start>
+            <sbol:end>1296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280619"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280609">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280609"/>
+        <sbol:displayId>annotation2280609</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280609">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280609"/>
+            <sbol:displayId>range2280609</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>43</sbol:start>
+            <sbol:end>48</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280609"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280616">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280616"/>
+        <sbol:displayId>annotation2280616</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280616">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280616"/>
+            <sbol:displayId>range2280616</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1209</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280616"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280618">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280618"/>
+        <sbol:displayId>annotation2280618</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280618">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280618"/>
+            <sbol:displayId>range2280618</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1242</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280618"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280620">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280620"/>
+        <sbol:displayId>annotation2280620</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280620">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280620"/>
+            <sbol:displayId>range2280620</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1330</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280620"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280638">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280638"/>
+        <sbol:displayId>annotation2280638</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280638">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280638"/>
+            <sbol:displayId>range2280638</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2256</sbol:start>
+            <sbol:end>2296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280638"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280606">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280606"/>
+        <sbol:displayId>annotation2280606</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280606">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280606"/>
+            <sbol:displayId>range2280606</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280606"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280623">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280623"/>
+        <sbol:displayId>annotation2280623</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280623">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280623"/>
+            <sbol:displayId>range2280623</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1363</sbol:start>
+            <sbol:end>1363</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280623"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280632">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280632"/>
+        <sbol:displayId>annotation2280632</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280632">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280632"/>
+            <sbol:displayId>range2280632</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1440</sbol:start>
+            <sbol:end>1443</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280632"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280635">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280635"/>
+        <sbol:displayId>annotation2280635</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280635">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280635"/>
+            <sbol:displayId>range2280635</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2135</sbol:start>
+            <sbol:end>2159</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280635"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280604">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280604"/>
+        <sbol:displayId>annotation2280604</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280604">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280604"/>
+            <sbol:displayId>range2280604</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280604"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280633">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280633"/>
+        <sbol:displayId>annotation2280633</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280633">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280633"/>
+            <sbol:displayId>range2280633</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1454</sbol:start>
+            <sbol:end>2128</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280633"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280610">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280610"/>
+        <sbol:displayId>annotation2280610</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280610">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280610"/>
+            <sbol:displayId>range2280610</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>63</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280610"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280612">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280612"/>
+        <sbol:displayId>annotation2280612</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280612">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280612"/>
+            <sbol:displayId>range2280612</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>67</sbol:start>
+            <sbol:end>70</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280612"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280629">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280629"/>
+        <sbol:displayId>annotation2280629</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280629">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280629"/>
+            <sbol:displayId>range2280629</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1416</sbol:start>
+            <sbol:end>1421</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280629"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280626">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280626"/>
+        <sbol:displayId>annotation2280626</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280626">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280626"/>
+            <sbol:displayId>range2280626</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1379</sbol:start>
+            <sbol:end>1427</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280626"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280625">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280625"/>
+        <sbol:displayId>annotation2280625</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280625">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280625"/>
+            <sbol:displayId>range2280625</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1379</sbol:start>
+            <sbol:end>1395</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280625"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280628">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280628"/>
+        <sbol:displayId>annotation2280628</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280628">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280628"/>
+            <sbol:displayId>range2280628</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1403</sbol:start>
+            <sbol:end>1419</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280628"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280627">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280627"/>
+        <sbol:displayId>annotation2280627</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280627">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280627"/>
+            <sbol:displayId>range2280627</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1393</sbol:start>
+            <sbol:end>1398</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280627"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280607">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280607"/>
+        <sbol:displayId>annotation2280607</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280607">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280607"/>
+            <sbol:displayId>range2280607</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>20</sbol:start>
+            <sbol:end>25</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280607"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280621">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280621"/>
+        <sbol:displayId>annotation2280621</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280621">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280621"/>
+            <sbol:displayId>range2280621</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1337</sbol:start>
+            <sbol:end>1356</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280621"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280634">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280634"/>
+        <sbol:displayId>annotation2280634</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280634">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280634"/>
+            <sbol:displayId>range2280634</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1454</sbol:start>
+            <sbol:end>2134</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280634"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280637">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280637"/>
+        <sbol:displayId>annotation2280637</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280637">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280637"/>
+            <sbol:displayId>range2280637</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2179</sbol:start>
+            <sbol:end>2222</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280637"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280615">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280615"/>
+        <sbol:displayId>annotation2280615</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280615">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280615"/>
+            <sbol:displayId>range2280615</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1170</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280615"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280617">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280617"/>
+        <sbol:displayId>annotation2280617</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280617">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280617"/>
+            <sbol:displayId>range2280617</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1242</sbol:start>
+            <sbol:end>1321</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280617"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280622">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280622"/>
+        <sbol:displayId>annotation2280622</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280622">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280622"/>
+            <sbol:displayId>range2280622</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1357</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280622"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280642">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280642"/>
+        <sbol:displayId>annotation2280642</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280642">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280642"/>
+            <sbol:displayId>range2280642</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1379</sbol:start>
+            <sbol:end>2296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280642"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280605">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280605"/>
+        <sbol:displayId>annotation2280605</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280605">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280605"/>
+            <sbol:displayId>range2280605</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>19</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280605"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280630">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280630"/>
+        <sbol:displayId>annotation2280630</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280630">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280630"/>
+            <sbol:displayId>range2280630</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1436</sbol:start>
+            <sbol:end>2296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280630"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280611">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280611"/>
+        <sbol:displayId>annotation2280611</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280611">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280611"/>
+            <sbol:displayId>range2280611</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>63</sbol:start>
+            <sbol:end>74</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280611"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763039#annotation2280613">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#annotation2280613"/>
+        <sbol:displayId>annotation2280613</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763039#range2280613">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763039#range2280613"/>
+            <sbol:displayId>range2280613</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>81</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763039#component2280613"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I763039#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712009">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712009"/>
+    <sbol:displayId>BBa_I712009</sbol:displayId>
+    <dcterms:title>BBa_I712009</dcterms:title>
+    <dcterms:description>CD4 signal peptide; localizes to plasma membrane</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Coding region for first 25 amino acids (including start codon) of CD4 receptor which is signal peptide for plasma membrane localization.</igem:description>
+    <igem:author>Peter Cimermancic</igem:author>
+    <igem:source>It comes from human gene for CD4 receptor.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>No considerations.</igem:note>
+    <igem:status>Available</igem:status>
+    <igem:nickname>CD4 signal</igem:nickname>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712009#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742130">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742130"/>
+    <sbol:displayId>BBa_I742130</sbol:displayId>
+    <dcterms:title>BBa_I742130</dcterms:title>
+    <dcterms:description>Reverse RBS</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>DNA is double-stranded. To translate genes of both strands, you need RBSs in both strands.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>Please refer to the original (BB_B0034).</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>Please refer to the original (BB_B0034).</igem:note>
+    <igem:status>Planning</igem:status>
+    <igem:nickname>revRBS</igem:nickname>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742130#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712077#feature1952296">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952296"/>
+    <sbol:displayId>STOP</sbol:displayId>
+    <dcterms:title>STOP</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742134">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742134"/>
+    <sbol:displayId>BBa_I742134</sbol:displayId>
+    <dcterms:title>BBa_I742134</dcterms:title>
+    <dcterms:description>Recombinase XerC of the XerCD complex.</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Xer C is activated by a septum-translocated FtsK at cell division. It pairs with XerD to make an activated complex which cleaves or inverts sequences at dif-sites, depending on dif-site directionality. See Edinburgh project 2007 for details.
+
+It turns out that XerC overexpression is a very effective way of not getting any colonies on your agar-plates. Therefore the Edinburgh 2007 team never incorperated it into its final construct.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>XerC is an innate E. coli K12 locus.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>The coding XerC sequence contains none of the restriction sites used when biobricking.</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742134#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712077">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077"/>
+    <sbol:displayId>BBa_I712077</sbol:displayId>
+    <dcterms:title>BBa_I712077</dcterms:title>
+    <dcterms:description>TEV protease (N-terminal half) - entered sequence may be wrong</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>N-terminal half of TEV (Tobacco Etch Virus) protease.
+
+TEV protease is a highly site-specific protease that is found in the Tobacco Etch Virus (TEV). One of the main uses of this protease is for removing affinity tags from purified proteins. But scientists developed assay for detecting transmembrane protein interactions on its base.
+
+TEV protease is splitted into halves (N-terminal and C-terminal). These halves are inactive but assembles and regain activity if they are fused with interacting transmembrane proteins. For detecting TEV protease activity another fusion protein is constructed which is composed of transmembrane region, specific TEV protease cleavage site and kind of transcription factor. When both halves of TEV protease assembles and therefore split protease regains activity it cleaves third protein and transcription factor is released from membrane. Transcription factor is later translocated to the nucleus where induces transcription of promoter with reporter gene.
+
+This is N-terminal half of this protease.</igem:description>
+    <igem:author>Rok Gaber</igem:author>
+    <igem:source>Tobacco Etch Virus</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>Synthetic gene</igem:note>
+    <igem:status>Available</igem:status>
+    <igem:nickname>TEV</igem:nickname>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I712077#component1952295">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#component1952295"/>
+        <sbol:displayId>Coding</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952295"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I712077#component1952296">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#component1952296"/>
+        <sbol:displayId>STOP</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952296"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I712077#annotation1952295">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#annotation1952295"/>
+        <sbol:displayId>annotation1952295</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I712077#range1952295">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#range1952295"/>
+            <sbol:displayId>range1952295</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>354</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I712077#component1952295"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I712077#annotation1952296">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#annotation1952296"/>
+        <sbol:displayId>annotation1952296</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I712077#range1952296">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#range1952296"/>
+            <sbol:displayId>range1952296</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>355</sbol:start>
+            <sbol:end>357</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I712077#component1952296"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712077#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952305">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952305"/>
+    <sbol:displayId>CrtI_stop</sbol:displayId>
+    <dcterms:title>CrtI stop</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766206">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766206"/>
+    <sbol:displayId>BBa_I766206</sbol:displayId>
+    <dcterms:title>BBa_I766206</dcterms:title>
+    <dcterms:description>XmaI</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>restriction site</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>synthetic</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766206#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952303">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952303"/>
+    <sbol:displayId>CrtI_start</sbol:displayId>
+    <dcterms:title>CrtI start</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712078#feature1952300">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952300"/>
+    <sbol:displayId>STOP</sbol:displayId>
+    <dcterms:title>STOP</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952302">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952302"/>
+    <sbol:displayId>native_rbs</sbol:displayId>
+    <dcterms:title>native rbs</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952301">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952301"/>
+    <sbol:displayId>CrtB_coding_region</sbol:displayId>
+    <dcterms:title>CrtB coding region</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952306">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952306"/>
+    <sbol:displayId>CrtB_stop</sbol:displayId>
+    <dcterms:title>CrtB stop</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952304">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952304"/>
+    <sbol:displayId>CrtB_start</sbol:displayId>
+    <dcterms:title>CrtB start</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712069">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712069"/>
+    <sbol:displayId>BBa_I712069</sbol:displayId>
+    <dcterms:title>BBa_I712069</dcterms:title>
+    <dcterms:description>RBS-T7 RNA polymerase with NLS</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>T7 RNA polymerase with RBS (ribosome-binding site) and NLS (nuclear localisation signal).
+NLS is used to target the protein to the cell nucleus.</igem:description>
+    <igem:author>Sasa Jereb</igem:author>
+    <igem:source>Genomic DNA of BL21 (E.coli strain).</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>DNA was isolated from BL21 and PCR was performed to attach RBS and NLS.</igem:note>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712069#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712078#feature1952299">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952299"/>
+    <sbol:displayId>Coding</sbol:displayId>
+    <dcterms:title>Coding</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766203">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766203"/>
+    <sbol:displayId>BBa_I766203</sbol:displayId>
+    <dcterms:title>BBa_I766203</dcterms:title>
+    <dcterms:description>WMTM1</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Worm MTMR1 (myotubularin-related  phosphatidylinositol phosphatase).  Used to generate phosphatidyl inositol 5 phosphate in our organelle proejct</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>from C. elegans genomic DNA</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766203#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952297">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952297"/>
+    <sbol:displayId>native_rbs</sbol:displayId>
+    <dcterms:title>native rbs</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742135">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742135"/>
+    <sbol:displayId>BBa_I742135</sbol:displayId>
+    <dcterms:title>BBa_I742135</dcterms:title>
+    <dcterms:description>Natural RBS + Recombinase XerC of the XerCD complex.</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>Xer C is activated by a septum-translocated FtsK at cell division. It pairs with XerD to make an activated complex which cleaves or inverts sequences at dif-sites, depending on dif-site directionality. See Edinburgh project 2007 for details.
+
+It turns out that XerC overexpression is a very effective way of not getting any colonies on your agar-plates. Therefore the Edinburgh 2007 team never incorperated it into its final construct.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>XerC is an innate E. coli K12 locus.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>The coding XerC sequence contains none of the restriction sites used when biobricking. -13bp upstream sequence included for RBS reasons.</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742135#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712077#feature1952295">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#feature1952295"/>
+    <sbol:displayId>Coding</sbol:displayId>
+    <dcterms:title>Coding</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766201">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766201"/>
+    <sbol:displayId>BBa_I766201</sbol:displayId>
+    <dcterms:title>BBa_I766201</dcterms:title>
+    <dcterms:description>Adaptor/Adh Terminator</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>S. cerevisiae terminator sequence</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>endogenous terminator for Adh (Alcohol dehydrogenase) in yeast</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766201#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766207">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766207"/>
+    <sbol:displayId>BBa_I766207</sbol:displayId>
+    <dcterms:title>BBa_I766207</dcterms:title>
+    <dcterms:description>PspOMI</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>restriction site</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>synthetic</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766207#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133"/>
+    <sbol:displayId>BBa_I742133</sbol:displayId>
+    <dcterms:title>BBa_I742133</dcterms:title>
+    <dcterms:description>CrtIB genes with PstI site mutated out</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>CrtIB encodes two enzymes, which make up steps three and two in the carotenoid biosynthesis pathway respectively.
+
+CrtI encodes phytoene desaturase and CrtB encodes Phytoene synthase.
+
+Both cloned genes still have their native ribosome binding sites.
+
+More information about the carotenoid synthesis pathway may be found on the [http://parts.mit.edu/igem07/index.php/Edinburgh/Yoghurt/Design#Colour_Production Edinburgh Yoghurt Wiki]</igem:description>
+    <igem:author>sarah hollingshead</igem:author>
+    <igem:source>Genes were both isolated from Pantoea ananatis (formerly Erwinia uredovora) 
+DSMZ 30080, ATCC 19321
+
+Diversity of Carotenoid Synthesis Gene Clusters from Environmental Enterobacteriaceae Strains, N Sedkova, APPLIED AND ENVIRONMENTAL MICROBIOLOGY, 71(12): 8141???8146 (2005) 
+
+Elucidation of Pathway the Erwinia uredovora Carotenoid Biosynthetic by Functional Analysis of Gene Products Expressed in Escherichia coli, N Misawa, et al, JOURNAL OF BACTERIOLOGY, 172(12): 6704-6712 (1990)</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>The CrtI gene contained two PstI sites, which were both mutated out using point mutagenesis</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952303">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952303"/>
+        <sbol:displayId>CrtI_start</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952303"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952302">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952302"/>
+        <sbol:displayId>native_rbs</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952302"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952297">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952297"/>
+        <sbol:displayId>native_rbs</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952297"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952305">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952305"/>
+        <sbol:displayId>CrtI_stop</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952305"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952298">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952298"/>
+        <sbol:displayId>CrtI_coding_region</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952298"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952306">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952306"/>
+        <sbol:displayId>CrtB_stop</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952306"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952304">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952304"/>
+        <sbol:displayId>CrtB_start</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952304"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I742133#component1952301">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952301"/>
+        <sbol:displayId>CrtB_coding_region</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952301"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952306">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952306"/>
+        <sbol:displayId>annotation1952306</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952306">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952306"/>
+            <sbol:displayId>range1952306</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>2428</sbol:start>
+            <sbol:end>2430</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952306"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952302">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952302"/>
+        <sbol:displayId>annotation1952302</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952302">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952302"/>
+            <sbol:displayId>range1952302</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1482</sbol:start>
+            <sbol:end>1497</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952302"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952304">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952304"/>
+        <sbol:displayId>annotation1952304</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952304">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952304"/>
+            <sbol:displayId>range1952304</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1498</sbol:start>
+            <sbol:end>1500</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952304"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952303">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952303"/>
+        <sbol:displayId>annotation1952303</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952303">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952303"/>
+            <sbol:displayId>range1952303</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>23</sbol:start>
+            <sbol:end>25</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952303"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952298">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952298"/>
+        <sbol:displayId>annotation1952298</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952298">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952298"/>
+            <sbol:displayId>range1952298</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>23</sbol:start>
+            <sbol:end>1481</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952298"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952305">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952305"/>
+        <sbol:displayId>annotation1952305</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952305">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952305"/>
+            <sbol:displayId>range1952305</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1479</sbol:start>
+            <sbol:end>1481</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952305"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952301">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952301"/>
+        <sbol:displayId>annotation1952301</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952301">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952301"/>
+            <sbol:displayId>range1952301</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1498</sbol:start>
+            <sbol:end>2430</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952301"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I742133#annotation1952297">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#annotation1952297"/>
+        <sbol:displayId>annotation1952297</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I742133#range1952297">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#range1952297"/>
+            <sbol:displayId>range1952297</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>22</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I742133#component1952297"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742133#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742131#feature1956553">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131#feature1956553"/>
+    <sbol:displayId>cI_repressor_coding_sequence</sbol:displayId>
+    <dcterms:title>cI repressor coding sequence</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766202">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766202"/>
+    <sbol:displayId>BBa_I766202</sbol:displayId>
+    <dcterms:title>BBa_I766202</dcterms:title>
+    <dcterms:description>HMTM1</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>codes for Human MTMR1 (myotubularin-related-1-phosphatidylinositol phosphatase)</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>Human genomic DNA</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766202#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712078">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078"/>
+    <sbol:displayId>BBa_I712078</sbol:displayId>
+    <dcterms:title>BBa_I712078</dcterms:title>
+    <dcterms:description>TEV protease (C-terminal half)</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>C-terminal half of TEV (Tobacco Etch Virus) protease.
+
+TEV protease is a highly site-specific protease that is found in the Tobacco Etch Virus (TEV). One of the main uses of this protease is for removing affinity tags from purified proteins. But scientists developed assay for detecting transmembrane protein interactions on its base.
+
+TEV protease is splitted into halves (N-terminal and C-terminal). These halves are inactive but assembles and regain activity if they are fused with interacting transmembrane proteins. For detecting TEV protease activity another fusion protein is constructed which is composed of transmembrane region, specific TEV protease cleavage site and kind of transcription factor. When both halves of TEV protease assembles and therefore split protease regains activity it cleaves third protein and transcription factor is released from membrane. Transcription factor is later translocated to the nucleus where induces transcription of promoter with reporter gene.
+
+This is C-terminal half of this protease.</igem:description>
+    <igem:author>Rok Gaber</igem:author>
+    <igem:source>Tobacco Etch Virus</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>Synthetic gene</igem:note>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I712078#component1952300">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#component1952300"/>
+        <sbol:displayId>STOP</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952300"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I712078#component1952299">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#component1952299"/>
+        <sbol:displayId>Coding</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I712078#feature1952299"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I712078#annotation1952299">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#annotation1952299"/>
+        <sbol:displayId>annotation1952299</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I712078#range1952299">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#range1952299"/>
+            <sbol:displayId>range1952299</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>372</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I712078#component1952299"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I712078#annotation1952300">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#annotation1952300"/>
+        <sbol:displayId>annotation1952300</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I712078#range1952300">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#range1952300"/>
+            <sbol:displayId>range1952300</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>373</sbol:start>
+            <sbol:end>375</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I712078#component1952300"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712078#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742133#feature1952298">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#feature1952298"/>
+    <sbol:displayId>CrtI_coding_region</sbol:displayId>
+    <dcterms:title>CrtI coding region</dcterms:title>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742129">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742129"/>
+    <sbol:displayId>BBa_I742129</sbol:displayId>
+    <dcterms:title>BBa_I742129</dcterms:title>
+    <dcterms:description>Reverse terminator BBa_B0011 LuxICDABEG (+/-)</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>LuxICDABEG (+/-) forms a stem-loop which cancels transcription on both strands, whichever you choose to place it in. Please see BBa_B0011 for details about the terminator.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>Please see BBa_B0011 for details.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>None.</igem:note>
+    <igem:status>Planning</igem:status>
+    <igem:partStatus>Released HQ 2013</igem:partStatus>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742129#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766204">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766204"/>
+    <sbol:displayId>BBa_I766204</sbol:displayId>
+    <dcterms:title>BBa_I766204</dcterms:title>
+    <dcterms:description>Ste2</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>encodes for the protein Ste2</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>From the genome of S cerevisiae.
+
+http://db.yeastgenome.org/cgi-bin/locus.pl?locus=ste2</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766204#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I742126">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742126"/>
+    <sbol:displayId>BBa_I742126</sbol:displayId>
+    <dcterms:title>BBa_I742126</dcterms:title>
+    <dcterms:description>Reverse lambda cI-regulated promoter</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>This is an exact 'upside down' version of BBa_R0051. The promoter has two DNA binding sites for lambda cI repressor BBa_C0051. By adding this part, we wish to emphasise the possibility of engineering both DNA strands, and the additional regulatory potential that it gives.</igem:description>
+    <igem:author>Caroline Dahl</igem:author>
+    <igem:source>See BBa_R0051.</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>Any 'upside down' (reverse complementary) sequences made by PCR amplification need be made with suffix and prefix is opposite order with respect to the original default sequence.</igem:note>
+    <igem:status>Planning</igem:status>
+    <igem:nickname>revPlam</igem:nickname>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I742126#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I763026">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026"/>
+    <sbol:displayId>BBa_I763026</sbol:displayId>
+    <dcterms:title>BBa_I763026</dcterms:title>
+    <dcterms:description>LacI coding device regulated by pTetR</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>LacI coding device regulated by pTet inverting regulator which action is inhibited by the addition of tetracycline or its analog, aTc.</igem:description>
+    <igem:author>Alice Pasini</igem:author>
+    <igem:source>Igem 2007 plates</igem:source>
+    <igem:created>2007-09-06T06:00:00.000Z</igem:created>
+    <igem:note>---</igem:note>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253076">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253076"/>
+        <sbol:displayId>lacI_LVA</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253076"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253068">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253068"/>
+        <sbol:displayId>BBa_R0040</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253068"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253077">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253077"/>
+        <sbol:displayId>LVA</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253077"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253086">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253086"/>
+        <sbol:displayId>BBa_B0015</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253086"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253081">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253081"/>
+        <sbol:displayId>component2253081</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253081"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253078">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253078"/>
+        <sbol:displayId>Help_Barcodes</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253078"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253079">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253079"/>
+        <sbol:displayId>BBa_I763025</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253079"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253084">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253084"/>
+        <sbol:displayId>component2253084</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253084"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253071">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253071"/>
+        <sbol:displayId>_10</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253071"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253074">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253074"/>
+        <sbol:displayId>component2253074</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253074"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253072">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253072"/>
+        <sbol:displayId>BBa_S0100</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253072"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253073">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253073"/>
+        <sbol:displayId>BBa_B0034</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253073"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253075">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253075"/>
+        <sbol:displayId>BBa_C0012</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253075"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253070">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253070"/>
+        <sbol:displayId>TetR_2</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253070"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253080">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253080"/>
+        <sbol:displayId>BBa_B0010</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253080"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253085">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253085"/>
+        <sbol:displayId>component2253085</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253085"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253069">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253069"/>
+        <sbol:displayId>_35</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253069"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253067">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253067"/>
+        <sbol:displayId>TetR_1</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253067"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253083">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253083"/>
+        <sbol:displayId>T7_TE</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253083"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://parts.igem.org/Part:BBa_I763026#component2253082">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253082"/>
+        <sbol:displayId>BBa_B0012</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#Component"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://parts.igem.org/Part:BBa_I763026#feature2253082"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253081">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253081"/>
+        <sbol:displayId>annotation2253081</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253081">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253081"/>
+            <sbol:displayId>range2253081</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1253</sbol:start>
+            <sbol:end>1296</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253081"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253085">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253085"/>
+        <sbol:displayId>annotation2253085</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253085">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253085"/>
+            <sbol:displayId>range2253085</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1363</sbol:start>
+            <sbol:end>1363</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253085"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253070">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253070"/>
+        <sbol:displayId>annotation2253070</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253070">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253070"/>
+            <sbol:displayId>range2253070</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>26</sbol:start>
+            <sbol:end>44</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253070"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253073">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253073"/>
+        <sbol:displayId>annotation2253073</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253073">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253073"/>
+            <sbol:displayId>range2253073</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>63</sbol:start>
+            <sbol:end>74</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253073"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253074">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253074"/>
+        <sbol:displayId>annotation2253074</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253074">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253074"/>
+            <sbol:displayId>range2253074</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>67</sbol:start>
+            <sbol:end>70</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253074"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253068">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253068"/>
+        <sbol:displayId>annotation2253068</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253068">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253068"/>
+            <sbol:displayId>range2253068</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>54</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253068"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253082">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253082"/>
+        <sbol:displayId>annotation2253082</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253082">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253082"/>
+            <sbol:displayId>range2253082</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1330</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253082"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253072">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253072"/>
+        <sbol:displayId>annotation2253072</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253072">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253072"/>
+            <sbol:displayId>range2253072</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>63</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253072"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253083">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253083"/>
+        <sbol:displayId>annotation2253083</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253083">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253083"/>
+            <sbol:displayId>range2253083</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1337</sbol:start>
+            <sbol:end>1356</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253083"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253084">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253084"/>
+        <sbol:displayId>annotation2253084</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253084">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253084"/>
+            <sbol:displayId>range2253084</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1357</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253084"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253075">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253075"/>
+        <sbol:displayId>annotation2253075</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253075">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253075"/>
+            <sbol:displayId>range2253075</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>81</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253075"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253069">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253069"/>
+        <sbol:displayId>annotation2253069</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253069">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253069"/>
+            <sbol:displayId>range2253069</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>20</sbol:start>
+            <sbol:end>25</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253069"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253086">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253086"/>
+        <sbol:displayId>annotation2253086</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253086">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253086"/>
+            <sbol:displayId>range2253086</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1242</sbol:start>
+            <sbol:end>1370</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253086"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253077">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253077"/>
+        <sbol:displayId>annotation2253077</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253077">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253077"/>
+            <sbol:displayId>range2253077</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1170</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253077"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253078">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253078"/>
+        <sbol:displayId>annotation2253078</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253078">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253078"/>
+            <sbol:displayId>range2253078</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1209</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253078"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253071">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253071"/>
+        <sbol:displayId>annotation2253071</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253071">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253071"/>
+            <sbol:displayId>range2253071</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>43</sbol:start>
+            <sbol:end>48</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253071"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253067">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253067"/>
+        <sbol:displayId>annotation2253067</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253067">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253067"/>
+            <sbol:displayId>range2253067</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>19</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253067"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253076">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253076"/>
+        <sbol:displayId>annotation2253076</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253076">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253076"/>
+            <sbol:displayId>range2253076</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>81</sbol:start>
+            <sbol:end>1208</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253076"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253079">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253079"/>
+        <sbol:displayId>annotation2253079</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253079">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253079"/>
+            <sbol:displayId>range2253079</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>1233</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253079"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://parts.igem.org/Part:BBa_I763026#annotation2253080">
+        <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#annotation2253080"/>
+        <sbol:displayId>annotation2253080</sbol:displayId>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:location>
+          <sbol:Range rdf:about="http://parts.igem.org/Part:BBa_I763026#range2253080">
+            <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I763026#range2253080"/>
+            <sbol:displayId>range2253080</sbol:displayId>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1242</sbol:start>
+            <sbol:end>1321</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="http://parts.igem.org/Part:BBa_I763026#component2253080"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I763026#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I766200">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766200"/>
+    <sbol:displayId>BBa_I766200</sbol:displayId>
+    <dcterms:title>BBa_I766200</dcterms:title>
+    <dcterms:description>pSte2</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>endogenous promoter of Ste2</igem:description>
+    <igem:author>Nili Sommovilla</igem:author>
+    <igem:source>from yeast genome</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>none.</igem:note>
+    <igem:status>Planning</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I766200#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://parts.igem.org/Part:BBa_I712022">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712022"/>
+    <sbol:displayId>BBa_I712022</sbol:displayId>
+    <dcterms:title>BBa_I712022</dcterms:title>
+    <dcterms:description>T7 RNA polymerase with NLS</dcterms:description>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <igem:description>T7 RNA polymerase with NLS (nuclear localisation signal) attached to it C-terminus.</igem:description>
+    <igem:author>Sasa Jereb</igem:author>
+    <igem:source>Genomic DNA of BL21 (E.coli strain)</igem:source>
+    <igem:created>2007-10-22T06:00:00.000Z</igem:created>
+    <igem:note>Genomic DNA was isolated from BL21 strain and PCR was performed to attach a NLS.</igem:note>
+    <igem:note>NLS does not contain a stop codon.</igem:note>
+    <igem:status>Available</igem:status>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://parts.igem.org/Part:BBa_I712022#sequence"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766200#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766200#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>atccaatatcacctgaccttcatctttatgtttttccactggtgtaatgtactctgttgcatcatcaataagcaactgggacgccaataattcataccaacaatcttttcttaatgagttgtttacaaaccccagaggccctaaacctatgtacctcaaagctcggacatcttttttctctaataactttgatataacttttcctttttgttcttctgcctttccactgtcacaacgagaaagtgattccagatatgcgttataacctccccttgtcaacgcgtctttgtcgtggctactctgattagtatgaaataatgaccttaatggcatcgtattttgttaattggcttgttctatgtcatttgctaaattttctctttatttctttactttgccaattcaagataatcttcccttcccagagagaaaaaaggaaaaatttagctatgaaacctcaataagctttttaatacaccaaagattcaagataagagcatagaacgaactgtagaatagtccggatatgttatccaatgcctgccaaaatgcattgtcacacgctgtagtgctcgaataggtgttgcaatccgtcaatatacgtcttgctctgtgggtaaatgtctcgtgcattaagacaggctagtataaacgagaagaagtatcctgctttgcaatgaaacaatagtatccgctaagaatttaagcaggccaacgtccatactgcttaggacctgtgcctggcaagtcgcagattgaagttttttcaaccatgtaaatttcctaattgggtaagtacatgatgaaacacatatgaagaaaaaagctttcctacatattcaagatttttttctgtgggtggaatactatttaaggagtgctattagtatcttatttgacttcaaagcaatacgataccttttcttttcacctgctctggctataattataattggttacttaaaaatgcaccgttaagaaccatatccaagaatcaaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766207#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766207#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>gggccc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712074#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712074#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>taatacgactcactatagggaatacaagctacttgttctttttgca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712009#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712009#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>atgaaccggggagtcccttttaggcacttgcttctggtgctgcaactggcgctcctcccagcagccactcaggga</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742131#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742131#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ttattaagctactaaagcgtagttttcgtcgtttgcagcgccaaacgtctcttcaggccactgactagcgataactttccccacaacggaacaactctcattgcatgggatcattgggtactgtgggtttagtggttgtaaaaacacctgaccgctatccctgatcagtttcttgaaggtaaactcatcacccccaagtctggctatgcagaaatcacctggctcaacagcctgctcagggtcaacgagaattaacattccgtcaggaaagcttggcttggagcctgttggtgcggtcatggaattaccttcaacctcaagccagaatgcagaatcactggcttttttggttgtgcttacccatctctccgcatcacctttggtaaaggttctaagctcaggtgagaacatccctgcctgaacatgagaaaaaacagggtactcatactcacttctaagtgacggctgcatactaaccgcttcatacatctcgtagatttctctggcgattgaagggctaaattcttcaacgctaactttgagaatttttgcaagcaatgcggcgttataagcatttaatgcattgatgccattaaataaagcaccaacgcctgactgccccatccccatcttgtctgcgacagattcctgggataagccaagttcatttttctttttttcataaattgctttaaggcgacgtgcgtcctcaagctgctcttgtgttaatggtttcttttttgtgctcat</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766202#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766202#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>gcttctgcatcaacttctaaatataattcacactccttggagaatgagtctattaagaggacgtctcgagatggagtcaatcgagatctcactgaggctgttcctcgacttccaggagaaacactaatcactgacaaagaagttatttacatatgtcctttcaatggccccattaagggaagagtttacatcacaaattatcgtctttatttaagaagtttggaaacggattcttctctaatacttgatgttcctctgggtgtgatctcgagaattgaaaaaatgggaggcgcgacaagtagaggagaaaattcctatggtctagatattacttgtaaagacatgagaaacctgaggttcgctttgaaacaggaaggccacagcagaagagatatgtttgagatcctcacgagatacgcgtttcccctggctcacagtctgccattatttgcatttttaaatgaagaaaagtttaacgtggatggatggacagtttacaatccagtggaagaatacaggaggcagggcttgcccaatcaccattggagaataacttttattaataagtgctatgagctctgtgacacttaccctgctcttttggtggttccgtatcgtgcctcagatgatgacctccggagagttgcaacttttaggtcccgaaatcgaattccagtgctgtcatggattcatccagaaaataagacggtcattgtgcgttgcagtcagcctcttgtcggtatgagtgggaaacgaaataaagatgatgagaaatatctcgatgttatcagggagactaataaacaaatttctaaactcaccatttatgatgcaagacccagcgtaaatgcagtggccaacaaggcaacaggaggaggatatgaaagtgatgatgcatatcataacgccgaacttttcttcttagacattcataatattcatgttatgcgggaatctttaaaaaaagtgaaggacattgtttatcctaatgtagaagaatctcattggttgtccagtttggagtctactcattggttagaacatatcaagctcgttttgacaggagccattcaagtagcagacaaagtttcttcagggaagagttcagtgcttgtgcattgcagtgacggatgggacaggactgctcagctgacatccttggccatgctgatgttggatagcttctataggagcattgaagggttcgaaatactggtacaaaaagaatggataagttttggacataaatttgcatctcgaataggtcatggtgataaaaaccacaccgatgctgaccgttctcctatttttctccagtttattgattgtgtgtggcaaatgtcaaaacagttccctacagcttttgaattcaatgaacaatttttgattataattttggatcatctgtatagttgccgatttggtactttcttattcaactgtgaatctgctcgagaaagacagaaggttacagaaaggactgtttctttatggtcactgataaacagtaataaagaaaaattcaaaaaccccttctatactaaagaaatcaatcgagttttatatccagttgccagtatgcgtcacttggaactctgggtgaattactacattagatggaaccccaggatcaagcaacaacagccgaatccagtggagcagcgttacatggagctcttagccttacgcgacgaatacataaagcggcttgaggaactgcagctcgccaactctgccaagctttctgatcccccaacttcaccttccagtccttcgcaaatgatgccccatgtgcaaactcacttc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742135#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742135#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ggattgaacgcgtatgaccgatttacacaccgatgtagaacgctacctacgttatctgagcgtggagcgccagcttagcccgataaccctgcttaactaccagcgtcagcttgaggcgatcatcaattttgccagcgaaaacggcctgcaaagctggcagcaatgtgatgtgacgatggtgcgcaattttgctgtacgcagtcgccgtaaagggctgggagcagcaagtctggcgttacggctttctgcgctacgtagcttttttgactggctggtcagccagaacgaactcaaagctaacccggcgaaaggtgtttcggcaccgaaagcgccgcgtcatctgccgaaaaacatcgacgtcgacgatatgaatcggctgctggatattgatatcaatgatcccctcgctgtacgcgaccgtgcaatgctggaagtgatgtacggcgcgggtctgcgtctttctgagctggtggggctggatattaaacacctcgacctggagtctggtgaagtgtgggttatggggaaaggcagcaaagagcgccgcctgccgattggtcgcaacgctgtggcgtggattgagcactggcttgatttgcgcgacctgtttggtagcgaagacgacgcgctttttctgtcgaaactgggcaagcgtatctccgcgcgtaatgtgcagaaacgctttgccgaatggggcataaaacaagggctgaataatcacgttcatccgcataaattacgtcactcgttcgccacgcatatgctggagtcgagcggcgatcttcgtggtgtgcaggagctgctgggtcatgccaacctctccaccacgcaaatctatactcatcttgattttcaacaccttgcctcggtgtacgatgcggcgcatccacgcgccaaacgggggaaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712069#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712069#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ccaccatgaacacgattaacatcgctaagaacgacttctctgacatcgaactggctgctatcccgttcaacactctggctgaccattacggtgagcgtttagctcgcgaacagttggcccttgagcatgagtcttacgagatgggtgaagcacgcttccgcaagatgtttgagcgtcaacttaaagctggtgaggttgcggataacgctgccgccaagcctctcatcactaccctactccctaagatgattgcacgcatcaacgactggtttgaggaagtgaaagctaagcgcggcaagcgcccgacagccttccagttcctgcaagaaatcaagccggaagccgtagcgtacatcaccattaagaccactctggcttgcctaaccagtgctgacaatacaaccgttcaggctgtagcaagcgcaatcggtcgggccattgaggacgaggctcgcttcggtcgtatccgtgaccttgaagctaagcacttcaagaaaaacgttgaggaacaactcaacaagcgcgtagggcacgtctacaagaaagcatttatgcaagttgtcgaggctgacatgctctctaagggtctactcggtggcgaggcgtggtcttcgtggcataaggaagactctattcatgtaggagtacgctgcatcgagatgctcattgagtcaaccggaatggttagcttacaccgccaaaatgctggcgtagtaggtcaagactctgagactatcgaactcgcacctgaatacgctgaggctatcgcaacccgtgcaggtgcgctggctggcatctctccgatgttccaaccttgcgtagttcctcctaagccgtggactggcattactggtggtggctattgggctaacggtcgtcgtcctctggcgctggtgcgtactcacagtaagaaagcactgatgcgctacgaagacgtttacatgcctgaggtgtacaaagcgattaacattgcgcaaaacaccgcatggaaaatcaacaagaaagtcctagcggtcgccaacgtaatcaccaagtggaagcattgtccggtcgaggacatccctgcgattgagcgtgaagaactcccgatgaaaccggaagacatcgacatgaatcctgaggctctcaccgcgtggaaacgtgctgccgctgctgtgtaccgcaaggacaaggctcgcaagtctcgccgtatcagccttgagttcatgcttgagcaagccaataagtttgctaaccataaggccatctggttcccttacaacatggactggcgcggtcgtgtttacgctgtgtcaatgttcaacccgcaaggtaacgatatgaccaaaggactgcttacgctggcgaaaggtaaaccaatcggtaaggaaggttactactggctgaaaatccacggtgcaaactgtgcgggtgtcgataaggttccgttccctgagcgcatcaagttcattgaggaaaaccacgagaacatcatggcttgcgctaagtctccactggagaacacttggtgggctgagcaagattctccgttctgcttccttgcgttctgctttgagtacgctggggtacagcaccacggcctgagctataactgctcccttccgctggcgtttgacgggtcttgctctggcatccagcacttctccgcgatgctccgagatgaggtaggtggtcgcgcggttaacttgcttcctagtgaaaccgttcaggacatctacgggattgttgctaagaaagtcaacgagattctacaagcagacgcaatcaatgggaccgataacgaagtagttaccgtgaccgatgagaacactggtgaaatctctgagaaagtcaagctgggcactaaggcactggctggtcaatggctggcttacggtgttactcgcagtgtgactaagcgttcagtcatgacgctggcttacgggtccaaagagttcggcttccgtcaacaagtgctggaagataccattcagccagctattgattccggcaagggtctgatgttcactcagccgaatcaggctgctggatacatggctaagctgatttgggaatctgtgagcgtgacggtggtagctgcggttgaagcaatgaactggcttaagtctgctgctaagctgctggctgctgaggtcaaagataagaagactggagagattcttcgcaagcgttgcgctgtgcattgggtaactcctgatggtttccctgtgtggcaggaatacaagaagcctattcagacgcgcttgaacctgatgttcctcggtcagttccgcttacagcctaccattaacaccaacaaagatagcgagattgatgcacacaaacaggagtctggtatcgctcctaactttgtacacagccaagacggtagccaccttcgtaagactgtagtgtgggcacacgagaagtacggaatcgaatcttttgcactgattcacgactccttcggtaccattccggctgacgctgcgaacctgttcaaagcagtgcgcgaaactatggttgacacatatgagtcttgtgatgtactggctgatttctacgaccagttcgctgaccagttgcacgagtctcaattggacaaaatgccagcacttccggctaaaggtaacttgaacctccgtgacatcttagagtcggacttcgcgttcgcggatccaaaaaagaagagaaaggta</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712077#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712077#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ggagaaagcttgtttaagggaccacgtgattacaacccgatatcgagcaccatttgtcacttgacgaatgaatctgatgggcacacaacatcgttgtatggtattggatttggtcccttcatcattacaaacaagcacttgtttagaagaaataatggaacactgttggtccaatcactacatggtgtattcaaggtcaagaacaccacgactttgcaacaacacctcattgatgggagggacatgataattattcgcatgcctaaggatttcccaccatttcctcaaaagctgaaatttagagagccacaaagggaagagcgcatatgtcttgtgacaaccaacttccaaacttaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766203#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766203#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements></sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742130#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742130#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>tctcctcttt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712078#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712078#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>aagagcatgtctagcatggtgtcagacaccagttgcacattcccttcatctgatggcatattctggaagcattggattcaaaccaaggatgggcagtgtggcagtccattagtatcaactagagatgggttcattgttggtatacactcagcatcgaatttcaccaacacaaacaattatttcacaagcgtgccgaaaaacttcatggaattgttgacaaatcaggaggcgcagcagtgggttagtggttggcgattaaatgctgactcagtattgtgggggggccataaagttttcatgagcaaacctgaagagccttttcagccagttaaggaagcgactcaactcatgagtgaattggtgtactcgcaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766201#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766201#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>taaggatccgggcccatccaatatcacctgaccttcatctttatgtttttccactggtgtaatgtactctgttgcatcatcaataagcaactgggacgccaataattcataccaacaatcttttcttaatgagttgtttacaaaccccagaggccctaaacctatgtacctcaaagctcggacatcttttttctctaataactttgatataacttttcctttttgttcttctgcctttccactgtcacaacgagaaagtgattccagatatgcgttataacctccccttgtcaacgcgtctttgtcgtggctactctgattagtatgaaataatgaccttaatggcatcgtattttgttaattggcttgttctatgtcatttgctaaattttctctttatttctttactttgccaattcaagataatcttcccttcccagagagaaaaaaggaaaaatttagctatgaaacctcaataagctttttaatacaccaaagattcaagataagagcatagaacgaactgtagaatagtccggatatgttatccaatgcctgccaaaatgcattgtcacacgctgtagtgctcgaataggtgttgcaatccgtcaatatacgtcttgctctgtgggtaaatgtctcgtgcattaagacaggctagtataaacgagaagaagtatcctgctttgcaatgaaacaatagtatccgctaagaatttaagcaggccaacgtccatactgcttaggacctgtgcctggcaagtcgcagattgaagttttttcaaccatgtaaatttcctaattgggtaagtacatgatgaaacacatatgaagaaaaaagctttcctacatattcaagatttttttctgtgggtggaatactatttaaggagtgctattagtatcttatttgacttcaaagcaatacgataccttttcttttcacctgctctggctataattataattggttacttaaaaatgcaccgttaagaaccatatccaagaatcaaaaatgtctgatgcggctccttcattgagcaatctattttatgatccaacgtataatcctggtcaaagcaccattaactacacttccatatatgggaatggatctaccatcactttcgatgagttgcaaggtttagttaacagtactgttactcaggccattatgtttggtgtcagatgtggtgcagctgctttgactttgattgtcatgtggatgacatcgagaagcagaaaaacgccgattttcattatcaaccaagtttcattgtttttaatcattttgcattctgcactctattttaaatatttactgtctaattactcttcagtgacttacgctctcaccggatttcctcagttcatcagtagaggtgacgttcatgtttatggtgctacaaatataattcaagtccttcttgtggcttctattgagacttcactggtgtttcagataaaagttattttcacaggcgacaacttcaaaaggataggtttgatgctgacgtcgatatctttcactttagggattgctacagttaccatgtattttgtaagcgctgttaaaggtatgattgtgacttataatgatgttagtgccacccaagataaatacttcaatgcatccacaattttacttgcatcctcaataaactttatgtcatttgtcctggtagttaaattgattttagctattagatcaagaagattccttggtctcaagcagttcgatagtttccatattttactcataatgtcatgtcaatctttgttggttccatcgataatattcatcctcgcatacagtttggaaccaaaccagggaacagatgtcttgactactgttgcaacattacttgctgtattgtctttaccattatcatcaatgtgggccacggctgctaataatgcatccaaaacaaacacaattacttcagactttacaacatccacagataggttttatccaggcacgctgtctagctttcaaactgatagtatcaacaacgatgctaaaagcagtctcagaagtagattatatgacctatatcctagaaggaaggaaacaacatcggataaacattcggaaagaacttttgtttctgagactgcagatgatatagagaaaaatcagttttatcagttgcccacacctacgagttcaaaaaatactaggataggaccgtttgctgatgcaagttacaaagagggagaagttgaacccgtcgacatgtacactcccgatacggcagctgatgaggaagccagaaagttctggactgaagataataataatttactcgagtctaaaggtgaagaattattcactggtgttgtcccaattttggttgaattagatggtgatgttaatggtcacaaattttctgtctccggtgaaggtgaaggtgatgctacttacggtaaattgaccttaaaatttatttgtactactggtaaattgccagttccatggccaaccttagtcactactttaacttatggtgttcaatgtttttctagatacccagatcatatgaaacaacatgactttttcaagtctgccatgccagaaggttatgttcaagaaagaactatttttttcaaagatgacggtaactacaagaccagagctgaagtcaagtttgaaggtgataccttagttaatagaatcgaattaaaaggtattgattttaaagaagatggtaacattttaggtcacaaattggaatacaactataactctcacaatgtttacatcatggctgacaaacaaaagaatggtatcaaagttaacttcaaaattagacacaacattgaagatggttctgttcaattagctgaccattatcaacaaaatactccaattggtgatggtccagtcttgttaccagacaaccattacttatccactcaatctaggttatccaaagatccaaacgaaaagagagaccacatggtcttgttagaatttgttactgctgctggtattacccatggtatggatgaattgtacaaacccgggggatctggatcgggatctgatccagatttggaaattagagctgcttttttgagacaaagaaatactgctttgagaactgaagttgctgaattggaacaagaagttcaaagattggaaaatgaagtttctcaatatgaaactagatatggtccattgggtggtggtaaataaggatccgcgaatttcttatgatttatgatttttattattaaataagttataaaaaaaaataagtgtatacaaattttaaagtgactcttaggttttaaaacgaaaattcttattcttgagtaactctttcctgtggtcaggttgctttctcaggtatagcatgaggtcgctcttattgaccacacc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742134#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742134#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements></sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766205#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766205#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ctcgag</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I712022#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I712022#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>atgaacacgattaacatcgctaagaacgacttctctgacatcgaactggctgctatcccgttcaacactctggctgaccattacggtgagcgtttagctcgcgaacagttggcccttgagcatgagtcttacgagatgggtgaagcacgcttccgcaagatgtttgagcgtcaacttaaagctggtgaggttgcggataacgctgccgccaagcctctcatcactaccctactccctaagatgattgcacgcatcaacgactggtttgaggaagtgaaagctaagcgcggcaagcgcccgacagccttccagttcctgcaagaaatcaagccggaagccgtagcgtacatcaccattaagaccactctggcttgcctaaccagtgctgacaatacaaccgttcaggctgtagcaagcgcaatcggtcgggccattgaggacgaggctcgcttcggtcgtatccgtgaccttgaagctaagcacttcaagaaaaacgttgaggaacaactcaacaagcgcgtagggcacgtctacaagaaagcatttatgcaagttgtcgaggctgacatgctctctaagggtctactcggtggcgaggcgtggtcttcgtggcataaggaagactctattcatgtaggagtacgctgcatcgagatgctcattgagtcaaccggaatggttagcttacaccgccaaaatgctggcgtagtaggtcaagactctgagactatcgaactcgcacctgaatacgctgaggctatcgcaacccgtgcaggtgcgctggctggcatctctccgatgttccaaccttgcgtagttcctcctaagccgtggactggcattactggtggtggctattgggctaacggtcgtcgtcctctggcgctggtgcgtactcacagtaagaaagcactgatgcgctacgaagacgtttacatgcctgaggtgtacaaagcgattaacattgcgcaaaacaccgcatggaaaatcaacaagaaagtcctagcggtcgccaacgtaatcaccaagtggaagcattgtccggtcgaggacatccctgcgattgagcgtgaagaactcccgatgaaaccggaagacatcgacatgaatcctgaggctctcaccgcgtggaaacgtgctgccgctgctgtgtaccgcaaggacaaggctcgcaagtctcgccgtatcagccttgagttcatgcttgagcaagccaataagtttgctaaccataaggccatctggttcccttacaacatggactggcgcggtcgtgtttacgctgtgtcaatgttcaacccgcaaggtaacgatatgaccaaaggactgcttacgctggcgaaaggtaaaccaatcggtaaggaaggttactactggctgaaaatccacggtgcaaactgtgcgggtgtcgataaggttccgttccctgagcgcatcaagttcattgaggaaaaccacgagaacatcatggcttgcgctaagtctccactggagaacacttggtgggctgagcaagattctccgttctgcttccttgcgttctgctttgagtacgctggggtacagcaccacggcctgagctataactgctcccttccgctggcgtttgacgggtcttgctctggcatccagcacttctccgcgatgctccgagatgaggtaggtggtcgcgcggttaacttgcttcctagtgaaaccgttcaggacatctacgggattgttgctaagaaagtcaacgagattctacaagcagacgcaatcaatgggaccgataacgaagtagttaccgtgaccgatgagaacactggtgaaatctctgagaaagtcaagctgggcactaaggcactggctggtcaatggctggcttacggtgttactcgcagtgtgactaagcgttcagtcatgacgctggcttacgggtccaaagagttcggcttccgtcaacaagtgctggaagataccattcagccagctattgattccggcaagggtctgatgttcactcagccgaatcaggctgctggatacatggctaagctgatttgggaatctgtgagcgtgacggtggtagctgcggttgaagcaatgaactggcttaagtctgctgctaagctgctggctgctgaggtcaaagataagaagactggagagattcttcgcaagcgttgcgctgtgcattgggtaactcctgatggtttccctgtgtggcaggaatacaagaagcctattcagacgcgcttgaacctgatgttcctcggtcagttccgcttacagcctaccattaacaccaacaaagatagcgagattgatgcacacaaacaggagtctggtatcgctcctaactttgtacacagccaagacggtagccaccttcgtaagactgtagtgtgggcacacgagaagtacggaatcgaatcttttgcactgattcacgactccttcggtaccattccggctgacgctgcgaacctgttcaaagcagtgcgcgaaactatggttgacacatatgagtcttgtgatgtactggctgatttctacgaccagttcgctgaccagttgcacgagtctcaattggacaaaatgccagcacttccggctaaaggtaacttgaacctccgtgacatcttagagtcggacttcgcgttcgcggatccaaaaaagaagagaaaggta</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742126#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742126#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>gcaaccattatcaccgccagaggtaaaatagtcaacacgcacggtgtta</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742129#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742129#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>aaataataaaaaagccggattaataatctggctttttatattctct</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I742133#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I742133#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ctcatcgttaaagagcgactacatgaaaccaactacggtaattggtgcaggcttcggtggcctggcactggcaattcgtctacaagctgcggggatccccgtcttactgcttgaacaacgtgataaacccggcggtcgggcttatgtctacgaggatcaggggtttacctttgatgcaggcccgacggttatcaccgatcccagtgccattgaagaactgtttgcactggcaggaaaacagttaaaagagtatgtcgaactgctgccggttacgccgttttaccgcctgtgttgggagtcagggaaggtctttaattacgataacgatcaaacccggctcgaagcgcagattcagcagtttaatccccgcgatgtcgaaggttatcgtcagtttctggactattcacgcgcggtgtttaaagaaggctatctaaagctcggtactgtcccttttttatcgttcagagacatgcttcgcgccgcacctcaactggcgaaactgcaagcatggagaagcgtttacagtaaggttgccagttacatcgaagatgaacatctgcgccaggcgttttctttccactcgctgttggtgggcggcaatcccttcgccacctcatccatttatacgttgatacacgcgctggagcgtgagtggggcgtctggtttccgcgtggcggcaccggcgcattagttcaggggatgataaagctgtttcaggatctgggtggcgaagtcgtgttaaacgccagagtcagccatatggaaacgacaggaaacaagattgaagccgtgcatttagaggacggtcgcaggttcctgacgcaagccgtcgcgtcaaatgcagatgtggttcatacctatcgcgacctgttaagccagcaccctgccgcggttaagcagtccaacaaactgcaaactaagcgcatgagtaactctctgtttgtgctctattttggtttgaatcaccatcatgatcagctcgcgcatcacacggtttgtttcggcccgcgttaccgcgagctgattgacgaaatttttaatcatgatggcctcgcagaggacttctcactttatctgcacgcgccctgtgtcacggattcgtcactggcgcctgaaggttgcggcagttactatgtgttggcgccggtgccgcatttaggcaccgcgaacctcgactggacggttgaggggccaaaactacgcgaccgtatttttgcgtaccttgagcagcattacatgcctggcttacggagtcagctggtcacgcaccggatgtttacgccgtttgattttcgcgaccagcttaatgcctatcatggctcagccttttctgtggagcccgttcttacccagagcgcctggtttcggccgcataaccgcgataaaaccattactaatctctacctggtcggcgcaggcacgcatcccggcgcaggcattcctggcgtcatcggctcggcaaaagcgacagcaggtttgatgctggaggatctgatatgaataatccgtcgttactcaatcatgcggtcgaaacgatggcagttggctcgaaaagttttgcgacagcctcaaagttatttgatgcaaaaacccggcgcagcgtactgatgctctacgcctggtgccgccattgtgacgatgttattgacgatcagacgctgggctttcaggcccggcagcctgccttacaaacgcccgaacaacgtctgatgcaacttgagatgaaaacgcgccaggcctatgcaggatcgcagatgcacgaaccggcgtttgcggcttttcaggaagtggctatggctcatgatatcgccccggcttacgcgtttgatcatctggaaggcttcgccatggatgtacgcgaagcgcaatacagccaactggatgatacgctgcgctattgctatcacgttgcaggcgttgtcggcttgatgatggcgcaaatcatgggcgtgcgggataacgccacgctggaccgcgcctgtgaccttgggctggcatttcagttgaccaatattgctcgcgatattgtggacgatgcgcatgcgggccgctgttatctgccggcaagctggctggagcatgaaggtctgaacaaagagaattatgcggcacctgaaaaccgtcaggcgctgagccgtatcgcccgtcgtttggtgcaggaagcagaaccttactatttgtctgccacagccggcctggcagggttgcccctgcgttccgcctgggcaatcgctacggcgaagcaggtttaccggaaaataggtgtcaaagttgaacaggccggtcagcaagcctgggatcagcggcagtcaacgaccacgcccgaaaaattaacgctgctgctggccgcctctggtcaggcccttacttcccggatgcgggctcatcctccccgccctgcgcatctctggcagcgcccgctctaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766206#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766206#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ctcgag</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://parts.igem.org/Part:BBa_I766204#sequence">
+    <sbol:persistentIdentity rdf:resource="http://parts.igem.org/Part:BBa_I766204#sequence"/>
+    <sbol:displayId>sequence</sbol:displayId>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>atgtctgatgcggctccttcattgagcaatctattttatgatccaacgtataatcctggtcaaagcaccattaactacacttccatatatgggaatggatctaccatcactttcgatgagttgcaaggtttagttaacagtactgttactcaggccattatgtttggtgtcagatgtggtgcagctgctttgactttgattgtcatgtggatgacatcgagaagcagaaaaacgccgattttcattatcaaccaagtttcattgtttttaatcattttgcattctgcactctattttaaatatttactgtctaattactcttcagtgacttacgctctcaccggatttcctcagttcatcagtagaggtgacgttcatgtttatggtgctacaaatataattcaagtccttcttgtggcttctattgagacttcactggtgtttcagataaaagttattttcacaggcgacaacttcaaaaggataggtttgatgctgacgtcgatatctttcactttagggattgctacagttaccatgtattttgtaagcgctgttaaaggtatgattgtgacttataatgatgttagtgccacccaagataaatacttcaatgcatccacaattttacttgcatcctcaataaactttatgtcatttgtcctggtagttaaattgattttagctattagatcaagaagattccttggtctcaagcagttcgatagtttccatattttactcataatgtcatgtcaatctttgttggttccatcgataatattcatcctcgcatacagtttggaaccaaaccagggaacagatgtcttgactactgttgcaacattacttgctgtattgtctttaccattatcatcaatgtgggccacggctgctaataatgcatccaaaacaaacacaattacttcagactttacaacatccacagataggttttatccaggcacgctgtctagctttcaaactgatagtatcaacaacgatgctaaaagcagtctcagaagtagattatatgacctatatcctagaaggaaggaaacaacatcggataaacattcggaaagaacttttgtttctgagactgcagatgatatagagaaaaatcagttttatcagttgcccacacctacgagttcaaaaaatactaggataggaccgtttgctgatgcaagttacaaagagggagaagttgaacccgtcgacatgtacactcccgatacggcagctgatgaggaagccagaaagttctggactgaagataataataattta</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbolhub:UploadData rdf:about="http://sbolhub.org/gen/igem_sbol2_151015212715">
+    <sbol:persistentIdentity rdf:resource="http://sbolhub.org/gen/igem_sbol2_151015212715"/>
+    <sbol:displayId>igem_sbol2_151015212715</sbol:displayId>
+  </sbolhub:UploadData>
+</rdf:RDF>

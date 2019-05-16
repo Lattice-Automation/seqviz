@@ -150,8 +150,7 @@ const withEventRouter = WrappedComp =>
 
         setPartState({
           circularCentralIndex: newCentralIndex,
-          findState: { searchResults: [], searchIndex: 0 },
-          showSearch: false
+          findState: { searchResults: [], searchIndex: 0 }
         });
       }
     };
@@ -254,26 +253,16 @@ const withEventRouter = WrappedComp =>
           break;
         }
         case "Clear": {
-          const {
-            seqSelection: selection,
-            showSearch,
-            setPartState
-          } = this.props;
+          const { seqSelection: selection, setPartState } = this.props;
           const { type: selectionType } = selection;
 
           if (selectionType === "FIND") {
-            if (showSearch) {
-              setPartState({
-                findState: {
-                  searchIndex: 0,
-                  searchResults: []
-                }
-              });
-            } else {
-              setPartState({
-                showSearch: false
-              });
-            }
+            setPartState({
+              findState: {
+                searchIndex: 0,
+                searchResults: []
+              }
+            });
           }
           break;
         }

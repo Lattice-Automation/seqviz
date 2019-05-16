@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:RDF xmlns="http://sbols.org/v1#" xmlns:ns2="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#JPUB_000263">
+        <displayId>JPUB_000263</displayId>
+        <name>pBbS0c-RFP</name>
+        <description>BglBrick vector based on the work of Rachel Krupa w/constitutive RFP cassette</description>
+        <dnaSequence>
+            <DnaSequence ns2:about="public-registry.jbei.org/entry/ds#64614d006a8f3360ab562917eadff8866d8245b7">
+                <nucleotides>ttgacagctagctcagtcctaggtactgtgctagctactagtgaaagaggagaaatactagatggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgctactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttatatactagaagcggccgggatcctaactcgagtaaggatctccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttatacctagggtacgggttttgctgcccgcaaacgggctgttctggtgttgctagtttgttatcagaatcgcagatccggcttcagccggtttgccggctgaaagcgctatttcttccagaattgccatgattttttccccacgggaggcgtcactggctcccgtgttgtcggcagctttgattcgataagcagcatcgcctgtttcaggctgtctatgtgtgactgttgagctgtaacaagttgtctcaggtgttcaatttcatgttctagttgctttgttttactggtttcacctgttctattaggtgttacatgctgttcatctgttacattgtcgatctgttcatggtgaacagctttgaatgcaccaaaaactcgtaaaagctctgatgtatctatcttttttacaccgttttcatctgtgcatatggacagttttccctttgatatgtaacggtgaacagttgttctacttttgtttgttagtcttgatgcttcactgatagatacaagagccataagaacctcagatccttccgtatttagccagtatgttctctagtgtggttcgttgtttttgcgtgagccatgagaacgaaccattgagatcatacttactttgcatgtcactcaaaaattttgcctcaaaactggtgagctgaatttttgcagttaaagcatcgtgtagtgtttttcttagtccgttatgtaggtaggaatctgatgtaatggttgttggtattttgtcaccattcatttttatctggttgttctcaagttcggttacgagatccatttgtctatctagttcaacttggaaaatcaacgtatcagtcgggcggcctcgcttatcaaccaccaatttcatattgctgtaagtgtttaaatctttacttattggtttcaaaacccattggttaagccttttaaactcatggtagttattttcaagcattaacatgaacttaaattcatcaaggctaatctctatatttgccttgtgagttttcttttgtgttagttcttttaataaccactcataaatcctcatagagtatttgttttcaaaagacttaacatgttccagattatattttatgaatttttttaactggaaaagataaggcaatatctcttcactaaaaactaattctaatttttcgcttgagaacttggcatagtttgtccactggaaaatctcaaagcctttaaccaaaggattcctgatttccacagttctcgtcatcagctctctggttgctttagctaatacaccataagcattttccctactgatgttcatcatctgagcgtattggttataagtgaacgataccgtccgttctttccttgtagggttttcaatcgtggggttgagtagtgccacacagcataaaattagcttggtttcatgctccgttaagtcatagcgactaatcgctagttcatttgctttgaaaacaactaattcagacatacatctcaattggtctaggtgattttaatcactataccaattgagatgggctagtcaatgataattactagtccttttcccgggtgatctgggtatctgtaaattctgctagacctttgctggaaaacttgtaaattctgctagaccctctgtaaattccgctagacctttgtgtgttttttttgtttatattcaagtggttataatttatagaataaagaaagaataaaaaaagataaaaagaatagatcccagccctgtgtataactcactactttagtcagttccgcagtattacaaaaggatgtcgcaaacgctgtttgctcctctacaaaacagaccttaaaaccctaaaggcttaagtagcaccctcgcaagctcgggcaaatcgctgaatattccttttgtctccgaccatcaggcacctgagtcgctgtctttttcgtgacattcagttcgctgcgctcacggctctggcagtgaatgggggtaaatggcactacaggcgccttttatggattcatgcaaggaaactacccataatacaagaaaagcccgtcacgggcttctcagggcgttttatggcgggtctgctatgtggtgctatctgactttttgctgttcagcagttcctgccctctgattttccagtctgaccacttcggattatcccgtgacaggtcattcagactggctaatgcacccagtaaggcagcggtatcatcaacaggcttacccgtcttactgtccctagtgcttggattctcaccaataaaaaacgcccggcggcaaccgagcgttctgaacaaatccagatggagttctgaggtcattactggatctatcaacaggagtccaagcgagctcgatatcaaattacgccccgccctgccactcatcgcagtactgttgtaattcattaagcattctgccgacatggaagccatcacaaacggcatgatgaacctgaatcgccagcggcatcagcaccttgtcgccttgcgtataatatttgcccatggtgaaaacgggggcgaagaagttgtccatattggccacgtttaaatcaaaactggtgaaactcacccagggattggctgagacgaaaaacatattctcaataaaccctttagggaaataggccaggttttcaccgtaacacgccacatcttgcgaatatatgtgtagaaactgccggaaatcgtcgtggtattcactccagagcgatgaaaacgtttcagtttgctcatggaaaacggtgtaacaagggtgaacactatcccatatcaccagctcaccgtctttcattgccatacgaaattccggatgagcattcatcaggcgggcaagaatgtgaataaaggccggataaaacttgtgcttatttttctttacggtctttaaaaaggccgtaatatccagctgaacggtctggttataggtacattgagcaactgactgaaatgcctcaaaatgttctttacgatgccattgggatatatcaacggtggtatatccagtgatttttttctccattttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggtagtgatcttatttcattatggtgaaagttggaacctcttacgtgccgatcaacgtctcattttcgccagatatcgaattcatgagatct</nucleotides>
+            </DnaSequence>
+        </dnaSequence>
+        <annotation>
+            <SequenceAnnotation ns2:about="public-registry.jbei.org/entry/sa#54743d04-bf0d-4c48-a940-5ac87cc701f9">
+                <bioStart>1</bioStart>
+                <bioEnd>919</bioEnd>
+                <strand>+</strand>
+                <subComponent>
+                    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#79201890-cffe-4d49-9a37-54d0f9a3d61c">
+                        <ns2:type ns2:resource="http://purl.obolibrary.org/obo/SO_0000704"/>
+                        <displayId>79201890-cffe-4d49-9a37-54d0f9a3d61c</displayId>
+                        <name>RFP cassette</name>
+                    </DnaComponent>
+                </subComponent>
+            </SequenceAnnotation>
+        </annotation>
+        <annotation>
+            <SequenceAnnotation ns2:about="public-registry.jbei.org/entry/sa#d7331b93-48b8-4257-9c0b-f769b0c1c8a9">
+                <bioStart>944</bioStart>
+                <bioEnd>1072</bioEnd>
+                <strand>+</strand>
+                <subComponent>
+                    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#9970e358-5993-4823-a802-384b1df331ec">
+                        <ns2:type ns2:resource="http://purl.obolibrary.org/obo/SO_0000141"/>
+                        <displayId>9970e358-5993-4823-a802-384b1df331ec</displayId>
+                        <name>dbl term</name>
+                    </DnaComponent>
+                </subComponent>
+            </SequenceAnnotation>
+        </annotation>
+        <annotation>
+            <SequenceAnnotation ns2:about="public-registry.jbei.org/entry/sa#69b06de3-2be9-45f4-b699-a3a491f5b5f6">
+                <bioStart>1074</bioStart>
+                <bioEnd>3302</bioEnd>
+                <strand>-</strand>
+                <subComponent>
+                    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#4a660728-778c-4e77-bfac-521264e2afa4">
+                        <ns2:type ns2:resource="http://purl.obolibrary.org/obo/SO_0000296"/>
+                        <displayId>4a660728-778c-4e77-bfac-521264e2afa4</displayId>
+                        <name>pSC101**</name>
+                    </DnaComponent>
+                </subComponent>
+            </SequenceAnnotation>
+        </annotation>
+        <annotation>
+            <SequenceAnnotation ns2:about="public-registry.jbei.org/entry/sa#868513d3-b781-4a2a-af57-5bc02ef91659">
+                <bioStart>3303</bioStart>
+                <bioEnd>3408</bioEnd>
+                <strand>+</strand>
+                <subComponent>
+                    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#d03573a6-5f85-49ad-9af1-827891907a10">
+                        <ns2:type ns2:resource="http://purl.obolibrary.org/obo/SO_0000141"/>
+                        <displayId>d03573a6-5f85-49ad-9af1-827891907a10</displayId>
+                        <name>T0</name>
+                    </DnaComponent>
+                </subComponent>
+            </SequenceAnnotation>
+        </annotation>
+        <annotation>
+            <SequenceAnnotation ns2:about="public-registry.jbei.org/entry/sa#c399ec74-ec3c-4ad7-a18f-17025241f041">
+                <bioStart>3424</bioStart>
+                <bioEnd>4083</bioEnd>
+                <strand>-</strand>
+                <subComponent>
+                    <DnaComponent ns2:about="public-registry.jbei.org/entry/dc#8640bd6e-e142-437a-97a2-f4ac5ff2c6b5">
+                        <ns2:type ns2:resource="http://purl.obolibrary.org/obo/SO_0000704"/>
+                        <displayId>8640bd6e-e142-437a-97a2-f4ac5ff2c6b5</displayId>
+                        <name>CmR</name>
+                    </DnaComponent>
+                </subComponent>
+            </SequenceAnnotation>
+        </annotation>
+    </DnaComponent>
+</ns2:RDF>

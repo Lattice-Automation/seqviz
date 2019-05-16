@@ -44,14 +44,15 @@ export const INSERT_COLORS = [
 ];
 
 // color generator function
-export const genRandomColor = () => {
-  const randIndex = Math.floor(Math.random() * COLORS.length);
-  return COLORS[randIndex];
+export const genRandomColor = (colors = []) => {
+  const choices = colors.length ? colors : COLORS;
+  const randIndex = Math.floor(Math.random() * choices.length);
+  return choices[randIndex];
 };
 
 /** get an "indexed" color from the colors array */
-export const colorByIndex = (i) => COLORS[i % COLORS.length];
+export const colorByIndex = i => COLORS[i % COLORS.length];
 
 /** get an "indexed" color from the colors array */
-export const borderColorByIndex = (i) =>
+export const borderColorByIndex = i =>
   COLOR_BORDER_MAP[COLORS[i % COLORS.length]];

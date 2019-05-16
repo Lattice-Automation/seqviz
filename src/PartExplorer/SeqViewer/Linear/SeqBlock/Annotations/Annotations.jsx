@@ -270,7 +270,7 @@ class AnnotationRow extends React.PureComponent {
 export default class AnnotationRows extends React.PureComponent {
   render() {
     const {
-      Annotations,
+      showAnnotations,
       annotationRows,
       yDiff,
       findXAndWidth,
@@ -284,7 +284,7 @@ export default class AnnotationRows extends React.PureComponent {
       elementHeight
     } = this.props;
 
-    if (!Annotations) return null;
+    if (!showAnnotations) return null;
 
     return (
       <g id="linear-annotations">

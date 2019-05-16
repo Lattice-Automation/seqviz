@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Collection:Bacillus_subtilis">
+    <sbol:displayId>Bacillus_subtilis</sbol:displayId>
+    <dcterms:title>Collection of Bacillus subtilis features</dcterms:title>
+    <dcterms:description>This is a collection of features that have been associated with Bacillus subtilis plasmids downloaded from the SnapGene Resources repository (http://www.snapgene.com).</dcterms:description>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006"/>
+    <sbol:displayId>TcR_006</sbol:displayId>
+    <dcterms:title>TcR-006</dcterms:title>
+    <dcterms:description>confers resistance to tetracycline</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017"/>
+    <sbol:displayId>AmpR_017</sbol:displayId>
+    <dcterms:title>AmpR-017</dcterms:title>
+    <dcterms:description>confers resistance to ampicillin, carbenicillin, and related antibiotics</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001"/>
+    <sbol:displayId>p15A_ori_001</sbol:displayId>
+    <dcterms:title>p15A ori-001</dcterms:title>
+    <dcterms:description>Plasmids containing the medium-copy-number p15A origin of replication can be propagated in E. coli cells</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000296"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:displayId>AmpR_promoter_009</sbol:displayId>
+    <dcterms:title>AmpR promoter-009</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220"/>
+    <sbol:displayId>MCS_220</sbol:displayId>
+    <dcterms:title>MCS-220</dcterms:title>
+    <dcterms:description>multiple cloning site</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000001"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB"/>
+    <sbol:displayId>repB</sbol:displayId>
+    <dcterms:title>repB</dcterms:title>
+    <dcterms:description>from Enterococcus faecalis plasmid pAM-alpha-1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+    <sbol:elements>cgcggaacccctatttgtttatttttctaaatacattcaaatatgtatccgctcatgagacaataaccctgataaatgcttcaataatattgaaaaaggaagagt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TcR-006#seq"/>
+    <sbol:elements>gtgaatacatcctattcacaatcgaatttacgacacaaccaaattttaatttggctttgcattttatctttttttagcgtattaaatgaaatggttttgaacgtctcattacctgatattgcaaatgattttaataaaccacctgcgagtacaaactgggtgaacacagcctttatgttaaccttttccattggaacagctgtatatggaaagctatctgatcaattaggcatcaaaaggttactcctatttggaattataataaattgtttcgggtcggtaattgggtttgttggccattctttcttttccttacttattatggctcgttttattcaaggggctggtgcagctgcatttccagcactcgtaatggttgtagttgcgcgctatattccaaaggaaaataggggtaaagcatttggtcttattggatcgatagtagccatgggagaaggagtcggtccagcgattggtggaatgatagcccattatattcattggtcctatcttctactcattcctatgataacaattatcactgttccgtttcttatgaaattattaaagaaagaagtaaggataaaaggtcattttgatatcaaaggaattatactaatgtctgtaggcattgtattttttatgttgtttacaacatcatatagcatttcttttcttatcgttagcgtgctgtcattcctgatatttgtaaaacatatcaggaaagtaacagatccttttgttgatcccggattagggaaaaatataccttttatgattggagttctttgtgggggaattatatttggaacagtagcagggtttgtctctatggttccttatatgatgaaagatgttcaccagctaagtactgccgaaatcggaagtgtaattattttccctggaacaatgagtgtcattattttcggctacattggtgggatacttgttgatagaagaggtcctttatacgtgttaaacatcggagttacatttctttctgttagctttttaactgcttcctttcttttagaaacaacatcatggttcatgacaattataatcgtatttgttttaggtgggctttcgttcaccaaaacagttatatcaacaattgtttcaagtagcttgaaacagcaggaagctggtgctggaatgagtttgcttaactttaccagctttttatcagagggaacaggtattgcaattgtaggtggtttattatccatacccttacttgatcaaaggttgttacctatggaagttgatcagtcaacttatctgtatagtaatttgttattacttttttcaggaatcattgtcattagttggctggttaccttgaatgtatataaacattctcaaagggatttctaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:p15A_ori-001#seq"/>
+    <sbol:elements>ttgagatcgttttggtctgcgcgtaatctcttgctctgaaaacgaaaaaaccgccttgcagggaggtttttcgaaggttctctgagctaccaactctttgaaccgaggtaactggcttgcaggagcgcagtcaccaaaacttgtcctttcagtttagccttaaccggcgcatgacttcaagactaactcctctaaatcaattaccagtggctgctgccagtggtgcttttgcatgtctttccgggttggactcaagacgatagttaccggataaggcgcagcggtcggactgaacggggggttcgtgcatacagtccagcttggagcgaactgcctacccggaactgagtgtcaggcgtggaatgagacaaacgcggccataacagcggaatgacaccggtaaaccgaaaggcaggaacaggagagcgcacgagggagccgccagggggaaacgcctggtatctttatagtcctgtcgggtttcgccaccactgatttgagcgtcagatttcgtgatgcttgtcagggggcggagcctatggaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-017#seq"/>
+    <sbol:elements>atgagtattcaacatttccgtgtcgcccttattcccttttttgcggcattttgccttcctgtttttgctcacccagaaacgctggtgaaagtaaaagatgctgaagatcagttgggtgcacgagtgggttacatcgaactggatctcaacagcggtaagatccttgagagttttcgccccgaagaacgttttccaatgatgagcacttttaaagttctgctatgtggcgcggtattatcccgtgttgacgccgggcaagagcaactcggtcgccgcatacactattctcagaatgacttggttgagtactcaccagtcacagaaaagcatcttacggatggcatgacagtaagagaattatgcagtgctgccataaccatgagtgataacactgcggccaacttacttctgacaacgatcggaggaccgaaggagctaaccgcttttttgcacaacatgggggatcatgtaactcgccttgatcgttgggaaccggagctgaatgaagccataccaaacgacgagcgtgacaccacgatgcctgcagcaatggcaacaacgttgcgcaaactattaactggcgaactacttactctagcttcccggcaacaattaatagactggatggaggcggataaagttgcaggaccacttctgcgctcggcccttccggctggctggtttattgctgataaatctggagccggtgagcgtgggtctcgcggtatcattgcagcactggggccagatggtaagccctcccgtatcgtagttatctacacgacggggagtcaggcaactatggatgaacgaaatagacagatcgctgagataggtgcctcactgattaagcattggtaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:repB#seq"/>
+    <sbol:elements>atgggggtttcttttaatattatgtgtcctaatagtagcatttattcagatgaaaaatcaagggttttagtggacaagacaaaaagtggaaaagtgagaccatggagagaaaagaaaatcgctaatgttgattactttgaacttctgcatattcttgaatttaaaaaggctgaaagagtaaaagattgtgctgaaatattagagtataaacaaaatcgtgaaacaggcgaaagaaagttgtatcgagtgtggttttgtaaatccaggctttgtccaatgtgcaactggaggagagcaatgaaacatggcattcagtcacaaaaggttgttgctgaagttattaaacaaaagccaacagttcgttggttgtttctcacattaacagttaaaaatgtttatgatggcgaagaattaaataagagtttgtcagatatggctcaaggatttcgccgaatgatgcaatataaaaaaattaataaaaatcttgttggttttatgcgtgcaacggaagtgacaataaataataaagataattcttataatcagcacatgcatgtattggtatgtgtggaaccaacttattttaagaatacagaaaactacgtgaatcaaaaacaatggattcaattttggaaaaaggcaatgaaattagactatgatccaaatgtaaaagttcaaatgattcgaccgaaaaataaatataaatcggatatacaatcggcaattgacgaaactgcaaaatatcctgtaaaggatacggattttatgaccgatgatgaagaaaagaatttgaaacgtttgtctgatttggaggaaggtttacaccgtaaaaggttaatctcctatggtggtttgttaaaagaaatacataaaaaattaaaccttgatgacacagaagaaggcgatttgattcatacagatgatgacgaaaaagccgatgaagatggattttctattattgcaatgtggaattgggaacggaaaaattattttattaaagagtag</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:MCS-220#seq"/>
+    <sbol:elements>aagcttctagagatctgcaggtcgacggatccccgggaattc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

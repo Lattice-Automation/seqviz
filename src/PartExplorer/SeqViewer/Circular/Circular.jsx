@@ -19,8 +19,8 @@ class Circular extends React.PureComponent {
      * given the incoming zoom property, calculate the "lineHeight", which is
      * the height of each row (used as a differential in radius usually)
      */
-    const calcLineHeight = Zoom => Math.max((Zoom / 100.0) * 3, 1) * 14;
-    const lineHeight = calcLineHeight(nextProps.Zoom);
+    const calcLineHeight = zoom => Math.max((zoom / 100.0) * 3, 1) * 14;
+    const lineHeight = calcLineHeight(nextProps.zoom.circular);
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
       nextProps.seq.length
@@ -114,15 +114,12 @@ class Circular extends React.PureComponent {
    * @return {Coor}
    */
   findCoor = (index, radius, rotate = false) => {
-    const { center, circularCentralIndex, hideHeader } = this.props;
+    const { center, circularCentralIndex } = this.props;
     const { seqLength } = this.state;
-
-    const rotatedIndex =
-      rotate && !hideHeader ? index - circularCentralIndex : index;
+    const rotatedIndex = rotate ? index - circularCentralIndex : index;
     const lengthPerc = rotatedIndex / seqLength;
     const lengthPercCentered = lengthPerc - 0.25;
     const radians = lengthPercCentered * Math.PI * 2;
-
     const xAdjust = Math.cos(radians) * radius;
     const yAdjust = Math.sin(radians) * radius;
 
@@ -180,8 +177,7 @@ class Circular extends React.PureComponent {
     sweepFWD = false,
     arrowFWD = false,
     arrowREV = false,
-    offset = 0,
-    isInsert = false
+    offset = 0
   }) => {
     const { radius } = this.props;
     const { seqLength, lineHeight } = this.state;
@@ -237,9 +233,9 @@ class Circular extends React.PureComponent {
 
   render() {
     const {
-      Annotations: showAnnotations,
-      Axis: showAxis,
-      Zoom,
+      showAnnotations,
+      showIndex,
+      zoom,
       name,
       inputRef,
       mouseEvent,
@@ -251,24 +247,8 @@ class Circular extends React.PureComponent {
       size,
 
       seq,
-      compSeq,
-
-      showSearch,
-      seqSelection,
-      findState,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
+      compSeq
     } = this.props;
-
-    const partState = {
-      showSearch,
-      seqSelection,
-      findState,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
-    };
 
     const {
       seqLength,
@@ -282,7 +262,7 @@ class Circular extends React.PureComponent {
 
     // general values/functions used in many/all children
     const general = {
-      Zoom,
+      zoom,
       radius,
       center,
       lineHeight,
@@ -292,10 +272,8 @@ class Circular extends React.PureComponent {
       generateArc,
       rotateCoor,
       inputRef,
-      resizing,
-      ...partState
+      resizing
     };
-
     // adjust lineHeight so everything will fit at max zoom
     // eq of a line between (0, lineHeight), (100, height / totalRows)
     let vAdjust = 0;
@@ -316,14 +294,16 @@ class Circular extends React.PureComponent {
       >
         <g id="circular-root" transform={`translate(0, ${yDiff + vAdjust})`}>
           <Selection
+            {...this.props}
             {...general}
             id={selectionId}
             onUnmount={onUnMount}
             totalRows={4}
             seq={seq}
           />
-          {showAxis && (
+          {showIndex && (
             <Index
+              {...this.props}
               {...general}
               name={name}
               size={size}
@@ -333,9 +313,10 @@ class Circular extends React.PureComponent {
               totalRows={4}
             />
           )}
-          <CircularFind {...general} selectionRows={4} />
+          <CircularFind {...this.props} {...general} selectionRows={4} />
           {showAnnotations && (
             <Annotations
+              {...this.props}
               {...general}
               annotations={annotationsInRows}
               size={size}
@@ -345,6 +326,7 @@ class Circular extends React.PureComponent {
           )}
           {!resizing && (
             <Labels
+              {...this.props}
               {...general}
               labels={outerLabels}
               size={size}

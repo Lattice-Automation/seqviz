@@ -1,5 +1,6 @@
 import { isEqual } from "lodash";
 import * as React from "react";
+import { calcGC, calcTm } from "../../../Utils/sequence";
 
 /**
  * an HOC dedicated to handling range selection for the LinearSeq viewer
@@ -117,6 +118,23 @@ const withSelectionHandler = WrappedComp =>
       return 0;
     };
 
+    getSelectionSequence = (start, end, clock) => {
+      const { seq } = this.props;
+      if (end < start && !clock) {
+        return seq.substring(end, start);
+      }
+      if (end > start && !clock) {
+        return seq.substring(end, seq.length) + seq.substring(0, start);
+      }
+      if (end > start && clock) {
+        return seq.substring(start, end);
+      }
+      if (end < start && clock) {
+        return seq.substring(start, seq.length) + seq.substring(0, end);
+      }
+      return "";
+    };
+
     /**
      * in a linear sequence viewer, given the bounding box of a component, the basepairs
      * by SeqBlock and the position of the mouse event, find the current base
@@ -223,12 +241,21 @@ const withSelectionHandler = WrappedComp =>
         searchIndex: newSearchIndex = null,
         feature
       } = selectRange;
-      const newSelection = {
-        type,
-        ref,
-        clockwise,
+      const selectionLength = this.calcSelectionLength(start, end, clockwise);
+      const selectionSequence = this.getSelectionSequence(
         start,
         end,
+        clockwise
+      );
+      const sequence = selectionSequence;
+      const GC = calcGC(selectionSequence);
+      const Tm = calcTm(selectionSequence);
+      const sequenceMeta = { sequence, GC, Tm };
+      const selectionMeta = { type, start, end, selectionLength, clockwise };
+      const newSelection = {
+        ref,
+        sequenceMeta,
+        selectionMeta,
         feature
       };
       const findStateIndex =
@@ -260,8 +287,7 @@ const withSelectionHandler = WrappedComp =>
         seq,
         annotations,
         Linear,
-        findState: { searchResults },
-        setPartState
+        findState: { searchResults }
       } = this.props;
 
       if (!this.allowSetSelection) return;

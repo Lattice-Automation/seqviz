@@ -1,0 +1,47 @@
+LOCUS       Exported                 947 bp ds-DNA     linear   UNA 25-JUL-2014
+DEFINITION  natural linear DNA
+ACCESSION   .
+VERSION     .
+KEYWORDS    CCR5_multifrag_insert1
+SOURCE      natural DNA sequence
+  ORGANISM  unspecified
+REFERENCE   1  (bases 1 to 947)
+  AUTHORS   Clontech
+  TITLE     Direct Submission
+  JOURNAL   Exported Friday, Apr 29, 2016 from SnapGene 3.1.2
+            http://www.snapgene.com
+FEATURES             Location/Qualifiers
+     source          1..947
+                     /organism="unspecified"
+                     /mol_type="genomic DNA"
+     misc_feature    1..12
+                     /note="20bp overlap"
+     misc_feature    1..10
+                     /note="15bp overlap"
+     misc_feature    1..8
+                     /note="MCS1"
+                     /note="pUC18/19 multiple cloning site"
+     misc_feature    9..947
+                     /note="L-arm"
+     misc_feature    941..947
+                     /note="20bp overlap"
+     misc_feature    943..947
+                     /note="15bp overlap"
+ORIGIN
+        1 ggggatccat ggtcttgtct tttaattctc ttttcgagga ctgagaggga gggtagcatg
+       61 gtagttaaga gtgcaggctt cccgcattca aaatcggttg cttactagct gtgtggcttt
+      121 gagcaagtta ctcaccctct ctgtgcttca aggtccttgt ctgcaaaatg tgaaaaatat
+      181 ttcctgcctc ataaggttgc cctaaggatt aaatgaatga atgggtatga tgcttagaac
+      241 agtgattggc atccagtatg tgccctcgag gcctcttaat tattactggc ttgctcatag
+      301 tgcatgttct ttgtgggcta actctagcgt caataaaaat gttaagactg agttgcagcc
+      361 gggcatggtg gctcatgcct gtaatcccag cattctagga ggctgaggca ggaggatcgc
+      421 ttgagcccag gagttcgaga ccagcctggg caacatagtg tgatcttgta tctataaaaa
+      481 taaacaaaat tagcttggtg tggtggcgcc tgtagtcccc agccacttgg aggggtgagg
+      541 tgagaggatt gcttgagccc gggatggtcc aggctgcagt gagccatgat cgtgccactg
+      601 cactccagcc tgggcgacag agtgagaccc tgtctcacaa caacaacaac aacaacaaaa
+      661 aggctgagct gcaccatgct tgacccagtt tcttaaaatt gttgtcaaag cttcattcac
+      721 tccatggtgc tatagagcac aagattttat ttggtgagat ggtgctttca tgaattcccc
+      781 caacagagcc aagctctcca tctagtggac agggaagcta gcagcaaacc ttcccttcac
+      841 tacaaaactt cattgcttgg ccaaaaagag agttaattca atgtagacat ctatgtaggc
+      901 aattaaaaac ctattgatgt ataaaacagt ttgcattcat ggagggc
+//

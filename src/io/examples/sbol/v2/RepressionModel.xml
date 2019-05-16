@@ -1,0 +1,908 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ModuleDefinition rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit"/>
+    <sbol:displayId>CRPb_characterization_Circuit</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b"/>
+        <sbol:displayId>cas9m_BFP_gRNA_b</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gRNA_b/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP"/>
+        <sbol:displayId>EYFP</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/EYFP/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gene"/>
+        <sbol:displayId>cas9m_BFP_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate"/>
+        <sbol:displayId>mKate</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/mKate/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16"/>
+        <sbol:displayId>Gal4VP16</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_gene"/>
+        <sbol:displayId>EYFP_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP"/>
+        <sbol:displayId>cas9m_BFP</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_gene"/>
+        <sbol:displayId>gRNA_b_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_gene"/>
+        <sbol:displayId>mKate_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b"/>
+        <sbol:displayId>gRNA_b</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_gene"/>
+        <sbol:displayId>Gal4VP16_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/1.0"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#private"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_deg"/>
+        <sbol:displayId>Gal4VP16_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_deg/Gal4VP16/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_deg/Gal4VP16"/>
+            <sbol:displayId>Gal4VP16</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation"/>
+        <sbol:displayId>EYFP_Activation</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000170"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation/EYFP_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation/EYFP_gene"/>
+            <sbol:displayId>EYFP_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation/Gal4VP16/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_Activation/Gal4VP16"/>
+            <sbol:displayId>Gal4VP16</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000459"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_deg"/>
+        <sbol:displayId>gRNA_b_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_deg/gRNA_b/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_deg/gRNA_b"/>
+            <sbol:displayId>gRNA_b</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production"/>
+        <sbol:displayId>mKate_production</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production/mKate_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production/mKate_gene"/>
+            <sbol:displayId>mKate_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production/mKate/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_production/mKate"/>
+            <sbol:displayId>mKate</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_deg"/>
+        <sbol:displayId>cas9m_BFP_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_deg/cas9m_BFP/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_deg/cas9m_BFP"/>
+            <sbol:displayId>cas9m_BFP</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production"/>
+        <sbol:displayId>cas9m_BFP_production</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production/cas9m_BFP_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production/cas9m_BFP_gene"/>
+            <sbol:displayId>cas9m_BFP_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production/cas9m_BFP/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_production/cas9m_BFP"/>
+            <sbol:displayId>cas9m_BFP</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production"/>
+        <sbol:displayId>gRNA_b_production</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production/gRNA_b_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production/gRNA_b_gene"/>
+            <sbol:displayId>gRNA_b_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production/gRNA_b/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b_production/gRNA_b"/>
+            <sbol:displayId>gRNA_b</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b_deg"/>
+        <sbol:displayId>cas9m_BFP_gRNA_b_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b_deg/cas9m_BFP_gRNA_b/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b_deg/cas9m_BFP_gRNA_b"/>
+            <sbol:displayId>cas9m_BFP_gRNA_b</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_deg"/>
+        <sbol:displayId>mKate_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_deg/mKate/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate_deg/mKate"/>
+            <sbol:displayId>mKate</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/mKate/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_deg/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_deg"/>
+        <sbol:displayId>EYFP_deg</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_deg/EYFP/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_deg/EYFP"/>
+            <sbol:displayId>EYFP</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production"/>
+        <sbol:displayId>Gal4VP16_production</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production/Gal4VP16_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production/Gal4VP16_gene"/>
+            <sbol:displayId>Gal4VP16_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production/Gal4VP16/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16_production/Gal4VP16"/>
+            <sbol:displayId>Gal4VP16</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/Gal4VP16/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:module>
+      <sbol:Module rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template"/>
+        <sbol:displayId>CRISPR_Template</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/1.0"/>
+        <sbol:mapsTo>
+          <sbol:MapsTo rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/cas9m_BFP_map/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/cas9m_BFP_map"/>
+            <sbol:displayId>cas9m_BFP_map</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:refinement rdf:resource="http://sbols.org/v2#useLocal"/>
+            <sbol:remote rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_generic/1.0"/>
+            <sbol:local rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP/1.0"/>
+          </sbol:MapsTo>
+        </sbol:mapsTo>
+        <sbol:mapsTo>
+          <sbol:MapsTo rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/gRNA_b_map/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/gRNA_b_map"/>
+            <sbol:displayId>gRNA_b_map</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:refinement rdf:resource="http://sbols.org/v2#useLocal"/>
+            <sbol:remote rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/gRNA_generic/1.0"/>
+            <sbol:local rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/gRNA_b/1.0"/>
+          </sbol:MapsTo>
+        </sbol:mapsTo>
+        <sbol:mapsTo>
+          <sbol:MapsTo rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/EYFP_gene_map/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/EYFP_gene_map"/>
+            <sbol:displayId>EYFP_gene_map</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:refinement rdf:resource="http://sbols.org/v2#useLocal"/>
+            <sbol:remote rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene/1.0"/>
+            <sbol:local rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP_gene/1.0"/>
+          </sbol:MapsTo>
+        </sbol:mapsTo>
+        <sbol:mapsTo>
+          <sbol:MapsTo rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/cas9m_BFP_gRNA_map/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/cas9m_BFP_gRNA_map"/>
+            <sbol:displayId>cas9m_BFP_gRNA_map</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:refinement rdf:resource="http://sbols.org/v2#useLocal"/>
+            <sbol:remote rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_gRNA_complex/1.0"/>
+            <sbol:local rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/cas9m_BFP_gRNA_b/1.0"/>
+          </sbol:MapsTo>
+        </sbol:mapsTo>
+        <sbol:mapsTo>
+          <sbol:MapsTo rdf:about="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/EYFP_map/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/CRISPR_Template/EYFP_map"/>
+            <sbol:displayId>EYFP_map</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:refinement rdf:resource="http://sbols.org/v2#useLocal"/>
+            <sbol:remote rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target/1.0"/>
+            <sbol:local rdf:resource="http://sbols.org/CRISPR_Example/CRPb_characterization_Circuit/EYFP/1.0"/>
+          </sbol:MapsTo>
+        </sbol:mapsTo>
+      </sbol:Module>
+    </sbol:module>
+  </sbol:ModuleDefinition>
+  <sbol:ModuleDefinition rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template"/>
+    <sbol:displayId>CRISPR_Template</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_generic/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_generic"/>
+        <sbol:displayId>cas9_generic</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9_generic"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target"/>
+        <sbol:displayId>target</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/target"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_gRNA_complex/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_gRNA_complex"/>
+        <sbol:displayId>cas9_gRNA_complex</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9_gRNA_complex"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene"/>
+        <sbol:displayId>target_gene</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/target_gene"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/gRNA_generic/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/gRNA_generic"/>
+        <sbol:displayId>gRNA_generic</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/gRNA_generic"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition"/>
+        <sbol:displayId>target_gene_inhibition</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition/cas9_gRNA_complex/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition/cas9_gRNA_complex"/>
+            <sbol:displayId>cas9_gRNA_complex</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000020"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_gRNA_complex/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition/target_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene_inhibition/target_gene"/>
+            <sbol:displayId>target_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation"/>
+        <sbol:displayId>cas9_complex_formation</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000177"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/cas9_gRNA_complex/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/cas9_gRNA_complex"/>
+            <sbol:displayId>cas9_gRNA_complex</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_gRNA_complex/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/cas9_generic/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/cas9_generic"/>
+            <sbol:displayId>cas9_generic</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_generic/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/gRNA_generic/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/cas9_complex_formation/gRNA_generic"/>
+            <sbol:displayId>gRNA_generic</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000010"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/gRNA_generic/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production"/>
+        <sbol:displayId>target_production</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production/target/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production/target"/>
+            <sbol:displayId>target</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000011"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production/target_gene/1.0">
+            <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_production/target_gene"/>
+            <sbol:displayId>target_gene</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:participant rdf:resource="http://sbols.org/CRISPR_Example/CRISPR_Template/target_gene/1.0"/>
+          </sbol:Participation>
+        </sbol:participation>
+      </sbol:Interaction>
+    </sbol:interaction>
+  </sbol:ModuleDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_gRNA_b/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gRNA_b"/>
+    <sbol:displayId>cas9m_BFP_gRNA_b</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Complex"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP"/>
+    <sbol:displayId>cas9m_BFP</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/pConst/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/pConst"/>
+    <sbol:displayId>pConst</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/target_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/target_gene"/>
+    <sbol:displayId>target_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/mKate/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate"/>
+    <sbol:displayId>mKate</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/gRNA_generic/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_generic"/>
+    <sbol:displayId>gRNA_generic</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#RnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001998"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16"/>
+    <sbol:displayId>Gal4VP16</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16_cds/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_cds"/>
+    <sbol:displayId>Gal4VP16_cds</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene"/>
+    <sbol:displayId>cas9m_BFP_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/pConst/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/pConst"/>
+        <sbol:displayId>pConst</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/pConst"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/cas9m_BFP_cds/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/cas9m_BFP_cds"/>
+        <sbol:displayId>cas9m_BFP_cds</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_cds"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/cas9m_BFP_gene_constraint/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/cas9m_BFP_gene_constraint"/>
+        <sbol:displayId>cas9m_BFP_gene_constraint</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/pConst/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_gene/cas9m_BFP_cds/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/mKate_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene"/>
+    <sbol:displayId>mKate_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/mKate_gene/pConst/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/pConst"/>
+        <sbol:displayId>pConst</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/pConst"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/mKate_gene/mKate_cds/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/mKate_cds"/>
+        <sbol:displayId>mKate_cds</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/mKate_cds"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/mKate_gene/mKate_gene_constraint/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/mKate_gene_constraint"/>
+        <sbol:displayId>mKate_gene_constraint</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/pConst/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/mKate_gene/mKate_cds/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/EYFP_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene"/>
+    <sbol:displayId>EYFP_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/EYFP_gene/EYFP_cds/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/EYFP_cds"/>
+        <sbol:displayId>EYFP_cds</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/EYFP_cds"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/EYFP_gene/CRP_b/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/CRP_b"/>
+        <sbol:displayId>CRP_b</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/CRP_b"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/EYFP_gene/EYFP_gene_constraint/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/EYFP_gene_constraint"/>
+        <sbol:displayId>EYFP_gene_constraint</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/CRP_b/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/EYFP_gene/EYFP_cds/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/EYFP_cds/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP_cds"/>
+    <sbol:displayId>EYFP_cds</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/CRP_b/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRP_b"/>
+    <sbol:displayId>CRP_b</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://sbols.org/CRISPR_Example/CRP_b_seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/mKate_cds/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_cds"/>
+    <sbol:displayId>mKate_cds</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://sbols.org/CRISPR_Example/mKate_seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene"/>
+    <sbol:displayId>gRNA_b_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_nc/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_nc"/>
+        <sbol:displayId>gRNA_b_nc</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_nc"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/CRa_U6/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/CRa_U6"/>
+        <sbol:displayId>CRa_U6</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/CRa_U6"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_terminator/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_terminator"/>
+        <sbol:displayId>gRNA_b_terminator</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_terminator"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_gene_constraint1/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_gene_constraint1"/>
+        <sbol:displayId>gRNA_b_gene_constraint1</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/CRa_U6/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_nc/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_gene_constraint2/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_gene_constraint2"/>
+        <sbol:displayId>gRNA_b_gene_constraint2</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_nc/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_gene/gRNA_b_terminator/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/target/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/target"/>
+    <sbol:displayId>target</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/gRNA_b/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b"/>
+    <sbol:displayId>gRNA_b</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#RnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001998"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9m_BFP_cds/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9m_BFP_cds"/>
+    <sbol:displayId>cas9m_BFP_cds</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/CRa_U6/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRa_U6"/>
+    <sbol:displayId>CRa_U6</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://sbols.org/CRISPR_Example/CRa_U6_seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9_generic/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9_generic"/>
+    <sbol:displayId>cas9_generic</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16_gene/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene"/>
+    <sbol:displayId>Gal4VP16_gene</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16_gene/pConst/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/pConst"/>
+        <sbol:displayId>pConst</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/pConst"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16_gene/Gal4VP16_cds/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/Gal4VP16_cds"/>
+        <sbol:displayId>Gal4VP16_cds</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_cds"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://sbols.org/CRISPR_Example/Gal4VP16_gene/GAL4VP16_gene_constraint/1.0">
+        <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/GAL4VP16_gene_constraint"/>
+        <sbol:displayId>GAL4VP16_gene_constraint</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/pConst/1.0"/>
+        <sbol:object rdf:resource="http://sbols.org/CRISPR_Example/Gal4VP16_gene/Gal4VP16_cds/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/cas9_gRNA_complex/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/cas9_gRNA_complex"/>
+    <sbol:displayId>cas9_gRNA_complex</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Complex"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_terminator/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_terminator"/>
+    <sbol:displayId>gRNA_b_terminator</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/EYFP/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/EYFP"/>
+    <sbol:displayId>EYFP</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_nc/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_nc"/>
+    <sbol:displayId>gRNA_b_nc</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://sbols.org/CRISPR_Example/CRa_U6_seq/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRa_U6_seq"/>
+    <sbol:displayId>CRa_U6_seq</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:elements>GGTTTACCGAGCTCTTATTGGTTTTCAAACTTCATTGACTGTGCCAAGGTCGGGCAGGAAGAGGGCCTATTTCCCATGATTCCTTCATATTTGCATATACGATACAAGGCTGTTAGAGAGATAATTAGAATTAATTTGACTGTAAACACAAAGATATTAGTACAAAATACGTGACGTAGAAAGTAATAATTTCTTGGGTAGTTTGCAGTTTTAAAATTATGTTTTAAAATGGACTATCATATGCTTACCGTAACTTGAAATATAGAACCGATCCTCCCATTGGTATATATTATAGAACCGATCCTCCCATTGGCTTGTGGAAAGGACGAAACACCGTACCTCATCAGGAACATGTGTTTAAGAGCTATGCTGGAAACAGCAGAAATAGCAAGTTTAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGCTTTTTTTGGTGCGTTTTTATGCTTGTAGTATTGTATAATGTTTTT</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://sbols.org/CRISPR_Example/CRP_b_seq/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/CRP_b_seq"/>
+    <sbol:displayId>CRP_b_seq</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:elements>GCTCCGAATTTCTCGACAGATCTCATGTGATTACGCCAAGCTACGGGCGGAGTACTGTCCTCCGAGCGGAGTACTGTCCTCCGAGCGGAGTACTGTCCTCCGAGCGGAGTACTGTCCTCCGAGCGGAGTTCTGTCCTCCGAGCGGAGACTCTAGATACCTCATCAGGAACATGTTGGAATTCTAGGCGTGTACGGTGGGAGGCCTATATAAGCAGAGCTCGTTTAGTGAACCGTCAGATCGCCTCGAGTACCTCATCAGGAACATGTTGGATCCAATTCGACC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://sbols.org/CRISPR_Example/gRNA_b_seq/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/gRNA_b_seq"/>
+    <sbol:displayId>gRNA_b_seq</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:elements>AAGGTCGGGCAGGAAGAGGGCCTATTTCCCATGATTCCTTCATATTTGCATATACGATACAAGGCTGTTAGAGAGATAATTAGAATTAATTTGACTGTAAACACAAAGATATTAGTACAAAATACGTGACGTAGAAAGTAATAATTTCTTGGGTAGTTTGCAGTTTTAAAATTATGTTTTAAAATGGACTATCATATGCTTACCGTAACTTGAAAGTATTTCGATTTCTTGGCTTTATATATCTTGTGGAAAGGACGAAACACCGTACCTCATCAGGAACATGTGTTTAAGAGCTATGCTGGAAACAGCAGAAATAGCAAGTTTAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGCTTTTTTT</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://sbols.org/CRISPR_Example/mKate_seq/1.0">
+    <sbol:persistentIdentity rdf:resource="http://sbols.org/CRISPR_Example/mKate_seq"/>
+    <sbol:displayId>mKate_seq</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:elements>TCTAAGGGCGAAGAGCTGATTAAGGAGAACATGCACATGAAGCTGTACATGGAGGGCACCGTGAACAACCACCACTTCAAGTGCACATCCGAGGGCGAAGGCAAGCCCTACGAGGGCACCCAGACCATGAGAATCAAGGTGGTCGAGGGCGGCCCTCTCCCCTTCGCCTTCGACATCCTGGCTACCAGCTTCATGTACGGCAGCAAAACCTTCATCAACCACACCCAGGGCATCCCCGACTTCTTTAAGCAGTCCTTCCCTGAGGTAAGTGGTCCTACCTCATCAGGAACATGTGTTTTAGAGCTAGAAATAGCAAGTTAAAATAAGGCTAGTCCGTTATCAACTTGAAAAAGTGGCACCGAGTCGGTGCTACTAACTCTCGAGTCTTCTTTTTTTTTTTCACAGGGCTTCACATGGGAGAGAGTCACCACATACGAAGACGGGGGCGTGCTGACCGCTACCCAGGACACCAGCCTCCAGGACGGCTGCCTCATCTACAACGTCAAGATCAGAGGGGTGAACTTCCCATCCAACGGCCCTGTGATGCAGAAGAAAACACTCGGCTGGGAGGCCTCCACCGAGATGCTGTACCCCGCTGACGGCGGCCTGGAAGGCAGAAGCGACATGGCCCTGAAGCTCGTGGGCGGGGGCCACCTGATCTGCAACTTGAAGACCACATACAGATCCAAGAAACCCGCTAAGAACCTCAAGATGCCCGGCGTCTACTATGTGGACAGAAGACTGGAAAGAATCAAGGAGGCCGACAAAGAGACCTACGTCGAGCAGCACGAGGTGGCTGTGGCCAGATACTGCG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:prov="http://www.w3.org/ns/prov#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v2#"
+   xmlns:sys-bio="http://sys-bio.org#">
+  <prov:Activity rdf:about="http://sys-bio.org/Activity/build_generation/1.0.0">
+    <sbol:displayId>build_generation</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/build_generation"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://sys-bio.org/Activity/build_generation/build_generation_association/1.0.0">
+        <sbol:displayId>build_generation_association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/build_generation/build_generation_association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:agent rdf:resource="mailto:jdoe@sbols.org"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#build"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sys-bio.org/Activity/build_generation/design_usage/1.0.0">
+        <sbol:displayId>design_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/build_generation/design_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://sys-bio.org/ModuleDefinition/design/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#design"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://sys-bio.org/Activity/design_generation/1.0.0">
+    <sbol:displayId>design_generation</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/design_generation"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://sys-bio.org/Activity/design_generation/design_generation_association/1.0.0">
+        <sbol:displayId>design_generation_association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/design_generation/design_generation_association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:agent rdf:resource="http://www.async.ece.utah.edu/ibiosim"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#design"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sys-bio.org/Activity/design_generation/predicted_usage/1.0.0">
+        <sbol:displayId>predicted_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/design_generation/predicted_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://sys-bio.org/Model/predicted/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#learn"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://sys-bio.org/Activity/fit_model_generation/1.0.0">
+    <sbol:displayId>fit_model_generation</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/fit_model_generation"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://sys-bio.org/Activity/fit_model_generation/fit_model_generation_association/1.0.0">
+        <sbol:displayId>fit_model_generation_association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/fit_model_generation/fit_model_generation_association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:agent rdf:resource="mailto:jschmoe@sbols.org"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#learn"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sys-bio.org/Activity/fit_model_generation/raw_data_usage/1.0.0">
+        <sbol:displayId>raw_data_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/fit_model_generation/raw_data_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://sys-bio.org/Attachment/raw_data/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#test"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+  <prov:Activity rdf:about="http://sys-bio.org/Activity/raw_data_generation/1.0.0">
+    <sbol:displayId>raw_data_generation</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/raw_data_generation"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:qualifiedAssociation>
+      <prov:Association rdf:about="http://sys-bio.org/Activity/raw_data_generation/raw_data_generation_association/1.0.0">
+        <sbol:displayId>raw_data_generation_association</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/raw_data_generation/raw_data_generation_association"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:agent rdf:resource="http://sys-bio.org/plate_reader_1"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#test"/>
+      </prov:Association>
+    </prov:qualifiedAssociation>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sys-bio.org/Activity/raw_data_generation/build_usage/1.0.0">
+        <sbol:displayId>build_usage</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Activity/raw_data_generation/build_usage"/>
+        <sbol:version>1.0.0</sbol:version>
+        <prov:entity rdf:resource="http://sys-bio.org/Implementation/build/1.0.0"/>
+        <prov:hadRole rdf:resource="http://sbols.org/v2#build"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+  <sbol:Attachment rdf:about="http://sys-bio.org/Attachment/characterization_protocol/1.0.0">
+    <sbol:displayId>characterization_protocol</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Attachment/characterization_protocol"/>
+    <sbol:source rdf:resource="dynamic_measurement.mdx"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Attachment>
+  <sbol:Attachment rdf:about="http://sys-bio.org/Attachment/model_fitting_script/1.0.0">
+    <sbol:displayId>model_fitting_script</sbol:displayId>
+    <sbol:format rdf:resource="http://www.ebi.ac.uk/swo/SWO_0000147"/>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Attachment/model_fitting_script"/>
+    <sbol:source rdf:resource="file:optimize.py"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Attachment>
+  <sbol:Attachment rdf:about="http://sys-bio.org/Attachment/raw_data/1.0.0">
+    <sbol:displayId>raw_data</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Attachment/raw_data"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasDerivedFrom rdf:resource="http://sys-bio.org/Implementation/build/1.0.0"/>
+	<prov:wasDerivedFrom rdf:resource="http://sys-bio.org/Implementation/build/9.9.9"/>
+    <prov:wasGeneratedBy rdf:resource="http://sys-bio.org/Activity/raw_data_generation/1.0.0"/>
+    <sbol:source rdf:resource="file:raw_data.fcs"/>
+  </sbol:Attachment>
+  <sbol:Implementation rdf:about="http://sys-bio.org/Implementation/build/1.0.0">
+    <sbol:displayId>build</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Implementation/build"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasDerivedFrom rdf:resource="http://sys-bio.org/ModuleDefinition/design/1.0.0"/>
+    <prov:wasGeneratedBy rdf:resource="http://sys-bio.org/Activity/build_generation/1.0.0"/>
+	<prov:wasGeneratedBy rdf:resource="http://sys-bio.org/Activity/build_generation/9.9.9"/>
+  </sbol:Implementation>
+  <sbol:Model rdf:about="http://sys-bio.org/Model/fit_model/1.0.0">
+    <sbol:displayId>fit_model</sbol:displayId>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Model/fit_model"/>
+    <sbol:source rdf:resource="file://server.sys-bio.org/model_fit.xml"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasDerivedFrom rdf:resource="http://sys-bio.org/Attachment/raw_data/1.0.0"/>
+    <prov:wasGeneratedBy rdf:resource="http://sys-bio.org/Activity/fit_model_generation/1.0.0"/>
+  </sbol:Model>
+  <sbol:Model rdf:about="http://sys-bio.org/Model/predicted/1.0.0">
+    <sbol:displayId>predicted</sbol:displayId>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Model/predicted"/>
+    <sbol:source rdf:resource="file://server.sys-bio.org/circuit_simulation.xml"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Model>
+  <sbol:ModuleDefinition rdf:about="http://sys-bio.org/ModuleDefinition/design/1.0.0">
+    <sbol:displayId>design</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/ModuleDefinition/design"/>
+    <sbol:version>1.0.0</sbol:version>
+    <prov:wasDerivedFrom rdf:resource="http://sys-bio.org/Model/predicted/1.0.0"/>
+    <prov:wasGeneratedBy rdf:resource="http://sys-bio.org/Activity/design_generation/1.0.0"/>
+  </sbol:ModuleDefinition>
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/characterization_protocol/1.0.0">
+    <sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+    <sbol:displayId>characterization_protocol</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/characterization_protocol"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/conversion/1.0.0">
+    <dcterms:description>SBML to SBOL conversion</dcterms:description>
+    <sbol:displayId>conversion</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/conversion"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/gibson_assembly/1.0.0">
+    <dcterms:description>DNA assembly</dcterms:description>
+    <sbol:displayId>gibson_assembly</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/gibson_assembly"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/model_fitting/1.0.0">
+    <sbol:attachment rdf:resource="http://sys-bio.org/Attachment/model_fitting_script/1.0.0"/>
+    <sbol:displayId>model_fitting</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/model_fitting"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+  <prov:Agent rdf:about="http://sys-bio.org/plate_reader_1">
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/plate_reader_1"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Agent>
+  <prov:Agent rdf:about="http://www.async.ece.utah.edu/ibiosim">
+    <dcterms:description>Software application for the modeling, analysis, and design of genetic circuits</dcterms:description>
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/ibiosim"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Agent>
+  <prov:Agent rdf:about="mailto:jdoe@sbols.org">
+    <dcterms:description>Lab Technician</dcterms:description>
+    <dcterms:title>John Doe</dcterms:title>
+    <sbol:persistentIdentity rdf:resource="mailto:jdoe@sbols.org"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Agent>
+  <prov:Agent rdf:about="mailto:jschmoe@sbols.org">
+    <dcterms:description>Research Fellow</dcterms:description>
+    <dcterms:title>Joe Schmoe</dcterms:title>
+    <sbol:persistentIdentity rdf:resource="mailto:jschmoe@sbols.org"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Agent>
+</rdf:RDF>

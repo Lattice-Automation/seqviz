@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/vector">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/vector"/>
+    <sbol:displayId>vector</sbol:displayId>
+    <dcterms:title>vector</dcterms:title>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000755"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/linearized_vector">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/linearized_vector"/>
+    <sbol:displayId>linearized_vector</sbol:displayId>
+    <prov:wasGeneratedBy rdf:resource="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme"/>
+    <dcterms:title>linearized_vector</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000985"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://sbolstandard.org/build/restriction_enzyme">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/restriction_enzyme"/>
+    <sbol:displayId>restriction_enzyme</sbol:displayId>
+    <dcterms:title>restriction_enzyme</dcterms:title>
+    <sbol:type rdf:resource="http://purl.obolibrary.org/obo/GO_0009036"/>
+  </sbol:ComponentDefinition>
+  <prov:Activity rdf:about="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme">
+    <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme"/>
+    <sbol:displayId>cut_vector_with_restriction_enzyme</sbol:displayId>
+    <dcterms:title>cut(vector, restriction_enzyme)</dcterms:title>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme/enzyme">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme/enzyme"/>
+        <sbol:displayId>enzyme</sbol:displayId>
+        <prov:hadRole rdf:resource="http://purl.obolibrary.org/obo/GO_0009036"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/restriction_enzyme"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+    <prov:qualifiedUsage>
+      <prov:Usage rdf:about="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme/vector">
+        <sbol:persistentIdentity rdf:resource="http://sbolstandard.org/build/cut_vector_with_restriction_enzyme/vector"/>
+        <sbol:displayId>vector</sbol:displayId>
+        <prov:hadRole rdf:resource="http://identifiers.org/so/SO:0000755"/>
+        <prov:entity rdf:resource="http://sbolstandard.org/build/vector"/>
+      </prov:Usage>
+    </prov:qualifiedUsage>
+  </prov:Activity>
+</rdf:RDF>

@@ -1,0 +1,62 @@
+<seq:seq xmlns:seq="http://jbei.org/sequence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jbei.org/sequence seq.xsd">
+      <seq:name>pBbE0c-RFP</seq:name>
+      <seq:circular>false</seq:circular>
+      <seq:sequence>cagctagctcagtcctaggtactgtgctagctactagtgaaagaggagaaatactagatggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgctactagagccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttatatactagaagcggccgggatcctaactcgagtaaggatctccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttatacctagggcgttcggctgcggcgagcggtatcagctcactcaaaggcggtaatacggttatccacagaatcaggggataacgcaggaaagaacatgtgagcaaaaggccagcaaaaggccaggaaccgtaaaaaggccgcgttgctggcgtttttccataggctccgcccccctgacgagcatcacaaaaatcgacgctcaagtcagaggtggcgaaacccgacaggactataaagataccaggcgtttccccctggaagctccctcgtgcgctctcctgttccgaccctgccgcttaccggatacctgtccgcctttctcccttcgggaagcgtggcgctttctcatagctcacgctgtaggtatctcagttcggtgtaggtcgttcgctccaagctgggctgtgtgcacgaaccccccgttcagcccgaccgctgcgccttatccggtaactatcgtcttgagtccaacccggtaagacacgacttatcgccactggcagcagccactggtaacaggattagcagagcgaggtatgtaggcggtgctacagagttcttgaagtggtggcctaactacggctacactagaaggacagtatttggtatctgcgctctgctgaagccagttaccttcggaaaaagagttggtagctcttgatccggcaaacaaaccaccgctggtagcggtggtttttttgtttgcaagcagcagattacgcgcagaaaaaaaggatctcaagaagatcctttgatcttttctacggggtctgacgctcagtggaacgaaaactcacgttaagggattttggtcatgactagtgcttggattctcaccaataaaaaacgcccggcggcaaccgagcgttctgaacaaatccagatggagttctgaggtcattactggatctatcaacaggagtccaagcgagctcgatatcaaattacgccccgccctgccactcatcgcagtactgttgtaattcattaagcattctgccgacatggaagccatcacaaacggcatgatgaacctgaatcgccagcggcatcagcaccttgtcgccttgcgtataatatttgcccatggtgaaaacgggggcgaagaagttgtccatattggccacgtttaaatcaaaactggtgaaactcacccagggattggctgagacgaaaaacatattctcaataaaccctttagggaaataggccaggttttcaccgtaacacgccacatcttgcgaatatatgtgtagaaactgccggaaatcgtcgtggtattcactccagagcgatgaaaacgtttcagtttgctcatggaaaacggtgtaacaagggtgaacactatcccatatcaccagctcaccgtctttcattgccatacgaaattccggatgagcattcatcaggcgggcaagaatgtgaataaaggccggataaaacttgtgcttatttttctttacggtctttaaaaaggccgtaatatccagctgaacggtctggttataggtacattgagcaactgactgaaatgcctcaaaatgttctttacgatgccattgggatatatcaacggtggtatatccagtgatttttttctccattttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggtagtgatcttatttcattatggtgaaagttggaacctcttacgtgccgatcaacgtctcattttcgccagatatcgaattcatgagatctttga</seq:sequence>
+      <seq:features>
+        <seq:feature>
+          <seq:label>CmR</seq:label>
+          <seq:complement>true</seq:complement>
+          <seq:type>gene</seq:type>
+          <seq:location>
+            <seq:genbankStart>2011</seq:genbankStart>
+            <seq:end>2670</seq:end>
+          </seq:location>
+          <seq:attribute name="gene" quoted="false">CmR</seq:attribute>
+          <seq:attribute name="note" quoted="false">GENE [ZFP-GG destination LacUV5 p15A CmR]</seq:attribute>
+          <seq:attribute name="note" quoted="false">[ZFP-GG destination LacUV5 p15A CmR]</seq:attribute>
+          <seq:attribute name="vntifkey" quoted="false">22</seq:attribute>
+          <seq:seqHash>a72c2c4a8028bbc263350f91b94173fa147118ac20adba8609a0034dde50951e</seq:seqHash>
+        </seq:feature>
+        <seq:feature>
+          <seq:label>RFP cassette</seq:label>
+          <seq:complement>false</seq:complement>
+          <seq:type>gene</seq:type>
+          <seq:location>
+            <seq:genbankStart>2812</seq:genbankStart>
+            <seq:end>915</seq:end>
+          </seq:location>
+          <seq:attribute name="gene" quoted="false">RFP cassette</seq:attribute>
+          <seq:attribute name="note" quoted="false">GENE GENE [pBbE0k-RFP]</seq:attribute>
+          <seq:attribute name="note" quoted="false">GENE [pBbE0k-RFP]</seq:attribute>
+          <seq:seqHash>a446e0456108a6eeb366b663b88a6a495022bbfff001131568b1727f9a6c1f55</seq:seqHash>
+        </seq:feature>
+        <seq:feature>
+          <seq:label>colE1 origin</seq:label>
+          <seq:complement>true</seq:complement>
+          <seq:type>rep_origin</seq:type>
+          <seq:location>
+            <seq:genbankStart>1202</seq:genbankStart>
+            <seq:end>1884</seq:end>
+          </seq:location>
+          <seq:attribute name="gene" quoted="false">ColE1 Origin</seq:attribute>
+          <seq:attribute name="note" quoted="false">REP_ORIGIN REP_ORIGIN [ColE1]</seq:attribute>
+          <seq:attribute name="note" quoted="false">REP_ORIGIN [ColE1]</seq:attribute>
+          <seq:attribute name="vntifkey" quoted="false">33</seq:attribute>
+          <seq:seqHash>e220c676221ffaf8c2588ea26c928d7e822e4e530ac1787a512e2c1e1302f0d5</seq:seqHash>
+        </seq:feature>
+        <seq:feature>
+          <seq:label>T0</seq:label>
+          <seq:complement>false</seq:complement>
+          <seq:type>terminator</seq:type>
+          <seq:location>
+            <seq:genbankStart>1890</seq:genbankStart>
+            <seq:end>1995</seq:end>
+          </seq:location>
+          <seq:attribute name="gene" quoted="false">Terminator</seq:attribute>
+          <seq:attribute name="note" quoted="false">TERMINATOR TERMINATOR [p15A KanR]</seq:attribute>
+          <seq:attribute name="note" quoted="false">TERMINATOR [p15A KanR]</seq:attribute>
+          <seq:attribute name="vntifkey" quoted="false">43</seq:attribute>
+          <seq:seqHash>b50863e4d0992b22d225efde18e8fc2a545ed248720a09767491724fb57b8cdb</seq:seqHash>
+        </seq:feature>
+      </seq:features>
+    </seq:seq>

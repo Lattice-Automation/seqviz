@@ -10,10 +10,7 @@ import Selection from "./Selection/Selection";
  * Comprised of:
  * 	   IndexRow (the x axis basepair index)
  * 	   AnnotationRow (annotations)
- * 		 PrimerRow (primers)
  * 	   Selection (cursor selection range)
- * 	   ORFrames (open reading frames)
- * 	   CutSites
  * 	   Find (regions that match the users current find search)
  *
  * a single block of linear sequence. Essentially a row that holds
@@ -84,7 +81,9 @@ export default class SeqBlock extends React.PureComponent {
       currSearchIndex,
       blockHeight,
 
-      Axis,
+      showIndex,
+      showComplement,
+      showAnnotations,
 
       seqFontSize,
       firstBase,
@@ -98,24 +97,8 @@ export default class SeqBlock extends React.PureComponent {
       onUnmount,
       resizing,
 
-      zoomed,
-
-      showSearch,
-      seqSelection,
-      findState,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
+      zoomed
     } = this.props;
-
-    const partState = {
-      showSearch,
-      seqSelection,
-      findState,
-      circularCentralIndex,
-      linearCentralIndex,
-      setPartState
-    };
 
     if (!size.width || !size.height) return null;
 
@@ -141,22 +124,23 @@ export default class SeqBlock extends React.PureComponent {
       type: "SEQ",
       element: this
     };
-
     // height and yDiff of the sequence strand
     const indexYDiff = 0;
     const indexHeight = zoomed ? lineHeight : 0; // bases not shown at < 10 zoom
 
     // height and yDiff of the complement strand
     const compYDiff = indexYDiff + indexHeight;
-    const compHeight = zoomed ? lineHeight : 0;
+    const compHeight = zoomed && showComplement ? lineHeight : 0;
 
     // height and yDiff of annotations
     const annYDiff = compYDiff + compHeight;
-    const annHeight = elementHeight * annotationRows.length;
+    const annHeight = showAnnotations
+      ? elementHeight * annotationRows.length
+      : 0;
 
     // calc the height necessary for the sequence selection
     let selectHeight = indexHeight + compHeight + annHeight;
-    let selectEdgeHeight = Axis ? selectHeight + lineHeight : selectHeight;
+    let selectEdgeHeight = showIndex ? selectHeight + lineHeight : selectHeight;
 
     // needed because otherwise the selection height is very small
     if (!zoomed && selectHeight <= elementHeight) {
@@ -185,6 +169,7 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
+            {...this.props}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -192,26 +177,27 @@ export default class SeqBlock extends React.PureComponent {
             firstBase={firstBase}
             lastBase={lastBase}
             fullSeq={fullSeq}
-            {...partState}
           />
           {zoomed ? (
             <text {...textProps} y={indexYDiff} id={id}>
               {seq}
             </text>
           ) : null}
-          {compSeq && zoomed ? (
+          {compSeq && zoomed && showComplement ? (
             <text {...textProps} y={compYDiff} id={id}>
               {compSeq}
             </text>
           ) : null}
-          <Annotations
-            {...this.props}
-            findXAndWidth={this.findXAndWidth}
-            lastBase={lastBase}
-            yDiff={annYDiff}
-            seqBlockRef={this}
-            fullSeq={fullSeq}
-          />
+          {showAnnotations && (
+            <Annotations
+              {...this.props}
+              findXAndWidth={this.findXAndWidth}
+              lastBase={lastBase}
+              yDiff={annYDiff}
+              seqBlockRef={this}
+              fullSeq={fullSeq}
+            />
+          )}
           {searchRows.length ? (
             <LinearFind
               {...this.props}
@@ -224,6 +210,7 @@ export default class SeqBlock extends React.PureComponent {
             />
           ) : null}
           <Selection.Edges
+            {...this.props}
             selectEdgeHeight={selectEdgeHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -231,13 +218,14 @@ export default class SeqBlock extends React.PureComponent {
             firstBase={firstBase}
             lastBase={lastBase}
             fullSeq={fullSeq}
-            {...partState}
           />
-          <IndexRow
-            {...this.props}
-            transform={`translate(0, ${indexRowYDiff})`}
-            findXAndWidth={this.findXAndWidth}
-          />
+          {showIndex && (
+            <IndexRow
+              {...this.props}
+              transform={`translate(0, ${indexRowYDiff})`}
+              findXAndWidth={this.findXAndWidth}
+            />
+          )}
         </g>
       </svg>
     );

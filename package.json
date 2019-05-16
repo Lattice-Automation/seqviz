@@ -1,13 +1,16 @@
 {
   "name": "visualizer",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.",
   "author": "Lattice Automation (https://latticeautomation.com/)",
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "babel-polyfill": "^6.26.0",
+    "bufferpack": "0.0.6",
+    "jszip": "^3.2.1",
     "node-sass": "^4.12.0",
     "rc-slider": "^8.6.9",
     "react": "^16.8.6",
@@ -17,7 +20,8 @@
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
     "tinycolor2": "^1.4.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "xml2js": "^0.4.19"
   },
   "scripts": {
     "start": "react-scripts start",

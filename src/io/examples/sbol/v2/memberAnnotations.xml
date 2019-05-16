@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:grn="urn:bbn.com:tasbe:grn/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:annot="http://myannotation.org/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://www.async.ece.utah.edu/myParts/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/myParts"/>
+    <sbol:displayId>myParts</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+  </sbol:Collection>
+  <sbol:ModuleDefinition rdf:about="http://www.async.ece.utah.edu/someModuleDefSub/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someModuleDefSub"/>
+    <sbol:displayId>someModuleDefSub</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+  </sbol:ModuleDefinition>
+  <sbol:ModuleDefinition rdf:about="http://www.async.ece.utah.edu/someModuleDef/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someModuleDef"/>
+    <sbol:displayId>someModuleDef</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://www.async.ece.utah.edu/someModuleDef/someInteraction/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someModuleDef/someInteraction"/>
+        <sbol:displayId>someInteraction</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000177"/>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:module>
+      <sbol:Module rdf:about="http://www.async.ece.utah.edu/someModuleDef/someModule/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someModuleDef/someModule"/>
+        <sbol:displayId>someModule</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/someModuleDefSub/1.0"/>
+      </sbol:Module>
+    </sbol:module>
+  </sbol:ModuleDefinition>
+  <sbol:Model rdf:about="http://www.async.ece.utah.edu/someModel/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someModel"/>
+    <sbol:displayId>someModel</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+    <sbol:source rdf:resource="someModel_source"/>
+    <sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/>
+    <sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/>
+  </sbol:Model>
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/someCompDefCDS/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDefCDS"/>
+    <sbol:displayId>someCompDefCDS</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://www.async.ece.utah.edu/someCompDef/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef"/>
+    <sbol:displayId>someCompDef</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.async.ece.utah.edu/someCompDef/someOtherComponent/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someOtherComponent"/>
+        <sbol:displayId>someOtherComponent</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/someCompDefCDS/1.0"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://www.async.ece.utah.edu/someCompDef/someComponent/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someComponent"/>
+        <sbol:displayId>someComponent</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://www.async.ece.utah.edu/someCompDefCDS/1.0"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation"/>
+        <sbol:displayId>someSequenceAnnotation</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+        <sbol:location>
+          <sbol:Range rdf:about="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation/cut/1.0">
+            <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation/cut"/>
+            <sbol:displayId>cut</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:start>1</sbol:start>
+            <sbol:end>10</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation2/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation2"/>
+        <sbol:displayId>someSequenceAnnotation2</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <sbol:location>
+          <sbol:Cut rdf:about="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation2/cut/1.0">
+            <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someSequenceAnnotation2/cut"/>
+            <sbol:displayId>cut</sbol:displayId>
+            <sbol:version>1.0</sbol:version>
+            <sbol:at>1</sbol:at>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Cut>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://www.async.ece.utah.edu/someCompDef/someSequenceConstraint/1.0">
+        <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someCompDef/someSequenceConstraint"/>
+        <sbol:displayId>someSequenceConstraint</sbol:displayId>
+        <sbol:version>1.0</sbol:version>
+        <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="http://www.async.ece.utah.edu/someCompDef/someComponent/1.0"/>
+        <sbol:object rdf:resource="http://www.async.ece.utah.edu/someCompDef/someOtherComponent/1.0"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://www.async.ece.utah.edu/someSeq/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someSeq"/>
+    <sbol:displayId>someSeq</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+    <sbol:elements>ACGTURYSWKMBDHVN-.</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <grn:RegulatoryReaction rdf:about="http://www.async.ece.utah.edu/someGenericTopLevel/1.0">
+    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/someGenericTopLevel"/>
+    <sbol:displayId>someGenericTopLevel</sbol:displayId>
+    <sbol:version>1.0</sbol:version>
+    <annot:thisAnnotation>turtleString</annot:thisAnnotation>
+  </grn:RegulatoryReaction>
+</rdf:RDF>

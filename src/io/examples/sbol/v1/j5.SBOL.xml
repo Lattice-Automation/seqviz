@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rdf:RDF xmlns="http://sbols.org/v1#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:so="http://purl.obolibrary.org/obo/">
+  <DnaComponent rdf:about="http://j5.jbei.org/dc#d23e01cc-9028-419a-ac01-50c1e71662d8">
+    <displayId>d23e01cc-9028-419a-ac01-50c1e71662d8</displayId>
+    <name>signal_pep</name>
+    <dnaSequence>
+      <DnaSequence rdf:about="http://j5.jbei.org/ds#4b627502-268d-4c1e-a53a-5fc2962eeaef">
+        <nucleotides>ggcagcaaggtctacggcaaggaacagtttttgcggatgcgccagagcatgttccccgatcgc</nucleotides>
+      </DnaSequence>
+    </dnaSequence>
+    <annotation>
+      <SequenceAnnotation rdf:about="http://j5.jbei.org/sa#84ca57d7-1bbe-4399-9563-efb4f6d0e0e1">
+        <bioStart>1</bioStart>
+        <bioEnd>63</bioEnd>
+        <strand>+</strand>
+        <subComponent>
+          <DnaComponent rdf:about="http://j5.jbei.org/dc#995ed0f9-6613-4107-8a14-f7837d563f5d">
+            <rdf:type rdf:resource="http://purl.obolibrary.org/obo/SO_0000316" />
+            <displayId>995ed0f9-6613-4107-8a14-f7837d563f5d</displayId>
+            <name>signal_peptide</name>
+          </DnaComponent>
+        </subComponent>
+      </SequenceAnnotation>
+    </annotation>
+  </DnaComponent>
+</rdf:RDF>

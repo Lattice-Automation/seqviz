@@ -28,6 +28,11 @@ export const nucleotideWildCards = {
   n: { a: "a", c: "c", g: "g", t: "t" }
 };
 
+export const validSequenceCharacters = {
+  ...nucleotides,
+  ...nucleotideWildCards
+};
+
 /**
  * Translate common nucleotide wildcards
  *
@@ -175,22 +180,30 @@ export const reIndex = (sequence, start) => {
 };
 
 export const defaultSelection = {
-  id: "",
   ref: null,
-  start: 0,
-  end: 0,
-  clockwise: true
+  sequenceMeta: { sequence: "", GC: 0, Tm: 0 },
+  selectionMeta: {
+    type: "",
+    start: 0,
+    end: 0,
+    selectionLength: 0,
+    clockwise: true
+  },
+  feature: null
 };
 
 /**
  * a default annotation generator
  */
-export const annotationFactory = () => ({
+export const annotationFactory = (colors = []) => ({
   id: shortid.generate(),
-  color: genRandomColor(),
+  color: genRandomColor(colors),
   name: "Untitled",
   type: "",
   start: 0,
   end: 0,
   direction: "NONE"
 });
+
+export const trimNewLines = str =>
+  str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");

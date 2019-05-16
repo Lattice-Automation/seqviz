@@ -1,0 +1,293 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#">
+  <sbol:Collection rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Collection:Schizosaccharomyces_pombe">
+    <sbol:displayId>Schizosaccharomyces_pombe</sbol:displayId>
+    <dcterms:title>Collection of Schizosaccharomyces pombe features</dcterms:title>
+    <dcterms:description>This is a collection of features that have been associated with Schizosaccharomyces pombe plasmids downloaded from the SnapGene Resources repository (http://www.snapgene.com).</dcterms:description>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6"/>
+    <sbol:member rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001"/>
+    <sbol:displayId>TEF_promoter_001</sbol:displayId>
+    <dcterms:title>TEF promoter-001</dcterms:title>
+    <dcterms:description>Ashbya gossypii TEF promoter</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG"/>
+    <sbol:displayId>_5xFLAG</sbol:displayId>
+    <dcterms:title>5xFLAG</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6"/>
+    <sbol:displayId>natMX6</sbol:displayId>
+    <dcterms:title>natMX6</dcterms:title>
+    <dcterms:description>yeast selectable marker conferring nourseothricin resistance</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021"/>
+    <sbol:displayId>KanR_021</sbol:displayId>
+    <dcterms:title>KanR-021</dcterms:title>
+    <dcterms:description>confers resistance to kanamycin in bacteria or G418 (Geneticin(R)) in eukaryotes</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004"/>
+    <sbol:displayId>HygR_004</sbol:displayId>
+    <dcterms:title>HygR-004</dcterms:title>
+    <dcterms:description>confers resistance to hygromycin</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR"/>
+    <sbol:displayId>NrsR</sbol:displayId>
+    <dcterms:title>NrsR</dcterms:title>
+    <dcterms:description>confers resistance to nourseothricin</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator"/>
+    <sbol:displayId>TEF_terminator</sbol:displayId>
+    <dcterms:title>TEF terminator</dcterms:title>
+    <dcterms:description>Ashbya gossypii TEF terminator</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag"/>
+    <sbol:displayId>_12Pk_tag</sbol:displayId>
+    <dcterms:title>12Pk tag</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009"/>
+    <sbol:displayId>ori_009</sbol:displayId>
+    <dcterms:title>ori-009</dcterms:title>
+    <dcterms:description>high-copy-number ColE1/pMB1/pBR322/pUC origin of replication</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000296"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter"/>
+    <sbol:displayId>SP6_promoter</sbol:displayId>
+    <dcterms:title>SP6 promoter</dcterms:title>
+    <dcterms:description>promoter for bacteriophage SP6 RNA polymerase</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003"/>
+    <sbol:displayId>BleoR_003</sbol:displayId>
+    <dcterms:title>BleoR-003</dcterms:title>
+    <dcterms:description>confers resistance to bleomycin, phleomycin, and Zeocin(TM)</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009"/>
+    <sbol:displayId>AmpR_promoter_009</sbol:displayId>
+    <dcterms:title>AmpR promoter-009</dcterms:title>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter"/>
+    <sbol:displayId>T7_promoter</sbol:displayId>
+    <dcterms:title>T7 promoter</dcterms:title>
+    <dcterms:description>promoter for bacteriophage T7 RNA polymerase</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6"/>
+    <sbol:displayId>bleMX6</sbol:displayId>
+    <dcterms:title>bleMX6</dcterms:title>
+    <dcterms:description>yeast selectable marker conferring phleomycin resistance</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6"/>
+    <sbol:displayId>hphMX6</sbol:displayId>
+    <dcterms:title>hphMX6</dcterms:title>
+    <dcterms:description>yeast selectable marker conferring hygromycin resistance</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX"/>
+    <sbol:displayId>kanMX</sbol:displayId>
+    <dcterms:title>kanMX</dcterms:title>
+    <dcterms:description>yeast selectable marker conferring kanamycin resistance</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003"/>
+    <sbol:displayId>ADH1_terminator_003</sbol:displayId>
+    <dcterms:title>ADH1 terminator-003</dcterms:title>
+    <dcterms:description>transcription terminator for alcohol dehydrogenase 1</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013"/>
+    <sbol:displayId>AmpR_013</sbol:displayId>
+    <dcterms:title>AmpR-013</dcterms:title>
+    <dcterms:description>confers resistance to ampicillin, carbenicillin, and related antibiotics</dcterms:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013#seq"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR_promoter-009#seq"/>
+    <sbol:elements>cgcggaacccctatttgtttatttttctaaatacattcaaatatgtatccgctcatgagacaataaccctgataaatgcttcaataatattgaaaaaggaagagt</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_terminator#seq"/>
+    <sbol:elements>actgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgcctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ADH1_terminator-003#seq"/>
+    <sbol:elements>gcgaatttcttatgatttatgatttttattattaaataagttataaaaaaaataagtgtatacaaattttaaagtgactcttaggttttaaaacgaaaattcttattcttgagtaactctttcctgtaggtcaggttgctttctcaggtatagtatgaggtcgctcttattgaccacacctctaccgg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:natMX6#seq"/>
+    <sbol:elements>gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcatttgcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacgccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaacataaacaaccatgggtaccactcttgacgacacggcttaccggtaccgcaccagtgtcccgggggacgccgaggccatcgaggcactggatgggtccttcaccaccgacaccgtcttccgcgtcaccgccaccggggacggcttcaccctgcgggaggtgccggtggacccgcccctgaccaaggtgttccccgacgacgaatcggacgacgaatcggacgacggggaggacggcgacccggactcccggacgttcgtcgcgtacggggacgacggcgacctggcgggcttcgtggtcatctcgtactcggcgtggaaccgccggctgaccgtcgaggacatcgaggtcgccccggagcaccgggggcacggggtcgggcgcgcgttgatggggctcgcgacggagttcgccggcgagcggggcgccgggcacctctggctggaggtcaccaacgtcaacgcaccggcgatccacgcgtaccggcggatggggttcaccctctgcggcctggacaccgccctgtacgacggcaccgcctcggacggcgagcggcaggcgctctacatgagcatgccctgcccctaatcagtactgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgcctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:AmpR-013#seq"/>
+    <sbol:elements>atgagtattcaacatttccgtgtcgcccttattcccttttttgcggcattttgccttcctgtttttgctcacccagaaacgctggtgaaagtaaaagatgctgaagatcagttgggtgcacgagtgggttacatcgaactggatctcaacagcggtaagatccttgagagttttcgccccgaagaacgttttccaatgatgagcacttttaaagttctgctatgtggcgcggtattatcccgtattgacgccgggcaagagcaactcggtcgccgcatacactattctcagaatgacttggttgagtactcaccagtcacagaaaagcatcttacggatggcatgacagtaagagaattatgcagtgctgccataaccatgagtgataacactgcggccaacttacttctgacaacgatcggaggaccgaaggagctaaccgcttttttgcacaacatgggggatcatgtaactcgccttgatcgttgggaaccggagctgaatgaagccataccaaacgacgagcgtgacaccacgatgcctgtagcaatggcaacaacgttgcgcaaactattaactggcgaactacttactctagcttcccggcaacaattaatagactggatggaggcggataaagttgcaggaccacttctgcgctcggcccttccggctggctggtttattgctgataaatctggagccggtgagcgtgggtctcgcggtatcattgcagcactggggccagatggtaagccctcccgtatcgtagttatctacacgacggggagtcaggcaactatggatgaacgaaatagacagatcgctgagataggtgcctcactgattaagcattggtaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:hphMX6#seq"/>
+    <sbol:elements>gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcatttgcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacgccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaacataaacaaccatgggtaaaaagcctgaactcaccgcgacgtctgtcgagaagtttctgatcgaaaagttcgacagcgtctccgacctgatgcagctctcggagggcgaagaatctcgtgctttcagcttcgatgtaggagggcgtggatatgtcctgcgggtaaatagctgcgccgatggtttctacaaagatcgttatgtttatcggcactttgcatcggccgcgctcccgattccggaagtgcttgacattggggaattcagcgagagcctgacctattgcatctcccgccgtgcacagggtgtcacgttgcaagacctgcctgaaaccgaactgcccgctgttctgcagccggtcgcggaggccatggatgcgatcgctgcggccgatcttagccagacgagcgggttcggcccattcggaccgcaaggaatcggtcaatacactacatggcgtgatttcatatgcgcgattgctgatccccatgtgtatcactggcaaactgtgatggacgacaccgtcagtgcgtccgtcgcgcaggctctcgatgagctgatgctttgggccgaggactgccccgaagtccggcacctcgtgcacgcggatttcggctccaacaatgtcctgacggacaatggccgcataacagcggtcattgactggagcgaggcgatgttcggggattcccaatacgaggtcgccaacatcttcttctggaggccgtggttggcttgtatggagcagcagacgcgctacttcgagcggaggcatccggagcttgcaggatcgccgcggctccgggcgtatatgctccgcattggtcttgaccaactctatcagagcttggttgacggcaatttcgatgatgcagcttgggcgcagggtcgatgcgacgcaatcgtccgatccggagccgggactgtcgggcgtacacaaatcgcccgcagaagcgcggccgtctggaccgatggctgtgtagaagtactcgccgatagtggaaaccgacgccccagcactcgtccgagggcaaaggaataatcagtactgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgcctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:SP6_promoter#seq"/>
+    <sbol:elements>atttaggtgacactataga</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:5xFLAG#seq"/>
+    <sbol:elements>gactacaaggacgacgatgacaaggattacaaagatgacgacgataagcttatggactacaaggacgacgatgacaaggattacaaagatgacgacgataagcttatggactacaaggacgacgatgacaag</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:T7_promoter#seq"/>
+    <sbol:elements>taatacgactcactatagg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:kanMX#seq"/>
+    <sbol:elements>gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcatttgcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacgccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaacataaacaaccatgggtaaggaaaagactcacgtttcgaggccgcgattaaattccaacatggatgctgatttatatgggtataaatgggctcgcgataatgtcgggcaatcaggtgcgacaatctatcgattgtatgggaagcccgatgcgccagagttgtttctgaaacatggcaaaggtagcgttgccaatgatgttacagatgagatggtcagactaaactggctgacggaatttatgcctcttccgaccatcaagcattttatccgtactcctgatgatgcatggttactcaccactgcgatccccggcaaaacagcattccaggtattagaagaatatcctgattcaggtgaaaatattgttgatgcgctggcagtgttcctgcgccggttgcattcgattcctgtttgtaattgtccttttaacagcgatcgcgtatttcgtctcgctcaggcgcaatcacgaatgaataacggtttggttgatgcgagtgattttgatgacgagcgtaatggctggcctgttgaacaagtctggaaagaaatgcataagcttttgccattctcaccggattcagtcgtcactcatggtgatttctcacttgataaccttatttttgacgaggggaaattaataggttgtattgatgttggacgagtcggaatcgcagaccgataccaggatcttgccatcctatggaactgcctcggtgagttttctccttcattacagaaacggctttttcaaaaatatggtattgataatcctgatatgaataaattgcagtttcatttgatgctcgatgagtttttctaatcagtactgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgcctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:12Pk_tag#seq"/>
+    <sbol:elements>ggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctacactcgacggtggaggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctacactcgacggtggaggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctacactcgacggtggaggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctacactcgacggtggaggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctacactcgacggtggaggtaagcctatccctaaccctctgctgggtcttgattctacatccggaggtaagcctatccctaaccctctgctgggtcttgattctaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:ori-009#seq"/>
+    <sbol:elements>ttgagatcctttttttctgcgcgtaatctgctgcttgcaaacaaaaaaaccaccgctaccagcggtggtttgtttgccggatcaagagctaccaactctttttccgaaggtaactggcttcagcagagcgcagataccaaatactgtccttctagtgtagccgtagttaggccaccacttcaagaactctgtagcaccgcctacatacctcgctctgctaatcctgttaccagtggctgctgccagtggcgataagtcgtgtcttaccgggttggactcaagacgatagttaccggataaggcgcagcggtcgggctgaacggggggttcgtgcacacagcccagcttggagcgaacgacctacaccgaactgagatacctacagcgtgagcattgagaaagcgccacgcttcccgaagggagaaaggcggacaggtatccggtaagcggcagggtcggaacaggagagcgcacgagggagcttccagggggaaacgcctggtatctttatagtcctgtcgggtttcgccacctctgacttgagcgtcgatttttgtgatgctcgtcaggggggcggagcctatggaaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:NrsR#seq"/>
+    <sbol:elements>atgggtaccactcttgacgacacggcttaccggtaccgcaccagtgtcccgggggacgccgaggccatcgaggcactggatgggtccttcaccaccgacaccgtcttccgcgtcaccgccaccggggacggcttcaccctgcgggaggtgccggtggacccgcccctgaccaaggtgttccccgacgacgaatcggacgacgaatcggacgacggggaggacggcgacccggactcccggacgttcgtcgcgtacggggacgacggcgacctggcgggcttcgtggtcatctcgtactcggcgtggaaccgccggctgaccgtcgaggacatcgaggtcgccccggagcaccgggggcacggggtcgggcgcgcgttgatggggctcgcgacggagttcgccggcgagcggggcgccgggcacctctggctggaggtcaccaacgtcaacgcaccggcgatccacgcgtaccggcggatggggttcaccctctgcggcctggacaccgccctgtacgacggcaccgcctcggacggcgagcggcaggcgctctacatgagcatgccctgcccctaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:HygR-004#seq"/>
+    <sbol:elements>atgggtaaaaagcctgaactcaccgcgacgtctgtcgagaagtttctgatcgaaaagttcgacagcgtctccgacctgatgcagctctcggagggcgaagaatctcgtgctttcagcttcgatgtaggagggcgtggatatgtcctgcgggtaaatagctgcgccgatggtttctacaaagatcgttatgtttatcggcactttgcatcggccgcgctcccgattccggaagtgcttgacattggggaattcagcgagagcctgacctattgcatctcccgccgtgcacagggtgtcacgttgcaagacctgcctgaaaccgaactgcccgctgttctgcagccggtcgcggaggccatggatgcgatcgctgcggccgatcttagccagacgagcgggttcggcccattcggaccgcaaggaatcggtcaatacactacatggcgtgatttcatatgcgcgattgctgatccccatgtgtatcactggcaaactgtgatggacgacaccgtcagtgcgtccgtcgcgcaggctctcgatgagctgatgctttgggccgaggactgccccgaagtccggcacctcgtgcacgcggatttcggctccaacaatgtcctgacggacaatggccgcataacagcggtcattgactggagcgaggcgatgttcggggattcccaatacgaggtcgccaacatcttcttctggaggccgtggttggcttgtatggagcagcagacgcgctacttcgagcggaggcatccggagcttgcaggatcgccgcggctccgggcgtatatgctccgcattggtcttgaccaactctatcagagcttggttgacggcaatttcgatgatgcagcttgggcgcagggtcgatgcgacgcaatcgtccgatccggagccgggactgtcgggcgtacacaaatcgcccgcagaagcgcggccgtctggaccgatggctgtgtagaagtactcgccgatagtggaaaccgacgccccagcactcgtccgagggcaaaggaataa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:KanR-021#seq"/>
+    <sbol:elements>atgggtaaggaaaagactcacgtttcgaggccgcgattaaattccaacatggatgctgatttatatgggtataaatgggctcgcgataatgtcgggcaatcaggtgcgacaatctatcgattgtatgggaagcccgatgcgccagagttgtttctgaaacatggcaaaggtagcgttgccaatgatgttacagatgagatggtcagactaaactggctgacggaatttatgcctcttccgaccatcaagcattttatccgtactcctgatgatgcatggttactcaccactgcgatccccggcaaaacagcattccaggtattagaagaatatcctgattcaggtgaaaatattgttgatgcgctggcagtgttcctgcgccggttgcattcgattcctgtttgtaattgtccttttaacagcgatcgcgtatttcgtctcgctcaggcgcaatcacgaatgaataacggtttggttgatgcgagtgattttgatgacgagcgtaatggctggcctgttgaacaagtctggaaagaaatgcataagcttttgccattctcaccggattcagtcgtcactcatggtgatttctcacttgataaccttatttttgacgaggggaaattaataggttgtattgatgttggacgagtcggaatcgcagaccgataccaggatcttgccatcctatggaactgcctcggtgagttttctccttcattacagaaacggctttttcaaaaatatggtattgataatcctgatatgaataaattgcagtttcatttgatgctcgatgagtttttctaa</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:TEF_promoter-001#seq"/>
+    <sbol:elements>gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcatttgcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacgccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaacataaacaacc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:BleoR-003#seq"/>
+    <sbol:elements>atggccaagttgaccagtgccgttccggtgctcaccgcgcgcgacgtcgccggagcggtcgagttctggaccgaccggctcgggttctcccgggacttcgtggaggacgacttcgccggtgtggtccgggacgacgtgaccctgttcatcagcgcggtccaggaccaggtggtgccggacaacaccctggcctgggtgtgggtgcgcggcctggacgagctgtacgccgagtggtcggaggtcgtgtccacgaacttccgggacgcctccgggccggccatgaccgagatcggcgagcagccgtgggggcgggagttcgccctgcgcgacccggccggcaactgcgtgcacttcgtggccgaggagcaggactga</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6#seq">
+    <sbol:persistentIdentity rdf:resource="http://genocad.org/SBOL/doi:10.6084/m9.figshare.1159038/Part:bleMX6#seq"/>
+    <sbol:elements>gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcatttgcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacgccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaacataaacaaccatggccaagttgaccagtgccgttccggtgctcaccgcgcgcgacgtcgccggagcggtcgagttctggaccgaccggctcgggttctcccgggacttcgtggaggacgacttcgccggtgtggtccgggacgacgtgaccctgttcatcagcgcggtccaggaccaggtggtgccggacaacaccctggcctgggtgtgggtgcgcggcctggacgagctgtacgccgagtggtcggaggtcgtgtccacgaacttccgggacgcctccgggccggccatgaccgagatcggcgagcagccgtgggggcgggagttcgccctgcgcgacccggccggcaactgcgtgcacttcgtggccgaggagcaggactgatcagtactgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgcctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

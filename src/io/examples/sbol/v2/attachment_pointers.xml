@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:prov="http://www.w3.org/ns/prov#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sbol="http://sbols.org/v2#"
+   xmlns:sys-bio="http://sys-bio.org#"
+   xmlns:myapp="http://www.myapp.org/">
+  
+  <sbol:Attachment rdf:about="http://sys-bio.org/Attachment/characterization_protocol/1.0.0">
+    <sbol:displayId>characterization_protocol</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Attachment/characterization_protocol"/>
+    <sbol:source rdf:resource="dynamic_measurement.mdx"/>
+    <sbol:version>1.0.0</sbol:version>
+  </sbol:Attachment>
+  
+  <sbol:Sequence rdf:about="http://partsregistry.org/seq/BBa_J23119">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://partsregistry.org/seq/BBa_J23119"/>
+	<sbol:displayId>BBa_J23119</sbol:displayId>
+	<prov:wasDerivedFrom rdf:resource="http://parts.igem.org/Part:BBa_J23119:Design"/>
+	<sbol:elements>ttgacagctagctcagtcctaggtataatgctagc</sbol:elements>
+	<sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+
+  <sbol:ComponentDefinition rdf:about="http://partsregistry.org/cd/BBa_J23119">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://partsregistry.org/cd/BBa_J23119"/> 
+	<sbol:displayId>BBa_J23119</sbol:displayId> 
+	<prov:wasDerivedFrom rdf:resource="http://partsregistry.org/Part:BBa_J23119"/> 
+	<dcterms:title>J23119 promoter</dcterms:title> 
+	<dcterms:description>Constitutive promoter</dcterms:description> 
+	<sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/> 
+	<sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+	<sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/> 
+	<sbol:role rdf:resource="http://identifiers.org/so/SO:0000613"/> 
+	<sbol:sequence rdf:resource="http://partsregistry.org/seq/BBa_J23119"/> 
+  </sbol:ComponentDefinition>
+
+  <sbol:Model rdf:about="http://www.sbolstandard.org/examples/pIKE_Toggle_1">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://www.sbolstandard.org/examples/pIKE_Toggle_1"/> 
+	<sbol:displayId>pIKE_Toggle_1</sbol:displayId> 
+	<dcterms:title>pIKE_Toggle_1 toggle switch</dcterms:title> 
+	<sbol:source rdf:resource="http://virtualparts.org/part/pIKE_Toggle_1"/> 
+	<sbol:language rdf:resource="http://identifiers.org/edam/format_2585"/> 
+	<sbol:framework rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000062"/> 
+  </sbol:Model>
+
+  <sbol:ModuleDefinition rdf:about="http://sbolstandard.org/example/md/GFP_expression">
+	<sbol:persistentIdentity rdf:resource="http://sbolstandard.org/example/md/GFP_expression"/> 
+	<sbol:displayId>GFP_expression</sbol:displayId> 
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+  </sbol:ModuleDefinition>
+
+  <sbol:Collection rdf:about="http://parts.igem.org/Promoters/Catalog/Anderson">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://parts.igem.org/Promoters/Catalog/Anderson"/> 
+	<sbol:displayId>Anderson</sbol:displayId> 
+	<dcterms:title>Anderson promoters</dcterms:title> 
+	<dcterms:description>The Anderson promoter collection</dcterms:description> 
+	<sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23119"/> 
+	<sbol:member rdf:resource="http://partsregistry.org/Part:BBa_J23118"/> 
+  </sbol:Collection>
+
+  <sbol:Implementation rdf:about="http://examples.org/Implementation/build/1.0.0">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:displayId>build</sbol:displayId> 
+	<sbol:persistentIdentity rdf:resource="http://examples.org/Implementation/build"/> 
+	<sbol:version>1.0.0</sbol:version> 
+	<prov:wasDerivedFrom rdf:resource="http://examples.org/ComponentDefinition/design/1.0.0"/> 
+	<sbol:built rdf:resource="http://examples.org/ComponentDefinition/mutant/1.0.0"/> 
+  </sbol:Implementation>
+
+  <sbol:Attachment rdf:about="https://dummy.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="https://dummy.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6"/> 
+	<sbol:displayId>attachment_00009Les8pDTQCmKA7A5T6</sbol:displayId> 
+	<dcterms:title>NicePlot.png</dcterms:title> 
+	<sbol:source rdf:resource="https://dummy.org/public/ACS_SynBio/attachment_00009Les8pDTQCmKA7A5T6/1/download"/> 
+	<sbol:format rdf:resource="http://identifiers.org/edam/format_3603"/> 
+	<sbol:size>31399</sbol:size> 
+	<sbol:hash>404966a5062857f63edb5c3ba16bb581d7fb6a1e</sbol:hash> 
+  </sbol:Attachment>
+  
+  <myapp:Datasheet rdf:about="http://www.partsregistry.org/gen/datasheet1">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+    <sbol:persistentIdentity rdf:resource="http://www.partsregistry.org/gen/datasheet1"/>
+    <sbol:displayId>datasheet1</sbol:displayId>
+    <dcterms:title>Datasheet 1</dcterms:title>
+    <myapp:characterizationData rdf:resource="http://www.myapp.org//measurement/1"/>
+    <myapp:transcriptionRate>1</myapp:transcriptionRate>
+  </myapp:Datasheet>
+
+  <prov:Activity rdf:about="http://myapp.com/codon_optimization_activity">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity"/> 
+	<sbol:displayId>codon_optimization_activity</sbol:displayId> 
+	<dcterms:title>Codon Optimization Activity</dcterms:title> 
+	<prov:qualifiedAssociation> 
+	  <prov:Association rdf:about="http://myapp.com/codon_optimization_activity/association"> 
+		<sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity/association"/> 
+		<sbol:displayId>association</sbol:displayId> 
+		<prov:hadRole rdf:resource="http://myapp.com/codonoptimiser"/> 
+		<prov:agent rdf:resource="http://myapp.com/codon_optimization_software"/> 
+	  </prov:Association> 
+	</prov:qualifiedAssociation> 
+	<prov:qualifiedUsage> 
+	  <prov:Usage rdf:about="http://myapp.com/codon_optimization_activity/usage"> 
+		<sbol:persistentIdentity rdf:resource="http://myapp.com/codon_optimization_activity/usage"/> 
+		<sbol:displayId>usage</sbol:displayId> 
+		<prov:hadRole rdf:resource="http://sbols.org/v2#source"/> 
+		<prov:entity rdf:resource="http://myapp.com/non_codon_optimized"/> 
+	  </prov:Usage> 
+	</prov:qualifiedUsage> 
+  </prov:Activity>
+
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/characterization_protocol/1.0.0">
+    <sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+    <sbol:displayId>characterization_protocol</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/characterization_protocol"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+  
+  <prov:Agent rdf:about="http://myapp.com/x_ray">
+	<sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+	<sbol:persistentIdentity rdf:resource="http://myapp.com/x_ray"/> 
+	<sbol:displayId>x_ray</sbol:displayId> 
+	<dcterms:title>X-ray</dcterms:title> 
+  </prov:Agent>
+  
+  <prov:Plan rdf:about="http://sys-bio.org/Plan/characterization_protocol/1.0.0">
+    <sbol:attachment rdf:resource="http://sys-bio.org/Attachment/characterization_protocol/1.0.0"/>
+    <sbol:displayId>characterization_protocol</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://sys-bio.org/Plan/characterization_protocol"/>
+    <sbol:version>1.0.0</sbol:version>
+  </prov:Plan>
+</rdf:RDF>
