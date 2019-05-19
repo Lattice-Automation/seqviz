@@ -23,7 +23,10 @@ export class Edges extends React.Component {
       lastBase,
       resizing,
       fullSeq,
-      seqSelection: { ref, start, end, clockwise }
+      seqSelection: {
+        ref,
+        selectionMeta: { start, end, clockwise }
+      }
     } = this.props;
 
     let startEdge = null;
@@ -121,10 +124,10 @@ export class Block extends React.PureComponent {
       lastBase,
       resizing,
       fullSeq,
-      seqSelection
+      seqSelection: { ref, selectionMeta: selection }
     } = this.props;
-    const { ref, clockwise } = seqSelection;
-    let { start, end } = seqSelection;
+    const { clockwise } = selection;
+    let { start, end } = selection;
 
     // there's no need to render a selection block (rect) if just one point
     // has been selected

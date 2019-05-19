@@ -289,7 +289,6 @@ const withSelectionHandler = WrappedComp =>
         Linear,
         findState: { searchResults }
       } = this.props;
-
       if (!this.allowSetSelection) return;
       // should not be updating selection since it's not a drag event time
       if ((e.type === "mousemove" || e.type === "mouseup") && !this.dragEvent) {
@@ -329,7 +328,9 @@ const withSelectionHandler = WrappedComp =>
         case "SEQ": {
           // SeqBlock or anything on Circular (not already described above)
           let currBase = null;
-          const { seqSelection: currSelection } = this.props;
+          const {
+            seqSelection: { selectionMeta: currSelection }
+          } = this.props;
           if (Linear) {
             currBase = this.calculateBaseLinear(e, knownRange);
             const clockwiseDrag =
@@ -339,6 +340,7 @@ const withSelectionHandler = WrappedComp =>
             if (e.type === "mousedown" && currBase !== null) {
               // this is the start of a drag event
               this.setSequenceSelection({
+                ...currSelection,
                 start: e.shiftKey ? currSelection.start : currBase,
                 end: currBase,
                 clockwise: clockwiseDrag

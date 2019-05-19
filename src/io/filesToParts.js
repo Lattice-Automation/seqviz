@@ -48,7 +48,7 @@ const zipHandler = file => {
  * @param {String} file  the string representation of the passed file
  */
 const fileToParts = async (file, options) => {
-  const { fileName = "", colors = [] } = options;
+  const { fileName = "", colors = [], backbone = "" } = options;
   if (!file) throw Error("Cannot parse null or empty string");
 
   // this is a check for an edge case, where the user uploads come kind
@@ -110,7 +110,7 @@ const fileToParts = async (file, options) => {
       case file.includes("Parts from the iGEM"):
       case file.includes("<part_list>"):
         // BioBrick XML
-        parts = await parseBioBrick(file, colors);
+        parts = await parseBioBrick(file, { colors, backbone });
         break;
       case isBenchling:
         parts = await parseBenchling(file);
@@ -147,10 +147,10 @@ const fileToParts = async (file, options) => {
  */
 export default async (files, options) =>
   new Promise(resolve => {
-    const { fileName = "", colors = [] } = options;
+    const { fileName = "", colors = [], backbone = "" } = options;
     // if it's just a single file string
     if (typeof files === "string")
-      resolve(fileToParts(files, { fileName, colors }));
+      resolve(fileToParts(files, { fileName, colors, backbone }));
 
     // a list of file strings or a FileList has been dropped
     let numToUpload = files.length;
@@ -166,7 +166,8 @@ export default async (files, options) =>
             // convert it to a part
             fileToParts(rec.data, {
               fileName: rec.fileName,
-              colors: colors
+              colors: colors,
+              backbone: backbone
             }).then(convertedParts => {
               partsList = partsList.concat(...convertedParts);
               if (partsList.length >= numToUpload) {
@@ -181,7 +182,8 @@ export default async (files, options) =>
           fr.onload = e => {
             fileToParts(e.target.result, {
               fileName: file.name,
-              colors: colors
+              colors: colors,
+              backbone: backbone
             }).then(parts => {
               numToUpload += parts.length - 1;
               partsList = partsList.concat(...parts);

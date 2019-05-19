@@ -27,10 +27,45 @@ class PartExplorer extends React.Component {
   };
 
   componentDidMount = async () => {
-    const { part: partInput, annotate, colors } = this.props;
-    let part = await processPartInput(partInput, colors);
+    const {
+      part: partInput,
+      annotate,
+      colors,
+      backbone,
+      searchNext
+    } = this.props;
+    let part = await processPartInput(partInput, { colors, backbone });
     part = annotate ? await this.autoAnnotate(part) : part;
     this.setState({ part: part });
+    const handleKeyPress = e => {
+      const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
+        metaKey,
+        altKey,
+        ctrlKey,
+        shiftKey,
+        key
+      }))(e);
+      const next = (({ meta, alt, ctrl, shift, key }) => ({
+        metaKey: meta,
+        altKey: alt,
+        ctrlKey: ctrl,
+        shiftKey: shift,
+        key
+      }))(searchNext);
+      if (isEqual(input, next)) {
+        this.incrementSearch();
+      }
+    };
+    const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+    if (searchNext.key) {
+      if (takenBindings.includes(searchNext.key)) {
+        console.error(
+          "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
+        );
+      } else {
+        window.addEventListener("keydown", e => handleKeyPress(e));
+      }
+    }
   };
 
   shouldComponentUpdate = (nextProps, nextState) =>
@@ -47,6 +82,26 @@ class PartExplorer extends React.Component {
     }, {});
     const { ...rest } = this.state;
     this.setState({ ...rest, ...newState });
+  };
+
+  /**
+   * incrementResults
+   * Traverse the search results array and return a search index via a prop callback to
+   * tell the viewer what to highlight
+   */
+  incrementSearch = () => {
+    const {
+      findState: { searchResults, searchIndex }
+    } = this.state;
+    let newSearchIndex = searchIndex;
+    if (searchResults.length) {
+      const lastIndex = searchResults.length - 1;
+      newSearchIndex += 1;
+      if (newSearchIndex > lastIndex) newSearchIndex = 0;
+      this.setState({
+        findState: { searchResults: searchResults, searchIndex: newSearchIndex }
+      });
+    }
   };
 
   lambdaAnnotate = async part => {
@@ -103,7 +158,7 @@ class PartExplorer extends React.Component {
   };
 
   render() {
-    const { viewer, onSelection } = this.props;
+    const { viewer } = this.props;
     const { part } = this.state;
     const partState = this.state;
     const partAvailable = part.seq || false;
@@ -123,7 +178,7 @@ class PartExplorer extends React.Component {
                       part={part}
                       {...partState}
                       setPartState={this.setPartState}
-                      onSelection={onSelection}
+                      incrementSearch={this.incrementSearch}
                       size={size}
                       Circular
                     />
@@ -141,7 +196,7 @@ class PartExplorer extends React.Component {
                       {...part}
                       {...partState}
                       setPartState={this.setPartState}
-                      onSelection={onSelection}
+                      incrementSearch={this.incrementSearch}
                       size={size}
                       Circular={false}
                     />

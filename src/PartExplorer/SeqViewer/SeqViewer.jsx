@@ -3,6 +3,7 @@ import * as React from "react";
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
+import seqSearch from "../Find/Find";
 
 export const CIRC_CONSTS = {
   DROP_YDIFF: 13,
@@ -24,6 +25,18 @@ class SeqViewer extends React.Component {
       resizing
     }; // store the viewer settings in state
   }
+
+  componentDidMount = () => {
+    const {
+      searchQuery: { query, mismatch },
+      seq,
+      setPartState,
+      onSearch
+    } = this.props;
+    const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
+    onSearch({ searchResults, searchIndex });
+    setPartState({ findState: { searchResults, searchIndex } });
+  };
 
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps, nextState) =>

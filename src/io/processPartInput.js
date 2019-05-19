@@ -14,9 +14,15 @@ import externalToParts from "../io/externalToParts";
  * and an array of annotations. Check partFactory for latest
  * part object structure
  */
-const processPartInput = async (partInput, colors = []) => {
+const processPartInput = async (partInput, options) => {
+  const { colors = [], backbone = "" } = options;
   // We might be getting a FileList input from JS file input
   if (partInput.constructor.name === "FileList") {
+    if (backbone.length) {
+      console.warn(
+        "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
+      );
+    }
     if (partInput.length < 1) {
       console.error(
         "Instantiation Error: There are no valid files in your part input"
@@ -33,10 +39,20 @@ const processPartInput = async (partInput, colors = []) => {
   }
   // We might be getting a single File
   else if (partInput.constructor.name === "File") {
+    if (backbone.length) {
+      console.warn(
+        "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
+      );
+    }
     return partFromFile(partInput, colors);
   }
   // We might have been passed a valid part already
   else if (partInput.constructor.name === "Object") {
+    if (backbone.length) {
+      console.warn(
+        "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
+      );
+    }
     const {
       seq: sequence = "",
       compSeq: complement = "",
@@ -62,7 +78,7 @@ const processPartInput = async (partInput, colors = []) => {
     // If the string contains numbers it could be an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
-        return externalToParts(partInput, colors);
+        return externalToParts(partInput, { colors, backbone });
       } catch (err) {
         console.warn(
           "Were you trying to display a BioBrick or NCBI part? We were not able to fetch the part: ",
@@ -73,6 +89,11 @@ const processPartInput = async (partInput, colors = []) => {
     }
     // Otherwise check if it's just a sequence string
     else {
+      if (backbone.length) {
+        console.warn(
+          "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
+        );
+      }
       const invalidSequence = new RegExp(
         `[^${Object.keys(validSequenceCharacters).join("")}()|]`,
         "gi"
