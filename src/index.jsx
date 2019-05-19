@@ -12,9 +12,10 @@ import PUC from "./DefaultParts/pUC";
 //   PUC,
 //   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA"
 // ];
+// //const parts = ["KJ668651.1", "BBa_E0040"];
 // //const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["circular", "linear", "both"];
+// const types = ["linear", "circular", "both"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -36,8 +37,7 @@ import PUC from "./DefaultParts/pUC";
 // const annotations = true;
 // const complement = true;
 // const index = true;
-
-// const viewer = VIEWER("app-root", part, {
+// let viewer = VIEWER("app-root", part, {
 //   annotate: annotate,
 //   viewer: type,
 //   showAnnotations: annotations,
@@ -47,7 +47,19 @@ import PUC from "./DefaultParts/pUC";
 //   colors: [],
 //   onSelection: selection => {
 //     console.log("Your Selection: ", selection);
-//   }
+//   },
+//   onSearch: results => {
+//     console.log("Your Search Results: ", results);
+//   },
+//   searchNext: {
+//     key: "a",
+//     meta: false,
+//     ctrl: false,
+//     shift: false,
+//     alt: false
+//   },
+//   searchQuery: { query: "attcc", mismatch: 1 },
+//   backbone: "pSB1C3"
 // });
 // viewer.render();
 
@@ -74,7 +86,19 @@ import PUC from "./DefaultParts/pUC";
 //     colors: [],
 //     onSelection: selection => {
 //       console.log("Your Selection: ", selection);
-//     }
+//     },
+//     onSearch: query => {
+//       console.log("Your Query: ", query);
+//     },
+//     searchNext: {
+//       key: "a",
+//       meta: false,
+//       ctrl: false,
+//       shift: false,
+//       alt: false
+//     },
+//     searchQuery: { query: "attcc", mismatch: 1 },
+//     backbone: "pSB1C3"
 //   });
 //   viewer.render();
 // };
@@ -88,6 +112,9 @@ import PUC from "./DefaultParts/pUC";
 //   document.getElementById("app-root")
 // );
 
+/**
+ * Library exports
+ */
 export const pUC = () => {
   return PUC;
 };
@@ -103,17 +130,37 @@ export const Viewer = (element = "root", ViewerOptions) => {
     zoom = { circular: 0, linear: 50 },
     colors = [],
     onSelection = () => {
-      console.log("no custom selection functionality yet");
-    }
+      console.log(
+        "No custom selection functionality yet. Function passed as onSelection option will be applied to selected range."
+      );
+    },
+    onSearch = () => {
+      console.log(
+        "No custom search functionality yet. Function passed as onSearch option will be applied to search results."
+      );
+    },
+    searchNext = {
+      key: "",
+      meta: false,
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
+    searchQuery = { query: "", mismatch: 0 },
+    backbone = ""
   } = ViewerOptions;
   return VIEWER(element, part, {
-    annotate: annotate,
-    viewer: viewer,
-    showAnnotations: showAnnotations,
-    showComplement: showComplement,
-    showIndex: showIndex,
-    zoom: zoom,
-    colors: colors,
-    onSelection: onSelection
+    annotate,
+    viewer,
+    showAnnotations,
+    showComplement,
+    showIndex,
+    zoom,
+    colors,
+    onSelection,
+    onSearch,
+    searchNext,
+    searchQuery,
+    backbone
   });
 };

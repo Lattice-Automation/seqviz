@@ -21,7 +21,10 @@ class CircularSelection extends React.PureComponent {
       findCoor,
       generateArc,
       totalRows,
-      seqSelection: { ref, start, end, clockwise }
+      seqSelection: {
+        ref,
+        selectionMeta: { start, end, clockwise }
+      }
     } = this.props;
 
     // calculate the length of the current selection region

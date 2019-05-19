@@ -60,17 +60,26 @@ const withEventRouter = WrappedComp =>
      */
     selectAllHotkey = () => {
       const {
+        onSelection,
         setPartState,
-        seqSelection: { start }
-      } = this.props;
-      setPartState({
+        seqSelection,
         seqSelection: {
+          selectionMeta: { start }
+        }
+      } = this.props;
+      const newSelection = {
+        ...seqSelection,
+        selectionMeta: {
           start: start,
           end: start,
-          clockwise: true,
-          ref: "ALL" // ref to all means select the whole thing
-        }
+          clockwise: true
+        },
+        ref: "ALL" // ref to all means select the whole thing
+      };
+      setPartState({
+        seqSelection: newSelection
       });
+      onSelection(newSelection);
     };
 
     handleTripleClick = () => {
@@ -149,8 +158,7 @@ const withEventRouter = WrappedComp =>
         newCentralIndex = (newCentralIndex + seq.length) % seq.length;
 
         setPartState({
-          circularCentralIndex: newCentralIndex,
-          findState: { searchResults: [], searchIndex: 0 }
+          circularCentralIndex: newCentralIndex
         });
       }
     };
@@ -162,7 +170,10 @@ const withEventRouter = WrappedComp =>
     clipboardCopy = () => {
       const {
         seq,
-        seqSelection: { start, end, ref }
+        seqSelection: {
+          selectionMeta: { start, end },
+          ref
+        }
       } = this.props;
 
       const formerFocus = document.activeElement;
@@ -252,20 +263,6 @@ const withEventRouter = WrappedComp =>
           this.clipboardCopy();
           break;
         }
-        case "Clear": {
-          const { seqSelection: selection, setPartState } = this.props;
-          const { type: selectionType } = selection;
-
-          if (selectionType === "FIND") {
-            setPartState({
-              findState: {
-                searchIndex: 0,
-                searchResults: []
-              }
-            });
-          }
-          break;
-        }
         case "ArrowUp":
         case "ArrowRight":
         case "ArrowDown":
@@ -275,37 +272,10 @@ const withEventRouter = WrappedComp =>
         case "ShiftArrowDown":
         case "ShiftArrowLeft": {
           const {
-            seqSelection: selection,
-            findState: { searchIndex: currIdx, searchResults },
+            seqSelection: { selectionMeta: selection },
             setPartState
           } = this.props;
-          const { start, end, type: selectionType } = selection;
-          if (selectionType === "FIND") {
-            let nextIdx = currIdx;
-            let nextResults = searchResults;
-            if (type === "ArrowUp") {
-              nextIdx = currIdx <= 0 ? searchResults.length - 1 : currIdx - 1;
-            } else if (type === "ArrowDown") {
-              nextIdx = currIdx >= searchResults.length - 1 ? 0 : currIdx + 1;
-            }
-            const nextSelectStart =
-              nextIdx >= 0 ? searchResults[nextIdx].start : start;
-            const nextSelectEnd =
-              nextIdx >= 0 ? searchResults[nextIdx].end : end;
-            setPartState({
-              findState: {
-                searchIndex: nextIdx,
-                searchResults: nextResults
-              },
-              seqSelection: {
-                start: nextSelectStart,
-                end: nextSelectEnd
-              },
-              linearCentralIndex: nextSelectStart,
-              circularCentralIndex: nextSelectStart
-            });
-            break;
-          }
+          const { start, end } = selection;
           if (Linear) {
             let { clockwise } = selection;
             let newPos = end;
@@ -346,18 +316,22 @@ const withEventRouter = WrappedComp =>
             if (newPos !== start && !type.startsWith("Shift")) {
               setPartState({
                 seqSelection: {
-                  start: newPos,
-                  end: newPos,
-                  clockwise: true,
+                  selectionMeta: {
+                    start: newPos,
+                    end: newPos,
+                    clockwise: true
+                  },
                   ref: ""
                 }
               });
             } else if (type.startsWith("Shift")) {
               setPartState({
                 seqSelection: {
-                  start: start,
-                  end: newPos,
-                  clockwise: clockwise,
+                  selectionMeta: {
+                    start: start,
+                    end: newPos,
+                    clockwise: clockwise
+                  },
                   ref: ""
                 }
               });

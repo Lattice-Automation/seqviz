@@ -11,8 +11,9 @@ import xml2js from "xml2js";
  *
  * an exmaple of the XML file that's parsed is in ./examples/biobrick
  */
-export default async (file, colors = []) =>
+export default async (file, options) =>
   new Promise((resolve, reject) => {
+    const { colors = [], backbone = "" } = options;
     // util reject function that will be triggered if any fields fail
     const rejectBioBrick = errType =>
       reject(new Error(`Failed on BioBrick because ${errType}`));
@@ -37,7 +38,7 @@ export default async (file, colors = []) =>
       const seq_data = firstElement(sequences);
       if (!seq_data || !seq_data.seq_data) rejectBioBrick("getting seq_data");
 
-      const seq = firstElement(seq_data.seq_data);
+      const seq = firstElement(seq_data.seq_data) + backbone;
       const name = firstElement(part_name);
 
       // assume it failed
