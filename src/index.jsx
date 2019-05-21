@@ -15,7 +15,7 @@ import PUC from "./DefaultParts/pUC";
 // //const parts = ["KJ668651.1", "BBa_E0040"];
 // //const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["circular", "both"];
+// const types = ["circular"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -33,7 +33,7 @@ import PUC from "./DefaultParts/pUC";
 // const part = parts[localStorage.getItem("iteration") % parts.length];
 // const type = types[localStorage.getItem("iteration") % types.length];
 
-// const annotate = false;
+// const annotate = true;
 // const annotations = true;
 // const complement = true;
 // const index = true;
@@ -43,7 +43,7 @@ import PUC from "./DefaultParts/pUC";
 //   showAnnotations: annotations,
 //   showComplement: complement,
 //   showIndex: index,
-//   zoom: { circular: 100, linear: 50 },
+//   zoom: { linear: 50 },
 //   colors: [],
 //   onSelection: selection => {
 //     console.log("Your Selection: ", selection);
@@ -60,7 +60,7 @@ import PUC from "./DefaultParts/pUC";
 //   },
 //   searchQuery: { query: "GCGG" },
 //   backbone: "pSB1C3",
-//   enzymes: []
+//   enzymes: ["AciI"]
 // });
 // viewer.render();
 
@@ -99,7 +99,8 @@ import PUC from "./DefaultParts/pUC";
 //       alt: false
 //     },
 //     searchQuery: { query: "attcc", mismatch: 1 },
-//     backbone: "pSB1C3"
+//     backbone: "pSB1C3",
+//     enzymes: []
 //   });
 //   viewer.render();
 // };
