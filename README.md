@@ -10,63 +10,103 @@ In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.<br>
+Runs a test app for this library in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+You will first want to write or uncomment-out test code in `src/index.jsx`. Remember to remove or comment-out test code before building the library.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the library into a single browser-ready minified script.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+You can see the results in `/dist` labeled as `visualizer${version}.min.js`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Using the library
 
-### `npm run eject`
+The library source code will be in a file named `visualizer${version}.min.js`. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+You will want to import the library in your top level `index.html`. In the case of the cdn download you can use.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```html
+<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.7.min.js"></script>
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This will expose the `lattice` library through the `window` global variable. The `lattice` library currently contains one sample part `pUC()` and the `Viewer()` constructor. You can initialize a new viewer with the sample part like so:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```html
+<script>
+  const lattice = window.lattice;
+  const part = lattice.pUC();
+  const viewer = lattice.Viewer("bottom-root", {
+    part: part,
+    viewer: "both"
+  });
+  viewer.render();
+</script>
+```
 
-## Learn More
+### Viewer Options
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`Viewer(${element}, ${viewerOptions})` <br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`element` :
 
-### Code Splitting
+- a string element name like "root" or "app-root"
+- an element i.e. from `document.getElementById()`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+<br>
 
-### Analyzing the Bundle Size
+`viewerOptions` :
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```js
+const {
+  part = "KJ668651.1" || "BBa_E0040" || PUC || "ATCG", // part input
+  annotate = true || false, // whether or not to use our lambda auto-annotate
+  viewer = "circular" || "linear" || "both", // type of viewer to show
+  showAnnotations = true || false, // whether or not to show annotations
+  showComplement = true || false, // whether or not to show complement strand
+  showIndex = true || false, // whether or not to show index (numbers and line)
+  zoom = { linear: 0 - 100 }, // zoom under 50 is zoom out, zoom above 50 is zoom in
+  colors = ["#85A6FF", "#FFFFF"], // color hex codes for annotation colors
+  onSelection = selectionObject => {}, // used to return, log, or do something to selection
+  onSearch = searchResults => {}, // used to return, log, or do something to search results
+  searchNext = {
+    key: "",
+    meta: true || false,
+    ctrl: true || false,
+    shift: true || false,
+    alt: true || false
+  }, // key binding for toggling next search result highlight, defaults to none
+  searchQuery = { query: "", mismatch: 0 }, // search query
+  backbone = "pSB1C3", // name of a BioBrick backbone, or a custom backbone string
+  enzymes = ["AciI"] // list of enzymes for which to search for and display cutsites
+} = viewerOptions;
+```
 
-### Making a Progressive Web App
+<br>
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+`part` :
 
-### Advanced Configuration
+- NCBI accession number
+- BioBrick accession number
+- sequence string supports {atcguyrwskmdvhbxnATCGUYRWSKMDVHBXN}
+- part object of the form
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```json
+{
+  "name": "some part",
+  "seq": "AtCg",
+  "compSeq": "tAgC",
+  "annotations": [
+    {
+      "start": 1,
+      "end": 4,
+      "direction": "REVERSE",
+      "name": "a fragment"
+    }
+  ]
+}
+```
