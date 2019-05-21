@@ -108,7 +108,8 @@ class PartExplorer extends React.Component {
     const result = await new Promise((resolve, reject) => {
       request.post(
         {
-          uri: `${String(process.env.REACT_APP_LAMBDA_URL)}/annotate`,
+          uri:
+            "https://u7a3t8zeo8.execute-api.us-east-1.amazonaws.com/prod/annotate",
           method: "POST",
           json: JSON.stringify({
             part: { id: shortid.generate(), seq: part.seq.toLowerCase() }
