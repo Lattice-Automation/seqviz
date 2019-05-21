@@ -128,9 +128,6 @@ const SingleAnnotation = props => {
  * which are non-overlapping arrays or annotation arrays, which are then
  * used to create the array of array of annotation paths
  *
- * When the zoom is greater than 5, show the annotation names in the annotations
- * (move them to within the annotation)
- *
  * @type {Function}
  */
 export default class Annotations extends React.PureComponent {
@@ -155,19 +152,18 @@ export default class Annotations extends React.PureComponent {
   };
 
   render() {
-    const { radius, rowsToSkip, zoom, lineHeight, annotations } = this.props;
+    const { radius, rowsToSkip, lineHeight, annotations } = this.props;
 
     // at least 3 rows inward from default radius (ie index row)
     const rowShiftHeight = lineHeight * rowsToSkip;
     const radiusAdjust = lineHeight * 3;
     let currBRadius = radius - radiusAdjust - rowShiftHeight;
 
-    // increasing the size of the annotations during a "zoom"
     let currTRadius = currBRadius - lineHeight; // top radius
 
     // shared style object for inlining
     const annStyle = {
-      strokeWidth: zoom.circular > 30 ? 1 : 0.5,
+      strokeWidth: 0.5,
       shapeRendering: "geometricPrecision",
       cursor: "pointer",
       fillOpacity: 0.7,

@@ -3,11 +3,11 @@ import shortid from "shortid";
 import { stackElements } from "../partElementsToRows";
 import Annotations from "./Annotations/Annotations";
 import "./Circular.scss";
-import CircularFind from "./CircularFind/CircularFind";
 import Index from "./Index/Index";
 import Labels from "./Labels/Labels";
 import Selection from "./Selection/Selection";
 import withViewerHOCs from "../handlers";
+import CutSites from "./CutSites/CutSites";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -15,12 +15,7 @@ export const CHAR_WIDTH = 7.801;
 
 class Circular extends React.PureComponent {
   static getDerivedStateFromProps = nextProps => {
-    /**
-     * given the incoming zoom property, calculate the "lineHeight", which is
-     * the height of each row (used as a differential in radius usually)
-     */
-    const calcLineHeight = zoom => Math.max((zoom / 100.0) * 3, 1) * 14;
-    const lineHeight = calcLineHeight(nextProps.zoom.circular);
+    const lineHeight = 14;
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
       nextProps.seq.length
@@ -35,6 +30,7 @@ class Circular extends React.PureComponent {
      * when it can easily fit on top of the annotation itself
      */
     const seqLength = nextProps.seq.length;
+    const cutSiteLabels = nextProps.cutSites;
     const { radius } = nextProps;
     let innerRadius = radius - 3 * lineHeight;
     const inlinedLabels = [];
@@ -58,6 +54,14 @@ class Circular extends React.PureComponent {
       });
       innerRadius -= lineHeight;
     });
+
+    cutSiteLabels.forEach(c =>
+      outerLabels.push({
+        ...c,
+        start: c.sequenceCutIdx,
+        type: "enzyme"
+      })
+    );
 
     // sort all the labels so they're in ascending order
     outerLabels.sort(
@@ -235,7 +239,6 @@ class Circular extends React.PureComponent {
     const {
       showAnnotations,
       showIndex,
-      zoom,
       name,
       inputRef,
       mouseEvent,
@@ -247,7 +250,8 @@ class Circular extends React.PureComponent {
       size,
 
       seq,
-      compSeq
+      compSeq,
+      cutSites
     } = this.props;
 
     const {
@@ -262,7 +266,6 @@ class Circular extends React.PureComponent {
 
     // general values/functions used in many/all children
     const general = {
-      zoom,
       radius,
       center,
       lineHeight,
@@ -274,9 +277,6 @@ class Circular extends React.PureComponent {
       inputRef,
       resizing
     };
-    // adjust lineHeight so everything will fit at max zoom
-    // eq of a line between (0, lineHeight), (100, height / totalRows)
-    let vAdjust = 0;
 
     const plasmidId = `${name}-viewer-circular`;
     const selectionId = shortid.generate();
@@ -292,7 +292,7 @@ class Circular extends React.PureComponent {
         ref={inputRef(plasmidId, { type: "SEQ" })}
         {...size}
       >
-        <g id="circular-root" transform={`translate(0, ${yDiff + vAdjust})`}>
+        <g id="circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection
             {...this.props}
             {...general}
@@ -301,19 +301,6 @@ class Circular extends React.PureComponent {
             totalRows={4}
             seq={seq}
           />
-          {showIndex && (
-            <Index
-              {...this.props}
-              {...general}
-              name={name}
-              size={size}
-              yDiff={yDiff + vAdjust}
-              seq={seq}
-              compSeq={compSeq}
-              totalRows={4}
-            />
-          )}
-          <CircularFind {...this.props} {...general} selectionRows={4} />
           {showAnnotations && (
             <Annotations
               {...this.props}
@@ -330,7 +317,22 @@ class Circular extends React.PureComponent {
               {...general}
               labels={outerLabels}
               size={size}
-              yDiff={yDiff + vAdjust}
+              yDiff={yDiff}
+            />
+          )}
+          {cutSites.length && (
+            <CutSites {...general} selectionRows={4} cutSites={cutSites} />
+          )}
+          {showIndex && (
+            <Index
+              {...this.props}
+              {...general}
+              name={name}
+              size={size}
+              yDiff={yDiff}
+              seq={seq}
+              compSeq={compSeq}
+              totalRows={4}
             />
           )}
         </g>

@@ -6,10 +6,6 @@ import WrappedGroupLabel from "./WrappedGroupLabel";
 /**
  * used to build up all plasmid labels, for annotations, enzymes, etc
  *
- * this should eventually show a name on the annotation if the viewer is
- * sufficiently zoomed, and simply show a line connecting the name
- * to the path if it is too zoomed out and the names do not fit within a path
- *
  * a caveat to take into account here is that the names, outside the
  * map, might also overlap with one another. There will need to be a check, given
  * the dimensions of each name, calculated by the font, and the size
@@ -49,13 +45,12 @@ export default class Labels extends React.Component {
       findCoor,
       lineHeight,
       size,
-      zoom,
       yDiff
     } = props;
 
     // create a radius outside the plasmid map for placing the names
     const textRadiusAdjust =
-      zoom.circular < 60 && seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
+      seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
     const textRadius = radius + textRadiusAdjust;
 
     /**
@@ -232,8 +227,6 @@ export default class Labels extends React.Component {
      * this pushes their textCoors inward to prevent that
      */
     return labelsGrouped.map(g => {
-      if (zoom.circular > 0) return g; // this adjustment is only for fully zoomed out state
-
       let { x, y } = g.textCoor;
       // prevent the text label from overflowing the sides (w/ one char padding)
       x = Math.max(CHAR_WIDTH * (g.name.length + 1), x);
@@ -259,7 +252,7 @@ export default class Labels extends React.Component {
 
   render() {
     const { labelGroups, hoveredGroup } = this.state;
-    const { size, lineHeight, zoom } = this.props;
+    const { size, lineHeight } = this.props;
 
     // find the currently hovered group
     const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
@@ -329,7 +322,6 @@ export default class Labels extends React.Component {
             size={size}
             setHoveredGroup={this.setHoveredGroup}
             lineHeight={lineHeight}
-            zoom={zoom}
           />
         )}
       </g>

@@ -15,7 +15,8 @@ const Viewer = (element, part, options) => {
       colors,
       zoom,
       backbone,
-      searchQuery: { query, mismatch }
+      searchQuery: { query, mismatch },
+      enzymes
     } = displayOptions;
 
     const displayName = displayPart.name
@@ -29,7 +30,6 @@ const Viewer = (element, part, options) => {
     const displayComplement = showComplement ? "on" : "off";
     const displayIndex = showIndex ? "on" : "off";
     const displayCustomColors = colors.length ? "yes" : "no";
-    const displayZoomCircular = zoom.circular;
     const displayZoomLinear =
       zoom.linear > 50
         ? zoom.linear - 50
@@ -51,13 +51,18 @@ const Viewer = (element, part, options) => {
         Show Complement: ${displayComplement}
         Show Index: ${displayIndex}
         Using Custom Colors: ${displayCustomColors}
-        Circular Zoom: ${displayZoomCircular} (0 . 100)
         Linear Zoom: ${displayZoomLinear} (-50 . 50)
         Searching for sequence "${query}" with ${mismatch} mismatch allowance
+        Showing cut sites for enzymes: ${enzymes}
         ${displayBackbone}
     =====================================================
     `
     );
+    if (viewerType === "circular" && query !== "") {
+      console.warn(
+        "Search visualization is only supported in Linear Sequence View."
+      );
+    }
   };
 
   const viewer = <PartExplorer part={part} {...options} />;
