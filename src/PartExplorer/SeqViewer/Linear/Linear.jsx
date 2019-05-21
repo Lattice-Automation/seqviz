@@ -55,6 +55,8 @@ class Linear extends React.Component {
       showIndex,
       showComplement,
       showAnnotations,
+
+      cutSites,
       annotations,
 
       lineHeight,
@@ -80,6 +82,10 @@ class Linear extends React.Component {
     const compSeqs = new Array(arrSize); // complements...
     const blockHeights = new Array(arrSize); // block heights...
     const yDiffs = new Array(arrSize); // y differentials...
+
+    const cutSiteRows = cutSites.length
+      ? createSingleRows(cutSites, bpsPerBlock, arrSize)
+      : new Array(arrSize).fill([]);
 
     const annotationRows = showAnnotations // annotations...
       ? createMultiRows(
@@ -117,6 +123,9 @@ class Linear extends React.Component {
       if (showAnnotations && annotationRows[i].length) {
         blockHeight += annotationRows[i].length * elementHeight + spacingHeight;
       }
+      if (cutSiteRows[i].length) {
+        blockHeight += lineHeight + spacingHeight; // space for cutsite name
+      }
       blockHeights[i] = blockHeight;
 
       // update the yDifferentialMap for the current block
@@ -144,6 +153,7 @@ class Linear extends React.Component {
           compSeq={compSeqs[i]}
           blockHeight={blockHeights[i]}
           annotationRows={annotationRows[i]}
+          cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
           currSearchIndex={searchIndex}
           firstBase={firstBase}

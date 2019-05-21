@@ -15,7 +15,7 @@ import PUC from "./DefaultParts/pUC";
 // //const parts = ["KJ668651.1", "BBa_E0040"];
 // //const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["linear", "circular", "both"];
+// const types = ["circular", "both"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -43,7 +43,7 @@ import PUC from "./DefaultParts/pUC";
 //   showAnnotations: annotations,
 //   showComplement: complement,
 //   showIndex: index,
-//   zoom: { circular: 0, linear: 50 },
+//   zoom: { circular: 100, linear: 50 },
 //   colors: [],
 //   onSelection: selection => {
 //     console.log("Your Selection: ", selection);
@@ -58,8 +58,9 @@ import PUC from "./DefaultParts/pUC";
 //     shift: false,
 //     alt: false
 //   },
-//   searchQuery: { query: "attcc", mismatch: 1 },
-//   backbone: "pSB1C3"
+//   searchQuery: { query: "GCGG" },
+//   backbone: "pSB1C3",
+//   enzymes: []
 // });
 // viewer.render();
 
@@ -87,8 +88,8 @@ import PUC from "./DefaultParts/pUC";
 //     onSelection: selection => {
 //       console.log("Your Selection: ", selection);
 //     },
-//     onSearch: query => {
-//       console.log("Your Query: ", query);
+//     onSearch: results => {
+//       console.log("Your Search Results: ", results);
 //     },
 //     searchNext: {
 //       key: "a",
@@ -147,7 +148,8 @@ export const Viewer = (element = "root", ViewerOptions) => {
       alt: false
     },
     searchQuery = { query: "", mismatch: 0 },
-    backbone = ""
+    backbone = "",
+    enzymes = []
   } = ViewerOptions;
   return VIEWER(element, part, {
     annotate,
@@ -161,6 +163,7 @@ export const Viewer = (element = "root", ViewerOptions) => {
     onSearch,
     searchNext,
     searchQuery,
-    backbone
+    backbone,
+    enzymes
   });
 };

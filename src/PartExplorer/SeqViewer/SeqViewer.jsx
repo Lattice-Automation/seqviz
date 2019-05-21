@@ -4,6 +4,7 @@ import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
 import seqSearch from "../Find/Find";
+import { cutSitesInRows } from "../../Utils/digest/digest";
 
 export const CIRC_CONSTS = {
   DROP_YDIFF: 13,
@@ -94,7 +95,6 @@ class SeqViewer extends React.Component {
    */
   circularProps = () => {
     const {
-      zoom: { circular: zoom } = 0,
       size,
       part: {
         seq: { length: seqLength }
@@ -108,38 +108,18 @@ class SeqViewer extends React.Component {
 
     const limitingDim = Math.min(size.height, size.width);
 
-    // find the number of currently shown basepairs along the arc, using an exponential curve
-    // between (0, seqLength) and (100, 50) (zoom, BPs shown on arc)
-    // this curve was generated using desmos so that, at max zoom, there's always ~50 bps,
-    // regardless of plasmid size and, at minimum zoom, the entire length of the plasmid.
-    // this was originally a linear line, but too few bps were shown in the 15-70 range
-    // curve params for future adjustment:
-    // https://user-images.githubusercontent.com/13923102/36227188-43a80494-119e-11e8-8196-a173a96ebff8.png
     const exp = 0.83; // exponent... greater exp leads to flatter curve (c in fig)
     const beta = Math.exp(Math.log(50 / seqLength) / -(100 ** exp)); // beta coefficient (b in fig)
-    const bpsOnArc = seqLength * beta ** -(zoom ** exp); // calc using the full expression
+    const bpsOnArc = seqLength * beta; // calc using the full expression
 
     // scale the radius so only (bpsOnArc) many bps are shown
     let radius = limitingDim * 0.34;
 
-    const maxPixelPerBP = limitingDim / 100.0; // fully zoomed on 50 bps; 1.1 is approximate
-    // for bps on circular vs linear index line across the viewer
-    const minPixelPerBP = (radius * Math.PI) / seqLength; // not zoomed at all, whole plasmid
-
-    // slope from (0, minPixelPerBP) to (100, maxPixelPerBP)
-    const pixelSlope = (maxPixelPerBP - minPixelPerBP) / 100.0; // from zero to 100 zoom
-    const pixelPerBP = pixelSlope * zoom + minPixelPerBP; // equation of a line
+    const pixelPerBP = (radius * Math.PI) / seqLength;
     const totalPixelsOfArc = pixelPerBP * bpsOnArc;
 
-    // honestly I don't know the signif of this coefficent 0.84 (Josh)
-    // slope from (0, y) to (100, 0)
-    // trying to avoid dividing by 0
-    const radiusAdjust = center.y / Math.max(0.1, 100 * (100 - zoom + 1));
     radius = totalPixelsOfArc / (Math.PI * (bpsOnArc / seqLength));
-    let yDiff = radius - radiusAdjust;
-    if (zoom === 0) {
-      yDiff = 0; // stupid hack
-    }
+    const yDiff = 0;
     return { radius, yDiff, Linear: false, size, bpsOnArc, center };
   };
 
@@ -147,10 +127,13 @@ class SeqViewer extends React.Component {
     const {
       Circular: CircularProp,
       part,
+      enzymes,
       part: {
         seq: { length: seqLength }
       }
     } = this.props;
+
+    const cutSites = enzymes.length ? cutSitesInRows(part.seq, enzymes) : [];
 
     return (
       <div
@@ -163,6 +146,7 @@ class SeqViewer extends React.Component {
             {...part}
             {...this.state}
             {...this.circularProps()}
+            cutSites={cutSites}
           />
         )}
         {!CircularProp && (
@@ -172,6 +156,7 @@ class SeqViewer extends React.Component {
             {...this.state}
             {...this.linearProps()}
             seqLength={seqLength}
+            cutSites={cutSites}
           />
         )}
       </div>

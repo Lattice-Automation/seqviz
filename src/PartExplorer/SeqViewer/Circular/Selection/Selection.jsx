@@ -13,7 +13,6 @@ class CircularSelection extends React.PureComponent {
   render() {
     const {
       seq,
-      zoom,
       radius,
       lineHeight,
       seqLength,
@@ -52,8 +51,7 @@ class CircularSelection extends React.PureComponent {
 
     // const calc the size of the selection radii
     let topR = radius + lineHeight; // outer radius
-    if (zoom.circular > 60 || seq.length < 200) {
-      // at above 60 zoom, two rows of basepairs will be rendered
+    if (seq.length < 200) {
       topR += 2 * lineHeight;
     }
     const bAdjust = lineHeight * totalRows; // adjust bottom radius
@@ -85,9 +83,6 @@ class CircularSelection extends React.PureComponent {
 
     // this should be very thin when the selection range starts and ends at same point
     let edgeStrokeWidth = 3;
-    if (zoom.circular > 30) {
-      edgeStrokeWidth = 4;
-    }
     if (start === end) {
       edgeStrokeWidth = 1.5;
     }

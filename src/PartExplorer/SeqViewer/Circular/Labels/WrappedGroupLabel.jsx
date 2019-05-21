@@ -18,8 +18,7 @@ export default class WrappedGroupLabel extends React.Component {
       group,
       setHoveredGroup,
       lineHeight,
-      size: { height, width },
-      zoom
+      size: { height, width }
     } = this.props;
 
     // utility function for calculating the width of the last row before this one
@@ -90,12 +89,10 @@ export default class WrappedGroupLabel extends React.Component {
         ? x - (group.labels[0].name.length + 3) * CHAR_WIDTH
         : x;
     y -= CHAR_WIDTH;
-    if (zoom.circular === 0) {
-      x = Math.max(x, 2 * CHAR_WIDTH); // prevent overflow of left or right side
-      x = Math.min(x, width - 2 * CHAR_WIDTH - groupWidth);
-      y = Math.max(y, 2 * CHAR_WIDTH); // prevent overflow of top and bottom
-      y = Math.min(y, height - 2 * CHAR_WIDTH - groupHeight);
-    }
+    x = Math.max(x, 2 * CHAR_WIDTH); // prevent overflow of left or right side
+    x = Math.min(x, width - 2 * CHAR_WIDTH - groupWidth);
+    y = Math.max(y, 2 * CHAR_WIDTH); // prevent overflow of top and bottom
+    y = Math.min(y, height - 2 * CHAR_WIDTH - groupHeight);
 
     // add padding to the box by adding/subbing a CHAR_WIDTH from edges
     const groupCoor = { x, y };

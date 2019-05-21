@@ -3,6 +3,7 @@ import Annotations from "./Annotations/Annotations";
 import IndexRow from "./Index/Index";
 import LinearFind from "./LinearFind/LinearFind";
 import Selection from "./Selection/Selection";
+import CutSiteRow from "./CutSites/CutSites";
 
 /**
  * SeqBlock
@@ -77,6 +78,7 @@ export default class SeqBlock extends React.PureComponent {
       compSeq,
       fullSeq,
       annotationRows,
+      cutSiteRows,
       searchRows,
       currSearchIndex,
       blockHeight,
@@ -124,8 +126,13 @@ export default class SeqBlock extends React.PureComponent {
       type: "SEQ",
       element: this
     };
+
+    // height and yDiff of cut sites
+    const cutSiteYDiff = elementHeight;
+    const cutSiteHeight = zoomed && cutSiteRows.length ? elementHeight : 0;
+
     // height and yDiff of the sequence strand
-    const indexYDiff = 0;
+    const indexYDiff = cutSiteYDiff + cutSiteHeight;
     const indexHeight = zoomed ? lineHeight : 0; // bases not shown at < 10 zoom
 
     // height and yDiff of the complement strand
@@ -178,16 +185,6 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             fullSeq={fullSeq}
           />
-          {zoomed ? (
-            <text {...textProps} y={indexYDiff} id={id}>
-              {seq}
-            </text>
-          ) : null}
-          {compSeq && zoomed && showComplement ? (
-            <text {...textProps} y={compYDiff} id={id}>
-              {compSeq}
-            </text>
-          ) : null}
           {showAnnotations && (
             <Annotations
               {...this.props}
@@ -226,6 +223,24 @@ export default class SeqBlock extends React.PureComponent {
               findXAndWidth={this.findXAndWidth}
             />
           )}
+          {zoomed ? (
+            <CutSiteRow
+              {...this.props}
+              findXAndWidth={this.findXAndWidth}
+              lastBase={lastBase}
+              yDiff={cutSiteYDiff}
+            />
+          ) : null}
+          {zoomed ? (
+            <text {...textProps} y={indexYDiff} id={id}>
+              {seq}
+            </text>
+          ) : null}
+          {compSeq && zoomed && showComplement ? (
+            <text {...textProps} y={compYDiff} id={id}>
+              {compSeq}
+            </text>
+          ) : null}
         </g>
       </svg>
     );
