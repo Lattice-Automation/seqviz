@@ -46,7 +46,10 @@ export default async (accession, options) => {
         "The backbone option is currently only valid with BioBrick imports. If you meant to display a BioBrick, please make sure that your part input was a valid BioBrick accession number."
       );
     }
-    const igembackbone = igembrick && backbone.length ? fetchBBB(backbone) : "";
+    const igembackbone =
+      igembrick && backbone.length
+        ? { name: backbone, backbone: fetchBBB(backbone) }
+        : "";
     if (igembrick && igembackbone === "") {
       console.warn(
         "It looks like you are trying to display a BioBrick. BioBricks typically need to be inserted into a Plasmid Backbone (https://parts.igem.org/Plasmid_backbones/Assembly). Please specify one in your viewer options."

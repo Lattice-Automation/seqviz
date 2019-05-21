@@ -38,8 +38,9 @@ export default async (file, options) =>
       const seq_data = firstElement(sequences);
       if (!seq_data || !seq_data.seq_data) rejectBioBrick("getting seq_data");
 
-      const seq = firstElement(seq_data.seq_data) + backbone;
-      const name = firstElement(part_name);
+      const seq = firstElement(seq_data.seq_data) + backbone.backbone;
+      const backboneName = backbone.name.length < 20 ? backbone.name : "";
+      const name = `${backboneName}-${firstElement(part_name)}`;
 
       // assume it failed
       if (!seq || !name || !featureArray) {
