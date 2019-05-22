@@ -1,3 +1,5 @@
+import { annotationFactory } from "./sequence";
+
 /**
  * returns an object with sequence and complement sequence as strings
  *
@@ -36,8 +38,12 @@ const DNAComplement = {
   V: "B",
   b: "v",
   B: "V",
-  N: "N", // unknown
-  n: "n"
+  N: "N",
+  n: "n",
+  X: "X",
+  x: "x",
+  U: "A",
+  u: "a"
 };
 
 /**
@@ -112,3 +118,30 @@ export const partFactory = () => ({
   cutSites: [],
   note: ""
 });
+
+export const partStub = colors => {
+  const sequence =
+    "atcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXN";
+  return {
+    ...partFactory(),
+    name: "No Part to Display",
+    seq: sequence,
+    compSeq: dnaComplement(sequence).compSeq,
+    annotations: [
+      {
+        ...annotationFactory(colors),
+        start: 20,
+        end: 30,
+        direction: "FORWARD",
+        name: "forward annotation"
+      },
+      {
+        ...annotationFactory(colors),
+        start: 50,
+        end: 70,
+        direction: "REVERSE",
+        name: "reverse annotation"
+      }
+    ]
+  };
+};

@@ -10,12 +10,13 @@ import PUC from "./DefaultParts/pUC";
 //   "KJ668651.1",
 //   "BBa_E0040",
 //   PUC,
-//   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA"
+//   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA",
+//   ""
 // ];
 // //const parts = ["KJ668651.1", "BBa_E0040"];
-// //const part = parts[Math.floor(Math.random() * parts.length)];
+// const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["circular"];
+// const types = ["linear", "circular", "both"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -30,10 +31,10 @@ import PUC from "./DefaultParts/pUC";
 //   localStorage.setItem("iteration", "0");
 // }
 
-// const part = parts[localStorage.getItem("iteration") % parts.length];
+// //const part = parts[localStorage.getItem("iteration") % parts.length];
 // const type = types[localStorage.getItem("iteration") % types.length];
 
-// const annotate = true;
+// const annotate = false;
 // const annotations = true;
 // const complement = true;
 // const index = true;

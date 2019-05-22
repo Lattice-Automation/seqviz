@@ -1,4 +1,4 @@
-import { partFactory, dnaComplement } from "../Utils/parser";
+import { partFactory, dnaComplement, partStub } from "../Utils/parser";
 import {
   annotationFactory,
   validSequenceCharacters,
@@ -75,6 +75,10 @@ const processPartInput = async (partInput, options) => {
   }
   // We might get a string
   else if (partInput.constructor.name === "String") {
+    if (partInput.length < 1) {
+      console.error("Instantiation Error: No valid part found.");
+      return partStub(colors);
+    }
     // If the string contains numbers it could be an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
@@ -111,6 +115,9 @@ const processPartInput = async (partInput, options) => {
         );
       }
     }
+  } else {
+    console.error("Instantiation Error: No valid part found.");
+    return partStub(colors);
   }
 };
 

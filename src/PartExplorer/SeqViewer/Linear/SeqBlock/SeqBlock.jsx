@@ -128,7 +128,7 @@ export default class SeqBlock extends React.PureComponent {
     };
 
     // height and yDiff of cut sites
-    const cutSiteYDiff = elementHeight;
+    const cutSiteYDiff = zoomed && cutSiteRows.length ? elementHeight / 2 : 0; // spacing for cutSite names
     const cutSiteHeight = zoomed && cutSiteRows.length ? elementHeight : 0;
 
     // height and yDiff of the sequence strand
@@ -146,7 +146,8 @@ export default class SeqBlock extends React.PureComponent {
       : 0;
 
     // calc the height necessary for the sequence selection
-    let selectHeight = indexHeight + compHeight + annHeight;
+    let selectHeight =
+      indexHeight + compHeight + annHeight + cutSiteHeight + cutSiteYDiff;
     let selectEdgeHeight = showIndex ? selectHeight + lineHeight : selectHeight;
 
     // needed because otherwise the selection height is very small

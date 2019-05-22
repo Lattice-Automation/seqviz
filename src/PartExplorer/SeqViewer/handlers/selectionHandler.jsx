@@ -329,7 +329,7 @@ const withSelectionHandler = WrappedComp =>
           // SeqBlock or anything on Circular (not already described above)
           let currBase = null;
           const {
-            seqSelection: { selectionMeta: currSelection }
+            seqSelection: { ref: currRef, selectionMeta: currSelection }
           } = this.props;
           if (Linear) {
             currBase = this.calculateBaseLinear(e, knownRange);
@@ -340,7 +340,6 @@ const withSelectionHandler = WrappedComp =>
             if (e.type === "mousedown" && currBase !== null) {
               // this is the start of a drag event
               this.setSequenceSelection({
-                ...currSelection,
                 start: e.shiftKey ? currSelection.start : currBase,
                 end: currBase,
                 clockwise: clockwiseDrag
@@ -349,7 +348,6 @@ const withSelectionHandler = WrappedComp =>
             } else if (this.dragEvent && currBase !== null) {
               // continue a drag event that's currently happening
               this.setSequenceSelection({
-                ...currSelection,
                 end: currBase,
                 clockwise: clockwiseDrag
               });
@@ -358,9 +356,9 @@ const withSelectionHandler = WrappedComp =>
             let {
               start: newStart,
               end: newEnd,
-              ref: newRef,
               clockwise: newClockwise
             } = currSelection;
+            let newRef = currRef;
             const seqLength = seq.length;
             currBase = this.calculateBaseCircular(e); // get the base currently hovered over
             if (e.type === "mousedown") {
@@ -441,7 +439,7 @@ const withSelectionHandler = WrappedComp =>
                   this.fullSelectionLength = check; // shift select catch up
                 }
                 const sameDirectionDrag = this.dragEvent && sameDirectionMove; // there is an ongoing drag in the same direction as the direction the selection started in
-                const alreadyFullSelection = currSelection.ref === "ALL"; // selection is full sequence
+                const alreadyFullSelection = currRef === "ALL"; // selection is full sequence
                 const hitFullSelection =
                   !alreadyFullSelection &&
                   this.fullSelectionLength >= seqLength; // selection became full sequence
@@ -451,6 +449,7 @@ const withSelectionHandler = WrappedComp =>
                 } else if (alreadyFullSelection) {
                   this.fullSelectionLength =
                     seqLength + (this.fullSelectionLength % seqLength); // this ensures that backtracking doesn't require making up to your overshoot forward circles
+                  newRef = "ALL";
                   if (
                     !sameDirectionDrag && // changed direction
                     check === this.fullSelectionLength - seqLength && // back tracking

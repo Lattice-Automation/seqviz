@@ -43,8 +43,7 @@ const SingleAnnotation = props => {
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
     arrowFWD: a.direction === "FORWARD",
-    arrowREV: a.direction === "REVERSE",
-    isInsert: a.type === "insert"
+    arrowREV: a.direction === "REVERSE"
   });
 
   // determine whether the annotation's name is in the top or bottom
