@@ -72,7 +72,7 @@ class Linear extends React.Component {
     const zoomed = zoom.linear > 10;
 
     // the actual fragmenting of the sequence into subblocks. generates all info that will be needed
-    // including sequence blocks, complement blocks, annotations, blockHeights, yDifferentials,
+    // including sequence blocks, complement blocks, annotations, blockHeights
     const seqLength = seq.length;
     let arrSize = Math.round(Math.ceil(seqLength / bpsPerBlock));
     if (arrSize === Number.POSITIVE_INFINITY) arrSize = 1;
@@ -81,7 +81,6 @@ class Linear extends React.Component {
     const seqs = new Array(arrSize); // arrays for sequences...
     const compSeqs = new Array(arrSize); // complements...
     const blockHeights = new Array(arrSize); // block heights...
-    const yDiffs = new Array(arrSize); // y differentials...
 
     const cutSiteRows = cutSites.length
       ? createSingleRows(cutSites, bpsPerBlock, arrSize)
@@ -100,7 +99,6 @@ class Linear extends React.Component {
         ? createSingleRows(searchResults, bpsPerBlock, arrSize)
         : new Array(arrSize).fill([]);
 
-    let yDiffCumm = 0; // cummulative y differential tracker
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
@@ -127,10 +125,6 @@ class Linear extends React.Component {
         blockHeight += lineHeight + spacingHeight; // space for cutsite name
       }
       blockHeights[i] = blockHeight;
-
-      // update the yDifferentialMap for the current block
-      yDiffs[i] = yDiffCumm;
-      yDiffCumm += blockHeight;
     }
     const seqBlocks = [];
     let yDiff = 0;
@@ -163,7 +157,6 @@ class Linear extends React.Component {
           zoomed={zoomed}
         />
       );
-
       yDiff += blockHeights[i];
     }
 

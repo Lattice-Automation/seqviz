@@ -1,7 +1,6 @@
 import * as React from "react";
 import SeqViewer from "./SeqViewer/SeqViewer";
 import "./PartExplorer.scss";
-import BlankPage from "../BlankPage/BlankPage";
 import request from "request";
 import shortid from "shortid";
 import { annotationFactory, defaultSelection } from "../Utils/sequence";
@@ -99,7 +98,12 @@ class PartExplorer extends React.Component {
       newSearchIndex += 1;
       if (newSearchIndex > lastIndex) newSearchIndex = 0;
       this.setState({
-        findState: { searchResults: searchResults, searchIndex: newSearchIndex }
+        findState: {
+          searchResults: searchResults,
+          searchIndex: newSearchIndex
+        },
+        circularCentralIndex: searchResults[searchIndex].start,
+        linearCentralIndex: searchResults[searchIndex].start
       });
     }
   };
@@ -162,7 +166,7 @@ class PartExplorer extends React.Component {
     const { viewer } = this.props;
     const { part } = this.state;
     const partState = this.state;
-    const partAvailable = part.seq || false;
+    const partAvailable = part.seq || part.seq === "" || false;
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";
     return (
@@ -205,7 +209,6 @@ class PartExplorer extends React.Component {
                 }}
               />
             )}
-            {part.seq.length < 1 && <BlankPage />}
           </div>
         )}
       </div>

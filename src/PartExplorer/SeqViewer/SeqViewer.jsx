@@ -119,6 +119,7 @@ class SeqViewer extends React.Component {
     const totalPixelsOfArc = pixelPerBP * bpsOnArc;
 
     radius = totalPixelsOfArc / (Math.PI * (bpsOnArc / seqLength));
+    radius = radius === 0 ? 1 : radius;
     const yDiff = 0;
     return { radius, yDiff, Linear: false, size, bpsOnArc, center };
   };
