@@ -13,10 +13,9 @@ import PUC from "./DefaultParts/pUC";
 //   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA",
 //   ""
 // ];
-// //const parts = ["KJ668651.1", "BBa_E0040"];
 // const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["linear", "circular", "both"];
+// const types = ["circular", "linear", "both"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -61,7 +60,7 @@ import PUC from "./DefaultParts/pUC";
 //   },
 //   searchQuery: { query: "GCGG" },
 //   backbone: "pSB1C3",
-//   enzymes: ["AciI"]
+//   enzymes: []
 // });
 // viewer.render();
 

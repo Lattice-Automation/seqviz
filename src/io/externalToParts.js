@@ -1,5 +1,3 @@
-import axios from "axios";
-import path from "path";
 import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
 
@@ -11,7 +9,7 @@ export default async (accession, options) => {
   const { colors = [], backbone = "" } = options;
   // right now, we support either NCBI or iGEM. We parse this automatically. the user
   // doesn't specify the target registry, so we have to infer it from the passed accession
-  let url = `https://cors-anywhere.herokuapp.com/https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
+  let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
   if (accession.includes("BB")) {
     igembrick = true;
     // it's a BioBrick... target the iGEM repo
@@ -24,21 +22,8 @@ export default async (accession, options) => {
     }
   }
   try {
-    const axiosOptions = {};
-    if (process.env.NODE_ENV === "test") {
-      // this is a hack needed to avoid a cross origin complain when testing
-      // the file: https://stackoverflow.com/a/42678578/7541747
-      axiosOptions.adapter = require(`${path.join(
-        path.dirname(require.resolve("axios")),
-        "lib/adapters/http"
-      )}`);
-      axiosOptions.headers = {
-        Authorization: "Basic YWRtaW46bHVveGlueGlhbjkx"
-      };
-    }
-
     // make the call
-    const response = await axios.get(url, axiosOptions);
+    const response = await fetch(url).then(response => response.text());
 
     // convert to a part
     if (!igembrick && backbone.length) {
@@ -55,7 +40,7 @@ export default async (accession, options) => {
         "It looks like you are trying to display a BioBrick. BioBricks typically need to be inserted into a Plasmid Backbone (https://parts.igem.org/Plasmid_backbones/Assembly). Please specify one in your viewer options."
       );
     }
-    const parts = await fileToParts(response.data, {
+    const parts = await fileToParts(response, {
       colors: colors,
       backbone: igembackbone
     });
