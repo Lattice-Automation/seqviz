@@ -287,7 +287,8 @@ const withSelectionHandler = WrappedComp =>
         seq,
         annotations,
         Linear,
-        findState: { searchResults }
+        findState: { searchResults },
+        setPartState
       } = this.props;
       if (!this.allowSetSelection) return;
       // should not be updating selection since it's not a drag event time
@@ -314,6 +315,11 @@ const withSelectionHandler = WrappedComp =>
           const feature = knownRange.ref
             ? annotations.find(annotation => annotation.id === knownRange.ref)
             : null;
+          if (!Linear) {
+            setPartState({
+              linearCentralIndex: selectionStart
+            });
+          }
           this.setSequenceSelection({
             ...knownRange,
             start: selectionStart,

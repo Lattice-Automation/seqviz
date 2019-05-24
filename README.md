@@ -1,6 +1,15 @@
 # dna-sequence-vizualizer
 
-A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client’s website or application.
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Fri May 24 07:27:32 EDT 2019<!-- /exec-bash -->
+
+**Latest Production Version:** <!-- version(cmd:) -->0.0.10<!-- /version -->
+
+**Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
+
+<!-- pkg-description(cmd:) -->A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.<!-- /pkg-description -->
+<br>
+
+---
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -22,16 +31,16 @@ You will also see any lint errors in the console.
 
 Builds the library into a single browser-ready minified script.
 
-You can see the results in `/dist` labeled as `visualizer${version}.min.js`
+You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.0.10.min.js`<!-- /pkg-file -->
 
 ## Using the library
 
-The library source code will be in a file named `visualizer${version}.min.js`. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
+The library source code will be in a file named <!-- pkg-file(cmd:) -->`visualizer.0.0.10.min.js`<!-- /pkg-file -->. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
 
 You will want to import the library in your top level `index.html`. In the case of the cdn download you can use.
 
 ```html
-<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.7.min.js"></script>
+<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.${version}.min.js"></script>
 ```
 
 This will expose the `lattice` library through the `window` global variable. The `lattice` library currently contains one sample part `pUC()` and the `Viewer()` constructor. You can initialize a new viewer with the sample part like so:
@@ -54,7 +63,7 @@ This will expose the `lattice` library through the `window` global variable. The
 
 `element` :
 
-- a string element name like "root" or "app-root"
+- a string element id like "root" or "app-root"
 - an element i.e. from `document.getElementById()`
 
 <br>
@@ -92,7 +101,7 @@ const {
 
 - NCBI accession number
 - BioBrick accession number
-- sequence string supports {atcguyrwskmdvhbxnATCGUYRWSKMDVHBXN}
+- sequence string supports `{atcguyrwskmdvhbxnATCGUYRWSKMDVHBXN}`
 - part object of the form
 
 ```json
