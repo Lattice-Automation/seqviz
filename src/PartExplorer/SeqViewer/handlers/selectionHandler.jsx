@@ -354,6 +354,7 @@ const withSelectionHandler = WrappedComp =>
             } else if (this.dragEvent && currBase !== null) {
               // continue a drag event that's currently happening
               this.setSequenceSelection({
+                start: currSelection.start,
                 end: currBase,
                 clockwise: clockwiseDrag
               });

@@ -145,7 +145,7 @@ class Circular extends React.PureComponent {
     const { center } = this.props;
 
     // find coordinate's current angle
-    const angle = degrees * 0.0174533; // degrees to radians
+    const angle = degrees * (Math.PI / 180); // degrees to radians
     const cos = Math.cos(angle);
     const sin = Math.sin(angle);
 

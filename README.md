@@ -1,8 +1,8 @@
 # dna-sequence-vizualizer
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Fri May 24 07:27:32 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue May 28 09:34:47 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.0.10<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.0.11<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -31,11 +31,11 @@ You will also see any lint errors in the console.
 
 Builds the library into a single browser-ready minified script.
 
-You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.0.10.min.js`<!-- /pkg-file -->
+You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.0.11.min.js`<!-- /pkg-file -->
 
 ## Using the library
 
-The library source code will be in a file named <!-- pkg-file(cmd:) -->`visualizer.0.0.10.min.js`<!-- /pkg-file -->. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
+The library source code will be in a file named <!-- pkg-file(cmd:) -->`visualizer.0.0.11.min.js`<!-- /pkg-file -->. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
 
 You will want to import the library in your top level `index.html`. In the case of the cdn download you can use.
 
