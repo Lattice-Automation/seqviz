@@ -1,4 +1,3 @@
-import "babel-polyfill";
 import VIEWER from "./App";
 import PUC from "./DefaultParts/pUC";
 
