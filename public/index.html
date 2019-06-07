@@ -23,7 +23,7 @@
     <meta name="google" content="notranslate" />
 
     <!-- STYLES FOR TESTING VISUALIZER WITH UI -->
-    <!-- <style type="text/css">
+    <style type="text/css">
       #config-root {
         margin: 1px;
         padding: 5px;
@@ -70,15 +70,15 @@
         overflow: hidden;
         overscroll-behavior: none;
       }
-    </style> -->
+    </style>
 
     <!-- IMPORT FOR TESTING VISUALIZER WITH UI -->
-    <!-- <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.12-stable.min.js"></script> -->
+    <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.13.min.js"></script>
   </head>
 
   <body id="body">
     <!-- HTML INPUTS TO TEST VISUALIZER WITH UI -->
-    <!-- <div id="config-root">
+    <div id="config-root">
       <span id="config"> Part: <input id="accession" /> </span>
       &nbsp;&nbsp;<span id="config">
         Backbone:
@@ -150,20 +150,20 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button id="submit">Submit</button>
       <hr />
-    </div> -->
+    </div>
 
     <!-- ROOT TO ATTACH VISUALIZER -->
-    <!-- <div id="app-root"></div> -->
+    <div id="app-root"></div>
 
     <!-- DISPLAY NODE TO TEST VISUALIZER WITH UI -->
-    <!-- <div id="data-root">
+    <div id="data-root">
       <span>
         <div id="select-data"></div>
       </span>
-    </div> -->
+    </div>
 
     <!-- SCRIPT TO TEST VISUALIZER WITH UI -->
-    <!-- <script>
+    <script>
       function showPart() {
         const lattice = window.lattice;
 
@@ -208,7 +208,6 @@
           onSelection: selection => {
             const dataDisplay = document.getElementById("select-data");
             const { feature, selectionMeta, sequenceMeta } = selection;
-            console.log(feature);
             dataDisplay.innerHTML = `<em><b>${
               feature ? feature.name : ""
             }</b></em><br/><em>${feature ? feature.type : ""}</em>  ${
@@ -235,6 +234,6 @@
       }
 
       document.getElementById("submit").addEventListener("click", showPart);
-    </script> -->
+    </script>
   </body>
 </html>
