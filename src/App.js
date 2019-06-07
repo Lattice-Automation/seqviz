@@ -78,57 +78,10 @@ const Viewer = (element, part, options) => {
     ReactDOM.render(viewer, domElement);
   };
 
-  const setPart = newPart => {
-    const viewer = <PartExplorer part={newPart} {...options} />;
-    const viewerHTML = ReactDOMServer.renderToStaticMarkup(viewer);
-
-    const domElement =
-      element.constructor.name.startsWith("HTML") &&
-      element.constructor.name.endsWith("Element")
-        ? element
-        : document.getElementById(element);
-
-    const render = () => {
-      ReactDOM.render(viewer, domElement);
-    };
-    displayConfig(newPart, options);
-    return {
-      viewer: viewerHTML,
-      render: render,
-      setPart: setPart,
-      setOptions: setOptions
-    };
-  };
-
-  const setOptions = newOptions => {
-    const OPTIONS = { ...options, ...newOptions };
-    const viewer = <PartExplorer part={part} {...OPTIONS} />;
-    const viewerHTML = ReactDOMServer.renderToStaticMarkup(viewer);
-
-    const domElement =
-      element.constructor.name.startsWith("HTML") &&
-      element.constructor.name.endsWith("Element")
-        ? element
-        : document.getElementById(element);
-
-    const render = () => {
-      ReactDOM.render(viewer, domElement);
-    };
-    displayConfig(part, OPTIONS);
-    return {
-      viewer: viewerHTML,
-      render: render,
-      setPart: setPart,
-      setOptions: setOptions
-    };
-  };
-
   displayConfig(part, options);
   return {
     viewer: viewerHTML,
-    render: render,
-    setPart: setPart,
-    setOptions: setOptions
+    render: render
   };
 };
 

@@ -22,8 +22,16 @@ export default async (accession, options) => {
     }
   }
   try {
-    // make the call
-    const response = await fetch(url).then(response => response.text());
+    let response;
+    // get part from localStorage if already requested before
+    if (localStorage.getItem(accession.trim())) {
+      response = localStorage.getItem(accession.trim());
+    } else {
+      // make the call
+      response = await fetch(url).then(response => response.text());
+      // Store requested part in localStorage
+      localStorage.setItem(accession.trim(), response);
+    }
 
     // convert to a part
     if (!igembrick && backbone.length) {

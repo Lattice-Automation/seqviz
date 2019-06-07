@@ -43,6 +43,24 @@ class SeqViewer extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
+  componentDidUpdate = prevProps => {
+    const {
+      searchQuery: { query, mismatch },
+      seq,
+      setPartState,
+      onSearch
+    } = this.props;
+    const {
+      searchQuery: { query: prevQeury, mismatch: prevMismatch },
+      seq: prevSeq
+    } = prevProps;
+    if (query !== prevQeury || mismatch !== prevMismatch || seq !== prevSeq) {
+      const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
+      onSearch({ searchResults, searchIndex });
+      setPartState({ findState: { searchResults, searchIndex } });
+    }
+  };
+
   unsub = () => {};
 
   /**

@@ -70,6 +70,70 @@ class PartExplorer extends React.Component {
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
+  componentDidUpdate = async prevProps => {
+    const {
+      part: partInput,
+      annotate,
+      colors,
+      backbone,
+      zoom: { circular: czoom, linear: lzoom },
+      enzymes,
+      searchNext
+    } = this.props;
+
+    const {
+      part: prevPart,
+      annotate: prevAnnotate,
+      colors: prevColors,
+      backbone: prevBackbone,
+      zoom: { circular: prevCzoom, linear: prevLzoom },
+      enzymes: prevEnzymes
+    } = prevProps;
+
+    if (
+      partInput !== prevPart ||
+      annotate !== prevAnnotate ||
+      backbone !== prevBackbone ||
+      colors !== prevColors ||
+      czoom !== prevCzoom ||
+      lzoom !== prevLzoom ||
+      enzymes !== prevEnzymes
+    ) {
+      let part = await processPartInput(partInput, { colors, backbone });
+      part = annotate ? await this.autoAnnotate(part) : part;
+      this.setState({ part: part });
+      const handleKeyPress = e => {
+        const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
+          metaKey,
+          altKey,
+          ctrlKey,
+          shiftKey,
+          key
+        }))(e);
+        const next = (({ meta, alt, ctrl, shift, key }) => ({
+          metaKey: meta,
+          altKey: alt,
+          ctrlKey: ctrl,
+          shiftKey: shift,
+          key
+        }))(searchNext);
+        if (isEqual(input, next)) {
+          this.incrementSearch();
+        }
+      };
+      const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+      if (searchNext.key) {
+        if (takenBindings.includes(searchNext.key)) {
+          console.error(
+            "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
+          );
+        } else {
+          window.addEventListener("keydown", e => handleKeyPress(e));
+        }
+      }
+    }
+  };
+
   setPartState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
       if (typeof state[key] === "object") {
@@ -140,7 +204,17 @@ class PartExplorer extends React.Component {
   };
 
   autoAnnotate = async (part, colors = []) => {
-    const result = await this.lambdaAnnotate(part);
+    let result;
+    // get part from localStorage if already requested before
+    if (localStorage.getItem(`auto-annotate-${part}`)) {
+      result = JSON.parse(localStorage.getItem(`auto-annotate-${part}`));
+    } else {
+      // make the call
+      result = await this.lambdaAnnotate(part);
+      // Store requested part in localStorage
+      localStorage.setItem(`auto-annotate-${part}`, JSON.stringify(result));
+    }
+
     let annotations = result.body.map(a => ({
       ...annotationFactory(colors),
       ...a
