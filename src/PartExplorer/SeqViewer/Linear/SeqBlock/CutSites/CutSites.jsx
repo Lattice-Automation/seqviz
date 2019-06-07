@@ -42,6 +42,15 @@ const CutSites = props => {
 
   if (enzymes.length < 1) return null;
 
+  const recogContiguous = (start, end, first, last) => {
+    if ((start < first && end < first) || (start > last && end > last))
+      return true;
+    if (end >= start) {
+      return end < last && start > first;
+    }
+    return start < last && end > first;
+  };
+
   const sitesWithX = cutSiteRows.map(c => {
     const { x: cutX } = findXAndWidth(c.sequenceCutIdx, c.sequenceCutIdx);
     const { x: hangX } = findXAndWidth(c.complementCutIdx, c.complementCutIdx);
@@ -49,11 +58,22 @@ const CutSites = props => {
       c.recogStart,
       c.recogEnd
     );
-    if (c.start > c.end) {
-      ({ x: highlightX, width: highlightWidth } = findXAndWidth(
-        c.start > lastBase ? firstBase : Math.max(firstBase, c.start),
-        c.end < firstBase ? lastBase : Math.min(lastBase, c.end)
-      ));
+    if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
+      if (c.recogStart > c.recogEnd) {
+        ({ x: highlightX, width: highlightWidth } = findXAndWidth(
+          c.recogEnd < firstBase ? lastBase : Math.min(lastBase, c.recogEnd),
+          c.recogStart > lastBase
+            ? firstBase
+            : Math.max(firstBase, c.recogStart)
+        ));
+      } else if (c.recogEnd > c.recogStart) {
+        ({ x: highlightX, width: highlightWidth } = findXAndWidth(
+          c.recogStart < firstBase
+            ? lastBase
+            : Math.min(lastBase, c.recogStart),
+          c.recogEnd > lastBase ? firstBase : Math.max(firstBase, c.recogEnd)
+        ));
+      }
     }
     return {
       ...c,
