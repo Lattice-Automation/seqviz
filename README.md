@@ -4,17 +4,17 @@ A demonstration of the DNA Sequence Visualizer provided by Lattice.
 
 ## Running in development
 
-To run a local, copy clone the repository, and run `npm start` in the directory.
+To run a local copy, clone the repository, and then run `npm install` and `npm start` in the directory.
 
 The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app), but the only pertinent pieces of code, including style, input, and viewer instantiation are in the `index.html` file in the `public` folder. All the other files are defaults created by the Create React App library to help render the file.
 
 To change the version of visualizer you run in the demo change the last part in the script import
 
-`<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.13.min.js"></script>`
+`<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.1.1.min.js"></script>`
 
-The example above is running `version 0.0.13`. Alternatively you can run the demo from a local copy of the compiled visualizer. If you download the `version 0.0.13` script for example you can run the app with just
+The example above is running `version 0.1.1`. Alternatively you can run the demo from a local copy of the compiled visualizer. If you download the `version 0.1.1` script for example you can run the app with just
 
-`<script src="visualizer.0.0.13.min.js"></script>`
+`<script src="%PUBLIC_URL%/visualizer.0.1.1.min.js"></script>`
 
 provided the copy of the compiled visualizer code is in the same repository as the `index.html` file.
 
