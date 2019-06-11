@@ -74,8 +74,11 @@
       }
     </style>
 
-    <!-- IMPORT FOR TESTING VISUALIZER WITH UI -->
-    <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.0.13.min.js"></script>
+    <!-- IMPORT FROM LOCAL FOR TESTING VISUALIZER WITH UI -->
+    <script src="%PUBLIC_URL%/visualizer.0.1.0.min.js"></script>
+
+    <!-- IMPORT FROM CDN FOR TESTING VISUALIZER WITH UI -->
+    <!-- <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.1.0.min.js"></script> -->
   </head>
 
   <body id="body">
@@ -218,7 +221,7 @@
               selectionMeta.end
             }) <br/> <b>GC:</b> ${sequenceMeta.GC.toPrecision(
               2
-            )}% <b>Tm:</b> ${sequenceMeta.Tm.toPrecision(2)}Â°C `;
+            )}% <b>Tm:</b> ${sequenceMeta.Tm.toPrecision(2)}°C `;
           },
           onSearch: results => {
             if (query.length) {
