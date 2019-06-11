@@ -10,7 +10,7 @@ const fileName = `${packageName}.${VERSION}.min.js`;
 const banner = `${libraryName} - ${packageName} - ${VERSION} \n provided and maintained by ${AUTHOR}`;
 
 module.exports = {
-  entry: "./src/index.jsx",
+  entry: "./src/library.js",
   output: {
     filename: fileName,
     library: libraryName,

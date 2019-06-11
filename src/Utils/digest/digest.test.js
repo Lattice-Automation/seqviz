@@ -1,4 +1,4 @@
-import { partFactory } from "imports/models";
+import { partFactory } from "../parser";
 import { agaroseDigest, digest, DIGEST_MAP_LADDER } from "./digest.js";
 
 describe("DNATools: Digest", () => {
@@ -149,7 +149,10 @@ describe("DNATools: Digest", () => {
       expect.arrayContaining([
         expect.objectContaining({
           end: [{ enzymes: [], index: 16 }],
-          meta: { centralIndex: 10, message: "Digest resulted in only one fragment" },
+          meta: {
+            centralIndex: 10,
+            message: "Digest resulted in only one fragment"
+          },
           size: "16",
           start: [{ enzymes: ["BsaI"], index: 0 }],
           top: 97.9
