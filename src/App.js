@@ -66,7 +66,7 @@ const Viewer = (element, part, options) => {
   };
 
   const viewer = <PartExplorer part={part} {...options} />;
-  const viewerHTML = ReactDOMServer.renderToStaticMarkup(viewer);
+  const viewerHTML = ReactDOMServer.renderToString(viewer);
 
   const domElement =
     element.constructor.name.startsWith("HTML") &&
@@ -80,7 +80,8 @@ const Viewer = (element, part, options) => {
 
   displayConfig(part, options);
   return {
-    viewer: viewerHTML,
+    viewer: viewer,
+    viewerHTML: viewerHTML,
     render: render
   };
 };

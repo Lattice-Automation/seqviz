@@ -1,15 +1,45 @@
 {
   "name": "visualizer",
-  "version": "0.0.13",
+  "version": "0.1.0",
   "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (gb, fasta, dna), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.",
+  "keywords": [
+    "DNA",
+    "sequence viewer",
+    "sequence visualizer",
+    "plasmid",
+    "plasmid viewer"
+  ],
   "author": "Lattice Automation (https://latticeautomation.com/)",
-  "main": "src/index.jsx",
+  "contributors": [
+    "Raymond Chung <rchung@latticeautomation.com> (https://github.com/RazzYoshi)"
+  ],
+  "homepage": "https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lattice-Automation/dna-sequence-vizualizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lattice-Automation/dna-sequence-vizualizer/issues",
+    "email": "support@latticeautomation.com"
+  },
+  "license": "MIT",
+  "main": "src/library.js",
   "private": true,
   "dependencies": {
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-transform-imports": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "bufferpack": "0.0.6",
+    "fs": "0.0.1-security",
+    "image-webpack-loader": "^4.6.0",
     "jszip": "^3.2.1",
+    "net": "^1.0.2",
     "node-sass": "^4.12.0",
     "rc-slider": "^8.6.9",
     "react": "^16.8.6",
@@ -19,8 +49,12 @@
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
     "tinycolor2": "^1.4.1",
+    "tls": "0.0.1",
     "typescript": "^3.4.5",
-    "xml2js": "^0.4.19"
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack-cli": "^3.3.2",
+    "xml2js": "^0.4.19",
+    "xml-comment-api": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,35 +66,10 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/node": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.0.5",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-imports": "^1.5.1",
-    "babel-preset-react": "^6.24.1",
-    "fs": "0.0.1-security",
-    "image-webpack-loader": "^4.6.0",
-    "net": "^1.0.2",
-    "tls": "0.0.1",
-    "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack-cli": "^3.3.2",
-    "xml-comment-api": "^1.0.1"
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-env",

@@ -1,8 +1,8 @@
 # dna-sequence-vizualizer
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Fri Jun 7 18:34:54 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jun 11 17:47:25 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.0.13<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.1.0<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -11,31 +11,42 @@
 
 ---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Running in Development Mode
 
-## Available Scripts
+The testing environment is run with [Create React App](https://github.com/facebook/create-react-app). To test the visualizer in your local development environment you should edit the code at:
 
-In the project directory, you can run:
+`public/index.html` html input fields, dom nodes, etc.
+
+`src/index.css` style for the test, sample code is already present, commented out
+
+`src/index.jsx` initialize viewer from the Viewer object
+
+In the project directory, you run:
 
 ### `npm start`
 
-Runs a test app for this library in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You will first want to write or uncomment-out test code in `src/index.jsx`. Remember to remove or comment-out test code before building the library.
+The page will reload if you make edits.
 
-The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+After making changes to the library you will want to rebuild it in webpack to get a new minified script. Change the version in the `package.json` then run:
 
 ### `npm run build`
 
-Builds the library into a single browser-ready minified script.
+This will build the library into a single browser-ready minified script.
 
-You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.0.13.min.js`<!-- /pkg-file -->
+You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.1.0.min.js`<!-- /pkg-file -->
+
+## Library Demo
+
+You can see a demonstration of this library with some simple html ui at [seqviz-demo](https://github.com/Lattice-Automation/seqviz-demo/blob/master/README.md).
+See the [index.html](https://github.com/Lattice-Automation/seqviz-demo/blob/master/public/index.html) for demo code.
 
 ## Using the library
 
-The library source code will be in a file named <!-- pkg-file(cmd:) -->`visualizer.0.0.13.min.js`<!-- /pkg-file -->. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
+The library source code will be in a file named <!-- pkg-file(cmd:) -->`visualizer.0.1.0.min.js`<!-- /pkg-file -->. You can either extract this from the GitHub release tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
 
 You will want to import the library in your top level `index.html`. In the case of the cdn download you can use.
 
