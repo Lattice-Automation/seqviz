@@ -4,7 +4,7 @@ import shortid from "shortid";
 class LinearFind extends React.PureComponent {
   render() {
     const {
-      searchRows,
+      filteredRows: searchRows,
       findXAndWidth,
       indexYDiff,
       compYDiff,

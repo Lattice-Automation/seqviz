@@ -164,6 +164,11 @@ export default class SeqBlock extends React.PureComponent {
       selectHeight += 0.5 * elementHeight;
       selectEdgeHeight += 0.25 * elementHeight;
     }
+
+    const filteredSearchRows = showComplement
+      ? searchRows
+      : searchRows.filter(search => search.row === 0);
+
     return (
       <svg
         {...svgProps}
@@ -196,9 +201,10 @@ export default class SeqBlock extends React.PureComponent {
               fullSeq={fullSeq}
             />
           )}
-          {searchRows.length ? (
+          {filteredSearchRows.length ? (
             <LinearFind
               {...this.props}
+              filteredRows={filteredSearchRows}
               findXAndWidth={this.findXAndWidth}
               indexYDiff={indexYDiff}
               compYDiff={compYDiff}
