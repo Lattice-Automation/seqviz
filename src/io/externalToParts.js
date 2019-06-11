@@ -25,12 +25,22 @@ export default async (accession, options) => {
     let response;
     // get part from localStorage if already requested before
     if (localStorage.getItem(accession.trim())) {
+      console.log(
+        `${accession.trim()} was loaded from cache. If you would like to refetch the part just delete the cookie with key ${accession.trim()} from your browser's Local Storage.`
+      );
       response = localStorage.getItem(accession.trim());
     } else {
-      // make the call
-      response = await fetch(url).then(response => response.text());
-      // Store requested part in localStorage
-      localStorage.setItem(accession.trim(), response);
+      if (navigator.onLine) {
+        // make the call
+        response = await fetch(url).then(response => response.text());
+        // Store requested part in localStorage
+        localStorage.setItem(accession.trim(), response);
+      } else {
+        const partRegistry = igembrick ? "iGEM" : "NCBI";
+        throw new Error(
+          `It looks like you are trying to fetch a part from ${partRegistry}, but could not connect to the registry. Please check that you have a stable network connection.`
+        );
+      }
     }
 
     // convert to a part
@@ -54,8 +64,8 @@ export default async (accession, options) => {
     });
     if (parts && parts.length) return parts[0];
     throw Error("No convertible part found");
-  } catch (err) {
-    console.log(err);
-    return err;
+  } catch (error) {
+    console.error(error.message);
+    return error;
   }
 };

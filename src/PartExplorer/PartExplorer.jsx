@@ -25,17 +25,15 @@ class PartExplorer extends React.Component {
     part: {}
   };
 
-  componentDidMount = async () => {
-    const {
-      part: partInput,
-      annotate,
-      colors,
-      backbone,
-      searchNext
-    } = this.props;
+  createPart = async () => {
+    const { part: partInput, annotate, colors, backbone } = this.props;
     let part = await processPartInput(partInput, { colors, backbone });
-    part = annotate ? await this.autoAnnotate(part) : part;
+    part = annotate ? await this.autoAnnotate(part, colors) : part;
     this.setState({ part: part });
+  };
+
+  addKeyBindings = () => {
+    const { searchNext } = this.props;
     const handleKeyPress = e => {
       const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
         metaKey,
@@ -67,6 +65,11 @@ class PartExplorer extends React.Component {
     }
   };
 
+  componentDidMount = async () => {
+    this.createPart();
+    this.addKeyBindings();
+  };
+
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
@@ -77,8 +80,7 @@ class PartExplorer extends React.Component {
       colors,
       backbone,
       zoom: { circular: czoom, linear: lzoom },
-      enzymes,
-      searchNext
+      enzymes
     } = this.props;
 
     const {
@@ -99,38 +101,8 @@ class PartExplorer extends React.Component {
       lzoom !== prevLzoom ||
       enzymes !== prevEnzymes
     ) {
-      let part = await processPartInput(partInput, { colors, backbone });
-      part = annotate ? await this.autoAnnotate(part) : part;
-      this.setState({ part: part });
-      const handleKeyPress = e => {
-        const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
-          metaKey,
-          altKey,
-          ctrlKey,
-          shiftKey,
-          key
-        }))(e);
-        const next = (({ meta, alt, ctrl, shift, key }) => ({
-          metaKey: meta,
-          altKey: alt,
-          ctrlKey: ctrl,
-          shiftKey: shift,
-          key
-        }))(searchNext);
-        if (isEqual(input, next)) {
-          this.incrementSearch();
-        }
-      };
-      const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-      if (searchNext.key) {
-        if (takenBindings.includes(searchNext.key)) {
-          console.error(
-            "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
-          );
-        } else {
-          window.addEventListener("keydown", e => handleKeyPress(e));
-        }
-      }
+      this.createPart();
+      this.addKeyBindings();
     }
   };
 
@@ -205,14 +177,18 @@ class PartExplorer extends React.Component {
 
   autoAnnotate = async (part, colors = []) => {
     let result;
-    // get part from localStorage if already requested before
-    if (localStorage.getItem(`auto-annotate-${part}`)) {
-      result = JSON.parse(localStorage.getItem(`auto-annotate-${part}`));
-    } else {
-      // make the call
-      result = await this.lambdaAnnotate(part);
-      // Store requested part in localStorage
-      localStorage.setItem(`auto-annotate-${part}`, JSON.stringify(result));
+    try {
+      if (navigator.onLine) {
+        // make the call
+        result = await this.lambdaAnnotate(part);
+      } else {
+        throw new Error(
+          `It looks like you wanted to annotate your part, but could not connect to our BLAST endpoint. Please check that you have a stable network connection.`
+        );
+      }
+    } catch (error) {
+      console.error(error.message);
+      return error;
     }
 
     let annotations = result.body.map(a => ({
