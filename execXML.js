@@ -3,6 +3,7 @@ const VERSION = PACKAGE.version;
 const PKGNAME = PACKAGE.name;
 const PKGAUTHOR = PACKAGE.author;
 const PKGDESCR = PACKAGE.description;
+const PKGBUGS = PACKAGE.bugs;
 
 const fs = require("fs");
 const path = require("path");
@@ -21,6 +22,8 @@ const execXML = (file, cwd) => {
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
     .replace("pkg-description", () => PKGDESCR)
     .replace("pkg-file", () => `\`${PKGNAME}.${VERSION}.min.js\``)
+    .replace("pkg-bug-url", () => `[Issues](${PKGBUGS.url})`)
+    .replace("pkg-bug-email", () => `[${PKGBUGS.email}](${PKGBUGS.email})`)
     .replace("exec-bash", comment => {
       const { cmd, match } = comment.attributes;
       // Execute command and capture output.

@@ -57,7 +57,7 @@ import PUC from "./DefaultParts/pUC";
 //     shift: false,
 //     alt: false
 //   },
-//   searchQuery: { query: "GCGG" },
+//   searchQuery: { query: "GCGGX" },
 //   backbone: "pSB1C3",
 //   enzymes: []
 // });
