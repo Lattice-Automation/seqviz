@@ -13,21 +13,23 @@ export const Viewer = (element = "root", ViewerOptions) => {
   const {
     part = null,
     annotate = false,
-    viewer = "circular",
+    viewer = "both",
     showAnnotations = true,
     showComplement = true,
     showIndex = true,
     zoom = { circular: 0, linear: 50 },
     colors = [],
-    onSelection = () => {
+    onSelection = selection => {
       console.log(
         "No custom selection functionality yet. Function passed as onSelection option will be applied to selected range."
       );
+      console.log("Your Selection: ", selection);
     },
-    onSearch = () => {
+    onSearch = results => {
       console.log(
         "No custom search functionality yet. Function passed as onSearch option will be applied to search results."
       );
+      console.log("Your Search Results: ", results);
     },
     searchNext = {
       key: "",
