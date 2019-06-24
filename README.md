@@ -1,31 +1,130 @@
-# dna-sequence-visualizer demo
+<b>HTML Demo</b> | [Semantic UI Demo](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md)
 
-A demonstration of the DNA Sequence Visualizer provided by Lattice.
+# seqviz Demo
 
-## Running in development
+A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) to see the source code and contribute.
 
-To run a local copy, clone the repository, and then run `npm install` and `npm start` in the directory.
+## Running in Development
 
-The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app), but the only pertinent pieces of code, including style, input, and viewer instantiation are in the `index.html` file in the `public` folder. All the other files are defaults created by the Create React App library to help render the file.
+To run a local copy of this demo, clone the repository, and then run `npm install` and `npm start` in the directory.
 
-To change the version of visualizer you run in the demo change the last part in the script import
+The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-`<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.1.1.min.js"></script>`
+To change the version of `seqviz` you run in the demo change the last part in the script import in [`public/index.html`](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html)
 
-The example above is running `version 0.1.1`. Alternatively you can run the demo from a local copy of the compiled visualizer. If you download the `version 0.1.1` script for example you can run the app with just
+`<script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script>`
 
-`<script src="%PUBLIC_URL%/visualizer.0.1.1.min.js"></script>`
+The example above is running `version 0.2.0`. Alternatively you can run the demo from a local copy of the compiled seqviz. If you download the `version 0.2.0` script for example you can run the app with just
 
-provided the copy of the compiled visualizer code is in the same repository as the `index.html` file.
+`<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
+
+provided the copy of the compiled seqviz code is in the same repository as the `index.html` file.
+
+To check what the version of your downloaded library is, open the `seqviz.min.js` file and see the header
+
+```js
+/*!
+ * lattice - seqviz - 0.2.0
+ * provided and maintained by Lattice Automation (https://latticeautomation.com/)
+ */
+```
 
 ### `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+If something is already running on your port 3000 Create React App will ask if you want to run the demo on the next port up (3001 and then 3002, etc.). In those cases, you can view the demo at the specified port.
+
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-## Demo Inputs
+## Demo Files (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#demo-files-html--semantic))
+
+The HTML demo uses Create React App but does not use any React specific code. The only file customized for the Demo is the [`public/index.html`](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html). The rest of the files are Create React App's basic setup to render that file.
+
+The library is imported in the head:
+
+```html
+<!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
+<script src="%PUBLIC_URL%/seqviz.min.js"></script>
+
+<!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
+<!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
+```
+
+The styles for the demo are also initialized in the head:
+
+```html
+<!-- STYLES FOR TESTING SEQVIZ WITH UI -->
+<style type="text/css">
+  #config-root {
+    margin: 1px;
+    padding: 5px;
+    order: 1;
+    flex: 1 0 auto;
+  }
+
+  #app-root {
+    order: 2;
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  #data-root {
+    margin: 1px;
+    padding: 5px;
+    order: 3;
+    flex: 1 0 auto;
+  }
+
+  #enzymes {
+    height: 1.5em;
+  }
+
+  #enzyme {
+    display: inline-block;
+  }
+
+  #submit:hover {
+    cursor: pointer;
+    background: rgba(0, 90, 255, 0.7);
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 99vw;
+    height: 98vh;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+</style>
+```
+
+The html inputs are in the
+
+```html
+<body id="body"></body>
+```
+
+See [Demo Inputs](#demo-inputs) below.
+
+And the viewer initialization is in a
+
+```html
+<!-- SCRIPT TO TEST SEQVIZ WITH UI -->
+<script></script>
+```
+
+at the bottom of the file.
+
+## Demo Inputs (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#demo-inputs-html--semantic))
 
 ### Part
 
@@ -243,7 +342,7 @@ onSelection: selection => {
 
 Demonstrates the onSelection hook which exposes information about your sequence selection on the viewer.
 
-## Final Viewer Instantiation
+## Final Viewer Instantiation (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#final-viewer-instantiation-html--semantic))
 
 ```js
 const viewer = lattice.Viewer("app-root", {
@@ -282,3 +381,5 @@ const viewer = lattice.Viewer("app-root", {
   enzymes: enzymes
 });
 ```
+
+The HTML Demo uses the library's packaged ReactDOM renderer to render the viewer. This is done by calling `viewer.render()`.
