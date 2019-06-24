@@ -22,7 +22,7 @@
     />
     <meta name="google" content="notranslate" />
 
-    <!-- STYLES FOR TESTING VISUALIZER WITH UI -->
+    <!-- STYLES FOR TESTING SEQVIZ WITH UI -->
     <style type="text/css">
       #config-root {
         margin: 1px;
@@ -74,15 +74,15 @@
       }
     </style>
 
-    <!-- IMPORT FROM LOCAL FOR TESTING VISUALIZER WITH UI -->
-    <script src="%PUBLIC_URL%/visualizer.0.1.1.min.js"></script>
+    <!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
+    <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 
-    <!-- IMPORT FROM CDN FOR TESTING VISUALIZER WITH UI -->
-    <!-- <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.1.1.min.js"></script> -->
+    <!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
+    <!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
   </head>
 
   <body id="body">
-    <!-- HTML INPUTS TO TEST VISUALIZER WITH UI -->
+    <!-- HTML INPUTS TO TEST SEQVIZ WITH UI -->
     <div id="config-root">
       <span> Part: <input id="accession" /> </span>
       &nbsp;&nbsp;<span>
@@ -152,55 +152,125 @@
           <option id="enzyme" value="SpeI">spei</option>
         </select>
       </span>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button id="submit">Submit</button>
       <hr />
     </div>
 
-    <!-- ROOT TO ATTACH VISUALIZER -->
+    <!-- ROOT TO ATTACH SEQVIZ -->
     <div id="app-root"></div>
 
-    <!-- DISPLAY NODE TO TEST VISUALIZER WITH UI -->
+    <!-- DISPLAY NODE TO TEST SEQVIZ WITH UI -->
     <div id="data-root">
       <span>
         <div id="select-data"></div>
       </span>
     </div>
 
-    <!-- SCRIPT TO TEST VISUALIZER WITH UI -->
+    <!-- SCRIPT TO TEST SEQVIZ WITH UI -->
     <script>
+      const lattice = window.lattice;
+
+      // const bbparts = [
+      //   "BBa_E0040",
+      //   "BBa_K1583102",
+      //   "BBa_K1610105",
+      //   "BBa_K1825006",
+      //   "BBa_K1921021"
+      // ];
+
+      let part = document.getElementById("accession").value;
+      const partElement = document
+        .getElementById("accession")
+        .addEventListener("change", event => {
+          part = event.target.value;
+          showPart();
+        });
+
+      let backbone = document.getElementById("backbone").value;
+      const backboneElement = document
+        .getElementById("backbone")
+        .addEventListener("change", event => {
+          backbone = event.target.value;
+          showPart();
+        });
+
+      let viewType = document.getElementById("viewer").value;
+      const viewTypeElement = document
+        .getElementById("viewer")
+        .addEventListener("change", event => {
+          viewType = event.target.value;
+          showPart();
+        });
+
+      let annotate = document.getElementById("auto-annotate").checked;
+      const annotateElement = document
+        .getElementById("auto-annotate")
+        .addEventListener("change", event => {
+          annotate = event.target.checked;
+          showPart();
+        });
+
+      let annotations = document.getElementById("annotations").checked;
+      const annotationsElement = document
+        .getElementById("annotations")
+        .addEventListener("change", event => {
+          annotations = event.target.checked;
+          showPart();
+        });
+
+      let complement = document.getElementById("complement").checked;
+      const complementElement = document
+        .getElementById("complement")
+        .addEventListener("change", event => {
+          complement = event.target.checked;
+          showPart();
+        });
+
+      let index = document.getElementById("index").checked;
+      const indexElement = document
+        .getElementById("index")
+        .addEventListener("change", event => {
+          index = event.target.checked;
+          showPart();
+        });
+
+      let query = document.getElementById("query").value;
+      const queryElement = document
+        .getElementById("query")
+        .addEventListener("change", event => {
+          query = event.target.value;
+          showPart();
+        });
+
+      let enzymes = Array.prototype.map.call(
+        document.getElementById("enzymes").selectedOptions,
+        o => {
+          return o.value;
+        }
+      );
+      const enzymesElement = document
+        .getElementById("enzymes")
+        .addEventListener("change", event => {
+          enzymes = Array.prototype.map.call(
+            event.target.selectedOptions,
+            o => {
+              return o.value;
+            }
+          );
+          showPart();
+        });
+
+      let lzoom = document.getElementById("lzoom").value;
+      const lzoomElement = document.getElementById("lzoom");
+      lzoomElement.addEventListener("change", event => {
+        lzoom = event.target.value;
+        showPart();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Enter") showPart();
+      });
+
       function showPart() {
-        const lattice = window.lattice;
-
-        // const bbparts = [
-        //   "BBa_E0040",
-        //   "BBa_K1583102",
-        //   "BBa_K1610105",
-        //   "BBa_K1825006",
-        //   "BBa_K1921021"
-        // ];
-
-        const part = document.getElementById("accession").value;
-        const backbone = document.getElementById("backbone").value;
-        const viewType = document.getElementById("viewer").value;
-
-        const annotate = document.getElementById("auto-annotate").checked;
-
-        const annotations = document.getElementById("annotations").checked;
-        const complement = document.getElementById("complement").checked;
-        const index = document.getElementById("index").checked;
-
-        const query = document.getElementById("query").value;
-
-        const enzymes = Array.prototype.map.call(
-          document.getElementById("enzymes").selectedOptions,
-          o => {
-            return o.value;
-          }
-        );
-
-        const lzoom = document.getElementById("lzoom").value;
-
         const viewer = lattice.Viewer("app-root", {
           part: part,
           backbone: backbone,
@@ -240,8 +310,6 @@
         });
         viewer.render();
       }
-
-      document.getElementById("submit").addEventListener("click", showPart);
     </script>
   </body>
 </html>
