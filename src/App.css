@@ -1,33 +1,54 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
+#sidebar-container {
   min-height: 100vh;
+}
+
+.sidebar-container {
+  min-height: 100vh;
+}
+
+#part-explorer {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#header,
+#footer {
+  margin: 0px;
+  flex: 0 0 auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#seqviewer {
+  min-height: 50vh;
+  width: 100vw;
+  margin: 0px;
+  overflow-y: none;
+  flex: 1 1 0;
+}
+
+#selection-name {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#selection-type {
+  font-style: italic;
+}
+
+#selection-label {
+  font-weight: bold;
+}
+
+#selection-name,
+#selection-type,
+#selection-length,
+#selection-range,
+#sequence-gc,
+#sequence-tm {
+  padding: 5px;
+}
+
+#selection-label {
+  padding: 5px 0px 5px 5px;
 }
