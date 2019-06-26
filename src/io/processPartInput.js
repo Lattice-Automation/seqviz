@@ -69,7 +69,7 @@ const processPartInput = async (partInput, options) => {
       if (typeof complement !== "string" || complement === "") {
         part.compSeq = dnaComplement(sequence).compSeq;
       }
-      part.annotations = validateAnnotations(annotations, colors);
+      part.annotations = validateAnnotations(part.name, annotations, colors);
       return part;
     }
   }
@@ -169,12 +169,12 @@ const partFromFile = async (file, colors = []) => {
  * Determine if there are annotations, and format them
  * correctly if there are
  */
-const validateAnnotations = (annotations, colors = []) => {
+const validateAnnotations = (fileName, annotations, colors = []) => {
   if (!Array.isArray(annotations) || annotations === []) {
     return [];
   } else {
     return annotations.map(annotation => ({
-      ...annotationFactory(colors),
+      ...annotationFactory(fileName, annotation.name, colors),
       ...annotation
     }));
   }

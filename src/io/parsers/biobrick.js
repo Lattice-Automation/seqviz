@@ -1,6 +1,5 @@
-import { genRandomColor } from "../../Utils/colors";
 import { dnaComplement, firstElement, partFactory } from "../../Utils/parser";
-import shortid from "shortid";
+import { annotationFactory } from "../../Utils/sequence";
 import xml2js from "xml2js";
 
 /**
@@ -61,12 +60,15 @@ export default async (file, options) =>
               const { direction, startpos, endpos, type, title } = currFet;
 
               return {
-                id: shortid.generate(),
+                ...annotationFactory(
+                  name,
+                  title[0] || `${direction[0]}-${startpos[0]}`,
+                  colors
+                ),
                 direction: direction[0] === "forward" ? "FORWARD" : "REVERSE",
                 start: +startpos[0] || 0,
                 end: +endpos[0] || 0,
                 name: title[0] || "Untitled",
-                color: genRandomColor(colors),
                 type: type[0] || "N/A"
               };
             })
