@@ -9,7 +9,7 @@ import externalToParts from "../io/externalToParts";
 
 /**
  * Determine what the input was to see if we need a parser or factory.
- * The output should always be a part consumable by visualizer
+ * The output should always be a part consumable by seqviz
  * Currently this means it needs a sequence, a complement sequence,
  * and an array of annotations. Check partFactory for latest
  * part object structure
@@ -31,7 +31,7 @@ const processPartInput = async (partInput, options) => {
     } else {
       if (partInput.length > 1) {
         console.warn(
-          "Visualizer can only display one part at a time. The first valid file in your file list will be displayed."
+          "SeqViz can only display one part at a time. The first valid file in your file list will be displayed."
         );
       }
       return partFromFiles(partInput, colors);

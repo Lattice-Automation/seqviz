@@ -199,16 +199,16 @@ export const annotationFactory = (fileName, annotationName, colors = []) => {
   let color;
   if (
     localStorage.getItem(
-      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`
+      `seqviz-cache-${fileName}-annotation-${annotationName}-color`
     )
   ) {
     color = localStorage.getItem(
-      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`
+      `seqviz-cache-${fileName}-annotation-${annotationName}-color`
     );
   } else {
     color = genRandomColor(colors);
     localStorage.setItem(
-      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`,
+      `seqviz-cache-${fileName}-annotation-${annotationName}-color`,
       color
     );
   }

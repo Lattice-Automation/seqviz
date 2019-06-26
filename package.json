@@ -1,11 +1,11 @@
 {
-  "name": "visualizer",
+  "name": "seqviz",
   "version": "0.1.1",
   "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (GenBank, FASTA, DNA), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.",
   "keywords": [
     "DNA",
     "sequence viewer",
-    "sequence visualizer",
+    "sequence seqviz",
     "plasmid",
     "plasmid viewer"
   ],
@@ -58,8 +58,23 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "patch": "npm version -m \"chore: Release version %s\" -- ",
+    "patch:major": "npm run patch major",
+    "patch:minor": "npm run patch minor",
+    "patch:patch": "npm run patch patch",
+    "patch:prerelease": "npm run patch prerelease --",
+    "patch:premajor": "npm run patch major && npm run patch prerelease --",
+    "patch:preminor": "npm run patch minor && npm run patch prerelease --",
+    "patch:prepatch": "npm run patch patch && npm run patch prerelease --",
     "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md",
-    "build:react": "react-scripts build",
+    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/",
+    "release:major": "npm run patch:major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:minor": "npm run patch:minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:patch": "npm run patch:patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:prerelease": "npm run patch:prerelease && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:premajor": "npm run patch:premajor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:preminor": "npm run patch:preminor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "release:prepatch": "npm run patch:prepatch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

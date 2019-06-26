@@ -21,7 +21,7 @@ const execXML = (file, cwd) => {
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
     .replace("pkg-description", () => PKGDESCR)
-    .replace("pkg-file", () => `\`${PKGNAME}.${VERSION}.min.js\``)
+    .replace("pkg-file", () => `\`${PKGNAME}.min.js\``)
     .replace("pkg-bug-url", () => `[Issues](${PKGBUGS.url})`)
     .replace("pkg-bug-email", () => `[${PKGBUGS.email}](${PKGBUGS.email})`)
     .replace("exec-bash", comment => {
