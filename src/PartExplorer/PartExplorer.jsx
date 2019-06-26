@@ -192,7 +192,7 @@ class PartExplorer extends React.Component {
     }
 
     let annotations = result.body.map(a => ({
-      ...annotationFactory(colors),
+      ...annotationFactory(part.name, a.name || a.start, colors),
       ...a
     }));
     // add in the annotations already on the part

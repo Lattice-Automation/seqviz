@@ -156,7 +156,7 @@ export default async (fileInput, fileName, colors = []) =>
             if (type !== "source") {
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
-                ...annotationFactory(colors),
+                ...annotationFactory(parsedName, `${type}-${start}`, colors),
                 type,
                 start,
                 end,

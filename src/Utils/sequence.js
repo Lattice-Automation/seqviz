@@ -195,15 +195,33 @@ export const defaultSelection = {
 /**
  * a default annotation generator
  */
-export const annotationFactory = (colors = []) => ({
-  id: shortid.generate(),
-  color: genRandomColor(colors),
-  name: "Untitled",
-  type: "",
-  start: 0,
-  end: 0,
-  direction: "NONE"
-});
+export const annotationFactory = (fileName, annotationName, colors = []) => {
+  let color;
+  if (
+    localStorage.getItem(
+      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`
+    )
+  ) {
+    color = localStorage.getItem(
+      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`
+    );
+  } else {
+    color = genRandomColor(colors);
+    localStorage.setItem(
+      `seq-viz-cache-${fileName}-annotation-${annotationName}-color`,
+      color
+    );
+  }
+  return {
+    id: shortid.generate(),
+    color: color,
+    name: "Untitled",
+    type: "",
+    start: 0,
+    end: 0,
+    direction: "NONE"
+  };
+};
 
 export const trimNewLines = str =>
   str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");

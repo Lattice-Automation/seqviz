@@ -80,7 +80,7 @@ export default async (sbol, fileName, colors = []) =>
 
             const range = Range[0];
             annotations.push({
-              ...annotationFactory(colors),
+              ...annotationFactory(name, annId, colors),
               name: annId,
               start: first(range.start) - 1,
               end: first(range.end) - 1
