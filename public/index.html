@@ -22,7 +22,7 @@
     />
     <meta name="google" content="notranslate" />
 
-    <!-- STYLES FOR TESTING VISUALIZER WITH UI -->
+    <!-- STYLES FOR TESTING SEQVIZ WITH UI -->
     <style type="text/css">
       #config-root {
         margin: 1px;
@@ -74,15 +74,15 @@
       }
     </style>
 
-    <!-- IMPORT FROM LOCAL FOR TESTING VISUALIZER WITH UI -->
-    <script src="%PUBLIC_URL%/visualizer.0.1.1.min.js"></script>
+    <!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
+    <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 
-    <!-- IMPORT FROM CDN FOR TESTING VISUALIZER WITH UI -->
-    <!-- <script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.0.1.1.min.js"></script> -->
+    <!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
+    <!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
   </head>
 
   <body id="body">
-    <!-- HTML INPUTS TO TEST VISUALIZER WITH UI -->
+    <!-- HTML INPUTS TO TEST SEQVIZ WITH UI -->
     <div id="config-root">
       <span> Part: <input id="accession" /> </span>
       &nbsp;&nbsp;<span>
@@ -157,17 +157,17 @@
       <hr />
     </div>
 
-    <!-- ROOT TO ATTACH VISUALIZER -->
+    <!-- ROOT TO ATTACH SEQVIZ -->
     <div id="app-root"></div>
 
-    <!-- DISPLAY NODE TO TEST VISUALIZER WITH UI -->
+    <!-- DISPLAY NODE TO TEST SEQVIZ WITH UI -->
     <div id="data-root">
       <span>
         <div id="select-data"></div>
       </span>
     </div>
 
-    <!-- SCRIPT TO TEST VISUALIZER WITH UI -->
+    <!-- SCRIPT TO TEST SEQVIZ WITH UI -->
     <script>
       function showPart() {
         const lattice = window.lattice;
