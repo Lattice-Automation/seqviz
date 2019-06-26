@@ -6,8 +6,8 @@ const VERSION = PACKAGE.version;
 const AUTHOR = PACKAGE.author;
 const packageName = PACKAGE.name;
 const libraryName = "lattice";
-const fileName = `${packageName}.${VERSION}.min.js`;
-const banner = `${libraryName} - ${packageName} - ${VERSION} \n provided and maintained by ${AUTHOR}`;
+const fileName = `${packageName}.min.js`;
+const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR}`;
 
 module.exports = {
   entry: "./src/library.js",

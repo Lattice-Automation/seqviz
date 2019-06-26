@@ -1,6 +1,6 @@
-# dna-sequence-vizualizer
+# seqviz
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jun 18 10:38:57 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Jun 26 15:45:09 EDT 2019<!-- /exec-bash -->
 
 **Latest Production Version:** <!-- version(cmd:) -->0.1.1<!-- /version -->
 
@@ -56,23 +56,26 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 ## Library Demo
 
-You can see a demonstration of this library with some simple html ui at **[sequencevisualizer.tools.latticeautomation.com](https://sequencevisualizer.tools.latticeautomation.com)** .
+You can see a demonstration of this library with some simple html ui at **[tools.latticeautomation.com/seqviz/](https://tools.latticeautomation.com/seqviz/index.html)** .
 
 For developers, the repository for the demo is [seqviz-demo](https://github.com/Lattice-Automation/seqviz-demo/blob/master/README.md).
-See the [index.html](https://github.com/Lattice-Automation/seqviz-demo/blob/master/public/index.html) for demo code.
+
+See the [index.html](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html) for demo code.
+
+The repository also contains a React application demo for the library. See the [semantic-ui](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md) branch.
 
 ## Using the Library
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`visualizer.0.1.1.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/dna-sequence-vizualizer/releases) tarball or download it from our cdn at `https://d3jtxn3hut9l08.cloudfront.net/`.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/dna-sequence-vizualizer/releases) tarball or download it from our cdn at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
 For example you can use:
 
 ```html
-<script src="https://d3jtxn3hut9l08.cloudfront.net/visualizer.${version}.min.js"></script>
+<script src="https://cdn.latticeautomation.com/libs/seqviz/${version}/seqviz.min.js"></script>
 ```
 
 This method requires no actual download. You will be served the library directly from our cdn. This method, however, does require you to have internet access in order to use the library.
@@ -80,13 +83,13 @@ This method requires no actual download. You will be served the library directly
 If you want to load the library locally and be able to view cached parts without internet connection you can download the source file to the same folder as your `index.html` and use:
 
 ```html
-<script src="visualizer.${version}.min.js"></script>
+<script src="seqviz.min.js"></script>
 ```
 
 If you are using [Create React App](https://github.com/facebook/create-react-app) and have the source code stored in your public folder you can use:
 
 ```html
-<script src="%PUBLIC_URL%/visualizer.${version}.min.js"></script>
+<script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
 Once you have imported the library you can access the `lattice` library through the `window` global variable. The `lattice` library currently contains one sample part `pUC()` and the `Viewer()` constructor.
@@ -447,7 +450,9 @@ Defaults to **`[]`**.
 
 ### Caching
 
-This library caches parts fetched from NCBI and iGem (see `viewerOptions` [`part`](#part-)) so that they can be viewed even if you lose internet connection. These parts are cached in your browser's local storage as cookies with the key of the part accession id. If you would like to refetch a part for whatever reason, simply delete the cookie for the part you want to reload and initialize the viewer with the accession id again.
+This library caches parts fetched from NCBI and iGem (see `viewerOptions` [`part`](#part-)) so that they can be viewed even if you lose internet connection. These parts are cached in your browser's local storage as cookies with keys of the format `seqviz-cache-${accession-id}`. If you would like to refetch a part for whatever reason, simply delete the cookie for the part you want to reload and initialize the viewer with the accession id again.
+
+If you have annotations on your parts seqviz will also cache the colors of your annotations so that they remain consistent between refreshes. These are stored in cookies with keys of the format `seqviz-cache-${partName}-annotation-${annotationName}-color`. If you do not like the colors assigned to your annotations or have added an array of custom colors, delete the cookies corresponding to the annotations you want to refresh and re-intialize the viewer.
 
 If you need help deleting your cookies here are some helpful guides: [Deleting Cookies on Major Browsers](https://www.lifewire.com/how-to-delete-cookies-2617981).
 
@@ -483,17 +488,19 @@ Use `npm start` or `npm run start` to spin up your development environment.
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+If something is already running on your port 3000 Create React App will ask if you want to run the demo on the next port up (3001 and then 3002, etc.). In those cases, you can view the demo at the specified port.
+
 The page will reload if you make edits.
 
 You will also see any lint errors in the console.
 
 ### `build`
 
-After making changes to the library you will want to rebuild it in webpack to get a new minified script. Change the version in the `package.json` then run `npm run build`
+Use `npm run build` to rebuild the library after making changes. Remember to change the version in the `package.json` before building.
 
-This will build the library into a single browser-ready minified script.
+Webpack will consolidate the library into a single browser-ready minified script.
 
-You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`visualizer.0.1.1.min.js`<!-- /pkg-file -->
+You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->
 
 ### `execXML`
 
@@ -502,6 +509,10 @@ This script is used to propagate information to the `.md` files. It is included 
 ### `test`
 
 Create React App uses [jest](https://jestjs.io/) for testing. You can run all existing tests with `npm run test`.
+
+### `release` **Maintainers only**
+
+Use `npm run release` to upload the latest build to the Lattice CDN S3 storage. You will need `Python`, `pip`, and `awscli` installed on your computer. For more information about the release process and release related npm scripts see the [Release Process](https://github.com/Lattice-Automation/seqviz/wiki/Release-Process) wiki page.
 
 ## Contributing
 

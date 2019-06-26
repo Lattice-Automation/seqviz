@@ -24,17 +24,17 @@ export default async (accession, options) => {
   try {
     let response;
     // get part from localStorage if already requested before
-    if (localStorage.getItem(`seq-viz-cache-${accession.trim()}`)) {
+    if (localStorage.getItem(`seqviz-cache-${accession.trim()}`)) {
       console.log(
         `${accession.trim()} was loaded from cache. If you would like to refetch the part just delete the cookie with key ${accession.trim()} from your browser's Local Storage.`
       );
-      response = localStorage.getItem(`seq-viz-cache-${accession.trim()}`);
+      response = localStorage.getItem(`seqviz-cache-${accession.trim()}`);
     } else {
       if (navigator.onLine) {
         // make the call
         response = await fetch(url).then(response => response.text());
         // Store requested part in localStorage
-        localStorage.setItem(`seq-viz-cache-${accession.trim()}`, response);
+        localStorage.setItem(`seqviz-cache-${accession.trim()}`, response);
       } else {
         const partRegistry = igembrick ? "iGEM" : "NCBI";
         throw new Error(
