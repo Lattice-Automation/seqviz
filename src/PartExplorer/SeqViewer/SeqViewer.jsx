@@ -69,12 +69,12 @@ class SeqViewer extends React.Component {
    */
   linearProps = () => {
     const { size, zoom: { linear: zoom } = 50 } = this.props;
-
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of zoom currently active
-    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
+    let bpsPerBlock = Math.round((adjustedWidth / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
 
     if (zoom <= 5) {
       bpsPerBlock *= 3;
@@ -86,7 +86,7 @@ class SeqViewer extends React.Component {
       bpsPerBlock = Math.round(bpsPerBlock * (70 / zoom));
     }
 
-    const charWidth = size.width / bpsPerBlock; // width of each basepair
+    const charWidth = adjustedWidth / bpsPerBlock; // width of each basepair
 
     const lineHeight = 1.4 * seqFontSize; // aspect ratio is 1.4 for roboto mono
     const elementHeight = 16; // the height, in pixels, of annotations, ORFs, etc

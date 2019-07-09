@@ -101,20 +101,20 @@ export default class SeqBlock extends React.PureComponent {
 
       zoomed
     } = this.props;
-
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!size.width || !size.height) return null;
 
     const svgProps = {
       display: "block",
       height: blockHeight,
-      width: size.width
+      width: adjustedWidth
     };
     const textProps = {
       dominantBaseline: "middle",
       fontSize: seqFontSize,
       lengthAdjust: "spacing",
       textAnchor: "start",
-      textLength: size.width,
+      textLength: adjustedWidth,
       textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
     };
 
