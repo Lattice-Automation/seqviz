@@ -5,11 +5,13 @@ import {
   Container,
   Dropdown,
   Icon,
+  Image,
   Input,
   Label,
   Menu,
   Sidebar
 } from "semantic-ui-react";
+import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./App.css";
 
 const backBoneOptions = [
@@ -251,7 +253,6 @@ export class SelectionInfo extends Component {
   render() {
     const { selection } = this.props;
     const { feature, selectionMeta, sequenceMeta } = selection;
-    console.log(selectionMeta);
     return (
       selection && (
         <div className="selection-meta">
@@ -296,34 +297,6 @@ export class SelectionInfo extends Component {
         </div>
       )
     );
-    // return (
-    //   selection && (
-    //     <div>
-    //       <div id="selection-name">{feature ? feature.name : ""}</div>
-    //       {selectionMeta && (
-    //         <div id="selection-meta">
-    //           {feature && feature.type && (
-    //             <span id="selection-type">{feature.type}</span>
-    //           )}
-    //           <span id="selection-length">
-    //             {selectionMeta.selectionLength}bp
-    //           </span>
-    //           <span id="selection-range">
-    //             ({selectionMeta.start} -{selectionMeta.end})
-    //           </span>
-    //         </div>
-    //       )}
-    //       {sequenceMeta && (
-    //         <div id="sequence-meta">
-    //           <span id="selection-label">GC:</span>
-    //           <span id="sequence-gc">{sequenceMeta.GC.toPrecision(2)}%</span>
-    //           <span id="selection-label">Tm:</span>
-    //           <span id="sequence-tm">{sequenceMeta.Tm.toPrecision(2)}°C</span>
-    //         </div>
-    //       )}
-    //     </div>
-    //   )
-    // );
   }
 }
 export class SideBarMenu extends Component {
@@ -407,6 +380,11 @@ export class SideBarMenu extends Component {
                   />
                   <BackBoneInput setDemoState={setDemoState} />
                   <SelectionInfo {...this.props} />
+                  <Image
+                    className="header-logo"
+                    src={SeqvizLogo}
+                    floated="right"
+                  />
                 </div>
               </div>
               <div id="seqviewer">
