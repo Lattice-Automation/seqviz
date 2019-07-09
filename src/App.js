@@ -1,47 +1,49 @@
 import React, { Component } from "react";
 import {
   Button,
-  Input,
-  Icon,
-  Menu,
+  Checkbox,
   Container,
-  Sidebar,
   Dropdown,
-  Checkbox
+  Icon,
+  Input,
+  Menu,
+  Sidebar
 } from "semantic-ui-react";
 import "./App.css";
 
 const backBoneOptions = [
-  { key: "psb1c3", value: "psb1c3", text: "pSB1C3" },
-  { key: "bba_k1362091", value: "bba_k1362091", text: "BBa_K1362091" },
-  { key: "bba_k823055", value: "bba_k823055", text: "BBa_K823055" },
-  { key: "psb1a3", value: "psb1a3", text: "pSB1A3" },
-  { key: "psb1a7", value: "psb1a7", text: "pSB1A7" },
-  { key: "psb1ac3", value: "psb1ac3", text: "pSB1AC3" },
-  { key: "psb1ak3", value: "psb1ak3", text: "pSB1AK3" },
-  { key: "psb1at3", value: "psb1at3", text: "pSB1AT3" },
-  { key: "psb1k3", value: "psb1k3", text: "pSB1K3" },
-  { key: "psb1t3", value: "psb1t3", text: "pSB1T3" }
+  { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
+  { key: "psb1a3", value: "pSB1A3", text: "pSB1A3" },
+  { key: "psb1ac3", value: "pSB1AC3", text: "pSB1AC3" },
+  { key: "psb1ak3", value: "pSB1AK3", text: "pSB1AK3" },
+  { key: "psb1at3", value: "pSB1AT3", text: "pSB1AT3" },
+  { key: "psb1k3", value: "pSB1K3", text: "pSB1K3" },
+  { key: "psb1t3", value: "pSB1T3", text: "pSB1T3" },
+  { key: "psb1a7", value: "pSB1A7", text: "pSB1A7" },
+  { key: "bba_k1362091", value: "BBa_K1362091", text: "BBa_K1362091" },
+  { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" }
 ];
 export class BackBoneInput extends Component {
-  state = { value: "" };
+  state = { value: "pSB1C3" }; // default backbone
   render() {
     const { setDemoState } = this.props;
     return (
-      <span>
+      <div className="backbone-dropdown">
         <Dropdown
-          trigger={<Icon name="circle notched" />}
+          text={this.state.value}
+          icon="circle notched"
+          labeled
+          floating
           button
           className="icon"
           options={backBoneOptions}
-          placeholder="Select a plasmid backbone"
+          placeholder="Backbone"
           onChange={(event, data) => {
             this.setState({ value: data.value });
             setDemoState({ backbone: data.value });
           }}
         />
-        {this.state.value}
-      </span>
+      </div>
     );
   }
 }
@@ -168,10 +170,16 @@ export class CheckboxInput extends Component {
 
 export class PartInput extends Component {
   render() {
-    const { setDemoState } = this.props;
+    const { handleClick, setDemoState } = this.props;
     return (
       <Input
         icon="search"
+        className="part-input"
+        action={{
+          icon: "bars",
+          onClick: handleClick
+        }}
+        actionPosition="left"
         name="accession"
         placeholder="Find a BioBrick ..."
         onChange={(event, data) => {
@@ -347,15 +355,17 @@ export class SideBarMenu extends Component {
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
             <div id="part-explorer">
               <div id="header">
-                <OptionsButton {...this.props} handleClick={this.handleClick} />
-                <PartInput setDemoState={setDemoState} />
-                <BackBoneInput setDemoState={setDemoState} />
+                <div className="control-panel">
+                  <PartInput
+                    setDemoState={setDemoState}
+                    handleClick={this.handleClick}
+                  />
+                  <BackBoneInput setDemoState={setDemoState} />
+                  <SelectionInfo {...this.props} />
+                </div>
               </div>
               <div id="seqviewer">
                 <SequenceViewer {...this.props} />
-              </div>
-              <div id="footer">
-                <SelectionInfo {...this.props} />
               </div>
             </div>
           </Sidebar.Pusher>
