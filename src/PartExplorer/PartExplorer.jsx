@@ -195,9 +195,9 @@ class PartExplorer extends React.Component {
       ...annotationFactory(part.name, a.name || a.start, colors),
       ...a
     }));
-    // add in the annotations already on the part
-    annotations = part.annotations.concat(annotations);
-    // filter out duplicates
+    // add only annotations that don't already exist on the part with the same name and start/end
+    // do not concat and globally cull duplicates, we want to respect duplicates
+    // that already exist on the part
     annotations = annotations.reduce((acc, a) => {
       if (
         !acc.find(
@@ -208,7 +208,7 @@ class PartExplorer extends React.Component {
         return acc.concat(a);
       }
       return acc;
-    }, []);
+    }, part.annotations);
     return { ...part, annotations };
   };
 
