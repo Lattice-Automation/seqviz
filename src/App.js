@@ -6,6 +6,7 @@ import {
   Dropdown,
   Icon,
   Input,
+  Label,
   Menu,
   Sidebar
 } from "semantic-ui-react";
@@ -250,35 +251,79 @@ export class SelectionInfo extends Component {
   render() {
     const { selection } = this.props;
     const { feature, selectionMeta, sequenceMeta } = selection;
-
+    console.log(selectionMeta);
     return (
       selection && (
-        <div>
-          <div id="selection-name">{feature ? feature.name : ""}</div>
-          {selectionMeta && (
-            <div id="selection-meta">
-              {feature && feature.type && (
-                <span id="selection-type">{feature.type}</span>
-              )}
-              <span id="selection-length">
-                {selectionMeta.selectionLength}bp
-              </span>
-              <span id="selection-range">
-                ({selectionMeta.start} -{selectionMeta.end})
-              </span>
-            </div>
+        <div className="selection-meta">
+          {feature && (
+            <Label as="a" basic className="label-feature">
+              Feature
+              <Label.Detail>{feature ? feature.name : ""}</Label.Detail>
+            </Label>
           )}
-          {sequenceMeta && (
-            <div id="sequence-meta">
-              <span id="selection-label">GC:</span>
-              <span id="sequence-gc">{sequenceMeta.GC.toPrecision(2)}%</span>
-              <span id="selection-label">Tm:</span>
-              <span id="sequence-tm">{sequenceMeta.Tm.toPrecision(2)}°C</span>
-            </div>
+          {feature && feature.type && (
+            <Label as="a" basic className="label-type">
+              Type
+              <Label.Detail>{feature.type}</Label.Detail>
+            </Label>
+          )}
+          {selectionMeta && selectionMeta.selectionLength !== 0 && (
+            <Label as="a" basic className="label-length">
+              Length
+              <Label.Detail>{selectionMeta.selectionLength}bp</Label.Detail>
+            </Label>
+          )}
+          {selectionMeta && selectionMeta.start !== selectionMeta.end && (
+            <Label as="a" basic className="label-range">
+              Range
+              <Label.Detail>
+                {selectionMeta.start} - {selectionMeta.end}
+              </Label.Detail>
+            </Label>
+          )}
+          {sequenceMeta && sequenceMeta.GC !== 0 && (
+            <Label as="a" basic className="label-gc">
+              GC
+              <Label.Detail>{sequenceMeta.GC.toPrecision(2)}%</Label.Detail>
+            </Label>
+          )}
+          {sequenceMeta && sequenceMeta.Tm !== 0 && (
+            <Label as="a" basic className="label-tm">
+              Tm
+              <Label.Detail>{sequenceMeta.Tm.toPrecision(2)}°C</Label.Detail>
+            </Label>
           )}
         </div>
       )
     );
+    // return (
+    //   selection && (
+    //     <div>
+    //       <div id="selection-name">{feature ? feature.name : ""}</div>
+    //       {selectionMeta && (
+    //         <div id="selection-meta">
+    //           {feature && feature.type && (
+    //             <span id="selection-type">{feature.type}</span>
+    //           )}
+    //           <span id="selection-length">
+    //             {selectionMeta.selectionLength}bp
+    //           </span>
+    //           <span id="selection-range">
+    //             ({selectionMeta.start} -{selectionMeta.end})
+    //           </span>
+    //         </div>
+    //       )}
+    //       {sequenceMeta && (
+    //         <div id="sequence-meta">
+    //           <span id="selection-label">GC:</span>
+    //           <span id="sequence-gc">{sequenceMeta.GC.toPrecision(2)}%</span>
+    //           <span id="selection-label">Tm:</span>
+    //           <span id="sequence-tm">{sequenceMeta.Tm.toPrecision(2)}°C</span>
+    //         </div>
+    //       )}
+    //     </div>
+    //   )
+    // );
   }
 }
 export class SideBarMenu extends Component {
