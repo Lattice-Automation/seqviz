@@ -8,14 +8,14 @@
 
 .control-panel {
   display: flex;
-  width: 650px;
+  vertical-align: middle;
+  width: 100vw;
 }
 
 .part-input {
-  border: none !important;
   width: 300px;
-  border-radius: 5px;
-  margin-right: 18px;
+  border-right: 1px solid #f0f0f0;
+  margin-right: 24px;
 }
 
 .part-input input {
@@ -25,12 +25,16 @@
   font-size: 1.2em;
 }
 
+.part-input .search.icon {
+  margin-right: 8px !important;
+}
+
 .part-input button {
   background-color: white !important;
 }
 
 .backbone-dropdown {
-  margin: auto 0;
+  margin: auto 24px auto 0;
   vertical-align: middle;
   display: flex;
 }
@@ -55,6 +59,14 @@
 .backbone-dropdown .dropdown .icon {
   background-color: dodgerblue !important;
   color: aliceblue !important;
+}
+
+.selection-meta {
+  margin: auto 24px auto 0;
+}
+
+.selection-meta .label {
+  margin-right: 8px !important;
 }
 
 #part-explorer {
