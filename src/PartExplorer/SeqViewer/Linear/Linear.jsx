@@ -68,6 +68,8 @@ class Linear extends React.Component {
       findState: { searchResults = [], searchIndex }
     } = this.props;
 
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+
     // un-official definition for being zoomed in. Being over 10 seems like a decent cut-off
     const zoomed = zoom.linear > 10;
 
@@ -134,7 +136,7 @@ class Linear extends React.Component {
       if (i + 1 === arrSize) {
         blockSize = {
           ...size,
-          width: (seqs[i].length / bpsPerBlock) * size.width
+          width: (seqs[i].length / bpsPerBlock) * adjustedWidth
         };
       }
       seqBlocks.push(

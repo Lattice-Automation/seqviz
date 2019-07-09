@@ -18,6 +18,7 @@ export default class Index extends React.PureComponent {
       findXAndWidth
     } = this.props;
     const seqLength = seq.length;
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
 
     // the number of tallies on the x-axis is zoom dependent:
     // (0, 10]: every 50
@@ -82,7 +83,7 @@ export default class Index extends React.PureComponent {
 
       textFromLeft -= digits * 10; // 10 = 0.91 x 11
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
-      textFromLeft = Math.min(size.width - textWidth / 2, textFromLeft); // keep off right edge
+      textFromLeft = Math.min(adjustedWidth - textWidth / 2, textFromLeft); // keep off right edge
 
       const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight})`;
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
@@ -101,11 +102,11 @@ export default class Index extends React.PureComponent {
 
   render() {
     const { lineHeight, size, transform, showIndex, resizing } = this.props;
-
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!showIndex) return null;
 
     const axisStyle = {
-      width: size.width,
+      width: adjustedWidth,
       height: 1,
       shapeRendering: resizing ? "optimizeSpeed" : "crispEdges"
     };

@@ -145,10 +145,10 @@ const withSelectionHandler = WrappedComp =>
      */
     calculateBaseLinear = (e, knownRange) => {
       const { size, bpsPerBlock } = this.props;
-
+      const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
       const block = e.currentTarget.getBoundingClientRect();
       const distFromLeft = e.clientX - block.left;
-      const percFromLeft = distFromLeft / size.width;
+      const percFromLeft = distFromLeft / adjustedWidth;
       const bpsFromLeft = Math.round(percFromLeft * bpsPerBlock);
 
       const currBase = knownRange.start + bpsFromLeft;
