@@ -36,6 +36,10 @@ const SingleAnnotation = props => {
   // how many degrees should it be rotated?
   const rotation = getRotation(a.start);
 
+  if (currBRadius < 0 || currTRadius < 0) {
+    return null;
+  }
+
   const path = generateArc({
     innerRadius: currBRadius,
     outerRadius: currTRadius,

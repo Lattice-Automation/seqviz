@@ -55,7 +55,12 @@ class CircularSelection extends React.PureComponent {
       topR += 2 * lineHeight;
     }
     const bAdjust = lineHeight * totalRows; // adjust bottom radius
-    const bottomR = radius - bAdjust; // inner radius
+    let bottomR = radius - bAdjust; // inner radius
+
+    if (bottomR < 0 || topR < 0) {
+      bottomR = 0;
+      topR = radius;
+    }
 
     // find start and stop coordinates to created edges
     const lineTop = findCoor(0, topR);
