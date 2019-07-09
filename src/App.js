@@ -371,7 +371,7 @@ export class SideBarMenu extends Component {
             </Menu.Item>
           </Sidebar>
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
-            <div id="part-explorer">
+            <div className="seqviz-container">
               <div id="header">
                 <div className="control-panel">
                   <PartInput
