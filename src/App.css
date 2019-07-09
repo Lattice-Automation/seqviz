@@ -6,6 +6,57 @@
   min-height: 100vh;
 }
 
+.control-panel {
+  display: flex;
+  width: 650px;
+}
+
+.part-input {
+  border: none !important;
+  width: 300px;
+  border-radius: 5px;
+  margin-right: 18px;
+}
+
+.part-input input {
+  height: 48px;
+  box-shadow: none !important;
+  border: none !important;
+  font-size: 1.2em;
+}
+
+.part-input button {
+  background-color: white !important;
+}
+
+.backbone-dropdown {
+  margin: auto 0;
+  vertical-align: middle;
+  display: flex;
+}
+
+.backbone-dropdown .dropdown {
+  margin-right: 8px;
+  background: #f0f0f0;
+}
+
+.backbone-dropdown .dropdown:hover {
+  background: #eaeaea;
+}
+
+.backbone-dropdown .dropdown.active {
+  background: #e4e4e4 !important;
+}
+
+.backbone-dropdown .label {
+  margin: auto !important;
+}
+
+.backbone-dropdown .dropdown .icon {
+  background-color: dodgerblue !important;
+  color: aliceblue !important;
+}
+
 #part-explorer {
   height: 100vh;
   width: 100vw;
@@ -13,10 +64,12 @@
   flex-direction: column;
 }
 
-#header,
-#footer {
-  margin: 0px;
+#header {
+  height: 64px;
+  padding: 8px 16px;
+  margin: auto 0;
   flex: 0 0 auto;
+  box-shadow: 0 2px 8px #f0f1f2;
 }
 
 #seqviewer {
