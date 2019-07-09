@@ -5,16 +5,10 @@ import PUC from "./DefaultParts/pUC";
  * CODE TO TEST VIEWER
  */
 // import "./index.css";
-// const parts = [
-//   "KJ668651.1",
-//   "BBa_E0040",
-//   PUC,
-//   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA",
-//   ""
-// ];
+// const parts = ["BBa_E0040"];
 // const part = parts[Math.floor(Math.random() * parts.length)];
 
-// const types = ["circular", "linear", "both"];
+// const types = ["linear", "both"];
 
 // // Store variable in localStorage for deterministically cycling through exampels
 // if (
@@ -59,7 +53,7 @@ import PUC from "./DefaultParts/pUC";
 //   },
 //   searchQuery: { query: "GCGGX" },
 //   backbone: "pSB1C3",
-//   enzymes: []
+//   enzymes: ["PstI"]
 // });
 // viewer.render();
 

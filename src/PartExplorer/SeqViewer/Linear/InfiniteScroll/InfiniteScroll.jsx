@@ -261,7 +261,7 @@ export default class InfiniteScroll extends React.PureComponent {
         onMouseOver={this.handleMouseOver}
         onFocus={() => {}}
       >
-        <div style={{ height }} ref={this.insideDOM}>
+        <div id="seqblock-container" style={{ height }} ref={this.insideDOM}>
           <div style={{ width: width, height: spaceAbove }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
