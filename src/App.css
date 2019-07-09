@@ -9,7 +9,7 @@
 .control-panel {
   display: flex;
   vertical-align: middle;
-  width: 100vw;
+  width: 100%;
 }
 
 .part-input {
@@ -63,10 +63,17 @@
 
 .selection-meta {
   margin: auto 24px auto 0;
+  flex: 1;
 }
 
 .selection-meta .label {
   margin-right: 8px !important;
+}
+
+.header-logo {
+  height: 48px;
+  padding-right: 12px;
+  margin: auto;
 }
 
 #part-explorer {
@@ -80,7 +87,6 @@
   height: 64px;
   padding: 8px 16px;
   margin: auto 0;
-  flex: 0 0 auto;
   box-shadow: 0 2px 8px #f0f1f2;
 }
 
