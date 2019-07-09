@@ -1,17 +1,20 @@
 #Linear-scroller {
   height: 100%;
-  width: 100%;
+  width: calc(100%-20px); // this needs to manually account for padding
   outline: none !important;
   position: relative;
   font-weight: 300;
-  padding: 1%;
+  padding: 10px;
   overflow-y: scroll;
-  overflow-x: hidden;
-  border-right: solid 1px gray;
-
   cursor: text;
+
+  #seqblock-container {
+    width: 100%; // this will pass the width down to the seqblocks for them to inherit correctly
+  }
+
   .SeqBlock {
-    margin: 4px 0;
+    width: 100%;
+    padding: 2px 0px;
   }
 }
 

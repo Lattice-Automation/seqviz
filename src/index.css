@@ -38,8 +38,8 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 99vw;
-  height: 98vh;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   overscroll-behavior: none;
 }

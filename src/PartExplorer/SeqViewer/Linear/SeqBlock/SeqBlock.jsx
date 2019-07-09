@@ -50,23 +50,23 @@ export default class SeqBlock extends React.PureComponent {
       seq: { length: seqLength }
     } = this.props;
     const lastBase = firstBase + seqLength;
-
+    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     // find the distance from the left to start
     let x = 0;
     if (firstIndex >= firstBase) {
-      x = ((firstIndex - firstBase) / seqLength) * size.width;
+      x = ((firstIndex - firstBase) / seqLength) * adjustedWidth;
       x = Math.max(x, 0) || 0;
     }
 
     // find the width for the current annotation
-    let { width } = size;
+    let width = adjustedWidth;
     if (firstIndex === lastIndex) {
       width = 0;
     } else if (firstIndex > firstBase || lastIndex < lastBase) {
-      width =
+      const widthUnit =
         (Math.min(lastIndex, lastBase) - Math.max(firstIndex, firstBase)) /
         seqLength;
-      width *= size.width;
+      width = adjustedWidth * widthUnit;
       width = Math.abs(width) || 0;
     }
     return { x, width };
