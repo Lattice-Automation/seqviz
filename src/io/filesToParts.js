@@ -8,6 +8,7 @@ import parseGenbank from "./parsers/genbank";
 import parseJBEI from "./parsers/jbei";
 import parseSBOL from "./parsers/sbol";
 import parseSnapgene from "./parsers/snapgene";
+import parseSeqBuilder from "./parsers/seqbuilder";
 
 /**
  * unzips a dropped zip file
@@ -100,8 +101,15 @@ const fileToParts = async (file, options) => {
         break;
       case file.includes("LOCUS") && file.includes("ORIGIN"):
       case fileName.endsWith(".gb"):
+      case fileName.endsWith(".gbk"):
+      case fileName.endsWith(".genbank"):
+      case fileName.endsWith(".ape"):
         // Genbank
         parts = await parseGenbank(file, fileName, colors);
+        break;
+      case file.includes("Written by SeqBuilder"):
+      case fileName.endsWith(".sbd"):
+        parts = await parseSeqBuilder(file, fileName, colors);
         break;
       case fileName.endsWith(".dna"):
         // Snapgene
@@ -132,7 +140,7 @@ const fileToParts = async (file, options) => {
         throw Error(`${fileName} File type not recognized`);
     }
   } catch (e) {
-    return [{ failedToParse: fileName }];
+    return [{ failedToParse: fileName, error: e }];
   }
 
   // add the source information to all parts

@@ -128,7 +128,13 @@ const partFromFiles = async (files, colors = []) => {
       colors: colors
     });
     const unrecognizedFiles = parsedFiles.reduce((acc, p) => {
-      if (p.failedToParse) {
+      if (
+        p.failedToParse &&
+        p.error &&
+        p.error.name === "ImportErrorTooLarge"
+      ) {
+        console.error(p.error.message);
+      } else if (p.failedToParse) {
         return acc.concat(p.failedToParse);
       }
       return acc;
