@@ -10,7 +10,7 @@ const tinycolor = require("tinycolor2");
 class AnnotationRow extends React.PureComponent {
   hoverOtherAnnotationRows = (className, opacity) => {
     const elements = document
-      .getElementById("Linear-scroller")
+      .getElementById("la-vz-linear-scroller")
       .getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].style.fillOpacity = opacity;
@@ -287,7 +287,7 @@ export default class AnnotationRows extends React.PureComponent {
     if (!showAnnotations) return null;
 
     return (
-      <g id="linear-annotations">
+      <g id="la-vz-linear-annotations">
         {annotationRows.map((a, i) => {
           const y = yDiff + elementHeight * i;
           const id = shortid.generate();

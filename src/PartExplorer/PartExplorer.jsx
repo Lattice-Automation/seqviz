@@ -220,9 +220,9 @@ class PartExplorer extends React.Component {
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";
     return (
-      <div className="part-explorer-container" id="part-explorer">
+      <div className="la-vz-part-explorer-container" id="la-vz-part-explorer">
         {partAvailable && (
-          <div className="seq-viewers-container">
+          <div className="la-vz-seq-viewers-container">
             {circular && part.seq.length > 0 && (
               <SizeMe
                 monitorHeight

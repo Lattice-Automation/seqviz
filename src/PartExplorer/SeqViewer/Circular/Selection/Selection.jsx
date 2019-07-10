@@ -109,7 +109,7 @@ class CircularSelection extends React.PureComponent {
     const thirdId = shortid.generate();
 
     return (
-      <g id="circular-selection">
+      <g id="la-vz-circular-selection">
         {selLength && (
           <path
             d={selectPath}

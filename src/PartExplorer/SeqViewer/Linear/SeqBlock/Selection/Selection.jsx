@@ -88,7 +88,7 @@ export class Edges extends React.Component {
     };
 
     return (
-      <g className="linear-sel-edges">
+      <g className="la-vz-linear-sel-edges">
         {startEdge !== null && (
           <rect {...rect} x={x} height={selectEdgeHeight} />
         )}
@@ -167,7 +167,7 @@ export class Block extends React.PureComponent {
               y={-10}
               height={selectHeight + 5}
               width={secBlockWidth}
-              className="linear-sel-block"
+              className="la-vz-linear-sel-block"
             />
           );
           ({ x, width } = findXAndWidth(firstBase, end));
@@ -203,7 +203,7 @@ export class Block extends React.PureComponent {
               y={-10}
               height={selectHeight + 5}
               width={secBlockWidth}
-              className="linear-sel-block"
+              className="la-vz-linear-sel-block"
               shapeRendering={resizing ? "optimizeSpeed" : "auto"}
             />
           );
@@ -238,7 +238,7 @@ export class Block extends React.PureComponent {
           y={-10}
           height={selectHeight + 5}
           width={width}
-          className="linear-sel-block"
+          className="la-vz-linear-sel-block"
           shapeRendering={resizing ? "optimizeSpeed" : "auto"}
         />
         {secondBlock}

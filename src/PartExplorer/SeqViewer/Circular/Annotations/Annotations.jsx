@@ -70,9 +70,9 @@ const SingleAnnotation = props => {
     }
   }
 
-  const circAnnID = `${a.id}-circular`;
+  const circAnnID = `la-vz-${a.id}-circular`;
   return (
-    <g id={`${a.id}-annotation-circular`} transform={rotation}>
+    <g id={`la-vz-${a.id}-annotation-circular`} transform={rotation}>
       <path id={circAnnID} d={path} {...transparentPath} />
       <path
         d={path}
@@ -137,7 +137,7 @@ export default class Annotations extends React.PureComponent {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className, opacity) => {
     const elements = document
-      .getElementById("circular-annotations")
+      .getElementById("la-vz-circular-annotations")
       .getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].style.fillOpacity = opacity;
@@ -183,7 +183,7 @@ export default class Annotations extends React.PureComponent {
     };
 
     return (
-      <g id="circular-annotations">
+      <g id="la-vz-circular-annotations">
         {annotations.reduce((acc, anns, i) => {
           if (i) {
             currBRadius -= lineHeight + 3;
@@ -194,8 +194,8 @@ export default class Annotations extends React.PureComponent {
             anns.map(a => (
               <SingleAnnotation
                 {...this.props}
-                key={`${a.id}-annotation-circular-row`}
-                id={`${a.id}-annotation-circular-row`}
+                key={`la-vz-${a.id}-annotation-circular-row`}
+                id={`la-vz-${a.id}-annotation-circular-row`}
                 annotation={a}
                 currBRadius={currBRadius}
                 currTRadius={currTRadius}

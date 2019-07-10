@@ -19,7 +19,7 @@ class LinearFind extends React.PureComponent {
       height: 18,
       stroke: "black",
       strokeWidth: 0.8,
-      className: "linear-sel-block",
+      className: "la-vz-linear-sel-block",
       cursor: "pointer"
     };
 

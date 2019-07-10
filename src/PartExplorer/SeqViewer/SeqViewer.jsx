@@ -156,7 +156,7 @@ class SeqViewer extends React.Component {
 
     return (
       <div
-        className="SeqViewer-container"
+        className="la-vz-viewer-container"
         style={{ zIndex: CircularProp ? 2 : 3 }}
       >
         {CircularProp && (

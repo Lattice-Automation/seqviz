@@ -278,21 +278,21 @@ class Circular extends React.PureComponent {
       resizing
     };
 
-    const plasmidId = `${name}-viewer-circular`;
+    const plasmidId = `la-vz-${name}-viewer-circular`;
     const selectionId = shortid.generate();
     if (!size.height) return null;
 
     return (
       <svg
         id={plasmidId}
-        className="circular-viewer"
+        className="la-vz-circular-viewer"
         onMouseDown={mouseEvent}
         onMouseUp={mouseEvent}
         onMouseMove={mouseEvent}
         ref={inputRef(plasmidId, { type: "SEQ" })}
         {...size}
       >
-        <g id="circular-root" transform={`translate(0, ${yDiff})`}>
+        <g id="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection
             {...this.props}
             {...general}
