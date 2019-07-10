@@ -234,16 +234,15 @@ export class SequenceViewer extends Component {
 
 export class OptionsButton extends Component {
   render() {
-    const { part, backbone, handleClick } = this.props;
-    return part && backbone ? (
-      <Button onClick={handleClick}>
-        <Icon name="bars" />
-        <label>Options</label>
-      </Button>
-    ) : (
-      <Button disabled onClick={handleClick}>
-        <Icon name="bars" />
-        <label>Options</label>
+    const { handleClick } = this.props;
+    return (
+      <Button style={{ height: "64px" }} basic fluid onClick={handleClick}>
+        <Label style={{ fontSize: "23px" }} attached="top">
+          SeqViz options
+          <Label.Detail>
+            <Icon tiny name="angle left" />
+          </Label.Detail>
+        </Label>
       </Button>
     );
   }
