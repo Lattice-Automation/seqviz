@@ -13,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./App.css";
+import { isEqual } from "lodash";
 
 const backBoneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -194,6 +195,16 @@ export class PartInput extends Component {
 }
 
 export class SequenceViewer extends Component {
+  shouldComponentUpdate = nextProps => {
+    const { searchResults, selection, ...rest } = this.props;
+    const {
+      searchResults: nextSearchResults,
+      selection: nextSelection,
+      ...nextRest
+    } = nextProps;
+    return !isEqual(rest, nextRest);
+  };
+
   render() {
     const {
       part = "",
