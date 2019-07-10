@@ -81,9 +81,18 @@
   width: 100vw;
   display: flex;
   flex-direction: column;
+  min-width: 1000px;
 }
 
 #header {
+  height: 64px;
+  padding: 8px 16px;
+  margin: auto 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+  min-width: 1000px;
+}
+
+#sidebar-header {
   height: 64px;
   padding: 8px 16px;
   margin: auto 0;
