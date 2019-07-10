@@ -88,9 +88,22 @@ class Linear extends React.Component {
       ? createSingleRows(cutSites, bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
+    /**
+     * Vet the annotations for starts and ends at zero index
+     * @param {*} annotations
+     * @return annotations
+     */
+    const vetAnnotations = annotations => {
+      annotations.forEach(ann => {
+        if (ann.end === 0 && ann.start > ann.end) ann.end = seqLength;
+        if (ann.start === seqLength && ann.end < ann.start) ann.start = 0;
+      });
+      return annotations;
+    };
+
     const annotationRows = showAnnotations // annotations...
       ? createMultiRows(
-          stackElements(annotations, seq.length),
+          stackElements(vetAnnotations(annotations), seq.length),
           bpsPerBlock,
           arrSize
         )
