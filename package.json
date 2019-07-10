@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fs": "0.0.1-security",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
@@ -14,7 +15,8 @@
     "build": "craco build",
     "test": "craco test",
     "deploy": "npm run build && aws s3 sync build s3://lattice-tools-s3/seqviz",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "bbinfo": "node ./src/io/fileInput.js ./src/io/biobricks/biobricks.fa"
   },
   "eslintConfig": {
     "extends": "react-app"
