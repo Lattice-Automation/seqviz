@@ -5,6 +5,7 @@ import PartExplorer from "./PartExplorer/PartExplorer.jsx";
 import "./App.scss";
 
 const Viewer = (element, part, options) => {
+  const displayConfiguration = false;
   const displayConfig = (displayPart, displayOptions) => {
     const {
       annotate,
@@ -78,7 +79,7 @@ const Viewer = (element, part, options) => {
     ReactDOM.render(viewer, domElement);
   };
 
-  displayConfig(part, options);
+  if (displayConfiguration) displayConfig(part, options);
   return {
     viewer: viewer,
     viewerHTML: viewerHTML,

@@ -20,16 +20,10 @@ export const Viewer = (element = "root", ViewerOptions) => {
     zoom = { circular: 0, linear: 50 },
     colors = [],
     onSelection = selection => {
-      console.log(
-        "No custom selection functionality yet. Function passed as onSelection option will be applied to selected range."
-      );
-      console.log("Your Selection: ", selection);
+      return selection;
     },
     onSearch = results => {
-      console.log(
-        "No custom search functionality yet. Function passed as onSearch option will be applied to search results."
-      );
-      console.log("Your Search Results: ", results);
+      return results;
     },
     searchNext = {
       key: "",
