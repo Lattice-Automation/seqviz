@@ -58,6 +58,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md",
+    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/",
     "patch": "npm version -m \"chore: Release version %s\" -- ",
     "patch:major": "npm run patch major",
     "patch:minor": "npm run patch minor",
@@ -66,8 +68,6 @@
     "patch:premajor": "npm run patch major && npm run patch prerelease --",
     "patch:preminor": "npm run patch minor && npm run patch prerelease --",
     "patch:prepatch": "npm run patch patch && npm run patch prerelease --",
-    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md",
-    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/",
     "release:major": "npm run patch:major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "release:minor": "npm run patch:minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "release:patch": "npm run patch:patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",

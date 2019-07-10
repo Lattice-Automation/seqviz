@@ -47,10 +47,12 @@ export default class SeqBlock extends React.PureComponent {
     const {
       firstBase,
       size,
-      seq: { length: seqLength }
+      seq: { length: seqLength },
+      bpsPerBlock
     } = this.props;
     const lastBase = firstBase + seqLength;
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    const adjustedWidth =
+      seqLength >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     // find the distance from the left to start
     let x = 0;
     if (firstIndex >= firstBase) {
@@ -89,6 +91,7 @@ export default class SeqBlock extends React.PureComponent {
 
       seqFontSize,
       firstBase,
+      bpsPerBlock,
       size,
       lineHeight,
       elementHeight,
@@ -101,7 +104,8 @@ export default class SeqBlock extends React.PureComponent {
 
       zoomed
     } = this.props;
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    const adjustedWidth =
+      seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!size.width || !size.height) return null;
 
     const svgProps = {
