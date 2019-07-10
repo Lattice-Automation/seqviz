@@ -102,7 +102,7 @@ export default class WrappedGroupLabel extends React.Component {
 
     return (
       <g key={key} onMouseLeave={() => setHoveredGroup("")}>
-        <path d={linePath} className="label-line" />
+        <path d={linePath} className="la-vz-label-line" />
         <rect
           fill="white"
           stroke="none"
@@ -128,7 +128,7 @@ export default class WrappedGroupLabel extends React.Component {
                 <React.Fragment key={l.id}>
                   <tspan
                     id={l.id}
-                    className="circular-label"
+                    className="la-vz-circular-label"
                     y={groupCoor.y + (i + 0.5) * lineHeight}
                     alignmentBaseline="middle"
                     tabIndex={-1}

@@ -1,16 +1,16 @@
-.SeqViewer-container {
+.la-vz-viewer-container {
   height: 100%;
   width: 100%;
   position: relative;
   z-index: 2 !important;
-  .noSeq {
+  .la-vz-no-seq {
     position: relative;
     height: 100%;
     left: 5px;
   }
 }
 
-.SeqViewer-eventRouter {
+.la-vz-viewer-event-router {
   position: absolute;
   outline: none;
   height: 100%;

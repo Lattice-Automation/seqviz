@@ -5,9 +5,9 @@ body,
   height: 100%;
 }
 
-#part-explorer {
+#la-vz-part-explorer {
   height: 100%;
-  .seq-viewers-container {
+  .la-vz-seq-viewers-container {
     display: flex;
     height: inherit;
   }
@@ -31,21 +31,21 @@ label {
   float: right;
 }
 
-.scroll::-webkit-scrollbar {
+.la-vz-scroll::-webkit-scrollbar {
   width: 7px;
 }
 
-.scroll::-webkit-scrollbar-thumb {
+.la-vz-scroll::-webkit-scrollbar-thumb {
   background-clip: padding-box;
   border-radius: 7px;
   background-color: #a6a6a6;
 }
 
-.scroll::-webkit-scrollbar-track {
+.la-vz-scroll::-webkit-scrollbar-track {
   border-radius: 20px;
 }
 
-.scroll::-webkit-scrollbar-track-piece {
+.la-vz-scroll::-webkit-scrollbar-track-piece {
   background-clip: padding-box;
   border-radius: 7px;
   background-color: #ececec;

@@ -37,7 +37,7 @@ const withSelectionHandler = WrappedComp =>
 
     lastMouseY = null;
 
-    workspace = document.getElementById("part-explorer");
+    workspace = document.getElementById("la-vz-part-explorer");
     /**
      * an attempt an event rate limiter, since setting the selection range
      * in the cache is async (was having a problem getting two sets before the first was complete)

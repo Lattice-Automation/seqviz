@@ -31,7 +31,7 @@ const withEventRouter = WrappedComp =>
       super(props);
 
       this.state = {
-        id: `${props.type}-${props.name.replace(/\s/g, "")}-event-router`
+        id: `la-vz-${props.type}-${props.name.replace(/\s/g, "")}-event-router`
       };
     }
 
@@ -369,7 +369,7 @@ const withEventRouter = WrappedComp =>
       return (
         <div
           id={id}
-          className="SeqViewer-eventRouter"
+          className="la-vz-viewer-event-router"
           onMouseMove={this.handleMouseEvent}
           onKeyDown={this.handleKeyPress}
           onWheel={this.handleScrollEvent}

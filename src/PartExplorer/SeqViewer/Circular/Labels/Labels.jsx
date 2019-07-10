@@ -258,7 +258,10 @@ export default class Labels extends React.Component {
     const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
 
     return (
-      <g id="circular-labels" onMouseLeave={() => this.setHoveredGroup("")}>
+      <g
+        id="la-vz-circular-labels"
+        onMouseLeave={() => this.setHoveredGroup("")}
+      >
         {labelGroups.map(g => {
           const [first] = g.labels;
           // generate the line between the name and plasmid surface
@@ -267,12 +270,12 @@ export default class Labels extends React.Component {
             <React.Fragment>
               <path
                 d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`}
-                className="label-line"
+                className="la-vz-label-line"
               />
               {g.forkCoor && (
                 <path
                   d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`}
-                  className="label-line"
+                  className="la-vz-label-line"
                 />
               )}
             </React.Fragment>
@@ -285,7 +288,7 @@ export default class Labels extends React.Component {
                 {labelLines}
                 <text
                   id={first.id}
-                  className="circular-label"
+                  className="la-vz-circular-label"
                   {...g.textCoor}
                   textAnchor={g.textAnchor}
                   alignmentBaseline="middle"
@@ -305,7 +308,7 @@ export default class Labels extends React.Component {
               {labelLines}
               <text
                 id={first.id}
-                className="circular-label"
+                className="la-vz-circular-label"
                 textAnchor={g.textAnchor}
                 onMouseEnter={() => this.setHoveredGroup(first.id)}
                 alignmentBaseline="middle"

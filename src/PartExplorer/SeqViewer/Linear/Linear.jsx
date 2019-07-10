@@ -155,7 +155,7 @@ class Linear extends React.Component {
       seqBlocks.push(
         <SeqBlock
           {...this.props}
-          key={`${ids[i]}_block`}
+          key={`la-vz-${ids[i]}_block`}
           id={ids[i]}
           y={yDiff}
           seq={seqs[i]}

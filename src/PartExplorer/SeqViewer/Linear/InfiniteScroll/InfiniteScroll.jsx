@@ -254,14 +254,18 @@ export default class InfiniteScroll extends React.PureComponent {
 
     return (
       <div
-        id="Linear-scroller"
+        id="la-vz-linear-scroller"
         ref={this.scroller}
-        className="scroll"
+        className="la-vz-scroll"
         onScroll={this.handleScrollOrResize}
         onMouseOver={this.handleMouseOver}
         onFocus={() => {}}
       >
-        <div id="seqblock-container" style={{ height }} ref={this.insideDOM}>
+        <div
+          id="la-vz-seqblock-container"
+          style={{ height }}
+          ref={this.insideDOM}
+        >
           <div style={{ width: width, height: spaceAbove }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>

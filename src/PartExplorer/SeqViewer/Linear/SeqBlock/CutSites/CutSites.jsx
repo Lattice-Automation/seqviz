@@ -14,7 +14,7 @@ import * as React from "react";
  * first set the names to 1.0 and then the cut site regions (without the name) to 0.5
  */
 const hoverCutSite = (className, on = false) => {
-  const linearScroller = document.getElementById("Linear-scroller");
+  const linearScroller = document.getElementById("la-vz-linear-scroller");
   if (linearScroller) {
     let elements = linearScroller.getElementsByClassName(`${className}-name`);
     for (let i = 0; i < elements.length; i += 1) {
@@ -136,12 +136,12 @@ const CutSites = props => {
         );
 
         return (
-          <React.Fragment key={`${c.id}-firstBase`}>
+          <React.Fragment key={`la-vz-${c.id}-first-base`}>
             {sequenceCutSite ? (
               <text
                 {...textProps}
                 id={c.id}
-                className={`cutSite-text ${c.id}-name`}
+                className={`la-vz-cut-site-text ${c.id}-name`}
                 x={c.cutX}
                 style={{
                   cursor: "pointer",

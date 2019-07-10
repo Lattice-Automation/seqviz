@@ -91,7 +91,11 @@ export default class CutSites extends React.PureComponent {
     };
 
     return (
-      <g id={`circular-cutsite-${id}`} key={id} transform={getRotation(start)}>
+      <g
+        id={`la-vz-circular-cutsite-${id}`}
+        key={id}
+        transform={getRotation(start)}
+      >
         {<path d={cutLinePath} {...lineStyle} />}
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
@@ -113,7 +117,7 @@ export default class CutSites extends React.PureComponent {
 
   render() {
     return (
-      <g id="circular-cutsites">
+      <g id="la-vz-circular-cutsites">
         {this.props.cutSites.map(this.displayCutSite)}
       </g>
     );

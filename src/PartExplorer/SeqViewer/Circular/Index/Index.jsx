@@ -70,14 +70,14 @@ export default class Index extends React.PureComponent {
     for (let i = firstBase; i <= lastBase; i += 1) {
       basepairsToRender.push(
         <text
-          key={`base_${i}`}
+          key={`la-vz-base_${i}`}
           {...findCoor(0, radius + 2 * lineHeight)}
           transform={getRotation(i + 0.25)}
         >
           {seqForCircular.charAt(i)}
         </text>,
         <text
-          key={`base_comp_${i}`}
+          key={`la-vz-base_comp_${i}`}
           {...findCoor(0, radius + lineHeight)}
           transform={getRotation(i + 0.25)}
         >
@@ -179,7 +179,7 @@ export default class Index extends React.PureComponent {
       largeArc: true
     });
     return (
-      <g id="circular-index">
+      <g id="la-vz-circular-index">
         <text {...nameStyle}>
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
@@ -195,10 +195,10 @@ export default class Index extends React.PureComponent {
           {`${seqLength} bp`}
         </text>
         {seq.length < 200 ? (
-          <g className="circular-bps">{this.renderBasepairs()}</g>
+          <g className="la-vz-circular-bps">{this.renderBasepairs()}</g>
         ) : null}
         {ticks.map(t => (
-          <g key={`${t}_tick`} transform={getRotation(t - 0.5)}>
+          <g key={`la-vz-${t}_tick`} transform={getRotation(t - 0.5)}>
             <path
               d={`M ${tickCoorStart.x} ${tickCoorStart.y}
                 L ${tickCoorEnd.x} ${tickCoorEnd.y}`}

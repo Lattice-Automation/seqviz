@@ -172,7 +172,7 @@ export default class SeqBlock extends React.PureComponent {
     return (
       <svg
         {...svgProps}
-        className="SeqBlock"
+        className="la-vz-seq-block"
         id={id}
         ref={inputRef(id, seqRange)}
         onMouseDown={mouseEvent}
