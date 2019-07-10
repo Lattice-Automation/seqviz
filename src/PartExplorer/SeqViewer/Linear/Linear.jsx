@@ -149,7 +149,9 @@ class Linear extends React.Component {
       if (i + 1 === arrSize) {
         blockSize = {
           ...size,
-          width: (seqs[i].length / bpsPerBlock) * adjustedWidth
+          width:
+            (seqs[i].length / bpsPerBlock) *
+            (seqs[i] >= bpsPerBlock ? adjustedWidth : size.width)
         };
       }
       seqBlocks.push(

@@ -15,10 +15,12 @@ export default class Index extends React.PureComponent {
       lineHeight,
       size,
       resizing,
-      findXAndWidth
+      findXAndWidth,
+      bpsPerBlock
     } = this.props;
     const seqLength = seq.length;
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    const adjustedWidth =
+      seqLength >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
 
     // the number of tallies on the x-axis is zoom dependent:
     // (0, 10]: every 50
@@ -101,8 +103,17 @@ export default class Index extends React.PureComponent {
   };
 
   render() {
-    const { lineHeight, size, transform, showIndex, resizing } = this.props;
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    const {
+      lineHeight,
+      size,
+      transform,
+      showIndex,
+      resizing,
+      bpsPerBlock,
+      seq
+    } = this.props;
+    const adjustedWidth =
+      seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!showIndex) return null;
 
     const axisStyle = {
