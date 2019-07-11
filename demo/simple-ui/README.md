@@ -1,4 +1,4 @@
-<b>HTML Demo</b> | [Semantic UI Demo](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md)
+<b>HTML Demo</b> | [Semantic UI Demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md)
 
 # seqviz Demo
 
@@ -6,19 +6,19 @@ A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Latti
 
 ## Running in Development
 
-To run a local copy of this demo, clone the repository, and then run `npm install` and `npm start` in the directory.
+To run a local copy of this demo, clone the [SeqViz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo/simple-ui`. Then run `npm install` and `npm start`.
 
 The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-To change the version of `seqviz` you run in the demo change the last part in the script import in [`public/index.html`](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html)
+The demo will be running the latest version of the SeqViz library, but you can change the version you want to demo in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html) file by modifying the line that looks like this:
 
 `<script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script>`
 
-The example above is running `version 0.2.0`. Alternatively you can run the demo from a local copy of the compiled seqviz. If you download the `version 0.2.0` script for example you can run the app with just
+The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled SeqViz, copy the minified distribution into the demo folder and use this:
 
 `<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
 
-provided the copy of the compiled seqviz code is in the same repository as the `index.html` file.
+The minified distribution will need to be in the same folder as the `index.html` file.
 
 To check what the version of your downloaded library is, open the `seqviz.min.js` file and see the header
 
@@ -38,9 +38,9 @@ If something is already running on your port 3000 Create React App will ask if y
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-## Demo Files (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#demo-files-html--semantic))
+## Demo Files (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md#demo-files-html--semantic))
 
-The HTML demo uses Create React App but does not use any React specific code. The only file customized for the Demo is the [`public/index.html`](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html). The rest of the files are Create React App's basic setup to render that file.
+The HTML demo uses Create React App but does not use any React specific code. The only file customized for the Demo is the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html). The rest of the files are Create React App's basic setup to render that file.
 
 The library is imported in the head:
 
@@ -124,7 +124,7 @@ And the viewer initialization is in a
 
 at the bottom of the file.
 
-## Demo Inputs (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#demo-inputs-html--semantic))
+## Demo Inputs (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md#demo-inputs-html--semantic))
 
 ### Part
 
@@ -342,7 +342,7 @@ onSelection: selection => {
 
 Demonstrates the onSelection hook which exposes information about your sequence selection on the viewer.
 
-## Final Viewer Instantiation (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md#final-viewer-instantiation-html--semantic))
+## Final Viewer Instantiation (<b>HTML</b> | [Semantic](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md#final-viewer-instantiation-html--semantic))
 
 ```js
 const viewer = lattice.Viewer("app-root", {

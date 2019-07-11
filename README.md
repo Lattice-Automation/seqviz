@@ -60,9 +60,9 @@ You can see a demonstration of this library with some simple html ui at **[tools
 
 For developers, the repository for the demo is [seqviz-demo](https://github.com/Lattice-Automation/seqviz-demo/blob/master/README.md).
 
-See the [index.html](https://github.com/Lattice-Automation/seqviz-demo/blob/simple-ui/public/index.html) for demo code.
+See the [index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html) for demo code.
 
-The repository also contains a React application demo for the library. See the [semantic-ui](https://github.com/Lattice-Automation/seqviz-demo/blob/semantic-ui/README.md) branch.
+The repository also contains a React application demo for the library. See the [semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md) branch.
 
 ## Using the Library
 

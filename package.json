@@ -58,7 +58,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md",
+    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/semantic-ui/public/ && cp dist/seqviz.min.js demo/simple-ui/public/",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/",
     "patch": "npm version -m \"chore: Release version %s\" -- ",
     "patch:major": "npm run patch major",
