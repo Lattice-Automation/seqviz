@@ -1,0 +1,182 @@
+div,
+input,
+label {
+  font-family: Roboto Mono, Monaco, monospace !important;
+}
+
+#sidebar-container {
+  min-height: 100vh;
+}
+
+.sidebar-container {
+  min-height: 100vh;
+}
+
+.control-panel {
+  display: flex;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.part-input {
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  margin: auto 24px auto 16px;
+  padding: 0 8px 0 16px !important;
+}
+
+.part-input input {
+  height: 48px;
+  box-shadow: none !important;
+  border: none !important;
+  font-size: 1.1em !important;
+}
+
+.part-input input:focus,
+.part-input:focus-within {
+  background-color: rgb(255, 250, 234) !important;
+}
+
+.part-input .input-label {
+  font-size: 1.1em !important;
+  margin: auto !important;
+  padding: 10px 12px !important;
+}
+
+.part-input .search.icon {
+  margin-right: 8px !important;
+}
+
+.part-input button {
+  background-color: white !important;
+}
+
+.backbone-dropdown {
+  margin: auto 24px auto 0;
+  vertical-align: middle;
+  display: flex;
+}
+
+.backbone-dropdown .dropdown {
+  margin-right: 8px;
+  background: #f0f0f0;
+}
+
+.backbone-dropdown .text {
+  font-size: 1.1em;
+}
+
+.backbone-dropdown .dropdown:hover {
+  background: #eaeaea;
+}
+
+.backbone-dropdown .dropdown.active {
+  background: #e4e4e4 !important;
+}
+
+.backbone-dropdown .label {
+  margin: auto !important;
+}
+
+.backbone-dropdown .dropdown .icon {
+  background-color: dodgerblue !important;
+  color: aliceblue !important;
+}
+
+.selection-meta {
+  margin: auto 24px auto 0;
+  flex: 1;
+}
+
+.selection-meta .label {
+  margin-right: 8px !important;
+}
+
+.header-logo {
+  height: 48px;
+  padding-right: 12px;
+  margin: auto;
+}
+
+.seqviz-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-width: 1000px;
+}
+
+#sidebar-toggle-open {
+  background-color: transparent;
+}
+
+#header {
+  height: 64px;
+  padding: 8px 16px;
+  margin: auto 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+  min-width: 1000px;
+}
+
+.sidebar-header {
+  height: 64px;
+  padding: 8px 16px;
+  margin: auto 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-header h3 {
+  margin: auto 0 !important;
+}
+
+.sidebar .slider {
+  width: 100%;
+}
+
+.circular-button#sidebar-toggle-open,
+.circular-button#sidebar-toggle-close {
+  margin: auto 0;
+  border: none;
+  background: white;
+}
+
+.circular-button#sidebar-toggle-open:hover,
+.circular-button#sidebar-toggle-close:hover {
+  background: #f2f2f2;
+}
+
+#seqviewer {
+  /* height is 100% of the viewport height less the header height */
+  height: calc(100% - 64px);
+  width: 100%;
+  margin: 0px;
+  flex: 1 1 0;
+}
+
+#selection-name {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#selection-type {
+  font-style: italic;
+}
+
+#selection-label {
+  font-weight: bold;
+}
+
+#selection-name,
+#selection-type,
+#selection-length,
+#selection-range,
+#sequence-gc,
+#sequence-tm {
+  padding: 5px;
+}
+
+#selection-label {
+  padding: 5px 0px 5px 5px;
+}
