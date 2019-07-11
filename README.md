@@ -1,8 +1,8 @@
 # seqviz
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Jul 11 16:09:46 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Jul 11 16:26:38 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.2.2<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.2.3<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -54,7 +54,7 @@ This package aims to provide basic sequence viewing in a simple, open-source way
   - Sequences loaded as objects or strings **will** be available for viewing while off-line
   - Once a part has been fetched from NCBI or iGem it will be cached in your browser in a cookie with the accession id as the name. As long as you have that cookie, the part **will** be available for viewing off-line (see [Caching](#caching) for more details).
 
-## Library Demos
+## Library Demo
 
 You can see a demonstration of this library used to fetch BioBricks at **[tools.latticeautomation.com/seqviz/](https://tools.latticeautomation.com/seqviz)** .
 
@@ -524,7 +524,7 @@ This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice 
 
 You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/dna-sequence-vizualizer/issues)<!-- /pkg-bug-url -->
 
-or contact <!-- pkg-bug-email(cmd:) -->[support@latticeautomation.com](support@latticeautomation.com)<!-- /pkg-bug-email -->
+or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
 
 ## Licence
 
