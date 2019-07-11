@@ -315,7 +315,7 @@ Defaults to:
 
 ```js
 selection => {
-  console.log(selection);
+  return selection;
 };
 ```
 
@@ -365,7 +365,7 @@ Defaults to:
 
 ```js
 results => {
-  console.log(results);
+  return results;
 };
 ```
 
