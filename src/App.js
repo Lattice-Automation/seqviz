@@ -173,16 +173,13 @@ export class CheckboxInput extends Component {
 
 export class PartInput extends Component {
   render() {
-    const { handleClick, setDemoState } = this.props;
+    const { toggleSidebar, setDemoState } = this.props;
     return (
       <Input
         icon="search"
         className="part-input"
-        action={{
-          icon: "bars",
-          onClick: handleClick
-        }}
-        actionPosition="left"
+        label={{ className: "input-label", content: "BBa_" }}
+        labelPosition="left"
         name="accession"
         placeholder="Find a BioBrick ..."
         onChange={(event, data) => {
@@ -232,15 +229,16 @@ export class SequenceViewer extends Component {
   }
 }
 
+// TODO: Fix me, please
 export class OptionsButton extends Component {
   render() {
-    const { handleClick } = this.props;
+    const { toggleSidebar } = this.props;
     return (
-      <Button style={{ height: "64px" }} basic fluid onClick={handleClick}>
-        <Label style={{ fontSize: "23px" }} attached="top">
+      <Button style={{ height: "64px" }} basic fluid onClick={toggleSidebar}>
+        <Label className="options-header-label" attached="top">
           SeqViz options
           <Label.Detail>
-            <Icon tiny name="angle left" />
+            <Icon tiny="true" name="angle left" />
           </Label.Detail>
         </Label>
       </Button>
@@ -298,13 +296,15 @@ export class SelectionInfo extends Component {
     );
   }
 }
+
 export class SideBarMenu extends Component {
   state = { visible: false };
 
-  handleClick = () => {
+  toggleSidebar = () => {
     const { visible } = this.state;
     this.setState({ visible: !visible });
   };
+
   handleHide = () => {
     this.setState({ visible: false });
   };
@@ -323,7 +323,7 @@ export class SideBarMenu extends Component {
             onHide={this.handleHide}
             visible={visible}
           >
-            <OptionsButton {...this.props} handleClick={this.handleClick} />
+            <OptionsButton {...this.props} toggleSidebar={this.toggleSidebar} />
 
             <Menu.Item as="a">
               <ViewerTypeInput setDemoState={setDemoState} />
@@ -373,9 +373,14 @@ export class SideBarMenu extends Component {
             <div className="seqviz-container">
               <div id="header">
                 <div className="control-panel">
+                  <Button
+                    id="sidebar-toggle-open"
+                    icon="bars"
+                    onClick={this.toggleSidebar}
+                  />
                   <PartInput
                     setDemoState={setDemoState}
-                    handleClick={this.handleClick}
+                    toggleSidebar={this.toggleSidebar}
                   />
                   <BackBoneInput setDemoState={setDemoState} />
                   <SelectionInfo {...this.props} />
