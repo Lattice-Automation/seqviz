@@ -14,7 +14,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "deploy": "npm run build && aws s3 sync build s3://lattice-tools-s3/seqviz",
+    "deploy": "npm run build && aws s3 sync build s3://lattice-tools-s3/seqviz && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*'",
     "eject": "craco eject",
     "bbinfo": "node ./src/io/fileInput.js ./src/io/biobricks/biobricks.fa"
   },
