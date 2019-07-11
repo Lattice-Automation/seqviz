@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <noscript>
+      <a href="https://www.enable-javascript.com/">
+        Please check that Javascript is enabled in your browser.
+      </a>
+    </noscript>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>DNA Sequence Visualizer</title>
+    <meta
+      name="Description"
+      content="DNA Sequence Visualizer by Lattice Automation"
+    />
+    <meta name="google" content="notranslate" />
+
+    <!-- STYLES FOR TESTING SEQVIZ WITH UI -->
+    <style type="text/css">
+      #config-root {
+        margin: 1px;
+        padding: 5px;
+        order: 1;
+        flex: 1 0 auto;
+      }
+
+      #app-root {
+        order: 2;
+        flex: 1 1 auto;
+        overflow: hidden;
+      }
+
+      #data-root {
+        margin: 1px;
+        padding: 5px;
+        order: 3;
+        flex: 1 0 auto;
+      }
+
+      #enzymes {
+        height: 1.5em;
+      }
+
+      #enzyme {
+        display: inline-block;
+      }
+
+      #submit:hover {
+        cursor: pointer;
+        background: rgba(0, 90, 255, 0.7);
+        color: white;
+        border-radius: 5px;
+        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24),
+          0 7px 10px 0 rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 99vw;
+        height: 98vh;
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+    </style>
+
+    <!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
+    <script src="%PUBLIC_URL%/seqviz.min.js"></script>
+
+    <!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
+    <!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
+  </head>
+
+  <body id="body">
+    <!-- HTML INPUTS TO TEST SEQVIZ WITH UI -->
+    <div id="config-root">
+      <span> Part: <input id="accession" /> </span>
+      &nbsp;&nbsp;<span>
+        Backbone:
+        <select name="backbone" id="backbone">
+          <option value="psb1c3">pSB1C3</option>
+          <option value="bba_k1362091">BBa_K1362091</option>
+          <option value="bba_k823055">BBa_K823055</option>
+          <option value="psb1a3">pSB1A3</option>
+          <option value="psb1a7">pSB1A7</option>
+          <option value="psb1ac3">pSB1AC3</option>
+          <option value="psb1ak3">pSB1AK3</option>
+          <option value="psb1at3">pSB1AT3</option>
+          <option value="psb1k3">pSB1K3</option>
+          <option value="psb1t3">pSB1T3</option>
+        </select>
+      </span>
+      &nbsp;&nbsp;<span>
+        Viewer Type:
+        <select name="viewer" id="viewer">
+          <option value="both">both</option>
+          <option value="circular">circular</option>
+          <option value="linear">linear</option>
+        </select>
+      </span>
+      &nbsp;&nbsp;
+      <span>
+        Zoom Linear:
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="50"
+          class="slider"
+          id="lzoom"
+        />
+      </span>
+      &nbsp;&nbsp;<span>Search Query: <input id="query"/></span>
+      <span id="search-data"></span>
+      <br /><br />
+      <span>
+        Auto-annotate:
+        <input id="auto-annotate" checked="true" type="checkbox" />
+      </span>
+      &nbsp;&nbsp;
+      <span>
+        Show Annotations:
+        <input id="annotations" checked="true" type="checkbox" />
+      </span>
+      &nbsp;&nbsp;
+      <span>
+        Show Complement:
+        <input id="complement" checked="true" type="checkbox" />
+      </span>
+      &nbsp;&nbsp;
+      <span>
+        Show Axis:
+        <input id="index" checked="true" type="checkbox" />
+      </span>
+      &nbsp;&nbsp;
+      <span>
+        Enzymes:
+        <select name="enzyme" id="enzymes" multiple>
+          <option id="enzyme" value="EcoRI">ecori</option>
+          <option id="enzyme" value="PstI">psti</option>
+          <option id="enzyme" value="XbaI">xbai</option>
+          <option id="enzyme" value="SpeI">spei</option>
+        </select>
+      </span>
+      <hr />
+    </div>
+
+    <!-- ROOT TO ATTACH SEQVIZ -->
+    <div id="app-root"></div>
+
+    <!-- DISPLAY NODE TO TEST SEQVIZ WITH UI -->
+    <div id="data-root">
+      <span>
+        <div id="select-data"></div>
+      </span>
+    </div>
+
+    <!-- SCRIPT TO TEST SEQVIZ WITH UI -->
+    <script>
+      const lattice = window.lattice;
+
+      // const bbparts = [
+      //   "BBa_E0040",
+      //   "BBa_K1583102",
+      //   "BBa_K1610105",
+      //   "BBa_K1825006",
+      //   "BBa_K1921021"
+      // ];
+
+      let part = document.getElementById("accession").value;
+      const partElement = document
+        .getElementById("accession")
+        .addEventListener("change", event => {
+          part = event.target.value;
+          showPart();
+        });
+
+      let backbone = document.getElementById("backbone").value;
+      const backboneElement = document
+        .getElementById("backbone")
+        .addEventListener("change", event => {
+          backbone = event.target.value;
+          showPart();
+        });
+
+      let viewType = document.getElementById("viewer").value;
+      const viewTypeElement = document
+        .getElementById("viewer")
+        .addEventListener("change", event => {
+          viewType = event.target.value;
+          showPart();
+        });
+
+      let annotate = document.getElementById("auto-annotate").checked;
+      const annotateElement = document
+        .getElementById("auto-annotate")
+        .addEventListener("change", event => {
+          annotate = event.target.checked;
+          showPart();
+        });
+
+      let annotations = document.getElementById("annotations").checked;
+      const annotationsElement = document
+        .getElementById("annotations")
+        .addEventListener("change", event => {
+          annotations = event.target.checked;
+          showPart();
+        });
+
+      let complement = document.getElementById("complement").checked;
+      const complementElement = document
+        .getElementById("complement")
+        .addEventListener("change", event => {
+          complement = event.target.checked;
+          showPart();
+        });
+
+      let index = document.getElementById("index").checked;
+      const indexElement = document
+        .getElementById("index")
+        .addEventListener("change", event => {
+          index = event.target.checked;
+          showPart();
+        });
+
+      let query = document.getElementById("query").value;
+      const queryElement = document
+        .getElementById("query")
+        .addEventListener("change", event => {
+          query = event.target.value;
+          showPart();
+        });
+
+      let enzymes = Array.prototype.map.call(
+        document.getElementById("enzymes").selectedOptions,
+        o => {
+          return o.value;
+        }
+      );
+      const enzymesElement = document
+        .getElementById("enzymes")
+        .addEventListener("change", event => {
+          enzymes = Array.prototype.map.call(
+            event.target.selectedOptions,
+            o => {
+              return o.value;
+            }
+          );
+          showPart();
+        });
+
+      let lzoom = document.getElementById("lzoom").value;
+      const lzoomElement = document.getElementById("lzoom");
+      lzoomElement.addEventListener("change", event => {
+        lzoom = event.target.value;
+        showPart();
+      });
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Enter") showPart();
+      });
+
+      function showPart() {
+        const viewer = lattice.Viewer("app-root", {
+          part: part,
+          backbone: backbone,
+          viewer: viewType,
+          annotate: annotate,
+          showAnnotations: annotations,
+          showComplement: complement,
+          showIndex: index,
+          zoom: { linear: lzoom },
+          onSelection: selection => {
+            const dataDisplay = document.getElementById("select-data");
+            const { feature, selectionMeta, sequenceMeta } = selection;
+            dataDisplay.innerHTML = `<em><b>${
+              feature ? feature.name : ""
+            }</b></em><br/><em>${feature ? feature.type : ""}</em>  ${
+              selectionMeta.selectionLength
+            }bp (${selectionMeta.start} - ${
+              selectionMeta.end
+            }) <br/> <b>GC:</b> ${sequenceMeta.GC.toPrecision(
+              2
+            )}% <b>Tm:</b> ${sequenceMeta.Tm.toPrecision(2)}°C `;
+          },
+          onSearch: results => {
+            if (query.length) {
+              const dataDisplay = document.getElementById("search-data");
+              const { searchResults } = results;
+              dataDisplay.innerHTML = `<em>${
+                searchResults.length
+              } results</em>`;
+            } else {
+              const dataDisplay = document.getElementById("search-data");
+              dataDisplay.innerHTML = "";
+            }
+          },
+          searchQuery: { query: query },
+          enzymes: enzymes
+        });
+        viewer.render();
+      }
+    </script>
+  </body>
+</html>
