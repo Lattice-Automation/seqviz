@@ -39,6 +39,8 @@ label {
 
 .part-input .input-label {
   font-size: 1.1em !important;
+  margin: auto !important;
+  padding: 10px 12px !important;
 }
 
 .part-input .search.icon {
@@ -104,11 +106,6 @@ label {
   min-width: 1000px;
 }
 
-.input-label {
-  margin: auto !important;
-  padding: 8px 12px !important;
-}
-
 #sidebar-toggle-open {
   background-color: transparent;
 }
@@ -121,11 +118,33 @@ label {
   min-width: 1000px;
 }
 
-#sidebar-header {
+.sidebar-header {
   height: 64px;
   padding: 8px 16px;
   margin: auto 0;
   box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-header h3 {
+  margin: auto 0 !important;
+}
+
+.sidebar .slider {
+  width: 100%;
+}
+
+.circular-button#sidebar-toggle-open,
+.circular-button#sidebar-toggle-close {
+  margin: auto 0;
+  border: none;
+  background: white;
+}
+
+.circular-button#sidebar-toggle-open:hover,
+.circular-button#sidebar-toggle-close:hover {
+  background: #f2f2f2;
 }
 
 #seqviewer {
