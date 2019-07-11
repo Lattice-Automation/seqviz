@@ -1,3 +1,9 @@
+div,
+input,
+label {
+  font-family: Roboto Mono, Monaco, monospace !important;
+}
+
 #sidebar-container {
   min-height: 100vh;
 }
@@ -13,16 +19,26 @@
 }
 
 .part-input {
-  width: 300px;
   border-right: 1px solid #f0f0f0;
-  margin-right: 24px;
+  border-left: 1px solid #f0f0f0;
+  margin: auto 24px auto 16px;
+  padding: 0 8px 0 16px !important;
 }
 
 .part-input input {
   height: 48px;
   box-shadow: none !important;
   border: none !important;
-  font-size: 1.2em;
+  font-size: 1.1em !important;
+}
+
+.part-input input:focus,
+.part-input:focus-within {
+  background-color: rgb(255, 250, 234) !important;
+}
+
+.part-input .input-label {
+  font-size: 1.1em !important;
 }
 
 .part-input .search.icon {
@@ -42,6 +58,10 @@
 .backbone-dropdown .dropdown {
   margin-right: 8px;
   background: #f0f0f0;
+}
+
+.backbone-dropdown .text {
+  font-size: 1.1em;
 }
 
 .backbone-dropdown .dropdown:hover {
@@ -82,6 +102,15 @@
   display: flex;
   flex-direction: column;
   min-width: 1000px;
+}
+
+.input-label {
+  margin: auto !important;
+  padding: 8px 12px !important;
+}
+
+#sidebar-toggle-open {
+  background-color: transparent;
 }
 
 #header {
