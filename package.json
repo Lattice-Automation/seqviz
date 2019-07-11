@@ -20,7 +20,7 @@
   },
   "bugs": {
     "url": "https://github.com/Lattice-Automation/dna-sequence-vizualizer/issues",
-    "email": "support@latticeautomation.com"
+    "email": "contact@latticeautomation.com"
   },
   "license": "MIT",
   "main": "src/library.js",
