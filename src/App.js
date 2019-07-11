@@ -139,6 +139,8 @@ export class EnzymeInput extends Component {
     return (
       <div>
         Enzymes:
+        <br />
+        <br />
         <Dropdown
           placeholder="Select enzymes"
           fluid
@@ -178,7 +180,7 @@ export class PartInput extends Component {
       <Input
         icon="search"
         className="part-input"
-        label={{ className: "input-label", content: "BBa_" }}
+        label={{ className: "input-label", content: "iGEM" }}
         labelPosition="left"
         name="accession"
         placeholder="Find a BioBrick ..."
