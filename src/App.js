@@ -29,6 +29,10 @@ const backBoneOptions = [
 ];
 export class BackBoneInput extends Component {
   state = { value: "pSB1C3" }; // default backbone
+  componentDidMount = () => {
+    const { setDemoState } = this.props;
+    setDemoState({ backbone: this.state.value });
+  };
   render() {
     const { setDemoState } = this.props;
     return (
@@ -174,7 +178,7 @@ export class CheckboxInput extends Component {
 
 export class PartInput extends Component {
   render() {
-    const { toggleSidebar, setDemoState } = this.props;
+    const { setDemoState } = this.props;
     return (
       <Input
         icon="search"
@@ -389,10 +393,7 @@ export class SideBarMenu extends Component {
                     icon="bars"
                     onClick={this.toggleSidebar}
                   />
-                  <PartInput
-                    setDemoState={setDemoState}
-                    toggleSidebar={this.toggleSidebar}
-                  />
+                  <PartInput setDemoState={setDemoState} />
                   <BackBoneInput setDemoState={setDemoState} />
                   <SelectionInfo {...this.props} />
                   <Image
