@@ -54,15 +54,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
   - Sequences loaded as objects or strings **will** be available for viewing while off-line
   - Once a part has been fetched from NCBI or iGem it will be cached in your browser in a cookie with the accession id as the name. As long as you have that cookie, the part **will** be available for viewing off-line (see [Caching](#caching) for more details).
 
-## Library Demo
+## Library Demos
 
-You can see a demonstration of this library with some simple html ui at **[tools.latticeautomation.com/seqviz/](https://tools.latticeautomation.com/seqviz/index.html)** .
+You can see a demonstration of this library used to fetch BioBricks at **[tools.latticeautomation.com/seqviz/](https://tools.latticeautomation.com/seqviz)** .
 
-For developers, the repository for the demo is [seqviz-demo](https://github.com/Lattice-Automation/seqviz-demo/blob/master/README.md).
+For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
 
-See the [index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html) for demo code.
-
-The repository also contains a React application demo for the library. See the [semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md) branch.
+For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
 
 ## Using the Library
 
