@@ -39,6 +39,8 @@ label {
 
 .part-input .input-label {
   font-size: 1.1em !important;
+  margin: auto !important;
+  padding: 10px 12px !important;
 }
 
 .part-input .search.icon {
@@ -104,11 +106,6 @@ label {
   min-width: 1000px;
 }
 
-.input-label {
-  margin: auto !important;
-  padding: 8px 12px !important;
-}
-
 #sidebar-toggle-open {
   background-color: transparent;
 }
@@ -132,6 +129,10 @@ label {
 
 .sidebar-header h3 {
   margin: auto 0 !important;
+}
+
+.sidebar .slider {
+  width: 100%;
 }
 
 .circular-button#sidebar-toggle-open,
