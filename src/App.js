@@ -1,10 +1,10 @@
+import { isEqual } from "lodash";
 import React, { Component } from "react";
 import {
   Button,
   Checkbox,
   Container,
   Dropdown,
-  Icon,
   Image,
   Input,
   Label,
@@ -13,7 +13,6 @@ import {
 } from "semantic-ui-react";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./App.css";
-import { isEqual } from "lodash";
 
 const backBoneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -144,6 +143,8 @@ export class EnzymeInput extends Component {
     return (
       <div>
         Enzymes:
+        <br />
+        <br />
         <Dropdown
           placeholder="Select enzymes"
           fluid
@@ -183,7 +184,7 @@ export class PartInput extends Component {
       <Input
         icon="search"
         className="part-input"
-        label={{ className: "input-label", content: "BBa_" }}
+        label={{ className: "input-label", content: "iGEM" }}
         labelPosition="left"
         name="accession"
         placeholder="Find a BioBrick ..."
@@ -244,19 +245,21 @@ export class SequenceViewer extends Component {
   }
 }
 
-// TODO: Fix me, please
-export class OptionsButton extends Component {
+export class SidebarHeader extends Component {
   render() {
     const { toggleSidebar } = this.props;
     return (
-      <Button style={{ height: "64px" }} basic fluid onClick={toggleSidebar}>
-        <Label className="options-header-label" attached="top">
-          SeqViz options
-          <Label.Detail>
-            <Icon tiny="true" name="angle left" />
-          </Label.Detail>
-        </Label>
-      </Button>
+      <div className="sidebar-header">
+        <h3>Viewer Options</h3>
+        <Button
+          onClick={toggleSidebar}
+          id="sidebar-toggle-close"
+          className="circular-button"
+          circular
+          floated="right"
+          icon="angle left"
+        />
+      </div>
     );
   }
 }
@@ -338,8 +341,7 @@ export class SideBarMenu extends Component {
             onHide={this.handleHide}
             visible={visible}
           >
-            <OptionsButton {...this.props} toggleSidebar={this.toggleSidebar} />
-
+            <SidebarHeader toggleSidebar={this.toggleSidebar} />
             <Menu.Item as="a">
               <ViewerTypeInput setDemoState={setDemoState} />
             </Menu.Item>
@@ -390,6 +392,8 @@ export class SideBarMenu extends Component {
                 <div className="control-panel">
                   <Button
                     id="sidebar-toggle-open"
+                    className="circular-button"
+                    circular
                     icon="bars"
                     onClick={this.toggleSidebar}
                   />
