@@ -81,7 +81,7 @@ export class SelectionInfo extends Component {
           active={active}
           onClick={handleMetaClick}
         >
-          {active ? "Hide Meta" : "Show Meta"}
+          {active ? "HIDE META" : "SHOW META"}
         </Button>
       </div>
     );

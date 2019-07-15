@@ -109,7 +109,7 @@ input#part-input {
 .meta-toggle button {
   margin: 0 !important;
   padding: 10px 12px !important;
-  width: 140px;
+  width: 120px;
   background: #f0f0f0 !important;
   border-radius: 0.25rem !important;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
