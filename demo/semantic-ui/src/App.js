@@ -13,6 +13,7 @@ import {
   Sidebar
 } from "semantic-ui-react";
 import LatticeLogo from "../src/lattice-brand.png";
+import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./App.css";
 import { Header } from "./Header";
 
@@ -215,7 +216,11 @@ export class SidebarFooter extends Component {
         <p>
           Powered by{" "}
           <span>
-            <a target="_blank" href="https://latticeautomation.com/">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://latticeautomation.com/"
+            >
               Lattice Automation
             </a>
           </span>
@@ -225,6 +230,7 @@ export class SidebarFooter extends Component {
           <span>
             <a
               target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/Lattice-Automation/seqviz"
             >
               SeqViz
@@ -233,7 +239,11 @@ export class SidebarFooter extends Component {
           <span>{"  |  "}</span>
           <Icon name="medium" />
           <span>
-            <a target="_blank" href="https://medium.com/@rchung/facc51b4e191">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://medium.com/@rchung/facc51b4e191"
+            >
               Story
             </a>
           </span>
@@ -246,7 +256,6 @@ export class SidebarFooter extends Component {
   }
 }
 
-
 export class StartButton extends Component {
   fillDefaultPart = () => {
     const { setDemoState } = this.props;
@@ -254,10 +263,21 @@ export class StartButton extends Component {
   };
   render() {
     return (
-      <div className="start-button">
-        <span>or </span>
-        <Button onClick={this.fillDefaultPart}>Click Here</Button>
-        <span>to load a default part</span>
+      <div id="easy-start">
+        <Button id="default-part-button" onClick={this.fillDefaultPart}>
+          CLICK
+        </Button>
+        <span>
+          to load default part (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="http://parts.igem.org/Part:BBa_E0040"
+          >
+            BBa_E0040
+          </a>
+          )
+        </span>
       </div>
     );
   }
@@ -280,7 +300,7 @@ export class SideBarMenu extends Component {
     const { setDemoState, part } = this.props;
     return (
       <div style={{ height: "100vh" }}>
-        <Sidebar.Pushable stylename="sidebar-container">
+        <Sidebar.Pushable className="sidebar-container">
           <Sidebar
             stylename="sidebar-container"
             as={Menu}
@@ -343,11 +363,43 @@ export class SideBarMenu extends Component {
                   <SequenceViewer {...this.props} />
                 </div>
               ) : (
-                <div>
-                  <div id="starting-instructions">
-                    Type a BioBrick Id into the search above to get started
+                <div id="landing-zone">
+                  <div id="getting-started-card" className="card">
+                    <Image
+                      id="seqviz-brand-getting-started"
+                      src={SeqvizLogo}
+                      floated="right"
+                    />
                   </div>
-                  <StartButton setDemoState={setDemoState} />
+                  <div id="landing-card" className="card">
+                    <div id="starting-instructions">
+                      Type a <strong>BioBrick ID</strong> from <br />
+                      iGEM's{" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="http://parts.igem.org/Main_Page"
+                      >
+                        Registry of Standard Biological Parts
+                      </a>{" "}
+                      <br />
+                      into the search above to get started
+                    </div>
+                    <Divider horizontal>Or</Divider>
+                    <StartButton setDemoState={setDemoState} />
+                  </div>
+                  <div id="lattice-card" className="card">
+                    <p>
+                      Created by{" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://latticeautomation.com/"
+                      >
+                        Lattice Automation
+                      </a>
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
