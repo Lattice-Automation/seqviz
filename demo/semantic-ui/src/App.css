@@ -82,3 +82,12 @@ button {
 #selection-label {
   padding: 5px 0px 5px 5px;
 }
+
+#starting-instructions {
+  padding: 40px;
+  text-align: center;
+}
+
+.start-button {
+  text-align: center;
+}
