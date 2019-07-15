@@ -1,8 +1,8 @@
 # seqviz
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Jul 11 16:26:38 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Jul 15 18:33:26 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.2.3<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.2.4<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
