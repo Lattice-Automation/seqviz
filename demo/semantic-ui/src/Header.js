@@ -177,7 +177,6 @@ export class Header extends Component {
             {...this.props}
             active={this.state.active}
             handleMetaClick={this.handleMetaClick}
-            // handleDeselection={this.handleDeselection}
           />
           <Image id="brand" src={SeqvizLogo} floated="right" />
         </div>
