@@ -319,7 +319,7 @@ selection => {
 };
 ```
 
-For an example on how to practically use the selection information see [seqviz-demo](https://github.com/Lattice-Automation/seqviz-demo/blob/master/public/index.html).
+For examples on how to practically use the selection information see [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
 #### `onSearch`:
 
