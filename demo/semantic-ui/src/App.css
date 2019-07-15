@@ -82,3 +82,26 @@ button {
 #selection-label {
   padding: 5px 0px 5px 5px;
 }
+
+.sidebar-footer {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  padding: 8px;
+}
+
+#lattice-brand {
+  height: 64px;
+  margin: 0 auto 8px auto;
+}
+
+.sidebar-footer p {
+  font-size: 0.8em !important;
+  margin-bottom: 8px;
+}
+
+.sidebar-footer span {
+  font-weight: bold;
+}
