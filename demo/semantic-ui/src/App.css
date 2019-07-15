@@ -105,3 +105,12 @@ button {
 .sidebar-footer span {
   font-weight: bold;
 }
+
+#starting-instructions {
+  padding: 40px;
+  text-align: center;
+}
+
+.start-button {
+  text-align: center;
+}
