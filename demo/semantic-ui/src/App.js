@@ -4,11 +4,15 @@ import {
   Button,
   Checkbox,
   Container,
+  Divider,
   Dropdown,
+  Icon,
+  Image,
   Input,
   Menu,
   Sidebar
 } from "semantic-ui-react";
+import LatticeLogo from "../src/lattice-brand.png";
 import "./App.css";
 import { Header } from "./Header";
 
@@ -202,6 +206,47 @@ export class SidebarHeader extends Component {
   }
 }
 
+export class SidebarFooter extends Component {
+  render() {
+    return (
+      <div className="sidebar-footer">
+        <Divider clearing />
+        <Image id="lattice-brand" src={LatticeLogo} />
+        <p>
+          Powered by{" "}
+          <span>
+            <a target="_blank" href="https://latticeautomation.com/">
+              Lattice Automation
+            </a>
+          </span>
+        </p>
+        <p>
+          <Icon name="github" />
+          <span>
+            <a
+              target="_blank"
+              href="https://github.com/Lattice-Automation/seqviz"
+            >
+              SeqViz
+            </a>
+          </span>
+          <span>{"  |  "}</span>
+          <Icon name="medium" />
+          <span>
+            <a target="_blank" href="https://medium.com/@rchung/facc51b4e191">
+              Story
+            </a>
+          </span>
+        </p>
+        <p>
+          <span>contact@latticeautomation.com</span>
+        </p>
+      </div>
+    );
+  }
+}
+
+
 export class StartButton extends Component {
   fillDefaultPart = () => {
     const { setDemoState } = this.props;
@@ -288,6 +333,7 @@ export class SideBarMenu extends Component {
             <Menu.Item as="a">
               <EnzymeInput setDemoState={setDemoState} />
             </Menu.Item>
+            <SidebarFooter />
           </Sidebar>
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
             <div className="seqviz-container">
