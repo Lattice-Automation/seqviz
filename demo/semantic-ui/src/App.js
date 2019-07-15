@@ -202,6 +202,22 @@ export class SidebarHeader extends Component {
   }
 }
 
+export class StartButton extends Component {
+  fillDefaultPart = () => {
+    const { setDemoState } = this.props;
+    setDemoState({ part: "BBa_E0040" });
+  };
+  render() {
+    return (
+      <div className="start-button">
+        <span>or </span>
+        <Button onClick={this.fillDefaultPart}>Click Here</Button>
+        <span>to load a default part</span>
+      </div>
+    );
+  }
+}
+
 export class SideBarMenu extends Component {
   state = { visible: false };
 
@@ -216,7 +232,7 @@ export class SideBarMenu extends Component {
 
   render() {
     const { visible } = this.state;
-    const { setDemoState } = this.props;
+    const { setDemoState, part } = this.props;
     return (
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable stylename="sidebar-container">
@@ -276,9 +292,18 @@ export class SideBarMenu extends Component {
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
             <div className="seqviz-container">
               <Header {...this.props} toggleSidebar={this.toggleSidebar} />
-              <div id="seqviewer">
-                <SequenceViewer {...this.props} />
-              </div>
+              {part ? (
+                <div id="seqviewer">
+                  <SequenceViewer {...this.props} />
+                </div>
+              ) : (
+                <div>
+                  <div id="starting-instructions">
+                    Type a BioBrick Id into the search above to get started
+                  </div>
+                  <StartButton setDemoState={setDemoState} />
+                </div>
+              )}
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>

@@ -51,7 +51,7 @@ export class BackBoneInput extends Component {
 
 export class PartInput extends Component {
   render() {
-    const { setDemoState } = this.props;
+    const { setDemoState, part } = this.props;
     return (
       <Input
         icon="search"
@@ -60,6 +60,7 @@ export class PartInput extends Component {
         label={{ className: "input-label", content: "BioBrick" }}
         labelPosition="left"
         name="accession"
+        value={part}
         placeholder="Search iGEM..."
         onChange={(event, data) => {
           setDemoState({ part: data.value });
@@ -150,7 +151,7 @@ export class Header extends Component {
   handleMetaClick = () =>
     this.setState(prevState => ({ active: !prevState.active }));
   render() {
-    const { setDemoState, toggleSidebar } = this.props;
+    const { setDemoState, part, toggleSidebar } = this.props;
 
     return (
       <div className="header" id="app-header">
@@ -171,7 +172,7 @@ export class Header extends Component {
             position="bottom left"
           />
           <BackBoneInput setDemoState={setDemoState} />
-          <PartInput setDemoState={setDemoState} />
+          <PartInput setDemoState={setDemoState} part={part} />
           <SelectionInfo
             {...this.props}
             active={this.state.active}
