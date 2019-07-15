@@ -195,17 +195,7 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             fullSeq={fullSeq}
           />
-          {showAnnotations && (
-            <Annotations
-              {...this.props}
-              findXAndWidth={this.findXAndWidth}
-              lastBase={lastBase}
-              yDiff={annYDiff}
-              seqBlockRef={this}
-              fullSeq={fullSeq}
-            />
-          )}
-          {filteredSearchRows.length ? (
+          {searchRows.length > 0 && (
             <LinearFind
               {...this.props}
               filteredRows={filteredSearchRows}
@@ -216,7 +206,18 @@ export default class SeqBlock extends React.PureComponent {
               seqBlockRef={this}
               lastBase={lastBase}
             />
-          ) : null}
+          )}
+          {showAnnotations && (
+            <Annotations
+              {...this.props}
+              findXAndWidth={this.findXAndWidth}
+              lastBase={lastBase}
+              yDiff={annYDiff}
+              seqBlockRef={this}
+              fullSeq={fullSeq}
+            />
+          )}
+
           <Selection.Edges
             {...this.props}
             selectEdgeHeight={selectEdgeHeight}
@@ -251,6 +252,19 @@ export default class SeqBlock extends React.PureComponent {
             <text {...textProps} y={compYDiff} id={id}>
               {compSeq}
             </text>
+          ) : null}
+          {filteredSearchRows.length ? (
+            <LinearFind
+              {...this.props}
+              filteredRows={filteredSearchRows}
+              findXAndWidth={this.findXAndWidth}
+              indexYDiff={indexYDiff}
+              compYDiff={compYDiff}
+              currSearchIndex={currSearchIndex}
+              seqBlockRef={this}
+              lastBase={lastBase}
+              listenerOnly
+            />
           ) : null}
         </g>
       </svg>
