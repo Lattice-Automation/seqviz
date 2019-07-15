@@ -12,16 +12,26 @@ class LinearFind extends React.PureComponent {
       seqBlockRef,
       inputRef,
       firstBase,
-      lastBase
+      lastBase,
+      listenerOnly = false
     } = this.props;
 
-    const findProps = {
-      height: 18,
-      stroke: "black",
-      strokeWidth: 0.8,
-      className: "la-vz-linear-sel-block",
-      cursor: "pointer"
-    };
+    const findProps = listenerOnly
+      ? {
+          stroke: "none",
+          height: 18,
+          fill: "transparent",
+          cursor: "pointer",
+          style: { fill: "transparent" },
+          className: "la-vz-linear-sel-block"
+        }
+      : {
+          height: 18,
+          stroke: "black",
+          strokeWidth: 0.8,
+          cursor: "pointer",
+          className: "la-vz-linear-sel-block"
+        };
 
     return searchRows.map(s => {
       let { x, width } = findXAndWidth(s.start, s.end);
