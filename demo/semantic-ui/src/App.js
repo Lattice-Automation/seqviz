@@ -5,55 +5,12 @@ import {
   Checkbox,
   Container,
   Dropdown,
-  Image,
   Input,
-  Label,
   Menu,
   Sidebar
 } from "semantic-ui-react";
-import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./App.css";
-
-const backBoneOptions = [
-  { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
-  { key: "psb1a3", value: "pSB1A3", text: "pSB1A3" },
-  { key: "psb1ac3", value: "pSB1AC3", text: "pSB1AC3" },
-  { key: "psb1ak3", value: "pSB1AK3", text: "pSB1AK3" },
-  { key: "psb1at3", value: "pSB1AT3", text: "pSB1AT3" },
-  { key: "psb1k3", value: "pSB1K3", text: "pSB1K3" },
-  { key: "psb1t3", value: "pSB1T3", text: "pSB1T3" },
-  { key: "psb1a7", value: "pSB1A7", text: "pSB1A7" },
-  { key: "bba_k1362091", value: "BBa_K1362091", text: "BBa_K1362091" },
-  { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" }
-];
-export class BackBoneInput extends Component {
-  state = { value: "pSB1C3" }; // default backbone
-  componentDidMount = () => {
-    const { setDemoState } = this.props;
-    setDemoState({ backbone: this.state.value });
-  };
-  render() {
-    const { setDemoState } = this.props;
-    return (
-      <div className="backbone-dropdown">
-        <Dropdown
-          text={this.state.value}
-          icon="circle notched"
-          labeled
-          floating
-          button
-          className="icon"
-          options={backBoneOptions}
-          placeholder="Backbone"
-          onChange={(event, data) => {
-            this.setState({ value: data.value });
-            setDemoState({ backbone: data.value });
-          }}
-        />
-      </div>
-    );
-  }
-}
+import { Header } from "./Header";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -177,25 +134,6 @@ export class CheckboxInput extends Component {
   }
 }
 
-export class PartInput extends Component {
-  render() {
-    const { setDemoState } = this.props;
-    return (
-      <Input
-        icon="search"
-        className="part-input"
-        label={{ className: "input-label", content: "iGEM" }}
-        labelPosition="left"
-        name="accession"
-        placeholder="Find a BioBrick ..."
-        onChange={(event, data) => {
-          setDemoState({ part: data.value });
-        }}
-      />
-    );
-  }
-}
-
 export class SequenceViewer extends Component {
   shouldComponentUpdate = nextProps => {
     const { searchResults, selection, ...rest } = this.props;
@@ -260,57 +198,6 @@ export class SidebarHeader extends Component {
           icon="angle left"
         />
       </div>
-    );
-  }
-}
-
-export class SelectionInfo extends Component {
-  render() {
-    const { selection } = this.props;
-    const { feature, selectionMeta, sequenceMeta } = selection;
-    return (
-      selection && (
-        <div className="selection-meta">
-          {feature && (
-            <Label as="a" basic className="label-feature">
-              Feature
-              <Label.Detail>{feature ? feature.name : ""}</Label.Detail>
-            </Label>
-          )}
-          {feature && feature.type && (
-            <Label as="a" basic className="label-type">
-              Type
-              <Label.Detail>{feature.type}</Label.Detail>
-            </Label>
-          )}
-          {selectionMeta && selectionMeta.selectionLength !== 0 && (
-            <Label as="a" basic className="label-length">
-              Length
-              <Label.Detail>{selectionMeta.selectionLength}bp</Label.Detail>
-            </Label>
-          )}
-          {selectionMeta && selectionMeta.start !== selectionMeta.end && (
-            <Label as="a" basic className="label-range">
-              Range
-              <Label.Detail>
-                {selectionMeta.start} - {selectionMeta.end}
-              </Label.Detail>
-            </Label>
-          )}
-          {sequenceMeta && sequenceMeta.GC !== 0 && (
-            <Label as="a" basic className="label-gc">
-              GC
-              <Label.Detail>{sequenceMeta.GC.toPrecision(2)}%</Label.Detail>
-            </Label>
-          )}
-          {sequenceMeta && sequenceMeta.Tm !== 0 && (
-            <Label as="a" basic className="label-tm">
-              Tm
-              <Label.Detail>{sequenceMeta.Tm.toPrecision(2)}°C</Label.Detail>
-            </Label>
-          )}
-        </div>
-      )
     );
   }
 }
@@ -388,25 +275,7 @@ export class SideBarMenu extends Component {
           </Sidebar>
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
             <div className="seqviz-container">
-              <div id="header">
-                <div className="control-panel">
-                  <Button
-                    id="sidebar-toggle-open"
-                    className="circular-button"
-                    circular
-                    icon="bars"
-                    onClick={this.toggleSidebar}
-                  />
-                  <PartInput setDemoState={setDemoState} />
-                  <BackBoneInput setDemoState={setDemoState} />
-                  <SelectionInfo {...this.props} />
-                  <Image
-                    className="header-logo"
-                    src={SeqvizLogo}
-                    floated="right"
-                  />
-                </div>
-              </div>
+              <Header {...this.props} toggleSidebar={this.toggleSidebar} />
               <div id="seqviewer">
                 <SequenceViewer {...this.props} />
               </div>
