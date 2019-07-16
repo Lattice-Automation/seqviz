@@ -167,7 +167,7 @@
 
     <!-- SCRIPT TO TEST SEQVIZ WITH UI -->
     <script>
-      const lattice = window.lattice;
+      const seqviz = window.seqviz;
 
       // const bbparts = [
       //   "BBa_E0040",
@@ -271,7 +271,7 @@
       });
 
       function showPart() {
-        const viewer = lattice.Viewer("app-root", {
+        const viewer = seqviz.Viewer("app-root", {
           part: part,
           backbone: backbone,
           viewer: viewType,

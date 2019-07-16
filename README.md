@@ -17,9 +17,6 @@
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
   - [Viewer Options](#viewer-options)
-- [Running in Development](#running-in-development-mode)
-  - [Development Files](#development-files)
-  - [Scripts](#scripts)
 - [Contributing](#contributing)
 - [Contact Us](#contact-us)
 
@@ -30,13 +27,13 @@
 This package aims to provide basic sequence viewing in a simple, open-source way, for use anywhere that supports running `javascript`. It currently provides:
 
 - **Imports**: For formats that can be displayed by this viewer see viewer options [part input](#part-)
-- **Circular Plasmid viewer** (`viewer = circular`):
+- **Circular Plasmid viewer** :
 
   - Shows annotations with names and colors
   - Shows name of sequence
   - Shows base pair length of sequence
 
-- **Linear Sequence viewer** (`viewer = linear`):
+- **Linear Sequence viewer** :
 
   - Shows annotations with names and colors
   - Shows sequence and complement nucleotide bases
@@ -52,11 +49,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 - **Off-line Viewing**: While the library is intended to be used with web applications on the internet it does support use without an internet connection. Offline viewing requires that you load the library source code from a local copy.
   - Auto-annotation is **not** available while off-line
   - Sequences loaded as objects or strings **will** be available for viewing while off-line
-  - Once a part has been fetched from NCBI or iGem it will be cached in your browser in a cookie with the accession id as the name. As long as you have that cookie, the part **will** be available for viewing off-line (see [Caching](#caching) for more details).
+  - Once a part has been fetched from NCBI or iGem it will be cached in your browser in a cookie with the accession id as the name. As long as you have that cookie, the part **will** be available for viewing off-line (see [Caching](https://github.com/Lattice-Automation/seqviz/wiki/Caching) for more details).
 
 ## Library Demo
 
-You can see a demonstration of this library used to fetch BioBricks at **[tools.latticeautomation.com/seqviz/](https://tools.latticeautomation.com/seqviz)** .
+You can see a demonstration of this library used to fetch BioBricks at
+
+### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
 
 For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
 
@@ -66,7 +65,7 @@ For a simpler start up, there is an HTML demo which only requires additions to t
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/dna-sequence-vizualizer/releases) tarball or download it from our cdn at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/dna-sequence-vizualizer/releases) tarball or download it from our CDN at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
@@ -76,7 +75,7 @@ For example you can use:
 <script src="https://cdn.latticeautomation.com/libs/seqviz/${version}/seqviz.min.js"></script>
 ```
 
-This method requires no actual download. You will be served the library directly from our cdn. This method, however, does require you to have internet access in order to use the library.
+This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
 
 If you want to load the library locally and be able to view cached parts without internet connection you can download the source file to the same folder as your `index.html` and use:
 
@@ -90,7 +89,7 @@ If you are using [Create React App](https://github.com/facebook/create-react-app
 <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
-Once you have imported the library you can access the `lattice` library through the `window` global variable. The `lattice` library currently contains one sample part `pUC()` and the `Viewer()` constructor.
+Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part `pUC()` and the `Viewer()` constructor.
 
 ### Instantiate a Viewer
 
@@ -98,9 +97,23 @@ You can initialize a new viewer with the sample part like so:
 
 ```html
 <script>
-  const lattice = window.lattice;
-  const part = lattice.pUC();
-  const viewer = lattice.Viewer("bottom-root", {
+  const seqviz = window.seqviz;
+  const part = {
+    name: "L09136",
+    seq:
+      "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgcagctcccggagacggttgtctgtaagcggatgccgggagcagacaagcccgtcagggcagcgggtgttggcgggtgtcggggctggcttaactatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcatag",
+    annotations: [
+      {
+        start: 133,
+        end: 457,
+        direction: "REVERSE",
+        name: "lacZ fragment",
+        color: "#8FDE8C",
+        type: "CDS"
+      }
+    ]
+  };
+  const viewer = seqviz.Viewer("root", {
     part: part
   });
   viewer.render();
@@ -119,7 +132,7 @@ The library is built with [React.js](https://reactjs.org/). `viewer.viewer` will
 
 This will return the `HTML` for the viewer if you want to render the viewer yourself. This is a trial feature and may not be sufficient information for a renderer to render the viewer.
 
-#### `viewer.render`
+#### `viewer.render()`
 
 This renders the viewer using `ReactDOM`(which is packaged with the library so you do not need to have it installed locally).
 
@@ -129,8 +142,8 @@ This renders the viewer using `ReactDOM`(which is packaged with the library so y
 
 #### `element` :
 
-- a string element id like `"root"` or `"app-root"`
-- an element i.e. from `document.getElementById()`
+- a string id attribute like `"root"` or `"app-root"`
+- an element; e.g. from `document.getElementById()`
 
 There are no defaults values for this option. An element input is minimally necessary to initialize a viewer and use this library.
 
@@ -166,7 +179,14 @@ const {
 - NCBI accession number (`string`)
 - BioBrick accession number (`string`)
 - sequence string supports `{atcguyrwskmdvhbxnATCGUYRWSKMDVHBXN}` (`string`)
-- HTML file input (`FileList` or `File`)
+- HTML file input (`FileList` or `File`):
+  - FASTA format (.seq, .fa, .fas, .fasta)
+  - GENBANK format (.gb, .gbk, .genbank, .ape)
+  - SNAPGENE format (.dna)
+  - JBEI format
+  - SBOL 1.0 and SBOL 2.0 formats
+  - Benchling format
+  - BioBricks
 - part `object` of the form:
 
 ```json
@@ -403,18 +423,18 @@ Defaults to:
 
 ```js
 {
-  y: [ c: "c", t: "t" },
-  r: { a: "a", g: "g" },
-  w: { a: "a", t: "t" },
-  s: { g: "g", c: "c" },
-  k: { t: "t", g: "g" },
-  m: { c: "c", a: "a" },
-  d: { a: "a", g: "g", t: "t" },
-  v: { a: "a", c: "c", g: "g" },
-  h: { a: "a", c: "c", t: "t" },
-  b: { c: "c", g: "g", t: "t" },
-  x: { a: "a", c: "c", g: "g", t: "t" },
-  n: { a: "a", c: "c", g: "g", t: "t" }
+  y: [ c, t],
+  r: [ a, g ],
+  w: [ a, t ],
+  s: [ g, c ],
+  k: [ t, g ],
+  m: [ c, a ],
+  d: [ a, g, t ],
+  v: [ a, c, g ],
+  h: [ a, c, t ],
+  b: [ c, g, t ],
+  x: [ a, c, g, t ],
+  n: [ a, c, g, t ]
 }
 ```
 
@@ -446,75 +466,9 @@ Defaults to **`""`**.
 
 Defaults to **`[]`**.
 
-### Caching
-
-This library caches parts fetched from NCBI and iGem (see `viewerOptions` [`part`](#part-)) so that they can be viewed even if you lose internet connection. These parts are cached in your browser's local storage as cookies with keys of the format `seqviz-cache-${accession-id}`. If you would like to refetch a part for whatever reason, simply delete the cookie for the part you want to reload and initialize the viewer with the accession id again.
-
-If you have annotations on your parts seqviz will also cache the colors of your annotations so that they remain consistent between refreshes. These are stored in cookies with keys of the format `seqviz-cache-${partName}-annotation-${annotationName}-color`. If you do not like the colors assigned to your annotations or have added an array of custom colors, delete the cookies corresponding to the annotations you want to refresh and re-intialize the viewer.
-
-If you need help deleting your cookies here are some helpful guides: [Deleting Cookies on Major Browsers](https://www.lifewire.com/how-to-delete-cookies-2617981).
-
-For people running Chrome developer tools the cookies can be found under the `Application` tab under `Storage` > `Local Storage` > `${your domain}`.
-
-## Running in Development Mode
-
-The testing environment is run with [Create React App](https://github.com/facebook/create-react-app).
-
-### Development Files
-
-#### `public/index.html`
-
-Place any `HTML` input fields, DOM nodes, etc. here.
-
-#### `src/index.css`
-
-Place any styles for the test here.
-
-#### `src/index.jsx`
-
-Initialize the viewer from the `Viewer` object here. Because you are accessing the `Viewer` constructor directly you will need to have values for all `viewerOptions`. Reference the sample code already present.
-
-### Scripts
-
-### `install`
-
-Use `npm install` to install all library dependencies locally. This is required to run the development environment.
-
-### `start`
-
-Use `npm start` or `npm run start` to spin up your development environment.
-
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-If something is already running on your port 3000 Create React App will ask if you want to run the demo on the next port up (3001 and then 3002, etc.). In those cases, you can view the demo at the specified port.
-
-The page will reload if you make edits.
-
-You will also see any lint errors in the console.
-
-### `build`
-
-Use `npm run build` to rebuild the library after making changes. Remember to change the version in the `package.json` before building.
-
-Webpack will consolidate the library into a single browser-ready minified script.
-
-You can see the results in `/dist` labeled as <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->
-
-### `execXML`
-
-This script is used to propagate information to the `.md` files. It is included in the `npm run build` script but you can run it separately with `node execXML.js ${file}`.
-
-### `test`
-
-Create React App uses [jest](https://jestjs.io/) for testing. You can run all existing tests with `npm run test`.
-
-### `release` **Maintainers only**
-
-Use `npm run release` to upload the latest build to the Lattice CDN S3 storage. You will need `Python`, `pip`, and `awscli` installed on your computer. For more information about the release process and release related npm scripts see the [Release Process](https://github.com/Lattice-Automation/seqviz/wiki/Release-Process) wiki page.
-
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CONTRIBUTING.md) and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CODE_OF_CONDUCT.md)
+See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CODE_OF_CONDUCT.md)
 
 Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
 

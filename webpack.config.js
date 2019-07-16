@@ -5,9 +5,9 @@ const PACKAGE = require("./package.json");
 const VERSION = PACKAGE.version;
 const AUTHOR = PACKAGE.author;
 const packageName = PACKAGE.name;
-const libraryName = "lattice";
+const libraryName = "seqviz";
 const fileName = `${packageName}.min.js`;
-const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR}`;
+const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 module.exports = {
   entry: "./src/library.js",

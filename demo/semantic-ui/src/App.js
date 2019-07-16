@@ -165,8 +165,8 @@ export class SequenceViewer extends Component {
       setDemoState
     } = this.props;
     const viewType = view || "both";
-    const lattice = window.lattice;
-    const viewer = lattice.Viewer("demo-root", {
+    const seqviz = window.seqviz;
+    const viewer = seqviz.Viewer("demo-root", {
       part: part,
       backbone: backbone,
       viewer: viewType,
