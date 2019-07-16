@@ -529,7 +529,7 @@ Demonstrates the onSelection hook which exposes information about your sequence 
 ## Final Viewer Instantiation ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#final-viewer-instantiation-html--semantic) | <b>Semantic</b>)
 
 ```js
-const viewer = lattice.Viewer("demo-root", {
+const viewer = seqviz.Viewer("demo-root", {
   part: part,
   backbone: backbone,
   viewer: viewType,
