@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./Header.css";
-import { urlParams, constructQuery, updateUrl } from "./utils";
+import { constructQuery, updateUrl, urlParams } from "./utils";
 
 const backBoneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -63,6 +63,7 @@ export class PartInput extends Component {
     return (
       <Input
         icon="search"
+        autoComplete="off"
         className="part-input"
         id="part-input"
         label={{ className: "input-label", content: "BioBrick" }}
@@ -170,7 +171,14 @@ export class Header extends Component {
     this.setState(prevState => ({ active: !prevState.active }));
   render() {
     const { setDemoState, part, toggleSidebar } = this.props;
-
+    // Hack to render a bottom margin for linear map when the meta bar is open
+    if (this.state.active) {
+      document.getElementById("la-vz-seqblock-container").style.marginBottom =
+        "32px";
+    } else if (document.getElementById("la-vz-seqblock-container")) {
+      document.getElementById("la-vz-seqblock-container").style.marginBottom =
+        "0";
+    }
     return (
       <div className="header" id="app-header">
         <div id="header-primary">

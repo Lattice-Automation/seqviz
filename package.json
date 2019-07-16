@@ -14,13 +14,13 @@
   "contributors": [
     "Raymond Chung <rchung@latticeautomation.com> (https://github.com/RazzYoshi)"
   ],
-  "homepage": "https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/README.md",
+  "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Lattice-Automation/dna-sequence-vizualizer.git"
+    "url": "https://github.com/Lattice-Automation/seqviz.git"
   },
   "bugs": {
-    "url": "https://github.com/Lattice-Automation/dna-sequence-vizualizer/issues",
+    "url": "https://github.com/Lattice-Automation/seqviz/issues",
     "email": "contact@latticeautomation.com"
   },
   "license": "MIT",
