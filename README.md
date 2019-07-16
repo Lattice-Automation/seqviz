@@ -3,7 +3,7 @@
 </p>
 &nbsp;
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 16:09:08 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 15:40:25 EDT 2019<!-- /exec-bash -->
 
 **Latest Production Version:** <!-- version(cmd:) -->0.2.4<!-- /version -->
 
@@ -68,7 +68,7 @@ For a simpler start up, there is an HTML demo which only requires additions to t
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/dna-sequence-vizualizer/releases) tarball or download it from our CDN at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
@@ -471,7 +471,7 @@ Defaults to **`[]`**.
 
 ## Contributing
 
-See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/CODE_OF_CONDUCT.md)
+See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/seqviz/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)
 
 Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
 
@@ -479,10 +479,10 @@ Here are some good guidelines to get started with contributing: [Contributing to
 
 This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->.
 
-You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/dna-sequence-vizualizer/issues)<!-- /pkg-bug-url -->
+You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url -->
 
 or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
 
 ## Licence
 
-[MIT](https://github.com/Lattice-Automation/dna-sequence-vizualizer/blob/master/LICENSE)
+[MIT](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
