@@ -1,7 +1,7 @@
 {
   "name": "seqviz",
   "version": "0.2.4",
-  "description": "A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (GenBank, FASTA, DNA), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.",
+  "description": "A framework agnostic DNA viewer for sequences or files (gb, fasta, etc) with auto-feature annotation",
   "keywords": [
     "seqviz",
     "DNA",
