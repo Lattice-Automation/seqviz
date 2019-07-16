@@ -60,6 +60,7 @@ export class BackBoneInput extends Component {
 export class PartInput extends Component {
   render() {
     const { setDemoState, part } = this.props;
+    updateUrl(constructQuery({ biobrick: part }));
     return (
       <Input
         icon="search"
