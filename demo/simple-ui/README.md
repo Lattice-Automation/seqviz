@@ -26,6 +26,7 @@ To check what the version of your downloaded library is, open the `seqviz.min.js
 /*!
  * lattice - seqviz - 0.2.0
  * provided and maintained by Lattice Automation (https://latticeautomation.com/)
+ * LICENSE MIT
  */
 ```
 

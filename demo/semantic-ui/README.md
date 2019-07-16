@@ -25,7 +25,8 @@ To check what the version of your downloaded library is, open the `seqviz.min.js
 ```js
 /*!
  * lattice - seqviz - 0.2.0
- *  provided and maintained by Lattice Automation (https://latticeautomation.com/)
+ * provided and maintained by Lattice Automation (https://latticeautomation.com/)
+ * LICENSE MIT
  */
 ```
 
@@ -50,66 +51,9 @@ The library is imported in the [`public/index.html`](https://github.com/Lattice-
 <!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
 ```
 
-The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.css) file:
+The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/semantic-ui/src/Header.css) files.
 
-```css
-#sidebar-container {
-  min-height: 100vh;
-}
-
-.sidebar-container {
-  min-height: 100vh;
-}
-
-#part-explorer {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-}
-
-#header,
-#footer {
-  margin: 0px;
-  flex: 0 0 auto;
-}
-
-#seqviewer {
-  min-height: 50vh;
-  width: 100vw;
-  margin: 0px;
-  overflow-y: none;
-  flex: 1 1 0;
-}
-
-#selection-name {
-  font-weight: bold;
-  font-style: italic;
-}
-
-#selection-type {
-  font-style: italic;
-}
-
-#selection-label {
-  font-weight: bold;
-}
-
-#selection-name,
-#selection-type,
-#selection-length,
-#selection-range,
-#sequence-gc,
-#sequence-tm {
-  padding: 5px;
-}
-
-#selection-label {
-  padding: 5px 0px 5px 5px;
-}
-```
-
-The inputs and viewer initialization are in the [`App.js`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.js) file. See [Demo Inputs](#demo-inputs--html-semantic) below.
+The inputs and viewer initialization are in the [`App.js`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.js) and [`Header.js`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/semantic-ui/src/Header.js) files. See [Demo Inputs](#demo-inputs--html-semantic) below.
 
 ## Demo Inputs ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#demo-inputs-html--semantic) | <b>Semantic</b>)
 
