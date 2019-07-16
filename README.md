@@ -1,4 +1,7 @@
-# seqviz
+<p align="center">
+  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-for-header.png">
+</p>
+
 
 **Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Jul 15 18:33:26 EDT 2019<!-- /exec-bash -->
 
