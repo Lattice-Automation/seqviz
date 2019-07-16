@@ -214,7 +214,7 @@ export class SidebarFooter extends Component {
         <Divider clearing />
         <Image id="lattice-brand" src={LatticeLogo} />
         <p>
-          Powered by{" "}
+          Created by{" "}
           <span>
             <a
               target="_blank"
