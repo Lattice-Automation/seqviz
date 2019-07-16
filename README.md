@@ -3,13 +3,13 @@
 </p>
 &nbsp;
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 15:40:25 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 16:42:27 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.2.4<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.3.0<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
-<!-- pkg-description(cmd:) -->A standalone DNA vector viewer that accepts a DNA sequence as a string or a file (GenBank, FASTA, DNA), auto-annotates it with DNA features, and renders to a DIV on the client's website or application.<!-- /pkg-description -->
+<!-- pkg-description(cmd:) -->A framework agnostic DNA viewer for sequences or files (gb, fasta, etc) with auto-feature annotation<!-- /pkg-description -->
 <br>
 
 ---
