@@ -434,8 +434,7 @@ export class Demo extends Component {
       }
       return newState;
     }, {});
-    const { ...rest } = this.state;
-    this.setState({ ...rest, ...newState });
+    this.setState({ ...this.state, ...newState });
   };
   render() {
     return <SideBarMenu {...this.state} setDemoState={this.setDemoState} />;

@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
 import "./Header.css";
+import { urlParams, constructQuery, updateUrl } from "./utils";
 
 const backBoneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -26,7 +27,13 @@ export class BackBoneInput extends Component {
   state = { value: "pSB1C3" }; // default backbone
   componentDidMount = () => {
     const { setDemoState } = this.props;
-    setDemoState({ backbone: this.state.value });
+    if (urlParams().backbone) {
+      this.setState({ value: urlParams().backbone });
+      updateUrl(constructQuery({ backbone: urlParams().backbone }));
+    } else {
+      setDemoState({ backbone: this.state.value });
+      updateUrl(constructQuery({ backbone: this.state.value }));
+    }
   };
   render() {
     const { setDemoState } = this.props;
@@ -40,6 +47,7 @@ export class BackBoneInput extends Component {
           options={backBoneOptions}
           placeholder="Select Backbone"
           onChange={(event, data) => {
+            updateUrl(constructQuery({ backbone: data.value }));
             this.setState({ value: data.value });
             setDemoState({ backbone: data.value });
           }}
@@ -63,6 +71,7 @@ export class PartInput extends Component {
         value={part}
         placeholder="Search iGEM..."
         onChange={(event, data) => {
+          updateUrl(constructQuery({ biobrick: data.value }));
           setDemoState({ part: data.value });
         }}
       />
@@ -148,6 +157,15 @@ export class HeaderMeta extends Component {
 
 export class Header extends Component {
   state = {};
+  componentDidMount = () => {
+    const { setDemoState } = this.props;
+    if (urlParams().backbone || urlParams().biobrick) {
+      setDemoState({
+        backbone: urlParams().backbone,
+        part: urlParams().biobrick
+      });
+    }
+  };
   handleMetaClick = () =>
     this.setState(prevState => ({ active: !prevState.active }));
   render() {
