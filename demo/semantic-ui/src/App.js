@@ -238,7 +238,7 @@ export class SidebarFooter extends Component {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://medium.com/@rchung/facc51b4e191"
+              href="https://medium.com/@rchung/visualize-your-dna-sequences-with-seqviz-facc51b4e191"
             >
               Story
             </a>
