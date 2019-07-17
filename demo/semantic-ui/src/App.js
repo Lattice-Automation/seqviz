@@ -14,6 +14,7 @@ import {
 } from "semantic-ui-react";
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
+import SeqVizGraphic from "../src/seqviz-logo.png";
 import "./App.css";
 import { Header } from "./Header";
 
@@ -27,10 +28,8 @@ export class ViewerTypeInput extends Component {
   render() {
     const { setDemoState } = this.props;
     return (
-      <div>
-        Viewer Type:
-        <br />
-        <br />
+      <div className="option" id="topology">
+        <span>Topology</span>
         <Dropdown
           defaultValue="both"
           fluid
@@ -49,10 +48,8 @@ export class LinearZoomInput extends Component {
   render() {
     const { setDemoState } = this.props;
     return (
-      <div>
-        Zoom Linear:
-        <br />
-        <br />
+      <div className="option" id="zoom">
+        <span>Zoom</span>
         <input
           type="range"
           min="1"
@@ -76,17 +73,15 @@ export class SearchQueryInput extends Component {
       searchResults: { searchResults = [] }
     } = this.props;
     return (
-      <div>
+      <div className="option" id="options-search">
+        <span>{`${searchResults.length} results`}</span>
         <Input
-          fluid
           icon="search"
           placeholder="Search..."
           onChange={(event, data) => {
             setDemoState({ query: data.value });
           }}
         />
-        <br />
-        {searchResults.length} results
       </div>
     );
   }
@@ -103,10 +98,8 @@ export class EnzymeInput extends Component {
   render() {
     const { setDemoState } = this.props;
     return (
-      <div>
-        Enzymes:
-        <br />
-        <br />
+      <div className="option" id="enzymes">
+        <span>Enzymes</span>
         <Dropdown
           placeholder="Select enzymes"
           fluid
@@ -193,7 +186,10 @@ export class SidebarHeader extends Component {
     const { toggleSidebar } = this.props;
     return (
       <div className="sidebar-header">
-        <h3>Viewer Options</h3>
+        <div id="header-left">
+          <Image id="seqviz-graphic" src={SeqVizGraphic} />
+          <h3>Viewer Settings</h3>
+        </div>
         <Button
           onClick={toggleSidebar}
           id="sidebar-toggle-close"
@@ -303,6 +299,7 @@ export class SideBarMenu extends Component {
         <Sidebar.Pushable className="sidebar-container">
           <Sidebar
             stylename="sidebar-container"
+            id="options-sidebar"
             as={Menu}
             animation="overlay"
             vertical
@@ -322,28 +319,28 @@ export class SideBarMenu extends Component {
                 searchResults={this.props.searchResults}
               />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="annotate"
                 label="Auto-annotate"
               />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="annotations"
                 label="Show annotations"
               />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="complement"
                 label="Show complement"
               />
             </Menu.Item>
-            <Menu.Item as="a">
+            <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="index"
