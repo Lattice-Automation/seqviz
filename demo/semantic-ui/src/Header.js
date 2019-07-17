@@ -173,7 +173,10 @@ export class Header extends Component {
   render() {
     const { setDemoState, part, toggleSidebar } = this.props;
     // Hack to render a bottom margin for linear map when the meta bar is open
-    if (this.state.active) {
+    if (
+      this.state.active &&
+      document.getElementById("la-vz-seqblock-container")
+    ) {
       document.getElementById("la-vz-seqblock-container").style.marginBottom =
         "32px";
     } else if (document.getElementById("la-vz-seqblock-container")) {
