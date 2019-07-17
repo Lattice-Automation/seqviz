@@ -10,7 +10,8 @@ import {
   Image,
   Input,
   Menu,
-  Sidebar
+  Sidebar,
+  Grid
 } from "semantic-ui-react";
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
@@ -87,29 +88,70 @@ export class SearchQueryInput extends Component {
   }
 }
 
-const enzymeOptions = [
-  { key: "psti", value: "PstI", text: "PstI" },
-  { key: "ecori", value: "EcoRI", text: "EcoRI" },
-  { key: "xbai", value: "XbaI", text: "XbaI" },
-  { key: "spei", value: "SpeI", text: "SpeI" }
-];
-
 export class EnzymeInput extends Component {
+  state = { PstI: false, EcoRI: false, XbaI: false, SpeI: false };
+  handleChange = enzyme => {
+    const { setDemoState, enzymes } = this.props;
+    let newEnzymes = [];
+    if (enzymes.includes(enzyme)) {
+      newEnzymes = enzymes.filter(e => e !== enzyme);
+      this.setState({ [enzyme]: false });
+    } else {
+      newEnzymes = enzymes.concat([enzyme]);
+      this.setState({ [enzyme]: true });
+    }
+    setDemoState({ enzymes: newEnzymes });
+  };
   render() {
-    const { setDemoState } = this.props;
     return (
       <div className="option" id="enzymes">
         <span>Enzymes</span>
-        <Dropdown
-          placeholder="Select enzymes"
-          fluid
-          multiple
-          selection
-          options={enzymeOptions}
-          onChange={(event, data) => {
-            setDemoState({ enzymes: data.value });
-          }}
-        />
+        <Grid style={{ marginLeft: 10, padding: 5 }} columns={2}>
+          <Grid.Row style={{ margin: 0, padding: 0 }}>
+            <Grid.Column style={{ margin: 0, padding: 5 }}>
+              <Button
+                fluid
+                active={this.state.PstI}
+                color={this.state.PstI ? "blue" : null}
+                onClick={() => this.handleChange("PstI")}
+              >
+                PstI
+              </Button>
+            </Grid.Column>
+            <Grid.Column style={{ margin: 0, padding: 5 }}>
+              <Button
+                fluid
+                active={this.state.EcoRI}
+                color={this.state.EcoRI ? "blue" : null}
+                onClick={() => this.handleChange("EcoRI")}
+              >
+                EcoRI
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row style={{ margin: 0, padding: 0 }}>
+            <Grid.Column style={{ margin: 0, padding: 5 }}>
+              <Button
+                fluid
+                active={this.state.XbaI}
+                color={this.state.XbaI ? "blue" : null}
+                onClick={() => this.handleChange("XbaI")}
+              >
+                XbaI
+              </Button>
+            </Grid.Column>
+            <Grid.Column style={{ margin: 0, padding: 5 }}>
+              <Button
+                fluid
+                active={this.state.SpeI}
+                color={this.state.SpeI ? "blue" : null}
+                onClick={() => this.handleChange("SpeI")}
+              >
+                SpeI
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     );
   }
@@ -300,7 +342,7 @@ export class SideBarMenu extends Component {
 
   render() {
     const { visible } = this.state;
-    const { setDemoState, part } = this.props;
+    const { setDemoState, part, enzymes } = this.props;
     return (
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable className="sidebar-container">
@@ -355,7 +397,7 @@ export class SideBarMenu extends Component {
               />
             </Menu.Item>
             <Menu.Item as="a">
-              <EnzymeInput setDemoState={setDemoState} />
+              <EnzymeInput setDemoState={setDemoState} enzymes={enzymes} />
             </Menu.Item>
             <SidebarFooter />
           </Sidebar>
@@ -431,7 +473,7 @@ export class Demo extends Component {
   };
   setDemoState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
-      if (typeof state[key] === "object") {
+      if (state[key].constructor === "Object") {
         newState[key] = { ...this.state[key], ...state[key] };
       } else {
         newState[key] = state[key];
