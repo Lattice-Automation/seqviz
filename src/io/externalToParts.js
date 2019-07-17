@@ -4,7 +4,7 @@ import { fetchBBB } from "./igemBackbones";
 /**
  * retrieve a string representation of a part from a remote server and convert it into a part
  */
-export default async (accession, options) => {
+export default async (newPart, accession, options) => {
   let igembrick = false;
   const { colors = [], backbone = "" } = options;
   // right now, we support either NCBI or iGEM. We parse this automatically. the user
@@ -25,9 +25,11 @@ export default async (accession, options) => {
     let response;
     // get part from localStorage if already requested before
     if (localStorage.getItem(`seqviz-cache-${accession.trim()}`)) {
-      console.log(
-        `${accession.trim()} was loaded from cache. If you would like to refetch the part just delete the cookie with key ${accession.trim()} from your browser's Local Storage.`
-      );
+      if (newPart) {
+        console.log(
+          `${accession.trim()} was loaded from cache. If you would like to refetch the part just delete the cookie with key ${accession.trim()} from your browser's Local Storage.`
+        );
+      }
       response = localStorage.getItem(`seqviz-cache-${accession.trim()}`);
     } else {
       if (navigator.onLine) {

@@ -25,9 +25,9 @@ class PartExplorer extends React.Component {
     part: {}
   };
 
-  createPart = async () => {
+  createPart = async (newPart = false) => {
     const { part: partInput, annotate, colors, backbone } = this.props;
-    let part = await processPartInput(partInput, { colors, backbone });
+    let part = await processPartInput(newPart, partInput, { colors, backbone });
     part = annotate ? await this.autoAnnotate(part, colors) : part;
     this.setState({ part: part });
   };
@@ -116,7 +116,7 @@ class PartExplorer extends React.Component {
   };
 
   componentDidMount = async () => {
-    this.createPart();
+    this.createPart(true);
     this.addKeyBindings();
   };
 
@@ -151,7 +151,7 @@ class PartExplorer extends React.Component {
       lzoom !== prevLzoom ||
       enzymes !== prevEnzymes
     ) {
-      this.createPart();
+      this.createPart(partInput !== prevPart);
       this.addKeyBindings();
     }
   };
