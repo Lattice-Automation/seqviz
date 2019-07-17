@@ -14,7 +14,7 @@ import externalToParts from "../io/externalToParts";
  * and an array of annotations. Check partFactory for latest
  * part object structure
  */
-const processPartInput = async (partInput, options) => {
+const processPartInput = async (newPart, partInput, options) => {
   const { colors = [], backbone = "" } = options;
   // We might be getting a FileList input from JS file input
   if (partInput.constructor.name === "FileList") {
@@ -82,7 +82,7 @@ const processPartInput = async (partInput, options) => {
     // If the string contains numbers it could be an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
-        return externalToParts(partInput, { colors, backbone });
+        return externalToParts(newPart, partInput, { colors, backbone });
       } catch (err) {
         console.warn(
           "Were you trying to display a BioBrick or NCBI part? We were not able to fetch the part: ",
