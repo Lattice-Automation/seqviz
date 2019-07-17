@@ -12,7 +12,11 @@ h1 {
 
 .sidebar-container {
   min-width: 1024px;
-  min-height: 824px;
+  min-height: 724px;
+}
+
+#options-sidebar {
+  width: 320px;
 }
 
 .sidebar-header {
@@ -26,6 +30,10 @@ h1 {
 
 .sidebar-header h3 {
   margin: auto 0 !important;
+}
+
+.sidebar-header #header-left {
+  display: flex;
 }
 
 .sidebar .slider {
@@ -48,7 +56,7 @@ h1 {
   display: flex;
   flex-direction: column;
   min-width: 1024px;
-  min-height: 824px;
+  min-height: 724px;
 }
 
 #seqviewer {
@@ -168,4 +176,25 @@ h1 {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
     0 1px 2px rgba(124, 124, 124, 0.24) !important;
+}
+
+.option {
+  display: flex;
+}
+
+.option span {
+  margin: auto 8px auto 0;
+}
+
+#options-search span {
+  width: 80px;
+}
+
+#options-search input {
+  width: 100%;
+}
+
+#seqviz-graphic {
+  height: 36px;
+  margin: auto 16px auto 0;
 }
