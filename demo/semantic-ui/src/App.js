@@ -111,6 +111,7 @@ export class EnzymeInput extends Component {
             <Grid.Column style={{ margin: 0, padding: 5 }}>
               <Button
                 fluid
+                style={{ padding: 10 }}
                 active={this.state.PstI}
                 color={this.state.PstI ? "blue" : null}
                 onClick={() => this.handleChange("PstI")}
@@ -121,6 +122,7 @@ export class EnzymeInput extends Component {
             <Grid.Column style={{ margin: 0, padding: 5 }}>
               <Button
                 fluid
+                style={{ padding: 10 }}
                 active={this.state.EcoRI}
                 color={this.state.EcoRI ? "blue" : null}
                 onClick={() => this.handleChange("EcoRI")}
@@ -133,6 +135,7 @@ export class EnzymeInput extends Component {
             <Grid.Column style={{ margin: 0, padding: 5 }}>
               <Button
                 fluid
+                style={{ padding: 10 }}
                 active={this.state.XbaI}
                 color={this.state.XbaI ? "blue" : null}
                 onClick={() => this.handleChange("XbaI")}
@@ -143,6 +146,7 @@ export class EnzymeInput extends Component {
             <Grid.Column style={{ margin: 0, padding: 5 }}>
               <Button
                 fluid
+                style={{ padding: 10 }}
                 active={this.state.SpeI}
                 color={this.state.SpeI ? "blue" : null}
                 onClick={() => this.handleChange("SpeI")}
