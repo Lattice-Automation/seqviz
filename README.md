@@ -3,9 +3,9 @@
 </p>
 &nbsp;
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 21:36:49 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 21:39:42 EDT 2019<!-- /exec-bash -->
 
-**Latest Production Version:** <!-- version(cmd:) -->0.3.0<!-- /version -->
+**Latest Production Version:** <!-- version(cmd:) -->0.3.1<!-- /version -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
