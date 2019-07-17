@@ -3,7 +3,7 @@
 </p>
 &nbsp;
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 16:42:27 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Tue Jul 16 21:36:49 EDT 2019<!-- /exec-bash -->
 
 **Latest Production Version:** <!-- version(cmd:) -->0.3.0<!-- /version -->
 
@@ -171,6 +171,13 @@ const {
     shift: true || false,
     alt: true || false
   }, // key binding for toggling next search result highlight, defaults to none
+  copySeq = {
+    key: "",
+    meta: true || false,
+    ctrl: true || false,
+    shift: true || false,
+    alt: true || false
+  }, // key binding for copying sequence, defaults to none
   searchQuery = { query: "", mismatch: 0 }, // search query
   backbone = "pSB1C3", // name of a BioBrick backbone, or a custom backbone string
   enzymes = ["AciI"] // list of enzymes for which to search for and display cutsites
@@ -397,6 +404,26 @@ results => {
 `object` used to set the key binding for tabulating search results (focus highlighting sequential search highlights).
 
 This library tries to keep default key bindings to a minimum so there are no key bindings to tabulating the search results, but you can set your own by passing the key binding to `searchNext`.
+
+Defaults to:
+
+```js
+{
+    key: "",
+    meta: false,
+    ctrl: false,
+    shift: false,
+    alt: false
+}
+```
+
+You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. If you want to make `searchNext` a special key binding e.g. `shift + A`, or `alt + .` you can specify your special key with value `true`.
+
+#### `copySeq`:
+
+`object` used to set the key binding for copying the template strand sequence of your current selection.
+
+This library tries to keep default key bindings to a minimum so there are no key bindings copy, but you can set your own by passing the key binding to `copySeq`.
 
 Defaults to:
 

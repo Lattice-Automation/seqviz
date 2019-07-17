@@ -32,6 +32,13 @@ export const Viewer = (element = "root", ViewerOptions) => {
       shift: false,
       alt: false
     },
+    copySeq = {
+      key: "",
+      meta: false,
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
     searchQuery = { query: "", mismatch: 0 },
     backbone = "",
     enzymes = []
@@ -47,6 +54,7 @@ export const Viewer = (element = "root", ViewerOptions) => {
     onSelection,
     onSearch,
     searchNext,
+    copySeq,
     searchQuery,
     backbone,
     enzymes

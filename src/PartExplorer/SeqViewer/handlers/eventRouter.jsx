@@ -164,40 +164,6 @@ const withEventRouter = WrappedComp =>
     };
 
     /**
-     * copy the given range of the linearSequence to the users clipboard
-     * more info @ https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-     */
-    clipboardCopy = () => {
-      const {
-        seq,
-        seqSelection: {
-          selectionMeta: { start, end },
-          ref
-        }
-      } = this.props;
-
-      const formerFocus = document.activeElement;
-      const tempNode = document.createElement("textarea");
-
-      if (ref === "ALL") {
-        tempNode.innerText = seq;
-      } else {
-        tempNode.innerText = seq.substring(start, end);
-      }
-
-      if (document.body) {
-        document.body.appendChild(tempNode);
-      }
-
-      tempNode.select();
-      document.execCommand("copy");
-      tempNode.remove();
-
-      if (formerFocus) {
-        formerFocus.focus();
-      }
-    };
-    /**
      * maps a keypress to an interaction (String)
      *
      * @param {React.SyntheticEvent} e   synthetic event input
@@ -215,29 +181,6 @@ const withEventRouter = WrappedComp =>
         default:
           return null;
       }
-      // Sample key mappings
-      // const { key, shiftKey, metaKey, ctrlKey } = e;
-      //   switch (key) {
-      //     case "ArrowLeft":
-      //     case "ArrowRight":
-      //     case "ArrowUp":
-      //     case "ArrowDown":
-      //       return shiftKey ? `Shift${key}` : key;
-      //     case "a":
-      //       if (metaKey || ctrlKey) {
-      //         e.preventDefault();
-      //         return "SelectAll";
-      //       }
-      //       return null;
-      //     case "c":
-      //       return metaKey || ctrlKey ? "Copy" : null;
-      //     case "Escape":
-      //       return "Clear";
-      //     case "Enter":
-      //       return "ArrowDown";
-      //     default:
-      //       return null;
-      //   }
     };
 
     /**

@@ -33,7 +33,38 @@ class PartExplorer extends React.Component {
   };
 
   addKeyBindings = () => {
-    const { searchNext } = this.props;
+    const { searchNext, copySeq } = this.props;
+
+    /**
+     * copy the given range of the linearSequence to the users clipboard
+     * more info @ https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
+     */
+    const clipboardCopy = () => {
+      const {
+        part: { seq },
+        seqSelection: {
+          selectionMeta: { start, end },
+          ref
+        }
+      } = this.state;
+      const formerFocus = document.activeElement;
+      const tempNode = document.createElement("textarea");
+      if (ref === "ALL") {
+        tempNode.innerText = seq;
+      } else {
+        tempNode.innerText = seq.substring(start, end);
+      }
+      if (document.body) {
+        document.body.appendChild(tempNode);
+      }
+      tempNode.select();
+      document.execCommand("copy");
+      tempNode.remove();
+      if (formerFocus) {
+        formerFocus.focus();
+      }
+    };
+
     const handleKeyPress = e => {
       const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
         metaKey,
@@ -52,16 +83,35 @@ class PartExplorer extends React.Component {
       if (isEqual(input, next)) {
         this.incrementSearch();
       }
-    };
-    const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-    if (searchNext.key) {
-      if (takenBindings.includes(searchNext.key)) {
-        console.error(
-          "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
-        );
-      } else {
-        window.addEventListener("keydown", e => handleKeyPress(e));
+
+      const copy = (({ meta, alt, ctrl, shift, key }) => ({
+        metaKey: meta,
+        altKey: alt,
+        ctrlKey: ctrl,
+        shiftKey: shift,
+        key
+      }))(copySeq);
+      if (isEqual(input, copy)) {
+        clipboardCopy();
       }
+    };
+
+    const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+    if (searchNext.key && takenBindings.includes(searchNext.key)) {
+      console.error(
+        "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
+      );
+    } else if (isEqual(searchNext, copySeq)) {
+      console.error("Custom key bindings must be unique.");
+    } else {
+      window.addEventListener("keydown", e => handleKeyPress(e));
+    }
+    if (copySeq.key && takenBindings.includes(copySeq.key)) {
+      console.error(
+        "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
+      );
+    } else {
+      window.addEventListener("keydown", e => handleKeyPress(e));
     }
   };
 

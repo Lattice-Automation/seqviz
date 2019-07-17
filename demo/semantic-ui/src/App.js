@@ -175,6 +175,13 @@ export class SequenceViewer extends Component {
         setDemoState({ searchResults: results });
       },
       searchQuery: { query: query },
+      copySeq: {
+        key: "c",
+        meta: true,
+        ctrl: false,
+        shift: false,
+        alt: false
+      },
       enzymes: Object.values(enzymes)
     });
     return part && viewer.viewer;
