@@ -17,9 +17,12 @@ export const urlParams = () => {
 };
 
 export const constructQuery = options => {
-  let { backbone, biobrick } = options;
-  backbone = backbone || urlParams().backbone || "";
-  biobrick = biobrick || urlParams().biobrick || "";
+  let { backbone = 0, biobrick = 0 } = options;
+  // Destructuring to 0 is to handle the case where the user has deleted the input
+  // We need to be able to differentiate between empty string and null
+  // So we set null to 0 and let empty string pass through
+  backbone = backbone === 0 ? urlParams().backbone : backbone;
+  biobrick = biobrick === 0 ? urlParams().biobrick : biobrick;
   return `?backbone=${backbone}&biobrick=${biobrick}`;
 };
 
