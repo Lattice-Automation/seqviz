@@ -57,6 +57,13 @@ import PUC from "./DefaultParts/pUC";
 //     shift: false,
 //     alt: false
 //   },
+//   copySeq: {
+//     key: "c",
+//     meta: true,
+//     ctrl: false,
+//     shift: false,
+//     alt: false
+//   },
 //   searchQuery: { query: "GCGGX" },
 //   backbone: "pSB1C3",
 //   enzymes: []
@@ -93,6 +100,13 @@ import PUC from "./DefaultParts/pUC";
 //     searchNext: {
 //       key: "a",
 //       meta: false,
+//       ctrl: false,
+//       shift: false,
+//       alt: false
+//     },
+//     copySeq: {
+//       key: "c",
+//       meta: true,
 //       ctrl: false,
 //       shift: false,
 //       alt: false
