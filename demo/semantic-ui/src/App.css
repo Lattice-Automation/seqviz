@@ -198,3 +198,22 @@ h1 {
   height: 36px;
   margin: auto 16px auto 0;
 }
+
+.enzyme-grid {
+  margin-left: 10px !important;
+  padding: 5px !important;
+}
+
+.enzyme-grid .enzyme-grid-column {
+  margin: 0px !important;
+  padding: 5px !important;
+}
+
+.enzyme-grid .enzyme-grid-row {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.enzyme-grid .enzyme-button {
+  padding: 10px !important;
+}

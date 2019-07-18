@@ -106,12 +106,12 @@ export class EnzymeInput extends Component {
     return (
       <div className="option" id="enzymes">
         <span>Enzymes</span>
-        <Grid style={{ marginLeft: 10, padding: 5 }} columns={2}>
-          <Grid.Row style={{ margin: 0, padding: 0 }}>
-            <Grid.Column style={{ margin: 0, padding: 5 }}>
+        <Grid className="enzyme-grid" columns={2}>
+          <Grid.Row className="enzyme-grid-row">
+            <Grid.Column className="enzyme-grid-column">
               <Button
                 fluid
-                style={{ padding: 10 }}
+                className="enzyme-button"
                 active={this.state.PstI}
                 color={this.state.PstI ? "blue" : null}
                 onClick={() => this.handleChange("PstI")}
@@ -119,10 +119,10 @@ export class EnzymeInput extends Component {
                 PstI
               </Button>
             </Grid.Column>
-            <Grid.Column style={{ margin: 0, padding: 5 }}>
+            <Grid.Column className="enzyme-grid-column">
               <Button
                 fluid
-                style={{ padding: 10 }}
+                className="enzyme-button"
                 active={this.state.EcoRI}
                 color={this.state.EcoRI ? "blue" : null}
                 onClick={() => this.handleChange("EcoRI")}
@@ -131,11 +131,11 @@ export class EnzymeInput extends Component {
               </Button>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={{ margin: 0, padding: 0 }}>
-            <Grid.Column style={{ margin: 0, padding: 5 }}>
+          <Grid.Row className="enzyme-grid-row">
+            <Grid.Column className="enzyme-grid-column">
               <Button
                 fluid
-                style={{ padding: 10 }}
+                className="enzyme-button"
                 active={this.state.XbaI}
                 color={this.state.XbaI ? "blue" : null}
                 onClick={() => this.handleChange("XbaI")}
@@ -143,10 +143,10 @@ export class EnzymeInput extends Component {
                 XbaI
               </Button>
             </Grid.Column>
-            <Grid.Column style={{ margin: 0, padding: 5 }}>
+            <Grid.Column className="enzyme-grid-column">
               <Button
                 fluid
-                style={{ padding: 10 }}
+                className="enzyme-button"
                 active={this.state.SpeI}
                 color={this.state.SpeI ? "blue" : null}
                 onClick={() => this.handleChange("SpeI")}

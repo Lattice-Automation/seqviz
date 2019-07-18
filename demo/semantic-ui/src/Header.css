@@ -84,13 +84,17 @@ input#part-input {
   border-left: 1px solid #f0f0f0;
 }
 
-.backbone-picker #dropdown {
+.backbone-picker #backbone-dropdown {
   margin: auto 0;
   padding-left: 16px;
-  flex-grow: 1;
+  width: 150px;
 }
 
-.backbone-picker #dropdown .text {
+.backbone-picker .ui.dropdown .menu > .item {
+  width: 150px !important;
+}
+
+.backbone-picker #backbone-dropdown .text {
   color: rgba(0, 0, 0, 0.87);
 }
 

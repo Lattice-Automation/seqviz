@@ -41,11 +41,12 @@ export class BackBoneInput extends Component {
       <div className="backbone-picker">
         <Label>Backbone</Label>
         <Dropdown
-          id="dropdown"
-          text={this.state.value}
+          id="backbone-dropdown"
+          placeholder={this.state.value}
           floating
+          search
+          fluid
           options={backBoneOptions}
-          placeholder="Select Backbone"
           onChange={(event, data) => {
             updateUrl(constructQuery({ backbone: data.value }));
             this.setState({ value: data.value });
@@ -73,8 +74,8 @@ export class PartInput extends Component {
         value={part}
         placeholder="Search iGEM..."
         onChange={(event, data) => {
-          updateUrl(constructQuery({ biobrick: data.value }));
           setDemoState({ part: data.value });
+          updateUrl(constructQuery({ biobrick: data.value }));
         }}
       />
     );
@@ -83,13 +84,14 @@ export class PartInput extends Component {
 
 export class SelectionInfo extends Component {
   render() {
-    const { active, handleMetaClick } = this.props;
+    const { active, handleMetaClick, part } = this.props;
     return (
       <div className="meta-toggle">
         <Button
           id="meta-button"
           toggle
           active={active}
+          disabled={part ? false : true}
           onClick={handleMetaClick}
         >
           {active ? "HIDE META" : "SHOW META"}
@@ -210,7 +212,7 @@ export class Header extends Component {
           />
           <Image id="brand" src={SeqvizLogo} floated="right" />
         </div>
-        {this.state.active && (
+        {this.state.active && part && (
           <div id="header-meta">
             <HeaderMeta {...this.props} />
           </div>
