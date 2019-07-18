@@ -304,7 +304,8 @@ const withSelectionHandler = WrappedComp =>
       const { start, end, direction } = knownRange;
       switch (knownRange.type) {
         case "ANNOTATION":
-        case "FIND": {
+        case "FIND":
+        case "ENZYME": {
           // Annotation or find selection range
           const clockwise = !(knownRange.direction && direction === "REVERSE");
           const selectionStart = clockwise ? start : end;
