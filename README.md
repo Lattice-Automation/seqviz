@@ -417,7 +417,7 @@ Defaults to:
 }
 ```
 
-You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. If you want to make `searchNext` a special key binding e.g. `shift + A`, or `alt + .` you can specify your special key with value `true`.
+You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `searchNext` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
 #### `copySeq`:
 
@@ -437,7 +437,7 @@ Defaults to:
 }
 ```
 
-You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. If you want to make `searchNext` a special key binding e.g. `shift + A`, or `alt + .` you can specify your special key with value `true`.
+You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `copySeq` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
 #### `searchQuery`:
 
