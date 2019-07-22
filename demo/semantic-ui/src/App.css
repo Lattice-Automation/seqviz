@@ -169,13 +169,14 @@ h1 {
 
 #default-part-button {
   margin-right: 12px;
-  padding: 10px 12px !important;
+  padding: 10px 12px;
   width: 80px;
-  background: rgb(255, 251, 196) !important;
-  border-radius: 0.25rem !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  color: white;
+  background: #14b7db;
+  border-radius: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
-    0 1px 2px rgba(124, 124, 124, 0.24) !important;
+    0 1px 2px rgba(124, 124, 124, 0.24);
 }
 
 .option {
@@ -199,21 +200,23 @@ h1 {
   margin: auto 16px auto 0;
 }
 
-.enzyme-grid {
-  margin-left: 10px !important;
-  padding: 5px !important;
+#enzyme-grid {
+  margin-left: 10px;
+  padding: 5px;
+  justify-items: center;
+  align-items: center;
 }
 
-.enzyme-grid .enzyme-grid-column {
-  margin: 0px !important;
-  padding: 5px !important;
+#enzyme-grid .enzyme-grid-column {
+  margin: 0px;
+  padding: 5px;
 }
 
-.enzyme-grid .enzyme-grid-row {
-  margin: 0px !important;
-  padding: 0px !important;
+#enzyme-grid .enzyme-grid-row {
+  margin: 0px;
+  padding: 0px;
 }
 
-.enzyme-grid .enzyme-button {
-  padding: 10px !important;
+#enzyme-grid .enzyme-button {
+  padding: 10px;
 }

@@ -24,7 +24,7 @@ const backBoneOptions = [
   { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" }
 ];
 export class BackBoneInput extends Component {
-  state = { value: "pSB1C3" }; // default backbone
+  state = { value: "pSB1C3", focus: false, hover: false }; // default backbone
   componentDidMount = () => {
     const { setDemoState } = this.props;
     if (urlParams().backbone) {
@@ -39,7 +39,13 @@ export class BackBoneInput extends Component {
     const { setDemoState } = this.props;
     return (
       <div className="backbone-picker">
-        <Label>Backbone</Label>
+        <Label
+          className={`input-label ${this.state.hover ? "hover" : ""}`}
+          onClick={() => document.getElementById("backbone-dropdown").click()}
+          onMouseDown={e => e.preventDefault()}
+        >
+          BACKBONE
+        </Label>
         <Dropdown
           id="backbone-dropdown"
           placeholder={this.state.value}
@@ -52,6 +58,10 @@ export class BackBoneInput extends Component {
             this.setState({ value: data.value });
             setDemoState({ backbone: data.value });
           }}
+          onFocus={() => this.setState({ focus: true })}
+          onMouseOver={() => this.setState({ hover: true })}
+          onBlur={() => this.setState({ focus: false })}
+          onMouseLeave={() => this.setState({ hover: false })}
         />
       </div>
     );
@@ -59,6 +69,7 @@ export class BackBoneInput extends Component {
 }
 
 export class PartInput extends Component {
+  state = { focus: false, hover: false };
   render() {
     const { setDemoState, part } = this.props;
     updateUrl(constructQuery({ biobrick: part }));
@@ -68,7 +79,15 @@ export class PartInput extends Component {
         autoComplete="off"
         className="part-input"
         id="part-input"
-        label={{ className: "input-label", content: "BioBrick" }}
+        label={
+          <Label
+            className={`input-label ${this.state.hover ? "hover" : ""}`}
+            onClick={() => document.getElementById("part-input").focus()}
+            onMouseDown={e => e.preventDefault()}
+          >
+            BioBrick
+          </Label>
+        }
         labelPosition="left"
         name="accession"
         value={part}
@@ -77,6 +96,10 @@ export class PartInput extends Component {
           setDemoState({ part: data.value });
           updateUrl(constructQuery({ biobrick: data.value }));
         }}
+        onFocus={() => this.setState({ focus: true })}
+        onMouseOver={() => this.setState({ hover: true })}
+        onBlur={() => this.setState({ focus: false })}
+        onMouseLeave={() => this.setState({ hover: false })}
       />
     );
   }
