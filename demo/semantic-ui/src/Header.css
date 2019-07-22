@@ -18,7 +18,9 @@ input#part-input {
 
 .part-input input:focus,
 .part-input:focus-within {
-  background-color: rgb(255, 251, 196) !important;
+  background-color: #f7f7f7 !important;
+  border-right: 1px solid #14b7db;
+  border-left: 1px solid #14b7db;
 }
 
 #part-input:-internal-autofill-selected,
@@ -26,8 +28,9 @@ input#part-input {
 #part-input:-webkit-autofill:hover,
 #part-input:-webkit-autofill:focus,
 #part-input:-webkit-autofill:active {
-  background: rgb(255, 251, 196) !important;
-  background-color: rgb(255, 251, 196) !important;
+  background-color: #f7f7f7 !important;
+  border-right: 1px solid #14b7db;
+  border-left: 1px solid #14b7db;
 }
 
 .part-input button {
@@ -54,7 +57,7 @@ input#part-input {
 }
 
 #header-primary .label {
-  background: #f0f0f0;
+  background: transparent;
   border-radius: 0.25rem !important;
   margin: auto !important;
   padding: 10px 12px !important;
@@ -81,7 +84,9 @@ input#part-input {
   vertical-align: middle;
   display: flex;
   justify-content: flex-start;
+  margin-right: -1px;
   border-left: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
 }
 
 .backbone-picker #backbone-dropdown {
@@ -100,7 +105,15 @@ input#part-input {
 
 .backbone-picker #dropdown:focus,
 .backbone-picker:focus-within {
-  background-color: rgb(255, 251, 196) !important;
+  /* z-index brings on focus allows for the border to show above the part input */
+  z-index: 1000;
+  background-color: #f7f7f7 !important;
+  border-right: 1px solid #14b7db;
+  border-left: 1px solid #14b7db;
+}
+
+#backbone-dropdown .icon {
+  cursor: pointer;
 }
 
 .meta-toggle {
@@ -110,20 +123,28 @@ input#part-input {
   flex: 1;
 }
 
-.meta-toggle button {
-  margin: 0 !important;
-  padding: 10px 12px !important;
+#meta-button {
+  margin: 0;
+  padding: 10px 12px;
   width: 120px;
-  background: #f0f0f0 !important;
-  border-radius: 0.25rem !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  background: #f0f0f0;
+  border-radius: 0.25rem;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
-    0 1px 2px rgba(124, 124, 124, 0.24) !important;
+    0 1px 2px rgba(124, 124, 124, 0.24);
+}
+#meta-button:hover {
+  background: #e0e0e0 !important;
 }
 
-.meta-toggle #meta-button.active {
-  background-color: rgb(255, 251, 196) !important;
-  color: rgba(0, 0, 0, 0.8) !important;
+#meta-button.active:hover {
+  background: #11a3c4 !important;
+}
+
+#meta-button.active {
+  background-color: #14b7db !important;
+  color: white !important;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
     0 1px 2px rgba(124, 124, 124, 0.24) !important;
 }

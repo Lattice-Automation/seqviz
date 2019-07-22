@@ -6,12 +6,12 @@ import {
   Container,
   Divider,
   Dropdown,
+  Grid,
   Icon,
   Image,
   Input,
   Menu,
-  Sidebar,
-  Grid
+  Sidebar
 } from "semantic-ui-react";
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-for-header.png";
@@ -106,7 +106,7 @@ export class EnzymeInput extends Component {
     return (
       <div className="option" id="enzymes">
         <span>Enzymes</span>
-        <Grid className="enzyme-grid" columns={2}>
+        <Grid id="enzyme-grid" columns={2}>
           <Grid.Row className="enzyme-grid-row">
             <Grid.Column className="enzyme-grid-column">
               <Button
