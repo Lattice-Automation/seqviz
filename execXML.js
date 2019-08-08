@@ -4,6 +4,7 @@ const PKGNAME = PACKAGE.name;
 const PKGAUTHOR = PACKAGE.author;
 const PKGDESCR = PACKAGE.description;
 const PKGBUGS = PACKAGE.bugs;
+const DISTBASE = "https://cdn.latticeautomation.com/libs/seqviz/";
 
 const fs = require("fs");
 const path = require("path");
@@ -18,6 +19,7 @@ const { execSync } = require("child_process");
 const execXML = (file, cwd) => {
   return xmlComment(file)
     .replace("version", () => VERSION)
+    .replace("dist-url", () => `\`${DISTBASE}${VERSION}/${PKGNAME}.min.js\``)
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
     .replace("pkg-description", () => PKGDESCR)

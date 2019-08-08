@@ -3,9 +3,12 @@
 </p>
 &nbsp;
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Jul 22 13:23:59 EDT 2019<!-- /exec-bash -->
+[![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
+[![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Version:** <!-- version(cmd:) -->0.3.2<!-- /version -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Aug 8 15:44:03 EDT 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -15,13 +18,13 @@
 ---
 
 - [Key Features](#key-features)
-- [Library Demo](#library-demo)
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
   - [Viewer Options](#viewer-options)
-- [Contributing](#contributing)
+- [Library Demo](#library-demo)
 - [Contact Us](#contact-us)
+- [Contributing](#contributing)
 
 ---
 
@@ -32,17 +35,17 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 - **Imports**: For formats that can be displayed by this viewer see viewer options [part input](#part-)
 - **Circular Plasmid viewer** :
 
-  - Shows annotations with names and colors
-  - Shows name of sequence
-  - Shows base pair length of sequence
+  - Annotations with names and colors
+  - Name of sequence
+  - Base pair length of sequence
 
 - **Linear Sequence viewer** :
 
-  - Shows annotations with names and colors
-  - Shows sequence and complement nucleotide bases
-  - Shows Index line with base pair numbers
-  - Shows enzyme cut sites
-  - Shows highlighted subsequences from search
+  - Annotations with names and colors
+  - Sequence and complement nucleotide bases
+  - Index line with base pair numbers
+  - Enzyme cut sites
+  - Highlighted subsequences from search
 
 - **Selections**:
 
@@ -54,29 +57,17 @@ This package aims to provide basic sequence viewing in a simple, open-source way
   - Sequences loaded as objects or strings **will** be available for viewing while off-line
   - Once a part has been fetched from NCBI or iGem it will be cached in your browser in a cookie with the accession id as the name. As long as you have that cookie, the part **will** be available for viewing off-line (see [Caching](https://github.com/Lattice-Automation/seqviz/wiki/Caching) for more details).
 
-## Library Demo
-
-You can see a demonstration of this library used to fetch BioBricks at
-
-### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
-
-For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
-
-For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
-
 ## Using the Library
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at `https://cdn.latticeautomation.com/libs/seqviz/${version}/`.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.2/seqviz.min.js`<!-- /dist-url -->.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
 For example you can use:
 
-```html
-<script src="https://cdn.latticeautomation.com/libs/seqviz/${version}/seqviz.min.js"></script>
-```
+`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.2/seqviz.min.js`<!-- /dist-url -->`"></script>`
 
 This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
 
@@ -116,9 +107,7 @@ You can initialize a new viewer with the sample part like so:
       }
     ]
   };
-  const viewer = seqviz.Viewer("root", {
-    part: part
-  });
+  const viewer = seqviz.Viewer("root", { part: part });
   viewer.render();
 </script>
 ```
@@ -496,11 +485,15 @@ Defaults to **`""`**.
 
 Defaults to **`[]`**.
 
-## Contributing
+## Library Demo
 
-See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/seqviz/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)
+You can see a demonstration of this library used to fetch BioBricks at
 
-Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
+### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
+
+For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
+
+For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
 
 ## Contact Us
 
@@ -509,6 +502,12 @@ This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice 
 You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url -->
 
 or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
+
+## Contributing
+
+See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/seqviz/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)
+
+Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
 
 ## Licence
 
