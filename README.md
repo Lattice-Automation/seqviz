@@ -17,14 +17,40 @@
 
 ---
 
+![](seqviz-feature-highlights.gif)
+
+---
+
 - [Key Features](#key-features)
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
+    - [`viewer.viewer`](#viewerviewer)
+    - [`viewer.viewerHTML`](#viewerviewerhtml)
+    - [`viewer.render()`](#viewerrender)
   - [Viewer Options](#viewer-options)
+    - [`element` :](#element)
+    - [`viewerOptions` :](#vieweroptions)
+    - [`part` :](#part)
+    - [`annotate`:](#annotate)
+    - [`viewer`:](#viewer)
+    - [`showAnnotations`:](#showannotations)
+    - [`showComplement`:](#showcomplement)
+    - [`showIndex`:](#showindex)
+    - [`zoom`:](#zoom)
+    - [`colors`:](#colors)
+    - [`onSelection`:](#onselection)
+    - [`onSearch`:](#onsearch)
+    - [`searchNext`:](#searchnext)
+    - [`copySeq`:](#copyseq)
+    - [`searchQuery`:](#searchquery)
+    - [`backbone`:](#backbone)
+    - [`enzymes`:](#enzymes)
 - [Library Demo](#library-demo)
+  - [**tools.latticeautomation.com/seqviz**](#toolslatticeautomationcomseqviz)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
+- [Licence](#licence)
 
 ---
 
