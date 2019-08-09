@@ -25,32 +25,11 @@
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
-    - [`viewer.viewer`](#viewerviewer)
-    - [`viewer.viewerHTML`](#viewerviewerhtml)
-    - [`viewer.render()`](#viewerrender)
   - [Viewer Options](#viewer-options)
-    - [`element` :](#element)
-    - [`viewerOptions` :](#vieweroptions)
-    - [`part` :](#part)
-    - [`annotate`:](#annotate)
-    - [`viewer`:](#viewer)
-    - [`showAnnotations`:](#showannotations)
-    - [`showComplement`:](#showcomplement)
-    - [`showIndex`:](#showindex)
-    - [`zoom`:](#zoom)
-    - [`colors`:](#colors)
-    - [`onSelection`:](#onselection)
-    - [`onSearch`:](#onsearch)
-    - [`searchNext`:](#searchnext)
-    - [`copySeq`:](#copyseq)
-    - [`searchQuery`:](#searchquery)
-    - [`backbone`:](#backbone)
-    - [`enzymes`:](#enzymes)
 - [Library Demo](#library-demo)
-  - [**tools.latticeautomation.com/seqviz**](#toolslatticeautomationcomseqviz)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
-- [Licence](#licence)
+- [License](#license)
 
 ---
 
@@ -535,6 +514,6 @@ See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/w
 
 Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
 
-## Licence
+## License
 
 [MIT](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
