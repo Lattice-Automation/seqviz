@@ -55,7 +55,7 @@ h1 {
   width: 100vw;
   display: flex;
   flex-direction: column;
-  min-width: 1024px;
+  min-width: 1040px;
   min-height: 724px;
 }
 
