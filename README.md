@@ -8,12 +8,16 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Aug 8 16:42:21 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Aug 14 14:19:45 EDT 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
 <!-- pkg-description(cmd:) -->A framework agnostic DNA viewer for sequences or files (gb, fasta, etc) with auto-feature annotation<!-- /pkg-description -->
 <br>
+
+---
+
+![](seqviz-feature-highlights.gif)
 
 ---
 
@@ -25,6 +29,7 @@
 - [Library Demo](#library-demo)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -509,6 +514,6 @@ See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/w
 
 Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
 
-## Licence
+## License
 
 [MIT](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
