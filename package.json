@@ -12,7 +12,8 @@
   ],
   "author": "Lattice Automation (https://latticeautomation.com/)",
   "contributors": [
-    "Raymond Chung <rchung@latticeautomation.com> (https://github.com/RazzYoshi)"
+    "Raymond Chung <rchung@latticeautomation.com> (https://github.com/RazzYoshi)",
+    "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)"
   ],
   "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
   "repository": {
