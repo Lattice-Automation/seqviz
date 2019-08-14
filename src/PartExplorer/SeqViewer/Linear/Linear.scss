@@ -1,10 +1,11 @@
 #la-vz-linear-scroller {
   height: 100%;
-  width: calc(100%-20px); // this needs to manually account for padding
+  width: 100%;
   outline: none !important;
   position: relative;
   font-weight: 300;
   padding: 10px;
+  overflow-x: hidden; // prevents unexpected horizontal scroll
   overflow-y: scroll;
   cursor: text;
 

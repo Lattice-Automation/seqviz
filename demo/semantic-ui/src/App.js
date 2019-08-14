@@ -241,7 +241,7 @@ export class SidebarHeader extends Component {
       <div className="sidebar-header">
         <div id="header-left">
           <Image id="seqviz-graphic" src={SeqVizGraphic} />
-          <h3>Viewer Settings</h3>
+          <h3>SeqViz Settings</h3>
         </div>
         <Button
           onClick={toggleSidebar}
@@ -291,9 +291,20 @@ export class SidebarFooter extends Component {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://medium.com/@rchung/visualize-your-dna-sequences-with-seqviz-facc51b4e191"
+              href="https://medium.com/@lattice.core/visualize-your-dna-sequences-with-seqviz-b1d945eb9684"
             >
               Story
+            </a>
+          </span>
+          <span>{"  |  "}</span>
+          <Icon name="edit outline" />
+          <span>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://docs.google.com/forms/d/1ILD3UwPvdkQlM06En7Pl9VqVpN_-g5iWs-B6gjKh9b0/viewform?edit_requested=true"
+            >
+              Survey
             </a>
           </span>
         </p>

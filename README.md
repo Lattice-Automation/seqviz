@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Aug 8 16:42:21 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Aug 14 14:19:45 EDT 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -25,8 +25,29 @@
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
+    - [`viewer.viewer`](#viewerviewer)
+    - [`viewer.viewerHTML`](#viewerviewerhtml)
+    - [`viewer.render()`](#viewerrender)
   - [Viewer Options](#viewer-options)
+    - [`element` :](#element)
+    - [`viewerOptions` :](#vieweroptions)
+    - [`part` :](#part)
+    - [`annotate`:](#annotate)
+    - [`viewer`:](#viewer)
+    - [`showAnnotations`:](#showannotations)
+    - [`showComplement`:](#showcomplement)
+    - [`showIndex`:](#showindex)
+    - [`zoom`:](#zoom)
+    - [`colors`:](#colors)
+    - [`onSelection`:](#onselection)
+    - [`onSearch`:](#onsearch)
+    - [`searchNext`:](#searchnext)
+    - [`copySeq`:](#copyseq)
+    - [`searchQuery`:](#searchquery)
+    - [`backbone`:](#backbone)
+    - [`enzymes`:](#enzymes)
 - [Library Demo](#library-demo)
+  - [**tools.latticeautomation.com/seqviz**](#toolslatticeautomationcomseqviz)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
 - [License](#license)
