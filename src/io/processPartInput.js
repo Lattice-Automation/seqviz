@@ -31,7 +31,7 @@ const processPartInput = async (newPart, partInput, options) => {
     } else {
       if (partInput.length > 1) {
         console.warn(
-          "SeqViz can only display one part at a time. The first valid file in your file list will be displayed."
+          "seqviz can only display one part at a time. The first valid file in your file list will be displayed."
         );
       }
       return partFromFiles(partInput, colors);

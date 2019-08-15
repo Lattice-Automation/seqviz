@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-for-header.png">
+  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-small.png">
 </p>
 &nbsp;
 
@@ -25,8 +25,29 @@
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
   - [Instantiate a Viewer](#instantiate-a-viewer)
+    - [`viewer.viewer`](#viewerviewer)
+    - [`viewer.viewerHTML`](#viewerviewerhtml)
+    - [`viewer.render()`](#viewerrender)
   - [Viewer Options](#viewer-options)
+    - [`element` :](#element)
+    - [`viewerOptions` :](#vieweroptions)
+    - [`part` :](#part)
+    - [`annotate`:](#annotate)
+    - [`viewer`:](#viewer)
+    - [`showAnnotations`:](#showannotations)
+    - [`showComplement`:](#showcomplement)
+    - [`showIndex`:](#showindex)
+    - [`zoom`:](#zoom)
+    - [`colors`:](#colors)
+    - [`onSelection`:](#onselection)
+    - [`onSearch`:](#onsearch)
+    - [`searchNext`:](#searchnext)
+    - [`copySeq`:](#copyseq)
+    - [`searchQuery`:](#searchquery)
+    - [`backbone`:](#backbone)
+    - [`enzymes`:](#enzymes)
 - [Library Demo](#library-demo)
+  - [**tools.latticeautomation.com/seqviz**](#toolslatticeautomationcomseqviz)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
 - [License](#license)

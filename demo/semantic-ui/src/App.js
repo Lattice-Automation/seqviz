@@ -14,8 +14,8 @@ import {
   Sidebar
 } from "semantic-ui-react";
 import LatticeLogo from "../src/lattice-brand.png";
-import SeqvizLogo from "../src/seqviz-brand-for-header.png";
-import SeqVizGraphic from "../src/seqviz-logo.png";
+import SeqvizLogo from "../src/seqviz-brand-small.png";
+import seqvizGraphic from "../src/seqviz-logo.png";
 import "./App.css";
 import { Header } from "./Header";
 
@@ -240,8 +240,8 @@ export class SidebarHeader extends Component {
     return (
       <div className="sidebar-header">
         <div id="header-left">
-          <Image id="seqviz-graphic" src={SeqVizGraphic} />
-          <h3>SeqViz Settings</h3>
+          <Image id="seqviz-graphic" src={seqvizGraphic} />
+          <h3>Settings</h3>
         </div>
         <Button
           onClick={toggleSidebar}
@@ -282,7 +282,7 @@ export class SidebarFooter extends Component {
               rel="noopener noreferrer"
               href="https://github.com/Lattice-Automation/seqviz"
             >
-              SeqViz
+              seqviz
             </a>
           </span>
           <span>{"  |  "}</span>
