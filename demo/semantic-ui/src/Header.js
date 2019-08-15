@@ -7,7 +7,7 @@ import {
   Label,
   Popup
 } from "semantic-ui-react";
-import SeqvizLogo from "../src/seqviz-brand-for-header.png";
+import SeqvizLogo from "../src/seqviz-brand-small.png";
 import "./Header.css";
 import { constructQuery, updateUrl, urlParams } from "./utils";
 

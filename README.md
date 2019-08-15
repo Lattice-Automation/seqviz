@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-for-header.png">
+  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-small.png">
 </p>
 &nbsp;
 

@@ -45,7 +45,7 @@ const Viewer = (element, part, options) => {
       `
     ====================================================
     Current Part: ${displayName}
-    Current SeqViz Settings:
+    Current seqviz Settings:
         Viewer Type: ${displayType} (circular | linear | both)
         Auto-annotation: ${displayAnnotate}
         Show Annotations: ${displayAnnotations}
