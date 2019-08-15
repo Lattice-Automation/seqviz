@@ -1,16 +1,16 @@
 # seqviz Demos
 
-This folder contains demonstrations of the SeqViz DNA sequence visualizer provided by Lattice. See [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) for the primary library documentation.
+This folder contains demonstrations of the seqviz DNA sequence visualizer provided by Lattice. See [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) for the primary library documentation.
 
 ## Running in Development
 
-To run the demos locally, clone the [SeqViz library](https://github.com/Lattice-Automation/seqviz) and `cd` to the folder of the demo you want to run. Then use `npm install` to install the demo and `npm start` to spin up a local copy.
+To run the demos locally, clone the [seqviz library](https://github.com/Lattice-Automation/seqviz) and `cd` to the folder of the demo you want to run. Then use `npm install` to install the demo and `npm start` to spin up a local copy.
 
-The demo will be running the latest version of the SeqViz library, but you can change the version you want to demo in the `index.html` file by modifying the line that looks like this:
+The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the `index.html` file by modifying the line that looks like this:
 
 `<script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script>`
 
-The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled SeqViz, copy the minified distribution into the demo folder and use this:
+The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled seqviz, copy the minified distribution into the demo folder and use this:
 
 `<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
 
