@@ -6,15 +6,15 @@ A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Latti
 
 ## Running in Development
 
-To run a local copy of this demo, clone the [SeqViz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo/simple-ui`. Then run `npm install` and `npm start`.
+To run a local copy of this demo, clone the [seqviz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo/simple-ui`. Then run `npm install` and `npm start`.
 
 The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The demo will be running the latest version of the SeqViz library, but you can change the version you want to demo in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html) file by modifying the line that looks like this:
+The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html) file by modifying the line that looks like this:
 
 `<script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script>`
 
-The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled SeqViz, copy the minified distribution into the demo folder and use this:
+The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled seqviz, copy the minified distribution into the demo folder and use this:
 
 `<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
 
