@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Aug 14 15:38:12 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Aug 15 12:40:57 EDT 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -66,13 +66,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.4/seqviz.min.js`<!-- /dist-url -->.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.5/seqviz.min.js`<!-- /dist-url -->.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
 For example you can use:
 
-`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.4/seqviz.min.js`<!-- /dist-url -->`"></script>`
+`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.5/seqviz.min.js`<!-- /dist-url -->`"></script>`
 
 This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
 
