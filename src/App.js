@@ -11,6 +11,7 @@ const Viewer = (element, part, options) => {
       annotate,
       viewer: viewerType,
       showAnnotations,
+      showPrimers,
       showComplement,
       showIndex,
       colors,
@@ -28,6 +29,7 @@ const Viewer = (element, part, options) => {
     const displayType = viewerType;
     const displayAnnotate = annotate ? "on" : "off";
     const displayAnnotations = showAnnotations ? "on" : "off";
+    const displayPrimers = showPrimers ? "on" : "off";
     const displayComplement = showComplement ? "on" : "off";
     const displayIndex = showIndex ? "on" : "off";
     const displayCustomColors = colors.length ? "yes" : "no";
@@ -49,6 +51,7 @@ const Viewer = (element, part, options) => {
         Viewer Type: ${displayType} (circular | linear | both)
         Auto-annotation: ${displayAnnotate}
         Show Annotations: ${displayAnnotations}
+        Show Primers: ${displayPrimers}
         Show Complement: ${displayComplement}
         Show Index: ${displayIndex}
         Using Custom Colors: ${displayCustomColors}

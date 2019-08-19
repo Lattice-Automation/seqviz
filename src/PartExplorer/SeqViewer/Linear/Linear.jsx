@@ -10,6 +10,7 @@ import {
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
 import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
+import findAllBindingSites from "../../Primer/findAllBindingSites";
 
 /**
  * A linear sequence viewer.
@@ -19,6 +20,7 @@ import SeqBlock from "./SeqBlock/SeqBlock";
  * 		SeqRow
  * 		IndexRow (axis)
  * 		Annotations
+ *      Primers
  *
  * the width, sequence of each seqBlock, annotations,
  * indexRow, is passed in the child component
@@ -28,6 +30,7 @@ import SeqBlock from "./SeqBlock/SeqBlock";
  * comp: whether or not to show complement
  * compSeq: the complement sequence to the orig sequence
  * annotations: an array of annotations to show above the seq
+ * primers: an array of primers to show above and below the seq
  */
 class Linear extends React.Component {
   shouldComponentUpdate = nextProps => {
@@ -55,6 +58,7 @@ class Linear extends React.Component {
       showIndex,
       showComplement,
       showAnnotations,
+      showPrimers,
 
       cutSites,
       annotations,
@@ -67,6 +71,17 @@ class Linear extends React.Component {
 
       findState: { searchResults = [], searchIndex }
     } = this.props;
+
+    let { primers } = this.props;
+
+    primers = findAllBindingSites(primers, seq);
+
+    const forwardPrimers = primers.filter(
+      primer => primer.direction === "FORWARD"
+    );
+    const reversePrimers = primers.filter(
+      primer => primer.direction === "REVERSE"
+    );
 
     const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
 
@@ -109,6 +124,22 @@ class Linear extends React.Component {
         )
       : new Array(arrSize).fill([]);
 
+    const forwardPrimerRows = showPrimers // primers...
+      ? createMultiRows(
+          stackElements(forwardPrimers, seq.length),
+          bpsPerBlock,
+          arrSize
+        )
+      : new Array(arrSize).fill([]);
+
+    const reversePrimerRows = showPrimers // primers...
+      ? createMultiRows(
+          stackElements(reversePrimers, seq.length),
+          bpsPerBlock,
+          arrSize
+        )
+      : new Array(arrSize).fill([]);
+
     const searchRows =
       searchResults && searchResults.length
         ? createSingleRows(searchResults, bpsPerBlock, arrSize)
@@ -139,6 +170,12 @@ class Linear extends React.Component {
       if (cutSiteRows[i].length) {
         blockHeight += lineHeight + spacingHeight; // space for cutsite name
       }
+      if (showPrimers && forwardPrimerRows[i].length) {
+        blockHeight += elementHeight * 3 * forwardPrimerRows[i].length;
+      }
+      if (showPrimers && reversePrimerRows[i].length) {
+        blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
+      }
       blockHeights[i] = blockHeight;
     }
     const seqBlocks = [];
@@ -164,6 +201,8 @@ class Linear extends React.Component {
           compSeq={compSeqs[i]}
           blockHeight={blockHeights[i]}
           annotationRows={annotationRows[i]}
+          forwardPrimerRows={forwardPrimerRows[i]}
+          reversePrimerRows={reversePrimerRows[i]}
           cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
           currSearchIndex={searchIndex}

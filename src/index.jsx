@@ -34,12 +34,14 @@ import PUC from "./DefaultParts/pUC";
 
 // const annotate = false;
 // const annotations = true;
+// const primers = true;
 // const complement = true;
 // const index = true;
 // let viewer = VIEWER("app-root", part, {
 //   annotate: annotate,
 //   viewer: type,
 //   showAnnotations: annotations,
+//   showPrimers: primers,
 //   showComplement: complement,
 //   showIndex: index,
 //   zoom: { linear: 50 },
@@ -80,6 +82,7 @@ import PUC from "./DefaultParts/pUC";
 //   const type = "both";
 //   const annotate = false;
 //   const annotations = true;
+//   const primers = true;
 //   const complement = true;
 //   const index = true;
 //   console.log(type);
@@ -89,6 +92,7 @@ import PUC from "./DefaultParts/pUC";
 //     showComplement: complement,
 //     showIndex: index,
 //     showAnnotations: annotations,
+//     showPrimers: primers,
 //     zoom: { circular: 0, linear: 50 },
 //     colors: [],
 //     onSelection: selection => {

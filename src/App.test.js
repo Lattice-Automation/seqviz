@@ -8,6 +8,7 @@ it("renders without crashing", () => {
     annotate: true,
     viewer: "both",
     showAnnotations: true,
+    showPrimers: true,
     showComplement: true,
     showIndex: true,
     zoom: { linear: 50 },
