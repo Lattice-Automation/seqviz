@@ -115,6 +115,7 @@ export const partFactory = () => ({
   compSeq: "",
   tags: [],
   annotations: [],
+  primers: [],
   cutSites: [],
   note: ""
 });

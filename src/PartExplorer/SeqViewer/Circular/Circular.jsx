@@ -2,12 +2,14 @@ import * as React from "react";
 import shortid from "shortid";
 import { stackElements } from "../partElementsToRows";
 import Annotations from "./Annotations/Annotations";
+import findAllBindingSites from "../../Primer/findAllBindingSites";
 import "./Circular.scss";
 import Index from "./Index/Index";
 import Labels from "./Labels/Labels";
 import Selection from "./Selection/Selection";
 import withViewerHOCs from "../handlers";
 import CutSites from "./CutSites/CutSites";
+import Primers from "./Primers/Primers";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -20,6 +22,8 @@ class Circular extends React.PureComponent {
       nextProps.annotations.filter(ann => ann.type !== "insert"),
       nextProps.seq.length
     );
+    const primers = findAllBindingSites(nextProps.primers, nextProps.seq);
+    const primersInRows = stackElements(primers, nextProps.seq.length);
 
     /**
      * find the element labels that need to be rendered outside the plasmid. This is done for
@@ -72,6 +76,7 @@ class Circular extends React.PureComponent {
       seqLength: nextProps.seq.length,
       lineHeight: lineHeight,
       annotationsInRows: annotationsInRows,
+      primersInRows: primersInRows,
       inlinedLabels: inlinedLabels,
       outerLabels: outerLabels
     };
@@ -82,6 +87,7 @@ class Circular extends React.PureComponent {
     seqLength: 0,
     lineHeight: 0,
     annotationsInRows: [],
+    primersInRows: [],
     inlinedLabels: [],
     outerLabels: []
   };
@@ -238,6 +244,7 @@ class Circular extends React.PureComponent {
   render() {
     const {
       showAnnotations,
+      showPrimers,
       showIndex,
       name,
       inputRef,
@@ -258,6 +265,7 @@ class Circular extends React.PureComponent {
       seqLength,
       lineHeight,
       annotationsInRows,
+      primersInRows,
       inlinedLabels,
       outerLabels
     } = this.state;
@@ -277,6 +285,21 @@ class Circular extends React.PureComponent {
       inputRef,
       resizing
     };
+
+    // an inward shift is needed for primers if the annotations are shown
+    let primerRowsToSkip = 0;
+    if (showAnnotations) {
+      primerRowsToSkip = annotationsInRows.length + 1;
+    }
+
+    // calculate the selection row height based on number of annotation and primers
+    let totalRows = 4;
+    if (showAnnotations) {
+      totalRows += annotationsInRows.length;
+    }
+    if (showPrimers) {
+      totalRows += primersInRows.length;
+    }
 
     const plasmidId = `la-vz-${name}-viewer-circular`;
     const selectionId = shortid.generate();
@@ -298,7 +321,7 @@ class Circular extends React.PureComponent {
             {...general}
             id={selectionId}
             onUnmount={onUnMount}
-            totalRows={4}
+            totalRows={totalRows}
             seq={seq}
           />
           {showAnnotations && (
@@ -309,6 +332,14 @@ class Circular extends React.PureComponent {
               size={size}
               rowsToSkip={0}
               inlinedAnnotations={inlinedLabels}
+            />
+          )}
+          {showPrimers && (
+            <Primers
+              {...general}
+              primers={primersInRows}
+              size={size}
+              rowsToSkip={primerRowsToSkip}
             />
           )}
           {!resizing && (
@@ -332,7 +363,7 @@ class Circular extends React.PureComponent {
               yDiff={yDiff}
               seq={seq}
               compSeq={compSeq}
-              totalRows={4}
+              totalRows={totalRows}
             />
           )}
         </g>

@@ -4,7 +4,13 @@ import {
   extractDate,
   trimCarriageReturn
 } from "../../Utils/parser";
-import { annotationFactory } from "../../Utils/sequence";
+import {
+  calcGC,
+  calcTm,
+  reverse,
+  annotationFactory,
+  primerFactory
+} from "../../Utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = [
@@ -116,6 +122,7 @@ export default async (fileInput, fileName, colors = []) =>
       // because "db_xref" is a recognized name type
       // the name depends on whether the tag type is in the reocgnized list of types
       const annotations = [];
+      const primers = [];
       if (file.indexOf("FEATURES")) {
         const FEATURES_LINE = file.indexOf("FEATURES");
         const FEATURES_NEW_LINE = file.indexOf("\n", FEATURES_LINE);
@@ -130,6 +137,9 @@ export default async (fileInput, fileName, colors = []) =>
           .substring(FEATURES_NEW_LINE, ORIGIN_LINE)
           .split(/\n/)
           .filter(r => r);
+
+        // Currently interpreting a primer
+        let primerFlag = false;
 
         FEATURES_ROWS.forEach(r => {
           // in the example above, the following converts it to ['source', '1..5028']
@@ -153,7 +163,27 @@ export default async (fileInput, fileName, colors = []) =>
               }
             }
 
-            if (type !== "source") {
+            // +++++PRIMERS+++++//
+            if (type === "primer_bind") {
+              primerFlag = true;
+              // create a new primer around the properties in this line
+              const forward = direction === "FORWARD";
+              primers.push({
+                ...primerFactory(),
+                gc: forward
+                  ? calcGC(seq.slice(start, end))
+                  : calcGC(compSeq.slice(start, end)),
+                tm: forward
+                  ? calcTm(seq.slice(start, end))
+                  : calcTm(compSeq.slice(start, end)),
+                vector: seq,
+                sequence: forward
+                  ? seq.slice(start, end).trim()
+                  : reverse(compSeq.slice(start, end)).trim()
+              });
+            } else if (type !== "source") {
+              // source would just be an annotation for the entire sequence so remove
+              primerFlag = false;
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
                 ...annotationFactory(parsedName, `${type}-${start}`, colors),
@@ -178,18 +208,29 @@ export default async (fileInput, fileName, colors = []) =>
               // it's key value pair where the key is something we recognize as an annotation name
               if (
                 lastAnnIndex > -1 &&
-                annotations[annotations.length - 1].name === "Untitled"
+                annotations[annotations.length - 1].name === "Untitled" &&
+                !primerFlag
               ) {
                 // defensively check that there isn't already a defined annotation w/o a name
                 annotations[annotations.length - 1].name = trimCarriageReturn(
                   tagValue
                 );
+              } else if (
+                primerFlag &&
+                primers[primers.length - 1].name === ""
+              ) {
+                primers[primers.length - 1].name = trimCarriageReturn(tagValue);
               }
             } else if (tagColorList.includes(tagName)) {
               // it's key value pair where the key is something we recognize as an annotation color
               if (lastAnnIndex > -1) {
                 // defensively check that there's already been a defined annotation
                 annotations[annotations.length - 1].color = tagValue;
+              }
+            } else if (tagName === "loom_primer_sequence") {
+              // Loom specific tag used to preserve mismatches
+              if (primerFlag) {
+                primers[primers.length - 1].sequence = tagValue;
               }
             }
           }
@@ -219,6 +260,7 @@ export default async (fileInput, fileName, colors = []) =>
         seq: seq,
         compSeq: compSeq,
         annotations: annotations,
+        primers: primers,
         circular: circular
       };
     });

@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Aug 15 12:40:57 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Aug 19 11:23:01 EDT 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -228,6 +228,12 @@ Defaults to **both**.
 #### `showAnnotations`:
 
 `boolean` **true** or **false**. If true will show annotations on the viewers.
+
+Defaults to **true**.
+
+#### `showPrimers`:
+
+`boolean` **true** or **false**. If true will show primers on the viewers.
 
 Defaults to **true**.
 
