@@ -12,9 +12,9 @@ The demo is bootstrapped with [Create React App](https://github.com/facebook/cre
 
 The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the `public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/public/index.html) file by modifying the line that looks like this:
 
-`<script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script>`
+`<script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script>`
 
-The example above is running `version 0.2.0`. If you want to run the demo from a local copy of the compiled seqviz, copy the minified distribution into the demo folder and use this:
+The example above is running `version 1.0.0`. If you want to run the demo from a local copy of the compiled seqviz, copy the minified distribution into the demo folder and use this:
 
 `<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
 
@@ -24,7 +24,7 @@ To check what the version of your downloaded library is, open the `seqviz.min.js
 
 ```js
 /*!
- * lattice - seqviz - 0.2.0
+ * lattice - seqviz - 1.0.0
  * provided and maintained by Lattice Automation (https://latticeautomation.com/)
  * LICENSE MIT
  */
@@ -48,7 +48,7 @@ The library is imported in the [`public/index.html`](https://github.com/Lattice-
 <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 
 <!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
-<!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/0.2.0/seqviz.min.js"></script> -->
+<!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script> -->
 ```
 
 The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/semantic-ui/src/Header.css) files.
@@ -332,6 +332,37 @@ export class CheckboxInput extends Component {
 ```
 
 Demonstrates turning on and off showing annotations on the viewers. On by default. Turn off if you just want to inspect the sequence base pairs.
+
+### Show Primers
+
+```js
+export class CheckboxInput extends Component {
+  render() {
+    const { name, label, setDemoState } = this.props;
+    return (
+      <Checkbox
+        toggle
+        defaultChecked
+        name={name}
+        label={label}
+        onChange={(event, data) => {
+          setDemoState({ [name]: data.checked });
+        }}
+      />
+    );
+  }
+}
+```
+
+```js
+<CheckboxInput
+  setDemoState={setDemoState}
+  name="primers"
+  label="Show primers"
+/>
+```
+
+Demonstrates turning on and off showing primers on the viewers. On by default. Turn off if you just want to inspect the sequence base pairs.
 
 ### Show Complement
 

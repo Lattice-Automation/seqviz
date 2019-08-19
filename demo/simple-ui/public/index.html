@@ -134,6 +134,11 @@
       </span>
       &nbsp;&nbsp;
       <span>
+        Show Primers:
+        <input id="primers" checked="true" type="checkbox" />
+      </span>
+      &nbsp;&nbsp;
+      <span>
         Show Complement:
         <input id="complement" checked="true" type="checkbox" />
       </span>
@@ -217,6 +222,14 @@
           showPart();
         });
 
+      let primers = document.getElementById("primers").checked;
+      const primersElement = document
+        .getElementById("primers")
+        .addEventListener("change", event => {
+          primers = event.target.checked;
+          showPart();
+        });
+
       let complement = document.getElementById("complement").checked;
       const complementElement = document
         .getElementById("complement")
@@ -277,6 +290,7 @@
           viewer: viewType,
           annotate: annotate,
           showAnnotations: annotations,
+          showPrimers: primers,
           showComplement: complement,
           showIndex: index,
           zoom: { linear: lzoom },
