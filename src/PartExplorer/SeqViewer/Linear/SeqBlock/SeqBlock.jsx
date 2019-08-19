@@ -4,6 +4,7 @@ import IndexRow from "./Index/Index";
 import LinearFind from "./LinearFind/LinearFind";
 import Selection from "./Selection/Selection";
 import CutSiteRow from "./CutSites/CutSites";
+import Primers from "./Primers/Primers";
 
 /**
  * SeqBlock
@@ -80,6 +81,8 @@ export default class SeqBlock extends React.PureComponent {
       compSeq,
       fullSeq,
       annotationRows,
+      forwardPrimerRows,
+      reversePrimerRows,
       cutSiteRows,
       searchRows,
       currSearchIndex,
@@ -88,6 +91,7 @@ export default class SeqBlock extends React.PureComponent {
       showIndex,
       showComplement,
       showAnnotations,
+      showPrimers,
 
       seqFontSize,
       firstBase,
@@ -102,6 +106,7 @@ export default class SeqBlock extends React.PureComponent {
       onUnmount,
       resizing,
 
+      charWidth,
       zoomed
     } = this.props;
     const adjustedWidth =
@@ -131,8 +136,18 @@ export default class SeqBlock extends React.PureComponent {
       element: this
     };
 
+    // height and yDiff of forward primers (above sequence)
+    const forwardPrimerYDiff = 0;
+    const forwardPrimerHeight =
+      showPrimers && forwardPrimerRows.length
+        ? elementHeight * 3 * forwardPrimerRows.length
+        : 0;
+
     // height and yDiff of cut sites
-    const cutSiteYDiff = zoomed && cutSiteRows.length ? elementHeight / 2 : 0; // spacing for cutSite names
+    const cutSiteYDiff =
+      zoomed && cutSiteRows.length
+        ? elementHeight / 2 + forwardPrimerHeight
+        : forwardPrimerHeight; // spacing for cutSite names
     const cutSiteHeight = zoomed && cutSiteRows.length ? elementHeight : 0;
 
     // height and yDiff of the sequence strand
@@ -143,15 +158,28 @@ export default class SeqBlock extends React.PureComponent {
     const compYDiff = indexYDiff + indexHeight;
     const compHeight = zoomed && showComplement ? lineHeight : 0;
 
+    // height and yDiff of reverse primers (below sequence)
+    const reversePrimerYDiff = compYDiff + compHeight;
+    const reversePrimerHeight =
+      showPrimers && reversePrimerRows.length
+        ? elementHeight * 3 * reversePrimerRows.length
+        : 0;
+
     // height and yDiff of annotations
-    const annYDiff = compYDiff + compHeight;
+    const annYDiff = reversePrimerYDiff + reversePrimerHeight;
     const annHeight = showAnnotations
       ? elementHeight * annotationRows.length
       : 0;
 
     // calc the height necessary for the sequence selection
     let selectHeight =
-      indexHeight + compHeight + annHeight + cutSiteHeight + cutSiteYDiff;
+      forwardPrimerHeight +
+      indexHeight +
+      compHeight +
+      annHeight +
+      cutSiteHeight +
+      cutSiteYDiff +
+      reversePrimerHeight;
     let selectEdgeHeight = showIndex ? selectHeight + lineHeight : selectHeight;
 
     // needed because otherwise the selection height is very small
@@ -217,7 +245,36 @@ export default class SeqBlock extends React.PureComponent {
               fullSeq={fullSeq}
             />
           )}
-
+          {showPrimers && (
+            <Primers
+              {...this.props}
+              findXAndWidth={this.findXAndWidth}
+              firstBase={firstBase}
+              lastBase={lastBase}
+              yDiff={forwardPrimerYDiff}
+              direction="FORWARD"
+              seqBlockRef={this}
+              fullSeq={fullSeq}
+              charWidth={charWidth}
+              fontSize={seqFontSize}
+              zoomed={zoomed}
+            />
+          )}
+          {showPrimers && (
+            <Primers
+              {...this.props}
+              findXAndWidth={this.findXAndWidth}
+              firstBase={firstBase}
+              lastBase={lastBase}
+              yDiff={reversePrimerYDiff}
+              direction="REVERSE"
+              seqBlockRef={this}
+              fullSeq={fullSeq}
+              charWidth={charWidth}
+              fontSize={seqFontSize}
+              zoomed={zoomed}
+            />
+          )}
           <Selection.Edges
             {...this.props}
             selectEdgeHeight={selectEdgeHeight}

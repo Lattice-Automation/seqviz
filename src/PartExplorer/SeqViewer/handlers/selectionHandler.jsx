@@ -304,6 +304,7 @@ const withSelectionHandler = WrappedComp =>
       const { start, end, direction } = knownRange;
       switch (knownRange.type) {
         case "ANNOTATION":
+        case "PRIMER":
         case "FIND":
         case "ENZYME": {
           // Annotation or find selection range

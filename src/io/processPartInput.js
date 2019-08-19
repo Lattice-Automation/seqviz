@@ -1,6 +1,7 @@
 import { partFactory, dnaComplement, partStub } from "../Utils/parser";
 import {
   annotationFactory,
+  primerFactory,
   validSequenceCharacters,
   trimNewLines
 } from "../Utils/sequence";
@@ -56,7 +57,8 @@ const processPartInput = async (newPart, partInput, options) => {
     const {
       seq: sequence = "",
       compSeq: complement = "",
-      annotations = []
+      annotations = [],
+      primers = []
     } = partInput;
     if (typeof sequence !== "string" || sequence === "") {
       console.error(
@@ -70,6 +72,7 @@ const processPartInput = async (newPart, partInput, options) => {
         part.compSeq = dnaComplement(sequence).compSeq;
       }
       part.annotations = validateAnnotations(part.name, annotations, colors);
+      part.primers = validatePrimers(primers);
       return part;
     }
   }
@@ -182,6 +185,21 @@ const validateAnnotations = (fileName, annotations, colors = []) => {
     return annotations.map(annotation => ({
       ...annotationFactory(fileName, annotation.name, colors),
       ...annotation
+    }));
+  }
+};
+
+/**
+ * Determine if there are primers, and format them
+ * correctly if there are
+ */
+const validatePrimers = primers => {
+  if (!Array.isArray(primers) || primers === []) {
+    return [];
+  } else {
+    return primers.map(primer => ({
+      ...primerFactory(),
+      ...primer
     }));
   }
 };

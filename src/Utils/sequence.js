@@ -192,6 +192,19 @@ export const defaultSelection = {
   feature: null
 };
 
+export const trimNewLines = str =>
+  str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");
+
+/**
+ * Minimum and maximum size of a selection used to create a primer
+ */
+export const primerSizeLimits = { min: 10, max: 500 };
+
+/**
+ * Minumum size of selection used to generate PCR primer pairs
+ */
+export const primerPcrSelectionLimits = { min: 23 };
+
 /**
  * a default annotation generator
  */
@@ -223,5 +236,19 @@ export const annotationFactory = (fileName, annotationName, colors = []) => {
   };
 };
 
-export const trimNewLines = str =>
-  str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");
+export const primerFactory = () => ({
+  overhang: "",
+  name: "",
+  id: shortid.generate(),
+  complementId: "",
+  gc: 0,
+  tm: 0,
+  any: 0,
+  dimer: 0,
+  hairpin: 0,
+  stability: 0,
+  penalty: 0,
+  vector: "",
+  sequence: "",
+  strict: false
+});

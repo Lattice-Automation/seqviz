@@ -196,6 +196,7 @@ export class SequenceViewer extends Component {
       viewType: view = "both",
       annotate = true,
       annotations = true,
+      primers = true,
       complement = true,
       index = true,
       query = "",
@@ -211,6 +212,7 @@ export class SequenceViewer extends Component {
       viewer: viewType,
       annotate: annotate,
       showAnnotations: annotations,
+      showPrimers: primers,
       showComplement: complement,
       showIndex: index,
       zoom: { linear: lzoom },
@@ -400,6 +402,13 @@ export class SideBarMenu extends Component {
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
+                name="primers"
+                label="Show primers"
+              />
+            </Menu.Item>
+            <Menu.Item as="a" className="options-checkbox">
+              <CheckboxInput
+                setDemoState={setDemoState}
                 name="complement"
                 label="Show complement"
               />
@@ -478,6 +487,7 @@ export class Demo extends Component {
     viewType: "",
     annotate: true,
     annotations: true,
+    primers: true,
     complement: true,
     index: true,
     query: "",
