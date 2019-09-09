@@ -41,12 +41,14 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 - **Circular Plasmid viewer** :
 
   - Annotations with names and colors
+  - Primers
   - Name of sequence
   - Base pair length of sequence
 
 - **Linear Sequence viewer** :
 
   - Annotations with names and colors
+  - Primers
   - Sequence and complement nucleotide bases
   - Index line with base pair numbers
   - Enzyme cut sites
@@ -92,7 +94,7 @@ Once you have imported the library you can access the `seqviz` library through t
 
 ### Instantiate a Viewer
 
-You can initialize a new viewer with the sample part like so:
+You can initialize a new viewer with a part json object like so:
 
 ```html
 <script>
@@ -505,6 +507,8 @@ You can see a demonstration of this library used to fetch BioBricks at
 For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
 
 For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
+
+You can also check out the example for examining NCBI parts included in our SeqViz introductory [Medium post](https://medium.com/lattice-automation/visualize-your-dna-sequences-with-seqviz-b1d945eb9684).
 
 ## Contact Us
 

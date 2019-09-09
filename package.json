@@ -39,7 +39,7 @@
     "babel-polyfill": "^6.26.0",
     "bufferpack": "0.0.6",
     "fs": "^0.0.2",
-    "image-webpack-loader": "^5.0.0",
+    "image-webpack-loader": "^6.0.0",
     "jszip": "^3.2.1",
     "net": "^1.0.2",
     "node-sass": "^4.12.0",
