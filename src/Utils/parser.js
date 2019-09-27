@@ -108,6 +108,16 @@ export const firstElement = arr => {
   return arr[0];
 };
 
+export const directionality = direction => {
+  const forward = ["FWD", "FORWARD", "FOR", "1", 1];
+  const reverse = ["REV", "REVERSE", "-1", -1];
+  return forward.includes(direction)
+    ? "FORWARD"
+    : reverse.includes(direction)
+    ? "REVERSE"
+    : "NONE";
+};
+
 export const partFactory = () => ({
   name: "",
   date: new Date().getTime(),

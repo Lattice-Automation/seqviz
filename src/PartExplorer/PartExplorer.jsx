@@ -4,6 +4,7 @@ import "./PartExplorer.scss";
 import request from "request";
 import shortid from "shortid";
 import { annotationFactory, defaultSelection } from "../Utils/sequence";
+import { directionality } from "../Utils/parser";
 import { isEqual } from "lodash";
 import processPartInput from "../io/processPartInput";
 import { SizeMe } from "react-sizeme";
@@ -198,11 +199,11 @@ class PartExplorer extends React.Component {
     const result = await new Promise((resolve, reject) => {
       request.post(
         {
-          uri:
-            "https://u7a3t8zeo8.execute-api.us-east-1.amazonaws.com/prod/annotate",
+          uri: "https://microservices.latticeautomation.com/annotate",
           method: "POST",
           json: JSON.stringify({
-            part: { id: shortid.generate(), seq: part.seq.toLowerCase() }
+            id: shortid.generate(),
+            seq: part.seq.toLowerCase()
           }),
           headers: {
             "Content-Type": "application/json"
@@ -240,10 +241,10 @@ class PartExplorer extends React.Component {
       console.error(error.message);
       return error;
     }
-
-    let annotations = result.body.map(a => ({
+    let annotations = result.body.annotations.map(a => ({
       ...annotationFactory(part.name, a.name || a.start, colors),
-      ...a
+      ...a,
+      ...{ direction: directionality(a.direction) }
     }));
     // add only annotations that don't already exist on the part with the same name and start/end
     // do not concat and globally cull duplicates, we want to respect duplicates
