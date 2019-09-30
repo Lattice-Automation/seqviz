@@ -84,7 +84,6 @@ class PartExplorer extends React.Component {
       if (isEqual(input, next)) {
         this.incrementSearch();
       }
-
       const copy = (({ meta, alt, ctrl, shift, key }) => ({
         metaKey: meta,
         altKey: alt,
@@ -98,21 +97,38 @@ class PartExplorer extends React.Component {
     };
 
     const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-    if (searchNext.key && takenBindings.includes(searchNext.key)) {
-      console.error(
-        "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
-      );
-    } else if (isEqual(searchNext, copySeq)) {
-      console.error("Custom key bindings must be unique.");
-    } else {
-      window.addEventListener("keydown", e => handleKeyPress(e));
-    }
-    if (copySeq.key && takenBindings.includes(copySeq.key)) {
-      console.error(
-        "Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding."
-      );
-    } else {
-      window.addEventListener("keydown", e => handleKeyPress(e));
+
+    const newBindingsMap = { searchNext: searchNext, copySeq: copySeq };
+
+    let uniqueNewBindings = {};
+    for (const binding in newBindingsMap) {
+      const currKey = newBindingsMap[binding].key;
+      if (currKey && takenBindings.includes(currKey)) {
+        console.error(
+          `Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding for ${binding}.`
+        );
+      } else if (Object.keys(uniqueNewBindings).includes(currKey)) {
+        for (const ubinding of uniqueNewBindings[currKey]) {
+          if (isEqual(newBindingsMap[binding], newBindingsMap[ubinding])) {
+            console.error(
+              `Custom key bindings must be unique. ${binding} and ${ubinding} cannot share the same key bindings.`
+            );
+          } else {
+            uniqueNewBindings = {
+              ...uniqueNewBindings,
+              ...{
+                [currKey]: uniqueNewBindings[currKey].concat([binding])
+              }
+            };
+          }
+        }
+      } else {
+        window.addEventListener("keydown", e => handleKeyPress(e));
+        uniqueNewBindings = {
+          ...uniqueNewBindings,
+          ...{ [currKey]: [binding] }
+        };
+      }
     }
   };
 
