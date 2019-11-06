@@ -7,7 +7,6 @@ import {
   trimCarriageReturn
 } from "../../Utils/parser";
 import { annotationFactory } from "../../Utils/sequence";
-import { ImportErrorTooLarge } from "../../Utils/customErrors";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = [
@@ -51,10 +50,8 @@ export default async (fileInput, fileName, colors = []) =>
     let circular = false;
 
     if (seq.length > 500000) {
-      throw new ImportErrorTooLarge(
-        `Import of sequence length ${
-          seq.length
-        }bp failed. Please keep sequences under 500000bp.`,
+      throw new Error(
+        `Import of sequence length ${seq.length}bp failed. Please keep sequences under 500000bp.`,
         seq.length
       );
     }

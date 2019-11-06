@@ -232,6 +232,7 @@ const withSelectionHandler = WrappedComp =>
         onSelection,
         findState: { searchIndex }
       } = this.props;
+
       const {
         clockwise = true,
         start = 0,
@@ -241,6 +242,7 @@ const withSelectionHandler = WrappedComp =>
         searchIndex: newSearchIndex = null,
         feature
       } = selectRange;
+
       const selectionLength = this.calcSelectionLength(start, end, clockwise);
       const selectionSequence = this.getSelectionSequence(
         start,
@@ -270,6 +272,7 @@ const withSelectionHandler = WrappedComp =>
           this.workspace.focus();
         }
       }
+
       onSelection(newSelection);
     };
 

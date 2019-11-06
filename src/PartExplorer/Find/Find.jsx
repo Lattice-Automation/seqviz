@@ -141,11 +141,6 @@ const validateSearchSeq = (query, mismatch, seq) => {
     };
   }
 
-  // If there are no results, say so
-  if (indices.length === 0 && compIndices.length === 0) {
-    console.log("Search complete. No matches found.");
-  }
-
   return searchSeq(indices, compIndices, query.length, seq.length);
 };
 

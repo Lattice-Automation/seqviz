@@ -1,5 +1,5 @@
-import VIEWER from "./App";
-import PUC from "./DefaultParts/pUC";
+import { Viewer } from "./library";
+import PUC from "./parts/pUC";
 
 /**
  * CODE TO TEST VIEWER
@@ -37,7 +37,8 @@ const annotations = true;
 const primers = true;
 const complement = true;
 const index = true;
-let viewer = VIEWER("app-root", part, {
+let viewer = Viewer("app-root", {
+  part: part,
   annotate: annotate,
   viewer: type,
   showAnnotations: annotations,

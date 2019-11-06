@@ -82,6 +82,7 @@ const processPartInput = async (newPart, partInput, options) => {
       console.error("Instantiation Error: No valid part found.");
       return partStub(colors);
     }
+
     // If the string contains numbers it could be an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
@@ -94,6 +95,7 @@ const processPartInput = async (newPart, partInput, options) => {
         return null;
       }
     }
+
     // Otherwise check if it's just a sequence string
     else {
       if (backbone.length) {

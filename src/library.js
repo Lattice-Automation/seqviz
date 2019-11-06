@@ -1,6 +1,6 @@
 import "babel-polyfill";
 import VIEWER from "./App";
-import PUC from "./DefaultParts/pUC";
+import PUC from "./parts/pUC";
 
 /**
  * Library exports
@@ -44,6 +44,7 @@ export const Viewer = (element = "root", ViewerOptions) => {
     backbone = "",
     enzymes = []
   } = ViewerOptions;
+
   return VIEWER(element, part, {
     annotate,
     viewer,

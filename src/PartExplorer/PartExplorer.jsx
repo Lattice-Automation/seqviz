@@ -1,14 +1,15 @@
+import { isEqual } from "lodash";
 import * as React from "react";
-import SeqViewer from "./SeqViewer/SeqViewer";
-import "./PartExplorer.scss";
+import sizeMe, { SizeMe } from "react-sizeme";
 import request from "request";
 import shortid from "shortid";
+
+import SeqViewer from "./SeqViewer/SeqViewer";
+import "./PartExplorer.scss";
 import { annotationFactory, defaultSelection } from "../Utils/sequence";
 import { directionality } from "../Utils/parser";
-import { isEqual } from "lodash";
 import processPartInput from "../io/processPartInput";
-import { SizeMe } from "react-sizeme";
-import sizeMe from "react-sizeme";
+
 sizeMe.noPlaceholders = true;
 
 /**
@@ -187,7 +188,6 @@ class PartExplorer extends React.Component {
   };
 
   /**
-   * incrementResults
    * Traverse the search results array and return a search index via a prop callback to
    * tell the viewer what to highlight
    */
@@ -211,6 +211,9 @@ class PartExplorer extends React.Component {
     }
   };
 
+  /**
+   * Send a POST to lattice's AWS Lambda auto-annotate endpoint
+   */
   lambdaAnnotate = async part => {
     const result = await new Promise((resolve, reject) => {
       request.post(
@@ -234,14 +237,18 @@ class PartExplorer extends React.Component {
         }
       );
     });
+
     if (result.statusCode !== 200) {
       const err = JSON.stringify(result.body);
       throw new Error(`Lambda annotations failed. Server response: ${err}`);
     }
-
     return result;
   };
 
+  /**
+   * A function for adding annotations automatically given a part's sequence alone.
+   * Calls a remote lambda service which uses BLAST and a pre-populated feature database
+   */
   autoAnnotate = async (part, colors = []) => {
     let result;
     try {
@@ -262,9 +269,9 @@ class PartExplorer extends React.Component {
       ...a,
       ...{ direction: directionality(a.direction) }
     }));
+
     // add only annotations that don't already exist on the part with the same name and start/end
-    // do not concat and globally cull duplicates, we want to respect duplicates
-    // that already exist on the part
+    // do not concat and globally cull duplicates, we want to deduplicate features
     annotations = annotations.reduce((acc, a) => {
       if (
         !acc.find(
@@ -282,52 +289,61 @@ class PartExplorer extends React.Component {
   render() {
     const { viewer } = this.props;
     const { part } = this.state;
-    const partState = this.state;
+
     const partAvailable = part.seq || part.seq === "" || false;
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";
+
+    if (!partAvailable || !part.seq.length) {
+      return (
+        <div
+          className="la-vz-part-explorer-container"
+          id="la-vz-part-explorer"
+        />
+      );
+    }
+
     return (
       <div className="la-vz-part-explorer-container" id="la-vz-part-explorer">
-        {partAvailable && (
-          <div className="la-vz-seq-viewers-container">
-            {circular && part.seq.length > 0 && (
-              <SizeMe
-                monitorHeight
-                render={({ size }) => {
-                  return (
-                    <SeqViewer
-                      {...this.props}
-                      part={part}
-                      {...partState}
-                      setPartState={this.setPartState}
-                      incrementSearch={this.incrementSearch}
-                      size={size}
-                      Circular
-                    />
-                  );
-                }}
-              />
-            )}
-            {linear && part.seq.length > 0 && (
-              <SizeMe
-                monitorHeight
-                render={({ size }) => {
-                  return (
-                    <SeqViewer
-                      {...this.props}
-                      {...part}
-                      {...partState}
-                      setPartState={this.setPartState}
-                      incrementSearch={this.incrementSearch}
-                      size={size}
-                      Circular={false}
-                    />
-                  );
-                }}
-              />
-            )}
-          </div>
-        )}
+        <div className="la-vz-seq-viewers-container">
+          {circular && (
+            <SizeMe
+              monitorHeight
+              render={({ size }) => {
+                return (
+                  <SeqViewer
+                    {...this.props}
+                    {...this.state}
+                    {...part}
+                    setPartState={this.setPartState}
+                    incrementSearch={this.incrementSearch}
+                    size={size}
+                    Circular
+                  />
+                );
+              }}
+            />
+          )}
+
+          {linear && (
+            <SizeMe
+              monitorHeight
+              render={({ size }) => {
+                return (
+                  <SeqViewer
+                    {...this.props}
+                    {...this.state}
+                    {...part}
+                    setPartState={this.setPartState}
+                    incrementSearch={this.incrementSearch}
+                    size={size}
+                    Circular={false}
+                  />
+                );
+              }}
+            />
+          )}
+        </div>
       </div>
     );
   }

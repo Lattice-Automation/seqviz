@@ -1,12 +1,22 @@
+import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
-import React from "react";
 import PartExplorer from "./PartExplorer/PartExplorer.jsx";
 import "./App.scss";
 
 const Viewer = (element, part, options) => {
   const displayConfiguration = false;
-  const displayConfig = (displayPart, displayOptions) => {
+
+  const viewer = <PartExplorer part={part} {...options} />;
+  const viewerHTML = ReactDOMServer.renderToString(viewer);
+
+  const domElement =
+    element.constructor.name.startsWith("HTML") &&
+    element.constructor.name.endsWith("Element")
+      ? element
+      : document.getElementById(element);
+
+  if (displayConfiguration) {
     const {
       annotate,
       viewer: viewerType,
@@ -19,13 +29,13 @@ const Viewer = (element, part, options) => {
       backbone,
       searchQuery: { query, mismatch },
       enzymes
-    } = displayOptions;
+    } = options;
 
-    const displayName = displayPart.name
-      ? displayPart.name
-      : displayPart.constructor.name === "FileList"
-      ? displayPart[0].name
-      : displayPart;
+    const displayName = part.name
+      ? part.name
+      : part.constructor.name === "FileList"
+      ? part[0].name
+      : part;
     const displayType = viewerType;
     const displayAnnotate = annotate ? "on" : "off";
     const displayAnnotations = showAnnotations ? "on" : "off";
@@ -67,26 +77,14 @@ const Viewer = (element, part, options) => {
         "Search visualization is only supported in Linear Sequence View."
       );
     }
-  };
+  }
 
-  const viewer = <PartExplorer part={part} {...options} />;
-  const viewerHTML = ReactDOMServer.renderToString(viewer);
-
-  const domElement =
-    element.constructor.name.startsWith("HTML") &&
-    element.constructor.name.endsWith("Element")
-      ? element
-      : document.getElementById(element);
-
-  const render = () => {
-    ReactDOM.render(viewer, domElement);
-  };
-
-  if (displayConfiguration) displayConfig(part, options);
   return {
     viewer: viewer,
     viewerHTML: viewerHTML,
-    render: render
+    render: () => {
+      ReactDOM.render(viewer, domElement);
+    }
   };
 };
 
