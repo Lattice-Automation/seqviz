@@ -1,4 +1,4 @@
-import { Viewer } from "./library";
+import Viewer from "./viewer";
 import PUC from "./parts/pUC";
 
 /**
