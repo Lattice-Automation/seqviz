@@ -1,5 +1,4 @@
 import * as React from "react";
-import shortid from "shortid";
 
 /**
  * A component for a single primer within the Circular Viewer

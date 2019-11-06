@@ -12,7 +12,7 @@
   ],
   "author": "Lattice Automation (https://latticeautomation.com/)",
   "contributors": [
-    "Raymond Chung <rchung@latticeautomation.com> (https://github.com/RazzYoshi)",
+    "Joshua Timmons <jtimmons@latticeautomation.com> (https://github.com/JJTimmons)",
     "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)"
   ],
   "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
@@ -32,31 +32,29 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-imports": "^2.0.0",
     "babel-preset-react": "^6.24.1",
     "babel-polyfill": "^6.26.0",
     "bufferpack": "0.0.6",
-    "fs": "^0.0.2",
-    "image-webpack-loader": "^6.0.0",
     "jszip": "^3.2.1",
-    "net": "^1.0.2",
-    "node-sass": "^4.12.0",
     "rc-slider": "^8.6.9",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^3.0.1",
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
     "tinycolor2": "^1.4.1",
-    "tls": "0.0.1",
     "typescript": "^3.4.5",
-    "uglifyjs-webpack-plugin": "^2.1.2",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "fs": "^0.0.2",
+    "image-webpack-loader": "^6.0.0",
+    "node-sass": "^4.12.0",
+    "react-scripts": "^3.0.1",
     "webpack-cli": "^3.3.2",
-    "xml2js": "^0.4.19",
-    "xml-comment-api": "^1.0.1"
+    "uglifyjs-webpack-plugin": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
