@@ -90,7 +90,7 @@ If you are using [Create React App](https://github.com/facebook/create-react-app
 <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
-Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part `pUC()` and the `Viewer()` constructor.
+Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part, `pUC`, and the `Viewer()` constructor.
 
 ### Instantiate a Viewer
 

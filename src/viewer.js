@@ -4,12 +4,12 @@ import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 
 import PartExplorer from "./PartExplorer/PartExplorer.jsx";
-import PUC from "./parts/pUC";
 import "./viewer.scss";
 
-export const pUC = () => {
-  return PUC;
-};
+/**
+ * Export a default part, pUC, for development
+ */
+export { default as pUC } from "./parts/pUC";
 
 /**
  * Return an object with a `viewer` (React component), `viewerHTML` (HTML string),
