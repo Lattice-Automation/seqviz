@@ -1,10 +1,12 @@
+// import React from "react";
 import Viewer from "./viewer";
 import PUC from "./parts/pUC";
 
-/**
- * CODE TO TEST VIEWER
- */
 import "./index.css";
+
+// const { whyDidYouUpdate } = require("why-did-you-update");
+// whyDidYouUpdate(React);
+
 const parts = [
   "KJ668651.1",
   "BBa_E0040",
@@ -67,7 +69,7 @@ let viewer = Viewer("app-root", {
     shift: false,
     alt: false
   },
-  searchQuery: { query: "GCGGX" },
+  // searchQuery: { query: "GCGGX" },
   backbone: "pSB1C3",
   enzymes: []
 });

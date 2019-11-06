@@ -1,6 +1,5 @@
 import { isEqual } from "lodash";
 import * as React from "react";
-import sizeMe, { SizeMe } from "react-sizeme";
 import request from "request";
 import shortid from "shortid";
 
@@ -9,8 +8,6 @@ import "./PartExplorer.scss";
 import { annotationFactory, defaultSelection } from "../Utils/sequence";
 import { directionality } from "../Utils/parser";
 import processPartInput from "../io/processPartInput";
-
-sizeMe.noPlaceholders = true;
 
 /**
  * a container for investigating the meta and sequence information of a part
@@ -183,8 +180,8 @@ class PartExplorer extends React.Component {
       }
       return newState;
     }, {});
-    const { ...rest } = this.state;
-    this.setState({ ...rest, ...newState });
+
+    this.setState({ ...this.state, ...newState });
   };
 
   /**
@@ -195,6 +192,7 @@ class PartExplorer extends React.Component {
     const {
       findState: { searchResults, searchIndex }
     } = this.state;
+
     let newSearchIndex = searchIndex;
     if (searchResults.length) {
       const lastIndex = searchResults.length - 1;
@@ -307,40 +305,24 @@ class PartExplorer extends React.Component {
       <div className="la-vz-part-explorer-container" id="la-vz-part-explorer">
         <div className="la-vz-seq-viewers-container">
           {circular && (
-            <SizeMe
-              monitorHeight
-              render={({ size }) => {
-                return (
-                  <SeqViewer
-                    {...this.props}
-                    {...this.state}
-                    {...part}
-                    setPartState={this.setPartState}
-                    incrementSearch={this.incrementSearch}
-                    size={size}
-                    Circular
-                  />
-                );
-              }}
+            <SeqViewer
+              {...this.props}
+              {...this.state}
+              {...part}
+              setPartState={this.setPartState}
+              incrementSearch={this.incrementSearch}
+              Circular
             />
           )}
 
           {linear && (
-            <SizeMe
-              monitorHeight
-              render={({ size }) => {
-                return (
-                  <SeqViewer
-                    {...this.props}
-                    {...this.state}
-                    {...part}
-                    setPartState={this.setPartState}
-                    incrementSearch={this.incrementSearch}
-                    size={size}
-                    Circular={false}
-                  />
-                );
-              }}
+            <SeqViewer
+              {...this.props}
+              {...this.state}
+              {...part}
+              setPartState={this.setPartState}
+              incrementSearch={this.incrementSearch}
+              Circular={false}
             />
           )}
         </div>

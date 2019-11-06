@@ -1,5 +1,4 @@
 import * as React from "react";
-import shortid from "shortid";
 import { stackElements } from "../partElementsToRows";
 import Annotations from "./Annotations/Annotations";
 import findAllBindingSites from "../../Primer/findAllBindingSites";
@@ -228,15 +227,11 @@ class Circular extends React.PureComponent {
     const sFlagR = sweepFWD ? 0 : 1;
 
     return `M ${rightBottom.x} ${rightBottom.y}
-      A ${innerRadius} ${innerRadius}, 0, ${lArc}, ${sFlagR}, ${leftBottom.x} ${
-      leftBottom.y
-    }
+      A ${innerRadius} ${innerRadius}, 0, ${lArc}, ${sFlagR}, ${leftBottom.x} ${leftBottom.y}
       L ${leftBottom.x} ${leftBottom.y}
       ${leftArrow}
       L ${leftTop.x} ${leftTop.y}
-      A ${outerRadius} ${outerRadius}, 0, ${lArc}, ${sFlagF}, ${rightTop.x} ${
-      rightTop.y
-    }
+      A ${outerRadius} ${outerRadius}, 0, ${lArc}, ${sFlagF}, ${rightTop.x} ${rightTop.y}
       ${rightArrow}
       Z`;
   };
@@ -302,7 +297,6 @@ class Circular extends React.PureComponent {
     }
 
     const plasmidId = `la-vz-${name}-viewer-circular`;
-    const selectionId = shortid.generate();
     if (!size.height) return null;
 
     return (
@@ -319,7 +313,6 @@ class Circular extends React.PureComponent {
           <Selection
             {...this.props}
             {...general}
-            id={selectionId}
             onUnmount={onUnMount}
             totalRows={totalRows}
             seq={seq}
@@ -334,21 +327,12 @@ class Circular extends React.PureComponent {
               inlinedAnnotations={inlinedLabels}
             />
           )}
-          {showPrimers && (
+          {showPrimers && primersInRows.length && (
             <Primers
               {...general}
               primers={primersInRows}
               size={size}
               rowsToSkip={primerRowsToSkip}
-            />
-          )}
-          {!resizing && (
-            <Labels
-              {...this.props}
-              {...general}
-              labels={outerLabels}
-              size={size}
-              yDiff={yDiff}
             />
           )}
           {cutSites.length && (
@@ -364,6 +348,15 @@ class Circular extends React.PureComponent {
               seq={seq}
               compSeq={compSeq}
               totalRows={totalRows}
+            />
+          )}
+          {!resizing && (
+            <Labels
+              {...this.props}
+              {...general}
+              labels={outerLabels}
+              size={size}
+              yDiff={yDiff}
             />
           )}
         </g>

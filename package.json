@@ -53,8 +53,9 @@
     "image-webpack-loader": "^6.0.0",
     "node-sass": "^4.12.0",
     "react-scripts": "^3.0.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack-cli": "^3.3.2",
-    "uglifyjs-webpack-plugin": "^2.1.2"
+    "why-did-you-update": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start ./src/example.js",

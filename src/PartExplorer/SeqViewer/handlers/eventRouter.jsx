@@ -21,7 +21,7 @@ const withEventRouter = WrappedComp =>
     /**
      * Triple click event handler helpers
      */
-    _delayedClick = null;
+    delayedClick = null;
 
     clickedOnce = null;
 
@@ -106,25 +106,25 @@ const withEventRouter = WrappedComp =>
       const { mouseEvent } = this.props;
 
       if (e.type === "mouseup") {
-        if (!this._delayedClick) {
-          this._delayedClick = debounce(this.resetClicked, 250);
+        if (!this.delayedClick) {
+          this.delayedClick = debounce(this.resetClicked, 250);
         }
         if (this.clickedOnce === e.target && this.clickedTwice === e.target) {
-          this._delayedClick.cancel();
+          this.delayedClick.cancel();
           this.handleTripleClick();
-          this._delayedClick();
+          this.delayedClick();
         } else if (
           this.clickedOnce === e.target &&
           this.clickedTwice === null
         ) {
-          this._delayedClick.cancel();
+          this.delayedClick.cancel();
           this.clickedOnce = e.target;
           this.clickedTwice = e.target;
-          this._delayedClick();
+          this.delayedClick();
         } else {
-          this._delayedClick.cancel();
+          this.delayedClick.cancel();
           this.clickedOnce = e.target;
-          this._delayedClick();
+          this.delayedClick();
         }
       }
       const { type, button, ctrlKey } = e;

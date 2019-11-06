@@ -1,15 +1,14 @@
 import { isEqual } from "lodash";
 import * as React from "react";
+import sizeMe from "react-sizeme";
+
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
 import seqSearch from "../Find/Find";
 import { cutSitesInRows } from "../../Utils/digest/digest";
 
-export const CIRC_CONSTS = {
-  DROP_YDIFF: 13,
-  DROP_RADIUS_SCALE: 0.42
-};
+sizeMe.noPlaceholders = true;
 
 /**
  * a parent sequence viewer component that holds whatever is common between
@@ -20,11 +19,7 @@ class SeqViewer extends React.Component {
 
   constructor(props) {
     super(props);
-    const resizing = false;
-
-    this.state = {
-      resizing
-    }; // store the viewer settings in state
+    this.state = { resizing: false };
   }
 
   componentDidMount = () => {
@@ -34,6 +29,7 @@ class SeqViewer extends React.Component {
       setPartState,
       onSearch
     } = this.props;
+
     const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
     onSearch({ searchResults, searchIndex });
     setPartState({ findState: { searchResults, searchIndex } });
@@ -50,11 +46,13 @@ class SeqViewer extends React.Component {
       setPartState,
       onSearch
     } = this.props;
+
     const {
-      searchQuery: { query: prevQeury, mismatch: prevMismatch },
+      searchQuery: { query: prevQuery, mismatch: prevMismatch },
       seq: prevSeq
     } = prevProps;
-    if (query !== prevQeury || mismatch !== prevMismatch || seq !== prevSeq) {
+
+    if (query !== prevQuery || mismatch !== prevMismatch || seq !== prevSeq) {
       const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
       onSearch({ searchResults, searchIndex });
       setPartState({ findState: { searchResults, searchIndex } });
@@ -183,4 +181,4 @@ class SeqViewer extends React.Component {
   }
 }
 
-export default SeqViewer;
+export default sizeMe({ monitorHeight: true })(SeqViewer);

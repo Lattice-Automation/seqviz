@@ -1,5 +1,6 @@
 import { isEqual } from "lodash";
 import * as React from "react";
+
 import { calcGC, calcTm } from "../../../Utils/sequence";
 
 /**

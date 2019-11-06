@@ -1,7 +1,55 @@
-import { COLOR_BORDER_MAP } from "../../../../../Utils/colors";
 import * as React from "react";
 import shortid from "shortid";
-const tinycolor = require("tinycolor2");
+
+import tinycolor from "tinycolor2";
+
+import { COLOR_BORDER_MAP } from "../../../../../Utils/colors";
+
+export default class AnnotationRows extends React.PureComponent {
+  render() {
+    const {
+      showAnnotations,
+      annotationRows,
+      yDiff,
+      findXAndWidth,
+      inputRef,
+      seqBlockRef,
+      onUnmount,
+      firstBase,
+      lastBase,
+      resizing,
+      fullSeq,
+      elementHeight
+    } = this.props;
+
+    if (!showAnnotations) return null;
+
+    return (
+      <g id="la-vz-linear-annotations">
+        {annotationRows.map((a, i) => {
+          const y = yDiff + elementHeight * i;
+
+          return (
+            <AnnotationRow
+              key={shortid.generate()}
+              annotations={a}
+              y={y}
+              height={elementHeight}
+              inputRef={inputRef}
+              seqBlockRef={seqBlockRef}
+              onUnmount={onUnmount}
+              findXAndWidth={findXAndWidth}
+              firstBase={firstBase}
+              lastBase={lastBase}
+              resizing={resizing}
+              fullSeq={fullSeq}
+            />
+          );
+        })}
+      </g>
+    );
+  }
+}
 
 /**
  * a single row of annotations. Multiple of these may be in one seqBlock
@@ -28,7 +76,6 @@ class AnnotationRow extends React.PureComponent {
 
   renderAnnotation = (a, index) => {
     const {
-      id,
       inputRef,
       seqBlockRef,
       findXAndWidth,
@@ -229,11 +276,7 @@ class AnnotationRow extends React.PureComponent {
     const nameFits = nameLength < width - 15;
 
     return (
-      <g
-        key={`annotation_${id}_${a.id}_${index}`}
-        id={a.id}
-        transform={`translate(${x}, 0)`}
-      >
+      <g key={a.id} id={a.id} transform={`translate(${x}, 0)`}>
         {annotationPath},
         {nameFits ? (
           <text
@@ -262,54 +305,6 @@ class AnnotationRow extends React.PureComponent {
     return (
       <g {...size} transform={gTranslate} className="linear-annotation-row">
         {annotations.map(this.renderAnnotation)}
-      </g>
-    );
-  }
-}
-
-export default class AnnotationRows extends React.PureComponent {
-  render() {
-    const {
-      showAnnotations,
-      annotationRows,
-      yDiff,
-      findXAndWidth,
-      inputRef,
-      seqBlockRef,
-      onUnmount,
-      firstBase,
-      lastBase,
-      resizing,
-      fullSeq,
-      elementHeight
-    } = this.props;
-
-    if (!showAnnotations) return null;
-
-    return (
-      <g id="la-vz-linear-annotations">
-        {annotationRows.map((a, i) => {
-          const y = yDiff + elementHeight * i;
-          const id = shortid.generate();
-
-          return (
-            <AnnotationRow
-              id={id}
-              annotations={a}
-              y={y}
-              height={elementHeight}
-              key={id}
-              inputRef={inputRef}
-              seqBlockRef={seqBlockRef}
-              onUnmount={onUnmount}
-              findXAndWidth={findXAndWidth}
-              firstBase={firstBase}
-              lastBase={lastBase}
-              resizing={resizing}
-              fullSeq={fullSeq}
-            />
-          );
-        })}
       </g>
     );
   }

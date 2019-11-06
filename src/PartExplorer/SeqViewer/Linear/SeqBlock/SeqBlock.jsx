@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import Annotations from "./Annotations/Annotations";
 import IndexRow from "./Index/Index";
 import LinearFind from "./LinearFind/LinearFind";
@@ -93,6 +94,7 @@ export default class SeqBlock extends React.PureComponent {
       showAnnotations,
       showPrimers,
 
+      seqSelection,
       seqFontSize,
       firstBase,
       bpsPerBlock,
@@ -107,8 +109,10 @@ export default class SeqBlock extends React.PureComponent {
       resizing,
 
       charWidth,
+      zoom,
       zoomed
     } = this.props;
+
     const adjustedWidth =
       seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!size.width || !size.height) return null;
@@ -214,7 +218,7 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
-            {...this.props}
+            seqSelection={seqSelection}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -276,14 +280,14 @@ export default class SeqBlock extends React.PureComponent {
             />
           )}
           <Selection.Edges
-            {...this.props}
-            selectEdgeHeight={selectEdgeHeight}
+            lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
             inputRef={inputRef}
             onUnmount={onUnmount}
-            firstBase={firstBase}
-            lastBase={lastBase}
-            fullSeq={fullSeq}
+            seqSelection={seqSelection}
+            selectEdgeHeight={selectEdgeHeight}
           />
           {showIndex && (
             <IndexRow

@@ -606,9 +606,7 @@ class PrimerRow extends React.PureComponent {
         {mismatches &&
           mismatches.map(mismatch => (
             <text
-              key={`mismatch_text_${id}_${primerUUID}_${Math.floor(
-                Math.random() * 1000 + 1
-              )}`}
+              key={`mismatch_text_${id}_${primerUUID}`}
               fontSize={fontSize}
               x={getMismatchX(mismatch)}
               y={forward ? 0 - height / 2 : (height * 3) / 2 + 1.4}

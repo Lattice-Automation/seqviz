@@ -1,6 +1,5 @@
 import { isEqual } from "lodash";
 import * as React from "react";
-import shortid from "shortid";
 import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
@@ -148,11 +147,13 @@ class Linear extends React.Component {
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
-      ids[i] = shortid.generate();
 
       // cut the new sequence and, if also looking for complement, the complement as well
       seqs[i] = seq.substring(firstBase, lastBase);
       compSeqs[i] = compSeq.substring(firstBase, lastBase);
+
+      // store a unique id from the block
+      ids[i] = seqs[i] + String(i);
 
       const spacingHeight = 0.25 * elementHeight;
       // find the line height for the seq block based on how many rows need to be shown
@@ -194,7 +195,7 @@ class Linear extends React.Component {
       seqBlocks.push(
         <SeqBlock
           {...this.props}
-          key={`la-vz-${ids[i]}_block`}
+          key={ids[i]}
           id={ids[i]}
           y={yDiff}
           seq={seqs[i]}
