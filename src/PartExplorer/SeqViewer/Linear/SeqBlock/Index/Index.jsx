@@ -87,7 +87,7 @@ export default class Index extends React.PureComponent {
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
       textFromLeft = Math.min(adjustedWidth - textWidth / 2, textFromLeft); // keep off right edge
 
-      const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight})`;
+      const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight - 1})`;
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
       return (
         <React.Fragment key={p}>
