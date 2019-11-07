@@ -185,7 +185,7 @@ const validateAnnotations = (fileName, annotations, colors = []) => {
     return [];
   } else {
     return annotations.map(annotation => ({
-      ...annotationFactory(fileName, annotation.name, colors),
+      ...annotationFactory(annotation.name),
       ...annotation
     }));
   }

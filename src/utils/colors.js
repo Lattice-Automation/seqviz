@@ -44,7 +44,7 @@ export const INSERT_COLORS = [
 ];
 
 // color generator function
-export const genRandomColor = (colors = []) => {
+export const chooseRandomColor = (colors = []) => {
   const choices = colors.length ? colors : COLORS;
   const randIndex = Math.floor(Math.random() * choices.length);
   return choices[randIndex];

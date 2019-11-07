@@ -263,7 +263,7 @@ class PartExplorer extends React.Component {
       return error;
     }
     let annotations = result.body.annotations.map(a => ({
-      ...annotationFactory(part.name, a.name || a.start, colors),
+      ...annotationFactory(a.name || a.start),
       ...a,
       ...{ direction: directionality(a.direction) }
     }));

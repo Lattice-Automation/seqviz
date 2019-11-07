@@ -6,11 +6,11 @@ A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Latti
 
 ## Running in Development
 
-To run a local copy of this demo, clone the [seqviz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo/semantic-ui`. Then run `npm install` and `npm start`.
+To run a local copy of this demo, clone the [seqviz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo`. Then run `npm install` and `npm start`.
 
 The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the `public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/public/index.html) file by modifying the line that looks like this:
+The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the `public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/public/index.html) file by modifying the line that looks like this:
 
 `<script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script>`
 
@@ -41,7 +41,7 @@ You will also see any lint errors in the console.
 
 The Semantic Demo uses a Create React App bootstrapped React application.
 
-The library is imported in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/public/index.html) at the head:
+The library is imported in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/public/index.html) at the head:
 
 ```html
 <!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
@@ -51,9 +51,9 @@ The library is imported in the [`public/index.html`](https://github.com/Lattice-
 <!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script> -->
 ```
 
-The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/semantic-ui/src/Header.css) files.
+The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/src/Header.css) files.
 
-The inputs and viewer initialization are in the [`App.js`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/src/App.js) and [`Header.js`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/semantic-ui/src/Header.js) files. See [Demo Inputs](#demo-inputs--html-semantic) below.
+The inputs and viewer initialization are in the [`App.js`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/src/App.js) and [`Header.js`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/src/Header.js) files. See [Demo Inputs](#demo-inputs--html-semantic) below.
 
 ## Demo Inputs ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#demo-inputs-html--semantic) | <b>Semantic</b>)
 

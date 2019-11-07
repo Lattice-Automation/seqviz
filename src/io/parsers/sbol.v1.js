@@ -1,7 +1,8 @@
-import { genRandomColor } from "../../utils/colors";
-import { dnaComplement, partFactory } from "../../utils/parser";
 import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
+
+import { colorByIndex } from "../../utils/colors";
+import { dnaComplement, partFactory } from "../../utils/parser";
 
 /*
   <sbol:Sequence rdf:about="https://synbiohub.cidarlab.org/public/Demo/A1_sequence/1">
@@ -31,7 +32,7 @@ import xml2js, { processors } from "xml2js";
  * 							 desperate and wind up with some oddly malformed parts
  */
 const dnaComponentToPart = (DnaComponent, options) => {
-  const { strict = false, file, colors = [] } = options;
+  const { strict = false, file } = options;
   // destructure the paramaeters from DnaComponent
   const { name, displayId, dnaSequence, annotation } = DnaComponent;
 
@@ -66,7 +67,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
   // attempt to parse the SBOL annotations into our version of annotations
   const annotations = [];
   if (annotation) {
-    annotation.forEach(({ SequenceAnnotation }) => {
+    annotation.forEach(({ SequenceAnnotation }, i) => {
       if (!SequenceAnnotation || !SequenceAnnotation[0]) return;
 
       const {
@@ -89,7 +90,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
 
         annotations.push({
           id: shortid.generate(),
-          color: genRandomColor(colors),
+          color: colorByIndex(i),
           start: bioStart[0]._ - 1 || 0, // sbol is 1-based
           end: bioEnd[0]._ || 0, // we're 0-based
           direction: strand[0]._ === "+" ? "FORWARD" : "REVERSE",

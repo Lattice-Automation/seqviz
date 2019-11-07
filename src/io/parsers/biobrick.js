@@ -1,6 +1,6 @@
+import xml2js from "xml2js";
 import { dnaComplement, firstElement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
-import xml2js from "xml2js";
 
 /**
  * converts an XML part representation of a BioBrick part into a format
@@ -12,7 +12,7 @@ import xml2js from "xml2js";
  */
 export default async (file, options) =>
   new Promise((resolve, reject) => {
-    const { colors = [], backbone = "" } = options;
+    const { backbone = "" } = options;
     // util reject function that will be triggered if any fields fail
     const rejectBioBrick = errType =>
       reject(new Error(`Failed on BioBrick because ${errType}`));
@@ -61,9 +61,7 @@ export default async (file, options) =>
 
               return {
                 ...annotationFactory(
-                  name,
-                  title[0] || `${direction[0]}-${startpos[0]}`,
-                  colors
+                  title[0] || `${direction[0]}-${startpos[0]}`
                 ),
                 direction: direction[0] === "forward" ? "FORWARD" : "REVERSE",
                 start: +startpos[0] || 0,

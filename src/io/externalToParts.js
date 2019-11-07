@@ -23,22 +23,16 @@ export default async (newPart, accession, options) => {
   }
   try {
     let response;
-    // get part from localStorage if already requested before
-    if (localStorage.getItem(`seqviz-cache-${accession.trim()}`)) {
-      response = localStorage.getItem(`seqviz-cache-${accession.trim()}`);
-    } else {
-      if (navigator.onLine) {
-        // make the call
-        response = await fetch(url).then(response => response.text());
-        // Store requested part in localStorage
-        localStorage.setItem(`seqviz-cache-${accession.trim()}`, response);
-      } else {
-        const partRegistry = igembrick ? "iGEM" : "NCBI";
 
-        throw new Error(
-          `It looks like you are trying to fetch a part from ${partRegistry}, but could not connect to the registry. Please check that you have a stable network connection.`
-        );
-      }
+    if (navigator.onLine) {
+      // make the call
+      response = await fetch(url).then(response => response.text());
+    } else {
+      const partRegistry = igembrick ? "iGEM" : "NCBI";
+
+      throw new Error(
+        `It looks like you are trying to fetch a part from ${partRegistry}, but could not connect to the registry. Please check that you have a stable network connection.`
+      );
     }
 
     // convert to a part

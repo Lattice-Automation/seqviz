@@ -186,7 +186,7 @@ export default async (fileInput, fileName, colors = []) =>
               primerFlag = false;
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
-                ...annotationFactory(parsedName, `${type}-${start}`, colors),
+                ...annotationFactory(`${type}-${start}`),
                 type,
                 start,
                 end,

@@ -67,7 +67,7 @@ const parseXml = str =>
   });
 
 export default async (fileArrayBuffer, options) => {
-  const { fileName = "", colors = [] } = options;
+  const { fileName = "" } = options;
   let offset = 0;
   const read = (size, fmt) => {
     const buffer = Buffer.from(fileArrayBuffer.slice(offset, size + offset));
@@ -172,7 +172,7 @@ export default async (fileArrayBuffer, options) => {
         }
         const { directionality } = attrs;
         data.annotations.push({
-          ...annotationFactory(fileName, attrs.name, colors),
+          ...annotationFactory(attrs.name),
           name: attrs.name,
           type: attrs.type,
           direction: directionalityDict[directionality],

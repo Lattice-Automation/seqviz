@@ -17,7 +17,7 @@ export { default as pUC } from "./parts/pUC";
  *
  * @param {ViewerOptions} viewerOptions - The {ViewerOptions} for the viewer
  */
-export default (element = "root", viewerOptions) => {
+export const Viewer = (element = "root", viewerOptions) => {
   const options = {
     annotate: false,
     backbone: "",

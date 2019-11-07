@@ -140,14 +140,14 @@ export const partStub = colors => {
     compSeq: dnaComplement(sequence).compSeq,
     annotations: [
       {
-        ...annotationFactory("partStub", "ann-20", colors),
+        ...annotationFactory("ann-20"),
         start: 20,
         end: 30,
         direction: "FORWARD",
         name: "forward annotation"
       },
       {
-        ...annotationFactory("partStub", "ann-50", colors),
+        ...annotationFactory("ann-50"),
         start: 50,
         end: 70,
         direction: "REVERSE",

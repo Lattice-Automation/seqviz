@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-small.png">
+  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/src/seqviz-brand-small.png">
 </p>
 &nbsp;
 
@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Nov 7 14:46:57 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Nov 7 15:06:48 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -493,7 +493,7 @@ You can see a demonstration of this library used to fetch BioBricks at
 
 ### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
 
-For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
+For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
 For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
 

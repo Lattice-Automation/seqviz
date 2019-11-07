@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { genRandomColor } from "./colors";
+import { colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 
 /**
@@ -282,23 +282,12 @@ export const primerPcrSelectionLimits = { min: 23 };
 /**
  * a default annotation generator
  */
-export const annotationFactory = (fileName, annotationName, colors = []) => {
-  let color;
-  if (
-    localStorage.getItem(
-      `seqviz-cache-${fileName}-annotation-${annotationName}-color`
-    )
-  ) {
-    color = localStorage.getItem(
-      `seqviz-cache-${fileName}-annotation-${annotationName}-color`
-    );
-  } else {
-    color = genRandomColor(colors);
-    localStorage.setItem(
-      `seqviz-cache-${fileName}-annotation-${annotationName}-color`,
-      color
-    );
-  }
+export const annotationFactory = annotationName => {
+  const nameSum = annotationName
+    .split("")
+    .reduce((s, c) => s + c.charCodeAt(0), 0);
+  const color = colorByIndex(nameSum);
+
   return {
     id: shortid.generate(),
     color: color,
