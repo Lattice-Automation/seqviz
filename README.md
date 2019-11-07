@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Nov 7 15:19:33 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Nov 7 17:00:08 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -68,13 +68,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.4.2/seqviz.min.js`<!-- /dist-url -->.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.5.0/seqviz.min.js`<!-- /dist-url -->.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
 For example you can use:
 
-`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.4.2/seqviz.min.js`<!-- /dist-url -->`"></script>`
+`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.5.0/seqviz.min.js`<!-- /dist-url -->`"></script>`
 
 This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
 
@@ -158,6 +158,10 @@ const {
   showIndex = true || false, // whether or not to show index (numbers and line)
   zoom = { linear: 0 - 100 }, // zoom under 50 is zoom out, zoom above 50 is zoom in
   colors = ["#85A6FF", "#FFFFF"], // color hex codes for annotation colors
+  bpColors = {
+    a: "#FF0000",
+    t: "#00FF00"
+  }, // individual bp coloring. all bp are black by default
   onSelection = selectionObject => {}, // used to return, log, or do something to selection
   onSearch = searchResults => {}, // used to return, log, or do something to search results
   searchNext = {
@@ -286,6 +290,19 @@ Defaults to:
   "#6B81FF", // blue
   "#85A6FF" // light blue
 ];
+```
+
+#### `bpColors`
+
+`object` mapping each bp to the color used to shade them. This is case insensitive, but exact matched cases are used first.
+
+```js
+{
+  bpColors: {
+    a: "#FF0000",
+    t: "#00FF00"
+  },
+}
 ```
 
 #### `onSelection`

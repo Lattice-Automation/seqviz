@@ -21,6 +21,7 @@ export const Viewer = (element = "root", viewerOptions) => {
   const options = {
     annotate: false,
     backbone: "",
+    bpColors: {},
     colors: [],
     copySeq: {
       key: "",
