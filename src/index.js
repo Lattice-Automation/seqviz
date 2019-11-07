@@ -48,6 +48,13 @@ let viewer = Viewer("app-root", {
   showIndex: index,
   zoom: { linear: 50 },
   colors: [],
+<<<<<<< HEAD
+=======
+  bpColors: {
+    a: "#FF0000",
+    t: "#00ff00"
+  },
+>>>>>>> chore-clean-development-env
   //   onSelection: selection => {
   //     console.log("Your Selection: ", selection);
   //   },
