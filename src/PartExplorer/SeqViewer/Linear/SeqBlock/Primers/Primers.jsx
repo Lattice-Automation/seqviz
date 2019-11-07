@@ -1,6 +1,6 @@
 import * as React from "react";
 import shortid from "shortid";
-import { reverse } from "../../../../../Utils/sequence";
+import { reverse } from "../../../../../utils/sequence";
 
 /**
  * a single row of primers. Multiple of these may be in one seqBlock
@@ -606,9 +606,7 @@ class PrimerRow extends React.PureComponent {
         {mismatches &&
           mismatches.map(mismatch => (
             <text
-              key={`mismatch_text_${id}_${primerUUID}_${Math.floor(
-                Math.random() * 1000 + 1
-              )}`}
+              key={`mismatch_text_${id}_${primerUUID}`}
               fontSize={fontSize}
               x={getMismatchX(mismatch)}
               y={forward ? 0 - height / 2 : (height * 3) / 2 + 1.4}

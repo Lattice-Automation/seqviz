@@ -1,5 +1,65 @@
 import * as React from "react";
-import shortid from "shortid";
+
+/**
+ * Used to build up all the path elements. Does not include a display
+ * of the primer name or a line connecting name to primer
+ *
+ * one central consideration here is that primers might overlap with one another.
+ * to avoid having those overalp visually, primers are first moved into rows,
+ * which are non-overlapping arrays or primer arrays, which are then
+ * used to create the array of array of primer paths
+ *
+ * When the Zoom is greater than 5, show the primer names in the primers
+ * (move them to within the primer)
+ *
+ * @type {Function}
+ */
+export default class Primers extends React.PureComponent {
+  hoverPrimer = (className, opacity) => {
+    const elements = document
+      .getElementById("circular-primers")
+      .getElementsByClassName(className);
+    for (let i = 0; i < elements.length; i += 1) {
+      elements[i].style.fillOpacity = opacity;
+    }
+  };
+
+  render() {
+    const { radius, rowsToSkip, Zoom, lineHeight, primers } = this.props;
+
+    const rowShiftHeight = lineHeight * rowsToSkip;
+    const radiusAdjust = lineHeight * 3;
+    let currBRadius = radius - radiusAdjust - rowShiftHeight;
+
+    // increasing the size of the primers during a "zoom"
+    let currTRadius = currBRadius - lineHeight; // top radius
+
+    return (
+      <g id="circular-primers">
+        {primers.reduce((acc, primerRows, i) => {
+          if (i) {
+            currBRadius -= lineHeight + 3;
+            currTRadius -= lineHeight + 3;
+          } // increment the primerRow radii if on every loop after first
+          return acc.concat(
+            primerRows.map(primer => (
+              <SinglePrimer
+                {...this.props}
+                key={`${primer.id}-${primer.start}`}
+                id={primer.id}
+                primer={primer}
+                currBRadius={currBRadius}
+                currTRadius={currTRadius}
+                Zoom={Zoom}
+                hoverPrimer={this.hoverPrimer}
+              />
+            ))
+          );
+        }, [])}
+      </g>
+    );
+  }
+}
 
 /**
  * A component for a single primer within the Circular Viewer
@@ -84,64 +144,3 @@ const SinglePrimer = props => {
     </g>
   );
 };
-
-/**
- * Used to build up all the path elements. Does not include a display
- * of the primer name or a line connecting name to primer
- *
- * one central consideration here is that primers might overlap with one another.
- * to avoid having those overalp visually, primers are first moved into rows,
- * which are non-overlapping arrays or primer arrays, which are then
- * used to create the array of array of primer paths
- *
- * When the Zoom is greater than 5, show the primer names in the primers
- * (move them to within the primer)
- *
- * @type {Function}
- */
-export default class Primers extends React.PureComponent {
-  hoverPrimer = (className, opacity) => {
-    const elements = document
-      .getElementById("circular-primers")
-      .getElementsByClassName(className);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = opacity;
-    }
-  };
-
-  render() {
-    const { radius, rowsToSkip, Zoom, lineHeight, primers } = this.props;
-
-    const rowShiftHeight = lineHeight * rowsToSkip;
-    const radiusAdjust = lineHeight * 3;
-    let currBRadius = radius - radiusAdjust - rowShiftHeight;
-
-    // increasing the size of the primers during a "zoom"
-    let currTRadius = currBRadius - lineHeight; // top radius
-
-    return (
-      <g id="circular-primers">
-        {primers.reduce((acc, primerRows, i) => {
-          if (i) {
-            currBRadius -= lineHeight + 3;
-            currTRadius -= lineHeight + 3;
-          } // increment the primerRow radii if on every loop after first
-          return acc.concat(
-            primerRows.map(primer => (
-              <SinglePrimer
-                {...this.props}
-                key={`${primer.id}-${primer.start}`}
-                id={primer.id}
-                primer={primer}
-                currBRadius={currBRadius}
-                currTRadius={currTRadius}
-                Zoom={Zoom}
-                hoverPrimer={this.hoverPrimer}
-              />
-            ))
-          );
-        }, [])}
-      </g>
-    );
-  }
-}

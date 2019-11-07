@@ -2,8 +2,8 @@ import {
   nucleotides,
   nucleotideWildCards,
   translateWildNucleotides
-} from "../../Utils/sequence";
-import { dnaComplement } from "../../Utils/parser";
+} from "../../utils/sequence";
+import { dnaComplement } from "../../utils/parser";
 
 /**
  * findWithMismatch
@@ -139,11 +139,6 @@ const validateSearchSeq = (query, mismatch, seq) => {
       searchResults: [],
       searchIndex: 0
     };
-  }
-
-  // If there are no results, say so
-  if (indices.length === 0 && compIndices.length === 0) {
-    console.log("Search complete. No matches found.");
   }
 
   return searchSeq(indices, compIndices, query.length, seq.length);

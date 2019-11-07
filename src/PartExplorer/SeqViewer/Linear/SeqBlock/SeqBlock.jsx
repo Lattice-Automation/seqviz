@@ -1,10 +1,12 @@
 import * as React from "react";
+
 import Annotations from "./Annotations/Annotations";
 import IndexRow from "./Index/Index";
 import LinearFind from "./LinearFind/LinearFind";
 import Selection from "./Selection/Selection";
 import CutSiteRow from "./CutSites/CutSites";
 import Primers from "./Primers/Primers";
+import TranslationRows from "./Translations/Translations";
 
 /**
  * SeqBlock
@@ -85,6 +87,7 @@ export default class SeqBlock extends React.PureComponent {
       reversePrimerRows,
       cutSiteRows,
       searchRows,
+      translations,
       currSearchIndex,
       blockHeight,
 
@@ -93,6 +96,7 @@ export default class SeqBlock extends React.PureComponent {
       showAnnotations,
       showPrimers,
 
+      seqSelection,
       seqFontSize,
       firstBase,
       bpsPerBlock,
@@ -109,6 +113,7 @@ export default class SeqBlock extends React.PureComponent {
       charWidth,
       zoomed
     } = this.props;
+
     const adjustedWidth =
       seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!size.width || !size.height) return null;
@@ -165,8 +170,15 @@ export default class SeqBlock extends React.PureComponent {
         ? elementHeight * 3 * reversePrimerRows.length
         : 0;
 
+    // height and yDiff of translations
+    let translationYDiff = reversePrimerYDiff + reversePrimerHeight;
+    const translationHeight = elementHeight * translations.length;
+    if (translations.length) {
+      translationYDiff += 0.25 * elementHeight;
+    }
+
     // height and yDiff of annotations
-    const annYDiff = reversePrimerYDiff + reversePrimerHeight;
+    const annYDiff = translationYDiff + translationHeight;
     const annHeight = showAnnotations
       ? elementHeight * annotationRows.length
       : 0;
@@ -176,11 +188,17 @@ export default class SeqBlock extends React.PureComponent {
       forwardPrimerHeight +
       indexHeight +
       compHeight +
+      translationHeight +
       annHeight +
       cutSiteHeight +
       cutSiteYDiff +
       reversePrimerHeight;
     let selectEdgeHeight = showIndex ? selectHeight + lineHeight : selectHeight;
+
+    // small edge-case for translation shifting downward
+    if (translations.length) {
+      selectHeight += 0.25 * elementHeight;
+    }
 
     // needed because otherwise the selection height is very small
     if (!zoomed && selectHeight <= elementHeight) {
@@ -214,7 +232,7 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
-            {...this.props}
+            seqSelection={seqSelection}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -276,14 +294,14 @@ export default class SeqBlock extends React.PureComponent {
             />
           )}
           <Selection.Edges
-            {...this.props}
-            selectEdgeHeight={selectEdgeHeight}
+            lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
             inputRef={inputRef}
             onUnmount={onUnmount}
-            firstBase={firstBase}
-            lastBase={lastBase}
-            fullSeq={fullSeq}
+            seqSelection={seqSelection}
+            selectEdgeHeight={selectEdgeHeight}
           />
           {showIndex && (
             <IndexRow
@@ -310,6 +328,14 @@ export default class SeqBlock extends React.PureComponent {
               {compSeq}
             </text>
           ) : null}
+          <TranslationRows
+            {...this.props}
+            yDiff={translationYDiff}
+            seqBlockRef={this}
+            firstBase={firstBase}
+            lastBase={lastBase}
+            findXAndWidth={this.findXAndWidth}
+          />
           {filteredSearchRows.length ? (
             <LinearFind
               {...this.props}

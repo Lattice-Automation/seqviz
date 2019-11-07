@@ -1,5 +1,5 @@
-import { genRandomColor } from "../../Utils/colors";
-import { dnaComplement, partFactory } from "../../Utils/parser";
+import { colorByIndex } from "../../utils/colors";
+import { dnaComplement, partFactory } from "../../utils/parser";
 import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
 
@@ -59,7 +59,7 @@ export default async (JBEI, colors = []) =>
         // attempt to parse the JBEI annotations into our version of annotations
         const annotations = [];
         if (features && features[0] && features[0].feature) {
-          features[0].feature.forEach(feature => {
+          features[0].feature.forEach((feature, i) => {
             if (!feature) return;
 
             const {
@@ -76,7 +76,7 @@ export default async (JBEI, colors = []) =>
             ) {
               annotations.push({
                 id: shortid.generate(),
-                color: genRandomColor(colors),
+                color: colorByIndex(i),
                 start: +location[0].genbankStart[0]._ - 1 || 0, // JBEI is 1-based
                 end: +location[0].end[0]._ || 0,
                 direction: complement[0]._ === "true" ? "REVERSE" : "FORWARD",

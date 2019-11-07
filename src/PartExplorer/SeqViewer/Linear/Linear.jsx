@@ -1,16 +1,17 @@
 import { isEqual } from "lodash";
 import * as React from "react";
-import shortid from "shortid";
+
+import findAllBindingSites from "../../Primer/findAllBindingSites";
 import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
 } from "../partElementsToRows";
+import { createLinearTranslations } from "../../../utils/sequence";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
 import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
-import findAllBindingSites from "../../Primer/findAllBindingSites";
 
 /**
  * A linear sequence viewer.
@@ -62,6 +63,7 @@ class Linear extends React.Component {
 
       cutSites,
       annotations,
+      translations,
 
       lineHeight,
       elementHeight,
@@ -145,14 +147,24 @@ class Linear extends React.Component {
         ? createSingleRows(searchResults, bpsPerBlock, arrSize)
         : new Array(arrSize).fill([]);
 
+    const translationRows = translations.length
+      ? createSingleRows(
+          createLinearTranslations(translations, seq),
+          bpsPerBlock,
+          arrSize
+        )
+      : new Array(arrSize).fill([]);
+
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
-      ids[i] = shortid.generate();
 
       // cut the new sequence and, if also looking for complement, the complement as well
       seqs[i] = seq.substring(firstBase, lastBase);
       compSeqs[i] = compSeq.substring(firstBase, lastBase);
+
+      // store a unique id from the block
+      ids[i] = seqs[i] + String(i);
 
       const spacingHeight = 0.25 * elementHeight;
       // find the line height for the seq block based on how many rows need to be shown
@@ -176,8 +188,13 @@ class Linear extends React.Component {
       if (showPrimers && reversePrimerRows[i].length) {
         blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
       }
+      if (translationRows[i].length) {
+        blockHeight +=
+          translationRows[i].length * elementHeight + spacingHeight;
+      }
       blockHeights[i] = blockHeight;
     }
+
     const seqBlocks = [];
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
@@ -194,7 +211,7 @@ class Linear extends React.Component {
       seqBlocks.push(
         <SeqBlock
           {...this.props}
-          key={`la-vz-${ids[i]}_block`}
+          key={ids[i]}
           id={ids[i]}
           y={yDiff}
           seq={seqs[i]}
@@ -205,6 +222,7 @@ class Linear extends React.Component {
           reversePrimerRows={reversePrimerRows[i]}
           cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
+          translations={translationRows[i]}
           currSearchIndex={searchIndex}
           firstBase={firstBase}
           onUnmount={onUnMount}
