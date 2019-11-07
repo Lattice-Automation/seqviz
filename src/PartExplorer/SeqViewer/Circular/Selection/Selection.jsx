@@ -1,5 +1,4 @@
 import * as React from "react";
-import shortid from "shortid";
 
 /**
  * renders the selection range of the plasmid viewer
@@ -87,9 +86,9 @@ class CircularSelection extends React.PureComponent {
     });
 
     // this should be very thin when the selection range starts and ends at same point
-    let edgeStrokeWidth = 3;
+    let edgeStrokeWidth = 2;
     if (start === end) {
-      edgeStrokeWidth = 1.5;
+      edgeStrokeWidth = 1;
     }
 
     const edgeStyle = {
@@ -104,33 +103,18 @@ class CircularSelection extends React.PureComponent {
       shapeRendering: "auto"
     };
 
-    const firstId = shortid.generate();
-    const secondId = shortid.generate();
-    const thirdId = shortid.generate();
-
     return (
       <g id="la-vz-circular-selection">
         {selLength && (
           <path
             d={selectPath}
-            id={secondId}
             transform={getRotation(start)}
             {...selectStyle}
           />
         )}
-        <path
-          d={edgePath}
-          id={firstId}
-          transform={getRotation(start)}
-          {...edgeStyle}
-        />
+        <path d={edgePath} transform={getRotation(start)} {...edgeStyle} />
         {selLength && (
-          <path
-            d={edgePath}
-            id={thirdId}
-            transform={getRotation(end)}
-            {...edgeStyle}
-          />
+          <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />
         )}
       </g>
     );

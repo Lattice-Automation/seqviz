@@ -5,9 +5,8 @@ import {
   partFactory,
   extractDate,
   trimCarriageReturn
-} from "../../Utils/parser";
-import { annotationFactory } from "../../Utils/sequence";
-import { ImportErrorTooLarge } from "../../Utils/customErrors";
+} from "../../utils/parser";
+import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = [
@@ -51,10 +50,8 @@ export default async (fileInput, fileName, colors = []) =>
     let circular = false;
 
     if (seq.length > 500000) {
-      throw new ImportErrorTooLarge(
-        `Import of sequence length ${
-          seq.length
-        }bp failed. Please keep sequences under 500000bp.`,
+      throw new Error(
+        `Import of sequence length ${seq.length}bp failed. Please keep sequences under 500000bp.`,
         seq.length
       );
     }
@@ -168,7 +165,7 @@ export default async (fileInput, fileName, colors = []) =>
             // source would just be an annotation for the entire sequence so remove
             // create a new annotation around the properties in this line (type and range)
             annotations.push({
-              ...annotationFactory(parsedName, `${type}-${start}`, colors),
+              ...annotationFactory(`${type}-${start}`),
               type,
               start,
               end,

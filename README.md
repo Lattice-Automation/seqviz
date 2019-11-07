@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/semantic-ui/src/seqviz-brand-small.png">
+  <img height="120" src="https://github.com/Lattice-Automation/seqviz/blob/develop/demo/src/seqviz-brand-small.png">
 </p>
 &nbsp;
 
@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Fri Sep 27 11:10:45 EDT 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Nov 7 15:19:33 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -68,13 +68,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.7/seqviz.min.js`<!-- /dist-url -->.
+The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.4.2/seqviz.min.js`<!-- /dist-url -->.
 
 You will want to import the library in your top level `index.html` (or whichever is the entry point of your website).
 
 For example you can use:
 
-`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.3.7/seqviz.min.js`<!-- /dist-url -->`"></script>`
+`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/0.4.2/seqviz.min.js`<!-- /dist-url -->`"></script>`
 
 This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
 
@@ -90,7 +90,7 @@ If you are using [Create React App](https://github.com/facebook/create-react-app
 <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
-Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part `pUC()` and the `Viewer()` constructor.
+Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part, `pUC`, and the `Viewer()` constructor.
 
 ### Instantiate a Viewer
 
@@ -135,18 +135,18 @@ This will return the `HTML` for the viewer if you want to render the viewer your
 
 This renders the viewer using `ReactDOM`(which is packaged with the library so you do not need to have it installed locally).
 
-### Viewer Options
+### Viewer Constructor
 
 `Viewer(${element}, ${viewerOptions})`
 
-#### `element` :
+#### `element`
 
 - a string id attribute like `"root"` or `"app-root"`
 - an element; e.g. from `document.getElementById()`
 
 There are no defaults values for this option. An element input is minimally necessary to initialize a viewer and use this library.
 
-#### `viewerOptions` :
+#### `viewerOptions`
 
 ```js
 const {
@@ -176,11 +176,12 @@ const {
   }, // key binding for copying sequence, defaults to none
   searchQuery = { query: "", mismatch: 0 }, // search query
   backbone = "pSB1C3", // name of a BioBrick backbone, or a custom backbone string
-  enzymes = ["AciI"] // list of enzymes for which to search for and display cutsites
+  enzymes = ["AciI"], // list of enzymes for which to search for and display cutsites
+  translations: [{ start: 0, end: 89, direction: "FORWARD" }] // list of translations
 } = viewerOptions;
 ```
 
-#### `part` :
+#### `part`
 
 - NCBI accession number (`string`)
 - BioBrick accession number (`string`)
@@ -198,12 +199,12 @@ const {
 ```json
 {
   "name": "some part",
-  "seq": "AtCg",
-  "compSeq": "tAgC",
+  "seq": "ATGATA",
+  "compSeq": "TACTAT",
   "annotations": [
     {
-      "start": 1,
-      "end": 4,
+      "start": 0,
+      "end": 3,
       "direction": "REVERSE",
       "name": "a fragment"
     }
@@ -211,47 +212,45 @@ const {
 }
 ```
 
-**NOTE** that this library currently assumes that your sequence has only `ATCGatcg` nucleotides. It may render wildcard nucleotides but wildcards will not be recognized by the search functionality if they are a part of the sequence. (see [searchQuery](#searchquery) for searching the sequence).
-
 There are no default values for this option. A part input is minimally necessary to initialize a viewer and use this library.
 
-#### `annotate`:
+#### `annotate`
 
 `boolean` **true** or **false**. If true will try to connect to Lattice's BLAST endpoint to find annotations for the imported part. Requires internet connection. Needs to be turned on (**true**) in order to see BioBrick prefixes and suffixes.
 
 Defaults to **false**.
 
-#### `viewer`:
+#### `viewer`
 
 `string` **circular**, **linear**, or **both**. Will determine whether to render part in the circular plasmid viewer, linear sequence viewer, or a side-by-side view with both.
 
 Defaults to **both**.
 
-#### `showAnnotations`:
+#### `showAnnotations`
 
 `boolean` **true** or **false**. If true will show annotations on the viewers.
 
 Defaults to **true**.
 
-#### `showPrimers`:
+#### `showPrimers`
 
 `boolean` **true** or **false**. If true will show primers on the viewers.
 
 Defaults to **true**.
 
-#### `showComplement`:
+#### `showComplement`
 
 `boolean` **true** or **false**. If true will show the complement strand nucleotide bases in addition to the sequence strand nucleotide bases in Linear Sequence viewer. Has no effect on the Circular Plasmid viewer where neither the sequence nor the complement strand bases can be seen.
 
 Defaults to **true**.
 
-#### `showIndex`:
+#### `showIndex`
 
 `boolean` **true** or **false**. If true will show an axis with the index numbers of the nucleotide bases.
 
 Defaults to **true**.
 
-#### `zoom`:
+#### `zoom`
 
 `object` that numerates zoom values for viewers.
 
@@ -266,7 +265,7 @@ linear: 50
 }
 ```
 
-#### `colors`:
+#### `colors`
 
 `array` of colors to be used for annotations. Annotations are rendered with a random color from a set of defined colors. The library currently explicitly supports hex code color options, but other color options may be inherently supported.
 
@@ -289,7 +288,7 @@ Defaults to:
 ];
 ```
 
-#### `onSelection`:
+#### `onSelection`
 
 `function` to be applied to the selection information. The function you specify will have access to the `selection` object as its only parameter.
 
@@ -343,17 +342,9 @@ If the selection is an annotation (generated by clicking on an annotation) there
 
 ```
 
-Defaults to:
-
-```js
-selection => {
-  return selection;
-};
-```
-
 For examples on how to practically use the selection information see [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
-#### `onSearch`:
+#### `onSearch`
 
 `function` to be applied to the search results. The function you specify will have access to the results object as its only parameter.
 
@@ -393,15 +384,7 @@ Example of a search result:
 
 The start and end are the indices encapsulating the substring match for the search query. The row is `0` for sequence strand and `1` for complement strand. The index is for tabulation (see [searchNext](#searchnext)).
 
-Defaults to:
-
-```js
-results => {
-  return results;
-};
-```
-
-#### `searchNext`:
+#### `searchNext`
 
 `object` used to set the key binding for tabulating search results (focus highlighting sequential search highlights).
 
@@ -421,7 +404,7 @@ Defaults to:
 
 You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `searchNext` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
-#### `copySeq`:
+#### `copySeq`
 
 `object` used to set the key binding for copying the template strand sequence of your current selection.
 
@@ -441,7 +424,7 @@ Defaults to:
 
 You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `copySeq` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
-#### `searchQuery`:
+#### `searchQuery`
 
 `object` to specify a subsequence search to be conducted on the imported part.
 
@@ -472,31 +455,37 @@ Defaults to:
 
 `mismatch` is an `int` numeration of the amount of mismatch leeway the search should have. A mismatch of `1` will will allow for one base to not match the `query`.
 
-#### `backbone`:
+#### `backbone`
 
 `string` addition to main sequence. This is a feature specific to BioBricks. The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, `pSB1T3` as specified at [parts.igem.org](https://parts.igem.org/Plasmid_backbones/Assembly). To use the backbone simply specify the backbone name (case insensitive) as a string like so
 
 ```js
 {
-  backbone: "BBa_K1362091";
+  backbone: "BBa_K1362091",
 }
 ```
 
 Custom backbones are also minimally supported. Any sequence string you input (`ATCGatcg`) can be used as the backbone.
 
-Defaults to **`""`**.
-
-#### `enzymes`:
+#### `enzymes`
 
 `array` of enzymes to show cut sites for. The library supports the full list of NEB enzymes. To search for their cut sites simply specify their name as a string in the array.
 
 ```js
 {
-  enzymes: ["AciI", "BsaI"];
+  enzymes: ["AciI", "BsaI"],
 }
 ```
 
-Defaults to **`[]`**.
+#### `translations`
+
+`array` of translation objects for creating translations beneath the sequence. Require 0-based start and end indexes (of the DNA bp) and a direction (`FORWARD` or `REVERSE`).
+
+```js
+{
+  translations: [{ start: 0, end: 89, direction: "FORWARD" }],
+}
+```
 
 ## Library Demo
 
@@ -504,7 +493,7 @@ You can see a demonstration of this library used to fetch BioBricks at
 
 ### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
 
-For developers, the demo source code is at [seqviz/demo/semantic-ui](https://github.com/Lattice-Automation/seqviz/tree/master/demo/semantic-ui/README.md).
+For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
 For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
 

@@ -1,5 +1,5 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 import shortid from "shortid";
 
 class CircularFind extends React.Component {
@@ -23,7 +23,9 @@ class CircularFind extends React.Component {
     } = this.props;
     let { start, end } = result;
     // crosses the zero index
-    if (end < start) end += seqLength;
+    if (end < start) {
+      end += seqLength;
+    }
 
     const resultLength = Math.abs(end - start);
 
@@ -64,12 +66,12 @@ class CircularFind extends React.Component {
       cursor: "pointer"
     };
 
-    const id = shortid.generate();
+    const id = `${start}${end}${result.row}${result.start}`;
 
     return (
       <path
         d={findPath}
-        key={shortid.generate()}
+        key={id}
         transform={getRotation(result.start)}
         {...resultStyle}
         id={id}

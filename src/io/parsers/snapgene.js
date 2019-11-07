@@ -2,8 +2,8 @@
 // https://github.com/IsaacLuo/SnapGeneFileReader
 // https://github.com/ediezben/dgparse/blob/master/specs/SnapGene_File_Format_%202.0.pdf
 
-import { dnaComplement, partFactory } from "../../Utils/parser";
-import { annotationFactory } from "../../Utils/sequence";
+import { dnaComplement, partFactory } from "../../utils/parser";
+import { annotationFactory } from "../../utils/sequence";
 const bufferpack = require("bufferpack");
 const xml2Js = require("xml2js");
 const { StringDecoder } = require("string_decoder");
@@ -67,7 +67,7 @@ const parseXml = str =>
   });
 
 export default async (fileArrayBuffer, options) => {
-  const { fileName = "", colors = [] } = options;
+  const { fileName = "" } = options;
   let offset = 0;
   const read = (size, fmt) => {
     const buffer = Buffer.from(fileArrayBuffer.slice(offset, size + offset));
@@ -172,7 +172,7 @@ export default async (fileArrayBuffer, options) => {
         }
         const { directionality } = attrs;
         data.annotations.push({
-          ...annotationFactory(fileName, attrs.name, colors),
+          ...annotationFactory(attrs.name),
           name: attrs.name,
           type: attrs.type,
           direction: directionalityDict[directionality],

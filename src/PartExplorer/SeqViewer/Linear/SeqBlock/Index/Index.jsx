@@ -6,7 +6,7 @@ import React from "react";
 export default class Index extends React.PureComponent {
   // given each basepair in the sequence, go through each and find whether 1) it is divisible
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
-  // of positions for tallies
+  // of positions for tickInc
   genTicks = () => {
     const {
       seq,
@@ -22,49 +22,49 @@ export default class Index extends React.PureComponent {
     const adjustedWidth =
       seqLength >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
 
-    // the number of tallies on the x-axis is zoom dependent:
+    // the tallie distance on the x-axis is zoom dependent:
     // (0, 10]: every 50
     // (10, 40]: every 20
     // (40, 70]: every 10
     // (70, 100] every 5
-    let tallies = 0;
+    let tickInc = 0;
     switch (true) {
       case zoom.linear > 85:
-        tallies = 5;
+        tickInc = 5;
         break;
       case zoom.linear > 40:
-        tallies = 10;
+        tickInc = 10;
         break;
       case zoom.linear > 10:
-        tallies = 20;
+        tickInc = 20;
         break;
       case zoom.linear >= 0:
-        tallies = 50;
+        tickInc = 50;
         break;
       default:
-        tallies = 10;
+        tickInc = 10;
     }
 
     // create the array that will hold all the indexes in the array
-    const talPositions = [];
+    const tickIndexes = [];
     if (firstBase === 0) {
-      talPositions.push(1);
+      tickIndexes.push(1);
     }
 
     let i = 0;
-    while ((i + firstBase) % tallies !== 0) i += 1;
+    while ((i + firstBase) % tickInc !== 0) i += 1;
     while (i < seqLength) {
       if (i + firstBase !== 0) {
-        talPositions.push(i + firstBase);
+        tickIndexes.push(i + firstBase);
       }
 
-      i += tallies;
+      i += tickInc;
     }
 
     const tickStyle = {
       width: 1,
-      height: 8,
-      shapeRendering: "crispEdges"
+      height: 8
+      // shapeRendering: "crispEdges"
     };
 
     const textStyle = {
@@ -72,7 +72,7 @@ export default class Index extends React.PureComponent {
       textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
     };
 
-    return talPositions.map(p => {
+    return tickIndexes.map(p => {
       const { x: leftDist } = findXAndWidth(p - 0.5, p - 0.5); // for midpoint
       const tickFromLeft = leftDist;
       let textFromLeft = leftDist; // 0.05 * 11
@@ -87,7 +87,7 @@ export default class Index extends React.PureComponent {
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
       textFromLeft = Math.min(adjustedWidth - textWidth / 2, textFromLeft); // keep off right edge
 
-      const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight})`;
+      const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight - 1})`;
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
       return (
         <React.Fragment key={p}>

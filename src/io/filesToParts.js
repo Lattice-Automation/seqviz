@@ -1,4 +1,4 @@
-import { dnaComplement, partFactory } from "../Utils/parser";
+import { dnaComplement, partFactory } from "../utils/parser";
 import JSZip from "jszip";
 import path from "path";
 import parseBenchling from "./parsers/benchling";

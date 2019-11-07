@@ -1,5 +1,5 @@
-import { partFactory, dnaComplement } from "../../Utils/parser";
-import { annotationFactory } from "../../Utils/sequence";
+import { partFactory, dnaComplement } from "../../utils/parser";
+import { annotationFactory } from "../../utils/sequence";
 import xml2js, { processors } from "xml2js";
 
 /**
@@ -80,7 +80,7 @@ export default async (sbol, fileName, colors = []) =>
 
             const range = Range[0];
             annotations.push({
-              ...annotationFactory(name, annId, colors),
+              ...annotationFactory(annId),
               name: annId,
               start: first(range.start) - 1,
               end: first(range.end) - 1

@@ -1,6 +1,97 @@
-import { COLOR_BORDER_MAP } from "../../../../Utils/colors";
+import { COLOR_BORDER_MAP } from "../../../../utils/colors";
 import * as React from "react";
 import tinycolor from "tinycolor2";
+
+/**
+ * Used to build up all the path elements. Does not include a display
+ * of the annotation name or a line connecting name to annotation
+ *
+ * one central consideration here is that annotations might overlap with one another.
+ * to avoid having those overalp visually, annotations are first moved into rows,
+ * which are non-overlapping arrays or annotation arrays, which are then
+ * used to create the array of array of annotation paths
+ *
+ * @type {Function}
+ */
+export default class Annotations extends React.PureComponent {
+  /** during an annotation hover event, darken all other pieces of the same annotation */
+  hoverAnnotation = (className, opacity) => {
+    const elements = document
+      .getElementById("la-vz-circular-annotations")
+      .getElementsByClassName(className);
+    for (let i = 0; i < elements.length; i += 1) {
+      elements[i].style.fillOpacity = opacity;
+    }
+  };
+
+  /** given the interior color of an annotation, calculate the color of its border */
+  calcBorderColor = fillColor => {
+    const tColor = tinycolor(fillColor);
+    const HslColor = tColor.toHsl();
+    HslColor.s = HslColor.s + 0.1 > 1 ? (HslColor.s = 1) : (HslColor.s += 0.1);
+    HslColor.l -= 0.26;
+    const borderColor = tinycolor(HslColor);
+    return `#${borderColor.toHex()}`;
+  };
+
+  render() {
+    const { radius, rowsToSkip, lineHeight, annotations } = this.props;
+
+    // at least 3 rows inward from default radius (ie index row)
+    const rowShiftHeight = lineHeight * rowsToSkip;
+    const radiusAdjust = lineHeight * 3;
+    let currBRadius = radius - radiusAdjust - rowShiftHeight;
+
+    let currTRadius = currBRadius - lineHeight; // top radius
+
+    // shared style object for inlining
+    const annStyle = {
+      strokeWidth: 0.5,
+      shapeRendering: "geometricPrecision",
+      cursor: "pointer",
+      fillOpacity: 0.7,
+      strokeLinejoin: "round"
+    };
+    // this is strictly here to create an invisible path that the
+    // annotation name can follow
+    const transparentPath = {
+      stroke: "transparent",
+      fill: "transparent"
+    };
+    const labelStyle = {
+      cursor: "pointer"
+    };
+
+    return (
+      <g id="la-vz-circular-annotations">
+        {annotations.reduce((acc, anns, i) => {
+          if (i) {
+            currBRadius -= lineHeight + 3;
+            currTRadius -= lineHeight + 3;
+          } // increment the annRow radii if on every loop after first
+
+          return acc.concat(
+            anns.map(a => (
+              <SingleAnnotation
+                {...this.props}
+                key={`la-vz-${a.id}-annotation-circular-row`}
+                id={`la-vz-${a.id}-annotation-circular-row`}
+                annotation={a}
+                currBRadius={currBRadius}
+                currTRadius={currTRadius}
+                transparentPath={transparentPath}
+                labelStyle={labelStyle}
+                annStyle={annStyle}
+                hoverAnnotation={this.hoverAnnotation}
+                calcBorderColor={this.calcBorderColor}
+              />
+            ))
+          );
+        }, [])}
+      </g>
+    );
+  }
+}
 
 /**
  * A component for a single annotation within the Circular Viewer
@@ -121,94 +212,3 @@ const SingleAnnotation = props => {
     </g>
   );
 };
-
-/**
- * Used to build up all the path elements. Does not include a display
- * of the annotation name or a line connecting name to annotation
- *
- * one central consideration here is that annotations might overlap with one another.
- * to avoid having those overalp visually, annotations are first moved into rows,
- * which are non-overlapping arrays or annotation arrays, which are then
- * used to create the array of array of annotation paths
- *
- * @type {Function}
- */
-export default class Annotations extends React.PureComponent {
-  /** during an annotation hover event, darken all other pieces of the same annotation */
-  hoverAnnotation = (className, opacity) => {
-    const elements = document
-      .getElementById("la-vz-circular-annotations")
-      .getElementsByClassName(className);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = opacity;
-    }
-  };
-
-  /** given the interior color of an annotation, calculate the color of its border */
-  calcBorderColor = fillColor => {
-    const tColor = tinycolor(fillColor);
-    const HslColor = tColor.toHsl();
-    HslColor.s = HslColor.s + 0.1 > 1 ? (HslColor.s = 1) : (HslColor.s += 0.1);
-    HslColor.l -= 0.26;
-    const borderColor = tinycolor(HslColor);
-    return `#${borderColor.toHex()}`;
-  };
-
-  render() {
-    const { radius, rowsToSkip, lineHeight, annotations } = this.props;
-
-    // at least 3 rows inward from default radius (ie index row)
-    const rowShiftHeight = lineHeight * rowsToSkip;
-    const radiusAdjust = lineHeight * 3;
-    let currBRadius = radius - radiusAdjust - rowShiftHeight;
-
-    let currTRadius = currBRadius - lineHeight; // top radius
-
-    // shared style object for inlining
-    const annStyle = {
-      strokeWidth: 0.5,
-      shapeRendering: "geometricPrecision",
-      cursor: "pointer",
-      fillOpacity: 0.7,
-      strokeLinejoin: "round"
-    };
-    // this is strictly here to create an invisible path that the
-    // annotation name can follow
-    const transparentPath = {
-      stroke: "transparent",
-      fill: "transparent"
-    };
-    const labelStyle = {
-      cursor: "pointer"
-    };
-
-    return (
-      <g id="la-vz-circular-annotations">
-        {annotations.reduce((acc, anns, i) => {
-          if (i) {
-            currBRadius -= lineHeight + 3;
-            currTRadius -= lineHeight + 3;
-          } // increment the annRow radii if on every loop after first
-
-          return acc.concat(
-            anns.map(a => (
-              <SingleAnnotation
-                {...this.props}
-                key={`la-vz-${a.id}-annotation-circular-row`}
-                id={`la-vz-${a.id}-annotation-circular-row`}
-                annotation={a}
-                currBRadius={currBRadius}
-                currTRadius={currTRadius}
-                transparentPath={transparentPath}
-                labelStyle={labelStyle}
-                annStyle={annStyle}
-                hoverAnnotation={this.hoverAnnotation}
-                calcBorderColor={this.calcBorderColor}
-              />
-            ))
-          );
-        }, [])}
-      </g>
-    );
-  }
-}

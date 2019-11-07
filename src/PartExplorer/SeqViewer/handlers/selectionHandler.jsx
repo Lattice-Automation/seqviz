@@ -1,6 +1,7 @@
 import { isEqual } from "lodash";
 import * as React from "react";
-import { calcGC, calcTm } from "../../../Utils/sequence";
+
+import { calcGC, calcTm } from "../../../utils/sequence";
 
 /**
  * an HOC dedicated to handling range selection for the LinearSeq viewer
@@ -232,6 +233,7 @@ const withSelectionHandler = WrappedComp =>
         onSelection,
         findState: { searchIndex }
       } = this.props;
+
       const {
         clockwise = true,
         start = 0,
@@ -241,6 +243,7 @@ const withSelectionHandler = WrappedComp =>
         searchIndex: newSearchIndex = null,
         feature
       } = selectRange;
+
       const selectionLength = this.calcSelectionLength(start, end, clockwise);
       const selectionSequence = this.getSelectionSequence(
         start,
@@ -270,6 +273,7 @@ const withSelectionHandler = WrappedComp =>
           this.workspace.focus();
         }
       }
+
       onSelection(newSelection);
     };
 
@@ -306,6 +310,7 @@ const withSelectionHandler = WrappedComp =>
         case "ANNOTATION":
         case "PRIMER":
         case "FIND":
+        case "TRANSLATION":
         case "ENZYME": {
           // Annotation or find selection range
           const clockwise = !(knownRange.direction && direction === "REVERSE");

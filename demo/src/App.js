@@ -13,11 +13,12 @@ import {
   Menu,
   Sidebar
 } from "semantic-ui-react";
+
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-small.png";
 import seqvizGraphic from "../src/seqviz-logo.png";
-import "./App.css";
 import { Header } from "./Header";
+import "./App.css";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -496,6 +497,7 @@ export class Demo extends Component {
     selection: {},
     searchResults: {}
   };
+
   setDemoState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
       if (state[key].constructor === "Object") {
@@ -507,6 +509,7 @@ export class Demo extends Component {
     }, {});
     this.setState({ ...this.state, ...newState });
   };
+
   render() {
     return <SideBarMenu {...this.state} setDemoState={this.setDemoState} />;
   }

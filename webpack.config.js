@@ -10,7 +10,7 @@ const fileName = `${packageName}.min.js`;
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 module.exports = {
-  entry: "./src/library.js",
+  entry: "./src/viewer.js",
   output: {
     filename: fileName,
     library: libraryName,
@@ -21,7 +21,9 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"]
   },
   node: {
-    fs: "empty"
+    fs: "empty",
+    net: "empty",
+    tls: "empty"
   },
   module: {
     rules: [

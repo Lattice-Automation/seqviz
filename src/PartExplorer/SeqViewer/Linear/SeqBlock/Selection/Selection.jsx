@@ -1,7 +1,7 @@
 import * as React from "react";
 import shortid from "shortid";
 
-export class Edges extends React.Component {
+export class Edges extends React.PureComponent {
   id = shortid.generate();
 
   componentDidMount = () => {
@@ -82,7 +82,7 @@ export class Edges extends React.Component {
       y: "-10",
       style: {
         fill: "black",
-        width: start === end && !ref ? 0.75 : 3
+        width: start === end && !ref ? 1 : 2
       },
       shapeRendering: resizing ? "speedOptimize" : "auto"
     };
@@ -247,7 +247,4 @@ export class Block extends React.PureComponent {
   }
 }
 
-export default {
-  Edges: Edges,
-  Block: Block
-};
+export default { Edges, Block };

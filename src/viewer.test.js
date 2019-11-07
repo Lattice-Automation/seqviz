@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import PUC from "./DefaultParts/pUC";
+import PUC from "./parts/pUC";
 import App from "./App";
 
 it("renders without crashing", () => {

@@ -23,26 +23,16 @@ export default async (newPart, accession, options) => {
   }
   try {
     let response;
-    // get part from localStorage if already requested before
-    if (localStorage.getItem(`seqviz-cache-${accession.trim()}`)) {
-      if (newPart) {
-        console.log(
-          `${accession.trim()} was loaded from cache. If you would like to refetch the part just delete the cookie with key ${accession.trim()} from your browser's Local Storage.`
-        );
-      }
-      response = localStorage.getItem(`seqviz-cache-${accession.trim()}`);
+
+    if (navigator.onLine) {
+      // make the call
+      response = await fetch(url).then(response => response.text());
     } else {
-      if (navigator.onLine) {
-        // make the call
-        response = await fetch(url).then(response => response.text());
-        // Store requested part in localStorage
-        localStorage.setItem(`seqviz-cache-${accession.trim()}`, response);
-      } else {
-        const partRegistry = igembrick ? "iGEM" : "NCBI";
-        throw new Error(
-          `It looks like you are trying to fetch a part from ${partRegistry}, but could not connect to the registry. Please check that you have a stable network connection.`
-        );
-      }
+      const partRegistry = igembrick ? "iGEM" : "NCBI";
+
+      throw new Error(
+        `It looks like you are trying to fetch a part from ${partRegistry}, but could not connect to the registry. Please check that you have a stable network connection.`
+      );
     }
 
     // convert to a part
@@ -60,11 +50,14 @@ export default async (newPart, accession, options) => {
         "It looks like you are trying to display a BioBrick. BioBricks typically need to be inserted into a Plasmid Backbone (https://parts.igem.org/Plasmid_backbones/Assembly). Please specify one in your viewer options."
       );
     }
+
     const parts = await fileToParts(response, {
       colors: colors,
       backbone: igembackbone
     });
+
     if (parts && parts.length) return parts[0];
+
     throw Error("No convertible part found");
   } catch (error) {
     console.error(error.message);

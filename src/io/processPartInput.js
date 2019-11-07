@@ -1,10 +1,10 @@
-import { partFactory, dnaComplement, partStub } from "../Utils/parser";
+import { partFactory, dnaComplement, partStub } from "../utils/parser";
 import {
   annotationFactory,
   primerFactory,
   validSequenceCharacters,
   trimNewLines
-} from "../Utils/sequence";
+} from "../utils/sequence";
 import filesToParts from "../io/filesToParts";
 import externalToParts from "../io/externalToParts";
 
@@ -82,6 +82,7 @@ const processPartInput = async (newPart, partInput, options) => {
       console.error("Instantiation Error: No valid part found.");
       return partStub(colors);
     }
+
     // If the string contains numbers it could be an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
@@ -94,6 +95,7 @@ const processPartInput = async (newPart, partInput, options) => {
         return null;
       }
     }
+
     // Otherwise check if it's just a sequence string
     else {
       if (backbone.length) {
@@ -183,7 +185,7 @@ const validateAnnotations = (fileName, annotations, colors = []) => {
     return [];
   } else {
     return annotations.map(annotation => ({
-      ...annotationFactory(fileName, annotation.name, colors),
+      ...annotationFactory(annotation.name),
       ...annotation
     }));
   }
