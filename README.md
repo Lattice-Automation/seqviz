@@ -158,6 +158,10 @@ const {
   showIndex = true || false, // whether or not to show index (numbers and line)
   zoom = { linear: 0 - 100 }, // zoom under 50 is zoom out, zoom above 50 is zoom in
   colors = ["#85A6FF", "#FFFFF"], // color hex codes for annotation colors
+  bpColors = {
+    a: "#FF0000",
+    t: "#00FF00"
+  }, // individual bp coloring. all bp are black by default
   onSelection = selectionObject => {}, // used to return, log, or do something to selection
   onSearch = searchResults => {}, // used to return, log, or do something to search results
   searchNext = {
@@ -286,6 +290,19 @@ Defaults to:
   "#6B81FF", // blue
   "#85A6FF" // light blue
 ];
+```
+
+#### `bpColors`
+
+`object` mapping each bp to the color used to shade them. This is case insensitive, but exact matched cases are used first.
+
+```js
+{
+  bpColors: {
+    a: "#FF0000",
+    t: "#00FF00"
+  },
+}
 ```
 
 #### `onSelection`

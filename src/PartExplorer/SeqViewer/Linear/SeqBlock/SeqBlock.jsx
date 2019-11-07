@@ -77,6 +77,55 @@ export default class SeqBlock extends React.PureComponent {
     return { x, width };
   };
 
+  bpColorCache = {};
+
+  /**
+   * Lookup a bp in the bpColors prop and return the color
+   * associated with the character, if one exists. Store the results
+   */
+  bpColorLookup = bp => {
+    const { bpColors } = this.props;
+
+    if (this.bpColorCache[bp]) {
+      return this.bpColorCache[bp];
+    }
+
+    const color =
+      bpColors[bp] ||
+      bpColors[bp.toUpperCase()] ||
+      bpColors[bp.toLowerCase()] ||
+      null;
+
+    this.bpColorCache[bp] = color;
+    return color;
+  };
+
+  /**
+   * Given a bp, return either the bp as was, or a text span if it should have a color
+   *
+   * We're looking up each bp in the props.bpColors map to see if it should
+   * be shadded and, if so, wrapping it in a textSpan
+   */
+  seqTextSpan = (bp, i) => {
+    const { id, charWidth } = this.props;
+
+    const color = this.bpColorLookup(bp);
+
+    if (color) {
+      return (
+        <tspan key={i + bp + id} fill={color} x={charWidth * i}>
+          {bp}
+        </tspan>
+      );
+    }
+
+    return (
+      <tspan key={i + bp + id} x={charWidth * i}>
+        {bp}
+      </tspan>
+    );
+  };
+
   render() {
     const {
       seq,
@@ -320,12 +369,12 @@ export default class SeqBlock extends React.PureComponent {
           ) : null}
           {zoomed ? (
             <text {...textProps} y={indexYDiff} id={id}>
-              {seq}
+              {seq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
             </text>
           ) : null}
           {compSeq && zoomed && showComplement ? (
             <text {...textProps} y={compYDiff} id={id}>
-              {compSeq}
+              {compSeq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
             </text>
           ) : null}
           <TranslationRows
