@@ -48,6 +48,10 @@ let viewer = Viewer("app-root", {
   showIndex: index,
   zoom: { linear: 50 },
   colors: [],
+  bpColors: {
+    a: "#FF0000",
+    t: "#00ff00"
+  },
   //   onSelection: selection => {
   //     console.log("Your Selection: ", selection);
   //   },
