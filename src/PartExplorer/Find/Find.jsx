@@ -2,8 +2,8 @@ import {
   nucleotides,
   nucleotideWildCards,
   translateWildNucleotides
-} from "../../Utils/sequence";
-import { dnaComplement } from "../../Utils/parser";
+} from "../../utils/sequence";
+import { dnaComplement } from "../../utils/parser";
 
 /**
  * findWithMismatch

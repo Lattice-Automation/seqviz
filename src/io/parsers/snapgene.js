@@ -2,8 +2,8 @@
 // https://github.com/IsaacLuo/SnapGeneFileReader
 // https://github.com/ediezben/dgparse/blob/master/specs/SnapGene_File_Format_%202.0.pdf
 
-import { dnaComplement, partFactory } from "../../Utils/parser";
-import { annotationFactory } from "../../Utils/sequence";
+import { dnaComplement, partFactory } from "../../utils/parser";
+import { annotationFactory } from "../../utils/sequence";
 const bufferpack = require("bufferpack");
 const xml2Js = require("xml2js");
 const { StringDecoder } = require("string_decoder");

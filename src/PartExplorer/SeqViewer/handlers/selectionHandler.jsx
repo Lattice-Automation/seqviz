@@ -1,7 +1,7 @@
 import { isEqual } from "lodash";
 import * as React from "react";
 
-import { calcGC, calcTm } from "../../../Utils/sequence";
+import { calcGC, calcTm } from "../../../utils/sequence";
 
 /**
  * an HOC dedicated to handling range selection for the LinearSeq viewer

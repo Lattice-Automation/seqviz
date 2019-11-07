@@ -1,10 +1,10 @@
-import { partFactory, dnaComplement, partStub } from "../Utils/parser";
+import { partFactory, dnaComplement, partStub } from "../utils/parser";
 import {
   annotationFactory,
   primerFactory,
   validSequenceCharacters,
   trimNewLines
-} from "../Utils/sequence";
+} from "../utils/sequence";
 import filesToParts from "../io/filesToParts";
 import externalToParts from "../io/externalToParts";
 

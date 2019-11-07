@@ -1,5 +1,5 @@
-import { genRandomColor } from "../../Utils/colors";
-import { dnaComplement, partFactory } from "../../Utils/parser";
+import { genRandomColor } from "../../utils/colors";
+import { dnaComplement, partFactory } from "../../utils/parser";
 import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
 

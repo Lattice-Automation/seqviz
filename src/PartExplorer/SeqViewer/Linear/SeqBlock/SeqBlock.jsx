@@ -109,7 +109,6 @@ export default class SeqBlock extends React.PureComponent {
       resizing,
 
       charWidth,
-      zoom,
       zoomed
     } = this.props;
 

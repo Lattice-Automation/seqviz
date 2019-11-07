@@ -3,14 +3,14 @@ import {
   partFactory,
   extractDate,
   trimCarriageReturn
-} from "../../Utils/parser";
+} from "../../utils/parser";
 import {
   calcGC,
   calcTm,
   reverse,
   annotationFactory,
   primerFactory
-} from "../../Utils/sequence";
+} from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = [

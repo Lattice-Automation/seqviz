@@ -58,7 +58,7 @@
     "why-did-you-update": "^1.0.6"
   },
   "scripts": {
-    "start": "react-scripts start ./src/example.js",
+    "start": "react-scripts start",
     "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/semantic-ui/public/ && cp dist/seqviz.min.js demo/simple-ui/public/",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && cd demo/semantic-ui && npm install && npm run deploy && cd ../..",
     "patch": "npm version -m \"chore: Release version %s\" -- ",
