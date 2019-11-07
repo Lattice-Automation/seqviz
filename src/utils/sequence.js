@@ -1,5 +1,6 @@
 import shortid from "shortid";
 import { genRandomColor } from "./colors";
+import { dnaComplement } from "./parser";
 
 /**
  * Resources shareable throughout Loom
@@ -26,6 +27,79 @@ export const nucleotideWildCards = {
   b: { c: "c", g: "g", t: "t" },
   x: { a: "a", c: "c", g: "g", t: "t" },
   n: { a: "a", c: "c", g: "g", t: "t" }
+};
+
+/**
+ * mapping the 64 standard codons to amino acids
+ * no synth AA's
+ *
+ * adapted from: "https://github.com/keithwhor/NtSeq/blob/master/lib/nt.js
+ */
+const codon2AA = {
+  AAA: "K",
+  AAT: "N",
+  AAG: "K",
+  AAC: "N",
+  ATA: "I",
+  ATT: "I",
+  ATG: "M",
+  ATC: "I",
+  AGA: "R",
+  AGT: "S",
+  AGG: "R",
+  AGC: "S",
+  ACA: "T",
+  ACT: "T",
+  ACG: "T",
+  ACC: "T",
+  TAA: "*",
+  TAT: "Y",
+  TAG: "*",
+  TAC: "Y",
+  TTA: "L",
+  TTT: "F",
+  TTG: "L",
+  TTC: "F",
+  TGA: "*",
+  TGT: "C",
+  TGG: "W",
+  TGC: "C",
+  TCA: "S",
+  TCT: "S",
+  TCG: "S",
+  TCC: "S",
+  GAA: "E",
+  GAT: "D",
+  GAG: "E",
+  GAC: "D",
+  GTA: "V",
+  GTT: "V",
+  GTG: "V",
+  GTC: "V",
+  GGA: "G",
+  GGT: "G",
+  GGG: "G",
+  GGC: "G",
+  GCA: "A",
+  GCT: "A",
+  GCG: "A",
+  GCC: "A",
+  CAA: "Q",
+  CAT: "H",
+  CAG: "Q",
+  CAC: "H",
+  CTA: "L",
+  CTT: "L",
+  CTG: "L",
+  CTC: "L",
+  CGA: "R",
+  CGT: "R",
+  CGG: "R",
+  CGC: "R",
+  CCA: "P",
+  CCT: "P",
+  CCG: "P",
+  CCC: "P"
 };
 
 export const validSequenceCharacters = {
@@ -252,3 +326,86 @@ export const primerFactory = () => ({
   sequence: "",
   strict: false
 });
+
+/**
+ * translateDNA
+ *
+ * given a sequence of DNA, translate it into an AMINO ACID sequence
+ */
+const translateDNA = seqInput => {
+  const seq = seqInput.toUpperCase();
+  const seqLength = seq.length;
+  let aaSeq = "";
+  for (let i = 0, j = 0; i < seqLength; i += 3, j += 1) {
+    if (i + 2 < seqLength) {
+      aaSeq += codon2AA[seq[i] + seq[i + 1] + seq[i + 2]] || "?";
+    }
+  }
+  return aaSeq;
+};
+
+export default translateDNA;
+
+/**
+ * createLinearTranslations
+ *
+ * a function used by SeqViewer/Circular to take a "translation", as it's stored
+ * in the DB (just a start and end point referencing the part sequence) and convert
+ * that into elements that are useful for the SeqBlocks
+ *
+ * the seqBlocks need, at a minimum, to know the direction of the translation, the
+ * amino acids relevant to their seqBlock, and the start and end point of the translation
+ *
+ * the actual start and end point of the translation will usually differ from that in storage,
+ * because not all basepairs within the start and end point might be used within the
+ * actual translation. For example, if the user selects 5 bps and makes a translation,
+ * only the first 3 will be used. so the actual start is 1 and the actual end is 3 (inclusive)
+ */
+export const createLinearTranslations = (translations, dnaSeq) => {
+  // elongate the original sequence to account for translations that cross the zero index
+  const dnaDoubled = dnaSeq + dnaSeq;
+  return translations.map(t => {
+    const { start, direction } = t;
+    let { end } = t;
+    if (start > end) end += dnaSeq.length;
+
+    // get the DNA sub sequence
+    const subDNASeq =
+      direction === "FORWARD"
+        ? dnaDoubled.substring(start, end)
+        : dnaComplement(dnaDoubled.substring(start, end))
+            .compSeq.split("")
+            .reverse()
+            .join(""); // get reverse complement
+
+    // translate the DNA sub sequence
+    const AAseq =
+      direction === "FORWARD"
+        ? translateDNA(subDNASeq)
+        : translateDNA(subDNASeq)
+            .split("")
+            .reverse()
+            .join(""); // translate
+
+    // the starting point for the translation, reading left to right (regardless of translation
+    // direction). this is later needed to calculate the number of bps needed in the first
+    // and last codons
+    const tStart = direction === "FORWARD" ? start : end - AAseq.length * 3;
+    let tEnd =
+      direction === "FORWARD"
+        ? (start + AAseq.length * 3) % dnaSeq.length
+        : end % dnaSeq.length;
+
+    // treating one particular edge case where the start at zero doesn't make sense
+    if (tEnd === 0 && direction === "REVERSE") {
+      tEnd += dnaSeq.length;
+    }
+
+    return {
+      ...t,
+      start: tStart,
+      end: tEnd,
+      AAseq: AAseq
+    };
+  });
+};

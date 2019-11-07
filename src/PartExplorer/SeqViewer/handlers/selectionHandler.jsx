@@ -310,6 +310,7 @@ const withSelectionHandler = WrappedComp =>
         case "ANNOTATION":
         case "PRIMER":
         case "FIND":
+        case "TRANSLATION":
         case "ENZYME": {
           // Annotation or find selection range
           const clockwise = !(knownRange.direction && direction === "REVERSE");

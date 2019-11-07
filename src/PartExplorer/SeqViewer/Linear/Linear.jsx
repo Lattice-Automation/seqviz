@@ -1,15 +1,17 @@
 import { isEqual } from "lodash";
 import * as React from "react";
+
+import findAllBindingSites from "../../Primer/findAllBindingSites";
 import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
 } from "../partElementsToRows";
+import { createLinearTranslations } from "../../../utils/sequence";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
 import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
-import findAllBindingSites from "../../Primer/findAllBindingSites";
 
 /**
  * A linear sequence viewer.
@@ -61,6 +63,7 @@ class Linear extends React.Component {
 
       cutSites,
       annotations,
+      translations,
 
       lineHeight,
       elementHeight,
@@ -144,6 +147,14 @@ class Linear extends React.Component {
         ? createSingleRows(searchResults, bpsPerBlock, arrSize)
         : new Array(arrSize).fill([]);
 
+    const translationRows = translations.length
+      ? createSingleRows(
+          createLinearTranslations(translations, seq),
+          bpsPerBlock,
+          arrSize
+        )
+      : new Array(arrSize).fill([]);
+
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
@@ -177,8 +188,13 @@ class Linear extends React.Component {
       if (showPrimers && reversePrimerRows[i].length) {
         blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
       }
+      if (translationRows[i].length) {
+        blockHeight +=
+          translationRows[i].length * elementHeight + spacingHeight;
+      }
       blockHeights[i] = blockHeight;
     }
+
     const seqBlocks = [];
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
@@ -206,6 +222,7 @@ class Linear extends React.Component {
           reversePrimerRows={reversePrimerRows[i]}
           cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
+          translations={translationRows[i]}
           currSearchIndex={searchIndex}
           firstBase={firstBase}
           onUnmount={onUnMount}

@@ -14,31 +14,14 @@ export { default as pUC } from "./parts/pUC";
 /**
  * Return an object with a `viewer` (React component), `viewerHTML` (HTML string),
  * and a `render` function for rendering the viewer to the `element`
+ *
+ * @param {ViewerOptions} viewerOptions - The {ViewerOptions} for the viewer
  */
 export default (element = "root", viewerOptions) => {
   const options = {
-    part: null,
     annotate: false,
-    viewer: "both",
-    showAnnotations: true,
-    showPrimers: true,
-    showComplement: true,
-    showIndex: true,
-    zoom: { circular: 0, linear: 50 },
+    backbone: "",
     colors: [],
-    onSelection: selection => {
-      return selection;
-    },
-    onSearch: results => {
-      return results;
-    },
-    searchNext: {
-      key: "",
-      meta: false,
-      ctrl: false,
-      shift: false,
-      alt: false
-    },
     copySeq: {
       key: "",
       meta: false,
@@ -46,10 +29,30 @@ export default (element = "root", viewerOptions) => {
       shift: false,
       alt: false
     },
-    searchQuery: { query: "", mismatch: 0 },
-    backbone: "",
-    enzymes: [],
     debug: false,
+    enzymes: [],
+    onSearch: results => {
+      return results;
+    },
+    onSelection: selection => {
+      return selection;
+    },
+    part: null,
+    searchNext: {
+      key: "",
+      meta: false,
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
+    searchQuery: { query: "", mismatch: 0 },
+    showAnnotations: true,
+    showComplement: true,
+    showIndex: true,
+    showPrimers: true,
+    translations: [],
+    viewer: "both",
+    zoom: { circular: 0, linear: 50 },
     ...viewerOptions
   };
 
