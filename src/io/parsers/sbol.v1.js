@@ -1,8 +1,8 @@
 import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
 
-import { colorByIndex } from "../../utils2/colors";
-import { dnaComplement, partFactory } from "../../utils2/parser";
+import { colorByIndex } from "../../utils/colors";
+import { dnaComplement, partFactory } from "../../utils/parser";
 
 /*
   <sbol:Sequence rdf:about="https://synbiohub.cidarlab.org/public/Demo/A1_sequence/1">

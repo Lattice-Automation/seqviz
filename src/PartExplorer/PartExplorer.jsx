@@ -5,8 +5,8 @@ import shortid from "shortid";
 
 import SeqViewer from "./SeqViewer/SeqViewer";
 import "./PartExplorer.scss";
-import { annotationFactory, defaultSelection } from "../utils2/sequence";
-import { directionality } from "../utils2/parser";
+import { annotationFactory, defaultSelection } from "../utils/sequence";
+import { directionality } from "../utils/parser";
 import processPartInput from "../io/processPartInput";
 
 /**

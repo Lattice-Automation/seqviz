@@ -8,7 +8,7 @@ import {
   createSingleRows,
   stackElements
 } from "../partElementsToRows";
-import { createLinearTranslations } from "../../../utils2/sequence";
+import { createLinearTranslations } from "../../../utils/sequence";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
 import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
