@@ -1,4 +1,4 @@
-import { COLOR_BORDER_MAP } from "../../../../utils/colors";
+import { COLOR_BORDER_MAP } from "../../../../utils2/colors";
 import * as React from "react";
 import tinycolor from "tinycolor2";
 

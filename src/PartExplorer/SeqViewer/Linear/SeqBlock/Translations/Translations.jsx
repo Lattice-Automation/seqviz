@@ -1,7 +1,7 @@
 import * as React from "react";
 import shortid from "shortid";
 
-import { borderColorByIndex, colorByIndex } from "../../../../../utils/colors";
+import { borderColorByIndex, colorByIndex } from "../../../../../utils2/colors";
 
 export default class TranslationRows extends React.PureComponent {
   render() {

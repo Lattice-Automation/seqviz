@@ -1,6 +1,6 @@
 import xml2js from "xml2js";
-import { dnaComplement, firstElement, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+import { dnaComplement, firstElement, partFactory } from "../../utils2/parser";
+import { annotationFactory } from "../../utils2/sequence";
 
 /**
  * converts an XML part representation of a BioBrick part into a format
