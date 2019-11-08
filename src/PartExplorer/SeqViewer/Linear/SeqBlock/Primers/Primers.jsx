@@ -1,6 +1,6 @@
 import * as React from "react";
 import shortid from "shortid";
-import { reverse } from "../../../../../utils/sequence";
+import { reverse } from "../../../../../utils2/sequence";
 
 /**
  * a single row of primers. Multiple of these may be in one seqBlock

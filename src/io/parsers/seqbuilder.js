@@ -5,8 +5,8 @@ import {
   partFactory,
   extractDate,
   trimCarriageReturn
-} from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+} from "../../utils2/parser";
+import { annotationFactory } from "../../utils2/sequence";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = [

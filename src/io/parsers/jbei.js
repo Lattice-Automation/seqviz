@@ -1,5 +1,5 @@
-import { colorByIndex } from "../../utils/colors";
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { colorByIndex } from "../../utils2/colors";
+import { dnaComplement, partFactory } from "../../utils2/parser";
 import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
 

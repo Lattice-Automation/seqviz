@@ -6,7 +6,7 @@ import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
 import seqSearch from "../Find/Find";
-import { cutSitesInRows } from "../../utils/digest/digest";
+import { cutSitesInRows } from "../../utils2/digest/digest";
 
 sizeMe.noPlaceholders = true;
 
