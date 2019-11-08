@@ -3,7 +3,7 @@ import shortid from "shortid";
 
 import tinycolor from "tinycolor2";
 
-import { COLOR_BORDER_MAP } from "../../../../../utils2/colors";
+import { COLOR_BORDER_MAP } from "../../../../../utils/colors";
 
 export default class AnnotationRows extends React.PureComponent {
   render() {

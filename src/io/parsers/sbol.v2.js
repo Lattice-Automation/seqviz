@@ -1,5 +1,5 @@
-import { partFactory, dnaComplement } from "../../utils2/parser";
-import { annotationFactory } from "../../utils2/sequence";
+import { partFactory, dnaComplement } from "../../utils/parser";
+import { annotationFactory } from "../../utils/sequence";
 import xml2js, { processors } from "xml2js";
 
 /**
