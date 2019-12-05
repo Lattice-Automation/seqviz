@@ -12,7 +12,7 @@ import SeqvizLogo from "../src/seqviz-brand-small.png";
 import "./Header.css";
 import { history, urlParams, updateUrl } from "./utils";
 
-const backBoneOptions = [
+const backboneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
   { key: "psb1a3", value: "pSB1A3", text: "pSB1A3" },
   { key: "psb1ac3", value: "pSB1AC3", text: "pSB1AC3" },
@@ -189,7 +189,7 @@ export class BackBoneInput extends Component {
           placeholder={urlParams().backbone}
           floating
           fluid
-          options={backBoneOptions}
+          options={backboneOptions}
           onChange={(_, data) => {
             updateUrl({ backbone: data.value });
           }}

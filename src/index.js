@@ -27,7 +27,8 @@ const annotations = true;
 const primers = true;
 const complement = true;
 const index = true;
-let viewer = Viewer("app-root", {
+
+const viewerInput = {
   part: part,
   viewer: type,
   showAnnotations: annotations,
@@ -64,8 +65,15 @@ let viewer = Viewer("app-root", {
   // backbone: "pSB1C3",
   enzymes: [],
   translations: [{ start: 0, end: 89, direction: "FORWARD" }]
-});
+};
+
+let viewer = Viewer("app-root", viewerInput);
 viewer.render();
+
+setTimeout(() => {
+  let viewer = Viewer("app-root", { ...viewerInput, bpColors: {} });
+  viewer.render();
+}, 4000);
 
 /**
  * CODE TO TEST VIEWER WITH FILE IMPORT
