@@ -8,8 +8,9 @@ export default async (accession, options) => {
   let igem = false;
 
   // get from cache
-  if (localStorage.getItem(accession)) {
-    return JSON.parse(localStorage.getItem(accession));
+  const key = accession + options.backbone || "";
+  if (localStorage.getItem(key)) {
+    return JSON.parse(localStorage.getItem(key));
   }
 
   const { colors = [], backbone = "" } = options;
@@ -64,7 +65,7 @@ export default async (accession, options) => {
 
     if (parts && parts.length) {
       const part = parts[0];
-      localStorage.setItem(accession, JSON.stringify(part));
+      localStorage.setItem(key, JSON.stringify(part));
       return part;
     }
 
