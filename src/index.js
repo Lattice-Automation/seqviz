@@ -19,7 +19,8 @@ import "./index.css";
 // ];
 // let part = parts[Math.floor(Math.random() * parts.length)];
 // const part = "KJ668651.1";
-const part = "BBa_K1598008";
+// const part = "BBa_K1598008";
+const part = "BBa_E0040";
 
 // const types = ["circular", "linear", "both"];
 const type = "both";
