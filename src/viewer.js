@@ -19,7 +19,6 @@ export { default as pUC } from "./parts/pUC";
  */
 export const Viewer = (element = "root", viewerOptions) => {
   const options = {
-    annotate: false,
     backbone: "",
     bpColors: {},
     colors: [],
@@ -91,7 +90,6 @@ export const Viewer = (element = "root", viewerOptions) => {
 const logConfig = options => {
   const {
     part,
-    annotate,
     viewer: viewerType,
     showAnnotations,
     showPrimers,
@@ -110,7 +108,6 @@ const logConfig = options => {
     ? part[0].name
     : part;
   const displayType = viewerType;
-  const displayAnnotate = annotate ? "on" : "off";
   const displayAnnotations = showAnnotations ? "on" : "off";
   const displayPrimers = showPrimers ? "on" : "off";
   const displayComplement = showComplement ? "on" : "off";
@@ -132,7 +129,6 @@ const logConfig = options => {
   Current Part: ${displayName}
   Current seqviz Settings:
       Viewer Type: ${displayType} (circular | linear | both)
-      Auto-annotation: ${displayAnnotate}
       Show Annotations: ${displayAnnotations}
       Show Primers: ${displayPrimers}
       Show Complement: ${displayComplement}
