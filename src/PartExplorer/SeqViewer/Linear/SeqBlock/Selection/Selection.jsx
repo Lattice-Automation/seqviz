@@ -92,7 +92,6 @@ export class Edges extends React.PureComponent {
       y: "-10",
       style: {
         fill: "black",
-        width: start === end && !ref ? 1 : 2
         width: start === end ? 1 : 2
       },
       shapeRendering: "crispEdges"
