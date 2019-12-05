@@ -1,6 +1,12 @@
 import * as React from "react";
 import shortid from "shortid";
 
+/**
+ * Edges on the side of selections of the Selection Viewer
+ *
+ * Only shown at the selection's start and end, not intermediate blocks
+ * (if there are intermediate blocks)
+ */
 export class Edges extends React.PureComponent {
   id = shortid.generate();
 
@@ -21,7 +27,6 @@ export class Edges extends React.PureComponent {
       selectEdgeHeight,
       firstBase,
       lastBase,
-      resizing,
       fullSeq,
       seqSelection: {
         ref,
@@ -77,23 +82,37 @@ export class Edges extends React.PureComponent {
       } // in this scenario, the ending edge of the selection range is before the start
     }
 
+    // for when it starts on the first bp of the next SeqBlock
+    if (start === end && start === lastBase) {
+      return null;
+    }
+
     // inlining style in the SVG for speed sake
     const rect = {
       y: "-10",
       style: {
         fill: "black",
         width: start === end && !ref ? 1 : 2
+        width: start === end ? 1 : 2
       },
-      shapeRendering: resizing ? "speedOptimize" : "auto"
+      shapeRendering: "crispEdges"
     };
 
     return (
       <g className="la-vz-linear-sel-edges">
         {startEdge !== null && (
-          <rect {...rect} x={x} height={selectEdgeHeight} />
+          <rect
+            {...rect}
+            x={start === end ? x : x - 1}
+            height={selectEdgeHeight}
+          />
         )}
         {lastEdge !== null && (
-          <rect {...rect} x={secondEdgeX} height={selectEdgeHeight} />
+          <rect
+            {...rect}
+            x={start === end ? secondEdgeX : secondEdgeX - 1}
+            height={selectEdgeHeight}
+          />
         )}
       </g>
     );
@@ -122,7 +141,6 @@ export class Block extends React.PureComponent {
       selectHeight,
       firstBase,
       lastBase,
-      resizing,
       fullSeq,
       seqSelection: { ref, selectionMeta: selection }
     } = this.props;
@@ -204,7 +222,7 @@ export class Block extends React.PureComponent {
               height={selectHeight + 5}
               width={secBlockWidth}
               className="la-vz-linear-sel-block"
-              shapeRendering={resizing ? "optimizeSpeed" : "auto"}
+              shapeRendering="auto"
             />
           );
           ({ x, width } = findXAndWidth(firstBase, start));
@@ -239,7 +257,7 @@ export class Block extends React.PureComponent {
           height={selectHeight + 5}
           width={width}
           className="la-vz-linear-sel-block"
-          shapeRendering={resizing ? "optimizeSpeed" : "auto"}
+          shapeRendering="auto"
         />
         {secondBlock}
       </React.Fragment>

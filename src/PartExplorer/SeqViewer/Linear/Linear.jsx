@@ -85,8 +85,6 @@ class Linear extends React.Component {
       primer => primer.direction === "REVERSE"
     );
 
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
-
     // un-official definition for being zoomed in. Being over 10 seems like a decent cut-off
     const zoomed = zoom.linear > 10;
 
@@ -199,15 +197,6 @@ class Linear extends React.Component {
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
-      let blockSize = { ...size };
-      if (i + 1 === arrSize) {
-        blockSize = {
-          ...size,
-          width:
-            (seqs[i].length / bpsPerBlock) *
-            (seqs[i] >= bpsPerBlock ? adjustedWidth : size.width)
-        };
-      }
       seqBlocks.push(
         <SeqBlock
           {...this.props}
@@ -227,7 +216,7 @@ class Linear extends React.Component {
           firstBase={firstBase}
           onUnmount={onUnMount}
           fullSeq={seq}
-          size={blockSize}
+          size={{ ...size }}
           zoomed={zoomed}
         />
       );

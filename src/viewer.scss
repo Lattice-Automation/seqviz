@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap");
+
 html,
 body,
 #app-root,
@@ -52,9 +54,8 @@ label {
   background-color: #ececec;
 }
 
-// done to prevent the text from being highlighted in the sequence viewer
 svg text {
-  user-select: none;
+  user-select: none; // done to prevent the text from being highlighted in the sequence viewer
   fill: #2a2a2a;
   font-family: Roboto Mono, Monaco, monospace;
 }

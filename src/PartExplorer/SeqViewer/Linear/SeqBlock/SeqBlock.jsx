@@ -48,56 +48,43 @@ export default class SeqBlock extends React.PureComponent {
    */
   findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
     const {
+      part: {
+        seq: { length: seqLength }
+      },
       firstBase,
       size,
-      seq: { length: seqLength },
       bpsPerBlock
     } = this.props;
-    const lastBase = firstBase + seqLength;
-    const adjustedWidth =
-      seqLength >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+
+    const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
+    const multiBlock = seqLength >= bpsPerBlock;
+    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    let widthMinusPadding = multiBlock ? size.width - 28 : size.width;
+
     // find the distance from the left to start
     let x = 0;
     if (firstIndex >= firstBase) {
-      x = ((firstIndex - firstBase) / seqLength) * adjustedWidth;
+      x = ((firstIndex - firstBase) / bpsPerBlock) * widthMinusPadding;
       x = Math.max(x, 0) || 0;
     }
 
-    // find the width for the current annotation
-    let width = adjustedWidth;
+    // find the width for the current element
+    let width = widthMinusPadding;
     if (firstIndex === lastIndex) {
+      // it starts on the last bp
       width = 0;
     } else if (firstIndex > firstBase || lastIndex < lastBase) {
-      const widthUnit =
-        (Math.min(lastIndex, lastBase) - Math.max(firstIndex, firstBase)) /
-        seqLength;
-      width = adjustedWidth * widthUnit;
+      // it starts or ends in this SeqBlock
+      const start = Math.max(firstIndex, firstBase);
+      const end = Math.min(lastIndex, lastBase);
+      width = widthMinusPadding * ((end - start) / bpsPerBlock);
       width = Math.abs(width) || 0;
+    } else if (firstBase + bpsPerBlock > seqLength && multiBlock) {
+      // it's an element in the last SeqBlock, that doesn't span the whole width
+      width = widthMinusPadding * ((seqLength % bpsPerBlock) / bpsPerBlock);
     }
+
     return { x, width };
-  };
-
-  bpColorCache = {};
-
-  /**
-   * Lookup a bp in the bpColors prop and return the color
-   * associated with the character, if one exists. Store the results
-   */
-  bpColorLookup = bp => {
-    const { bpColors } = this.props;
-
-    if (this.bpColorCache[bp]) {
-      return this.bpColorCache[bp];
-    }
-
-    const color =
-      bpColors[bp] ||
-      bpColors[bp.toUpperCase()] ||
-      bpColors[bp.toLowerCase()] ||
-      null;
-
-    this.bpColorCache[bp] = color;
-    return color;
   };
 
   /**
@@ -124,6 +111,29 @@ export default class SeqBlock extends React.PureComponent {
         {bp}
       </tspan>
     );
+  };
+
+  bpColorCache = {};
+
+  /**
+   * Lookup a bp in the bpColors prop and return the color
+   * associated with the character, if one exists. Store the results
+   */
+  bpColorLookup = bp => {
+    const { bpColors } = this.props;
+
+    if (this.bpColorCache[bp]) {
+      return this.bpColorCache[bp];
+    }
+
+    const color =
+      bpColors[bp] ||
+      bpColors[bp.toUpperCase()] ||
+      bpColors[bp.toLowerCase()] ||
+      null;
+
+    this.bpColorCache[bp] = color;
+    return color;
   };
 
   render() {
@@ -355,6 +365,8 @@ export default class SeqBlock extends React.PureComponent {
           {showIndex && (
             <IndexRow
               {...this.props}
+              firstBase={firstBase}
+              lastBase={lastBase}
               transform={`translate(0, ${indexRowYDiff})`}
               findXAndWidth={this.findXAndWidth}
             />

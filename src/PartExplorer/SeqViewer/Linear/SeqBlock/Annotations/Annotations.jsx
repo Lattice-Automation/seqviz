@@ -17,7 +17,6 @@ export default class AnnotationRows extends React.PureComponent {
       onUnmount,
       firstBase,
       lastBase,
-      resizing,
       fullSeq,
       elementHeight
     } = this.props;
@@ -41,7 +40,6 @@ export default class AnnotationRows extends React.PureComponent {
               findXAndWidth={findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
-              resizing={resizing}
               fullSeq={fullSeq}
             />
           );
@@ -81,15 +79,16 @@ class AnnotationRow extends React.PureComponent {
       findXAndWidth,
       firstBase,
       lastBase,
-      resizing,
       annotations,
       fullSeq
     } = this.props;
+
     const { color, name, direction, start, end } = a;
     const forward = direction === "FORWARD";
     const reverse = direction === "REVERSE";
     let { x: origX, width } = findXAndWidth(start, end);
     const crossZero = start > end && end < firstBase;
+
     // does the annotation begin or end within this seqBlock with a directionality?
     const endFWD = forward && end > firstBase && end <= lastBase;
     const endREV = reverse && start >= firstBase && start <= lastBase;
@@ -151,14 +150,14 @@ class AnnotationRow extends React.PureComponent {
     const height = this.props.height * 0.8;
 
     const rectProps = {
-      shapeRendering: resizing ? "optimizeSpeed" : "geometricPrecision"
+      shapeRendering: "geometricPrecision"
     };
 
     const textProps = {
       alignmentBaseline: "middle",
       cursor: "pointer",
       textAnchor: "middle",
-      textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility",
+      textRendering: "optimizeLegibility",
       x: width / 2,
       y: height / 2 + 1.4,
       style: {
@@ -212,29 +211,28 @@ class AnnotationRow extends React.PureComponent {
       linePath = `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
     }
 
-    if (!resizing) {
-      if ((forward && overflowRight) || (forward && crossZero)) {
-        if (lastBase - start > 14) {
-          linePath += `
-				M ${width - 3 * cW} ${cH}
-				L ${width - 2 * cW} ${2 * cH}
-				L ${width - 3 * cW} ${3 * cH}
-				M ${width - 4 * cW} ${cH}
-				L ${width - 3 * cW} ${2 * cH}
-				L ${width - 4 * cW} ${3 * cH}`; // add double arrow forward
-        }
-      } else if ((reverse && overflowLeft) || (reverse && crossZero)) {
-        if (end - firstBase > 14) {
-          linePath += `
-				M ${3 * cW} ${3 * cH}
-				L ${2 * cW} ${cH * 2}
-				L ${3 * cW} ${cH}
-				M ${4 * cW} ${3 * cH}
-				L ${3 * cW} ${cH * 2}
-				L ${4 * cW} ${cH}`; // add double forward reverse
-        }
+    if ((forward && overflowRight) || (forward && crossZero)) {
+      if (lastBase - start > 14) {
+        linePath += `
+      M ${width - 3 * cW} ${cH}
+      L ${width - 2 * cW} ${2 * cH}
+      L ${width - 3 * cW} ${3 * cH}
+      M ${width - 4 * cW} ${cH}
+      L ${width - 3 * cW} ${2 * cH}
+      L ${width - 4 * cW} ${3 * cH}`; // add double arrow forward
+      }
+    } else if ((reverse && overflowLeft) || (reverse && crossZero)) {
+      if (end - firstBase > 14) {
+        linePath += `
+      M ${3 * cW} ${3 * cH}
+      L ${2 * cW} ${cH * 2}
+      L ${3 * cW} ${cH}
+      M ${4 * cW} ${3 * cH}
+      L ${3 * cW} ${cH * 2}
+      L ${4 * cW} ${cH}`; // add double forward reverse
       }
     }
+
     let strokeColor;
     if (a.type === "insert") {
       strokeColor = color;
