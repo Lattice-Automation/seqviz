@@ -113,8 +113,6 @@ export default class SeqBlock extends React.PureComponent {
     );
   };
 
-  bpColorCache = {};
-
   /**
    * Lookup a bp in the bpColors prop and return the color
    * associated with the character, if one exists. Store the results
@@ -122,17 +120,12 @@ export default class SeqBlock extends React.PureComponent {
   bpColorLookup = bp => {
     const { bpColors } = this.props;
 
-    if (this.bpColorCache[bp]) {
-      return this.bpColorCache[bp];
-    }
-
     const color =
       bpColors[bp] ||
       bpColors[bp.toUpperCase()] ||
       bpColors[bp.toLowerCase()] ||
       null;
 
-    this.bpColorCache[bp] = color;
     return color;
   };
 

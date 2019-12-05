@@ -8,11 +8,11 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 5 16:37:03 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 5 17:05:30 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
-<!-- pkg-description(cmd:) -->A framework agnostic DNA viewer for sequences or files (gb, fasta, etc) with auto-feature annotation<!-- /pkg-description -->
+<!-- pkg-description(cmd:) -->DNA sequence viewer supporting GenBank, FASTA, etc.<!-- /pkg-description -->
 
 <br>
 
@@ -111,7 +111,7 @@ You can initialize a new viewer with a part json object like so:
       }
     ]
   };
-  const viewer = seqviz.Viewer("root", { part: part });
+  const viewer = seqviz.Viewer("root", { part });
   viewer.render();
 </script>
 ```
@@ -130,7 +130,11 @@ This renders the viewer using `ReactDOM`(which is packaged with the library so y
 
 #### `viewer.renderToString()`
 
-This will return the `HTML` for the viewer if you want to render the viewer yourself. A call to `[ReactDOMServer.renderToString](https://reactjs.org/docs/react-dom-server.html)`.
+This will return the `HTML` for the viewer if you want to render the viewer yourself. A call to [`ReactDOMServer.renderToString`](https://reactjs.org/docs/react-dom-server.html).
+
+#### `viewer.setState(viewerOptions)`
+
+Update viewer settings and re-render (if already rendered once).
 
 ### Viewer Constructor
 
@@ -149,17 +153,17 @@ There are no defaults values for this option. An element input is minimally nece
 const {
   part = "KJ668651.1" || "BBa_E0040" || PUC || "ATCG", // part input
   viewer = "circular" || "linear" || "both", // type of viewer to show
-  showAnnotations = true || false, // whether or not to show annotations
-  showComplement = true || false, // whether or not to show complement strand
-  showIndex = true || false, // whether or not to show index (numbers and line)
-  zoom = { linear: 0 - 100 }, // zoom under 50 is zoom out, zoom above 50 is zoom in
+  showAnnotations = true || false, // whether to show annotations
+  showComplement = true || false, // whether to show complement strand
+  showIndex = true || false, // whether to show index (numbers and line)
+  zoom = { linear: 0 - 100 }, // the greater the value, the greater the zoom
   colors = ["#85A6FF", "#FFFFF"], // color hex codes for annotation colors
   bpColors = {
     a: "#FF0000",
     t: "#00FF00"
   }, // individual bp coloring. all bp are black by default
-  onSelection = selectionObject => {}, // used to return, log, or do something to selection
-  onSearch = searchResults => {}, // used to return, log, or do something to search results
+  onSelection = selectionObject => {}, // returns a Selection object on selection changes
+  onSearch = searchResults => {}, // returns a Search result on search changes
   searchNext = {
     key: "",
     meta: true || false,
@@ -176,7 +180,7 @@ const {
   }, // key binding for copying sequence, defaults to none
   searchQuery = { query: "", mismatch: 0 }, // search query
   backbone = "pSB1C3", // name of a BioBrick backbone, or a custom backbone string
-  enzymes = ["AciI"], // list of enzymes for which to search for and display cutsites
+  enzymes = ["AciI"], // list of enzymes to search and display cutsites for
   translations: [{ start: 0, end: 89, direction: "FORWARD" }] // list of translations
 } = viewerOptions;
 ```
