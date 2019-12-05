@@ -12,8 +12,7 @@ import externalToParts from "../io/externalToParts";
  * Determine what the input was to see if we need a parser or factory.
  * The output should always be a part consumable by seqviz
  * Currently this means it needs a sequence, a complement sequence,
- * and an array of annotations. Check partFactory for latest
- * part object structure
+ * and an array of annotations. Check partFactory for latest part object structure
  */
 const processPartInput = async (newPart, partInput, options) => {
   const { colors = [], backbone = "" } = options;
@@ -116,9 +115,10 @@ const processPartInput = async (newPart, partInput, options) => {
           name: "Untitled"
         };
       } else {
-        console.error(
+        console.warn(
           "Instantiation Error: Your sequence string has invalid characters. Only nucleotides and nucleotide wildcards are allowed."
         );
+        return null;
       }
     }
   } else {

@@ -26,7 +26,9 @@ export default class PartExplorer extends React.Component {
 
     let part = await processPartInput(newPart, partInput, { colors, backbone });
 
-    this.setState({ part });
+    if (part) {
+      this.setState({ part });
+    }
   };
 
   addKeyBindings = () => {
