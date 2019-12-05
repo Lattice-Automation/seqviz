@@ -77,7 +77,7 @@ export class Header extends Component {
             floated="right"
             onClick={() => {
               if (history.location.search !== "") {
-                updateUrl({ backbone: "pSB1C3" });
+                updateUrl({ backbone: "pSB1C3", biobrick: "" });
               }
             }}
           />

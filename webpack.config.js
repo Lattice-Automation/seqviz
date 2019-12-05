@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const webpack = require("webpack");
 const PACKAGE = require("./package.json");
 
@@ -29,7 +30,10 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: "babel-loader"
+        loader: "babel-loader",
+        options: {
+          plugins: ["lodash"]
+        }
       },
       {
         test: /\.(ico|jpg|jpeg|png|gif|webp|svg)(\?.*)?$/,
@@ -47,5 +51,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [new UglifyJsPlugin(), new webpack.BannerPlugin(banner)]
+  plugins: [
+    new UglifyJsPlugin(),
+    new webpack.BannerPlugin(banner),
+    new LodashModuleReplacementPlugin()
+  ]
 };

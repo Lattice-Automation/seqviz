@@ -14,7 +14,8 @@
   "author": "Lattice Automation (https://latticeautomation.com/)",
   "contributors": [
     "Joshua Timmons <jtimmons@latticeautomation.com> (https://github.com/JJTimmons)",
-    "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)"
+    "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)",
+    "Raymond Chung (https://github.com/RazzYoshi)"
   ],
   "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
   "repository": {
@@ -45,12 +46,14 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-imports": "^2.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "fs": "^0.0.2",
     "image-webpack-loader": "^6.0.0",
+    "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.12.0",
     "react-scripts": "^3.0.1",
     "typescript": "^3.7.3",

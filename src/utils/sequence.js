@@ -291,7 +291,7 @@ export const annotationFactory = annotationName => {
   return {
     id: shortid.generate(),
     color: color,
-    name: "Untitled",
+    name: annotationName || "Untitled",
     type: "",
     start: 0,
     end: 0,
