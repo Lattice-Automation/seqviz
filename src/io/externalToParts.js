@@ -6,6 +6,12 @@ import { fetchBBB } from "./igemBackbones";
  */
 export default async (accession, options) => {
   let igem = false;
+
+  // get from cache
+  if (localStorage.getItem(accession)) {
+    return JSON.parse(localStorage.getItem(accession));
+  }
+
   const { colors = [], backbone = "" } = options;
   // right now, we support either NCBI or iGEM. We parse this automatically. the user
   // doesn't specify the target registry, so we have to infer it from the passed accession
@@ -56,7 +62,11 @@ export default async (accession, options) => {
       backbone: igemBackbone
     });
 
-    if (parts && parts.length) return parts[0];
+    if (parts && parts.length) {
+      const part = parts[0];
+      localStorage.setItem(accession, JSON.stringify(part));
+      return part;
+    }
 
     throw Error("No convertible part found");
   } catch (error) {

@@ -1,5 +1,5 @@
 /**
- * These parts are plasmid backbones downloaded from the iGem site
+ * These parts are plasmid backbones downloaded from the iGEM site
  * so that they can be referenced by name for viewer instantiation
  * As of 05/15/19 the supported backbones are
  * BBa_K1362091, BBa_K823055, pSB1A3, pSB1A7,
@@ -288,7 +288,10 @@ export const fetchBBB = name => {
     return BBB;
   } else {
     console.warn(
-      "Your backbone input did not match the name of any iGem Backbone packaged with this library. Please check if the backbone you are using is listed at https://parts.igem.org/Plasmid_backbones/Assembly. If you are using a custom backbone please be aware that this library does not check for the validity of your prefix and suffix. You can read more about prefixes and suffixes here: http://parts.igem.org/Help:Prefix-Suffix."
+      `Your backbone input did not match the name of any iGEM Backbone packaged with this library.
+      Please check if the backbone you are using is listed at https://parts.igem.org/Plasmid_backbones/Assembly.
+      If you are using a custom backbone please be aware that this library does not check for the validity of your prefix and suffix.
+      You can read more about prefixes and suffixes here: http://parts.igem.org/Help:Prefix-Suffix.`
     );
     return name;
   }

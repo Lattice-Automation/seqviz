@@ -18,7 +18,8 @@ import "./index.css";
 //   ""
 // ];
 // let part = parts[Math.floor(Math.random() * parts.length)];
-const part = "KJ668651.1";
+// const part = "KJ668651.1";
+const part = "BBa_K1598008";
 
 // const types = ["circular", "linear", "both"];
 const type = "both";
@@ -62,7 +63,7 @@ const viewerInput = {
     alt: false
   },
   // searchQuery: { query: "GCGGX" },
-  // backbone: "pSB1C3",
+  backbone: "pSB1C3",
   enzymes: [],
   translations: [{ start: 0, end: 89, direction: "FORWARD" }]
 };

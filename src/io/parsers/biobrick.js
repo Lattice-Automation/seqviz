@@ -38,40 +38,52 @@ export default async (file, options) =>
       const seq_data = firstElement(sequences);
       if (!seq_data || !seq_data.seq_data) rejectBioBrick("getting seq_data");
 
+      // go another level to get features...
+      let features = firstElement(featureArray);
+      if (features && "feature" in features) {
+        features = features.feature;
+      }
+
       const seq = firstElement(seq_data.seq_data) + backbone.backbone;
       const backboneName = backbone.name.length < 20 ? backbone.name : "";
-      const name = `${backboneName}-${firstElement(part_name)}`;
+      const name = `${firstElement(part_name)}-${backboneName}`;
 
-      // assume it failed
-      if (!seq || !name || !featureArray) {
+      if (!seq || !name) {
+        // assume it failed
         rejectBioBrick("seq || name || featureArray");
       }
+
+      // parse the iGEM annotations
+      const annotations = features
+        .map(f => {
+          if (!f) return null;
+
+          const { direction, startpos, endpos, type, title } = f;
+
+          return {
+            ...annotationFactory(title[0] || `${direction[0]}-${startpos[0]}`),
+            direction: direction[0] === "forward" ? "FORWARD" : "REVERSE",
+            start: +startpos[0] || 0,
+            end: +endpos[0] || 0,
+            name: title[0] || "Untitled",
+            type: type[0] || "N/A"
+          };
+        })
+        .filter(a => a);
+
+      // add another annotation for the backbone
+      annotations.push({
+        ...annotationFactory(backbone.name),
+        start: firstElement(seq_data.seq_data).length,
+        end: 0
+      });
 
       resolve([
         {
           ...partFactory(),
           ...dnaComplement(seq), // seq and compSeq
           name: name,
-          annotations: featureArray
-            .map(f => {
-              if (!f.feature) return null;
-              const currFet = f.feature[0];
-
-              if (!currFet) return null;
-              const { direction, startpos, endpos, type, title } = currFet;
-
-              return {
-                ...annotationFactory(
-                  title[0] || `${direction[0]}-${startpos[0]}`
-                ),
-                direction: direction[0] === "forward" ? "FORWARD" : "REVERSE",
-                start: +startpos[0] || 0,
-                end: +endpos[0] || 0,
-                name: title[0] || "Untitled",
-                type: type[0] || "N/A"
-              };
-            })
-            .filter(a => a)
+          annotations: annotations
         }
       ]);
     });

@@ -21,10 +21,25 @@ export default class PartExplorer extends React.Component {
     part: {}
   };
 
+  /**
+   * Convert the part input (ID, object, File, etc) to a part for the viewer
+   */
   createPart = async () => {
     const { part: partInput, colors, backbone } = this.props;
 
     let part = await processPartInput(partInput, { colors, backbone });
+
+    // none of the feature's ends can be greater than length of the plasmid - 1
+    part.annotations.forEach(a => {
+      a.start %= part.seq.length;
+      if (a.end >= part.seq.length) {
+        console.warning(
+          `Annotation ${a.name}'s end is > sequence length ${part.seq.length}:` +
+            "SeqViz uses 0-based indexing and the max index for an element is N - 1 where N is the length of the sequence."
+        );
+        a.end %= part.seq.length;
+      }
+    });
 
     if (part) {
       this.setState({ part });
