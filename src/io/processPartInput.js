@@ -24,6 +24,7 @@ const processPartInput = async (newPart, partInput, options) => {
         "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
       );
     }
+
     if (partInput.length < 1) {
       console.error(
         "Instantiation Error: There are no valid files in your part input"

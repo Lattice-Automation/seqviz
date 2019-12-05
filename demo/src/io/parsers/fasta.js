@@ -1,5 +1,4 @@
-module.exports = {
-  parseFASTA: async text => {
+const parseFASTA = async (text) => {
     if (text.trim().startsWith(">")) {
       return text
         .split(">") // split up if it's a multi-seq FASTA file
@@ -21,6 +20,7 @@ module.exports = {
         })
         .filter(p => p.name && p.seq);
     }
+    
     if (text.trim().startsWith(";")) {
       // it's an old-school style FASTA that's punctuated with semi-colons
       // ;my|NAME
