@@ -142,7 +142,8 @@ const fileToParts = async (file, options) => {
         throw Error(`${fileName} File type not recognized`);
     }
   } catch (e) {
-    return [{ failedToParse: fileName, error: e }];
+    console.warn(e);
+    return null;
   }
 
   // add the source information to all parts

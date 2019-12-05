@@ -65,8 +65,10 @@ export default async (accession, options) => {
 
     if (parts && parts.length) {
       const part = parts[0];
-      localStorage.setItem(key, JSON.stringify(part));
-      return part;
+      if (part && part.seq) {
+        localStorage.setItem(key, JSON.stringify(part));
+        return part;
+      }
     }
 
     throw Error("No convertible part found");

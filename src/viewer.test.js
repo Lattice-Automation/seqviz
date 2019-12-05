@@ -31,6 +31,17 @@ it("renders without crashing", () => {
   viewer.render();
 });
 
+it("renders while querying an iGEM part", () => {
+  const div = document.createElement("div");
+  let viewer = Viewer(div, {
+    ...defaultOptions,
+    part: "BBa_E0040",
+    backbone: "pSB1C3"
+  });
+
+  viewer.render();
+});
+
 it("updates props with setState", () => {
   const div = document.createElement("div");
   let viewer = Viewer(div, { ...defaultOptions, part: PUC });

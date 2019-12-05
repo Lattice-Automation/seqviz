@@ -42,6 +42,8 @@ export default async (file, options) =>
       let features = firstElement(featureArray);
       if (features && "feature" in features) {
         features = features.feature;
+      } else {
+        features = [];
       }
 
       const seq = firstElement(seq_data.seq_data) + backbone.backbone;
