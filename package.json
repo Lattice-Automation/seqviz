@@ -36,7 +36,6 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-sizeme": "^2.6.4",
-    "request": "^2.88.0",
     "shortid": "^2.2.14",
     "tinycolor2": "^1.4.1",
     "xml2js": "^0.4.19"
