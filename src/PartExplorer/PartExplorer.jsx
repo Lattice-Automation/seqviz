@@ -25,10 +25,9 @@ class PartExplorer extends React.Component {
   };
 
   createPart = async (newPart = false) => {
-    const { part: partInput, annotate, colors, backbone } = this.props;
+    const { part: partInput, colors, backbone } = this.props;
     let part = await processPartInput(newPart, partInput, { colors, backbone });
-    part = annotate ? await this.autoAnnotate(part, colors) : part;
-    this.setState({ part: part });
+    this.setState({ part });
   };
 
   addKeyBindings = () => {
@@ -141,7 +140,6 @@ class PartExplorer extends React.Component {
   componentDidUpdate = async prevProps => {
     const {
       part: partInput,
-      annotate,
       colors,
       backbone,
       zoom: { circular: czoom, linear: lzoom },
@@ -150,7 +148,6 @@ class PartExplorer extends React.Component {
 
     const {
       part: prevPart,
-      annotate: prevAnnotate,
       colors: prevColors,
       backbone: prevBackbone,
       zoom: { circular: prevCzoom, linear: prevLzoom },
@@ -159,7 +156,6 @@ class PartExplorer extends React.Component {
 
     if (
       partInput !== prevPart ||
-      annotate !== prevAnnotate ||
       backbone !== prevBackbone ||
       colors !== prevColors ||
       czoom !== prevCzoom ||
@@ -216,7 +212,7 @@ class PartExplorer extends React.Component {
     const result = await new Promise((resolve, reject) => {
       request.post(
         {
-          uri: "https://microservices.latticeautomation.com/annotate",
+          uri: "{ANNOTATE_ENDPOINT}",
           method: "POST",
           json: JSON.stringify({
             id: shortid.generate(),
@@ -246,8 +242,10 @@ class PartExplorer extends React.Component {
   /**
    * A function for adding annotations automatically given a part's sequence alone.
    * Calls a remote lambda service which uses BLAST and a pre-populated feature database
+   *
+   * NOTE: This is not in use or supported right now. Will be if there's a demand for it
    */
-  autoAnnotate = async (part, colors = []) => {
+  autoAnnotate = async part => {
     let result;
     try {
       if (navigator.onLine) {

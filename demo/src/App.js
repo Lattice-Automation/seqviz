@@ -195,7 +195,6 @@ export class SequenceViewer extends Component {
       part = "",
       backbone = "",
       viewType: view = "both",
-      annotate = true,
       annotations = true,
       primers = true,
       complement = true,
@@ -211,7 +210,6 @@ export class SequenceViewer extends Component {
       part: part,
       backbone: backbone,
       viewer: viewType,
-      annotate: annotate,
       showAnnotations: annotations,
       showPrimers: primers,
       showComplement: complement,
@@ -389,13 +387,6 @@ export class SideBarMenu extends Component {
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
-                name="annotate"
-                label="Auto-annotate"
-              />
-            </Menu.Item>
-            <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput
-                setDemoState={setDemoState}
                 name="annotations"
                 label="Show annotations"
               />
@@ -486,7 +477,6 @@ export class Demo extends Component {
     part: "",
     backbone: "",
     viewType: "",
-    annotate: true,
     annotations: true,
     primers: true,
     complement: true,

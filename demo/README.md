@@ -32,7 +32,7 @@ To check what the version of your downloaded library is, open the `seqviz.min.js
 
 ### `npm start`
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
@@ -271,37 +271,6 @@ onSelection: selection => {
 
 Demonstrates the onSearch hook which exposes the results of your search in an object.
 
-### Auto-annotate
-
-```js
-export class CheckboxInput extends Component {
-  render() {
-    const { name, label, setDemoState } = this.props;
-    return (
-      <Checkbox
-        toggle
-        defaultChecked
-        name={name}
-        label={label}
-        onChange={(event, data) => {
-          setDemoState({ [name]: data.checked });
-        }}
-      />
-    );
-  }
-}
-```
-
-```js
-<CheckboxInput
-  setDemoState={setDemoState}
-  name="annotate"
-  label="Auto-annotate"
-/>
-```
-
-Demonstrates fetching annotations from our lambda endpoint. On by default. Needs to be turned on to see iGem prefix and suffix annotations (because that information is not stored in the BioBricks).
-
 ### Show Annotations
 
 ```js
@@ -508,7 +477,6 @@ const viewer = seqviz.Viewer("demo-root", {
   part: part,
   backbone: backbone,
   viewer: viewType,
-  annotate: annotate,
   showAnnotations: annotations,
   showComplement: complement,
   showIndex: index,
