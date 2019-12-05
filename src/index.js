@@ -70,11 +70,6 @@ const viewerInput = {
 let viewer = Viewer("app-root", viewerInput);
 viewer.render();
 
-setTimeout(() => {
-  let viewer = Viewer("app-root", { ...viewerInput, bpColors: {} });
-  viewer.render();
-}, 4000);
-
 /**
  * CODE TO TEST VIEWER WITH FILE IMPORT
  */

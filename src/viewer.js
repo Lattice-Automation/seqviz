@@ -18,7 +18,7 @@ export { default as pUC } from "./parts/pUC";
  * @param {ViewerOptions} viewerOptions - The {ViewerOptions} for the viewer
  */
 export const Viewer = (element = "root", viewerOptions) => {
-  const options = {
+  let options = {
     backbone: "",
     bpColors: {},
     colors: [],
@@ -55,26 +55,57 @@ export const Viewer = (element = "root", viewerOptions) => {
     ...viewerOptions
   };
 
-  // create the React element and HTML for is not using React
-  const viewer = React.createElement(PartExplorer, options, null);
-  const render = () => {
-    return ReactDOM.render(viewer, domElement);
-  };
-
-  const renderToString = () => {
-    return ReactDOMServer.renderToString(viewer);
-  };
-
+  // used to keep track of whether to re-render after a "set" call
+  let rendered = false;
   // get the HTML element by ID or use as is if passed directly
   const domElement =
     element.constructor.name.startsWith("HTML") &&
     element.constructor.name.endsWith("Element")
       ? element
       : document.getElementById(element);
+  let viewer = React.createElement(PartExplorer, options, null);
+
+  /**
+   * Render the Viewer to the element passed
+   */
+  const render = () => {
+    rendered = true;
+    return ReactDOM.render(viewer, domElement);
+  };
+
+  /**
+   * Return an HTML string representation of the viewer
+   */
+  const renderToString = () => {
+    return ReactDOMServer.renderToString(viewer);
+  };
+
+  /**
+   * Update the viewer with new settings.
+   *
+   * Re-renders if render was already called.
+   *
+   * @param {Object} state key-value map of ViewerSettings
+   */
+  const setState = state => {
+    Object.keys(state).forEach(key => {
+      if (!Object.keys(options).includes(key)) {
+        console.error(`Invalid viewer setting: ${key}`);
+      }
+    });
+
+    options = { ...options, ...state };
+    viewer = React.createElement(PartExplorer, options, null);
+
+    if (rendered) {
+      return ReactDOM.render(viewer, domElement);
+    }
+  };
 
   return {
     viewer,
+    render,
     renderToString,
-    render
+    setState
   };
 };
