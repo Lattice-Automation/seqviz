@@ -64,9 +64,9 @@
     "start": "PORT=8000 react-scripts start",
     "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/public/",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && cd demo && npm install && npm run deploy && cd ../..",
-    "release:major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
-    "release:minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
-    "release:patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
+    "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
