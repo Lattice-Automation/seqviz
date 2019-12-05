@@ -168,7 +168,7 @@ class Linear extends React.Component {
 
       const spacingHeight = 0.25 * elementHeight;
       // find the line height for the seq block based on how many rows need to be shown
-      let blockHeight = lineHeight; // this is for padding between the rows
+      let blockHeight = lineHeight * 1.1; // this is for padding between the rows
       if (zoomed) {
         blockHeight += lineHeight; // is zoomed in enough + 2px margin
         blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
