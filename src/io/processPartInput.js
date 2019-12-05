@@ -14,7 +14,7 @@ import externalToParts from "../io/externalToParts";
  * Currently this means it needs a sequence, a complement sequence,
  * and an array of annotations. Check partFactory for latest part object structure
  */
-const processPartInput = async (newPart, partInput, options) => {
+const processPartInput = async (partInput, options) => {
   const { colors = [], backbone = "" } = options;
   // We might be getting a FileList input from JS file input
   if (partInput.constructor.name === "FileList") {
@@ -25,7 +25,7 @@ const processPartInput = async (newPart, partInput, options) => {
     }
 
     if (partInput.length < 1) {
-      console.error(
+      console.warning(
         "Instantiation Error: There are no valid files in your part input"
       );
       return null;
@@ -54,14 +54,16 @@ const processPartInput = async (newPart, partInput, options) => {
         "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
       );
     }
+
     const {
       seq: sequence = "",
       compSeq: complement = "",
       annotations = [],
       primers = []
     } = partInput;
+
     if (typeof sequence !== "string" || sequence === "") {
-      console.error(
+      console.warn(
         "Instantiation Error: Your part object input needs to have a string `seq` field"
       );
       return null;
@@ -83,10 +85,10 @@ const processPartInput = async (newPart, partInput, options) => {
       return partStub(colors);
     }
 
-    // If the string contains numbers it could be an NCBI or BioBrick accession number
+    // If the string contains numbers it's probably an NCBI or BioBrick accession number
     if (/\d/.test(partInput)) {
       try {
-        return externalToParts(newPart, partInput, { colors, backbone });
+        return externalToParts(partInput, { colors, backbone });
       } catch (err) {
         console.warn(
           "Were you trying to display a BioBrick or NCBI part? We were not able to fetch the part: ",

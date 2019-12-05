@@ -21,10 +21,10 @@ export default class PartExplorer extends React.Component {
     part: {}
   };
 
-  createPart = async (newPart = false) => {
+  createPart = async () => {
     const { part: partInput, colors, backbone } = this.props;
 
-    let part = await processPartInput(newPart, partInput, { colors, backbone });
+    let part = await processPartInput(partInput, { colors, backbone });
 
     if (part) {
       this.setState({ part });

@@ -1,4 +1,5 @@
 import xml2js from "xml2js";
+
 import { dnaComplement, firstElement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 

@@ -50,7 +50,9 @@ const zipHandler = file => {
  */
 const fileToParts = async (file, options) => {
   const { fileName = "", colors = [], backbone = "" } = options;
-  if (!file) throw Error("Cannot parse null or empty string");
+  if (!file) {
+    throw Error("Cannot parse null or empty string");
+  }
 
   // this is a check for an edge case, where the user uploads come kind
   // of file that's full of bps but doesn't fit into a defined type
@@ -150,15 +152,15 @@ const fileToParts = async (file, options) => {
 
 /**
  * filesToParts can convert either string representations of
- * dna files, or a list of HTML5 File objects, into Parts that
- * can then be saved to our DB
+ * DNA files, or a list of HTML5 File objects, into parts
  */
 export default async (files, options) =>
   new Promise(resolve => {
     const { fileName = "", colors = [], backbone = "" } = options;
     // if it's just a single file string
-    if (typeof files === "string")
+    if (typeof files === "string") {
       resolve(fileToParts(files, { fileName, colors, backbone }));
+    }
 
     // a list of file strings or a FileList has been dropped
     let numToUpload = files.length;

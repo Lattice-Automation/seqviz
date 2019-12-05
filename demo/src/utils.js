@@ -18,7 +18,7 @@ export const urlParams = () => {
 };
 
 export const updateUrl = query => {
-  let { backbone = 0, biobrick = 0 } = query;
+  let { backbone = "pSB1C3", biobrick = "" } = query;
 
   // Destructuring to 0 is to handle the case where the user has deleted the input
   // We need to be able to differentiate between empty string and null

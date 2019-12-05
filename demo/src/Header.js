@@ -10,7 +10,7 @@ import {
 
 import SeqvizLogo from "../src/seqviz-brand-small.png";
 import "./Header.css";
-import { urlParams, updateUrl } from "./utils";
+import { history, urlParams, updateUrl } from "./utils";
 
 const backBoneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -71,13 +71,42 @@ export class Header extends Component {
             active={this.state.active}
             handleMetaClick={this.handleMetaClick}
           />
-          <Image id="brand" src={SeqvizLogo} floated="right" />
+          <Image
+            id="brand"
+            src={SeqvizLogo}
+            floated="right"
+            onClick={() => {
+              if (history.location.search !== "") {
+                updateUrl({ backbone: "pSB1C3" });
+              }
+            }}
+          />
         </div>
         {this.state.active && part && (
           <div id="header-meta">
             <HeaderMeta {...this.props} />
           </div>
         )}
+      </div>
+    );
+  }
+}
+
+export class SelectionInfo extends Component {
+  render() {
+    const { active, handleMetaClick, part } = this.props;
+
+    return (
+      <div className="meta-toggle">
+        <Button
+          id="meta-button"
+          toggle
+          active={active}
+          disabled={part ? false : true}
+          onClick={handleMetaClick}
+        >
+          {active ? "HIDE META" : "SHOW META"}
+        </Button>
       </div>
     );
   }
@@ -207,26 +236,6 @@ export class PartInput extends Component {
         onBlur={() => this.setState({ focus: false })}
         onMouseLeave={() => this.setState({ hover: false })}
       />
-    );
-  }
-}
-
-export class SelectionInfo extends Component {
-  render() {
-    const { active, handleMetaClick, part } = this.props;
-
-    return (
-      <div className="meta-toggle">
-        <Button
-          id="meta-button"
-          toggle
-          active={active}
-          disabled={part ? false : true}
-          onClick={handleMetaClick}
-        >
-          {active ? "HIDE META" : "SHOW META"}
-        </Button>
-      </div>
     );
   }
 }

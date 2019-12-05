@@ -54,6 +54,7 @@ input#part-input {
   padding: 0 0 0 16px;
   border-left: 1px solid #f0f0f0;
   margin: auto;
+  cursor: pointer;
 }
 
 #header-primary .label {
