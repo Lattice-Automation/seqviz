@@ -2,11 +2,11 @@ import { isEqual } from "lodash";
 import * as React from "react";
 import sizeMe from "react-sizeme";
 
+import { cutSitesInRows } from "../../utils/digest/digest";
+import seqSearch from "../Find/Find";
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import "./SeqViewer.scss";
-import seqSearch from "../Find/Find";
-import { cutSitesInRows } from "../../utils/digest/digest";
 
 sizeMe.noPlaceholders = true;
 

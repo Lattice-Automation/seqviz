@@ -3,7 +3,7 @@
  * See viewer.js for the library's entrypoint
  */
 
-import { Viewer, pUC } from "./viewer";
+import { Viewer } from "./viewer";
 
 import "./index.css";
 

@@ -29,7 +29,6 @@ export const Viewer = (element = "root", viewerOptions) => {
       shift: false,
       alt: false
     },
-    debug: false,
     enzymes: [],
     onSearch: results => {
       return results;
@@ -56,11 +55,6 @@ export const Viewer = (element = "root", viewerOptions) => {
     ...viewerOptions
   };
 
-  // log configuration options if debugging
-  if (options.debug) {
-    logConfig(options);
-  }
-
   // create the React element and HTML for is not using React
   const viewerReact = React.createElement(PartExplorer, options, null);
   const viewerHTML = ReactDOMServer.renderToString(viewerReact);
@@ -80,70 +74,4 @@ export const Viewer = (element = "root", viewerOptions) => {
     viewerHTML: viewerHTML,
     render: render
   };
-};
-
-/**
- * Log the part and viewer options passed to the component
- *
- * @param {ViewerOptions} options viewer configuration options
- */
-const logConfig = options => {
-  const {
-    part,
-    viewer: viewerType,
-    showAnnotations,
-    showPrimers,
-    showComplement,
-    showIndex,
-    colors,
-    zoom,
-    backbone,
-    searchQuery: { query, mismatch },
-    enzymes
-  } = options;
-
-  const displayName = part.name
-    ? part.name
-    : part.constructor.name === "FileList"
-    ? part[0].name
-    : part;
-  const displayType = viewerType;
-  const displayAnnotations = showAnnotations ? "on" : "off";
-  const displayPrimers = showPrimers ? "on" : "off";
-  const displayComplement = showComplement ? "on" : "off";
-  const displayIndex = showIndex ? "on" : "off";
-  const displayCustomColors = colors.length ? "yes" : "no";
-  const displayZoomLinear =
-    zoom.linear > 50
-      ? zoom.linear - 50
-      : zoom.linear < 50
-      ? 0 - (50 - zoom.linear)
-      : 0;
-  const displayBackbone =
-    displayName.startsWith("BB") && backbone.length
-      ? `BioBrick Backbone : ${backbone}`
-      : "";
-  console.log(
-    `
-  ====================================================
-  Current Part: ${displayName}
-  Current seqviz Settings:
-      Viewer Type: ${displayType} (circular | linear | both)
-      Show Annotations: ${displayAnnotations}
-      Show Primers: ${displayPrimers}
-      Show Complement: ${displayComplement}
-      Show Index: ${displayIndex}
-      Using Custom Colors: ${displayCustomColors}
-      Linear Zoom: ${displayZoomLinear} (-50 . 50)
-      Searching for sequence "${query}" with ${mismatch} mismatch allowance
-      Showing cut sites for enzymes: ${enzymes}
-      ${displayBackbone}
-  =====================================================
-  `
-  );
-  if (viewerType === "circular" && query !== "") {
-    console.warn(
-      "Search visualization is only supported in Linear Sequence View."
-    );
-  }
 };

@@ -2,6 +2,12 @@ const fasta = require("./parsers/fasta");
 const fs = require("fs");
 const path = require("path");
 
+const parseFASTA = async file => {
+  if (!file) throw Error("Cannot parse null or empty string");
+  const parts = await fasta.parseFASTA(file);
+  return extractMeta(parts);
+};
+
 // https://react.semantic-ui.com/modules/search/#types-category
 const extractMeta = parts => {
   const partsMeta = parts.map(part => {
@@ -31,12 +37,6 @@ const extractMeta = parts => {
   return distinctTypes.map(type => {
     return { name: type, results: partsOfType(type) };
   });
-};
-
-const parseFASTA = async file => {
-  if (!file) throw Error("Cannot parse null or empty string");
-  const parts = await fasta.parseFASTA(file);
-  return extractMeta(parts);
 };
 
 /**
