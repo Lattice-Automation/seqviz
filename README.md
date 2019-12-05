@@ -124,13 +124,13 @@ The `viewer` is an object with three fields.
 
 The library is built with [React.js](https://reactjs.org/). `viewer.viewer` will return the `React` component for the viewer so that you can render it yourself.
 
-#### `viewer.viewerHTML`
-
-This will return the `HTML` for the viewer if you want to render the viewer yourself. This is a trial feature and may not be sufficient information for a renderer to render the viewer.
-
 #### `viewer.render()`
 
 This renders the viewer using `ReactDOM`(which is packaged with the library so you do not need to have it installed locally).
+
+#### `viewer.renderToString()`
+
+This will return the `HTML` for the viewer if you want to render the viewer yourself. A call to `[ReactDOMServer.renderToString](https://reactjs.org/docs/react-dom-server.html)`.
 
 ### Viewer Constructor
 

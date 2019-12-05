@@ -56,10 +56,13 @@ export const Viewer = (element = "root", viewerOptions) => {
   };
 
   // create the React element and HTML for is not using React
-  const viewerReact = React.createElement(PartExplorer, options, null);
-  const viewerHTML = ReactDOMServer.renderToString(viewerReact);
+  const viewer = React.createElement(PartExplorer, options, null);
   const render = () => {
-    ReactDOM.render(viewerReact, domElement);
+    return ReactDOM.render(viewer, domElement);
+  };
+
+  const renderToString = () => {
+    return ReactDOMServer.renderToString(viewer);
   };
 
   // get the HTML element by ID or use as is if passed directly
@@ -70,8 +73,8 @@ export const Viewer = (element = "root", viewerOptions) => {
       : document.getElementById(element);
 
   return {
-    viewer: viewerReact,
-    viewerHTML: viewerHTML,
-    render: render
+    viewer,
+    renderToString,
+    render
   };
 };
