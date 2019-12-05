@@ -1,6 +1,6 @@
 {
   "name": "seqviz",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "A framework agnostic DNA viewer for sequences or files (gb, fasta, etc) with auto-feature annotation",
   "keywords": [
     "seqviz",
