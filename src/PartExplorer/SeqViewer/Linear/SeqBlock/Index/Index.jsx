@@ -105,19 +105,21 @@ export default class Index extends React.PureComponent {
   render() {
     const {
       lineHeight,
-      size,
       transform,
       showIndex,
       resizing,
-      bpsPerBlock,
-      seq
+      findXAndWidth,
+      firstBase,
+      lastBase
     } = this.props;
-    const adjustedWidth =
-      seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+
+    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+    const { width } = findXAndWidth(firstBase, lastBase);
+
     if (!showIndex) return null;
 
     const axisStyle = {
-      width: adjustedWidth,
+      width: width,
       height: 1,
       shapeRendering: resizing ? "optimizeSpeed" : "crispEdges"
     };

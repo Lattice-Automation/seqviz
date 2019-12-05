@@ -61,7 +61,7 @@ let viewer = Viewer("app-root", {
     alt: false
   },
   // searchQuery: { query: "GCGGX" },
-  backbone: "pSB1C3",
+  // backbone: "pSB1C3",
   enzymes: [],
   translations: [{ start: 0, end: 89, direction: "FORWARD" }]
 });
