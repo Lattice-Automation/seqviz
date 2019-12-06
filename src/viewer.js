@@ -103,7 +103,6 @@ export const Viewer = (element = "root", viewerOptions) => {
   };
 
   return {
-    viewer,
     render,
     renderToString,
     setState

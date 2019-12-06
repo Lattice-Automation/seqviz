@@ -33,13 +33,13 @@ export default class PartExplorer extends React.Component {
       // none of the feature's ends can be greater than length of the plasmid - 1
       part.annotations.forEach(a => {
         a.start %= part.seq.length;
-        if (a.end >= part.seq.length) {
-          console.warning(
+        if (a.end > part.seq.length) {
+          console.warn(
             `Annotation ${a.name}'s end is > sequence length ${part.seq.length}:` +
               "SeqViz uses 0-based indexing and the max index for an element is N - 1 where N is the length of the sequence."
           );
-          a.end %= part.seq.length;
         }
+        a.end %= part.seq.length;
       });
 
       this.setState({ part });

@@ -120,10 +120,6 @@ The only required inputs are an element and a part, see below for details.
 
 The `viewer` is an object with three fields.
 
-#### `viewer.viewer`
-
-The library is built with [React.js](https://reactjs.org/). `viewer.viewer` will return the `React` component for the viewer so that you can render it yourself.
-
 #### `viewer.render()`
 
 This renders the viewer using `ReactDOM`(which is packaged with the library so you do not need to have it installed locally).

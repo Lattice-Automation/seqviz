@@ -69,7 +69,7 @@
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
     "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy",
-    "test": "react-scripts test",
+    "test": "CI=true react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
