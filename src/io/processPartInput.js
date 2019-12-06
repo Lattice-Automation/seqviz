@@ -25,7 +25,7 @@ const processPartInput = async (partInput, options) => {
     }
 
     if (partInput.length < 1) {
-      console.warning(
+      console.warn(
         "Instantiation Error: There are no valid files in your part input"
       );
       return null;
