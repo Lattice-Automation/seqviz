@@ -382,7 +382,7 @@ export class SequenceViewer extends Component {
       backbone = "",
       viewType: view = "both",
       annotations = true,
-      primers = true,
+      // primers = true,
       complement = true,
       index = true,
       query = "",
@@ -392,35 +392,34 @@ export class SequenceViewer extends Component {
     } = this.props;
 
     const viewType = view || "both";
-    const seqviz = window.seqviz;
+    const SeqViz = window.seqviz.SeqViz;
 
-    const viewer = seqviz.Viewer("demo-root", {
-      part: part,
-      backbone: backbone,
-      viewer: viewType,
-      showAnnotations: annotations,
-      showPrimers: primers,
-      showComplement: complement,
-      showIndex: index,
-      zoom: { linear: lzoom },
-      onSelection: selection => {
-        setDemoState({ selection: selection });
-      },
-      onSearch: results => {
-        setDemoState({ searchResults: results });
-      },
-      searchQuery: { query: query },
-      copySeq: {
-        key: "c",
-        meta: true,
-        ctrl: false,
-        shift: false,
-        alt: false
-      },
-      enzymes: Object.values(enzymes)
-    });
-
-    return part && viewer.viewer;
+    return (
+      <SeqViz
+        accession={part}
+        backbone={backbone}
+        viewer={viewType}
+        showAnnotations={annotations}
+        showComplement={complement}
+        showIndex={index}
+        onSelection={selection => {
+          setDemoState({ selection: selection });
+        }}
+        onSearch={results => {
+          setDemoState({ searchResults: results });
+        }}
+        searchQuery={{ query: query }}
+        copySeq={{
+          key: "c",
+          meta: true,
+          ctrl: false,
+          shift: false,
+          alt: false
+        }}
+        enzymes={Object.values(enzymes)}
+        zoom={{ linear: lzoom }}
+      />
+    );
   }
 }
 

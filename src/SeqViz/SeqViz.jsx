@@ -2,9 +2,11 @@ import { isEqual } from "lodash";
 import PropTypes from "prop-types";
 import * as React from "react";
 
+import externalToPart from "../io/externalToPart";
+import filesToParts from "../io/filesToParts";
+import { dnaComplement } from "../utils/parser";
+import { defaultSelection, annotationFactory } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
-import { defaultSelection } from "../utils/sequence";
-import processPartInput from "../io/processPartInput";
 
 import "./SeqViz.scss";
 
@@ -14,42 +16,38 @@ import "./SeqViz.scss";
  */
 export default class SeqViz extends React.Component {
   state = {
-    seqSelection: { ...defaultSelection },
+    circularCentralIndex: 0,
     findState: {
       searchResults: [],
       searchIndex: 0
     },
-    circularCentralIndex: 0,
     linearCentralIndex: 0,
-    part: {}
+    part: {},
+    seqSelection: { ...defaultSelection }
   };
 
   static propTypes = {
+    accession: PropTypes.string,
+    annotations: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.number.isRequired,
+        end: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
+        color: PropTypes.string,
+        type: PropTypes.string
+      })
+    ),
     backbone: PropTypes.string.isRequired,
     bpColors: PropTypes.object.isRequired,
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    compSeq: PropTypes.string,
     copySeq: PropTypes.object.isRequired,
     enzymes: PropTypes.arrayOf(PropTypes.string).isRequired,
+    file: PropTypes.object,
+    name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
     onSelection: PropTypes.func.isRequired,
-    part: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        seq: PropTypes.string.isRequired,
-        compSeq: PropTypes.string,
-        annotations: PropTypes.arrayOf(
-          PropTypes.shape({
-            name: PropTypes.string,
-            start: PropTypes.number.isRequired,
-            end: PropTypes.number.isRequired,
-            direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
-            color: PropTypes.string,
-            type: PropTypes.string
-          })
-        )
-      })
-    ]).isRequired,
     searchNext: PropTypes.shape({
       key: PropTypes.string,
       meta: PropTypes.bool,
@@ -61,6 +59,7 @@ export default class SeqViz extends React.Component {
       query: PropTypes.string,
       mismatch: PropTypes.number
     }).isRequired,
+    seq: PropTypes.string,
     showAnnotations: PropTypes.bool.isRequired,
     showComplement: PropTypes.bool.isRequired,
     showIndex: PropTypes.bool.isRequired,
@@ -83,6 +82,8 @@ export default class SeqViz extends React.Component {
   };
 
   static defaultProps = {
+    accession: "",
+    annotations: null,
     backbone: "",
     bpColors: {},
     colors: [],
@@ -93,7 +94,10 @@ export default class SeqViz extends React.Component {
       shift: false,
       alt: false
     },
+    compSeq: "",
     enzymes: [],
+    file: null,
+    name: "",
     onSearch: results => results,
     onSelection: selection => selection,
     searchNext: {
@@ -104,6 +108,7 @@ export default class SeqViz extends React.Component {
       alt: false
     },
     searchQuery: { query: "", mismatch: 0 },
+    seq: "",
     showAnnotations: true,
     showComplement: true,
     showIndex: true,
@@ -113,33 +118,35 @@ export default class SeqViz extends React.Component {
     zoom: { circular: 0, linear: 50 }
   };
 
+  componentDidMount = async () => {
+    this.addKeyBindings();
+    this.setPart(this.props, true);
+  };
+
+  componentDidUpdate = async (props, _) => {
+    this.addKeyBindings();
+    this.setPart(props);
+  };
+
   /**
-   * Convert the part input (ID, object, File, etc) to a part for the viewer
+   * Set the part from a file or an accession ID
    */
-  createPart = async () => {
-    const { part: partInput, colors, backbone } = this.props;
+  setPart = async (props, force = false) => {
+    const { accession, file } = this.props;
 
-    let part = await processPartInput(partInput, { colors, backbone });
-
-    if (part) {
-      // none of the feature's ends can be greater than length of the plasmid - 1
-      part.annotations.forEach(a => {
-        if (a.end > part.seq.length) {
-          console.warn(
-            `Annotation ${a.name}'s end is > sequence length ${part.seq.length}:` +
-              "SeqViz uses 0-based indexing and the max index for an element is N - 1 where N is the length of the sequence."
-          );
-        }
-
-        a.start %= part.seq.length;
-        a.end %= part.seq.length;
-      });
-
-      this.setState({ part });
+    if (force || accession !== props.accession || file !== props.file) {
+      if (props.accession) {
+        const part = await externalToPart(props.accession, this.props);
+        console.log(part);
+        this.setState({ part });
+      } else if (props.file) {
+        const parts = await filesToParts(props.file, this.props);
+        this.setState({ part: parts[0] });
+      }
     }
   };
 
-  addKeyBindings = () => {
+  addKeyBindings() {
     const { searchNext, copySeq } = this.props;
 
     /**
@@ -204,11 +211,16 @@ export default class SeqViz extends React.Component {
 
     const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 
-    const newBindingsMap = { searchNext: searchNext, copySeq: copySeq };
+    const newBindingsMap = { searchNext, copySeq };
 
     let uniqueNewBindings = {};
     for (const binding in newBindingsMap) {
       const currKey = newBindingsMap[binding].key;
+
+      if (!currKey) {
+        continue;
+      }
+
       if (currKey && takenBindings.includes(currKey)) {
         console.error(
           `Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding for ${binding}.`
@@ -222,9 +234,7 @@ export default class SeqViz extends React.Component {
           } else {
             uniqueNewBindings = {
               ...uniqueNewBindings,
-              ...{
-                [currKey]: uniqueNewBindings[currKey].concat([binding])
-              }
+              [currKey]: uniqueNewBindings[currKey].concat([binding])
             };
           }
         }
@@ -236,45 +246,10 @@ export default class SeqViz extends React.Component {
         };
       }
     }
-  };
-
-  componentDidMount = async () => {
-    this.createPart(true);
-    this.addKeyBindings();
-  };
+  }
 
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
-
-  componentDidUpdate = async prevProps => {
-    const {
-      part: partInput,
-      colors,
-      backbone,
-      zoom: { circular: czoom, linear: lzoom },
-      enzymes
-    } = this.props;
-
-    const {
-      part: prevPart,
-      colors: prevColors,
-      backbone: prevBackbone,
-      zoom: { circular: prevCzoom, linear: prevLzoom },
-      enzymes: prevEnzymes
-    } = prevProps;
-
-    if (
-      partInput !== prevPart ||
-      backbone !== prevBackbone ||
-      colors !== prevColors ||
-      czoom !== prevCzoom ||
-      lzoom !== prevLzoom ||
-      enzymes !== prevEnzymes
-    ) {
-      this.createPart(partInput !== prevPart);
-      this.addKeyBindings();
-    }
-  };
 
   setPartState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
@@ -293,52 +268,65 @@ export default class SeqViz extends React.Component {
    * Traverse the search results array and return a search index via a prop callback to
    * tell the viewer what to highlight
    */
-  incrementSearch = () => {
+  incrementSearch() {
     const {
       findState: { searchResults, searchIndex }
     } = this.state;
 
-    let newSearchIndex = searchIndex;
-    if (searchResults.length) {
-      const lastIndex = searchResults.length - 1;
-      newSearchIndex += 1;
-      if (newSearchIndex > lastIndex) newSearchIndex = 0;
-      this.setState({
-        findState: {
-          searchResults: searchResults,
-          searchIndex: newSearchIndex
-        },
-        circularCentralIndex: searchResults[searchIndex].start,
-        linearCentralIndex: searchResults[searchIndex].start
-      });
+    if (!searchResults.length) {
+      return;
     }
-  };
+
+    let newSearchIndex = searchIndex + 1;
+    const lastIndex = searchResults.length - 1;
+    if (newSearchIndex > lastIndex) {
+      newSearchIndex = 0;
+    }
+
+    this.setState({
+      findState: {
+        searchResults: searchResults,
+        searchIndex: newSearchIndex
+      },
+      circularCentralIndex: searchResults[searchIndex].start,
+      linearCentralIndex: searchResults[searchIndex].start
+    });
+  }
 
   render() {
     const { viewer } = this.props;
+    let { annotations, compSeq, name, seq } = this.props;
     const { part } = this.state;
 
-    const partAvailable = part.seq || part.seq === "" || false;
+    // part is either from a file/accession, or each prop was set
+    seq = seq || part.seq || "";
+    compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
+    annotations = (annotations || part.annotations || []).map(a => ({
+      ...annotationFactory(a.name),
+      ...a,
+      start: a.start % (seq.length || 1),
+      end: a.end % (seq.length || 1)
+    }));
+    name = name || part.name;
+
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";
 
-    if (!partAvailable || !part.seq.length) {
-      return (
-        <div
-          className="la-vz-part-explorer-container"
-          id="la-vz-part-explorer"
-        />
-      );
+    if (!seq.length) {
+      return <div className="la-vz-seqviz" />;
     }
 
     return (
-      <div className="la-vz-part-explorer-container" id="la-vz-part-explorer">
-        <div className="la-vz-seq-viewers-container">
+      <div className="la-vz-seqviz">
+        <div className="la-vz-seqviz-container">
           {circular && (
             <SeqViewer
               {...this.props}
               {...this.state}
-              {...part}
+              annotations={annotations}
+              compSeq={compSeq}
+              name={name}
+              seq={seq}
               setPartState={this.setPartState}
               incrementSearch={this.incrementSearch}
               Circular
@@ -349,7 +337,10 @@ export default class SeqViz extends React.Component {
             <SeqViewer
               {...this.props}
               {...this.state}
-              {...part}
+              annotations={annotations}
+              compSeq={compSeq}
+              name={name}
+              seq={seq}
               setPartState={this.setPartState}
               incrementSearch={this.incrementSearch}
               Circular={false}

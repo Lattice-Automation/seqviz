@@ -40,7 +40,7 @@ export default class SeqBlock extends React.PureComponent {
    * findXAndWidth
    *
    * a helper method that's used in several of the child components to figure
-   * out how far from the left the element is, and how wide it should be
+   * out how far from the left the element is and how wide it should be
    *
    * @param  {Number} firstIndex [the first index of the annotation/ORF/cutSite etc]
    * @param  {Number} lastIndex  [last index/basepair of the element]
@@ -48,9 +48,7 @@ export default class SeqBlock extends React.PureComponent {
    */
   findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
     const {
-      part: {
-        seq: { length: seqLength }
-      },
+      fullSeq: { length: seqLength },
       firstBase,
       size,
       bpsPerBlock
@@ -73,10 +71,11 @@ export default class SeqBlock extends React.PureComponent {
     if (firstIndex === lastIndex) {
       // it starts on the last bp
       width = 0;
-    } else if (firstIndex > firstBase || lastIndex < lastBase) {
+    } else if (firstIndex >= firstBase || lastIndex < lastBase) {
       // it starts or ends in this SeqBlock
       const start = Math.max(firstIndex, firstBase);
       const end = Math.min(lastIndex, lastBase);
+
       width = widthMinusPadding * ((end - start) / bpsPerBlock);
       width = Math.abs(width) || 0;
     } else if (firstBase + bpsPerBlock > seqLength && multiBlock) {

@@ -104,7 +104,7 @@ class CircularSelection extends React.PureComponent {
     };
 
     return (
-      <g id="la-vz-circular-selection">
+      <g className="la-vz-circular-selection">
         {selLength && (
           <path
             d={selectPath}

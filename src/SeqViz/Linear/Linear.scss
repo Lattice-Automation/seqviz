@@ -1,4 +1,4 @@
-#la-vz-linear-scroller {
+.la-vz-linear-scroller {
   height: 100%;
 
   outline: none !important;
@@ -9,7 +9,7 @@
   overflow-y: scroll;
   cursor: text;
 
-  #la-vz-seqblock-container {
+  .la-vz-seqblock-container {
     width: 100%; // this will pass the width down to the seqblocks for them to inherit correctly
   }
 
@@ -28,22 +28,22 @@
   fill: #def6ff;
 }
 
-#la-vz-linear-scroller.scroll::-webkit-scrollbar {
+.la-vz-linear-scroller.scroll::-webkit-scrollbar {
   width: 8px;
 }
 
-#la-vz-linear-scroller.scroll::-webkit-scrollbar-thumb {
+.la-vz-linear-scroller.scroll::-webkit-scrollbar-thumb {
   background-color: #b7b9bd;
   border-color: #b7b9bd;
   border-radius: 5px;
 }
 
-#la-vz-linear-scroller.scroll::-webkit-scrollbar-track {
+.la-vz-linear-scroller.scroll::-webkit-scrollbar-track {
   background: transparent;
   border-color: transparent;
 }
 
-#la-vz-linear-scroller.scroll::-webkit-scrollbar-track-piece {
+.la-vz-linear-scroller.scroll::-webkit-scrollbar-track-piece {
   background-color: #f7f7f7;
   border-color: transparent;
 }

@@ -24,7 +24,7 @@ export default class AnnotationRows extends React.PureComponent {
     if (!showAnnotations) return null;
 
     return (
-      <g id="la-vz-linear-annotations">
+      <g className="la-vz-linear-annotations">
         {annotationRows.map((a, i) => {
           const y = yDiff + elementHeight * i;
 
@@ -55,11 +55,15 @@ export default class AnnotationRows extends React.PureComponent {
  */
 class AnnotationRow extends React.PureComponent {
   hoverOtherAnnotationRows = (className, opacity) => {
-    const elements = document
-      .getElementById("la-vz-linear-scroller")
-      .getElementsByClassName(className);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = opacity;
+    const viewers = document.getElementsByClassName("la-vs-linear-scroller");
+    for (let j = 0; j < viewers.length; j += 1) {
+      const viewer = viewers[j];
+
+      const elements = viewer.getElementsByClassName(className);
+
+      for (let i = 0; i < elements.length; i += 1) {
+        elements[i].style.fillOpacity = opacity;
+      }
     }
   };
 
@@ -80,7 +84,8 @@ class AnnotationRow extends React.PureComponent {
       firstBase,
       lastBase,
       annotations,
-      fullSeq
+      fullSeq,
+      bpsPerBlock
     } = this.props;
 
     const { color, name, direction, start, end } = a;
@@ -95,7 +100,8 @@ class AnnotationRow extends React.PureComponent {
 
     // does the annotation overflow to the left or the right of this seqBlock?
     let overflowLeft = start < firstBase;
-    let overflowRight = end > lastBase || start === end; // start === end means covers whole plasmid
+    let overflowRight =
+      end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
 
     // if the annotation starts and ends in a SeqBlock, by circling all the way around,
     // it will be rendered twice (once from the firstBase to start and another from
@@ -186,7 +192,8 @@ class AnnotationRow extends React.PureComponent {
 				L ${width - cW} ${cH}
 				L ${width} ${2 * cH}
 				L ${width - cW} ${3 * cH}
-				L ${width} ${4 * cH}`; // jagged right edge
+        L ${width} ${4 * cH}`; // jagged right edge
+        console.log(a, overflowRight, crossZero);
       } else if (endFWD) {
         bottomRight = `
 				L ${width} ${height / 2}
@@ -274,7 +281,11 @@ class AnnotationRow extends React.PureComponent {
     const nameFits = nameLength < width - 15;
 
     return (
-      <g key={a.id} id={a.id} transform={`translate(${x}, 0)`}>
+      <g
+        key={`${a.id}-${firstBase}`}
+        id={a.id}
+        transform={`translate(${x}, 0)`}
+      >
         {annotationPath},
         {nameFits ? (
           <text
@@ -301,7 +312,11 @@ class AnnotationRow extends React.PureComponent {
     const gTranslate = `translate(0, ${y - 5})`;
 
     return (
-      <g {...size} transform={gTranslate} className="linear-annotation-row">
+      <g
+        {...size}
+        transform={gTranslate}
+        className="la-vz-linear-annotation-row"
+      >
         {annotations.map(this.renderAnnotation)}
       </g>
     );

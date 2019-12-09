@@ -13,7 +13,11 @@ export default class InfiniteScroll extends React.PureComponent {
     super(props);
 
     this.state = {
-      visibleBlocks: []
+      visibleBlocks:
+        // start off with first 5 blocks shown
+        new Array(Math.min(5, props.seqBlocks.length))
+          .fill(null)
+          .map((_, i) => i)
     };
     this.scroller = React.createRef();
     this.insideDOM = React.createRef();
@@ -254,15 +258,14 @@ export default class InfiniteScroll extends React.PureComponent {
 
     return (
       <div
-        id="la-vz-linear-scroller"
+        className="la-vz-linear-scroller"
         ref={this.scroller}
-        className="la-vz-scroll"
         onScroll={this.handleScrollOrResize}
         onMouseOver={this.handleMouseOver}
         onFocus={() => {}}
       >
         <div
-          id="la-vz-seqblock-container"
+          className="la-vz-seqblock-container"
           style={{ height }}
           ref={this.insideDOM}
         >

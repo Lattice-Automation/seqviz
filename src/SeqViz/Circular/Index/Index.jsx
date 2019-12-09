@@ -179,7 +179,7 @@ export default class Index extends React.PureComponent {
       largeArc: true
     });
     return (
-      <g id="la-vz-circular-index">
+      <g className="la-vz-circular-index">
         <text {...nameStyle}>
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>

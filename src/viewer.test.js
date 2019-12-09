@@ -26,7 +26,7 @@ const defaultOptions = {
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  let viewer = Viewer(div, { ...defaultOptions, part: PUC });
+  let viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
   viewer.render();
 });
@@ -44,7 +44,7 @@ it("renders while querying an iGEM part", () => {
 
 it("updates props with setState", () => {
   const div = document.createElement("div");
-  let viewer = Viewer(div, { ...defaultOptions, part: PUC });
+  let viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
   viewer.render();
 
