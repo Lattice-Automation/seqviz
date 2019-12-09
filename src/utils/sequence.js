@@ -282,8 +282,8 @@ export const primerPcrSelectionLimits = { min: 23 };
 /**
  * a default annotation generator
  */
-export const annotationFactory = annotationName => {
-  const nameSum = annotationName
+export const annotationFactory = annName => {
+  const nameSum = (annName || " ")
     .split("")
     .reduce((s, c) => s + c.charCodeAt(0), 0);
   const color = colorByIndex(nameSum);
@@ -291,7 +291,7 @@ export const annotationFactory = annotationName => {
   return {
     id: shortid.generate(),
     color: color,
-    name: annotationName || "Untitled",
+    name: annName || "Untitled",
     type: "",
     start: 0,
     end: 0,

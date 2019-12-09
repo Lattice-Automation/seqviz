@@ -1,3 +1,5 @@
+import filesToParts from "../io/filesToParts";
+import externalToParts from "../io/externalToParts";
 import { partFactory, dnaComplement, partStub } from "../utils/parser";
 import {
   annotationFactory,
@@ -5,8 +7,6 @@ import {
   validSequenceCharacters,
   trimNewLines
 } from "../utils/sequence";
-import filesToParts from "../io/filesToParts";
-import externalToParts from "../io/externalToParts";
 
 /**
  * Determine what the input was to see if we need a parser or factory.
@@ -29,17 +29,19 @@ const processPartInput = async (partInput, options) => {
         "Instantiation Error: There are no valid files in your part input"
       );
       return null;
-    } else {
-      if (partInput.length > 1) {
-        console.warn(
-          "seqviz can only display one part at a time. The first valid file in your file list will be displayed."
-        );
-      }
-      return partFromFiles(partInput, colors);
     }
+
+    if (partInput.length > 1) {
+      console.warn(
+        "seqviz can only display one part at a time. The first valid file in your file list will be displayed."
+      );
+    }
+
+    return partFromFiles(partInput, colors);
   }
+
   // We might be getting a single File
-  else if (partInput.constructor.name === "File") {
+  if (partInput.constructor.name === "File") {
     if (backbone.length) {
       console.warn(
         "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
@@ -47,8 +49,9 @@ const processPartInput = async (partInput, options) => {
     }
     return partFromFile(partInput, colors);
   }
+
   // We might have been passed a valid part already
-  else if (partInput.constructor.name === "Object") {
+  if (partInput.constructor.name === "Object") {
     if (backbone.length) {
       console.warn(
         "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
@@ -68,8 +71,7 @@ const processPartInput = async (partInput, options) => {
       );
       return null;
     } else {
-      const part = { ...partFactory(), ...partInput };
-      part.seq = sequence;
+      const part = { ...partFactory(), ...partInput, seq: sequence };
       if (typeof complement !== "string" || complement === "") {
         part.compSeq = dnaComplement(sequence).compSeq;
       }
@@ -78,8 +80,9 @@ const processPartInput = async (partInput, options) => {
       return part;
     }
   }
+
   // We might get a string
-  else if (partInput.constructor.name === "String") {
+  if (partInput.constructor.name === "String") {
     if (partInput.length < 1) {
       console.error("Instantiation Error: No valid part found.");
       return partStub(colors);
@@ -99,34 +102,34 @@ const processPartInput = async (partInput, options) => {
     }
 
     // Otherwise check if it's just a sequence string
-    else {
-      if (backbone.length) {
-        console.warn(
-          "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
-        );
-      }
-      const invalidSequence = new RegExp(
-        `[^${Object.keys(validSequenceCharacters).join("")}()|]`,
-        "gi"
+    if (backbone.length) {
+      console.warn(
+        "You've specified a backbone, were you trying to display a BioBrick part? If so, please specify the BioBrick accession number as your part input."
       );
-      if (!invalidSequence.test(trimNewLines(partInput))) {
-        return {
-          ...partFactory(),
-          seq: partInput,
-          compSeq: dnaComplement(partInput).compSeq,
-          name: "Untitled"
-        };
-      } else {
-        console.warn(
-          "Instantiation Error: Your sequence string has invalid characters. Only nucleotides and nucleotide wildcards are allowed."
-        );
-        return null;
-      }
     }
-  } else {
-    console.error("Instantiation Error: No valid part found.");
-    return partStub(colors);
+
+    const invalidSequence = new RegExp(
+      `[^${Object.keys(validSequenceCharacters).join("")}()|]`,
+      "gi"
+    );
+
+    if (!invalidSequence.test(trimNewLines(partInput))) {
+      return {
+        ...partFactory(),
+        seq: partInput,
+        compSeq: dnaComplement(partInput).compSeq,
+        name: "Untitled"
+      };
+    }
+
+    console.warn(
+      "Instantiation Error: Your sequence string has invalid characters. Only nucleotides and nucleotide wildcards are allowed."
+    );
+    return null;
   }
+
+  console.error("Instantiation Error: No valid part found.");
+  return partStub(colors);
 };
 
 const partFromFiles = async (files, colors = []) => {
@@ -186,12 +189,11 @@ const partFromFile = async (file, colors = []) => {
 const validateAnnotations = (fileName, annotations, colors = []) => {
   if (!Array.isArray(annotations) || annotations === []) {
     return [];
-  } else {
-    return annotations.map(annotation => ({
-      ...annotationFactory(annotation.name),
-      ...annotation
-    }));
   }
+  return annotations.map(annotation => ({
+    ...annotationFactory(annotation.name),
+    ...annotation
+  }));
 };
 
 /**
@@ -201,12 +203,11 @@ const validateAnnotations = (fileName, annotations, colors = []) => {
 const validatePrimers = primers => {
   if (!Array.isArray(primers) || primers === []) {
     return [];
-  } else {
-    return primers.map(primer => ({
-      ...primerFactory(),
-      ...primer
-    }));
   }
+  return primers.map(primer => ({
+    ...primerFactory(),
+    ...primer
+  }));
 };
 
 export default processPartInput;

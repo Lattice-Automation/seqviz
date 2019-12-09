@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import * as React from "react";
 
 import SeqViewer from "./SeqViewer";
-import "./SeqViewerContainer.scss";
 import { defaultSelection } from "../utils/sequence";
 import processPartInput from "../io/processPartInput";
+
+import "./SeqViz.scss";
 
 /**
  * A container for processing part input and rendering either
  * a linear or circular viewer
  */
-export default class SeqViewerContainer extends React.Component {
+export default class SeqViz extends React.Component {
   state = {
     seqSelection: { ...defaultSelection },
     findState: {
@@ -39,10 +40,10 @@ export default class SeqViewerContainer extends React.Component {
         compSeq: PropTypes.string,
         annotations: PropTypes.arrayOf(
           PropTypes.shape({
+            name: PropTypes.string,
             start: PropTypes.number.isRequired,
             end: PropTypes.number.isRequired,
             direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
-            name: PropTypes.string,
             color: PropTypes.string,
             type: PropTypes.string
           })
@@ -123,13 +124,14 @@ export default class SeqViewerContainer extends React.Component {
     if (part) {
       // none of the feature's ends can be greater than length of the plasmid - 1
       part.annotations.forEach(a => {
-        a.start %= part.seq.length;
         if (a.end > part.seq.length) {
           console.warn(
             `Annotation ${a.name}'s end is > sequence length ${part.seq.length}:` +
               "SeqViz uses 0-based indexing and the max index for an element is N - 1 where N is the length of the sequence."
           );
         }
+
+        a.start %= part.seq.length;
         a.end %= part.seq.length;
       });
 

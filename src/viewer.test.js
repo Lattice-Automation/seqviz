@@ -10,8 +10,8 @@ const defaultOptions = {
   zoom: { linear: 50 },
   bpColors: { A: "#FFF" },
   colors: [],
-  onSelection: selection => {},
-  onSearch: results => {},
+  onSelection: () => {},
+  onSearch: () => {},
   searchNext: {
     key: "a",
     meta: false,

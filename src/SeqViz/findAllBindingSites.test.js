@@ -1,4 +1,4 @@
-import findAllBindingSites from "./findAllBindingSites.jsx.js";
+import findAllBindingSites from "./findAllBindingSites.js";
 
 describe("Primer Binding Sites", () => {
   const testVector =
