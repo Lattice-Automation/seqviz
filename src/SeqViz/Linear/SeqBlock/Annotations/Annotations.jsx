@@ -193,7 +193,6 @@ class AnnotationRow extends React.PureComponent {
 				L ${width} ${2 * cH}
 				L ${width - cW} ${3 * cH}
         L ${width} ${4 * cH}`; // jagged right edge
-        console.log(a, overflowRight, crossZero);
       } else if (endFWD) {
         bottomRight = `
 				L ${width} ${height / 2}

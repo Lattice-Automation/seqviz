@@ -16,6 +16,7 @@ import "./SeqViz.scss";
  */
 export default class SeqViz extends React.Component {
   state = {
+    accession: "",
     circularCentralIndex: 0,
     findState: {
       searchResults: [],
@@ -120,29 +121,31 @@ export default class SeqViz extends React.Component {
 
   componentDidMount = async () => {
     this.addKeyBindings();
-    this.setPart(this.props, true);
+    this.setPart();
   };
 
-  componentDidUpdate = async (props, _) => {
+  componentDidUpdate = async ({ accession, backbone }) => {
     this.addKeyBindings();
-    this.setPart(props);
+    if (
+      accession !== this.props.accession ||
+      backbone !== this.props.backbone
+    ) {
+      this.setPart();
+    }
   };
 
   /**
    * Set the part from a file or an accession ID
    */
-  setPart = async (props, force = false) => {
+  setPart = async () => {
     const { accession, file } = this.props;
 
-    if (force || accession !== props.accession || file !== props.file) {
-      if (props.accession) {
-        const part = await externalToPart(props.accession, this.props);
-        console.log(part);
-        this.setState({ part });
-      } else if (props.file) {
-        const parts = await filesToParts(props.file, this.props);
-        this.setState({ part: parts[0] });
-      }
+    if (accession) {
+      const part = await externalToPart(accession, this.props);
+      this.setState({ part });
+    } else if (file) {
+      const parts = await filesToParts(file, this.props);
+      this.setState({ part: parts[0] });
     }
   };
 
@@ -248,9 +251,6 @@ export default class SeqViz extends React.Component {
     }
   }
 
-  shouldComponentUpdate = (nextProps, nextState) =>
-    !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
-
   setPartState = state => {
     let newState = Object.keys(state).reduce((newState, key) => {
       if (typeof state[key] === "object") {
@@ -261,7 +261,7 @@ export default class SeqViz extends React.Component {
       return newState;
     }, {});
 
-    this.setState({ ...this.state, ...newState });
+    this.setState({ ...newState });
   };
 
   /**

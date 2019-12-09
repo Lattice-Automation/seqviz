@@ -188,7 +188,6 @@ export default async (fileArrayBuffer, options) => {
         // blocks with miscellaneous data can be pushed to other
         const xml = await read(blockSize, "utf8");
         const b = await parseXml(xml);
-        console.log(b);
       } catch (e) {
         console.log("Error parsing snapgene file: ", e);
       }

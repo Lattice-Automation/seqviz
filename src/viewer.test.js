@@ -35,7 +35,7 @@ it("renders while querying an iGEM part", () => {
   const div = document.createElement("div");
   let viewer = Viewer(div, {
     ...defaultOptions,
-    part: "BBa_E0040",
+    part: "BBa_K1598008",
     backbone: "pSB1C3"
   });
 
