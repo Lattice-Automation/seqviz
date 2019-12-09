@@ -1,14 +1,14 @@
 import { isEqual } from "lodash";
 import * as React from "react";
 
-import findAllBindingSites from "../../Primer/findAllBindingSites";
+import { createLinearTranslations } from "../../utils/sequence";
+import findAllBindingSites from "../findAllBindingSites";
 import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
-} from "../partElementsToRows";
-import { createLinearTranslations } from "../../../utils/sequence";
+} from "../elementsToRows";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
 import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";

@@ -1,9 +1,9 @@
-// utility funcs for annotationsToRows
+// utility funcs for stackElements
 const last = arr => arr[arr.length - 1];
 const first = arr => arr[0];
 
 /**
- * annotationsToRows
+ * stackElements
  * takes an array of annotations (a one deep array) and creates an array of
  * array of annotations, where non-overlapping annotations can be in the same
  * row. Example:

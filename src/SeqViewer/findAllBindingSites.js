@@ -1,10 +1,10 @@
-import { dnaComplement } from "../../utils/parser";
+import { dnaComplement } from "../utils/parser";
 import {
   calcTm,
   getMismatchIndices,
   returnRanges,
   reverse
-} from "../../utils/sequence";
+} from "../utils/sequence";
 
 /**
  * Given a list of primer mismatches and the primer's annealing sequence
