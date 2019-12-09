@@ -513,7 +513,7 @@ export class StartButton extends Component {
         <Button
           id="default-part-button"
           onClick={() => {
-            updateUrl({ backbone: "pSB1C3", biobrick: "BBa_E0040" });
+            updateUrl({ backbone: "pSB1C3", biobrick: "BBa_K1598008" });
           }}
         >
           CLICK
@@ -523,9 +523,9 @@ export class StartButton extends Component {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://parts.igem.org/Part:BBa_E0040"
+            href="http://parts.igem.org/Part:BBa_K1598008"
           >
-            BBa_E0040
+            BBa_K1598008
           </a>
           )
         </span>

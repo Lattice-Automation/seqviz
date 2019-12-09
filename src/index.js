@@ -31,16 +31,16 @@ const complement = true;
 const index = true;
 
 const viewerInput = {
-  part: part,
-  name: "test",
-  annotations: [
-    {
-      name: "",
-      start: 0,
-      end: 5
-    }
-  ],
-  seq: "ATGAT",
+  // name: "test",
+  // annotations: [
+  //   {
+  //     name: "",
+  //     start: 0,
+  //     end: 5
+  //   }
+  // ],
+  // seq: "ATGAT",
+  accession: "BBa_K1598008",
   viewer: type,
   showAnnotations: annotations,
   showPrimers: primers,
