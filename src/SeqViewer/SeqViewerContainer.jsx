@@ -1,15 +1,16 @@
 import { isEqual } from "lodash";
 import * as React from "react";
 
-import SeqViewer from "./SeqViewer/SeqViewer";
-import "./PartExplorer.scss";
+import SeqViewer from "./SeqViewer";
+import "./SeqViewerContainer.scss";
 import { defaultSelection } from "../utils/sequence";
 import processPartInput from "../io/processPartInput";
 
 /**
- * a container for investigating the meta and sequence information of a part
+ * A container for processing part input and rendering either
+ * a linear or circular viewer
  */
-export default class PartExplorer extends React.Component {
+export default class SeqViewerContainer extends React.Component {
   state = {
     seqSelection: { ...defaultSelection },
     findState: {

@@ -1,12 +1,13 @@
 import * as React from "react";
-import { stackElements } from "../partElementsToRows";
+
+import findAllBindingSites from "../findAllBindingSites";
+import withViewerHOCs from "../handlers";
+import { stackElements } from "../elementsToRows";
 import Annotations from "./Annotations/Annotations";
-import findAllBindingSites from "../../Primer/findAllBindingSites";
 import "./Circular.scss";
 import Index from "./Index/Index";
 import Labels from "./Labels/Labels";
 import Selection from "./Selection/Selection";
-import withViewerHOCs from "../handlers";
 import CutSites from "./CutSites/CutSites";
 import Primers from "./Primers/Primers";
 

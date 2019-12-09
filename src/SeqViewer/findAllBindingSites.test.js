@@ -1,4 +1,4 @@
-import findAllBindingSites from "./findAllBindingSites.jsx";
+import findAllBindingSites from "./findAllBindingSites.jsx.js";
 
 describe("Primer Binding Sites", () => {
   const testVector =
@@ -306,7 +306,8 @@ describe("Primer Binding Sites", () => {
 
   test("binding sites of primers with overhang all have the correct length", () => {
     const testBindingSites = findAllBindingSites([testPrimerThree], testVector);
-    const seqLength = testPrimerThree.sequence.length + testPrimerThree.overhang.length;
+    const seqLength =
+      testPrimerThree.sequence.length + testPrimerThree.overhang.length;
     const bindingSitesCorrectLength = testBindingSites.filter(
       binding => binding.sequence.length === seqLength
     );

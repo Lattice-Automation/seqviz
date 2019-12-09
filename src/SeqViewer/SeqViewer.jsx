@@ -2,10 +2,11 @@ import { isEqual } from "lodash";
 import * as React from "react";
 import sizeMe from "react-sizeme";
 
-import { cutSitesInRows } from "../../utils/digest/digest";
-import seqSearch from "../Find/Find";
+import { cutSitesInRows } from "../utils/digest/digest";
 import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
+import seqSearch from "./find";
+
 import "./SeqViewer.scss";
 
 sizeMe.noPlaceholders = true;
@@ -58,8 +59,6 @@ class SeqViewer extends React.Component {
       setPartState({ findState: { searchResults, searchIndex } });
     }
   };
-
-  unsub = () => {};
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed

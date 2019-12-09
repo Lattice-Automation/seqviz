@@ -1,11 +1,19 @@
 module.exports = {
+  parser: "babel-eslint",
   env: {
     browser: true,
     es6: true,
     node: true
   },
-  extends: "airbnb",
-  parser: babel - eslint,
+  plugins: ["prettier", "react"],
+  rules: {
+    "prettier/prettier": "error"
+  },
+  extends: [
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -13,11 +21,10 @@ module.exports = {
     ecmaVersion: 2016,
     sourceType: "module"
   },
-  plugins: ["react"],
-  rules: {
-    indent: ["error", "tab"],
-    "linebreak-style": ["error", "unix"],
-    quotes: ["error", "double"],
-    semi: ["error", "always"]
+  settings: {
+    react: {
+      pragma: "React", // Pragma to use, default to "React"
+      version: "detect"
+    }
   }
 };
