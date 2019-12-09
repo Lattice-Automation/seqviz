@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 9 10:31:21 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 9 15:33:34 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -25,8 +25,8 @@
 - [Key Features](#key-features)
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
-  - [Instantiate a Viewer](#instantiate-a-viewer)
-  - [Viewer Options](#viewer-options)
+  - [Usage](#usage)
+  - [Viewer Configuration](#ViewerConfig)
 - [Library Demo](#library-demo)
 - [Contact Us](#contact-us)
 - [Contributing](#contributing)
@@ -43,14 +43,12 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 - **Circular Plasmid viewer** :
 
   - Annotations with names and colors
-  - Primers
   - Name of sequence
   - Base pair length of sequence
 
 - **Linear Sequence viewer** :
 
   - Annotations with names and colors
-  - Primers
   - Sequence and complement nucleotide bases
   - Index line with base pair numbers
   - Enzyme cut sites
@@ -59,7 +57,7 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 - **Selections**:
 
   - On both Circular and Linear viewers clicking on an annotation or dragging over a section of the viewer will create a selection
-  - Information about this selection will be available through the `onSelection()` option (see [viewer options](#vieweroptions-))
+  - Information about this selection will be available through the `onSelection()` option (see [viewer options](#ViewerConfig-))
 
 ## Using the Library
 
@@ -87,179 +85,80 @@ If you are using [Create React App](https://github.com/facebook/create-react-app
 <script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
-Once you have imported the library you can access the `seqviz` library through the `window` global variable. The `seqviz` library currently contains one sample part, `pUC`, and the `Viewer()` constructor.
+### Usage
 
-### Instantiate a Viewer
+You can initialize a viewer with React or vanilla-JS.
 
-You can initialize a new viewer with a part json object like so:
+React, via the `Seqviz` component:
+
+```jsx
+const { SeqViz } = window.seqviz;
+
+const CustomViewer = () => (
+  <SeqViz
+    name="J23100"
+    seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
+    annotations={[{ name: "promoter", start: 0, end: 34 }]}
+  />
+);
+```
+
+JavaScript, via the `Viewer` constructor:
 
 ```html
 <script>
   const seqviz = window.seqviz;
-  const part = {
-    name: "L09136",
-    seq:
-      "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgcagctcccggagacggttgtctgtaagcggatgccgggagcagacaagcccgtcagggcagcgggtgttggcgggtgtcggggctggcttaactatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcatag",
-    annotations: [
-      {
-        start: 133,
-        end: 457,
-        direction: "REVERSE",
-        name: "lacZ fragment",
-        color: "#8FDE8C",
-        type: "CDS"
-      }
-    ]
-  };
-  const viewer = seqviz.Viewer("root", { part });
-  viewer.render();
+  seqviz
+    .Viewer("root", {
+      name: "L09136",
+      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
+    })
+    .render();
 </script>
 ```
 
-The only required inputs are an element and a part, see below for details.
+### Viewer
 
-The `viewer` is an object with three fields.
+`Viewer(${element}, ${ViewerConfig})`
 
-#### `viewer.render()`
+- `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
+- `ViewerConfig` -- ViewerConfig are documented in greater detail below
 
-This renders the viewer using `ReactDOM`(which is packaged with the library so you do not need to have it installed locally).
+The Viewer returns an object with three properties:
 
-#### `viewer.renderToString()`
+- `viewer.render()` -- renders the viewer to the DOM at the node passed in `${element}`
+- `viewer.renderToString()` -- renders the viewer and returns as an HTML string
+- `viewer.setState(ViewerConfig)` -- update the viewer's settings and re-renders
 
-This will return the `HTML` for the viewer if you want to render the viewer yourself. A call to [`ReactDOMServer.renderToString`](https://reactjs.org/docs/react-dom-server.html).
+#### ViewerConfig
 
-#### `viewer.setState(viewerOptions)`
+All the following are usable with both the React implementation (as props) and the JS implementation as properties in a `ViewerConfig` object passed to the `Viewer` constructor.
 
-Update viewer settings and re-render (if already rendered once).
+One of the below is required:
 
-### Viewer Constructor
+- `seq` (_string_) a manual specification of the sequence to render
+- `accession` (_string_) an NCBI accession ID or iGEM part ID
+  - populates `name`, `seq`, and `annotations`
+- `file` ([_File_](https://developer.mozilla.org/en-US/docs/Web/API/File)) a File object (FASTA, Genbank, SnapGene, SBOL)
+  - populates `name`, `seq`, and `annotations`
 
-`Viewer(${element}, ${viewerOptions})`
+Simple optional configuration options:
 
-#### `element`
+- `viewer` (one of _\["linear", "circular", "both"\]_) the type of viewer to show. "both" by default
+- `name` (_string_) the name of the sequence/plasmid
+- `compSeq` (_string_) the complement sequence. inferred from `seq` by default
+- `showComplement` (_boolean_) whether to show the complement sequence
+- `showAnnotations` (_boolean_) whether to show annotations
+- `showIndex` (_boolean_) whether to show the index line and ticks below the sequence
+- `enzymes` (_\[string\]_) a list of restriction enzymes whose recognition sites should be shown
+- `zoom` how zoomed the viewer(s) should be `0-100`. map from viewer type to zoom level. default:
+  `{ linear: 50, circular: 0 }`
+- `bpColors` (_{\[string\]: string}_) map from bp to color. example:
+  `{ A: "#FF0" T: "#00F" }`
 
-- a string id attribute like `"root"` or `"app-root"`
-- an element; e.g. from `document.getElementById()`
+Additional configuration is below:
 
-There are no defaults values for this option. An element input is minimally necessary to initialize a viewer and use this library.
-
-#### `viewerOptions`
-
-```js
-const {
-  part = "KJ668651.1" || "BBa_E0040" || PUC || "ATCG", // part input
-  viewer = "circular" || "linear" || "both", // type of viewer to show
-  showAnnotations = true || false, // whether to show annotations
-  showComplement = true || false, // whether to show complement strand
-  showIndex = true || false, // whether to show index (numbers and line)
-  zoom = { linear: 0 - 100 }, // the greater the value, the greater the zoom
-  colors = ["#85A6FF", "#FFFFF"], // color hex codes for annotation colors
-  bpColors = {
-    a: "#FF0000",
-    t: "#00FF00"
-  }, // individual bp coloring. all bp are black by default
-  onSelection = selectionObject => {}, // returns a Selection object on selection changes
-  onSearch = searchResults => {}, // returns a Search result on search changes
-  searchNext = {
-    key: "",
-    meta: true || false,
-    ctrl: true || false,
-    shift: true || false,
-    alt: true || false
-  }, // key binding for toggling next search result highlight, defaults to none
-  copySeq = {
-    key: "",
-    meta: true || false,
-    ctrl: true || false,
-    shift: true || false,
-    alt: true || false
-  }, // key binding for copying sequence, defaults to none
-  searchQuery = { query: "", mismatch: 0 }, // search query
-  backbone = "pSB1C3", // name of a BioBrick backbone, or a custom backbone string
-  enzymes = ["AciI"], // list of enzymes to search and display cutsites for
-  translations: [{ start: 0, end: 89, direction: "FORWARD" }] // list of translations
-} = viewerOptions;
-```
-
-#### `input`
-
-- NCBI accession number (`string`)
-- BioBrick accession number (`string`)
-- sequence string supports `{atcguyrwskmdvhbxnATCGUYRWSKMDVHBXN}` (`string`)
-- HTML file input (`FileList` or `File`):
-  - FASTA format (.seq, .fa, .fas, .fasta)
-  - GENBANK format (.gb, .gbk, .genbank, .ape)
-  - SNAPGENE format (.dna)
-  - JBEI format
-  - SBOL 1.0 and SBOL 2.0 formats
-  - Benchling format
-  - BioBricks
-- part `object` of the form:
-
-```json
-{
-  "name": "some part",
-  "seq": "ATGATA",
-  "compSeq": "TACTAT",
-  "annotations": [
-    {
-      "start": 0,
-      "end": 3,
-      "direction": "REVERSE",
-      "name": "a fragment"
-    }
-  ]
-}
-```
-
-There are no default values for this option. A part input is minimally necessary to initialize a viewer and use this library.
-
-#### `viewer`
-
-`string` **circular**, **linear**, or **both**. Will determine whether to render part in the circular plasmid viewer, linear sequence viewer, or a side-by-side view with both.
-
-Defaults to **both**.
-
-#### `showAnnotations`
-
-`boolean` **true** or **false**. If true will show annotations on the viewers.
-
-Defaults to **true**.
-
-#### `showPrimers`
-
-`boolean` **true** or **false**. If true will show primers on the viewers.
-
-Defaults to **true**.
-
-#### `showComplement`
-
-`boolean` **true** or **false**. If true will show the complement strand nucleotide bases in addition to the sequence strand nucleotide bases in Linear Sequence viewer. Has no effect on the Circular Plasmid viewer where neither the sequence nor the complement strand bases can be seen.
-
-Defaults to **true**.
-
-#### `showIndex`
-
-`boolean` **true** or **false**. If true will show an axis with the index numbers of the nucleotide bases.
-
-Defaults to **true**.
-
-#### `zoom`
-
-`object` that numerates zoom values for viewers.
-
-Both sub-options in the zoom option are optional so you can use `{circular: 0}` or `{linear:50}` individually. Circular zoom is currently not supported and thus the `circular` option will not affect the viewers in any way. The `linear` option will zoom out the Linear Sequence viewer for numbers below 50 and zoom in for numbers above 50.
-
-Defaults to:
-
-```js
-{
-circular: 0,
-linear: 50
-}
-```
-
-#### `colors`
+##### `colors`
 
 `array` of colors to be used for annotations. Annotations are rendered with a random color from a set of defined colors. The library currently explicitly supports hex code color options, but other color options may be inherently supported.
 
@@ -282,20 +181,7 @@ Defaults to:
 ];
 ```
 
-#### `bpColors`
-
-`object` mapping each bp to the color used to shade them. This is case insensitive, but exact matched cases are used first.
-
-```js
-{
-  bpColors: {
-    a: "#FF0000",
-    t: "#00FF00"
-  },
-}
-```
-
-#### `onSelection`
+##### `onSelection`
 
 `function` to be applied to the selection information. The function you specify will have access to the `selection` object as its only parameter.
 
@@ -351,7 +237,7 @@ If the selection is an annotation (generated by clicking on an annotation) there
 
 For examples on how to practically use the selection information see [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
-#### `onSearch`
+##### `onSearch`
 
 `function` to be applied to the search results. The function you specify will have access to the results object as its only parameter.
 
@@ -391,7 +277,7 @@ Example of a search result:
 
 The start and end are the indices encapsulating the substring match for the search query. The row is `0` for sequence strand and `1` for complement strand. The index is for tabulation (see [searchNext](#searchnext)).
 
-#### `searchNext`
+##### `searchNext`
 
 `object` used to set the key binding for tabulating search results (focus highlighting sequential search highlights).
 
@@ -411,7 +297,7 @@ Defaults to:
 
 You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `searchNext` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
-#### `copySeq`
+##### `copySeq`
 
 `object` used to set the key binding for copying the template strand sequence of your current selection.
 
@@ -431,7 +317,7 @@ Defaults to:
 
 You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `copySeq` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
 
-#### `searchQuery`
+##### `searchQuery`
 
 `object` to specify a subsequence search to be conducted on the imported part.
 
@@ -462,7 +348,7 @@ Defaults to:
 
 `mismatch` is an `int` numeration of the amount of mismatch leeway the search should have. A mismatch of `1` will will allow for one base to not match the `query`.
 
-#### `backbone`
+##### `backbone`
 
 `string` addition to main sequence. This is a feature specific to BioBricks. The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, `pSB1T3` as specified at [parts.igem.org](https://parts.igem.org/Plasmid_backbones/Assembly). To use the backbone simply specify the backbone name (case insensitive) as a string like so
 
@@ -474,17 +360,7 @@ Defaults to:
 
 Custom backbones are also minimally supported. Any sequence string you input (`ATCGatcg`) can be used as the backbone.
 
-#### `enzymes`
-
-`array` of enzymes to show cut sites for. The library supports the full list of NEB enzymes. To search for their cut sites simply specify their name as a string in the array.
-
-```js
-{
-  enzymes: ["AciI", "BsaI"],
-}
-```
-
-#### `translations`
+##### `translations`
 
 `array` of translation objects for creating translations beneath the sequence. Require 0-based start and end indexes (of the DNA bp) and a direction (`FORWARD` or `REVERSE`).
 

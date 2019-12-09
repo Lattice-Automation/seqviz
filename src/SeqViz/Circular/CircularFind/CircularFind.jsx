@@ -96,7 +96,7 @@ class CircularFind extends React.Component {
     let firstBase = 0;
     let lastBase = seqLength;
     return searchResults.length ? (
-      <g id="la-vz-circular-find-results">
+      <g className="la-vz-circular-find-results">
         {searchResults.map(s => {
           const hideRender =
             s.start < firstBase && s.start > lastBase - seqLength;

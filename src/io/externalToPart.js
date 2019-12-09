@@ -9,6 +9,7 @@ export default async (accession, options) => {
 
   // get from cache
   const key = accession + options.backbone || "";
+  localStorage.clear();
   if (localStorage.getItem(key)) {
     return JSON.parse(localStorage.getItem(key));
   }

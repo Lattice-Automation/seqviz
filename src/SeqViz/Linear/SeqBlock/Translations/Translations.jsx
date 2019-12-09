@@ -21,7 +21,7 @@ export default class TranslationRows extends React.PureComponent {
     } = this.props;
 
     return (
-      <g className="linear-translations">
+      <g className="la-vz-linear-translations">
         {translations.map((t, i) => (
           <TranslationRow
             translation={t}

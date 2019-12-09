@@ -310,7 +310,7 @@ class Circular extends React.PureComponent {
         ref={inputRef(plasmidId, { type: "SEQ" })}
         {...size}
       >
-        <g id="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
+        <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection
             {...this.props}
             {...general}

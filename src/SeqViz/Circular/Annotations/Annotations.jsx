@@ -1,6 +1,7 @@
-import { COLOR_BORDER_MAP } from "../../../utils/colors";
 import * as React from "react";
 import tinycolor from "tinycolor2";
+
+import { COLOR_BORDER_MAP } from "../../../utils/colors";
 
 /**
  * Used to build up all the path elements. Does not include a display
@@ -16,11 +17,17 @@ import tinycolor from "tinycolor2";
 export default class Annotations extends React.PureComponent {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className, opacity) => {
-    const elements = document
-      .getElementById("la-vz-circular-annotations")
-      .getElementsByClassName(className);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = opacity;
+    const viewers = document.getElementsByClassName(
+      "la-vs-circular-annotations"
+    );
+    for (let j = 0; j < viewers.length; j += 1) {
+      const viewer = viewers[j];
+
+      const elements = viewer.getElementsByClassName(className);
+
+      for (let i = 0; i < elements.length; i += 1) {
+        elements[i].style.fillOpacity = opacity;
+      }
     }
   };
 
@@ -63,7 +70,7 @@ export default class Annotations extends React.PureComponent {
     };
 
     return (
-      <g id="la-vz-circular-annotations">
+      <g className="la-vz-circular-annotations">
         {annotations.reduce((acc, anns, i) => {
           if (i) {
             currBRadius -= lineHeight + 3;

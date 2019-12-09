@@ -259,7 +259,7 @@ export default class Labels extends React.Component {
 
     return (
       <g
-        id="la-vz-circular-labels"
+        className="la-vz-circular-labels"
         onMouseLeave={() => this.setHoveredGroup("")}
       >
         {labelGroups.map(g => {

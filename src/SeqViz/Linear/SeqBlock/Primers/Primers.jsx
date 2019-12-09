@@ -1,5 +1,6 @@
 import * as React from "react";
 import shortid from "shortid";
+
 import { reverse } from "../../../../utils/sequence";
 
 /**
@@ -7,16 +8,6 @@ import { reverse } from "../../../../utils/sequence";
  * vertically stacked on top of one another in non-overlapping arrays
  */
 class PrimerRow extends React.PureComponent {
-  hoverOtherPrimerRows = (className, opacity) => {
-    const scroller = document.getElementById("Linear-scroller");
-
-    const elements = scroller ? scroller.getElementsByClassName(className) : [];
-
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = opacity;
-    }
-  };
-
   // Handles the rendering of a single Primer within a primer row
   renderPrimer = singlePrimer => {
     const {
@@ -117,11 +108,11 @@ class PrimerRow extends React.PureComponent {
         const mismatchLength = mismatchEnd - mismatchStart;
         name = forward
           ? name.substring(0, mismatch.start) +
-            ".".repeat(mismatchLength) +
+            " ".repeat(mismatchLength) +
             name.substring(mismatch.end)
           : reverse(
               reverse(name).substring(0, mismatch.start) +
-                ".".repeat(mismatchLength) +
+                " ".repeat(mismatchLength) +
                 reverse(name).substring(mismatch.end)
             );
       });

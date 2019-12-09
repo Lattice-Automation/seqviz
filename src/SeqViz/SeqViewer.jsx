@@ -9,8 +9,6 @@ import seqSearch from "./find";
 
 import "./SeqViewer.scss";
 
-sizeMe.noPlaceholders = true;
-
 /**
  * a parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
@@ -65,7 +63,13 @@ class SeqViewer extends React.Component {
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    const { size, zoom: { linear: zoom } = 50 } = this.props;
+    const { size, zoom: { linear: zoom } = 50, style } = this.props;
+
+    if (!size.width && !size.height && style) {
+      size.width = style.width; // for testing, mostly
+      size.height = style.height;
+    }
+
     const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
@@ -111,10 +115,14 @@ class SeqViewer extends React.Component {
   circularProps = () => {
     const {
       size,
-      part: {
-        seq: { length: seqLength }
-      }
+      seq: { length: seqLength },
+      style
     } = this.props;
+
+    if (!size.width && !size.height && style) {
+      size.width = style.width; // for testing, mostly
+      size.height = style.height;
+    }
 
     const center = {
       x: size.width / 2,
@@ -140,16 +148,14 @@ class SeqViewer extends React.Component {
   };
 
   render() {
-    const {
-      Circular: CircularProp,
-      part,
-      enzymes,
-      part: {
-        seq: { length: seqLength }
-      }
-    } = this.props;
+    const { Circular: CircularProp, seq, enzymes, size, style } = this.props;
 
-    const cutSites = enzymes.length ? cutSitesInRows(part.seq, enzymes) : [];
+    if (!size.width && !size.height && style) {
+      size.width = style.width; // for testing, mostly
+      size.height = style.height;
+    }
+
+    const cutSites = enzymes.length ? cutSitesInRows(seq, enzymes) : [];
 
     return (
       <div
@@ -159,7 +165,6 @@ class SeqViewer extends React.Component {
         {CircularProp && (
           <CircularViewer
             {...this.props}
-            {...part}
             {...this.state}
             {...this.circularProps()}
             cutSites={cutSites}
@@ -168,10 +173,9 @@ class SeqViewer extends React.Component {
         {!CircularProp && (
           <LinearViewer
             {...this.props}
-            {...part}
             {...this.state}
             {...this.linearProps()}
-            seqLength={seqLength}
+            seqLength={seq.length}
             cutSites={cutSites}
           />
         )}

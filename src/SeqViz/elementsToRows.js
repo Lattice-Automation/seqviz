@@ -51,7 +51,9 @@ export const stackElements = (elements, seqL) => {
       // both this curr anntoation and the last in the row cross the zero index
       return last(elems).end < a.start && a.end < first(elems).start;
     });
+
     const newAcc = [...acc];
+
     if (insertIndex > -1) {
       // insert in the row where it's the new highest
       newAcc[insertIndex].push(a);
@@ -106,13 +108,14 @@ export const createMultiRows = (elements, rowLength, rowCount) => {
           k += 1;
         }
       } else if (elements[i][j].end < elements[i][j].start) {
-        // the element crosses the zero index and doesn't cover the whole
-        // plasmid
+        // the element crosses the zero index and doesn't cover the whole plasmid
 
         // first, push onto all arrays from the end down to the zero
         let e = Math.floor(elements[i][j].end / rowLength);
-        // handle an edge case
-        if (elements[i][j].end === 0) e = -1; // skip adding to rows
+        if (elements[i][j].end === 0) {
+          // handle an edge case where element ends at 0-index
+          e = -1; // skip adding to rows
+        }
         while (e >= 0 && e < newArr.length) {
           newArr[e][i].push(elements[i][j]);
           e -= 1;
@@ -129,6 +132,11 @@ export const createMultiRows = (elements, rowLength, rowCount) => {
         // SeqBlock. start === end is signal for covering whole plasmid
         for (let a = 0; a < newArr.length; a += 1) {
           newArr[a][i].push(elements[i][j]);
+        }
+
+        // edge case where starts and ends at 0
+        if (elements[i][j].end === 0) {
+          continue;
         }
 
         // and add again for the block that the element starts in

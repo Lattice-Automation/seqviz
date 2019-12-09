@@ -31,17 +31,16 @@ const complement = true;
 const index = true;
 
 const viewerInput = {
-  // part: part,
-  part: {
-    name: "test",
-    seq: "ATGAT",
-    annotations: [
-      {
-        start: 0,
-        end: 5
-      }
-    ]
-  },
+  part: part,
+  name: "test",
+  annotations: [
+    {
+      name: "",
+      start: 0,
+      end: 5
+    }
+  ],
+  seq: "ATGAT",
   viewer: type,
   showAnnotations: annotations,
   showPrimers: primers,
@@ -75,8 +74,8 @@ const viewerInput = {
   },
   // searchQuery: { query: "GCGGX" },
   backbone: "pSB1C3",
-  enzymes: [],
-  translations: [{ start: 0, end: 89, direction: "FORWARD" }]
+  enzymes: []
+  // translations: [{ start: 0, end: 89, direction: "FORWARD" }]
 };
 
 let viewer = Viewer("app-root", viewerInput);
