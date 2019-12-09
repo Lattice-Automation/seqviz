@@ -20,46 +20,9 @@ export { default as pUC } from "./parts/pUC";
  * Return an object with a `viewer` (React component), `viewerHTML` (HTML string),
  * and a `render` function for rendering the viewer to the `element`
  *
- * @param {ViewerOptions} viewerOptions - The {ViewerOptions} for the viewer
+ * @param {ViewerOptions} options - The {ViewerOptions} for the viewer
  */
-export const Viewer = (element = "root", viewerOptions) => {
-  let options = {
-    backbone: "",
-    bpColors: {},
-    colors: [],
-    copySeq: {
-      key: "",
-      meta: false,
-      ctrl: false,
-      shift: false,
-      alt: false
-    },
-    enzymes: [],
-    onSearch: results => {
-      return results;
-    },
-    onSelection: selection => {
-      return selection;
-    },
-    part: null,
-    searchNext: {
-      key: "",
-      meta: false,
-      ctrl: false,
-      shift: false,
-      alt: false
-    },
-    searchQuery: { query: "", mismatch: 0 },
-    showAnnotations: true,
-    showComplement: true,
-    showIndex: true,
-    showPrimers: true,
-    translations: [],
-    viewer: "both",
-    zoom: { circular: 0, linear: 50 },
-    ...viewerOptions
-  };
-
+export const Viewer = (element = "root", options) => {
   // used to keep track of whether to re-render after a "set" call
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly

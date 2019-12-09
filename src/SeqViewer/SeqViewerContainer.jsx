@@ -1,4 +1,5 @@
 import { isEqual } from "lodash";
+import PropTypes from "prop-types";
 import * as React from "react";
 
 import SeqViewer from "./SeqViewer";
@@ -20,6 +21,95 @@ export default class SeqViewerContainer extends React.Component {
     circularCentralIndex: 0,
     linearCentralIndex: 0,
     part: {}
+  };
+
+  static propTypes = {
+    backbone: PropTypes.string.isRequired,
+    bpColors: PropTypes.object.isRequired,
+    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+    copySeq: PropTypes.object.isRequired,
+    enzymes: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onSearch: PropTypes.func.isRequired,
+    onSelection: PropTypes.func.isRequired,
+    part: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        seq: PropTypes.string.isRequired,
+        compSeq: PropTypes.string,
+        annotations: PropTypes.arrayOf(
+          PropTypes.shape({
+            start: PropTypes.number.isRequired,
+            end: PropTypes.number.isRequired,
+            direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
+            name: PropTypes.string,
+            color: PropTypes.string,
+            type: PropTypes.string
+          })
+        )
+      })
+    ]).isRequired,
+    searchNext: PropTypes.shape({
+      key: PropTypes.string,
+      meta: PropTypes.bool,
+      ctrl: PropTypes.bool,
+      shift: PropTypes.bool,
+      alt: PropTypes.bool
+    }).isRequired,
+    searchQuery: PropTypes.shape({
+      query: PropTypes.string,
+      mismatch: PropTypes.number
+    }).isRequired,
+    showAnnotations: PropTypes.bool.isRequired,
+    showComplement: PropTypes.bool.isRequired,
+    showIndex: PropTypes.bool.isRequired,
+    showPrimers: PropTypes.bool.isRequired,
+    translations: PropTypes.arrayOf(
+      PropTypes.shape({
+        start: PropTypes.number.isRequired,
+        end: PropTypes.number.isRequired,
+        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
+        name: PropTypes.string,
+        color: PropTypes.string,
+        type: PropTypes.string
+      })
+    ).isRequired,
+    viewer: PropTypes.oneOf(["linear", "circular", "both"]).isRequired,
+    zoom: PropTypes.shape({
+      circular: PropTypes.number,
+      linear: PropTypes.number
+    }).isRequired
+  };
+
+  static defaultProps = {
+    backbone: "",
+    bpColors: {},
+    colors: [],
+    copySeq: {
+      key: "",
+      meta: false,
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
+    enzymes: [],
+    onSearch: results => results,
+    onSelection: selection => selection,
+    searchNext: {
+      key: "",
+      meta: false,
+      ctrl: false,
+      shift: false,
+      alt: false
+    },
+    searchQuery: { query: "", mismatch: 0 },
+    showAnnotations: true,
+    showComplement: true,
+    showIndex: true,
+    showPrimers: true,
+    translations: [],
+    viewer: "both",
+    zoom: { circular: 0, linear: 50 }
   };
 
   /**
