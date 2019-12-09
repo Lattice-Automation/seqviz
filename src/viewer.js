@@ -3,13 +3,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 
-import SeqViewerContainer from "./SeqViewer/SeqViewerContainer.jsx";
+import SeqViz from "./SeqViz/SeqViz.jsx";
 import "./viewer.scss";
 
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViewerContainer as SeqViz };
+export { SeqViz };
 
 /**
  * Export a part, pUC, for development
@@ -31,7 +31,7 @@ export const Viewer = (element = "root", options) => {
     element.constructor.name.endsWith("Element")
       ? element
       : document.getElementById(element);
-  let viewer = React.createElement(SeqViewerContainer, options, null);
+  let viewer = React.createElement(SeqViz, options, null);
 
   /**
    * Render the Viewer to the element passed
@@ -63,7 +63,7 @@ export const Viewer = (element = "root", options) => {
     });
 
     options = { ...options, ...state };
-    viewer = React.createElement(SeqViewerContainer, options, null);
+    viewer = React.createElement(SeqViz, options, null);
 
     if (rendered) {
       ReactDOM.render(viewer, domElement);

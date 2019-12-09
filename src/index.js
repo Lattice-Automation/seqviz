@@ -31,7 +31,17 @@ const complement = true;
 const index = true;
 
 const viewerInput = {
-  part: part,
+  // part: part,
+  part: {
+    name: "test",
+    seq: "ATGAT",
+    annotations: [
+      {
+        start: 0,
+        end: 5
+      }
+    ]
+  },
   viewer: type,
   showAnnotations: annotations,
   showPrimers: primers,
