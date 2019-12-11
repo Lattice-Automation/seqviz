@@ -653,7 +653,7 @@ export default class PrimerRows extends React.PureComponent {
       direction === "FORWARD" ? forwardPrimerRows : reversePrimerRows;
 
     return (
-      <g id="linear-primers">
+      <g className="la-vs-linear-primers">
         {primerRows.map((primerRow, i) => {
           const id = shortid.generate();
 

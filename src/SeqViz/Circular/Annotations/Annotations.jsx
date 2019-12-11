@@ -17,17 +17,9 @@ import { COLOR_BORDER_MAP } from "../../../utils/colors";
 export default class Annotations extends React.PureComponent {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className, opacity) => {
-    const viewers = document.getElementsByClassName(
-      "la-vs-circular-annotations"
-    );
-    for (let j = 0; j < viewers.length; j += 1) {
-      const viewer = viewers[j];
-
-      const elements = viewer.getElementsByClassName(className);
-
-      for (let i = 0; i < elements.length; i += 1) {
-        elements[i].style.fillOpacity = opacity;
-      }
+    const elements = document.getElementsByClassName(className);
+    for (let i = 0; i < elements.length; i += 1) {
+      elements[i].style.fillOpacity = opacity;
     }
   };
 

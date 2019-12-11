@@ -184,13 +184,7 @@ export default async (fileArrayBuffer, options) => {
       // # UNKNOWN: WE IGNORE THE WHOLE BLOCK
       await read(blockSize);
     } else {
-      try {
-        // blocks with miscellaneous data can be pushed to other
-        const xml = await read(blockSize, "utf8");
-        const b = await parseXml(xml);
-      } catch (e) {
-        console.log("Error parsing snapgene file: ", e);
-      }
+      console.warn("failed to parse snapgene file");
     }
   }
   /* eslint-enable no-await-in-loop */

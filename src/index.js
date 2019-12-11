@@ -20,7 +20,7 @@ import "./index.css";
 // let part = parts[Math.floor(Math.random() * parts.length)];
 // const part = "KJ668651.1";
 // const part = "BBa_K1598008";
-const part = "BBa_E0040";
+// const part = "BBa_E0040";
 
 // const types = ["circular", "linear", "both"];
 const type = "both";
@@ -77,6 +77,70 @@ const viewerInput = {
   enzymes: []
   // translations: [{ start: 0, end: 89, direction: "FORWARD" }]
 };
+
+// const viewerInput = {
+//   name: "BCDRBS_alt1_BD14",
+//   seq:
+//     "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg",
+//   annotations: [
+//     {
+//       start: 0,
+//       end: 71,
+//       direction: "FORWARD",
+//       name: "RBS",
+//       type: "RBS",
+//       color: "#80D849"
+//     },
+//     {
+//       start: 1,
+//       end: 70,
+//       direction: "FORWARD",
+//       name: "RBS",
+//       type: "RBS",
+//       color: "#80D849"
+//     }
+//   ],
+//   annotate: false,
+//   searchQuery: {
+//     query: "",
+//     mismatch: 0
+//   },
+//   translations: [],
+//   viewer: "linear",
+//   showComplement: true,
+//   bpColors: {
+//     a: "#000000",
+//     t: "#000000",
+//     c: "#000000",
+//     g: "#000000"
+//   },
+//   zoom: {
+//     linear: 50
+//   },
+//   accession: "",
+//   backbone: "",
+//   colors: [],
+//   copySeq: {
+//     key: "",
+//     meta: false,
+//     ctrl: false,
+//     shift: false,
+//     alt: false
+//   },
+//   compSeq: "",
+//   enzymes: [],
+//   file: null,
+//   searchNext: {
+//     key: "",
+//     meta: false,
+//     ctrl: false,
+//     shift: false,
+//     alt: false
+//   },
+//   showAnnotations: true,
+//   showIndex: true,
+//   showPrimers: true
+// };
 
 let viewer = Viewer("app-root", viewerInput);
 viewer.render();

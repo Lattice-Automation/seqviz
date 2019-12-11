@@ -1,11 +1,11 @@
 import * as React from "react";
 
 import Annotations from "./Annotations/Annotations";
+import CutSiteRow from "./CutSites/CutSites";
 import IndexRow from "./Index/Index";
 import LinearFind from "./LinearFind/LinearFind";
-import Selection from "./Selection/Selection";
-import CutSiteRow from "./CutSites/CutSites";
 import Primers from "./Primers/Primers";
+import Selection from "./Selection/Selection";
 import TranslationRows from "./Translations/Translations";
 
 /**
@@ -56,18 +56,17 @@ export default class SeqBlock extends React.PureComponent {
 
     const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
     const multiBlock = seqLength >= bpsPerBlock;
-    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
-    let widthMinusPadding = multiBlock ? size.width - 28 : size.width;
 
+    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     // find the distance from the left to start
     let x = 0;
     if (firstIndex >= firstBase) {
-      x = ((firstIndex - firstBase) / bpsPerBlock) * widthMinusPadding;
+      x = ((firstIndex - firstBase) / bpsPerBlock) * size.width;
       x = Math.max(x, 0) || 0;
     }
 
     // find the width for the current element
-    let width = widthMinusPadding;
+    let width = size.width;
     if (firstIndex === lastIndex) {
       // it starts on the last bp
       width = 0;
@@ -76,11 +75,11 @@ export default class SeqBlock extends React.PureComponent {
       const start = Math.max(firstIndex, firstBase);
       const end = Math.min(lastIndex, lastBase);
 
-      width = widthMinusPadding * ((end - start) / bpsPerBlock);
+      width = size.width * ((end - start) / bpsPerBlock);
       width = Math.abs(width) || 0;
     } else if (firstBase + bpsPerBlock > seqLength && multiBlock) {
       // it's an element in the last SeqBlock, that doesn't span the whole width
-      width = widthMinusPadding * ((seqLength % bpsPerBlock) / bpsPerBlock);
+      width = size.width * ((seqLength % bpsPerBlock) / bpsPerBlock);
     }
 
     return { x, width };
@@ -150,7 +149,6 @@ export default class SeqBlock extends React.PureComponent {
       seqSelection,
       seqFontSize,
       firstBase,
-      bpsPerBlock,
       size,
       lineHeight,
       elementHeight,
@@ -165,21 +163,19 @@ export default class SeqBlock extends React.PureComponent {
       zoomed
     } = this.props;
 
-    const adjustedWidth =
-      seq.length >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     if (!size.width || !size.height) return null;
 
     const svgProps = {
       display: "block",
       height: blockHeight,
-      width: adjustedWidth
+      width: size.width
     };
     const textProps = {
       dominantBaseline: "middle",
       fontSize: seqFontSize,
       lengthAdjust: "spacing",
       textAnchor: "start",
-      textLength: adjustedWidth,
+      textLength: size.width,
       textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
     };
 

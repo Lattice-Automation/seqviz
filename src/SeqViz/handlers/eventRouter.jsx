@@ -30,8 +30,10 @@ const withEventRouter = WrappedComp =>
     constructor(props) {
       super(props);
 
+      const type = props.Circular ? "circular" : "linear";
+
       this.state = {
-        id: `la-vz-${props.type}-${props.name.replace(/\s/g, "")}-event-router`
+        id: `la-vz-${type}-${props.name.replace(/\s/g, "")}-event-router`
       };
     }
 
@@ -197,6 +199,7 @@ const withEventRouter = WrappedComp =>
       const {
         bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1)
       } = this.props;
+
       switch (type) {
         case "SelectAll": {
           this.selectAllHotkey();

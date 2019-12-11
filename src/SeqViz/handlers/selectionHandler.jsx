@@ -146,7 +146,8 @@ const withSelectionHandler = WrappedComp =>
      */
     calculateBaseLinear = (e, knownRange) => {
       const { size, bpsPerBlock } = this.props;
-      const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
+
+      const adjustedWidth = size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
       const block = e.currentTarget.getBoundingClientRect();
       const distFromLeft = e.clientX - block.left;
       const percFromLeft = distFromLeft / adjustedWidth;
@@ -505,7 +506,7 @@ const withSelectionHandler = WrappedComp =>
           getElement={this.getElement}
           mouseEvent={this.updateSelectionWithknownRange}
           inputRef={this.mapIdToRange}
-          onUnMount={this.removeMountedBlock}
+          onUnmount={this.removeMountedBlock}
         />
       );
     }

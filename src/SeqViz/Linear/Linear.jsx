@@ -2,16 +2,17 @@ import { isEqual } from "lodash";
 import * as React from "react";
 
 import { createLinearTranslations } from "../../utils/sequence";
-import findAllBindingSites from "../findAllBindingSites";
 import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
 } from "../elementsToRows";
+import findAllBindingSites from "../findAllBindingSites";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
-import "./Linear.scss";
 import SeqBlock from "./SeqBlock/SeqBlock";
+
+import "./Linear.scss";
 
 /**
  * A linear sequence viewer.
@@ -69,7 +70,7 @@ class Linear extends React.Component {
       elementHeight,
       bpsPerBlock,
       size,
-      onUnMount,
+      onUnmount,
 
       findState: { searchResults = [], searchIndex }
     } = this.props;
@@ -214,7 +215,7 @@ class Linear extends React.Component {
           translations={translationRows[i]}
           currSearchIndex={searchIndex}
           firstBase={firstBase}
-          onUnmount={onUnMount}
+          onUnmount={onUnmount}
           fullSeq={seq}
           size={{ ...size }}
           zoomed={zoomed}

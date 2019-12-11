@@ -1,5 +1,5 @@
 import * as React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 
 import SeqViz from "./SeqViz";
 
@@ -9,7 +9,7 @@ import SeqViz from "./SeqViz";
  * https://user-images.githubusercontent.com/45974914/70350820-857b3900-1835-11ea-951f-32436b72b18c.png
  */
 it("renders short annotations", () => {
-  const wrapper = mount(
+  const wrapper = shallow(
     <SeqViz
       name="test"
       seq="ATGAT"
