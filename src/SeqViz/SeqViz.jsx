@@ -65,6 +65,7 @@ export default class SeqViz extends React.Component {
     showComplement: PropTypes.bool.isRequired,
     showIndex: PropTypes.bool.isRequired,
     showPrimers: PropTypes.bool.isRequired,
+    style: PropTypes.object,
     translations: PropTypes.arrayOf(
       PropTypes.shape({
         start: PropTypes.number.isRequired,
@@ -304,8 +305,8 @@ export default class SeqViz extends React.Component {
     annotations = (annotations || part.annotations || []).map(a => ({
       ...annotationFactory(a.name),
       ...a,
-      start: a.start % (seq.length || 1),
-      end: a.end % (seq.length || 1)
+      start: a.start % (seq.length + 1),
+      end: a.end % (seq.length + 1)
     }));
     name = name || part.name;
 

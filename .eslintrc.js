@@ -7,7 +7,8 @@ module.exports = {
   },
   plugins: ["prettier", "react"],
   rules: {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "react/prop-types": 0
   },
   extends: [
     "plugin:prettier/recommended",

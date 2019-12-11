@@ -245,7 +245,7 @@ class Circular extends React.PureComponent {
       name,
       inputRef,
       mouseEvent,
-      onUnMount,
+      onUnmount,
       center,
       radius,
       yDiff,
@@ -314,7 +314,7 @@ class Circular extends React.PureComponent {
           <Selection
             {...this.props}
             {...general}
-            onUnmount={onUnMount}
+            onUnmount={onUnmount}
             totalRows={totalRows}
             seq={seq}
           />

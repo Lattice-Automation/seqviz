@@ -16,9 +16,7 @@ import * as React from "react";
  */
 export default class Primers extends React.PureComponent {
   hoverPrimer = (className, opacity) => {
-    const elements = document
-      .getElementById("circular-primers")
-      .getElementsByClassName(className);
+    const elements = document.getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].style.fillOpacity = opacity;
     }

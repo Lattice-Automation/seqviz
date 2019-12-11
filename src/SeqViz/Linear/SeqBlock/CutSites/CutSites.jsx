@@ -14,16 +14,13 @@ import * as React from "react";
  * first set the names to 1.0 and then the cut site regions (without the name) to 0.5
  */
 const hoverCutSite = (className, on = false) => {
-  const linearScroller = document.getElementById("la-vz-linear-scroller");
-  if (linearScroller) {
-    let elements = linearScroller.getElementsByClassName(`${className}-name`);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = on ? 1.0 : 0.8;
-    }
-    elements = linearScroller.getElementsByClassName(className);
-    for (let i = 0; i < elements.length; i += 1) {
-      elements[i].style.fillOpacity = on ? 0.5 : 0;
-    }
+  let elements = document.getElementsByClassName(`${className}-name`);
+  for (let i = 0; i < elements.length; i += 1) {
+    elements[i].style.fillOpacity = on ? 1.0 : 0.8;
+  }
+  elements = document.getElementsByClassName(className);
+  for (let i = 0; i < elements.length; i += 1) {
+    elements[i].style.fillOpacity = on ? 0.5 : 0;
   }
 };
 

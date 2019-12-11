@@ -63,19 +63,18 @@ class SeqViewer extends React.Component {
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    const { size, zoom: { linear: zoom } = 50, style } = this.props;
+    const { seq, size, zoom: { linear: zoom } = 50, style } = this.props;
 
     if (!size.width && !size.height && style) {
       size.width = style.width; // for testing, mostly
       size.height = style.height;
     }
 
-    const adjustedWidth = size.width - 28; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of zoom currently active
-    let bpsPerBlock = Math.round((adjustedWidth / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
+    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
 
     if (zoom <= 5) {
       bpsPerBlock *= 3;
@@ -87,7 +86,11 @@ class SeqViewer extends React.Component {
       bpsPerBlock = Math.round(bpsPerBlock * (70 / zoom));
     }
 
-    const charWidth = adjustedWidth / bpsPerBlock; // width of each basepair
+    if (bpsPerBlock < seq.length) {
+      size.width -= 28; // -28 px for the padding (10px) + scroll bar (18px)
+    }
+
+    const charWidth = size.width / bpsPerBlock; // width of each basepair
 
     const lineHeight = 1.4 * seqFontSize; // aspect ratio is 1.4 for roboto mono
     const elementHeight = 16; // the height, in pixels, of annotations, ORFs, etc
@@ -148,7 +151,7 @@ class SeqViewer extends React.Component {
   };
 
   render() {
-    const { Circular: CircularProp, seq, enzymes, size, style } = this.props;
+    const { Circular: circular, seq, enzymes, size, style } = this.props;
 
     if (!size.width && !size.height && style) {
       size.width = style.width; // for testing, mostly
@@ -160,9 +163,9 @@ class SeqViewer extends React.Component {
     return (
       <div
         className="la-vz-viewer-container"
-        style={{ zIndex: CircularProp ? 2 : 3 }}
+        style={{ zIndex: circular ? 2 : 3 }}
       >
-        {CircularProp && (
+        {circular && (
           <CircularViewer
             {...this.props}
             {...this.state}
@@ -170,7 +173,7 @@ class SeqViewer extends React.Component {
             cutSites={cutSites}
           />
         )}
-        {!CircularProp && (
+        {!circular && (
           <LinearViewer
             {...this.props}
             {...this.state}

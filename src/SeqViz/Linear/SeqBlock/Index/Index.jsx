@@ -15,12 +15,9 @@ export default class Index extends React.PureComponent {
       lineHeight,
       size,
       resizing,
-      findXAndWidth,
-      bpsPerBlock
+      findXAndWidth
     } = this.props;
     const seqLength = seq.length;
-    const adjustedWidth =
-      seqLength >= bpsPerBlock ? size.width - 28 : size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
 
     // the tallie distance on the x-axis is zoom dependent:
     // (0, 10]: every 50
@@ -52,12 +49,13 @@ export default class Index extends React.PureComponent {
     }
 
     let i = 0;
-    while ((i + firstBase) % tickInc !== 0) i += 1;
+    while ((i + firstBase) % tickInc !== 0) {
+      i += 1;
+    }
     while (i < seqLength) {
       if (i + firstBase !== 0) {
         tickIndexes.push(i + firstBase);
       }
-
       i += tickInc;
     }
 
@@ -85,7 +83,7 @@ export default class Index extends React.PureComponent {
 
       textFromLeft -= digits * 10; // 10 = 0.91 x 11
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
-      textFromLeft = Math.min(adjustedWidth - textWidth / 2, textFromLeft); // keep off right edge
+      textFromLeft = Math.min(size.width - textWidth / 2, textFromLeft); // keep off right edge
 
       const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight - 1})`;
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
@@ -125,7 +123,7 @@ export default class Index extends React.PureComponent {
     };
 
     return (
-      <g transform={transform}>
+      <g className="la-vz-linear-index" transform={transform}>
         <rect
           style={axisStyle}
           fill="#B0B9C2"

@@ -1,6 +1,5 @@
 import * as React from "react";
 import shortid from "shortid";
-
 import tinycolor from "tinycolor2";
 
 import { COLOR_BORDER_MAP } from "../../../../utils/colors";
@@ -55,15 +54,9 @@ export default class AnnotationRows extends React.PureComponent {
  */
 class AnnotationRow extends React.PureComponent {
   hoverOtherAnnotationRows = (className, opacity) => {
-    const viewers = document.getElementsByClassName("la-vs-linear-scroller");
-    for (let j = 0; j < viewers.length; j += 1) {
-      const viewer = viewers[j];
-
-      const elements = viewer.getElementsByClassName(className);
-
-      for (let i = 0; i < elements.length; i += 1) {
-        elements[i].style.fillOpacity = opacity;
-      }
+    const elements = document.getElementsByClassName(className);
+    for (let i = 0; i < elements.length; i += 1) {
+      elements[i].style.fillOpacity = opacity;
     }
   };
 
