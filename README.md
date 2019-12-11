@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Dec 11 17:37:31 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Dec 11 17:02:36 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -63,26 +63,22 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 ### Installation
 
-The library source code is in a file named <!-- pkg-file(cmd:) -->`seqviz.min.js`<!-- /pkg-file -->. You can either extract this from the [GitHub release](https://github.com/Lattice-Automation/seqviz/releases) tarball or download it from our CDN at <!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/1.0.4/seqviz.min.js`<!-- /dist-url -->.
+#### npm
 
-You will want to import the library in your top level `index.html` (or whatever is the entry point of your website).
+```
+npm install seqviz
+```
 
-For example you can use:
+#### CDN
 
-`<script src="`<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/1.0.4/seqviz.min.js`<!-- /dist-url -->`"></script>`
+```html
+<script src="<!-- dist-url(cmd:) -->https://cdn.latticeautomation.com/libs/seqviz/1.0.3/seqviz.min.js<!-- /dist-url -->"></script>
+```
 
-This method requires no actual download. You will be served the library directly from our CDN. This method, however, does require you to have internet access in order to use the library.
-
-If you want to load the library locally and be able to view cached parts without internet connection you can download the source file to the same folder as your `index.html` and use:
+#### Download
 
 ```html
 <script src="seqviz.min.js"></script>
-```
-
-If you are using [Create React App](https://github.com/facebook/create-react-app) and have the source code stored in your public folder you can use:
-
-```html
-<script src="%PUBLIC_URL%/seqviz.min.js"></script>
 ```
 
 ### Usage
