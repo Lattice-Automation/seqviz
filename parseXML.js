@@ -20,7 +20,7 @@ const replaceXML = (file, cwd) => {
     .replace(
       "cdn-example",
       () =>
-        `\`\`\`\n<script\n\tsrc="${DISTBASE}${VERSION}/${PKGNAME}.min.js"\n></script>\n\`\`\``
+        `\n\`\`\`html\n<script\n\tsrc="${DISTBASE}${VERSION}/${PKGNAME}.min.js"\n></script>\n\`\`\`\n`
     )
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
