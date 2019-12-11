@@ -75,7 +75,7 @@
   },
   "scripts": {
     "start": "PORT=8000 react-scripts start",
-    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node execXML.js ./README.md && node execXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/public/",
+    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/public/",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && cd demo && npm install && npm run deploy && cd ../..",
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy && npm publish",
     "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy && npm publish",
