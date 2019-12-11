@@ -1,3 +1,8 @@
+const fs = require("fs");
+const path = require("path");
+const xmlComment = require("xml-comment-api");
+const { execSync } = require("child_process");
+
 const PACKAGE = require("./package.json");
 const VERSION = PACKAGE.version;
 const PKGNAME = PACKAGE.name;
@@ -6,20 +11,17 @@ const PKGDESCR = PACKAGE.description;
 const PKGBUGS = PACKAGE.bugs;
 const DISTBASE = "https://cdn.latticeautomation.com/libs/seqviz/";
 
-const fs = require("fs");
-const path = require("path");
-const xmlComment = require("xml-comment-api");
-const { execSync } = require("child_process");
-
 /**
- * Searches for xml comments in the file and parses
- * the comment for executable bash, writes out the
- * bash results into the return string
+ * Searches for xml comments in the file and inserts package meta-data
  */
-const execXML = (file, cwd) => {
+const replaceXML = (file, cwd) => {
   return xmlComment(file)
     .replace("version", () => VERSION)
-    .replace("dist-url", () => `\`${DISTBASE}${VERSION}/${PKGNAME}.min.js\``)
+    .replace(
+      "cdn-example",
+      () =>
+        `\`\`\`<script src="${DISTBASE}${VERSION}/${PKGNAME}.min.js"></script>\`\`\``
+    )
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
     .replace("pkg-description", () => PKGDESCR)
@@ -53,7 +55,7 @@ const rewrite = input => {
   try {
     const file = fs.readFileSync(input, "utf-8");
     const cwd = path.dirname(input);
-    rewritten = execXML(file, cwd);
+    rewritten = replaceXML(file, cwd);
     fs.writeFile(input, rewritten, "utf8", err => {
       if (err) throw err;
       console.log(`${input} file has been saved!`);
