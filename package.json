@@ -1,6 +1,6 @@
 {
   "name": "seqviz",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM part input",
   "keywords": [
     "seqviz",
