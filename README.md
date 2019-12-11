@@ -65,21 +65,13 @@ This package aims to provide basic sequence viewing in a simple, open-source way
 
 #### npm
 
-```
+```bash
 npm install seqviz
 ```
 
 #### CDN
 
-```html
-<script src="<!-- dist-url(cmd:) -->`https://cdn.latticeautomation.com/libs/seqviz/1.0.6/seqviz.min.js`<!-- /dist-url -->"></script>
-```
-
-#### Download
-
-```html
-<script src="seqviz.min.js"></script>
-```
+<!-- cdn-example(cmd:) --><!-- /cdn-example -->
 
 ### Usage
 
@@ -88,7 +80,7 @@ You can initialize a viewer with React or vanilla-JS.
 React, via the `Seqviz` component:
 
 ```jsx
-const { SeqViz } = window.seqviz;
+import { SeqViz } from "seqviz";
 
 const CustomViewer = () => (
   <SeqViz
@@ -103,8 +95,7 @@ JavaScript, via the `Viewer` constructor:
 
 ```html
 <script>
-  const seqviz = window.seqviz;
-  seqviz
+  window.seqviz
     .Viewer("root", {
       name: "L09136",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
