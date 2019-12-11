@@ -61,7 +61,8 @@ export default class InfiniteScroll extends React.PureComponent {
    */
   getSnapshotBeforeUpdate = prevProps => {
     // find the current top block
-    const distFromTop = this.scroller ? this.scroller.current.scrollTop : 0;
+    let top = this.scroller ? this.scroller.current.scrollTop : 0;
+
     // find out 1) which block this is at the edge of the top
     // and 2) how far from the top of that block we are right now
     const { blockHeights } = prevProps;
@@ -71,11 +72,11 @@ export default class InfiniteScroll extends React.PureComponent {
       accumulatedY += blockHeights[blockIndex];
       blockIndex += 1;
     } while (
-      accumulatedY + blockHeights[blockIndex] < distFromTop &&
+      accumulatedY + blockHeights[blockIndex] < top &&
       blockIndex < blockHeights.length
     );
 
-    const blockY = distFromTop - accumulatedY; // last extra distance
+    const blockY = top - accumulatedY; // last extra distance
     return { blockY, blockIndex };
   };
 
@@ -162,7 +163,14 @@ export default class InfiniteScroll extends React.PureComponent {
     const { visibleBlocks } = this.state;
 
     const newVisibleBlocks = [];
-    let { top } = this.insideDOM.current.getBoundingClientRect();
+
+    let top = 0;
+    if (this.scroller && this.insideDOM) {
+      const { top: parentTop } = this.scroller.current.getBoundingClientRect();
+      const { top: childTop } = this.insideDOM.current.getBoundingClientRect();
+      top = childTop - parentTop;
+    }
+
     top = -top + 35;
     top = Math.max(0, top); // don't go too high
     top = Math.min(totalHeight - height, top); // don't go too low
