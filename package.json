@@ -32,7 +32,7 @@
   "private": false,
   "scripts": {
     "start": "PORT=8000 react-scripts start",
-    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md",
+    "build": "rm -rf ./dist && webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
