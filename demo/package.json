@@ -9,13 +9,13 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^3.3.0",
     "semantic-ui-react": "^0.87.2",
-    "seqviz": "^1.0.10"
+    "seqviz": "^1.0.12"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "deploy": "npm update seqviz && git add . -m \"Update demo dependencies\" && npm run build && aws s3 sync build s3://lattice-tools-s3/seqviz && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*'",
+    "deploy": "npm update seqviz && git add . && git commit -m \"Update demo dependencies\" && npm run build && aws s3 sync build s3://lattice-tools-s3/seqviz && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*'",
     "eject": "craco eject",
     "bbinfo": "node ./src/io/fileInput.js ./src/io/biobricks/biobricks.fa"
   },
