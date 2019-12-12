@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 12 11:05:29 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 12 11:12:05 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -74,7 +74,7 @@ npm install seqviz
 <!-- cdn-example(cmd:) -->
 ```html
 <script
-	src="https://cdn.latticeautomation.com/libs/seqviz/1.0.10/seqviz.min.js"
+	src="https://cdn.latticeautomation.com/libs/seqviz/1.0.11/seqviz.min.js"
 ></script>
 ```
 <!-- /cdn-example -->
