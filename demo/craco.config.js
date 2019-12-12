@@ -15,6 +15,7 @@ module.exports = {
   },
   plugins: [
     { plugin: require("craco-less") },
+    { plugin: require("@semantic-ui-react/craco-less") },
     {
       plugin: {
         overrideWebpackConfig: ({ context, webpackConfig }) => {
@@ -25,9 +26,7 @@ module.exports = {
 
           if (!isFound) {
             throwUnexpectedConfigError({
-              message: `Can't find file-loader in the ${
-                context.env
-              } webpack config!`
+              message: `Can't find file-loader in the ${context.env} webpack config!`
             });
           }
 
