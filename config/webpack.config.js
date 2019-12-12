@@ -22,7 +22,6 @@ const cdnBuild = {
     filename: "seqviz.cdn.js",
     library: libraryName,
     libraryTarget: "umd",
-    publicPath: "/dist/",
     umdNamedDefine: true
   },
   mode: "production",
@@ -100,10 +99,11 @@ const npmBuild = Object.assign({}, cdnBuild, {
     filename: "seqviz.npm.js",
     library: libraryName,
     libraryTarget: "umd",
-    publicPath: "/dist/",
     umdNamedDefine: true
   },
-  externals: [nodeExternals()],
+  externals: [
+    nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })
+  ],
   plugins: [
     new UglifyJsPlugin(),
     new webpack.BannerPlugin(banner),
