@@ -2,6 +2,9 @@ const path = require("path");
 const webpack = require("webpack");
 const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+const nodeExternals = require("webpack-node-externals");
 
 const PACKAGE = require("./package.json");
 
@@ -13,6 +16,7 @@ const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and main
 
 module.exports = {
   entry: "./src/viewer.js",
+  target: "web",
   output: {
     path: path.join(__dirname, "./dist"),
     filename: "seqviz.min.js",
@@ -37,7 +41,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"],
+          presets: [
+            ["@babel/preset-env", { modules: false }],
+            "@babel/preset-react"
+          ],
           plugins: [
             "@babel/plugin-proposal-class-properties",
             "@babel/plugin-proposal-object-rest-spread",
@@ -59,6 +66,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
+        exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
@@ -69,24 +77,16 @@ module.exports = {
       "react-dom": path.resolve(__dirname, "./node_modules/react-dom")
     }
   },
-  externals: {
-    // Don't bundle react or react-dom
-    react: {
-      commonjs: "react",
-      commonjs2: "react",
-      amd: "React",
-      root: "React"
-    },
-    "react-dom": {
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "ReactDOM",
-      root: "ReactDOM"
-    }
-  },
+  externals: [nodeExternals()],
   plugins: [
     new UglifyJsPlugin(),
     new webpack.BannerPlugin(banner),
     new LodashModuleReplacementPlugin()
-  ]
+    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
+  ],
+  optimization: {
+    nodeEnv: "production",
+    minimize: true,
+    concatenateModules: true
+  }
 };

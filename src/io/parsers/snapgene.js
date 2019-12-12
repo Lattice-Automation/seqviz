@@ -2,69 +2,12 @@
 // https://github.com/IsaacLuo/SnapGeneFileReader
 // https://github.com/ediezben/dgparse/blob/master/specs/SnapGene_File_Format_%202.0.pdf
 
+import { StringDecoder } from "string_decoder";
+import bufferpack from "bufferpack";
+import xml2js from "xml2js";
+
 import { dnaComplement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
-const bufferpack = require("bufferpack");
-const xml2Js = require("xml2js");
-const { StringDecoder } = require("string_decoder");
-
-const ord = string => {
-  //  discuss at: http://locutus.io/php/ord/
-  // original by: Kevin van Zonneveld (http://kvz.io)
-  // bugfixed by: Onno Marsman (https://twitter.com/onnomarsman)
-  // improved by: Brett Zamir (http://brett-zamir.me)
-  //    input by: incidence
-  //   example 1: ord('K')
-  //   returns 1: 75
-  //   example 2: ord('\uD800\uDC00'); // surrogate pair to create a single Unicode character
-  //   returns 2: 65536
-
-  const str = string.toString();
-  const code = str.charCodeAt(0);
-
-  if (code >= 0xd800 && code <= 0xdbff) {
-    // High surrogate (could change last hex to 0xDB7F to treat
-    // high private surrogates as single characters)
-    const hi = code;
-    if (str.length === 1) {
-      // This is just a high surrogate with no following low surrogate,
-      // so we return its value;
-      return code;
-      // we could also throw an error as it is not a complete character,
-      // but someone may want to know
-    }
-    const low = str.charCodeAt(1);
-    return (hi - 0xd800) * 0x400 + (low - 0xdc00) + 0x10000;
-  }
-  if (code >= 0xdc00 && code <= 0xdfff) {
-    // Low surrogate
-    // This is just a low surrogate with no preceding high surrogate,
-    // so we return its value;
-    return code;
-    // we could also throw an error as it is not a complete character,
-    // but someone may want to know
-  }
-
-  return code;
-};
-
-const dec2bin = dec => (dec >>> 0).toString(2); // eslint-disable-line no-bitwise
-
-const isFirstBitA1 = num =>
-  Number(
-    num
-      .toString()
-      .split("")
-      .pop()
-  ) === 1;
-
-const parseXml = str =>
-  new Promise((resolve, reject) => {
-    xml2Js.parseString(str, (err, result) => {
-      if (err) reject(err);
-      resolve(result);
-    });
-  });
 
 export default async (fileArrayBuffer, options) => {
   const { fileName = "" } = options;
@@ -142,7 +85,7 @@ export default async (fileArrayBuffer, options) => {
     } else if (ordOfNB === 6) {
       //  # READ THE NOTES
       const blockContent = await read(blockSize, "utf8");
-      const notes = await parseXml(blockContent);
+      const notes = await editMD(blockContent);
       data.notes = notes ? notes.description : "";
     } else if (ordOfNB === 10) {
       //  # READ THE FEATURES
@@ -155,7 +98,7 @@ export default async (fileArrayBuffer, options) => {
       };
 
       const xml = await read(blockSize, "utf8");
-      const b = await parseXml(xml);
+      const b = await editMD(xml);
       const { Features: { Feature = [] } = {} } = b;
       data.annotations = [];
       Feature.forEach(({ $: attrs, Segment = [] }) => {
@@ -195,3 +138,61 @@ export default async (fileArrayBuffer, options) => {
     name: fileName.replace(".dna", "")
   };
 };
+
+const ord = string => {
+  //  discuss at: http://locutus.io/php/ord/
+  // original by: Kevin van Zonneveld (http://kvz.io)
+  // bugfixed by: Onno Marsman (https://twitter.com/onnomarsman)
+  // improved by: Brett Zamir (http://brett-zamir.me)
+  //    input by: incidence
+  //   example 1: ord('K')
+  //   returns 1: 75
+  //   example 2: ord('\uD800\uDC00'); // surrogate pair to create a single Unicode character
+  //   returns 2: 65536
+
+  const str = string.toString();
+  const code = str.charCodeAt(0);
+
+  if (code >= 0xd800 && code <= 0xdbff) {
+    // High surrogate (could change last hex to 0xDB7F to treat
+    // high private surrogates as single characters)
+    const hi = code;
+    if (str.length === 1) {
+      // This is just a high surrogate with no following low surrogate,
+      // so we return its value;
+      return code;
+      // we could also throw an error as it is not a complete character,
+      // but someone may want to know
+    }
+    const low = str.charCodeAt(1);
+    return (hi - 0xd800) * 0x400 + (low - 0xdc00) + 0x10000;
+  }
+  if (code >= 0xdc00 && code <= 0xdfff) {
+    // Low surrogate
+    // This is just a low surrogate with no preceding high surrogate,
+    // so we return its value;
+    return code;
+    // we could also throw an error as it is not a complete character,
+    // but someone may want to know
+  }
+
+  return code;
+};
+
+const dec2bin = dec => (dec >>> 0).toString(2); // eslint-disable-line no-bitwise
+
+const isFirstBitA1 = num =>
+  Number(
+    num
+      .toString()
+      .split("")
+      .pop()
+  ) === 1;
+
+const editMD = str =>
+  new Promise((resolve, reject) => {
+    xml2js.parseString(str, (err, result) => {
+      if (err) reject(err);
+      resolve(result);
+    });
+  });

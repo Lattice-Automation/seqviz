@@ -1,4 +1,5 @@
 import shortid from "shortid";
+
 import { colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 

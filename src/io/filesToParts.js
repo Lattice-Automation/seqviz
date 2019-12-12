@@ -1,4 +1,3 @@
-import JSZip from "jszip";
 import path from "path";
 
 import { dnaComplement, partFactory } from "../utils/parser";
@@ -12,36 +11,57 @@ import parseSnapgene from "./parsers/snapgene";
 import parseSeqBuilder from "./parsers/seqbuilder";
 
 /**
- * unzips a dropped zip file
+ * filesToParts can convert either string representations of
+ * DNA files, or a list of HTML5 File objects, into parts
  */
-const zipHandler = file => {
-  const zip = new JSZip();
-  const zippedFiles = [];
-  return new Promise(resolve => {
-    zip.loadAsync(file).then(zipf => {
-      let count = 0;
-      const entries = [];
-      Object.keys(zipf.files).forEach(name => {
-        if (name.includes("/.") || zipf.files[name].dir) return;
-        entries.push(zipf.files[name]);
-      });
+export default async (files, options) =>
+  new Promise(resolve => {
+    const { fileName = "", colors = [], backbone = "" } = options;
+    // if it's just a single file string
+    if (typeof files === "string") {
+      resolve(fileToParts(files, { fileName, colors, backbone }));
+    }
 
-      entries.forEach(entry => {
-        const zipRec = {};
-        zipRec.fileName = entry.name.slice(0, -4);
-        entry.async("uint8array").then(u8 => {
-          const stringData = new TextDecoder("utf-8").decode(u8);
-          zipRec.data = stringData;
-          zippedFiles.push(zipRec);
-          count += 1;
-          if (count === entries.length) {
-            resolve(zippedFiles);
-          }
-        });
-      });
+    // a list of file strings or a FileList has been dropped
+    let numToUpload = files.length;
+    let partsList = [];
+    files.forEach(file => {
+      if (file.type === "application/zip") {
+        console.error("Zip files are not supported by SeqViz!");
+      } else {
+        const fr = new FileReader();
+        if (!file.name.endsWith(".dna")) {
+          fr.onload = e => {
+            fileToParts(e.target.result, {
+              fileName: file.name,
+              colors: colors,
+              backbone: backbone
+            }).then(parts => {
+              numToUpload += parts.length - 1;
+              partsList = partsList.concat(...parts);
+              if (partsList.length >= numToUpload) {
+                resolve(Promise.all(partsList));
+              }
+            });
+          };
+          fr.readAsText(file);
+        } else {
+          fr.onload = e => {
+            parseSnapgene(e.target.result, {
+              fileName: file.name,
+              colors: colors
+            }).then(part => {
+              partsList = partsList.concat(part);
+              if (partsList.length >= numToUpload) {
+                resolve(Promise.all(partsList));
+              }
+            });
+          };
+          fr.readAsArrayBuffer(file);
+        }
+      }
     });
   });
-};
 
 /**
  * Takes in a file, in string format, figures out which type of file it is,
@@ -151,74 +171,3 @@ const fileToParts = async (file, options) => {
   if (parts) return parts.map(p => ({ ...p, source }));
   throw Error("Unreachable code");
 };
-
-/**
- * filesToParts can convert either string representations of
- * DNA files, or a list of HTML5 File objects, into parts
- */
-export default async (files, options) =>
-  new Promise(resolve => {
-    const { fileName = "", colors = [], backbone = "" } = options;
-    // if it's just a single file string
-    if (typeof files === "string") {
-      resolve(fileToParts(files, { fileName, colors, backbone }));
-    }
-
-    // a list of file strings or a FileList has been dropped
-    let numToUpload = files.length;
-    let partsList = [];
-    files.forEach(file => {
-      if (file.type === "application/zip") {
-        zipHandler(file).then(unzipped => {
-          // minus one because of the zip file
-          // plus one for every sub part that was inside the zip
-          numToUpload += unzipped.length - 1;
-          // for every unzipped file
-          unzipped.forEach(rec => {
-            // convert it to a part
-            fileToParts(rec.data, {
-              fileName: rec.fileName,
-              colors: colors,
-              backbone: backbone
-            }).then(convertedParts => {
-              partsList = partsList.concat(...convertedParts);
-              if (partsList.length >= numToUpload) {
-                resolve(Promise.all(partsList));
-              }
-            });
-          });
-        });
-      } else {
-        const fr = new FileReader();
-        if (!file.name.endsWith(".dna")) {
-          fr.onload = e => {
-            fileToParts(e.target.result, {
-              fileName: file.name,
-              colors: colors,
-              backbone: backbone
-            }).then(parts => {
-              numToUpload += parts.length - 1;
-              partsList = partsList.concat(...parts);
-              if (partsList.length >= numToUpload) {
-                resolve(Promise.all(partsList));
-              }
-            });
-          };
-          fr.readAsText(file);
-        } else {
-          fr.onload = e => {
-            parseSnapgene(e.target.result, {
-              fileName: file.name,
-              colors: colors
-            }).then(part => {
-              partsList = partsList.concat(part);
-              if (partsList.length >= numToUpload) {
-                resolve(Promise.all(partsList));
-              }
-            });
-          };
-          fr.readAsArrayBuffer(file);
-        }
-      }
-    });
-  });
