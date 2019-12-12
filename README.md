@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 12 13:58:59 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 12 14:32:54 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -25,7 +25,7 @@
 - [Key Features](#key-features)
 - [Using the Library](#using-the-library)
   - [Installation](#installation)
-  - [Usage](#usage)
+  - [Instantiation](#instantiation)
   - [Configuration](#configuration)
 - [Library Demo](#library-demo)
 - [Contact Us](#contact-us)
@@ -73,17 +73,15 @@ npm install seqviz --save
 
 <!-- cdn-example(cmd:) -->
 ```html
-<script
-	src="https://cdn.latticeautomation.com/libs/seqviz/1.0.12/seqviz.min.js"
-></script>
+<script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.12/seqviz.min.js"></script>
 ```
 <!-- /cdn-example -->
 
-### Usage
+### Instantiation
 
-You can initialize a viewer with React or vanilla-JS.
+You can instantiate a viewer via React or Vanilla JS.
 
-React, via the `Seqviz` component:
+React, with the `Seqviz` component:
 
 ```jsx
 import { SeqViz } from "seqviz";
@@ -97,7 +95,7 @@ const CustomViewer = () => (
 );
 ```
 
-JavaScript, via the `Viewer` constructor:
+JavaScript, with the `Viewer` constructor (default export):
 
 ```html
 <script>
@@ -381,8 +379,4 @@ This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice 
 
 You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
 
-## Contributing
-
-See [Running in Development Mode](https://github.com/Lattice-Automation/seqviz/wiki/Running-in-Development-Mode), [CONTRIBUTING](https://github.com/Lattice-Automation/seqviz/blob/master/CONTRIBUTING.md), and [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)
-
-Here are some good guidelines to get started with contributing: [Contributing to Open Source](https://medium.com/@jenweber/your-first-open-source-contribution-a-step-by-step-technical-guide-d3aca55cc5a6).
+Before contributing, read our [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)
