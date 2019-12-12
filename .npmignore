@@ -9,5 +9,5 @@ public
 .gitignore
 CODE_OF_CONDUCT.md
 jest*
-parseXML.js
+editMD.js
 webpack.config.js

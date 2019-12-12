@@ -32,9 +32,9 @@
   "private": false,
   "scripts": {
     "start": "PORT=8000 react-scripts start",
-    "build": "rm -rf ./dist && webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md",
+    "build": "rm -rf ./dist && webpack --config webpack.config.cdn.js --display-error-details && webpack --config webpack.config.npm.js --display-error-details && node editMD.js ./README.md && node editMD.js ./CODE_OF_CONDUCT.md",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
-    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
+    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
@@ -43,12 +43,12 @@
   },
   "dependencies": {
     "bufferpack": "0.0.6",
-    "jszip": "^3.2.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react-router-dom": "^5.0.0",
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
+    "string_decoder": "^1.3.0",
     "tinycolor2": "^1.4.1",
     "xml2js": "^0.4.19"
   },
@@ -57,17 +57,17 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "@babel/node": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/node": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-imports": "^2.0.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-react": "^6.24.1",
+    "core-js": "^3.5.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
@@ -84,14 +84,20 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.3.0",
+    "regenerator-runtime": "^0.13.3",
     "typescript": "^3.7.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.2",
+    "webpack-node-externals": "^1.7.2",
     "why-did-you-update": "^1.0.6",
     "xml-comment-api": "^1.0.1"
   },
   "browserslist": [
     ">0.2%",
     "not dead"
+  ],
+  "sideEffects": [
+    "**/*.scss"
   ]
 }
