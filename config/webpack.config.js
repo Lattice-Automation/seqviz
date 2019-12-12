@@ -22,7 +22,8 @@ const cdnBuild = {
     filename: "seqviz.cdn.js",
     library: libraryName,
     libraryTarget: "umd",
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    publicPath: "/dist/"
   },
   mode: "production",
   resolve: {
@@ -96,10 +97,11 @@ const cdnBuild = {
 const npmBuild = Object.assign({}, cdnBuild, {
   output: {
     path: path.join(__dirname, "..", "dist"),
-    filename: "seqviz.npm.js",
+    filename: "index.js",
     library: libraryName,
     libraryTarget: "umd",
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    publicPath: "/dist/"
   },
   externals: [
     nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })
