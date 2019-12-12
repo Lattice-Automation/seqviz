@@ -3,13 +3,14 @@ import * as React from "react";
 import findAllBindingSites from "../findAllBindingSites";
 import withViewerHOCs from "../handlers";
 import { stackElements } from "../elementsToRows";
-import Annotations from "./Annotations/Annotations";
+import Annotations from "./Annotations/Annotations.jsx";
+import Index from "./Index/Index.jsx";
+import Labels from "./Labels/Labels.jsx";
+import Selection from "./Selection/Selection.jsx";
+import CutSites from "./CutSites/CutSites.jsx";
+import Primers from "./Primers/Primers.jsx";
+
 import "./Circular.scss";
-import Index from "./Index/Index";
-import Labels from "./Labels/Labels";
-import Selection from "./Selection/Selection";
-import CutSites from "./CutSites/CutSites";
-import Primers from "./Primers/Primers";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters

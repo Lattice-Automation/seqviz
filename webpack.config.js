@@ -1,25 +1,29 @@
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+const path = require("path");
 const webpack = require("webpack");
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+
 const PACKAGE = require("./package.json");
 
 const VERSION = PACKAGE.version;
 const AUTHOR = PACKAGE.author;
 const packageName = PACKAGE.name;
 const libraryName = "seqviz";
-const fileName = `${packageName}.min.js`;
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 module.exports = {
   entry: "./src/viewer.js",
   output: {
-    filename: fileName,
+    path: path.join(__dirname, "./dist"),
+    filename: "seqviz.min.js",
     library: libraryName,
-    libraryTarget: "window"
+    libraryTarget: "umd",
+    publicPath: "/dist/",
+    umdNamedDefine: true
   },
   mode: "production",
   resolve: {
-    extensions: ["*", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx"]
   },
   node: {
     fs: "empty",
@@ -30,9 +34,17 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         loader: "babel-loader",
         options: {
-          plugins: ["lodash"]
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+          plugins: [
+            "@babel/plugin-proposal-class-properties",
+            "@babel/plugin-proposal-object-rest-spread",
+            "babel-plugin-module-resolver",
+            "babel-plugin-transform-imports",
+            "lodash"
+          ]
         }
       },
       {
@@ -50,6 +62,27 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
+  },
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, "./node_modules/react"),
+      "react-dom": path.resolve(__dirname, "./node_modules/react-dom")
+    }
+  },
+  externals: {
+    // Don't bundle react or react-dom
+    react: {
+      commonjs: "react",
+      commonjs2: "react",
+      amd: "React",
+      root: "React"
+    },
+    "react-dom": {
+      commonjs: "react-dom",
+      commonjs2: "react-dom",
+      amd: "ReactDOM",
+      root: "ReactDOM"
+    }
   },
   plugins: [
     new UglifyJsPlugin(),

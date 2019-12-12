@@ -1,5 +1,5 @@
-import withEventRouter from "./eventRouter";
-import withSelectionHandler from "./selectionHandler";
+import withEventRouter from "./eventRouter.jsx";
+import withSelectionHandler from "./selectionHandler.jsx";
 
 /**
  * sequentially apply all the Sequence Viewer HOCs

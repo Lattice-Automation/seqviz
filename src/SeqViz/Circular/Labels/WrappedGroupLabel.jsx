@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CHAR_WIDTH } from "../Circular";
+import { CHAR_WIDTH } from "../Circular.jsx";
 
 /**
  * a component that groups several other labels together so they're all viewable at once

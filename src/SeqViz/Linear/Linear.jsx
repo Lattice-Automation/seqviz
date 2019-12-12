@@ -9,8 +9,8 @@ import {
   stackElements
 } from "../elementsToRows";
 import findAllBindingSites from "../findAllBindingSites";
-import InfiniteScroll from "./InfiniteScroll/InfiniteScroll";
-import SeqBlock from "./SeqBlock/SeqBlock";
+import InfiniteScroll from "./InfiniteScroll/InfiniteScroll.jsx";
+import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 
 import "./Linear.scss";
 

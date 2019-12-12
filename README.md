@@ -8,7 +8,7 @@
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/tree/develop/src)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Wed Dec 11 18:18:19 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Thu Dec 12 11:05:29 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -373,17 +373,13 @@ You can see a demonstration of this library used to fetch BioBricks at
 
 For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
-For a simpler start up, there is an HTML demo which only requires additions to the `index.html` to get started. See [seqviz/demo/simple-ui/index.html](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/public/index.html).
-
 You can also check out the example for examining NCBI parts included in our SeqViz introductory [Medium post](https://medium.com/lattice-automation/visualize-your-dna-sequences-with-seqviz-b1d945eb9684).
 
 ## Contact Us
 
 This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->.
 
-You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url -->
-
-or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
+You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
 
 ## Contributing
 
