@@ -160,7 +160,7 @@ const fileToParts = async (file, options) => {
         parts = [{ ...partFactory(), ...dnaComplement(file), name }];
         break;
       default:
-        throw Error(`${fileName} File type not recognized`);
+        throw Error(`${fileName} File type not recognized: ${file}`);
     }
   } catch (e) {
     console.warn(e);

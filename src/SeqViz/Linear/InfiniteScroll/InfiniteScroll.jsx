@@ -277,7 +277,7 @@ export default class InfiniteScroll extends React.PureComponent {
           style={{ height }}
           ref={this.insideDOM}
         >
-          <div style={{ width: width, height: spaceAbove }} />
+          <div style={{ width: width || 0, height: spaceAbove }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
       </div>
