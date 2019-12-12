@@ -6,7 +6,7 @@ import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { dnaComplement } from "../utils/parser";
 import { defaultSelection, annotationFactory } from "../utils/sequence";
-import SeqViewer from "./SeqViewer";
+import SeqViewer from "./SeqViewer.jsx";
 
 import "./SeqViz.scss";
 

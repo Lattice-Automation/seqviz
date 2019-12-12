@@ -1,4 +1,13 @@
+__mocks__
+.github
 .vscode
 demo
-dist
 node_modules
+public
+.babelrc
+.eslintrc.js
+.gitignore
+CODE_OF_CONDUCT.md
+jest*
+parseXML.js
+webpack.config.js

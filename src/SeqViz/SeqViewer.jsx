@@ -3,8 +3,8 @@ import * as React from "react";
 import sizeMe from "react-sizeme";
 
 import { cutSitesInRows } from "../utils/digest/digest";
-import CircularViewer from "./Circular/Circular";
-import LinearViewer from "./Linear/Linear";
+import CircularViewer from "./Circular/Circular.jsx";
+import LinearViewer from "./Linear/Linear.jsx";
 import seqSearch from "./find";
 
 import "./SeqViewer.scss";

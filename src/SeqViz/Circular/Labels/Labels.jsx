@@ -1,7 +1,9 @@
 import * as React from "react";
-import { CHAR_WIDTH } from "../Circular";
+
+import { CHAR_WIDTH } from "../Circular.jsx";
+import WrappedGroupLabel from "./WrappedGroupLabel.jsx";
+
 import "./Labels.scss";
-import WrappedGroupLabel from "./WrappedGroupLabel";
 
 /**
  * used to build up all plasmid labels, for annotations, enzymes, etc

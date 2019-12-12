@@ -13,13 +13,15 @@ import {
   Menu,
   Sidebar
 } from "semantic-ui-react";
+import { SeqViz } from "seqviz";
 
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-small.png";
 import seqvizGraphic from "../src/seqviz-logo.png";
-import "./App.css";
 import { Header } from "./Header";
 import { history, urlParams, updateUrl } from "./utils";
+
+import "./App.css";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -392,7 +394,6 @@ export class SequenceViewer extends Component {
     } = this.props;
 
     const viewType = view || "both";
-    const SeqViz = window.seqviz.SeqViz;
 
     return (
       <SeqViz

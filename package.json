@@ -5,6 +5,7 @@
   "keywords": [
     "seqviz",
     "DNA",
+    "viewer",
     "sequence viewer",
     "vector viewer",
     "sequence visualizer",
@@ -27,25 +28,40 @@
     "email": "contact@latticeautomation.com"
   },
   "license": "MIT",
-  "main": "src/viewer.js",
+  "main": "dist/seqviz.min.js",
   "private": false,
+  "scripts": {
+    "start": "PORT=8000 react-scripts start",
+    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md",
+    "demo": "cd demo && npm install && npm run deploy && cd ../..",
+    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
+    "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "bufferpack": "0.0.6",
     "jszip": "^3.2.1",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
     "tinycolor2": "^1.4.1",
     "xml2js": "^0.4.19"
   },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
   "devDependencies": {
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -66,6 +82,8 @@
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.12.0",
     "prettier": "^1.19.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "^3.3.0",
     "typescript": "^3.7.3",
     "uglifyjs-webpack-plugin": "^2.1.2",
@@ -73,33 +91,8 @@
     "why-did-you-update": "^1.0.6",
     "xml-comment-api": "^1.0.1"
   },
-  "scripts": {
-    "start": "PORT=8000 react-scripts start",
-    "build": "webpack --config webpack.config.js --display-error-details --progress --color --verbose && node parseXML.js ./README.md && node parseXML.js ./CODE_OF_CONDUCT.md && cp dist/seqviz.min.js demo/public/",
-    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.min.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && cd demo && npm install && npm run deploy && cd ../..",
-    "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm run deploy && npm publish",
-    "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm run deploy && npm publish",
-    "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm run deploy && npm publish",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead"
-  ],
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "babel-plugin-module-resolver",
-      "babel-plugin-transform-imports"
-    ]
-  }
+  ]
 }
