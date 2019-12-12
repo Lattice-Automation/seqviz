@@ -15,10 +15,10 @@ const libraryName = "seqviz";
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 const cdnBuild = {
-  entry: path.join("..", "src", "viewer.js"),
+  entry: path.join(".", "src", "viewer.js"),
   target: "web",
   output: {
-    path: path.join(__dirname, "..", "dist"),
+    path: path.join(__dirname, ".", "dist"),
     filename: "seqviz.cdn.js",
     library: libraryName,
     libraryTarget: "umd",
@@ -96,7 +96,7 @@ const cdnBuild = {
  */
 const npmBuild = Object.assign({}, cdnBuild, {
   output: {
-    path: path.join(__dirname, "./dist"),
+    path: "./dist",
     filename: "seqviz.npm.js",
     library: libraryName,
     libraryTarget: "umd",
