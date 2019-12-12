@@ -1,4 +1,4 @@
-import externalToParts from "./externalToParts.js";
+import externalToPart from "./externalToPart";
 
 describe("Import parts from external apis and repositories (IO)", () => {
   // test import of some known parts against their expected properties
@@ -9,18 +9,18 @@ describe("Import parts from external apis and repositories (IO)", () => {
   const knownGenbanks = {
     NC_011521: {
       name: "NC_011521",
-      annotationCount: 7,
+      annotationCount: 5,
       seqLength: 6062
     },
     FJ172221: {
       name: "FJ172221",
-      annotationCount: 6,
+      annotationCount: 5,
       seqLength: 6062
     },
     BBa_J23100: {
       name: "BBa_J23100",
-      annotationCount: 0,
-      seqLength: 35
+      annotationCount: 1, // one annotation for pSB1C3
+      seqLength: 35 + 2070 // J23100 + pSB1C3
     }
   };
 
@@ -28,11 +28,18 @@ describe("Import parts from external apis and repositories (IO)", () => {
   Object.keys(knownGenbanks).forEach(file => {
     it(`imports ${file}`, async () => {
       const { name, annotationCount, seqLength } = knownGenbanks[file];
-      const result = await externalToParts(file);
-      expect(result).toHaveLength(1);
-      expect(result[0].seq).toHaveLength(seqLength);
-      expect(result[0].annotations).toHaveLength(annotationCount);
-      expect(result[0].name).toMatch(name);
+
+      let result = null;
+      if (file.startsWith("BBa_")) {
+        result = await externalToPart(file, { backbone: "pSB1C3" });
+      } else {
+        result = await externalToPart(file);
+      }
+
+      expect(result).toBeDefined();
+      expect(result.seq).toHaveLength(seqLength);
+      expect(result.annotations).toHaveLength(annotationCount);
+      expect(result.name).toMatch(name);
     });
   });
 });
