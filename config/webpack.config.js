@@ -6,7 +6,7 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
 
-const PACKAGE = require("./package.json");
+const PACKAGE = require("../package.json");
 
 const VERSION = PACKAGE.version;
 const AUTHOR = PACKAGE.author;
@@ -15,10 +15,10 @@ const libraryName = "seqviz";
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 const cdnBuild = {
-  entry: "./src/viewer.js",
+  entry: path.join("..", "src", "viewer.js"),
   target: "web",
   output: {
-    path: path.join(__dirname, "./dist"),
+    path: path.join(__dirname, "..", "dist"),
     filename: "seqviz.cdn.js",
     library: libraryName,
     libraryTarget: "umd",
@@ -73,8 +73,8 @@ const cdnBuild = {
   },
   resolve: {
     alias: {
-      react: path.resolve(__dirname, "./node_modules/react"),
-      "react-dom": path.resolve(__dirname, "./node_modules/react-dom")
+      react: path.resolve(__dirname, "../node_modules/react"),
+      "react-dom": path.resolve(__dirname, "../node_modules/react-dom")
     }
   },
   plugins: [
