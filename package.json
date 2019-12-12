@@ -37,7 +37,7 @@
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp ./dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
-    "markdown": "node ./scripts/markdown.js ./README.md && node ./scripts/markdown.js ./CODE_OF_CONDUCT.md",
+    "markdown": "node ./scripts/markdown.js ./README.md",
     "pre": "npm run build && npm run demo",
     "major": "npm version major && npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "minor": "npm version minor && npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
