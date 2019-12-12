@@ -15,7 +15,7 @@ const libraryName = "seqviz";
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
 const cdnBuild = {
-  entry: path.join(".", "src", "viewer.js"),
+  entry: path.join(__dirname, "..", "src", "viewer.js"),
   target: "web",
   output: {
     path: path.join(__dirname, "..", "dist"),
