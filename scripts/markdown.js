@@ -3,7 +3,7 @@ const path = require("path");
 const xmlComment = require("xml-comment-api");
 const { execSync } = require("child_process");
 
-const PACKAGE = require("./package.json");
+const PACKAGE = require("../package.json");
 const VERSION = PACKAGE.version;
 const PKGNAME = PACKAGE.name;
 const PKGAUTHOR = PACKAGE.author;
