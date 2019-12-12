@@ -1,6 +1,7 @@
-<p align="center">
-  <img height="120" src="https://imgur.com/rkJ1irF.png">
-</p>
+<div align="center">
+  <img height="110" src="https://imgur.com/rkJ1irF.png">
+</div>
+
 &nbsp;
 
 [![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
@@ -17,7 +18,9 @@
 
 ---
 
-![Demo](https://media.giphy.com/media/KH8oxeI0eeu4rpAi0O/giphy.gif)
+<div align="center">
+  <img width="675" src="https://media.giphy.com/media/KH8oxeI0eeu4rpAi0O/giphy.gif">
+</div>
 
 ---
 
@@ -69,9 +72,11 @@ npm install seqviz --save
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.20/seqviz.min.js"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation

@@ -1,37 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap");
 
-html,
-body,
-#app-root,
-#app-root > div {
-  height: 100%;
-}
-
 .la-vz-seqviz {
   height: 100%;
+
+  svg text {
+    user-select: none; // done to prevent the text from being highlighted in the sequence viewer
+    fill: #2a2a2a;
+    font-family: Roboto Mono, Monaco, monospace;
+  }
+
+  svg text::selection {
+    background: none;
+  }
 
   .la-vz-seqviz-container {
     display: flex;
     height: inherit;
   }
-}
-
-label {
-  width: 100%;
-  font-weight: 400;
-}
-
-.select {
-  background-color: transparent;
-  outline: none;
-  font-size: 13px;
-  height: 30px;
-  width: 168px;
-  padding-left: 5px;
-  border: 1px solid #bebebe;
-  padding: 5px 10px;
-  color: black;
-  float: right;
 }
 
 .la-vz-scroll::-webkit-scrollbar {
@@ -52,19 +37,4 @@ label {
   background-clip: padding-box;
   border-radius: 7px;
   background-color: #ececec;
-}
-
-svg text {
-  user-select: none; // done to prevent the text from being highlighted in the sequence viewer
-  fill: #2a2a2a;
-  font-family: Roboto Mono, Monaco, monospace;
-}
-
-svg text::selection {
-  background: none;
-}
-
-html,
-body {
-  overscroll-behavior: none;
 }
