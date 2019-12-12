@@ -4,10 +4,10 @@ __mocks__
 demo
 node_modules
 public
+scripts
 .babelrc
 .eslintrc.js
 .gitignore
 CODE_OF_CONDUCT.md
 jest*
-editMD.js
 webpack.config.js

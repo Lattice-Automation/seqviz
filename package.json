@@ -32,7 +32,7 @@
   "private": false,
   "scripts": {
     "start": "PORT=8000 react-scripts start",
-    "build": "rm -rf ./dist && webpack --config webpack.config.cdn.js --display-error-details && webpack --config webpack.config.npm.js --display-error-details && node editMD.js ./README.md && node editMD.js ./CODE_OF_CONDUCT.md",
+    "build": "rm -rf ./dist && webpack --config webpack.config.js --display-error-details && node scripts/editMD.js ./README.md && node scripts/editMD.js ./CODE_OF_CONDUCT.md",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
@@ -99,5 +99,71 @@
   ],
   "sideEffects": [
     "**/*.scss"
-  ]
+  ],
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "plugins": [
+      "prettier",
+      "react"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "react/prop-types": 0
+    },
+    "extends": [
+      "plugin:prettier/recommended",
+      "prettier/react",
+      "plugin:react/recommended"
+    ],
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2016,
+      "sourceType": "module"
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ],
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "babel-plugin-module-resolver",
+      "babel-plugin-transform-imports",
+      "lodash"
+    ]
+  },
+  "jest": {
+    "verbose": true,
+    "browser": true,
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/scripts/fileMock.js",
+      "\\.(css|scss|less)$": "<rootDir>/scripts/styleMock.js"
+    },
+    "setupFiles": [
+      "<rootDir>/scripts/jest.init.js"
+    ]
+  }
 }

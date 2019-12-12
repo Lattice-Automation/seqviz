@@ -1,5 +1,3 @@
-[HTML Demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md) | <b>Semantic UI Demo</b>
-
 # seqviz Demo
 
 A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) to see the source code and contribute.
@@ -10,52 +8,19 @@ To run a local copy of this demo, clone the [seqviz library](https://github.com/
 
 The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The demo will be running the latest version of the seqviz library, but you can change the version you want to demo in the `public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/public/index.html) file by modifying the line that looks like this:
-
-`<script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script>`
-
-The example above is running `version 1.0.0`. If you want to run the demo from a local copy of the compiled seqviz, copy the minified distribution into the demo folder and use this:
-
-`<script src="%PUBLIC_URL%/seqviz.min.js"></script>`
-
-The minified distribution will need to be in the same folder as the `index.html` file.
-
-To check what the version of your downloaded library is, open the `seqviz.min.js` file and see the header
-
-```js
-/*!
- * lattice - seqviz - 1.0.0
- * provided and maintained by Lattice Automation (https://latticeautomation.com/)
- * LICENSE MIT
- */
-```
+The demo will be running the latest version of the seqviz library.
 
 ### `npm start`
 
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Demo Files
 
-## Demo Files ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#demo-files-html--semantic) | <b>Semantic</b>)
-
-The Semantic Demo uses a Create React App bootstrapped React application.
-
-The library is imported in the [`public/index.html`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/public/index.html) at the head:
-
-```html
-<!-- IMPORT FROM LOCAL FOR TESTING SEQVIZ WITH UI -->
-<script src="%PUBLIC_URL%/seqviz.min.js"></script>
-
-<!-- IMPORT FROM CDN FOR TESTING SEQVIZ WITH UI -->
-<!-- <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.0/seqviz.min.js"></script> -->
-```
-
-The Demo uses a Semantic-UI React integration (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/src/Header.css) files.
+The Demo uses Semantic-UI (see [react.semantic](https://react.semantic-ui.com/)) for global styling, but specific customizations are in the [`App.css`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/src/App.css) and [`Header.css`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/src/Header.css) files.
 
 The inputs and viewer initialization are in the [`App.js`](https://github.com/Lattice-Automation/seqviz/tree/master/demo/src/App.js) and [`Header.js`](https://github.com/Lattice-Automation/seqviz/blob/master/demo/src/Header.js) files. See [Demo Inputs](#demo-inputs--html-semantic) below.
 
-## Demo Inputs ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#demo-inputs-html--semantic) | <b>Semantic</b>)
+## Demo Inputs
 
 ### Part
 
@@ -470,7 +435,7 @@ onSearch: results => {
 
 Demonstrates the onSelection hook which exposes information about your sequence selection on the viewer.
 
-## Final Viewer Instantiation ([HTML](https://github.com/Lattice-Automation/seqviz/tree/master/demo/simple-ui/README.md#final-viewer-instantiation-html--semantic) | <b>Semantic</b>)
+## Final Viewer Instantiation
 
 ```js
 const viewer = seqviz.Viewer("demo-root", {
@@ -492,4 +457,4 @@ const viewer = seqviz.Viewer("demo-root", {
 });
 ```
 
-The Semantic UI Demo returns the react component for the viewer via `viewe.viewer` so that the viewer can be rendered with the rest of the React application (see the `SideBarMenu` class in `App.js`).
+The demo returns the react component for the viewer via `viewe.viewer` so that the viewer can be rendered with the rest of the React application (see the `SideBarMenu` class in `App.js`).

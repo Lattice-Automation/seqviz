@@ -14,12 +14,12 @@ const packageName = PACKAGE.name;
 const libraryName = "seqviz";
 const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
 
-module.exports = {
+const cdnBuild = {
   entry: "./src/viewer.js",
   target: "web",
   output: {
     path: path.join(__dirname, "./dist"),
-    filename: "seqviz.min.js",
+    filename: "seqviz.cdn.js",
     library: libraryName,
     libraryTarget: "umd",
     publicPath: "/dist/",
@@ -77,7 +77,6 @@ module.exports = {
       "react-dom": path.resolve(__dirname, "./node_modules/react-dom")
     }
   },
-  externals: [nodeExternals()],
   plugins: [
     new UglifyJsPlugin(),
     new webpack.BannerPlugin(banner),
@@ -90,3 +89,27 @@ module.exports = {
     concatenateModules: true
   }
 };
+
+/**
+ * npmBuild, same as CDN build except node_modules are ignored as externals
+ * and the output filename differs
+ */
+const npmBuild = Object.assign({}, cdnBuild, {
+  output: {
+    path: path.join(__dirname, "./dist"),
+    filename: "seqviz.npm.js",
+    library: libraryName,
+    libraryTarget: "umd",
+    publicPath: "/dist/",
+    umdNamedDefine: true
+  },
+  externals: [nodeExternals()],
+  plugins: [
+    new UglifyJsPlugin(),
+    new webpack.BannerPlugin(banner),
+    new LodashModuleReplacementPlugin()
+    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
+  ]
+});
+
+module.exports = [cdnBuild, npmBuild];
