@@ -72,9 +72,11 @@ npm install seqviz --save
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.21/seqviz.min.js"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -378,5 +380,3 @@ You can also check out the example for examining NCBI parts included in our SeqV
 This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->.
 
 You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
-
-Before contributing, read our [CODE_OF_CONDUCT](https://github.com/Lattice-Automation/seqviz/blob/master/CODE_OF_CONDUCT.md)

@@ -27,6 +27,11 @@
   "sideEffects": [
     "**/*.scss"
   ],
+  "files": [
+    "./dist/index.js",
+    "LICENSE",
+    "README.md"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
@@ -254,13 +259,17 @@
   "contributors": [
     {
       "name": "Joshua Timmons",
-      "email": "jtimmons@latticeautomation.com"
+      "email": "jtimmons@latticeautomation.com",
+      "url": "https://github.com/JJTimmons"
     },
     {
-      "name": "Kevin LeShane"
+      "name": "Kevin LeShane",
+      "email": "kevin@latticeautomation.com",
+      "url": "https://github.com/leshane"
     },
     {
-      "name": "Raymond Chung"
+      "name": "Raymond Chung",
+      "url": "https://github.com/RazzYoshi"
     }
   ]
 }
