@@ -1,13 +1,6 @@
-__mocks__
-.github
 .vscode
 demo
+dist/seqviz.cdn.js
 node_modules
-public
-scripts
-.babelrc
-.eslintrc.js
 .gitignore
 CODE_OF_CONDUCT.md
-jest*
-webpack.config.js
