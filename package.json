@@ -1,6 +1,7 @@
 {
   "name": "seqviz",
   "version": "1.0.12",
+  "private": false,
   "description": "DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM part input",
   "keywords": [
     "seqviz",
@@ -12,134 +13,39 @@
     "plasmid",
     "plasmid viewer"
   ],
-  "author": "Lattice Automation (https://latticeautomation.com/)",
-  "contributors": [
-    "Joshua Timmons <jtimmons@latticeautomation.com> (https://github.com/JJTimmons)",
-    "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)",
-    "Raymond Chung (https://github.com/RazzYoshi)"
-  ],
   "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Lattice-Automation/seqviz.git"
-  },
   "bugs": {
     "url": "https://github.com/Lattice-Automation/seqviz/issues",
     "email": "contact@latticeautomation.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lattice-Automation/seqviz.git"
+  },
   "license": "MIT",
+  "author": "Lattice Automation (https://latticeautomation.com/)",
+  "sideEffects": [
+    "**/*.scss"
+  ],
   "main": "dist/seqviz.min.js",
-  "private": false,
   "scripts": {
-    "start": "PORT=8000 react-scripts start",
-    "build": "rm -rf ./dist && webpack --config webpack.config.js --display-error-details && node scripts/editMD.js ./README.md && node scripts/editMD.js ./CODE_OF_CONDUCT.md",
+    "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details && node ./scripts/markdown.js ./README.md && node scripts/markdown.js ./CODE_OF_CONDUCT.md",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
     "major": "npm version major && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "minor": "npm version minor && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "patch": "npm version patch && npm run build && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "dependencies": {
-    "bufferpack": "0.0.6",
-    "lodash": "^4.17.15",
-    "prop-types": "^15.7.2",
-    "react-router-dom": "^5.0.0",
-    "react-sizeme": "^2.6.4",
-    "shortid": "^2.2.14",
-    "string_decoder": "^1.3.0",
-    "tinycolor2": "^1.4.1",
-    "xml2js": "^0.4.19"
-  },
-  "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
-  },
-  "devDependencies": {
-    "@babel/node": "^7.7.4",
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-react": "^7.7.4",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-imports": "^2.0.0",
-    "babel-preset-react": "^6.24.1",
-    "core-js": "^3.5.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "eslint": "^6.7.2",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
-    "image-webpack-loader": "^6.0.0",
-    "lodash-webpack-plugin": "^0.11.5",
-    "node-sass": "^4.12.0",
-    "prettier": "^1.19.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^3.3.0",
-    "regenerator-runtime": "^0.13.3",
-    "typescript": "^3.7.3",
-    "uglifyjs-webpack-plugin": "^2.1.2",
-    "webpack-bundle-analyzer": "^3.6.0",
-    "webpack-cli": "^3.3.2",
-    "webpack-node-externals": "^1.7.2",
-    "why-did-you-update": "^1.0.6",
-    "xml-comment-api": "^1.0.1"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead"
-  ],
-  "sideEffects": [
-    "**/*.scss"
-  ],
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "es6": true,
-      "node": true
-    },
-    "plugins": [
-      "prettier",
-      "react"
-    ],
-    "rules": {
-      "prettier/prettier": "error",
-      "react/prop-types": 0
-    },
-    "extends": [
-      "plugin:prettier/recommended",
-      "prettier/react",
-      "plugin:react/recommended"
-    ],
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 2016,
-      "sourceType": "module"
-    },
-    "settings": {
-      "react": {
-        "pragma": "React",
-        "version": "detect"
-      }
-    }
+    "start": "PORT=8000 node scripts/start.js",
+    "test": "node scripts/test.js"
   },
   "babel": {
     "presets": [
       [
         "@babel/preset-env",
         {
-          "modules": false
+          "targets": {
+            "node": "current"
+          }
         }
       ],
       "@babel/preset-react"
@@ -152,13 +58,195 @@
       "lodash"
     ]
   },
+  "browserslist": [
+    ">0.2%",
+    "not dead"
+  ],
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "plugin:prettier/recommended",
+      "prettier/react",
+      "plugin:react/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 2016,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "prettier",
+      "react"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "react/prop-types": 0
+    },
+    "settings": {
+      "react": {
+        "pragma": "React",
+        "version": "detect"
+      }
+    }
+  },
   "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "modulePaths": [],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/jest/setup.js"
+    ],
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
     "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
       "^.+\\.jsx?$": "babel-jest"
     },
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/scripts/fileMock.js",
-      "\\.(css|scss|less)$": "<rootDir>/scripts/styleMock.js"
-    }
-  }
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "verbose": true,
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
+  "dependencies": {
+    "bufferpack": "0.0.6",
+    "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
+    "react-router-dom": "^5.0.0",
+    "react-sizeme": "^2.6.4",
+    "shortid": "^2.2.14",
+    "string_decoder": "^1.3.0",
+    "tinycolor2": "^1.4.1",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@svgr/webpack": "4.3.3",
+    "@typescript-eslint/eslint-plugin": "^2.8.0",
+    "@typescript-eslint/parser": "^2.8.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "8.0.6",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-named-asset-import": "^0.3.5",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-app": "^9.1.0",
+    "camelcase": "^5.3.1",
+    "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "core-js": "^3.5.0",
+    "css-loader": "3.2.0",
+    "dotenv": "8.2.0",
+    "dotenv-expand": "5.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-loader": "3.0.2",
+    "eslint-plugin-flowtype": "3.13.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "file-loader": "4.3.0",
+    "fs-extra": "^8.1.0",
+    "html-webpack-plugin": "4.0.0-beta.5",
+    "identity-obj-proxy": "3.0.0",
+    "image-webpack-loader": "^6.0.0",
+    "jest": "24.9.0",
+    "jest-environment-jsdom-fourteen": "0.1.0",
+    "jest-resolve": "24.9.0",
+    "jest-watch-typeahead": "0.4.2",
+    "lodash-webpack-plugin": "^0.11.5",
+    "mini-css-extract-plugin": "0.8.0",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "5.0.3",
+    "pnp-webpack-plugin": "1.5.0",
+    "postcss-flexbugs-fixes": "4.1.0",
+    "postcss-loader": "3.0.0",
+    "postcss-normalize": "8.0.1",
+    "postcss-preset-env": "6.7.0",
+    "postcss-safe-parser": "4.0.1",
+    "prettier": "^1.19.1",
+    "react": "^16.8.6",
+    "react-app-polyfill": "^1.0.5",
+    "react-dev-utils": "^10.0.0",
+    "react-dom": "^16.8.6",
+    "regenerator-runtime": "^0.13.3",
+    "resolve": "1.12.2",
+    "resolve-url-loader": "3.1.1",
+    "sass-loader": "8.0.0",
+    "semver": "6.3.0",
+    "style-loader": "1.0.0",
+    "terser-webpack-plugin": "2.2.1",
+    "ts-pnp": "1.1.5",
+    "typescript": "^3.7.3",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "url-loader": "2.3.0",
+    "webpack": "4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "3.9.0",
+    "webpack-manifest-plugin": "2.2.0",
+    "webpack-node-externals": "^1.7.2",
+    "why-did-you-update": "^1.0.6",
+    "workbox-webpack-plugin": "4.3.1",
+    "xml-comment-api": "^1.0.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "contributors": [
+    "Joshua Timmons <jtimmons@latticeautomation.com> (https://github.com/JJTimmons)",
+    "Kevin LeShane <kevin@latticeautomation.com> (https://github.com/leshane)",
+    "Raymond Chung (https://github.com/RazzYoshi)"
+  ]
 }

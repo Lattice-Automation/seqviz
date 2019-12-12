@@ -10,7 +10,7 @@ import filesToParts from "./filesToParts";
  * be elsewhere (directly adjacent the parser). This is just testing whether
  * filesToParts completely bails on files
  */
-describe("IO: files converted to parts", () => {
+describe("Converts files to parts (IO)", () => {
   const types = ["genbank", "fasta", "jbei", "benchling"];
   const folders = types.map(t => `${__dirname}/examples/${t}`);
 
@@ -26,7 +26,7 @@ describe("IO: files converted to parts", () => {
   Object.keys(allFiles)
     .filter(f => !f.includes("empty"))
     .forEach((file, i) => {
-      test(`file: ${file} ${i}`, async () => {
+      it(`converts: ${file} ${i}`, async () => {
         const fileString = fs.readFileSync(allFiles[file], "utf8");
         // does it resolve
         await expect(

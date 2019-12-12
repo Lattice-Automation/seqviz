@@ -1,5 +1,6 @@
-import _ from "lodash";
+import { isEqual, repeat, sortBy, uniqBy } from "lodash";
 import shortid from "shortid";
+
 import { dnaComplement } from "../parser";
 import { translateWildNucleotides } from "../sequence";
 import enzymes from "./enzymes.js";
@@ -103,8 +104,8 @@ const findCutSites = (
     index = seqToSearch.indexOf(inverComp, startIndex);
   }
 
-  return _.sortBy(
-    _.uniqBy(cutSiteIndices, "sequenceCutIdx"),
+  return sortBy(
+    uniqBy(cutSiteIndices, "sequenceCutIdx"),
     c => c.sequenceCutIdx
   );
 };
@@ -181,17 +182,17 @@ const digestPart = (enzymeName, part, circularCheck) => {
     // versus the start index of the complement strand
     const startDiff = Math.abs(cutSequenceStart - cutComplementStart);
     if (cutSequenceStart < cutComplementStart) {
-      cutCompSeq = `${_.repeat("*", startDiff)}${cutCompSeq}`;
+      cutCompSeq = `${repeat("*", startDiff)}${cutCompSeq}`;
     } else if (cutSequenceStart > cutComplementStart) {
-      cutSeq = `${_.repeat("*", startDiff)}${cutSeq}`;
+      cutSeq = `${repeat("*", startDiff)}${cutSeq}`;
     }
 
     // and now for differences in last indices at the end of the sequences
     const endDiff = Math.abs(cutSequenceEnd - cutComplementEnd);
     if (cutSequenceEnd > cutComplementEnd) {
-      cutCompSeq = `${cutCompSeq}${_.repeat("*", endDiff)}`;
+      cutCompSeq = `${cutCompSeq}${repeat("*", endDiff)}`;
     } else if (cutSequenceEnd < cutComplementEnd) {
-      cutSeq = `${cutSeq}${_.repeat("*", endDiff)}`;
+      cutSeq = `${cutSeq}${repeat("*", endDiff)}`;
     }
 
     // adjust the locations of all annotations to match their new locations
@@ -312,7 +313,7 @@ export const digest = (enzymeNames, part) => {
   const newParts = filteredEnzymes.reduce(
     (accParts, enzyme) => {
       // expensive, but checks whether part has been cut (TODO optimize w/ return)
-      const circularCheck = circular && _.isEqual(accParts[0], inputPart);
+      const circularCheck = circular && isEqual(accParts[0], inputPart);
       return accParts.reduce(
         (acc, p) =>
           // cut the sequence with the current enzyme into new sequences
@@ -765,10 +766,11 @@ const multiEnzymeDigest = (enzymeNames, part, startingFragmentList = []) => {
     processedFragments[0] = addCutEnzymesStart(processedFragments[0], [
       "Start of sequence"
     ]);
-    processedFragments[digestFragments.length - 1] = addCutEnzymesEnd(
-      processedFragments[digestFragments.length - 1],
-      ["End of sequence"]
-    );
+    processedFragments[
+      digestFragments.length - 1
+    ] = addCutEnzymesEnd(processedFragments[digestFragments.length - 1], [
+      "End of sequence"
+    ]);
   }
   return processedFragments;
 };

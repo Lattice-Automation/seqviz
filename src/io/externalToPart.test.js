@@ -1,6 +1,6 @@
-import externalToParts from "./externalToParts";
+import externalToParts from "./externalToParts.js";
 
-describe("IO: import parts from external apis and repositories", () => {
+describe("Import parts from external apis and repositories (IO)", () => {
   // test import of some known parts against their expected properties
 
   // test a couple files with a known number of annotations/seq length/name
@@ -26,7 +26,7 @@ describe("IO: import parts from external apis and repositories", () => {
 
   // check if name, annotation cound and sequence length are correct
   Object.keys(knownGenbanks).forEach(file => {
-    test(`file: ${file}`, async () => {
+    it(`imports ${file}`, async () => {
       const { name, annotationCount, seqLength } = knownGenbanks[file];
       const result = await externalToParts(file);
       expect(result).toHaveLength(1);

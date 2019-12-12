@@ -56,219 +56,7 @@ describe("Primer Binding Sites", () => {
     __typename: "Primer"
   };
 
-  /**
-   * Actual results at time of writing
-   * 
-   * [
-    {
-      overhang: "AAAA",
-      name: "FWD1",
-      id: "dsdcvkxHg",
-      complementId: "",
-      gc: 50,
-      tm: 43,
-      any: 0,
-      dimer: 0,
-      hairpin: 0,
-      stability: 0,
-      vector: testVector,
-      sequence: "AAAAttttttttcccccccc",
-      penalty: 0,
-      strict: false,
-      __typename: "Primer",
-      start: 46,
-      end: 66,
-      direction: "FORWARD",
-      mismatches: [
-        {
-          start: 0,
-          end: 4
-        }
-      ],
-      annealSequence: "ttttttttcccccccc"
-    },
-    {
-      overhang: "",
-      name: "REV2",
-      id: "JKdNupAp7",
-      complementId: "",
-      gc: 76.92307692307693,
-      tm: 46,
-      any: 0,
-      dimer: 0,
-      hairpin: 0,
-      stability: 0,
-      vector: testVector,
-      sequence: "tttttttccccccgggg",
-      penalty: 0,
-      strict: false,
-      __typename: "Primer",
-      start: 53,
-      end: 70,
-      direction: "FORWARD",
-      mismatches: [
-        {
-          start: 5,
-          end: 7
-        }
-      ],
-      annealSequence: "tttttttccccccgggg"
-    },
-    {
-      overhang: "",
-      name: "REV2",
-      id: "JKdNupAp7",
-      complementId: "",
-      gc: 76.92307692307693,
-      tm: 46,
-      any: 0,
-      dimer: 0,
-      hairpin: 0,
-      stability: 0,
-      vector: testVector,
-      sequence: "tttttttccccccgggg",
-      penalty: 0,
-      strict: false,
-      __typename: "Primer",
-      start: 62,
-      end: 7,
-      direction: "REVERSE",
-      mismatches: [
-        {
-          start: 0,
-          end: 6
-        }
-      ],
-      annealSequence: "tccccccgggg"
-    },  
-    {
-      "overhang": "gggg",
-      "name": "FWD2",
-      "id": "nqtBM-haM",
-      "complementId": "",
-      "gc": 0,
-      "tm": 23,
-      "any": 0,
-      "dimer": 0,
-      "hairpin": 0,
-      "stability": 0,
-      "vector": "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg",
-      "sequence": "ggggttaaaaaatttttttt",
-      "penalty": 0,
-      "strict": false,
-      "__typename": "Primer",
-      "start": 4,
-      "end": 24,
-      "direction": "FORWARD",
-      "mismatches": [
-        {
-          "start": 0,
-          "end": 6
-        },
-        {
-          "start": 0,
-          "end": 4
-        }
-      ],
-      "annealSequence": "aaaaaatttttttt"
-    },
-    {
-      "overhang": "gggg",
-      "name": "FWD2",
-      "id": "nqtBM-haM",
-      "complementId": "",
-      "gc": 0,
-      "tm": 23,
-      "any": 0,
-      "dimer": 0,
-      "hairpin": 0,
-      "stability": 0,
-      "vector": "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg",
-      "sequence": "ggggttaaaaaatttttttt",
-      "penalty": 0,
-      "strict": false,
-      "__typename": "Primer",
-      "start": 38,
-      "end": 58,
-      "direction": "FORWARD",
-      "mismatches": [
-        {
-          "start": 0,
-          "end": 6
-        },
-        {
-          "start": 0,
-          "end": 4
-        }
-      ],
-      "annealSequence": "aaaaaatttttttt"
-    },
-    {
-      "overhang": "gggg",
-      "name": "FWD2",
-      "id": "nqtBM-haM",
-      "complementId": "",
-      "gc": 0,
-      "tm": 23,
-      "any": 0,
-      "dimer": 0,
-      "hairpin": 0,
-      "stability": 0,
-      "vector": "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg",
-      "sequence": "ggggttaaaaaatttttttt",
-      "penalty": 0,
-      "strict": false,
-      "__typename": "Primer",
-      "start": 8,
-      "end": 28,
-      "direction": "REVERSE",
-      "mismatches": [
-        {
-          "start": 0,
-          "end": 6
-        },
-        {
-          "start": 0,
-          "end": 4
-        }
-      ],
-      "annealSequence": "aaaaaatttttttt"
-    },
-    {
-      "overhang": "gggg",
-      "name": "FWD2",
-      "id": "nqtBM-haM",
-      "complementId": "",
-      "gc": 0,
-      "tm": 23,
-      "any": 0,
-      "dimer": 0,
-      "hairpin": 0,
-      "stability": 0,
-      "vector": "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg",
-      "sequence": "ggggttaaaaaatttttttt",
-      "penalty": 0,
-      "strict": false,
-      "__typename": "Primer",
-      "start": 42,
-      "end": 62,
-      "direction": "REVERSE",
-      "mismatches": [
-        {
-          "start": 0,
-          "end": 6
-        },
-        {
-          "start": 0,
-          "end": 4
-        }
-      ],
-      "annealSequence": "aaaaaatttttttt"
-    }
-  ];
-   */
-
-  test("finds binding sites", () => {
+  it("finds binding sites", () => {
     const testBindingSites = findAllBindingSites(
       [testPrimerOne, testPrimerTwo],
       testVector
@@ -276,7 +64,7 @@ describe("Primer Binding Sites", () => {
     expect(testBindingSites).toHaveLength(3);
   });
 
-  test("correctly find binding sites that aren't perfect matches", () => {
+  it("correctly find binding sites that aren't perfect matches", () => {
     const primerSequence = testPrimerTwo.sequence.toLowerCase();
     const testBindingSites = findAllBindingSites(
       [testPrimerOne, testPrimerTwo],
@@ -296,7 +84,7 @@ describe("Primer Binding Sites", () => {
     expect(exactMatches).toHaveLength(0);
   });
 
-  test("correctly find binding sites that crosses zero index", () => {
+  it("correctly find binding sites that crosses zero index", () => {
     const testBindingSites = findAllBindingSites([testPrimerTwo], testVector);
     const bindingSiteCrossZero = testBindingSites.filter(
       binding => binding.start > binding.end
@@ -304,7 +92,7 @@ describe("Primer Binding Sites", () => {
     expect(bindingSiteCrossZero).toHaveLength(1);
   });
 
-  test("binding sites of primers with overhang all have the correct length", () => {
+  it("binding sites of primers with overhang all have the correct length", () => {
     const testBindingSites = findAllBindingSites([testPrimerThree], testVector);
     const seqLength =
       testPrimerThree.sequence.length + testPrimerThree.overhang.length;
