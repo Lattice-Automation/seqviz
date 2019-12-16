@@ -15,18 +15,6 @@ import "./SeqViz.scss";
  * a linear or circular viewer
  */
 export default class SeqViz extends React.Component {
-  state = {
-    accession: "",
-    circularCentralIndex: 0,
-    findState: {
-      searchResults: [],
-      searchIndex: 0
-    },
-    linearCentralIndex: 0,
-    part: {},
-    seqSelection: { ...defaultSelection }
-  };
-
   static propTypes = {
     accession: PropTypes.string,
     annotations: PropTypes.arrayOf(
@@ -118,6 +106,24 @@ export default class SeqViz extends React.Component {
     zoom: { circular: 0, linear: 50 }
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      accession: "",
+      circularCentralIndex: 0,
+      findState: {
+        searchResults: [],
+        searchIndex: 0
+      },
+      linearCentralIndex: 0,
+      part: {
+        annotations: this.parseAnnotations(props.annotations, props.seq)
+      },
+      seqSelection: { ...defaultSelection }
+    };
+  }
+
   componentDidMount = async () => {
     this.addKeyBindings();
     this.setPart();
@@ -141,12 +147,35 @@ export default class SeqViz extends React.Component {
 
     if (accession) {
       const part = await externalToPart(accession, this.props);
-      this.setState({ part });
+      this.setState({
+        part: {
+          ...part,
+          annotations: this.parseAnnotations(part.annotations, part.seq)
+        }
+      });
     } else if (file) {
       const parts = await filesToParts(file, this.props);
-      this.setState({ part: parts[0] });
+      this.setState({
+        part: {
+          ...parts[0],
+          annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
+        }
+      });
     }
   };
+
+  /**
+   * Modify the annotations to add unique ids, fix directionality and
+   * modulo the start and end of each to match SeqViz's API
+   */
+  parseAnnotations = (annotations, seq) =>
+    (annotations || []).map(a => ({
+      ...annotationFactory(a.name),
+      ...a,
+      direction: directionality(a.direction),
+      start: a.start % (seq.length + 1),
+      end: a.end % (seq.length + 1)
+    }));
 
   addKeyBindings() {
     const { searchNext, copySeq } = this.props;
@@ -264,8 +293,7 @@ export default class SeqViz extends React.Component {
   };
 
   /**
-   * Traverse the search results array and return a search index via a prop callback to
-   * tell the viewer what to highlight
+   * Move one further through the search results
    */
   incrementSearch() {
     const {
@@ -276,12 +304,7 @@ export default class SeqViz extends React.Component {
       return;
     }
 
-    let newSearchIndex = searchIndex + 1;
-    const lastIndex = searchResults.length - 1;
-    if (newSearchIndex > lastIndex) {
-      newSearchIndex = 0;
-    }
-
+    const newSearchIndex = (searchIndex + 1) % searchResults.length;
     this.setState({
       findState: {
         searchResults: searchResults,
@@ -295,19 +318,19 @@ export default class SeqViz extends React.Component {
   render() {
     const { viewer } = this.props;
     let { annotations, compSeq, name, seq } = this.props;
-    const { part } = this.state;
+    const {
+      part,
+      circularCentralIndex,
+      findState,
+      linearCentralIndex,
+      seqSelection
+    } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
     compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
-    annotations = (annotations || part.annotations || []).map(a => ({
-      ...annotationFactory(a.name),
-      ...a,
-      direction: directionality(a.direction),
-      start: a.start % (seq.length + 1),
-      end: a.end % (seq.length + 1)
-    }));
     name = name || part.name;
+    annotations = annotations || part.annotations;
 
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";
@@ -322,13 +345,14 @@ export default class SeqViz extends React.Component {
           {circular && (
             <SeqViewer
               {...this.props}
-              {...this.state}
+              circularCentralIndex={circularCentralIndex}
+              seqSelection={seqSelection}
+              findState={findState}
               annotations={annotations}
               compSeq={compSeq}
               name={name}
               seq={seq}
               setPartState={this.setPartState}
-              incrementSearch={this.incrementSearch}
               Circular
             />
           )}
@@ -336,13 +360,14 @@ export default class SeqViz extends React.Component {
           {linear && (
             <SeqViewer
               {...this.props}
-              {...this.state}
+              linearCentralIndex={linearCentralIndex}
+              seqSelection={seqSelection}
+              findState={findState}
               annotations={annotations}
               compSeq={compSeq}
               name={name}
               seq={seq}
               setPartState={this.setPartState}
-              incrementSearch={this.incrementSearch}
               Circular={false}
             />
           )}

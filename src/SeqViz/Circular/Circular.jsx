@@ -249,7 +249,6 @@ class Circular extends React.PureComponent {
       center,
       radius,
       yDiff,
-      resizing,
       size,
 
       seq,
@@ -278,8 +277,7 @@ class Circular extends React.PureComponent {
       getRotation,
       generateArc,
       rotateCoor,
-      inputRef,
-      resizing
+      inputRef
     };
 
     // an inward shift is needed for primers if the annotations are shown
@@ -344,15 +342,13 @@ class Circular extends React.PureComponent {
               totalRows={totalRows}
             />
           )}
-          {!resizing && (
-            <Labels
-              {...this.props}
-              {...general}
-              labels={outerLabels}
-              size={size}
-              yDiff={yDiff}
-            />
-          )}
+          <Labels
+            {...this.props}
+            {...general}
+            labels={outerLabels}
+            size={size}
+            yDiff={yDiff}
+          />
         </g>
       </svg>
     );

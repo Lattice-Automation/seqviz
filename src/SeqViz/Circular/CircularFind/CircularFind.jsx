@@ -16,7 +16,6 @@ export default class CircularFind extends React.Component {
       seqLength,
       getRotation,
       generateArc,
-      resizing,
       inputRef,
       findState: { searchIndex }
     } = this.props;
@@ -61,7 +60,7 @@ export default class CircularFind extends React.Component {
       stroke: "black",
       strokeWidth: 0.8,
       fill: fill,
-      shapeRendering: resizing ? "optimizeSpeed" : "auto",
+      shapeRendering: "auto",
       cursor: "pointer"
     };
 

@@ -45,14 +45,14 @@
   - Accession (NCBI or iGEM)
   - File (FASTA, GenBank, SBOL, SnapGene)
 
-- **Circular Plasmid viewer** :
+- **Circular plasmid viewer** :
 
   - Annotations with names and colors
   - Index of sequence
   - Name of plasmid
   - Base pair length of sequence
 
-- **Linear Sequence viewer** :
+- **Linear sequence viewer** :
 
   - Annotations with names and colors
   - Amino acid translations
