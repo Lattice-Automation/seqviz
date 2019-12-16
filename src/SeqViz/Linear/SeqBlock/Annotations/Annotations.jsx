@@ -82,8 +82,8 @@ class AnnotationRow extends React.PureComponent {
     } = this.props;
 
     const { color, name, direction, start, end } = a;
-    const forward = direction === "FORWARD";
-    const reverse = direction === "REVERSE";
+    const forward = direction === 1;
+    const reverse = direction === -1;
     let { x: origX, width } = findXAndWidth(start, end);
     const crossZero = start > end && end < firstBase;
 

@@ -145,7 +145,7 @@ export default async (fileInput, fileName, colors = []) =>
           const [type, rangeString] = currLine;
           // console.log(currLine);
           const rangeRegex = /\d+/g;
-          const direction = r.includes("complement") ? "REVERSE" : "FORWARD";
+          const direction = r.includes("complement") ? -1 : 1;
 
           // using the example above, this parses 1..5028 into 1 and 5028
           let [start, end] = [0, 0];

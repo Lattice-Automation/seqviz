@@ -314,7 +314,7 @@ const withSelectionHandler = WrappedComp =>
         case "TRANSLATION":
         case "ENZYME": {
           // Annotation or find selection range
-          const clockwise = !(knownRange.direction && direction === "REVERSE");
+          const clockwise = !(knownRange.direction && direction === -1);
           const selectionStart = clockwise ? start : end;
           const selectionEnd = clockwise ? end : start;
           const newSearchIndex = searchResults.findIndex(

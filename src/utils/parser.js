@@ -108,14 +108,20 @@ export const firstElement = arr => {
   return arr[0];
 };
 
+const fwd = new Set(["FWD", "FORWARD", "FOR", "1", 1]);
+const rev = new Set(["REV", "REVERSE", "-1", -1]);
+
 export const directionality = direction => {
-  const forward = ["FWD", "FORWARD", "FOR", "1", 1];
-  const reverse = ["REV", "REVERSE", "-1", -1];
-  return forward.includes(direction)
-    ? "FORWARD"
-    : reverse.includes(direction)
-    ? "REVERSE"
-    : "NONE";
+  if (!direction) {
+    return 0;
+  }
+  if (fwd.has(direction)) {
+    return 1;
+  }
+  if (rev.has(direction)) {
+    return -1;
+  }
+  return 0;
 };
 
 export const partFactory = () => ({
@@ -143,14 +149,14 @@ export const partStub = colors => {
         ...annotationFactory("ann-20"),
         start: 20,
         end: 30,
-        direction: "FORWARD",
+        direction: 1,
         name: "forward annotation"
       },
       {
         ...annotationFactory("ann-50"),
         start: 50,
         end: 70,
-        direction: "REVERSE",
+        direction: -1,
         name: "reverse annotation"
       }
     ]

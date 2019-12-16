@@ -92,8 +92,8 @@ export default async (fileArrayBuffer, options) => {
       const directionalityDict = {
         undefined: "NONE",
         "0": "NONE",
-        "1": "FORWARD",
-        "2": "REVERSE",
+        "1": 1,
+        "2": -1,
         "3": "BIDIRECTIONAL"
       };
 
