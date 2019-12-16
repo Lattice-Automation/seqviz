@@ -115,8 +115,8 @@ const SinglePrimer = props => {
     length: primerLength,
     largeArc: primerLength > seqLength / 2,
     sweepFWD: true,
-    arrowFWD: primer.direction === "FORWARD",
-    arrowREV: primer.direction === "REVERSE",
+    arrowFWD: primer.direction === 1,
+    arrowREV: primer.direction === -1,
     isInsert: primer.type === "insert"
   });
 

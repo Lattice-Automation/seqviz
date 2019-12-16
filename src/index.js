@@ -75,7 +75,7 @@ const viewerInput = {
   // searchQuery: { query: "GCGGX" },
   backbone: "pSB1C3",
   enzymes: []
-  // translations: [{ start: 0, end: 89, direction: "FORWARD" }]
+  // translations: [{ start: 0, end: 89, direction: 1 }]
 };
 
 // const viewerInput = {
@@ -86,7 +86,7 @@ const viewerInput = {
 //     {
 //       start: 0,
 //       end: 71,
-//       direction: "FORWARD",
+//       direction: 1,
 //       name: "RBS",
 //       type: "RBS",
 //       color: "#80D849"
@@ -94,7 +94,7 @@ const viewerInput = {
 //     {
 //       start: 1,
 //       end: 70,
-//       direction: "FORWARD",
+//       direction: 1,
 //       name: "RBS",
 //       type: "RBS",
 //       color: "#80D849"

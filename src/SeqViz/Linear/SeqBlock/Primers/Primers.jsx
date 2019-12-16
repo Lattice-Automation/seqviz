@@ -31,10 +31,8 @@ class PrimerRow extends React.PureComponent {
     let { x: origX, width } = findXAndWidth(start, end);
 
     // does the primer begin or end within this seqBlock with a directionality?
-    const endFWD =
-      direction === "FORWARD" && end > firstBase && end <= lastBase;
-    const endREV =
-      direction === "REVERSE" && start > firstBase && start <= lastBase;
+    const endFWD = direction === 1 && end > firstBase && end <= lastBase;
+    const endREV = direction === -1 && start > firstBase && start <= lastBase;
 
     // does the primer overflow to the left or the right of this seqBlock?
     let primerOverflowLeft = start < firstBase;
@@ -98,7 +96,7 @@ class PrimerRow extends React.PureComponent {
     let { mismatches } = singlePrimer;
 
     const mismatchPathes = [];
-    const forward = direction === "FORWARD";
+    const forward = direction === 1;
     let name = forward ? sequence : reverse(sequence);
 
     // If there are mismatches, add "." into primer name
@@ -649,8 +647,7 @@ export default class PrimerRows extends React.PureComponent {
     elementHeight *= 3;
 
     if (!showPrimers) return null;
-    const primerRows =
-      direction === "FORWARD" ? forwardPrimerRows : reversePrimerRows;
+    const primerRows = direction === 1 ? forwardPrimerRows : reversePrimerRows;
 
     return (
       <g className="la-vs-linear-primers">
@@ -658,7 +655,7 @@ export default class PrimerRows extends React.PureComponent {
           const id = shortid.generate();
 
           let rowDiff = yDiff + i * elementHeight;
-          if (direction === "FORWARD") {
+          if (direction === 1) {
             rowDiff += 0.35 * elementHeight;
           }
 

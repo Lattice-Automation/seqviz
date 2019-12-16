@@ -317,7 +317,7 @@ export default class SeqBlock extends React.PureComponent {
               firstBase={firstBase}
               lastBase={lastBase}
               yDiff={forwardPrimerYDiff}
-              direction="FORWARD"
+              direction={1}
               seqBlockRef={this}
               fullSeq={fullSeq}
               charWidth={charWidth}
@@ -332,7 +332,7 @@ export default class SeqBlock extends React.PureComponent {
               firstBase={firstBase}
               lastBase={lastBase}
               yDiff={reversePrimerYDiff}
-              direction="REVERSE"
+              direction={-1}
               seqBlockRef={this}
               fullSeq={fullSeq}
               charWidth={charWidth}

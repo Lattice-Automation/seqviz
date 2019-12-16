@@ -79,7 +79,7 @@ export default async (JBEI, colors = []) =>
                 color: colorByIndex(i),
                 start: +location[0].genbankStart[0]._ - 1 || 0, // JBEI is 1-based
                 end: +location[0].end[0]._ || 0,
-                direction: complement[0]._ === "true" ? "REVERSE" : "FORWARD",
+                direction: complement[0]._ === "true" ? -1 : 1,
                 type: type[0]._ || "N/A",
                 name: label[0]._ || "Untitled"
               });

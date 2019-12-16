@@ -73,7 +73,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
   const minTm = 40;
 
   const primerBindingSites = [];
-  const forward = direction === "FORWARD";
+  const forward = direction === 1;
 
   primers.forEach(primer => {
     const { overhang = "" } = primer;
@@ -212,8 +212,8 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
  */
 export const findAllBindingSites = (primers, vector) => {
   const { seq: vectorSeq, compSeq: vectorComp } = dnaComplement(vector);
-  return findBindingSites(primers, vectorSeq, "FORWARD").concat(
-    findBindingSites(primers, vectorComp, "REVERSE")
+  return findBindingSites(primers, vectorSeq, 1).concat(
+    findBindingSites(primers, vectorComp, -1)
   );
 };
 

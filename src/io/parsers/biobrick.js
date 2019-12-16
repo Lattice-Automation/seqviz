@@ -64,7 +64,7 @@ export default async (file, options) =>
 
           return {
             ...annotationFactory(title[0] || `${direction[0]}-${startpos[0]}`),
-            direction: direction[0] === "forward" ? "FORWARD" : "REVERSE",
+            direction: direction[0] === "forward" ? 1 : -1,
             start: +startpos[0] || 0,
             end: +endpos[0] || 0,
             name: title[0] || "Untitled",
