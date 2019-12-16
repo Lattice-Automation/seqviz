@@ -39,11 +39,13 @@
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp ./dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
     "markdown": "node ./scripts/markdown.js ./README.md",
     "pre": "npm run build && npm run demo",
-    "major": "npm version major && npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
-    "minor": "npm version minor && npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
-    "patch": "npm version patch && npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "major": "npm run test:ci && npm version major && npm run update",
+    "minor": "npm run test:ci && npm version minor && npm run update",
+    "patch": "npm run test:ci && npm version patch && npm run update",
     "start": "PORT=8000 node scripts/start.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "test:ci": "CI=true npm run test"
   },
   "babel": {
     "presets": [

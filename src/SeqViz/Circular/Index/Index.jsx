@@ -101,7 +101,6 @@ export default class Index extends React.PureComponent {
       getRotation,
       generateArc,
       findCoor,
-      resizing,
       totalRows
     } = this.props;
     const { ticks } = this.state;
@@ -163,7 +162,7 @@ export default class Index extends React.PureComponent {
       fill: "transparent",
       stroke: "black",
       strokeWidth: 2.5,
-      shapeRendering: resizing ? "optimizeSpeed" : "geometricPrecision"
+      shapeRendering: "geometricPrecision"
     };
     const tickTextStyle = {
       textAnchor: "middle",

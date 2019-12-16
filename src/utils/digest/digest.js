@@ -335,11 +335,10 @@ export const digest = (enzymeNames, part) => {
 };
 
 /**
- *
  * cutSitesInRows
  *
  * for the list of the enzymes, find their cut sites and split them into rows compatible
- * with the sequence viewer (for which this is in intended)
+ * with the sequence viewer
  *
  * @param  {String} seq            [the input seq to be cut]
  * @param  {[String]} enzymeList   [the list of enzymes to find indexes for]
@@ -351,12 +350,11 @@ export const digest = (enzymeNames, part) => {
  */
 export const cutSitesInRows = (seq, enzymeList) => {
   const seqToCut = (seq + seq).toUpperCase();
-  const seqLength = seq.length;
   const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]);
 
   // find all the cut sites for the given row
   const cutSites = filteredEnzymes.reduce((acc, e) => {
-    const cuts = findCutSites(enzymes[e], seqToCut, seqLength)
+    const cuts = findCutSites(enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.sequenceCutIdx === 0 && c.complementCutIdx === 0))
       .map(c => ({
         id: shortid.generate(),

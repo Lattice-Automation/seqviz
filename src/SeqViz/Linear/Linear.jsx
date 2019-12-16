@@ -36,8 +36,6 @@ import "./Linear.scss";
  */
 class Linear extends React.Component {
   shouldComponentUpdate = nextProps => {
-    // check whether we even want to update props. Don't do anything if relevant prop
-    // have not changed
     const { name, ...rest } = nextProps;
     const { name: origName, ...origRest } = this.props;
     return !isEqual(rest, origRest);

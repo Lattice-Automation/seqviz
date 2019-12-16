@@ -156,7 +156,6 @@ export default class SeqBlock extends React.PureComponent {
       inputRef,
       id,
       onUnmount,
-      resizing,
 
       charWidth,
       zoomed
@@ -175,7 +174,7 @@ export default class SeqBlock extends React.PureComponent {
       lengthAdjust: "spacing",
       textAnchor: "start",
       textLength: size.width,
-      textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
+      textRendering: "optimizeLegibility"
     };
 
     const lastBase = firstBase + seq.length;

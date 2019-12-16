@@ -14,13 +14,6 @@ import "./SeqViewer.scss";
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component {
-  static WIDTH_MULTIPLIER = 0.97;
-
-  constructor(props) {
-    super(props);
-    this.state = { resizing: false };
-  }
-
   componentDidMount = () => {
     const {
       searchQuery: { query, mismatch },
