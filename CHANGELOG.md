@@ -6,3 +6,49 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.2]
+
+### Added
+
+- Add this Changelog
+
+## [2.0.1]
+
+### Fixed
+
+- Change demo's seqviz dependency to `latest`
+
+## [2.0.0]
+
+### Changed
+
+- Refactor direction property, in annotations, translations, searchResults, to -1, 0, 1, from "REVERSE", "NONE", and "FORWARD", respectively
+  - the string enums are still supported, but they're no longer the default
+- Change the `row` property of searchResults to `direction` (either 1 or -1, for FWD or REV). Example below of a `searchResults` object from `options.onSearch()`:
+
+```json
+{
+  "searchResults": [
+    {
+      "start": 728,
+      "end": 733,
+      "direction": 1,
+      "index": 0
+    },
+    {
+      "start": 1788,
+      "end": 1793,
+      "direction": -1,
+      "index": 1
+    }
+  ],
+  "searchIndex": 0
+}
+```
+
+- Overhaul the README.md to match the changes above and add examples of translations, annotations, functions
+
+### Removed
+
+- Remove the `showAnnotations` options/prop. To avoid rendering `annotations`, we ask users to simply not provide `options.annotations` to the viewer
