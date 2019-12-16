@@ -79,9 +79,11 @@ npm install seqviz --save
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://cdn.latticeautomation.com/libs/seqviz/2.0.2/seqviz.min.js"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -178,22 +180,22 @@ Whether to show the index line and ticks below the sequence.
 
 An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start and end indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows (optional). Names (optional) are rendered on top the annotation.
 
-```json
+```js
 [
-  { "start": 0, "end": 22, "name": "Strong promoter", "direction": 1 },
-  { "start": 300, "end": 325, "name": "Weak promoter", "direction": -1 }
-]
+  { start: 0, end: 22, name: "Strong promoter", direction: 1 },
+  { start: 300, end: 325, name: "Weak promoter", direction: -1 }
+];
 ```
 
 #### `options.translations (=[])`
 
 An array of `translation` objects for rendering ranges of amino acids beneath the DNA sequence. Like `annotation`'s, `translation` objects requires 0-based start and end indexes, relative the DNA sequence, and a direction is required (1 (FWD) or -1 (REV)).
 
-```json
+```js
 [
-  { "start": 0, "end": 89, "direction": 1 },
-  { "start": 191, "end": 521, "direction": -1 }
-]
+  { start: 0, end: 89, direction: 1 },
+  { start: 191, end: 521, direction: -1 }
+];
 ```
 
 #### `options.enzymes (=[])`
@@ -208,7 +210,7 @@ How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`options.viewe
 
 An object mapping bp to color. Example:
 
-```json
+```js
 { "A": "#FF0000", "T": "#00FFFF" }
 ```
 
@@ -216,7 +218,7 @@ An object mapping bp to color. Example:
 
 An array of color hex codes for annotation coloring. Defaults to:
 
-```json
+```js
 [
   "#9DEAED", // cyan
   "#8FDE8C", // green
@@ -230,16 +232,16 @@ An array of color hex codes for annotation coloring. Defaults to:
   "#C59CFF", // purple
   "#6B81FF", // blue
   "#85A6FF" // light blue
-]
+];
 ```
 
 #### `options.onSelection (=null)`
 
 Callback function executed after selection events. Accepts a single `selection` argument: `(selection) => {}`.
 
-This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have an `element` property with info on the selected element. The example below is an example of a `selection` object following an `annotation` click.
+This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have an `element` property with info on the selected element. The example below is of a `selection` object following an `annotation` click.
 
-```json
+```js
 {
   // selection
   "sequenceMeta": {
@@ -270,13 +272,13 @@ This occurs after drag/drop selection and clicks. If an `annotation`, `translati
 
 A `searchQuery` object for specifying search results to highlight on the viewer.
 
-```json
+```js
 { "query": "", "mismatch": 0 }
 ```
 
 Searching supports the following nucleotide wildcards within the `query`.
 
-```json
+```js
 {
   "y": ["c", "t"],
   "r": ["a", "g"],
@@ -299,7 +301,7 @@ Searching supports the following nucleotide wildcards within the `query`.
 
 Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` object is below.
 
-```json
+```js
 {
   // searchResults
   "searchResults": [
@@ -328,7 +330,7 @@ You can use any key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowD
 
 Defaults to:
 
-```json
+```js
 {
   "key": "",
   "meta": false,
@@ -344,7 +346,7 @@ Defaults to:
 
 Defaults to:
 
-```json
+```js
 {
   "key": "",
   "meta": false,
