@@ -148,7 +148,7 @@ export default async (fileInput, fileName, colors = []) =>
             // it's the beginning of a new feature/annotation
             const [type, rangeString] = currLine;
             const rangeRegex = /\d+/g;
-            const direction = r.includes("complement") ? "REVERSE" : "FORWARD";
+            const direction = r.includes("complement") ? -1 : 1;
 
             // using the example above, this parses 1..5028 into 1 and 5028
             let [start, end] = [0, 0];
@@ -167,7 +167,7 @@ export default async (fileInput, fileName, colors = []) =>
             if (type === "primer_bind") {
               primerFlag = true;
               // create a new primer around the properties in this line
-              const forward = direction === "FORWARD";
+              const forward = direction === 1;
               primers.push({
                 ...primerFactory(),
                 gc: forward
@@ -177,7 +177,7 @@ export default async (fileInput, fileName, colors = []) =>
                   ? calcTm(seq.slice(start, end))
                   : calcTm(compSeq.slice(start, end)),
                 vector: seq,
-                sequence: forward
+                seq: forward
                   ? seq.slice(start, end).trim()
                   : reverse(compSeq.slice(start, end)).trim()
               });

@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
 [![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 16 12:01:01 EST 2019<!-- /exec-bash -->
+**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 16 15:49:01 EST 2019<!-- /exec-bash -->
 
 **Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
@@ -25,41 +25,48 @@
 ---
 
 - [Key Features](#key-features)
-- [Using the Library](#using-the-library)
+- [Using SeqViz](#using-seqviz)
   - [Installation](#installation)
   - [Instantiation](#instantiation)
-  - [Configuration](#configuration)
-- [Library Demo](#library-demo)
+  - [Viewer](#viewer)
+  - [Options](#options)
+- [Demo](#demo)
 - [Contact Us](#contact-us)
 
 ---
 
 ## Key Features
 
-This package aims to provide basic sequence viewing in a simple, open-source way, for use anywhere that supports running `javascript`. It currently provides:
+`SeqViz` aims to be a DNA sequence viewer with a simple API and easy customizability. It currently provides:
 
-- **Multiple input formats**: For formats that can be displayed by this viewer see viewer [input](#input-)
+- **Multiple input formats**:
+
+  - Sequence
+  - Accession (NCBI or iGEM)
+  - File (FASTA, GenBank, SBOL, SnapGene)
 
 - **Circular Plasmid viewer** :
 
   - Annotations with names and colors
-  - Name of sequence
+  - Index of sequence
+  - Name of plasmid
   - Base pair length of sequence
 
 - **Linear Sequence viewer** :
 
   - Annotations with names and colors
+  - Amino acid translations
   - Sequence and complement nucleotide bases
-  - Index line with base pair numbers
+  - Index of sequence
   - Enzyme cut sites
-  - Highlighted subsequences from search
+  - Highlighted sequence search results
 
 - **Selections**:
 
-  - On both Circular and Linear viewers clicking on an annotation or dragging over a section of the viewer will create a selection
-  - Information about this selection will be available through the `onSelection()` option (see [viewer options](#ViewerConfig-))
+  - Clicking on an `annotation`, `translation`, `enzyme` or `searchElement`, or dragging over the sequence, will create a selection
+  - Information about selections is available via `options.onSelection()` (see [viewer options](#options))
 
-## Using the Library
+## Using SeqViz
 
 ### Installation
 
@@ -73,7 +80,7 @@ npm install seqviz --save
 
 <!-- cdn-example(cmd:) -->
 ```html
-<script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.24/seqviz.min.js"></script>
+<script src="https://cdn.latticeautomation.com/libs/seqviz/2.0.2/seqviz.min.js"></script>
 ```
 <!-- /cdn-example -->
 
@@ -108,54 +115,108 @@ const CustomViewer = () => (
 
 ### Viewer
 
-`Viewer(${element}, ${ViewerConfig})`
+The viewer's constructor (Vanilla-JS) accepts two arguments.
+
+#### `Viewer(${element}, ${options})`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
-- `ViewerConfig` -- ViewerConfig are documented in greater detail below
+- `options` -- options/props are documented in greater detail below
 
-The Viewer returns an object with three properties:
+#### `viewer.render()`
 
-- `viewer.render()` -- renders the viewer to the DOM at the node passed in `${element}`
-- `viewer.renderToString()` -- renders the viewer and returns as an HTML string
-- `viewer.setState(ViewerConfig)` -- update the viewer's configuration and re-renders
+Renders the viewer to the DOM at the node passed in `${element}`.
 
-#### Configuration
+#### `viewer.renderToString()`
 
-All the following are usable with both the React implementation (as props) and the JS implementation as properties in a `ViewerConfig` object passed to the `Viewer` constructor.
+Renders the viewer and returns as an HTML string.
 
-One of the below is required:
+#### `viewer.setState(options)`
 
-- `seq` (_string_) the DNA sequence to render
-- `accession` (_string_) an NCBI accession ID or iGEM part ID
-  - populates `name`, `seq`, and `annotations`
-- `file` ([_File_](https://developer.mozilla.org/en-US/docs/Web/API/File)) a File object (FASTA, Genbank, SnapGene, SBOL)
-  - populates `name`, `seq`, and `annotations`
+Update the viewer's configuration and re-renders.
 
-Simple optional configuration options:
+### Options
 
-- `viewer` (one of _\["linear", "circular", "both"\]_) the type of viewer to show. "both" by default
-- `name` (_string_) the name of the sequence/plasmid
-- `compSeq` (_string_) the complement sequence. inferred from `seq` by default
-- `showComplement` (_boolean_) whether to show the complement sequence
-- `showAnnotations` (_boolean_) whether to show annotations
-- `showIndex` (_boolean_) whether to show the index line and ticks below the sequence
-- `enzymes` (_\[string\]_) a list of restriction enzymes whose recognition sites should be shown
-  - example: `["PstI", "EcoRI"]`
-- `bpColors` (_{\[string\]: string}_) map from bp to color.
-  - example: `{ A: "#FF0" T: "#00F" }`
-- `zoom` how zoomed the viewer(s) should be `0-100`
-  - map from viewer type to zoom level.
-    - default: `{ linear: 50, circular: 0 }`
+All the following are usable as props with the React implementation and as properties of an `options` object with the JS implementation.
 
-Additional configuration is below:
+#### Required (one of)
 
-##### `colors`
+#### `options.seq (='')`
 
-`array` of colors to be used for annotations. Annotations are rendered with a random color from a set of defined colors. The library currently explicitly supports hex code color options, but other color options may be inherently supported.
+The DNA sequence to render.
 
-Defaults to:
+#### `options.accession (='')`
 
-```js
+An NCBI accession ID or iGEM part ID. Populates `options.name`, `options.seq`, and `options.annotations`.
+
+#### `options.file (=null)`
+
+A [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object from a FASTA, Genbank, SnapGene, or SBOL file. Populates `options.name`, `options.seq`, and `options.annotations`.
+
+#### Optional
+
+#### `options.viewer (='both')`
+
+One of _\["linear", "circular", "both"\]_) the type of viewer to show. "both" by default.
+
+#### `options.name (='')`
+
+The name of the sequence/plasmid.
+
+#### `options.compSeq (='')`
+
+The complement sequence. Inferred from `seq` by default.
+
+#### `options.showComplement (=true)`
+
+Whether to show the complement sequence.
+
+#### `options.showIndex (=true)`
+
+Whether to show the index line and ticks below the sequence.
+
+#### `options.annotations (=[])`
+
+An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start and end indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows (optional). Names (optional) are rendered on top the annotation.
+
+```json
+[
+  { "start": 0, "end": 22, "name": "Strong promoter", "direction": 1 },
+  { "start": 300, "end": 325, "name": "Weak promoter", "direction": -1 }
+]
+```
+
+#### `options.translations (=[])`
+
+An array of `translation` objects for rendering ranges of amino acids beneath the DNA sequence. Like `annotation`'s, `translation` objects requires 0-based start and end indexes, relative the DNA sequence, and a direction is required (1 (FWD) or -1 (REV)).
+
+```json
+[
+  { "start": 0, "end": 89, "direction": 1 },
+  { "start": 191, "end": 521, "direction": -1 }
+]
+```
+
+#### `options.enzymes (=[])`
+
+An array of restriction enzyme names whose recognition sites should be shown. Example: `["PstI", "EcoRI"]`. This is case-insensitive. The list of supported enzymes is in [src/utils/digest/enzymes.js](src/utils/digest/enzymes.js).
+
+#### `options.zoom (={ linear: 50, circular: 0 })`
+
+How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`options.viewer`).
+
+#### `options.bpColors (={})`
+
+An object mapping bp to color. Example:
+
+```json
+{ "A": "#FF0000", "T": "#00FFFF" }
+```
+
+#### `options.colors (=[])`
+
+An array of color hex codes for annotation coloring. Defaults to:
+
+```json
 [
   "#9DEAED", // cyan
   "#8FDE8C", // green
@@ -169,40 +230,20 @@ Defaults to:
   "#C59CFF", // purple
   "#6B81FF", // blue
   "#85A6FF" // light blue
-];
+]
 ```
 
-##### `onSelection`
+#### `options.onSelection (=null)`
 
-`function` to be applied to the selection information. The function you specify will have access to the `selection` object as its only parameter.
+Callback function executed after selection events. Accepts a single `selection` argument: `(selection) => {}`.
 
-Example for a random drag selection
+This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have an `element` property with info on the selected element. The example below is an example of a `selection` object following an `annotation` click.
 
-```js
+```json
 {
-  "ref": "",
+  // selection
   "sequenceMeta": {
-    "sequence": "aggcggtttgcgtattgggcgctcttccgcttcctcgctcactgactcgctgcgctcggtcgttcggctgcggcgagcggtatcagctcactcaaaggcggtaatacggttatccacagaatcaggggataacgcaggaaagaacatgtgagcaaaaggccagcaaaaggccaggaaccgtaaaaaggccgcgttgctggcgtttttccataggctccgcccccctgacgagcatcacaaaaatcgacgctcaagtcagaggtggcgaaacccgacaggactataaagataccaggcgtttccccctggaagctccctcgtgcgctctcctgttccgaccctgccgcttaccggatacctgtccgcctttctcccttcgggaagcgtggcgctttctcatagctcacgctgtaggtatctcagttcggtgtaggtcgttcgctccaagctgggctgtgtgcacgaaccccccgttcagcccgaccgctgcgccttatccggtaactatcgtcttgagtccaacccggtaagacacgacttatcgccactggcagcagccactggtaacaggattagcagagcgaggtatgtaggcggtgctacagagttcttgaagtggtggcctaactacggctacactagaaggacagtatttggtatctgcgctctgctgaagccagttaccttcggaaaaagagttggtagctcttgatccggcaaacaaaccaccgctggtagcggtggtttttttgtttgcaagcagcagattacgcgcagaaaaaaaggatctcaagaagatcctttgatcttttctacggggtctgacgctcagtggaacgaaaactcacgttaagggattttggtcatgagattatcaaaaaggatcttcacctagatccttttaaattaaaaatgaagttttaaatcaatctaaagtatatatgagtaaacttggtctgacagttaccaatgcttaa",
-    "GC": 51.1,
-    "Tm": 85
-  },
-  "selectionMeta": {
-    "type": "",
-    "start": 650,
-    "end": 1627,
-    "selectionLength": 977,
-    "clockwise": true
-  }
-}
-```
-
-If the selection is an annotation (generated by clicking on an annotation) there will additionally be a `feature` field containing information about the annotation. The `ref` field is the id the `svg` element of the drawn annotation.
-
-```js
-{
-  "ref": "lxcC1L3M4z",
-  "sequenceMeta": {
-    "sequence": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
+    "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
     "GC": 55.3,
     "Tm": 85
   },
@@ -213,157 +254,115 @@ If the selection is an annotation (generated by clicking on an annotation) there
     "selectionLength": 324,
     "clockwise": true
   },
-  "feature": {
+  "element": {
     "id": "lxcC1L3M4z",
     "color": "#8FDE8C",
     "name": "lacZ fragment",
     "type": "CDS",
     "start": 133,
     "end": 457,
-    "direction": "REVERSE"
+    "direction": -1
   }
 }
-
 ```
 
-For examples on how to practically use the selection information see [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
+#### `options.searchQuery (=null)`
 
-##### `onSearch`
+A `searchQuery` object for specifying search results to highlight on the viewer.
 
-`function` to be applied to the search results. The function you specify will have access to the results object as its only parameter.
+```json
+{ "query": "", "mismatch": 0 }
+```
 
-Example of a search result:
+Searching supports the following nucleotide wildcards within the `query`.
 
-```js
+```json
 {
+  "y": ["c", "t"],
+  "r": ["a", "g"],
+  "w": ["a", "t"],
+  "s": ["c", "g"],
+  "k": ["g", "t"],
+  "m": ["a", "c"],
+  "d": ["a", "g", "t"],
+  "v": ["a", "c", "g"],
+  "h": ["a", "c", "t"],
+  "b": ["c", "g", "t"],
+  "x": ["a", "c", "g", "t"],
+  "n": ["a", "c", "g", "t"]
+}
+```
+
+`mismatch` is an `int` denoting the maximum allowable mismatch between the query and a match within the viewer's sequence (see: [edit distance](https://en.wikipedia.org/wiki/Edit_distance)).
+
+#### `options.onSearch (=null)`
+
+Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` object is below.
+
+```json
+{
+  // searchResults
   "searchResults": [
     {
       "start": 728,
       "end": 733,
-      "row": 0,
+      "direction": 1,
       "index": 0
     },
     {
       "start": 1788,
       "end": 1793,
-      "row": 0,
+      "direction": -1,
       "index": 1
-    },
-    {
-      "start": 1980,
-      "end": 1985,
-      "row": 0,
-      "index": 2
-    },
-    {
-      "start": 2774,
-      "end": 2779,
-      "row": 0,
-      "index": 3
     }
   ],
   "searchIndex": 0
 }
 ```
 
-The start and end are the indices encapsulating the substring match for the search query. The row is `0` for sequence strand and `1` for complement strand. The index is for tabulation (see [searchNext](#searchnext)).
+#### `options.searchNext (={})`
 
-##### `searchNext`
+`object` used to set key binding for incrementing through search results. Incrementing scrolls the viewer to the next search result.
 
-`object` used to set the key binding for tabulating search results (focus highlighting sequential search highlights).
-
-This library tries to keep default key bindings to a minimum so there are no key bindings to tabulating the search results, but you can set your own by passing the key binding to `searchNext`.
+You can use any key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). If you want to make `searchNext` a special key binding, e.g. `shift + a`, or `alt + .`, you can specify the special key by settings it to `true`.
 
 Defaults to:
 
-```js
+```json
 {
-    key: "",
-    meta: false,
-    ctrl: false,
-    shift: false,
-    alt: false
+  "key": "",
+  "meta": false,
+  "ctrl": false,
+  "shift": false,
+  "alt": false
 }
 ```
 
-You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `searchNext` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
+#### `options.copySeq (={})`
 
-##### `copySeq`
-
-`object` used to set the key binding for copying the template strand sequence of your current selection.
-
-This library tries to keep default key bindings to a minimum so there are no key bindings copy, but you can set your own by passing the key binding to `copySeq`.
+`object` used to set the key binding for copying the template strand sequence of your current selection. See `options.searchNext` for more details. After a copy-event, the copied sequence is written to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
 
 Defaults to:
 
-```js
+```json
 {
-    key: "",
-    meta: false,
-    ctrl: false,
-    shift: false,
-    alt: false
+  "key": "",
+  "meta": false,
+  "ctrl": false,
+  "shift": false,
+  "alt": false
 }
 ```
 
-You can use any keyboard key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). This library uses the `event.key` for key bindings. The key to be bound is case sensitive. If you want to make `copySeq` a special key binding e.g. `shift + a`, or `alt + .` you can specify your special key with value `true`.
+#### `options.backbone (='')`
 
-##### `searchQuery`
+This is a feature specific to [BioBricks](https://parts.igem.org/Plasmid_backbones/Assembly) (`options.accession`). The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, and `pSB1T3`.
 
-`object` to specify a subsequence search to be conducted on the imported part.
+Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`).
 
-Defaults to:
+## Demo
 
-```js
-{ query: "", mismatch: 0 }
-```
-
-`query` is a string subsequence. The search functionality supports the following common nucleotide wildcards:
-
-```js
-{
-  y: [ c, t],
-  r: [ a, g ],
-  w: [ a, t ],
-  s: [ g, c ],
-  k: [ t, g ],
-  m: [ c, a ],
-  d: [ a, g, t ],
-  v: [ a, c, g ],
-  h: [ a, c, t ],
-  b: [ c, g, t ],
-  x: [ a, c, g, t ],
-  n: [ a, c, g, t ]
-}
-```
-
-`mismatch` is an `int` numeration of the amount of mismatch leeway the search should have. A mismatch of `1` will will allow for one base to not match the `query`.
-
-##### `backbone`
-
-`string` addition to main sequence. This is a feature specific to BioBricks. The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, `pSB1T3` as specified at [parts.igem.org](https://parts.igem.org/Plasmid_backbones/Assembly). To use the backbone simply specify the backbone name (case insensitive) as a string like so
-
-```js
-{
-  backbone: "BBa_K1362091",
-}
-```
-
-Custom backbones are also minimally supported. Any sequence string you input (`ATCGatcg`) can be used as the backbone.
-
-##### `translations`
-
-`array` of translation objects for creating translations beneath the sequence. Require 0-based start and end indexes (of the DNA bp) and a direction (`FORWARD` or `REVERSE`).
-
-```js
-{
-  translations: [{ start: 0, end: 89, direction: "FORWARD" }],
-}
-```
-
-## Library Demo
-
-You can see a demonstration of this library used to fetch BioBricks at: [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz).
+You can see a demonstration with iGEM BioBricks at: [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz).
 
 For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
@@ -373,4 +372,4 @@ You can also check out an example of using SeqViz to view NCBI GenBank entries i
 
 This library is currently being maintained by <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->.
 
-You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
+You can report bugs at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact us directly at <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->

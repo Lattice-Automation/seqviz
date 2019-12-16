@@ -4,7 +4,7 @@ import * as React from "react";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { dnaComplement } from "../utils/parser";
+import { directionality, dnaComplement } from "../utils/parser";
 import { defaultSelection, annotationFactory } from "../utils/sequence";
 import SeqViewer from "./SeqViewer.jsx";
 
@@ -34,7 +34,7 @@ export default class SeqViz extends React.Component {
         start: PropTypes.number.isRequired,
         end: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
+        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD", 1, 0, -1]),
         color: PropTypes.string,
         type: PropTypes.string
       })
@@ -61,7 +61,6 @@ export default class SeqViz extends React.Component {
       mismatch: PropTypes.number
     }).isRequired,
     seq: PropTypes.string,
-    showAnnotations: PropTypes.bool.isRequired,
     showComplement: PropTypes.bool.isRequired,
     showIndex: PropTypes.bool.isRequired,
     showPrimers: PropTypes.bool.isRequired,
@@ -70,7 +69,7 @@ export default class SeqViz extends React.Component {
       PropTypes.shape({
         start: PropTypes.number.isRequired,
         end: PropTypes.number.isRequired,
-        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD"]),
+        direction: PropTypes.oneOf(["REVERSE", "NONE", 1]),
         name: PropTypes.string,
         color: PropTypes.string,
         type: PropTypes.string
@@ -111,7 +110,6 @@ export default class SeqViz extends React.Component {
     },
     searchQuery: { query: "", mismatch: 0 },
     seq: "",
-    showAnnotations: true,
     showComplement: true,
     showIndex: true,
     showPrimers: true,
@@ -305,6 +303,7 @@ export default class SeqViz extends React.Component {
     annotations = (annotations || part.annotations || []).map(a => ({
       ...annotationFactory(a.name),
       ...a,
+      direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
       end: a.end % (seq.length + 1)
     }));

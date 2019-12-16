@@ -136,8 +136,8 @@ const SingleAnnotation = props => {
     length: annLength,
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
-    arrowFWD: a.direction === "FORWARD",
-    arrowREV: a.direction === "REVERSE"
+    arrowFWD: a.direction === 1,
+    arrowREV: a.direction === -1
   });
 
   // determine whether the annotation's name is in the top or bottom
@@ -153,7 +153,7 @@ const SingleAnnotation = props => {
   let lengthToMidpoint = topLengthToMid;
   if (!bottomHalf) {
     lengthToMidpoint += topLengthToMid + bottomLengthToMid;
-    if (a.direction === "REVERSE") {
+    if (a.direction === -1) {
       lengthToMidpoint += 0.75 * lineHeight;
     } else if (a.direction === "NONE") {
       lengthToMidpoint += lineHeight;

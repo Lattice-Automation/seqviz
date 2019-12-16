@@ -93,7 +93,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
           color: colorByIndex(i),
           start: bioStart[0]._ - 1 || 0, // sbol is 1-based
           end: bioEnd[0]._ || 0, // we're 0-based
-          direction: strand[0]._ === "+" ? "FORWARD" : "REVERSE",
+          direction: strand[0]._ === "+" ? 1 : -1,
           type: annType[0]._ || "N/A",
           name: annName[0]._ || annId[0]._ || "Untitled"
         });

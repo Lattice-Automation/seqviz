@@ -62,7 +62,7 @@ const findCutSites = (
       complementCutIdx: index + complementCutIdx,
       start: index,
       end: index + recogLength,
-      recogStrand: "FORWARD",
+      recogStrand: 1,
       recogStart: index + recogStart,
       recogEnd: index + recogEnd
     });
@@ -96,7 +96,7 @@ const findCutSites = (
       complementCutIdx: index + recogLength - complementCutIdxComp,
       start: index,
       end: index + recogLength,
-      recogStrand: "REVERSE",
+      recogStrand: -1,
       recogStart: index + recogStart,
       recogEnd: index + recogEnd
     });

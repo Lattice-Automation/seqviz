@@ -59,7 +59,6 @@ class Linear extends React.Component {
       zoom,
       showIndex,
       showComplement,
-      showAnnotations,
       showPrimers,
 
       cutSites,
@@ -79,12 +78,8 @@ class Linear extends React.Component {
 
     primers = findAllBindingSites(primers, seq);
 
-    const forwardPrimers = primers.filter(
-      primer => primer.direction === "FORWARD"
-    );
-    const reversePrimers = primers.filter(
-      primer => primer.direction === "REVERSE"
-    );
+    const forwardPrimers = primers.filter(primer => primer.direction === 1);
+    const reversePrimers = primers.filter(primer => primer.direction === -1);
 
     // un-official definition for being zoomed in. Being over 10 seems like a decent cut-off
     const zoomed = zoom.linear > 10;
@@ -117,13 +112,11 @@ class Linear extends React.Component {
       return annotations;
     };
 
-    const annotationRows = showAnnotations // annotations...
-      ? createMultiRows(
-          stackElements(vetAnnotations(annotations), seq.length),
-          bpsPerBlock,
-          arrSize
-        )
-      : new Array(arrSize).fill([]);
+    const annotationRows = createMultiRows(
+      stackElements(vetAnnotations(annotations), seq.length),
+      bpsPerBlock,
+      arrSize
+    );
 
     const forwardPrimerRows = showPrimers // primers...
       ? createMultiRows(
@@ -175,7 +168,7 @@ class Linear extends React.Component {
       if (showIndex) {
         blockHeight += 25; // another for index row (height is fixed right now)
       }
-      if (showAnnotations && annotationRows[i].length) {
+      if (annotationRows[i].length) {
         blockHeight += annotationRows[i].length * elementHeight + spacingHeight;
       }
       if (cutSiteRows[i].length) {

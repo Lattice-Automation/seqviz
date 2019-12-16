@@ -1,8 +1,7 @@
 import * as React from "react";
 import { isEqual } from "lodash";
-import shortid from "shortid";
 
-class CircularFind extends React.Component {
+export default class CircularFind extends React.Component {
   shouldComponentUpdate = nextProps => {
     const { findState } = this.props;
 
@@ -33,8 +32,8 @@ class CircularFind extends React.Component {
     let topR = radius + lineHeight; // outer radius
 
     // adjustment for the top/bottom of the rectangle, based on row number
-    const aAdjust = result.row > 0 ? lineHeight / 2 : lineHeight * 1.5;
-    let bAdjust = result.row > 0 ? lineHeight / 1.5 : lineHeight * 1.7;
+    const aAdjust = result.direction > 0 ? lineHeight / 2 : lineHeight * 1.5;
+    let bAdjust = result.direction > 0 ? lineHeight / 1.5 : lineHeight * 1.7;
 
     let bottomR = radius + bAdjust;
     if (seqLength < 200) {
@@ -66,7 +65,7 @@ class CircularFind extends React.Component {
       cursor: "pointer"
     };
 
-    const id = `${start}${end}${result.row}${result.start}`;
+    const id = `${start}${end}${result.direction}${result.start}`;
 
     return (
       <path
@@ -108,5 +107,3 @@ class CircularFind extends React.Component {
     ) : null;
   }
 }
-
-export default CircularFind;
