@@ -52,7 +52,7 @@ describe("SeqBlock renders", () => {
           {
             start: 0,
             end: 71,
-            direction: "FORWARD",
+            direction: 1,
             name: "RBS",
             type: "RBS",
             color: "#80D849"

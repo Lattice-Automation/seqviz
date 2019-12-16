@@ -15,7 +15,7 @@ describe("Primer Binding Sites", () => {
     hairpin: 0,
     stability: 0,
     vector: testVector,
-    sequence: "TTTTttttCCCCcccc",
+    seq: "TTTTttttCCCCcccc",
     penalty: 0,
     strict: false,
     __typename: "Primer"
@@ -32,7 +32,7 @@ describe("Primer Binding Sites", () => {
     hairpin: 0,
     stability: 0,
     vector: testVector,
-    sequence: "TTTTTTTccCCCCgggg",
+    seq: "TTTTTTTccCCCCgggg",
     penalty: 0,
     strict: false,
     __typename: "Primer"
@@ -50,7 +50,7 @@ describe("Primer Binding Sites", () => {
     hairpin: 0,
     stability: 0,
     vector: testVector,
-    sequence: "ttaaaaaatttttttt",
+    seq: "ttaaaaaatttttttt",
     penalty: 0,
     strict: false,
     __typename: "Primer"
@@ -65,13 +65,13 @@ describe("Primer Binding Sites", () => {
   });
 
   it("correctly find binding sites that aren't perfect matches", () => {
-    const primerSequence = testPrimerTwo.sequence.toLowerCase();
+    const primerSequence = testPrimerTwo.seq.toLowerCase();
     const testBindingSites = findAllBindingSites(
       [testPrimerOne, testPrimerTwo],
       testVector
     );
     const primerTwoBindingSites = testBindingSites.filter(
-      binding => binding.sequence.toLowerCase() === primerSequence
+      binding => binding.seq.toLowerCase() === primerSequence
     );
     const annealingSequences = primerTwoBindingSites.reduce((acc, binding) => {
       const annealSequences = acc.concat([binding.annealSequence]);
@@ -95,9 +95,9 @@ describe("Primer Binding Sites", () => {
   it("binding sites of primers with overhang all have the correct length", () => {
     const testBindingSites = findAllBindingSites([testPrimerThree], testVector);
     const seqLength =
-      testPrimerThree.sequence.length + testPrimerThree.overhang.length;
+      testPrimerThree.seq.length + testPrimerThree.overhang.length;
     const bindingSitesCorrectLength = testBindingSites.filter(
-      binding => binding.sequence.length === seqLength
+      binding => binding.seq.length === seqLength
     );
 
     expect(bindingSitesCorrectLength).toHaveLength(4);

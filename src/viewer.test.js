@@ -21,7 +21,15 @@ const defaultOptions = {
   },
   searchQuery: { query: "GCGG" },
   backbone: "",
-  enzymes: []
+  enzymes: [],
+  annotations: [
+    {
+      name: "test_annotation",
+      start: 0,
+      end: 15,
+      direction: "FORWARD" // old prop-type, still supported
+    }
+  ]
 };
 
 it("renders without crashing", () => {

@@ -181,7 +181,7 @@ class TranslationRow extends React.Component {
 
           // direction check needed to determine which direction the amino acid translation
           // arrow are facing
-          const path = this.genPath(bpCount, direction === "FORWARD" ? 1 : -1);
+          const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
           return (
             <g

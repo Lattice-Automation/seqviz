@@ -240,11 +240,11 @@ export const reverse = sequence =>
  * @param direction
  */
 export const reverseDirection = direction => {
-  if (direction === "FORWARD") {
-    return "REVERSE";
+  if (direction === 1) {
+    return -1;
   }
-  if (direction === "REVERSE") {
-    return "FORWARD";
+  if (direction === -1) {
+    return 1;
   }
   return "NONE";
 };
@@ -256,7 +256,7 @@ export const reIndex = (sequence, start) => {
 
 export const defaultSelection = {
   ref: null,
-  sequenceMeta: { sequence: "", GC: 0, Tm: 0 },
+  sequenceMeta: { seq: "", GC: 0, Tm: 0 },
   selectionMeta: {
     type: "",
     start: 0,
@@ -264,7 +264,7 @@ export const defaultSelection = {
     selectionLength: 0,
     clockwise: true
   },
-  feature: null
+  element: null
 };
 
 export const trimNewLines = str =>
@@ -361,7 +361,7 @@ export const createLinearTranslations = (translations, dnaSeq) => {
 
     // get the DNA sub sequence
     const subDNASeq =
-      direction === "FORWARD"
+      direction === 1
         ? dnaDoubled.substring(start, end)
         : dnaComplement(dnaDoubled.substring(start, end))
             .compSeq.split("")
@@ -370,7 +370,7 @@ export const createLinearTranslations = (translations, dnaSeq) => {
 
     // translate the DNA sub sequence
     const AAseq =
-      direction === "FORWARD"
+      direction === 1
         ? translateDNA(subDNASeq)
         : translateDNA(subDNASeq)
             .split("")
@@ -380,14 +380,14 @@ export const createLinearTranslations = (translations, dnaSeq) => {
     // the starting point for the translation, reading left to right (regardless of translation
     // direction). this is later needed to calculate the number of bps needed in the first
     // and last codons
-    const tStart = direction === "FORWARD" ? start : end - AAseq.length * 3;
+    const tStart = direction === 1 ? start : end - AAseq.length * 3;
     let tEnd =
-      direction === "FORWARD"
+      direction === 1
         ? (start + AAseq.length * 3) % dnaSeq.length
         : end % dnaSeq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
-    if (tEnd === 0 && direction === "REVERSE") {
+    if (tEnd === 0 && direction === -1) {
       tEnd += dnaSeq.length;
     }
 

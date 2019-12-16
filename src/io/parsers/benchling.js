@@ -25,8 +25,7 @@ export default async text => {
     annotations: partJSON.annotations.map(a => ({
       ...a,
       id: shortid.generate(),
-      direction:
-        a.strand === 0 ? "FORWARD" : a.strand === 1 ? "REVERSE" : "NONE"
+      direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE"
     }))
   };
 
