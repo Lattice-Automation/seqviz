@@ -242,7 +242,7 @@ const withSelectionHandler = WrappedComp =>
         ref = "",
         type = "",
         searchIndex: newSearchIndex = null,
-        feature
+        element
       } = selectRange;
 
       const selectionLength = this.calcSelectionLength(start, end, clockwise);
@@ -260,7 +260,7 @@ const withSelectionHandler = WrappedComp =>
         ref,
         sequenceMeta,
         selectionMeta,
-        feature
+        element
       };
       const findStateIndex =
         newSearchIndex === null ? searchIndex : newSearchIndex;
@@ -320,9 +320,11 @@ const withSelectionHandler = WrappedComp =>
           const newSearchIndex = searchResults.findIndex(
             res => res.start === selectionStart
           );
-          const feature = knownRange.ref
+
+          const element = knownRange.ref
             ? annotations.find(annotation => annotation.id === knownRange.ref)
             : null;
+
           if (!Linear) {
             setPartState({
               linearCentralIndex: selectionStart
@@ -334,7 +336,7 @@ const withSelectionHandler = WrappedComp =>
             end: selectionEnd,
             clockwise: clockwise,
             searchIndex: newSearchIndex,
-            feature: feature
+            element: element
           });
           this.dragEvent = false;
           break;

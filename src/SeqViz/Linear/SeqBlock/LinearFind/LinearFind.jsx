@@ -57,7 +57,7 @@ class LinearFind extends React.PureComponent {
       return (
         <rect
           x={x}
-          y={s.row > 0 ? compYDiff - 10 : indexYDiff - 10}
+          y={s.direction > 0 ? compYDiff - 10 : indexYDiff - 10}
           width={width}
           style={{ fill }}
           key={id}

@@ -77,13 +77,13 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
 
   primers.forEach(primer => {
     const { overhang = "" } = primer;
-    let { sequence, strict } = primer;
+    let { seq, strict } = primer;
     strict = strict || false;
-    if (sequence === "") {
+    if (seq === "") {
       return;
     }
-    sequence = sequence.toLowerCase();
-    const sequenceLength = sequence.length;
+    seq = seq.toLowerCase();
+    const sequenceLength = seq.length;
 
     const vectorSequence = vectorSeq.toLowerCase();
     const vectorLength = vectorSequence.length;
@@ -91,19 +91,19 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
     const expandedVectorSequence =
       vectorSequence + vectorSequence.substring(0, sequenceLength); // Used for looking for binding sites that cross 0 index
 
-    let annealSequence = sequence;
+    let annealSequence = seq;
     let { mismatches, matchSeq } = [];
 
     matchSeq =
       sequenceLength < matchLength
-        ? sequence
-        : sequence.substring(sequenceLength - matchLength, sequenceLength);
+        ? seq
+        : seq.substring(sequenceLength - matchLength, sequenceLength);
 
     matchSeq = forward ? matchSeq : reverse(matchSeq);
 
     const regex = new RegExp(matchSeq, "gi");
     let result = regex.exec(expandedVectorSequence);
-    const combinedSequence = (overhang || "").concat(sequence);
+    const combinedSequence = (overhang || "").concat(seq);
     while (result) {
       if (result.index < vectorLength) {
         const tailCrossZero = forward
@@ -134,7 +134,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
 
         subVector = forward ? subVector : reverse(subVector);
 
-        const matchTm = calcTm(sequence, subVector);
+        const matchTm = calcTm(seq, subVector);
 
         if (
           (matchTm >= primer.tm || matchTm > minTm) &&
@@ -161,7 +161,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
             }
           } else {
             ({ mismatches = [], annealSequence = "" } = findMismatches(
-              sequence,
+              seq,
               subVector
             ));
           }
@@ -187,7 +187,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
             primerBindingSites.push({
               ...primer,
               id: `${primer.id}-${startIndex}`,
-              sequence: combinedSequence,
+              seq: combinedSequence,
               start: startIndex,
               end: endIndex,
               direction: direction,

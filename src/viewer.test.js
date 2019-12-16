@@ -27,7 +27,7 @@ const defaultOptions = {
       name: "test_annotation",
       start: 0,
       end: 15,
-      direction: "FORWARD"
+      direction: "FORWARD" // old prop-type, still supported
     }
   ]
 };

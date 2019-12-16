@@ -143,7 +143,6 @@ export default class SeqBlock extends React.PureComponent {
 
       showIndex,
       showComplement,
-      showAnnotations,
       showPrimers,
 
       seqSelection,
@@ -226,9 +225,7 @@ export default class SeqBlock extends React.PureComponent {
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
-    const annHeight = showAnnotations
-      ? elementHeight * annotationRows.length
-      : 0;
+    const annHeight = elementHeight * annotationRows.length;
 
     // calc the height necessary for the sequence selection
     let selectHeight =
@@ -264,7 +261,7 @@ export default class SeqBlock extends React.PureComponent {
 
     const filteredSearchRows = showComplement
       ? searchRows
-      : searchRows.filter(search => search.row === 0);
+      : searchRows.filter(search => search.direction === 1);
 
     return (
       <svg
@@ -300,16 +297,14 @@ export default class SeqBlock extends React.PureComponent {
               lastBase={lastBase}
             />
           )}
-          {showAnnotations && (
-            <Annotations
-              {...this.props}
-              findXAndWidth={this.findXAndWidth}
-              lastBase={lastBase}
-              yDiff={annYDiff}
-              seqBlockRef={this}
-              fullSeq={fullSeq}
-            />
-          )}
+          <Annotations
+            {...this.props}
+            findXAndWidth={this.findXAndWidth}
+            lastBase={lastBase}
+            yDiff={annYDiff}
+            seqBlockRef={this}
+            fullSeq={fullSeq}
+          />
           {showPrimers && (
             <Primers
               {...this.props}

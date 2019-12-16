@@ -256,7 +256,7 @@ export const reIndex = (sequence, start) => {
 
 export const defaultSelection = {
   ref: null,
-  sequenceMeta: { sequence: "", GC: 0, Tm: 0 },
+  sequenceMeta: { seq: "", GC: 0, Tm: 0 },
   selectionMeta: {
     type: "",
     start: 0,
@@ -264,7 +264,7 @@ export const defaultSelection = {
     selectionLength: 0,
     clockwise: true
   },
-  feature: null
+  element: null
 };
 
 export const trimNewLines = str =>

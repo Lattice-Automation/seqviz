@@ -240,7 +240,6 @@ class Circular extends React.PureComponent {
 
   render() {
     const {
-      showAnnotations,
       showPrimers,
       showIndex,
       name,
@@ -284,16 +283,11 @@ class Circular extends React.PureComponent {
     };
 
     // an inward shift is needed for primers if the annotations are shown
-    let primerRowsToSkip = 0;
-    if (showAnnotations) {
-      primerRowsToSkip = annotationsInRows.length + 1;
-    }
+    let primerRowsToSkip = annotationsInRows.length + 1;
 
     // calculate the selection row height based on number of annotation and primers
-    let totalRows = 4;
-    if (showAnnotations) {
-      totalRows += annotationsInRows.length;
-    }
+    let totalRows = 4 + annotationsInRows.length;
+
     if (showPrimers) {
       totalRows += primersInRows.length;
     }
@@ -319,16 +313,14 @@ class Circular extends React.PureComponent {
             totalRows={totalRows}
             seq={seq}
           />
-          {showAnnotations && (
-            <Annotations
-              {...this.props}
-              {...general}
-              annotations={annotationsInRows}
-              size={size}
-              rowsToSkip={0}
-              inlinedAnnotations={inlinedLabels}
-            />
-          )}
+          <Annotations
+            {...this.props}
+            {...general}
+            annotations={annotationsInRows}
+            size={size}
+            rowsToSkip={0}
+            inlinedAnnotations={inlinedLabels}
+          />
           {showPrimers && primersInRows.length && (
             <Primers
               {...general}

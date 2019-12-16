@@ -7,7 +7,6 @@ import { COLOR_BORDER_MAP } from "../../../../utils/colors";
 export default class AnnotationRows extends React.PureComponent {
   render() {
     const {
-      showAnnotations,
       annotationRows,
       yDiff,
       findXAndWidth,
@@ -19,8 +18,6 @@ export default class AnnotationRows extends React.PureComponent {
       fullSeq,
       elementHeight
     } = this.props;
-
-    if (!showAnnotations) return null;
 
     return (
       <g className="la-vz-linear-annotations">

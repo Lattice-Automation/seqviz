@@ -59,7 +59,6 @@ class Linear extends React.Component {
       zoom,
       showIndex,
       showComplement,
-      showAnnotations,
       showPrimers,
 
       cutSites,
@@ -113,13 +112,11 @@ class Linear extends React.Component {
       return annotations;
     };
 
-    const annotationRows = showAnnotations // annotations...
-      ? createMultiRows(
-          stackElements(vetAnnotations(annotations), seq.length),
-          bpsPerBlock,
-          arrSize
-        )
-      : new Array(arrSize).fill([]);
+    const annotationRows = createMultiRows(
+      stackElements(vetAnnotations(annotations), seq.length),
+      bpsPerBlock,
+      arrSize
+    );
 
     const forwardPrimerRows = showPrimers // primers...
       ? createMultiRows(
@@ -171,7 +168,7 @@ class Linear extends React.Component {
       if (showIndex) {
         blockHeight += 25; // another for index row (height is fixed right now)
       }
-      if (showAnnotations && annotationRows[i].length) {
+      if (annotationRows[i].length) {
         blockHeight += annotationRows[i].length * elementHeight + spacingHeight;
       }
       if (cutSiteRows[i].length) {
