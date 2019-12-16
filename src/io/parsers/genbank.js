@@ -177,7 +177,7 @@ export default async (fileInput, fileName, colors = []) =>
                   ? calcTm(seq.slice(start, end))
                   : calcTm(compSeq.slice(start, end)),
                 vector: seq,
-                sequence: forward
+                seq: forward
                   ? seq.slice(start, end).trim()
                   : reverse(compSeq.slice(start, end)).trim()
               });

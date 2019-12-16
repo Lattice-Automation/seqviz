@@ -61,7 +61,6 @@ export default class SeqViz extends React.Component {
       mismatch: PropTypes.number
     }).isRequired,
     seq: PropTypes.string,
-    showAnnotations: PropTypes.bool.isRequired,
     showComplement: PropTypes.bool.isRequired,
     showIndex: PropTypes.bool.isRequired,
     showPrimers: PropTypes.bool.isRequired,
@@ -111,7 +110,6 @@ export default class SeqViz extends React.Component {
     },
     searchQuery: { query: "", mismatch: 0 },
     seq: "",
-    showAnnotations: true,
     showComplement: true,
     showIndex: true,
     showPrimers: true,
