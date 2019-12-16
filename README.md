@@ -24,8 +24,8 @@
 
 ---
 
-- [Key Features](#key-features)
-- [Using SeqViz](#using-seqviz)
+- [Features](#features)
+- [Usage](#usage)
   - [Installation](#installation)
   - [Instantiation](#instantiation)
   - [Viewer](#viewer)
@@ -35,7 +35,7 @@
 
 ---
 
-## Key Features
+## Features
 
 `SeqViz` aims to be a DNA sequence viewer with a simple API and easy customizability. It currently provides:
 
@@ -66,14 +66,14 @@
   - Clicking on an `annotation`, `translation`, `enzyme` or `searchElement`, or dragging over the sequence, will create a selection
   - Information about selections is available via `options.onSelection()` (see [viewer options](#options))
 
-## Using SeqViz
+## Usage
 
 ### Installation
 
 #### npm
 
 ```bash
-npm install seqviz --save
+npm install seqviz
 ```
 
 #### CDN
@@ -93,11 +93,11 @@ npm install seqviz --save
 ```jsx
 import { SeqViz } from "seqviz";
 
-const CustomViewer = () => (
+export default () => (
   <SeqViz
     name="J23100"
     seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
-    annotations={[{ name: "promoter", start: 0, end: 34 }]}
+    annotations={[{ name: "promoter", start: 0, end: 34, direction: 1 }]}
   />
 );
 ```
@@ -119,10 +119,10 @@ const CustomViewer = () => (
 
 The viewer's constructor (Vanilla-JS) accepts two arguments.
 
-#### `Viewer(${element}, ${options})`
+#### `seqviz.Viewer(${element}, ${options})`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
-- `options` -- options/props are documented in greater detail below
+- `options` -- options as documented in greater detail [below](#options)
 
 #### `viewer.render()`
 
@@ -138,7 +138,7 @@ Update the viewer's configuration and re-renders.
 
 ### Options
 
-All the following are usable as props with the React implementation and as properties of an `options` object with the JS implementation.
+All the following are usable as props via the React component (`seqviz.SeqViz`) or as properties of an `options` object via the JS implementation (`seqviz.Viewer()`).
 
 #### Required (one of)
 
