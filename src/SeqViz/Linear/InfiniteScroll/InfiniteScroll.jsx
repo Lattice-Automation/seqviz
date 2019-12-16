@@ -193,7 +193,7 @@ export default class InfiniteScroll extends React.PureComponent {
     this.timeoutID = setTimeout(() => {
       this.scroller.current.scrollTop += incAmount;
       this.incrementScroller(incAmount);
-    }, 100);
+    }, 10);
   };
 
   stopIncrementingScroller = () => {

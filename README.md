@@ -19,7 +19,7 @@
 ---
 
 <div align="center">
-  <img width="675" src="https://media.giphy.com/media/KH8oxeI0eeu4rpAi0O/giphy.gif">
+  <img width="600" src="https://media.giphy.com/media/KH8oxeI0eeu4rpAi0O/giphy.gif">
 </div>
 
 ---
@@ -72,16 +72,16 @@ npm install seqviz --save
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://cdn.latticeautomation.com/libs/seqviz/1.0.23/seqviz.min.js"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
 
-You can instantiate a viewer via React or Vanilla JS.
-
-React, with the `Seqviz` component:
+#### React
 
 ```jsx
 import { SeqViz } from "seqviz";
@@ -95,7 +95,7 @@ const CustomViewer = () => (
 );
 ```
 
-JavaScript, with the `Viewer` constructor (default export):
+#### Vanilla-JS
 
 ```html
 <script>
@@ -365,13 +365,11 @@ Custom backbones are also minimally supported. Any sequence string you input (`A
 
 ## Library Demo
 
-You can see a demonstration of this library used to fetch BioBricks at
-
-### **[tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz)**
+You can see a demonstration of this library used to fetch BioBricks at: [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz).
 
 For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
-You can also check out the example for examining NCBI parts included in our SeqViz introductory [Medium post](https://medium.com/lattice-automation/visualize-your-dna-sequences-with-seqviz-b1d945eb9684).
+You can also check out an example of using SeqViz to view NCBI GenBank entries in our [Medium post](https://medium.com/lattice-automation/visualize-your-dna-sequences-with-seqviz-b1d945eb9684).
 
 ## Contact Us
 
