@@ -67,7 +67,7 @@ class SeqViewer extends React.Component {
 
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of zoom currently active
-    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
+    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.4) || 1; // width / 1 * seqFontSize
 
     if (zoom <= 5) {
       bpsPerBlock *= 3;

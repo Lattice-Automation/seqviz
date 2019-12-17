@@ -193,7 +193,7 @@ export default class InfiniteScroll extends React.PureComponent {
     this.timeoutID = setTimeout(() => {
       this.scroller.current.scrollTop += incAmount;
       this.incrementScroller(incAmount);
-    }, 10);
+    }, 5);
   };
 
   stopIncrementingScroller = () => {
@@ -226,16 +226,16 @@ export default class InfiniteScroll extends React.PureComponent {
     // centralIndex (triggering a downward scroll event)
     const scrollerBlock = this.scroller.current.getBoundingClientRect();
     let percFromTop = (e.clientY - scrollerBlock.top) / scrollerBlock.height;
-    if (percFromTop > 0.95) {
+    if (percFromTop > 0.9) {
       percFromTop = Math.min(1, percFromTop);
-      let scaledPerc = percFromTop - 0.95; // [0.0, 0.05]
-      scaledPerc *= 20; // [0, 1]
-      const scaledScroll = 40 * scaledPerc; // [0, 40]
+      let scaledPerc = percFromTop - 0.9;
+      scaledPerc *= 10;
+      const scaledScroll = 30 * scaledPerc;
       this.incrementScroller(scaledScroll);
-    } else if (percFromTop < 0.05) {
-      percFromTop = 0.05 - Math.max(0, percFromTop);
-      const scaledPerc = 20 * percFromTop; // [0, 1]
-      const scaledScroll = -40 * scaledPerc; // [-40, 0]
+    } else if (percFromTop < 0.1) {
+      percFromTop = 0.1 - Math.max(0, percFromTop);
+      const scaledPerc = 10 * percFromTop;
+      const scaledScroll = -30 * scaledPerc;
       this.incrementScroller(scaledScroll);
     } else {
       this.stopIncrementingScroller();

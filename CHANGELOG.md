@@ -30,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 }
 ```
 
+- Improve performance of selection events. Should now be almost instantaneous
+
 ## [2.0.2]
 
 ### Added
