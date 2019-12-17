@@ -28,22 +28,7 @@ const withSelectionHandler = WrappedComp =>
     static displayName = `SelectionHandler(${WrappedComp.displayName ||
       "Component"})`;
 
-    /**
-     * used to handle situations where the mouse movement is too fast to register
-     * correct discrete values
-     */
-    timestamp = null;
-
-    lastMouseX = null;
-
-    lastMouseY = null;
-
     workspace = document.getElementById("la-vz-part-explorer");
-    /**
-     * an attempt an event rate limiter, since setting the selection range
-     * in the cache is async (was having a problem getting two sets before the first was complete)
-     */
-    allowSetSelection = true;
 
     /**
      * a map between the id of child elements and their associated SelectRanges
@@ -56,15 +41,6 @@ const withSelectionHandler = WrappedComp =>
      * @type {Array.string}
      */
     mountedBlocks = new Set();
-
-    /**
-     * Double click event handler helpers
-     * Required because React's onDoubleClick hook doesn't work in conjunction
-     * with other mouse event handlers on the same component
-     */
-    _delayedClick = null;
-
-    clickedOnce = null;
 
     componentDidMount = () => {
       document.addEventListener("mouseup", this.stopDrag);
@@ -295,7 +271,7 @@ const withSelectionHandler = WrappedComp =>
         findState: { searchResults },
         setPartState
       } = this.props;
-      if (!this.allowSetSelection) return;
+
       // should not be updating selection since it's not a drag event time
       if ((e.type === "mousemove" || e.type === "mouseup") && !this.dragEvent) {
         return;
@@ -495,10 +471,6 @@ const withSelectionHandler = WrappedComp =>
         }
         default:
       }
-    };
-
-    resetClicked = () => {
-      this.clickedOnce = null;
     };
 
     render() {

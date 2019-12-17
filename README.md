@@ -6,11 +6,6 @@
 
 [![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
 [![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
-
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 16 15:49:01 EST 2019<!-- /exec-bash -->
-
-**Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
 
 <!-- pkg-description(cmd:) -->DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM part input<!-- /pkg-description -->
 
@@ -39,20 +34,20 @@
 
 `SeqViz` aims to be a DNA sequence viewer with a simple API and easy customizability. It currently provides:
 
-- **Multiple input formats**:
+- **Multiple input formats**
 
   - Sequence
   - Accession (NCBI or iGEM)
   - File (FASTA, GenBank, SBOL, SnapGene)
 
-- **Circular plasmid viewer** :
+- **Circular plasmid viewer**
 
   - Annotations with names and colors
   - Index of sequence
   - Name of plasmid
   - Base pair length of sequence
 
-- **Linear sequence viewer** :
+- **Linear sequence viewer**
 
   - Annotations with names and colors
   - Amino acid translations
@@ -61,7 +56,7 @@
   - Enzyme cut sites
   - Highlighted sequence search results
 
-- **Selections**:
+- **Selections**
 
   - Clicking on an `annotation`, `translation`, `enzyme` or `searchElement`, or dragging over the sequence, will create a selection
   - Information about selections is available via `options.onSelection()` (see [viewer options](#options))
@@ -119,7 +114,7 @@ export default () => (
 
 The viewer's constructor (Vanilla-JS) accepts two arguments.
 
-#### `seqviz.Viewer(${element}, ${options})`
+#### `seqviz.Viewer(element, options)`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
 - `options` -- options as documented in greater detail [below](#options)
