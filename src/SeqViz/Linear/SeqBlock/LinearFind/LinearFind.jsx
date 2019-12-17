@@ -1,7 +1,7 @@
 import * as React from "react";
 import shortid from "shortid";
 
-class LinearFind extends React.PureComponent {
+export default class LinearFind extends React.PureComponent {
   render() {
     const {
       filteredRows: searchRows,
@@ -69,4 +69,3 @@ class LinearFind extends React.PureComponent {
     });
   }
 }
-export default LinearFind;

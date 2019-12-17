@@ -1,11 +1,10 @@
-import { isEqual } from "lodash";
-import PropTypes from "prop-types";
 import * as React from "react";
+import PropTypes from "prop-types";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { directionality, dnaComplement } from "../utils/parser";
-import { defaultSelection, annotationFactory } from "../utils/sequence";
+import { annotationFactory } from "../utils/sequence";
 import SeqViewer from "./SeqViewer.jsx";
 
 import "./SeqViz.scss";
@@ -31,19 +30,13 @@ export default class SeqViz extends React.Component {
     bpColors: PropTypes.object.isRequired,
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     compSeq: PropTypes.string,
-    copySeq: PropTypes.object.isRequired,
+    copyEvent: PropTypes.func.isRequired,
     enzymes: PropTypes.arrayOf(PropTypes.string).isRequired,
     file: PropTypes.object,
     name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
     onSelection: PropTypes.func.isRequired,
-    searchNext: PropTypes.shape({
-      key: PropTypes.string,
-      meta: PropTypes.bool,
-      ctrl: PropTypes.bool,
-      shift: PropTypes.bool,
-      alt: PropTypes.bool
-    }).isRequired,
+    searchEvent: PropTypes.func.isRequired,
     searchQuery: PropTypes.shape({
       query: PropTypes.string,
       mismatch: PropTypes.number
@@ -76,26 +69,14 @@ export default class SeqViz extends React.Component {
     backbone: "",
     bpColors: {},
     colors: [],
-    copySeq: {
-      key: "",
-      meta: false,
-      ctrl: false,
-      shift: false,
-      alt: false
-    },
+    copyEvent: () => false,
     compSeq: "",
     enzymes: [],
     file: null,
     name: "",
     onSearch: results => results,
     onSelection: selection => selection,
-    searchNext: {
-      key: "",
-      meta: false,
-      ctrl: false,
-      shift: false,
-      alt: false
-    },
+    searchEvent: () => false,
     searchQuery: { query: "", mismatch: 0 },
     seq: "",
     showComplement: true,
@@ -119,18 +100,15 @@ export default class SeqViz extends React.Component {
       linearCentralIndex: 0,
       part: {
         annotations: this.parseAnnotations(props.annotations, props.seq)
-      },
-      seqSelection: { ...defaultSelection }
+      }
     };
   }
 
   componentDidMount = async () => {
-    this.addKeyBindings();
     this.setPart();
   };
 
   componentDidUpdate = async ({ accession, backbone }) => {
-    this.addKeyBindings();
     if (
       accession !== this.props.accession ||
       backbone !== this.props.backbone
@@ -177,119 +155,11 @@ export default class SeqViz extends React.Component {
       end: a.end % (seq.length + 1)
     }));
 
-  addKeyBindings() {
-    const { searchNext, copySeq } = this.props;
-
-    /**
-     * copy the given range of the linearSequence to the users clipboard
-     * more info @ https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand
-     */
-    const clipboardCopy = () => {
-      const {
-        part: { seq },
-        seqSelection: {
-          selectionMeta: { start, end },
-          ref
-        }
-      } = this.state;
-      const formerFocus = document.activeElement;
-      const tempNode = document.createElement("textarea");
-      if (ref === "ALL") {
-        tempNode.innerText = seq;
-      } else {
-        tempNode.innerText = seq.substring(start, end);
-      }
-      if (document.body) {
-        document.body.appendChild(tempNode);
-      }
-      tempNode.select();
-      document.execCommand("copy");
-      tempNode.remove();
-      if (formerFocus) {
-        formerFocus.focus();
-      }
-    };
-
-    const handleKeyPress = e => {
-      const input = (({ metaKey, altKey, ctrlKey, shiftKey, key }) => ({
-        metaKey,
-        altKey,
-        ctrlKey,
-        shiftKey,
-        key
-      }))(e);
-      const next = (({ meta, alt, ctrl, shift, key }) => ({
-        metaKey: meta,
-        altKey: alt,
-        ctrlKey: ctrl,
-        shiftKey: shift,
-        key
-      }))(searchNext);
-      if (isEqual(input, next)) {
-        this.incrementSearch();
-      }
-      const copy = (({ meta, alt, ctrl, shift, key }) => ({
-        metaKey: meta,
-        altKey: alt,
-        ctrlKey: ctrl,
-        shiftKey: shift,
-        key
-      }))(copySeq);
-      if (isEqual(input, copy)) {
-        clipboardCopy();
-      }
-    };
-
-    const takenBindings = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
-
-    const newBindingsMap = { searchNext, copySeq };
-
-    let uniqueNewBindings = {};
-    for (const binding in newBindingsMap) {
-      const currKey = newBindingsMap[binding].key;
-
-      if (!currKey) {
-        continue;
-      }
-
-      if (currKey && takenBindings.includes(currKey)) {
-        console.error(
-          `Up, Down, Left, and Right Arrow keys are already bound, please chose another key binding for ${binding}.`
-        );
-      } else if (Object.keys(uniqueNewBindings).includes(currKey)) {
-        for (const ubinding of uniqueNewBindings[currKey]) {
-          if (isEqual(newBindingsMap[binding], newBindingsMap[ubinding])) {
-            console.error(
-              `Custom key bindings must be unique. ${binding} and ${ubinding} cannot share the same key bindings.`
-            );
-          } else {
-            uniqueNewBindings = {
-              ...uniqueNewBindings,
-              [currKey]: uniqueNewBindings[currKey].concat([binding])
-            };
-          }
-        }
-      } else {
-        window.addEventListener("keydown", e => handleKeyPress(e));
-        uniqueNewBindings = {
-          ...uniqueNewBindings,
-          ...{ [currKey]: [binding] }
-        };
-      }
-    }
-  }
-
+  /**
+   * TODO: get rid of this
+   */
   setPartState = state => {
-    let newState = Object.keys(state).reduce((newState, key) => {
-      if (typeof state[key] === "object") {
-        newState[key] = { ...this.state[key], ...state[key] };
-      } else {
-        newState[key] = state[key];
-      }
-      return newState;
-    }, {});
-
-    this.setState({ ...newState });
+    this.setState(state);
   };
 
   /**
@@ -322,8 +192,7 @@ export default class SeqViz extends React.Component {
       part,
       circularCentralIndex,
       findState,
-      linearCentralIndex,
-      seqSelection
+      linearCentralIndex
     } = this.state;
 
     // part is either from a file/accession, or each prop was set
@@ -346,7 +215,7 @@ export default class SeqViz extends React.Component {
             <SeqViewer
               {...this.props}
               circularCentralIndex={circularCentralIndex}
-              seqSelection={seqSelection}
+              incrementSearch={this.incrementSearch}
               findState={findState}
               annotations={annotations}
               compSeq={compSeq}
@@ -361,7 +230,7 @@ export default class SeqViz extends React.Component {
             <SeqViewer
               {...this.props}
               linearCentralIndex={linearCentralIndex}
-              seqSelection={seqSelection}
+              incrementSearch={this.incrementSearch}
               findState={findState}
               annotations={annotations}
               compSeq={compSeq}

@@ -1,18 +1,39 @@
-import { isEqual } from "lodash";
 import * as React from "react";
 
 import { calcGC, calcTm } from "../../utils/sequence";
 
+/** Initial/default selection */
+const defaultSelection = {
+  ref: null,
+  seq: "",
+  gc: 0,
+  tm: 0,
+  type: "",
+  start: 0,
+  end: 0,
+  length: 0,
+  clockwise: true,
+  element: null
+};
+
+/** Default context object */
+export const SelectionContext = React.createContext(defaultSelection);
+
 /**
- * an HOC dedicated to handling range selection for the LinearSeq viewer
+ * an HOC dedicated to handling range selection for the viewer
  *
- * since range selection is needed for all other functions that affect the
- * underlying sequence data, this is a highest level HOC
+ * since range selection is needed for the eventRouter, this is
+ * the higher of the two HOCs
  *
  * @param  {React.Component} WrappedComp
  */
 const withSelectionHandler = WrappedComp =>
   class extends React.Component {
+    static displayName = `SelectionHandler`;
+
+    /** Only state is the selection range */
+    state = { ...defaultSelection };
+
     previousBase = null; // previous base cursor is over, used in circular drag select
 
     forward = null; // directionality of drag (true if clockwise), used in circular drag select
@@ -25,22 +46,11 @@ const withSelectionHandler = WrappedComp =>
 
     shiftSelection = false; // was the last selection action a shift click, used for shift-click catch up
 
-    static displayName = `SelectionHandler(${WrappedComp.displayName ||
-      "Component"})`;
-
-    workspace = document.getElementById("la-vz-part-explorer");
-
     /**
      * a map between the id of child elements and their associated SelectRanges
      * @type {Object.<string, SelectRange>}
      */
-    elementIdsToRanges = new Map();
-
-    /**
-     * an array of the elements that currently have a noted selection
-     * @type {Array.string}
-     */
-    mountedBlocks = new Set();
+    idToRange = new Map();
 
     componentDidMount = () => {
       document.addEventListener("mouseup", this.stopDrag);
@@ -50,17 +60,7 @@ const withSelectionHandler = WrappedComp =>
       document.removeEventListener("mouseup", this.stopDrag);
     };
 
-    /**
-     * return the SelectRange, defined above, of the id of the element
-     * whos id is passed. This was written for a function in the event router
-     * so it would be able to tell what type of context menu to build
-     *
-     * @param {string} elemId   the id of the element being queried against
-     * @return {SelectRange}   the seelction range of the element selected against
-     */
-    getElement = elemId => this.elementIdsToRanges.get(elemId);
-
-    // stop the current drag event from happening
+    /** Stop the current drag event from happening */
     stopDrag = () => {
       this.dragEvent = false;
     };
@@ -73,43 +73,6 @@ const withSelectionHandler = WrappedComp =>
       this.forward = null;
       this.fullSelectionLength = 0;
       this.dragEvent = true; // start a drag event
-    };
-
-    /**
-     * Called to check what the length of the selection is in circle drag select
-     */
-    calcSelectionLength = (start, base, clock) => {
-      const { seq } = this.props;
-      if (base < start && !clock) {
-        return start - base;
-      }
-      if (base > start && !clock) {
-        return start + (seq.length - base);
-      }
-      if (base > start && clock) {
-        return base - start;
-      }
-      if (base < start && clock) {
-        return seq.length - start + base;
-      }
-      return 0;
-    };
-
-    getSelectionSequence = (start, end, clock) => {
-      const { seq } = this.props;
-      if (end < start && !clock) {
-        return seq.substring(end, start);
-      }
-      if (end > start && !clock) {
-        return seq.substring(end, seq.length) + seq.substring(0, start);
-      }
-      if (end > start && clock) {
-        return seq.substring(start, end);
-      }
-      if (end < start && clock) {
-        return seq.substring(start, seq.length) + seq.substring(0, end);
-      }
-      return "";
     };
 
     /**
@@ -172,11 +135,13 @@ const withSelectionHandler = WrappedComp =>
     };
 
     /**
-     * add the newly mounted block, by id, to the list
-     * @param  {string} ref  id of the newly mounted SeqBlock
+     * a ref callback for mapping the id of child to its SelectRange
+     * it stores the id of all elements
+     * @param  {string} ref element's id, as it appears in DOM
+     * @param  {SelectRange} selectRange
      */
-    addMountedBlock = ref => {
-      this.mountedBlocks.add(ref);
+    inputRef = (ref, selectRange) => {
+      this.idToRange.set(ref, { ref, ...selectRange });
     };
 
     /**
@@ -184,78 +149,11 @@ const withSelectionHandler = WrappedComp =>
      * @param  {string} ref  if of the element to drop from list
      */
     removeMountedBlock = ref => {
-      this.mountedBlocks.delete(ref);
-      this.elementIdsToRanges.delete(ref);
+      this.idToRange.delete(ref);
     };
 
     /**
-     * a ref callback for setting adding the id of child to its SelectRange
-     * it stores the id of all select elements, which will be updated when the select range
-     * changes (as opposed to updating the whole tree)
-     * @param  {string} ref          		element id, as it appears in DOM
-     * @param  {SelectRange} selectRange   	def above
-     */
-    mapIdToRange = (ref, selectRange) => {
-      if (selectRange.type === "SELECT") {
-        this.mountedBlocks.add(ref);
-      }
-      this.elementIdsToRanges.set(ref, { ref, ...selectRange });
-    };
-
-    /** set the selection for the current part */
-    setSequenceSelection = selectRange => {
-      const {
-        seqSelection,
-        setPartState,
-        onSelection,
-        findState: { searchIndex }
-      } = this.props;
-
-      const {
-        clockwise = true,
-        start = 0,
-        end = 0,
-        ref = "",
-        type = "",
-        searchIndex: newSearchIndex = null,
-        element
-      } = selectRange;
-
-      const selectionLength = this.calcSelectionLength(start, end, clockwise);
-      const selectionSequence = this.getSelectionSequence(
-        start,
-        end,
-        clockwise
-      );
-      const sequence = selectionSequence;
-      const GC = calcGC(selectionSequence);
-      const Tm = calcTm(selectionSequence);
-      const sequenceMeta = { sequence, GC, Tm };
-      const selectionMeta = { type, start, end, selectionLength, clockwise };
-      const newSelection = {
-        ref,
-        sequenceMeta,
-        selectionMeta,
-        element
-      };
-      const findStateIndex =
-        newSearchIndex === null ? searchIndex : newSearchIndex;
-      if (!isEqual(seqSelection, newSelection)) {
-        setPartState({
-          seqSelection: newSelection,
-          findState: { searchIndex: findStateIndex }
-        });
-
-        if (this.workspace) {
-          this.workspace.focus();
-        }
-      }
-
-      onSelection(newSelection);
-    };
-
-    /**
-     * updateSelectionWithknownRange
+     * mouseEvent
      *
      * the selected child element is something that is known by reference.
      * update its SeqBlock's range (or any others affected) with the newly
@@ -263,7 +161,7 @@ const withSelectionHandler = WrappedComp =>
      *
      * @param {React.SyntheticEvent} e  		the mouseEvent
      */
-    updateSelectionWithknownRange = e => {
+    mouseEvent = e => {
       const {
         seq,
         annotations,
@@ -278,9 +176,9 @@ const withSelectionHandler = WrappedComp =>
       }
 
       const knownRange = this.dragEvent
-        ? this.elementIdsToRanges.get(e.currentTarget.id) // only look for SeqBlocks
-        : this.elementIdsToRanges.get(e.target.id) || // elements and SeqBlocks
-          this.elementIdsToRanges.get(e.currentTarget.id);
+        ? this.idToRange.get(e.currentTarget.id) // only look for SeqBlocks
+        : this.idToRange.get(e.target.id) || // elements and SeqBlocks
+          this.idToRange.get(e.currentTarget.id);
       if (!knownRange) return; // there isn't a known range with the id of the element
       const { start, end, direction } = knownRange;
       switch (knownRange.type) {
@@ -302,11 +200,14 @@ const withSelectionHandler = WrappedComp =>
             : null;
 
           if (!Linear) {
+            // if an element was clicked on the circular viewer, scroll the linear
+            // viewer so the element starts on the first SeqBlock
             setPartState({
               linearCentralIndex: selectionStart
             });
           }
-          this.setSequenceSelection({
+
+          this.setSelection({
             ...knownRange,
             start: selectionStart,
             end: selectionEnd,
@@ -320,27 +221,25 @@ const withSelectionHandler = WrappedComp =>
         case "SEQ": {
           // SeqBlock or anything on Circular (not already described above)
           let currBase = null;
-          const {
-            seqSelection: { ref: currRef, selectionMeta: currSelection }
-          } = this.props;
+          const { ref: currRef } = this.state;
+
           if (Linear) {
             currBase = this.calculateBaseLinear(e, knownRange);
             const clockwiseDrag =
-              currSelection &&
-              currSelection.start !== null &&
-              currBase >= currSelection.start;
+              this.state.start !== null && currBase >= this.state.start;
+
             if (e.type === "mousedown" && currBase !== null) {
               // this is the start of a drag event
-              this.setSequenceSelection({
-                start: e.shiftKey ? currSelection.start : currBase,
+              this.setSelection({
+                start: e.shiftKey ? this.state.start : currBase,
                 end: currBase,
                 clockwise: clockwiseDrag
               });
               this.dragEvent = true;
             } else if (this.dragEvent && currBase !== null) {
               // continue a drag event that's currently happening
-              this.setSequenceSelection({
-                start: currSelection.start,
+              this.setSelection({
+                start: this.state.start,
                 end: currBase,
                 clockwise: clockwiseDrag
               });
@@ -350,16 +249,17 @@ const withSelectionHandler = WrappedComp =>
               start: newStart,
               end: newEnd,
               clockwise: newClockwise
-            } = currSelection;
+            } = this.state;
             let newRef = currRef;
             const seqLength = seq.length;
             currBase = this.calculateBaseCircular(e); // get the base currently hovered over
+
             if (e.type === "mousedown") {
               if (e.shiftKey) {
                 this.shiftSelection = true;
               }
-              const selStart = e.shiftKey ? currSelection.start : currBase;
-              let forward = currSelection.clockwise;
+              const selStart = e.shiftKey ? this.state.start : currBase;
+              let forward = this.state.clockwise;
               const lookaheadc = this.calcSelectionLength(
                 selStart,
                 currBase,
@@ -382,85 +282,84 @@ const withSelectionHandler = WrappedComp =>
             } else if (
               e.type === "mousemove" &&
               this.dragEvent &&
-              typeof currBase === "number" // this is necessary because 0 is falsey
+              currBase > 0 &&
+              currBase !== this.previousBase
             ) {
-              if (currBase !== this.previousBase) {
-                const increased = currBase > this.previousBase; // bases increased
-                const changeThreshold = seqLength * 0.9; // threshold for unrealistic change by mouse movement
-                const change = Math.abs(this.previousBase - currBase); // index change from this mouse movement
-                const crossedZero = change > changeThreshold; // zero was crossed if base jumped more than changeThreshold
-                this.forward = increased ? !crossedZero : crossedZero; // bases increased XOR crossed zero
-                const lengthChange = crossedZero ? seqLength - change : change; // the change at the point where we cross zero has to be normalized by seqLength
-                let sameDirectionMove =
-                  this.forward === currSelection.clockwise ||
-                  currSelection.clockwise === null; // moving in same direction as start of drag or start of drag
-                this.fullSelectionLength = sameDirectionMove
-                  ? this.fullSelectionLength + lengthChange
-                  : this.fullSelectionLength - lengthChange; // cumulatively keep track of selection length
-                this.previousBase = currBase; // done comparing with previous base, update previous base
-                if (
-                  this.fullSelectionLength < seqLength * 0.01 &&
-                  !this.shiftSelection
-                ) {
-                  let clockwise = this.forward; // near selection start so selection direction is up for grabs
-                  const check = this.calcSelectionLength(
-                    currSelection.start,
-                    currBase,
-                    this.forward
-                  ); // check actual current selection length
-                  if (this.fullSelectionLength < 0) {
-                    this.fullSelectionLength = check; // This is to correct for errors when dragging too fast
-                  }
-                  if (check > this.fullSelectionLength) {
-                    clockwise = !this.forward; // the actual selection length being greater than additive selection length means we have come back to start and want to go in opposite direction
-                  }
-                  newEnd = currBase;
-                  newClockwise = clockwise; // this should be the only time we set the selection direction, all other changes in directionality are change in drag direction
-                  newRef = "";
-                }
-                sameDirectionMove = this.forward === currSelection.clockwise; // recalculate this in case we've switched selection directionality
+              const increased = currBase > this.previousBase; // bases increased
+              const changeThreshold = seqLength * 0.9; // threshold for unrealistic change by mouse movement
+              const change = Math.abs(this.previousBase - currBase); // index change from this mouse movement
+              const crossedZero = change > changeThreshold; // zero was crossed if base jumped more than changeThreshold
+              this.forward = increased ? !crossedZero : crossedZero; // bases increased XOR crossed zero
+              const lengthChange = crossedZero ? seqLength - change : change; // the change at the point where we cross zero has to be normalized by seqLength
+              let sameDirectionMove =
+                this.forward === this.state.clockwise ||
+                this.state.clockwise === null; // moving in same direction as start of drag or start of drag
+              this.fullSelectionLength = sameDirectionMove
+                ? this.fullSelectionLength + lengthChange
+                : this.fullSelectionLength - lengthChange; // cumulatively keep track of selection length
+              this.previousBase = currBase; // done comparing with previous base, update previous base
+              if (
+                this.fullSelectionLength < seqLength * 0.01 &&
+                !this.shiftSelection
+              ) {
+                let clockwise = this.forward; // near selection start so selection direction is up for grabs
                 const check = this.calcSelectionLength(
-                  currSelection.start,
+                  this.state.start,
                   currBase,
-                  currSelection.clockwise
-                ); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
-                if (
-                  this.selectionStarted &&
-                  this.shiftSelection &&
-                  check > this.fullSelectionLength
-                ) {
-                  this.fullSelectionLength = check; // shift select catch up
+                  this.forward
+                ); // check actual current selection length
+                if (this.fullSelectionLength < 0) {
+                  this.fullSelectionLength = check; // This is to correct for errors when dragging too fast
                 }
-                const sameDirectionDrag = this.dragEvent && sameDirectionMove; // there is an ongoing drag in the same direction as the direction the selection started in
-                const alreadyFullSelection = currRef === "ALL"; // selection is full sequence
-                const hitFullSelection =
-                  !alreadyFullSelection &&
-                  this.fullSelectionLength >= seqLength; // selection became full sequence
-                if (sameDirectionDrag && hitFullSelection) {
-                  newRef = "ALL"; // intial set of ALL selection on selection full sequence
-                  newEnd = currSelection.start;
-                } else if (alreadyFullSelection) {
-                  this.fullSelectionLength =
-                    seqLength + (this.fullSelectionLength % seqLength); // this ensures that backtracking doesn't require making up to your overshoot forward circles
-                  newRef = "ALL";
-                  if (
-                    !sameDirectionDrag && // changed direction
-                    check === this.fullSelectionLength - seqLength && // back tracking
-                    check > seqLength * 0.9 // passed selection start
-                  ) {
-                    newEnd = currBase; // start decreasing selection size due to backtracking
-                    newRef = "";
-                    this.fullSelectionLength =
-                      this.fullSelectionLength - seqLength; // reset calculated additive selection length to normal now that we are not at ALL length
-                  }
-                } else {
-                  newEnd = currBase; // nothing special just update the selection
-                  newRef = "";
+                if (check > this.fullSelectionLength) {
+                  clockwise = !this.forward; // the actual selection length being greater than additive selection length means we have come back to start and want to go in opposite direction
                 }
-                this.shiftSelection = false;
+                newEnd = currBase;
+                newClockwise = clockwise; // this should be the only time we set the selection direction, all other changes in directionality are change in drag direction
+                newRef = "";
               }
+              sameDirectionMove = this.forward === this.state.clockwise; // recalculate this in case we've switched selection directionality
+              const check = this.calcSelectionLength(
+                this.state.start,
+                currBase,
+                this.state.clockwise
+              ); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
+              if (
+                this.selectionStarted &&
+                this.shiftSelection &&
+                check > this.fullSelectionLength
+              ) {
+                this.fullSelectionLength = check; // shift select catch up
+              }
+              const sameDirectionDrag = this.dragEvent && sameDirectionMove; // there is an ongoing drag in the same direction as the direction the selection started in
+              const alreadyFullSelection = currRef === "ALL"; // selection is full sequence
+              const hitFullSelection =
+                !alreadyFullSelection && this.fullSelectionLength >= seqLength; // selection became full sequence
+              if (sameDirectionDrag && hitFullSelection) {
+                newRef = "ALL"; // intial set of ALL selection on selection full sequence
+                newEnd = this.state.start;
+              } else if (alreadyFullSelection) {
+                this.fullSelectionLength =
+                  seqLength + (this.fullSelectionLength % seqLength); // this ensures that backtracking doesn't require making up to your overshoot forward circles
+                newRef = "ALL";
+                if (
+                  !sameDirectionDrag && // changed direction
+                  check === this.fullSelectionLength - seqLength && // back tracking
+                  check > seqLength * 0.9 // passed selection start
+                ) {
+                  newEnd = currBase; // start decreasing selection size due to backtracking
+                  newRef = "";
+                  this.fullSelectionLength =
+                    this.fullSelectionLength - seqLength; // reset calculated additive selection length to normal now that we are not at ALL length
+                }
+              } else {
+                newEnd = currBase; // nothing special just update the selection
+                newRef = "";
+              }
+              this.shiftSelection = false;
             }
-            this.setSequenceSelection({
+
+            this.setSelection({
               start: newStart,
               end: newEnd,
               ref: newRef,
@@ -473,15 +372,100 @@ const withSelectionHandler = WrappedComp =>
       }
     };
 
+    /**
+     * Update the selection in state. Only update the specifid
+     * properties of the selection that should be updated.
+     */
+    setSelection = newSelection => {
+      const { onSelection } = this.props;
+
+      if (
+        newSelection.start === this.state.start &&
+        newSelection.end === this.state.end &&
+        newSelection.ref === this.state.ref
+      ) {
+        return;
+      }
+
+      const { clockwise, start, end, ref, type, element } = {
+        ...this.state,
+        ...newSelection
+      };
+
+      const length = this.calcSelectionLength(start, end, clockwise);
+      const seq = this.getSelectedSequence(start, end, clockwise);
+      const gc = calcGC(seq);
+      const tm = calcTm(seq);
+
+      const selection = {
+        ref,
+        seq,
+        gc,
+        tm,
+        type,
+        start,
+        end,
+        length,
+        clockwise,
+        element
+      };
+
+      this.setState(selection);
+      onSelection(selection);
+    };
+
+    /**
+     * Return the string subsequence from the range' start to end
+     */
+    getSelectedSequence = (start, end, clock) => {
+      const { seq } = this.props;
+      if (end < start && !clock) {
+        return seq.substring(end, start);
+      }
+      if (end > start && !clock) {
+        return seq.substring(end, seq.length) + seq.substring(0, start);
+      }
+      if (end > start && clock) {
+        return seq.substring(start, end);
+      }
+      if (end < start && clock) {
+        return seq.substring(start, seq.length) + seq.substring(0, end);
+      }
+      return "";
+    };
+
+    /**
+     * Check what the length of the selection is in circle drag select
+     */
+    calcSelectionLength = (start, base, clock) => {
+      const { seq } = this.props;
+      if (base < start && !clock) {
+        return start - base;
+      }
+      if (base > start && !clock) {
+        return start + (seq.length - base);
+      }
+      if (base > start && clock) {
+        return base - start;
+      }
+      if (base < start && clock) {
+        return seq.length - start + base;
+      }
+      return 0;
+    };
+
     render() {
       return (
-        <WrappedComp
-          {...this.props}
-          getElement={this.getElement}
-          mouseEvent={this.updateSelectionWithknownRange}
-          inputRef={this.mapIdToRange}
-          onUnmount={this.removeMountedBlock}
-        />
+        <SelectionContext.Provider value={this.state}>
+          <WrappedComp
+            {...this.props}
+            inputRef={this.inputRef}
+            mouseEvent={this.mouseEvent}
+            onUnmount={this.removeMountedBlock}
+            selection={this.state}
+            setSelection={this.setSelection}
+          />
+        </SelectionContext.Provider>
       );
     }
   };

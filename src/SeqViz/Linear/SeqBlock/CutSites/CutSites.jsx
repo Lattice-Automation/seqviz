@@ -1,13 +1,6 @@
 import * as React from "react";
 
 /**
- * CutSites
- *
- * a component shown above the sequence viewer that shows the name of the
- * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
- */
-
-/**
  * on hover, an enzyme recognition site should have an opacity of 0.5. 0 otherwise
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
  *
@@ -24,6 +17,12 @@ const hoverCutSite = (className, on = false) => {
   }
 };
 
+/**
+ * CutSites
+ *
+ * a component shown above the sequence viewer that shows the name of the
+ * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
+ */
 const CutSites = props => {
   const {
     zoom: { linear: zoom },

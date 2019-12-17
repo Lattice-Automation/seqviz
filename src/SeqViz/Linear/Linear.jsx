@@ -35,11 +35,10 @@ import "./Linear.scss";
  * primers: an array of primers to show above and below the seq
  */
 class Linear extends React.Component {
-  shouldComponentUpdate = nextProps => {
-    const { name, ...rest } = nextProps;
-    const { name: origName, ...origRest } = this.props;
-    return !isEqual(rest, origRest);
-  };
+  /**
+   * Deep equality comparison
+   */
+  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
 
   /**
    * given all the information needed to render all the seqblocks (ie, sequence, compSeq

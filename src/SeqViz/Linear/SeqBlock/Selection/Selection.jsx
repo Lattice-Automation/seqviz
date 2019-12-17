@@ -1,6 +1,8 @@
 import * as React from "react";
 import shortid from "shortid";
 
+import { SelectionContext } from "../../../handlers/selectionHandler";
+
 /**
  * Edges on the side of selections of the Selection Viewer
  *
@@ -8,18 +10,9 @@ import shortid from "shortid";
  * (if there are intermediate blocks)
  */
 export class Edges extends React.PureComponent {
+  static contextType = SelectionContext;
+
   id = shortid.generate();
-
-  componentDidMount = () => {
-    const { inputRef } = this.props;
-    // for selHandler.jsx
-    inputRef(this.id, { type: "SELECT" });
-  };
-
-  componentWillUnmount = () => {
-    const { onUnmount } = this.props;
-    onUnmount(this.id);
-  };
 
   render() {
     const {
@@ -27,12 +20,9 @@ export class Edges extends React.PureComponent {
       selectEdgeHeight,
       firstBase,
       lastBase,
-      fullSeq,
-      seqSelection: {
-        ref,
-        selectionMeta: { start, end, clockwise }
-      }
+      fullSeq
     } = this.props;
+    const { ref, start, end, clockwise } = this.context;
 
     let startEdge = null;
     let lastEdge = null;
@@ -120,19 +110,9 @@ export class Edges extends React.PureComponent {
 
 // eslint-disable-next-line
 export class Block extends React.PureComponent {
+  static contextType = SelectionContext;
+
   id = shortid.generate();
-
-  componentDidMount = () => {
-    const { inputRef } = this.props;
-    const selRange = { type: "SELECT" };
-    // selHandler.jsx
-    inputRef(this.id, selRange);
-  };
-
-  componentWillUnmount = () => {
-    const { onUnmount } = this.props;
-    onUnmount(this.id);
-  };
 
   render() {
     const {
@@ -140,11 +120,10 @@ export class Block extends React.PureComponent {
       selectHeight,
       firstBase,
       lastBase,
-      fullSeq,
-      seqSelection: { ref, selectionMeta: selection }
+      fullSeq
     } = this.props;
-    const { clockwise } = selection;
-    let { start, end } = selection;
+    const { clockwise, ref } = this.context;
+    let { start, end } = this.context;
 
     // there's no need to render a selection block (rect) if just one point
     // has been selected
@@ -245,17 +224,17 @@ export class Block extends React.PureComponent {
     // nothing was set for this selection block
     if (!x && !width) return null;
 
-    const rectId = shortid.generate();
+    const rectId = shortid.generate(); // TODO: why is this here?
 
     return (
       <React.Fragment>
         <rect
           id={rectId}
+          className="la-vz-linear-sel-block"
           x={x}
           y={-10}
           height={selectHeight + 5}
           width={width}
-          className="la-vz-linear-sel-block"
           shapeRendering="auto"
         />
         {secondBlock}
