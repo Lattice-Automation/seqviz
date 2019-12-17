@@ -232,34 +232,24 @@ An array of color hex codes for annotation coloring. Defaults to:
 
 #### `options.onSelection (=null)`
 
-Callback function executed after selection events. Accepts a single `selection` argument: `(selection) => {}`.
+Callback function executed after selection events. Should accept a single `selection` argument: `(selection) => {}`.
 
-This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have an `element` property with info on the selected element. The example below is of a `selection` object following an `annotation` click.
+This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have info on the selected element. The example below is of a `selection` object following an `annotation` click.
 
 ```js
 {
   // selection
-  "sequenceMeta": {
-    "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
-    "GC": 55.3,
-    "Tm": 85
-  },
-  "selectionMeta": {
-    "type": "ANNOTATION",
-    "start": 133,
-    "end": 457,
-    "selectionLength": 324,
-    "clockwise": true
-  },
-  "element": {
-    "id": "lxcC1L3M4z",
-    "color": "#8FDE8C",
-    "name": "lacZ fragment",
-    "type": "CDS",
-    "start": 133,
-    "end": 457,
-    "direction": -1
-  }
+  "name": "lacZ fragment",
+  "type": "ANNOTATION",
+  "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
+  "gc": 55.3,
+  "tm": 85,
+  "start": 133,
+  "end": 457,
+  "length": 324,
+  "direction": -1
+  "clockwise": true,
+  "color": "#8FDE8C",
 }
 ```
 
@@ -317,38 +307,24 @@ Callback executed after a search event. Called once on initial render and again 
 }
 ```
 
-#### `options.searchNext (={})`
+#### `options.searchEvent (=(KeyboardEvent) => false)`
 
-`object` used to set key binding for incrementing through search results. Incrementing scrolls the viewer to the next search result.
+A function that returns whether a [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) should trigger a search event. If this returns true, the highlighted search result within the viewers (see `options.onSearch`) is incremented.
 
-You can use any key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). If you want to make `searchNext` a special key binding, e.g. `shift + a`, or `alt + .`, you can specify the special key by settings it to `true`.
-
-Defaults to:
+An example of an `options.searchEvent` function that increments search results on every tab event:
 
 ```js
-{
-  "key": "",
-  "meta": false,
-  "ctrl": false,
-  "shift": false,
-  "alt": false
-}
+event => event.key === "Tab";
 ```
 
-#### `options.copySeq (={})`
+#### `options.copyEvent (=(KeyboardEvent) => false)`
 
-`object` used to set the key binding for copying the template strand sequence of your current selection. See `options.searchNext` for more details. After a copy-event, the copied sequence is written to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
+A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
 
-Defaults to:
+An example of an `options.copyEvent` function for copying after `ctrl+c` or `meta+c` events:
 
 ```js
-{
-  "key": "",
-  "meta": false,
-  "ctrl": false,
-  "shift": false,
-  "alt": false
-}
+event => event.key === "c" && (event.metaKey || event.ctrlKey);
 ```
 
 #### `options.backbone (='')`

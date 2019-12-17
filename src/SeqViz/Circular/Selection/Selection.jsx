@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { SelectionContext } from "../../handlers/selectionHandler";
+
 /**
  * renders the selection range of the plasmid viewer
  * consists of three parts (during an active selection):
@@ -8,7 +10,9 @@ import * as React from "react";
  * if nothing is selected, it should just be the single cursor
  * without a middle highlighted region
  */
-class CircularSelection extends React.PureComponent {
+export default class CircularSelection extends React.PureComponent {
+  static contextType = SelectionContext;
+
   render() {
     const {
       seq,
@@ -18,12 +22,9 @@ class CircularSelection extends React.PureComponent {
       getRotation,
       findCoor,
       generateArc,
-      totalRows,
-      seqSelection: {
-        ref,
-        selectionMeta: { start, end, clockwise }
-      }
+      totalRows
     } = this.props;
+    const { ref, start, end, clockwise } = this.context;
 
     // calculate the length of the current selection region
     let selLength = 0;
@@ -120,5 +121,3 @@ class CircularSelection extends React.PureComponent {
     );
   }
 }
-
-export default CircularSelection;

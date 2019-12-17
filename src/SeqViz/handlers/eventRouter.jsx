@@ -15,27 +15,13 @@ import * as React from "react";
 const withEventRouter = WrappedComp =>
   class WithEventRouter extends React.PureComponent {
     // eslint-disable-next-line
-    static displayName = `EventRouter(${WrappedComp.displayName ||
-      "Component"})`;
+    static displayName = `EventRouter`;
 
-    /**
-     * Triple click event handler helpers
-     */
     delayedClick = null;
 
     clickedOnce = null;
 
     clickedTwice = null;
-
-    constructor(props) {
-      super(props);
-
-      const type = props.Circular ? "circular" : "linear";
-
-      this.state = {
-        id: `la-vz-${type}-${props.name.replace(/\s/g, "")}-event-router`
-      };
-    }
 
     componentDidMount = () => {
       window.addEventListener("keydown", this.handleKeyPress);
@@ -50,38 +36,203 @@ const withEventRouter = WrappedComp =>
       this.eventRouter = eventRouter;
     };
 
-    suppressBrowserContextMenu = e => {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        this.handleMouseEvent(e);
+    /**
+     * action handler for a keyboard keypresses.
+     * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
+     *
+     * @param  {React.SyntheticEvent} e   keypress
+     */
+    handleKeyPress = e => {
+      const keyType = this.keypressMap(e);
+      if (!keyType) {
+        return; // not recognized key
+      }
+      this.handleSeqInteraction(keyType);
+    };
+
+    /**
+     * maps a keypress to an interaction (String)
+     *
+     * @param {React.SyntheticEvent} e   synthetic event input
+     * @return {String} 			     the action performed, one of:
+     * ["All", "Copy", "Up", "Right", "Down", "Left"]
+     */
+    keypressMap = e => {
+      const { copyEvent, searchEvent } = this.props;
+
+      if (copyEvent(e)) {
+        return "Copy";
+      }
+
+      if (searchEvent(e)) {
+        return "Search";
+      }
+
+      const { key, shiftKey } = e;
+      switch (key) {
+        case "ArrowLeft":
+        case "ArrowRight":
+        case "ArrowUp":
+        case "ArrowDown":
+          return shiftKey ? `Shift${key}` : key;
+        default:
+          return null;
       }
     };
 
     /**
-     * select all
+     * Respond to any of:
+     * 	All: cmd + A, select all
+     * 	Copy: cmd + C, copy
+     * 	Up, Right, Down, Left: some directional movement of the cursor
+     *
+     * @param {String} i  		  one of the commands listed above
+     */
+    handleSeqInteraction = async type => {
+      const { seq, Linear } = this.props;
+      const seqLength = seq.length;
+      const {
+        bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1)
+      } = this.props;
+
+      switch (type) {
+        case "SelectAll": {
+          this.selectAllHotkey();
+          break;
+        }
+        case "Copy": {
+          this.handleCopy();
+          break;
+        }
+        case "Search": {
+          this.handleSearch();
+          break;
+        }
+        case "ArrowUp":
+        case "ArrowRight":
+        case "ArrowDown":
+        case "ArrowLeft":
+        case "ShiftArrowUp":
+        case "ShiftArrowRight":
+        case "ShiftArrowDown":
+        case "ShiftArrowLeft": {
+          const { selection, setSelection } = this.props;
+          const { start, end } = selection;
+          if (Linear) {
+            let { clockwise } = selection;
+            let newPos = end;
+            if (type === "ArrowUp" || type === "ShiftArrowUp") {
+              // if there are multiple blocks or just one. If one, just inc by one
+              if (seqLength / bpsPerBlock > 1) {
+                newPos -= bpsPerBlock;
+              } else {
+                newPos -= 1;
+              }
+            } else if (type === "ArrowRight" || type === "ShiftArrowRight") {
+              newPos += 1;
+            } else if (type === "ArrowDown" || type === "ShiftArrowDown") {
+              // if there are multiple blocks or just one. If one, just inc by one
+              if (seqLength / bpsPerBlock > 1) {
+                newPos += bpsPerBlock;
+              } else {
+                newPos += 1;
+              }
+            } else if (type === "ArrowLeft" || type === "ShiftArrowLeft") {
+              newPos -= 1;
+            }
+
+            if (newPos <= -1) {
+              newPos = seqLength + newPos;
+            }
+            if (newPos >= seqLength + 1) {
+              newPos -= seqLength;
+            }
+            const selLength = Math.abs(start - end);
+            clockwise =
+              selLength === 0
+                ? type === "ArrowRight" ||
+                  type === "ShiftArrowRight" ||
+                  type === "ArrowDown" ||
+                  type === "ShiftArrowDown"
+                : clockwise;
+            if (newPos !== start && !type.startsWith("Shift")) {
+              setSelection({
+                start: newPos,
+                end: newPos,
+                clockwise: true,
+                ref: ""
+              });
+            } else if (type.startsWith("Shift")) {
+              setSelection({
+                start: start,
+                end: newPos,
+                clockwise: clockwise,
+                ref: ""
+              });
+            }
+            break;
+          }
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    };
+
+    /**
+     * Copy the current sequence selection to the user's clipboard
+     */
+    handleCopy = () => {
+      const {
+        part: { seq },
+        selection: { start, end, ref }
+      } = this.props;
+
+      const formerFocus = document.activeElement;
+      const tempNode = document.createElement("textarea");
+      if (ref === "ALL") {
+        tempNode.innerText = seq;
+      } else {
+        tempNode.innerText = seq.substring(start, end);
+      }
+      if (document.body) {
+        document.body.appendChild(tempNode);
+      }
+      tempNode.select();
+      document.execCommand("copy");
+      tempNode.remove();
+      if (formerFocus) {
+        formerFocus.focus();
+      }
+    };
+
+    /**
+     * Tell the parent SeqViz component to increment through the search results
+     */
+    handleSearch = () => {
+      this.props.incrementSearch();
+    };
+
+    /**
+     * select all of the sequence
      */
     selectAllHotkey = () => {
       const {
-        onSelection,
-        setPartState,
-        seqSelection,
-        seqSelection: {
-          selectionMeta: { start }
-        }
+        setSelection,
+        selection,
+        selection: { start }
       } = this.props;
+
       const newSelection = {
-        ...seqSelection,
-        selectionMeta: {
-          start: start,
-          end: start,
-          clockwise: true
-        },
+        ...selection,
+        start: start,
+        end: start,
+        clockwise: true,
         ref: "ALL" // ref to all means select the whole thing
       };
-      setPartState({
-        seqSelection: newSelection
-      });
-      onSelection(newSelection);
+
+      setSelection(newSelection);
     };
 
     handleTripleClick = () => {
@@ -165,152 +316,15 @@ const withEventRouter = WrappedComp =>
       }
     };
 
-    /**
-     * maps a keypress to an interaction (String)
-     *
-     * @param {React.SyntheticEvent} e   synthetic event input
-     * @return {String} 			     the action performed, one of:
-     * ["All", "Copy", "Up", "Right", "Down", "Left"]
-     */
-    keypressMap = e => {
-      const { key, shiftKey } = e;
-      switch (key) {
-        case "ArrowLeft":
-        case "ArrowRight":
-        case "ArrowUp":
-        case "ArrowDown":
-          return shiftKey ? `Shift${key}` : key;
-        default:
-          return null;
-      }
-    };
-
-    /**
-     * Respond to any of:
-     * 	All: cmd + A, select all
-     * 	Copy: cmd + C, copy
-     * 	Up, Right, Down, Left: some directional movement of the cursor
-     *
-     * @param {String} i  		  one of the commands listed above
-     */
-    handleSeqInteraction = async type => {
-      const { seq, Linear } = this.props;
-      const seqLength = seq.length;
-      const {
-        bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1)
-      } = this.props;
-
-      switch (type) {
-        case "SelectAll": {
-          this.selectAllHotkey();
-          break;
-        }
-        case "Copy": {
-          this.clipboardCopy();
-          break;
-        }
-        case "ArrowUp":
-        case "ArrowRight":
-        case "ArrowDown":
-        case "ArrowLeft":
-        case "ShiftArrowUp":
-        case "ShiftArrowRight":
-        case "ShiftArrowDown":
-        case "ShiftArrowLeft": {
-          const {
-            seqSelection: { selectionMeta: selection },
-            setPartState
-          } = this.props;
-          const { start, end } = selection;
-          if (Linear) {
-            let { clockwise } = selection;
-            let newPos = end;
-            if (type === "ArrowUp" || type === "ShiftArrowUp") {
-              // if there are multiple blocks or just one. If one, just inc by one
-              if (seqLength / bpsPerBlock > 1) {
-                newPos -= bpsPerBlock;
-              } else {
-                newPos -= 1;
-              }
-            } else if (type === "ArrowRight" || type === "ShiftArrowRight") {
-              newPos += 1;
-            } else if (type === "ArrowDown" || type === "ShiftArrowDown") {
-              // if there are multiple blocks or just one. If one, just inc by one
-              if (seqLength / bpsPerBlock > 1) {
-                newPos += bpsPerBlock;
-              } else {
-                newPos += 1;
-              }
-            } else if (type === "ArrowLeft" || type === "ShiftArrowLeft") {
-              newPos -= 1;
-            }
-
-            if (newPos <= -1) {
-              newPos = seqLength + newPos;
-            }
-            if (newPos >= seqLength + 1) {
-              newPos -= seqLength;
-            }
-            const selectionLength = Math.abs(start - end);
-            clockwise =
-              selectionLength === 0
-                ? type === "ArrowRight" ||
-                  type === "ShiftArrowRight" ||
-                  type === "ArrowDown" ||
-                  type === "ShiftArrowDown"
-                : clockwise;
-            if (newPos !== start && !type.startsWith("Shift")) {
-              setPartState({
-                seqSelection: {
-                  selectionMeta: {
-                    start: newPos,
-                    end: newPos,
-                    clockwise: true
-                  },
-                  ref: ""
-                }
-              });
-            } else if (type.startsWith("Shift")) {
-              setPartState({
-                seqSelection: {
-                  selectionMeta: {
-                    start: start,
-                    end: newPos,
-                    clockwise: clockwise
-                  },
-                  ref: ""
-                }
-              });
-            }
-            break;
-          }
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-    };
-
-    /**
-     * action handler for a keyboard keypresses.
-     * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
-     *
-     * @param  {React.SyntheticEvent} e   keypress
-     */
-    handleKeyPress = e => {
-      const keyType = this.keypressMap(e);
-      if (!keyType) {
-        return; // not recognized key
-      }
-      this.handleSeqInteraction(keyType);
-    };
-
     /** a reference used only so we can focus on the event router after mounting */
     eventRouter;
 
     render() {
-      const { id } = this.state;
+      const { selection, setSelection, mouseEvent, ...rest } = this.props;
+      const { Circular, name } = this.props;
+
+      const type = Circular ? "circular" : "linear";
+      const id = `la-vz-${type}-${name.replace(/\s/g, "")}-event-router`;
 
       return (
         <div
@@ -324,7 +338,7 @@ const withEventRouter = WrappedComp =>
             this.eventRouter = ref;
           }}
         >
-          <WrappedComp {...this.props} mouseEvent={this.handleMouseEvent} />
+          <WrappedComp {...rest} mouseEvent={this.handleMouseEvent} />
         </div>
       );
     }

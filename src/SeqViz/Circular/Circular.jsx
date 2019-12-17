@@ -1,3 +1,4 @@
+import { isEqual } from "lodash";
 import * as React from "react";
 
 import findAllBindingSites from "../findAllBindingSites";
@@ -16,7 +17,7 @@ import "./Circular.scss";
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
-class Circular extends React.PureComponent {
+class Circular extends React.Component {
   static getDerivedStateFromProps = nextProps => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
@@ -94,6 +95,11 @@ class Circular extends React.PureComponent {
   };
 
   /**
+   * Deep equality comparison
+   */
+  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
+
+  /**
    * find the rotation transformation needed to put a child element in the
    * correct location around the plasmid
    *
@@ -102,7 +108,6 @@ class Circular extends React.PureComponent {
    *
    * @return {Coor}
    */
-
   getRotation = index => {
     const { center, circularCentralIndex: centralIndex } = this.props;
     const { seqLength } = this.state;

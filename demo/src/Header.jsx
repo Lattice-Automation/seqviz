@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import * as React from "react";
 import {
   Button,
   Dropdown,
@@ -25,7 +25,7 @@ const backboneOptions = [
   { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" }
 ];
 
-export class Header extends Component {
+export class Header extends React.Component {
   state = { active: false };
 
   handleMetaClick = () =>
@@ -92,7 +92,7 @@ export class Header extends Component {
   }
 }
 
-export class SelectionInfo extends Component {
+export class SelectionInfo extends React.Component {
   render() {
     const { active, handleMetaClick, part } = this.props;
 
@@ -112,12 +112,11 @@ export class SelectionInfo extends Component {
   }
 }
 
-export class HeaderMeta extends Component {
+export class HeaderMeta extends React.Component {
   render() {
     const { selection } = this.props;
-    const { feature, selectionMeta, sequenceMeta } = selection;
-    const noneSelected =
-      !selectionMeta || selectionMeta.start === selectionMeta.end;
+    const { feature, start, end, length, gc, tm } = selection;
+    const noneSelected = start === end;
 
     return (
       selection && (
@@ -139,30 +138,30 @@ export class HeaderMeta extends Component {
               <p id="value">{feature.type}</p>
             </div>
           )}
-          {selectionMeta && selectionMeta.selectionLength !== 0 && (
+          {length !== 0 && (
             <div className="meta-datum">
               <p id="field">LENGTH</p>
-              <p id="value">{selectionMeta.selectionLength}bp</p>
+              <p id="value">{length}bp</p>
             </div>
           )}
-          {selectionMeta && selectionMeta.start !== selectionMeta.end && (
+          {start !== end && (
             <div className="meta-datum">
               <p id="field">RANGE</p>
               <p id="value">
-                {selectionMeta.start} - {selectionMeta.end}
+                {start} - {end}
               </p>
             </div>
           )}
-          {sequenceMeta && sequenceMeta.GC !== 0 && (
+          {gc !== 0 && (
             <div className="meta-datum">
               <p id="field">GC</p>
-              <p id="value">{sequenceMeta.GC.toPrecision(2)}%</p>
+              <p id="value">{gc}%</p>
             </div>
           )}
-          {sequenceMeta && sequenceMeta.Tm !== 0 && (
+          {tm !== 0 && (
             <div className="meta-datum">
               <p id="field">TM</p>
-              <p id="value">{sequenceMeta.Tm.toPrecision(2)}°C</p>
+              <p id="value">{tm}°C</p>
             </div>
           )}
         </div>
@@ -171,7 +170,7 @@ export class HeaderMeta extends Component {
   }
 }
 
-export class BackBoneInput extends Component {
+export class BackBoneInput extends React.Component {
   state = { focus: false, hover: false }; // default backbone
 
   render() {
@@ -203,7 +202,7 @@ export class BackBoneInput extends Component {
   }
 }
 
-export class PartInput extends Component {
+export class PartInput extends React.Component {
   state = { focus: false, hover: false };
 
   render() {

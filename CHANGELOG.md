@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Change copySeq option to copyEvent, a far simpler filter function on KeyboardEvents
+- Change searchNext option to searchEvent, a far simpler filter function on KeyboardEvents
+- Flatten the selection object. It's now a single object, no nesting. Change GC and Tm to lowercase. Example of new selection object (passed during `options.onSelection`) is below:
+
+```json
+{
+  // selection
+  "name": "lacZ fragment",
+  "type": "ANNOTATION",
+  "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
+  "gc": 55.3,
+  "tm": 85,
+  "start": 133,
+  "end": 457,
+  "length": 324,
+  "direction": -1,
+  "clockwise": true,
+  "color": "#8FDE8C"
+}
+```
+
 ## [2.0.2]
 
 ### Added

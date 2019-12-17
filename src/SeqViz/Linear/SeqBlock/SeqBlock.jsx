@@ -145,7 +145,7 @@ export default class SeqBlock extends React.PureComponent {
       showComplement,
       showPrimers,
 
-      seqSelection,
+      selection,
       seqFontSize,
       firstBase,
       size,
@@ -275,7 +275,7 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
-            seqSelection={seqSelection}
+            selection={selection}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -341,7 +341,7 @@ export default class SeqBlock extends React.PureComponent {
             fullSeq={fullSeq}
             inputRef={inputRef}
             onUnmount={onUnmount}
-            seqSelection={seqSelection}
+            selection={selection}
             selectEdgeHeight={selectEdgeHeight}
           />
           {showIndex && (
