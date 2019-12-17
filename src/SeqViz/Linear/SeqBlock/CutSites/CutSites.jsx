@@ -116,7 +116,7 @@ const CutSites = props => {
   };
 
   return (
-    <g className="cutSites">
+    <g className="la-vz-cut-sites">
       {sitesWithX.map(c => {
         // prevent double rendering, by placing the indeces only in the seqBlock
         // that they need to be shown. Important for the zero-index edge case
