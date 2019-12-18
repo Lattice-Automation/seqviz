@@ -253,12 +253,12 @@ This occurs after drag/drop selection and clicks. If an `annotation`, `translati
 }
 ```
 
-#### `options.searchQuery (=null)`
+#### `options.search (=null)`
 
-A `searchQuery` object for specifying search results to highlight on the viewer.
+A `search` object for specifying search results to highlight on the viewer. An example is below:
 
 ```js
-{ "query": "", "mismatch": 0 }
+{ "query": "aatggtctc", "mismatch": 1 }
 ```
 
 Searching supports the following nucleotide wildcards within the `query`.
@@ -284,37 +284,23 @@ Searching supports the following nucleotide wildcards within the `query`.
 
 #### `options.onSearch (=null)`
 
-Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` object is below.
+Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` array is below.
 
 ```js
-{
-  // searchResults
-  "searchResults": [
-    {
-      "start": 728,
-      "end": 733,
-      "direction": 1,
-      "index": 0
-    },
-    {
-      "start": 1788,
-      "end": 1793,
-      "direction": -1,
-      "index": 1
-    }
-  ],
-  "searchIndex": 0
-}
-```
-
-#### `options.searchEvent (=(KeyboardEvent) => false)`
-
-A function that returns whether a [KeyboardEvent](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent) should trigger a search event. If this returns true, the highlighted search result within the viewers (see `options.onSearch`) is incremented.
-
-An example of an `options.searchEvent` function that increments search results on every tab event:
-
-```js
-event => event.key === "Tab";
+[
+  {
+    start: 728,
+    end: 733,
+    direction: 1,
+    index: 0
+  },
+  {
+    start: 1788,
+    end: 1793,
+    direction: -1,
+    index: 1
+  }
+];
 ```
 
 #### `options.copyEvent (=(KeyboardEvent) => false)`

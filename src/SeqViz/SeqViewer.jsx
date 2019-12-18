@@ -5,7 +5,6 @@ import sizeMe from "react-sizeme";
 import { cutSitesInRows } from "../utils/digest/digest";
 import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
-import search from "../utils/search";
 import CentralIndexContext from "./handlers/centralIndex";
 
 import "./SeqViewer.scss";
@@ -15,42 +14,9 @@ import "./SeqViewer.scss";
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component {
-  componentDidMount = () => {
-    const {
-      searchQuery: { query, mismatch },
-      seq,
-      setPartState,
-      onSearch
-    } = this.props;
-
-    // const { searchResults, searchIndex } = search(query, mismatch, seq);
-    // onSearch({ searchResults, searchIndex });
-    // setPartState({ findState: { searchResults, searchIndex } });
-  };
-
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
-
-  componentDidUpdate = prevProps => {
-    const {
-      searchQuery: { query, mismatch },
-      seq,
-      setPartState,
-      onSearch
-    } = this.props;
-
-    const {
-      searchQuery: { query: prevQuery, mismatch: prevMismatch },
-      seq: prevSeq
-    } = prevProps;
-
-    if (query !== prevQuery || mismatch !== prevMismatch || seq !== prevSeq) {
-      const { searchResults, searchIndex } = search(query, mismatch, seq);
-      onSearch({ searchResults, searchIndex });
-      setPartState({ findState: { searchResults, searchIndex } });
-    }
-  };
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed

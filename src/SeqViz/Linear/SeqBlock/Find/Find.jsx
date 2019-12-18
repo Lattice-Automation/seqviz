@@ -10,7 +10,6 @@ export default props => {
     findXAndWidth,
     indexYDiff,
     compYDiff,
-    currSearchIndex,
     seqBlockRef,
     inputRef,
     firstBase,
@@ -47,10 +46,7 @@ export default props => {
         s.end < firstBase ? lastBase : Math.min(lastBase, s.end)
       ));
     }
-    const fill =
-      s.index === currSearchIndex
-        ? "rgba(255, 165, 7, 0.5)"
-        : "rgba(255, 251, 7, 0.5)";
+    const fill = "rgba(255, 251, 7, 0.5)";
     const id = shortid.generate();
     const selReference = {
       id: id,
