@@ -283,6 +283,16 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             fullSeq={fullSeq}
           />
+          <Selection.Edges
+            lastBase={lastBase}
+            findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            onUnmount={onUnmount}
+            selection={selection}
+            selectEdgeHeight={selectEdgeHeight}
+          />
           {searchRows.length > 0 && (
             <LinearFind
               {...this.props}
@@ -332,16 +342,6 @@ export default class SeqBlock extends React.PureComponent {
               zoomed={zoomed}
             />
           )}
-          <Selection.Edges
-            lastBase={lastBase}
-            findXAndWidth={this.findXAndWidth}
-            firstBase={firstBase}
-            fullSeq={fullSeq}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            selection={selection}
-            selectEdgeHeight={selectEdgeHeight}
-          />
           {showIndex && (
             <IndexRow
               {...this.props}
