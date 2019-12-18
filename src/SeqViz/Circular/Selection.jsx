@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SelectionContext } from "../../handlers/selection";
+import { SelectionContext } from "../handlers/selection";
 
 /**
  * renders the selection range of the plasmid viewer

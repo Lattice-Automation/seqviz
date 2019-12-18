@@ -1,7 +1,7 @@
 import * as React from "react";
 import shortid from "shortid";
 
-import { SelectionContext } from "../../../handlers/selection";
+import { SelectionContext } from "../../handlers/selection";
 
 /**
  * Edges on the side of selections of the Selection Viewer
