@@ -1,11 +1,12 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 import sizeMe from "react-sizeme";
 
 import { cutSitesInRows } from "../utils/digest/digest";
 import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
-import seqSearch from "./find";
+import search from "../utils/search";
+import CentralIndexContext from "./handlers/centralIndex";
 
 import "./SeqViewer.scss";
 
@@ -22,9 +23,9 @@ class SeqViewer extends React.Component {
       onSearch
     } = this.props;
 
-    const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
-    onSearch({ searchResults, searchIndex });
-    setPartState({ findState: { searchResults, searchIndex } });
+    // const { searchResults, searchIndex } = search(query, mismatch, seq);
+    // onSearch({ searchResults, searchIndex });
+    // setPartState({ findState: { searchResults, searchIndex } });
   };
 
   /** this is here because the size listener is returning a new "size" prop every time */
@@ -45,7 +46,7 @@ class SeqViewer extends React.Component {
     } = prevProps;
 
     if (query !== prevQuery || mismatch !== prevMismatch || seq !== prevSeq) {
-      const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
+      const { searchResults, searchIndex } = search(query, mismatch, seq);
       onSearch({ searchResults, searchIndex });
       setPartState({ findState: { searchResults, searchIndex } });
     }
@@ -159,12 +160,18 @@ class SeqViewer extends React.Component {
         style={{ zIndex: circular ? 2 : 3 }}
       >
         {circular && (
-          <CircularViewer
-            {...this.props}
-            {...this.state}
-            {...this.circularProps()}
-            cutSites={cutSites}
-          />
+          <CentralIndexContext.Consumer>
+            {({ circular, setCentralIndex }) => (
+              <CircularViewer
+                {...this.props}
+                {...this.state}
+                {...this.circularProps()}
+                centralIndex={circular}
+                setCentralIndex={setCentralIndex}
+                cutSites={cutSites}
+              />
+            )}
+          </CentralIndexContext.Consumer>
         )}
         {!circular && (
           <LinearViewer

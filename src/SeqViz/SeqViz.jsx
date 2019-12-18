@@ -5,6 +5,8 @@ import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { directionality, dnaComplement } from "../utils/parser";
 import { annotationFactory } from "../utils/sequence";
+import CentralIndexContext from "./handlers/centralIndex";
+import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
 
 import "./SeqViz.scss";
@@ -50,10 +52,7 @@ export default class SeqViz extends React.Component {
       PropTypes.shape({
         start: PropTypes.number.isRequired,
         end: PropTypes.number.isRequired,
-        direction: PropTypes.oneOf(["REVERSE", "NONE", 1]),
-        name: PropTypes.string,
-        color: PropTypes.string,
-        type: PropTypes.string
+        direction: PropTypes.oneOf(["FORWARD", "REVERSE", 1, -1]).isRequired
       })
     ).isRequired,
     viewer: PropTypes.oneOf(["linear", "circular", "both"]).isRequired,
@@ -69,8 +68,8 @@ export default class SeqViz extends React.Component {
     backbone: "",
     bpColors: {},
     colors: [],
-    copyEvent: () => false,
     compSeq: "",
+    copyEvent: () => false,
     enzymes: [],
     file: null,
     name: "",
@@ -92,15 +91,18 @@ export default class SeqViz extends React.Component {
 
     this.state = {
       accession: "",
-      circularCentralIndex: 0,
+      centralIndex: {
+        circular: 0,
+        linear: 0,
+        setCentralIndex: this.setCentralIndex
+      },
+      selection: { ...defaultSelection },
       findState: {
         searchResults: [],
         searchIndex: 0
       },
-      linearCentralIndex: 0,
-      part: {
-        annotations: this.parseAnnotations(props.annotations, props.seq)
-      }
+      annotations: this.parseAnnotations(props.annotations, props.seq),
+      part: {}
     };
   }
 
@@ -156,10 +158,27 @@ export default class SeqViz extends React.Component {
     }));
 
   /**
-   * TODO: get rid of this
+   * Update the central index of the linear or circular viewer
    */
-  setPartState = state => {
-    this.setState(state);
+  setCentralIndex = (type, value) => {
+    if (type !== "linear" && type !== "circular") {
+      throw new Error(`Unknown central index type: ${type}`);
+    }
+
+    if (this.state.centralIndex[type] === value) {
+      return; // nothing changed
+    }
+
+    this.setState({
+      centralIndex: { ...this.state.centralIndex, [type]: value }
+    });
+  };
+
+  /**
+   * Update selection in state. Should only be performed from handlers/selection.jsx
+   */
+  setSelection = selection => {
+    this.setState({ selection });
   };
 
   /**
@@ -179,21 +198,14 @@ export default class SeqViz extends React.Component {
       findState: {
         searchResults: searchResults,
         searchIndex: newSearchIndex
-      },
-      circularCentralIndex: searchResults[searchIndex].start,
-      linearCentralIndex: searchResults[searchIndex].start
+      }
     });
   }
 
   render() {
     const { viewer } = this.props;
     let { annotations, compSeq, name, seq } = this.props;
-    const {
-      part,
-      circularCentralIndex,
-      findState,
-      linearCentralIndex
-    } = this.state;
+    const { part, findState } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
@@ -211,35 +223,39 @@ export default class SeqViz extends React.Component {
     return (
       <div className="la-vz-seqviz">
         <div className="la-vz-seqviz-container">
-          {circular && (
-            <SeqViewer
-              {...this.props}
-              circularCentralIndex={circularCentralIndex}
-              incrementSearch={this.incrementSearch}
-              findState={findState}
-              annotations={annotations}
-              compSeq={compSeq}
-              name={name}
-              seq={seq}
-              setPartState={this.setPartState}
-              Circular
-            />
-          )}
+          <CentralIndexContext.Provider value={this.state.centralIndex}>
+            <SelectionContext.Provider value={this.state.selection}>
+              {circular && (
+                <SeqViewer
+                  {...this.props}
+                  incrementSearch={this.incrementSearch}
+                  findState={findState}
+                  selection={this.state.selection}
+                  setSelection={this.setSelection}
+                  annotations={annotations}
+                  compSeq={compSeq}
+                  name={name}
+                  seq={seq}
+                  Circular
+                />
+              )}
 
-          {linear && (
-            <SeqViewer
-              {...this.props}
-              linearCentralIndex={linearCentralIndex}
-              incrementSearch={this.incrementSearch}
-              findState={findState}
-              annotations={annotations}
-              compSeq={compSeq}
-              name={name}
-              seq={seq}
-              setPartState={this.setPartState}
-              Circular={false}
-            />
-          )}
+              {linear && (
+                <SeqViewer
+                  {...this.props}
+                  incrementSearch={this.incrementSearch}
+                  findState={findState}
+                  selection={this.state.selection}
+                  setSelection={this.setSelection}
+                  annotations={annotations}
+                  compSeq={compSeq}
+                  name={name}
+                  seq={seq}
+                  Circular={false}
+                />
+              )}
+            </SelectionContext.Provider>
+          </CentralIndexContext.Provider>
         </div>
       </div>
     );

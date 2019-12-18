@@ -1,5 +1,5 @@
-import withEventRouter from "./eventRouter.jsx";
-import withSelectionHandler from "./selectionHandler.jsx";
+import withEventHandler from "./events.jsx";
+import withSelectionHandler from "./selection.jsx";
 
 /**
  * sequentially apply all the Sequence Viewer HOCs
@@ -8,4 +8,4 @@ import withSelectionHandler from "./selectionHandler.jsx";
  * them to the Circular and Linear viewers (one function rather than 4 (or however many there are))
  */
 export default WrappedViewer =>
-  withSelectionHandler(withEventRouter(WrappedViewer));
+  withSelectionHandler(withEventHandler(WrappedViewer));
