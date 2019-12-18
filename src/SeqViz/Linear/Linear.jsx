@@ -1,14 +1,14 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 
 import { createLinearTranslations } from "../../utils/sequence";
-import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
 } from "../elementsToRows";
-import findAllBindingSites from "../findAllBindingSites";
+import withViewerHOCs from "../handlers";
+import bindingSites from "../../utils/bindingSites";
 import InfiniteScroll from "./InfiniteScroll/InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 
@@ -73,7 +73,7 @@ class Linear extends React.Component {
 
     let { primers } = this.props;
 
-    primers = findAllBindingSites(primers, seq);
+    primers = bindingSites(primers, seq);
 
     const forwardPrimers = primers.filter(primer => primer.direction === 1);
     const reversePrimers = primers.filter(primer => primer.direction === -1);

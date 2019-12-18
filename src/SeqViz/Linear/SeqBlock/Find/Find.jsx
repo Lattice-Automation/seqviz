@@ -1,71 +1,81 @@
 import * as React from "react";
 import shortid from "shortid";
 
-export default class LinearFind extends React.PureComponent {
-  render() {
-    const {
-      filteredRows: searchRows,
-      findXAndWidth,
-      indexYDiff,
-      compYDiff,
-      currSearchIndex,
-      seqBlockRef,
-      inputRef,
-      firstBase,
-      lastBase,
-      listenerOnly = false
-    } = this.props;
+/**
+ * Render rectangles around Search results. Yellow by default. Orange if active search element
+ */
+export default props => {
+  const {
+    filteredRows: searchRows,
+    findXAndWidth,
+    indexYDiff,
+    compYDiff,
+    currSearchIndex,
+    seqBlockRef,
+    inputRef,
+    firstBase,
+    lastBase,
+    listenerOnly = false
+  } = props;
 
-    const findProps = listenerOnly
-      ? {
-          stroke: "none",
-          height: 18,
-          fill: "transparent",
-          cursor: "pointer",
-          style: { fill: "transparent" },
-          className: "la-vz-linear-sel-block"
-        }
-      : {
-          height: 18,
-          stroke: "black",
-          strokeWidth: 0.8,
-          cursor: "pointer",
-          className: "la-vz-linear-sel-block"
-        };
+  if (!searchRows.length) {
+    return null;
+  }
 
-    return searchRows.map(s => {
-      let { x, width } = findXAndWidth(s.start, s.end);
-      if (s.start > s.end) {
-        ({ x, width } = findXAndWidth(
-          s.start > lastBase ? firstBase : Math.max(firstBase, s.start),
-          s.end < firstBase ? lastBase : Math.min(lastBase, s.end)
-        ));
+  const findProps = listenerOnly
+    ? {
+        stroke: "none",
+        height: 18,
+        fill: "transparent",
+        cursor: "pointer",
+        style: { fill: "transparent" },
+        className: "la-vz-linear-sel-block"
       }
-      const fill =
-        s.index === currSearchIndex
-          ? "rgba(255, 165, 7, 0.5)"
-          : "rgba(255, 251, 7, 0.5)";
-      const id = shortid.generate();
-      const selReference = {
-        id: id,
-        start: s.start,
-        end: s.end,
-        type: "FIND",
-        element: seqBlockRef
+    : {
+        height: 18,
+        stroke: "black",
+        strokeWidth: 0.8,
+        cursor: "pointer",
+        className: "la-vz-linear-sel-block"
       };
 
-      return (
-        <rect
-          x={x}
-          y={s.direction > 0 ? compYDiff - 10 : indexYDiff - 10}
-          width={width}
-          style={{ fill }}
-          key={id}
-          id={id}
-          ref={inputRef(id, selReference)}
-          {...findProps}
-        />
-      );
-    });
-  }
-}
+  return searchRows.map(s => {
+    let { x, width } = findXAndWidth(s.start, s.end);
+    if (s.start > s.end) {
+      ({ x, width } = findXAndWidth(
+        s.start > lastBase ? firstBase : Math.max(firstBase, s.start),
+        s.end < firstBase ? lastBase : Math.min(lastBase, s.end)
+      ));
+    }
+    const fill =
+      s.index === currSearchIndex
+        ? "rgba(255, 165, 7, 0.5)"
+        : "rgba(255, 251, 7, 0.5)";
+    const id = shortid.generate();
+    const selReference = {
+      id: id,
+      start: s.start,
+      end: s.end,
+      type: "FIND",
+      element: seqBlockRef
+    };
+
+    let y = indexYDiff - findProps.height / 2; // template row result
+    if (s.direction < 0) {
+      y = compYDiff - findProps.height / 2; // complement row result
+    }
+
+    return (
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        style={{ fill }}
+        key={id}
+        id={id}
+        ref={inputRef(id, selReference)}
+        {...findProps}
+      />
+    );
+  });
+};

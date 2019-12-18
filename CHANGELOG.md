@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Change copySeq option to copyEvent, a far simpler filter function on KeyboardEvents
-- Change searchNext option to searchEvent, a far simpler filter function on KeyboardEvents
+- Change copySeq option to copyEvent: a simpler filter function on KeyboardEvents (README)
+- Change searchNext option to searchEvent: a simpler filter function on KeyboardEvents (README)
 - Flatten the selection object. It's now a single object, no nesting. Change GC and Tm to lowercase. Example of new selection object (passed during `options.onSelection`) is below:
 
 ```json
@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 
 - Improve performance of selection events. Should now be almost instantaneous
+- Reduce initial number of bp shown in a Linear SeqBlock
 
 ## [2.0.2]
 

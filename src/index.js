@@ -72,10 +72,11 @@ const viewerInput = {
     shift: false,
     alt: false
   },
-  // searchQuery: { query: "GCGGX" },
+  searchQuery: { query: "agatg" },
   backbone: "pSB1C3",
-  enzymes: []
-  // translations: [{ start: 0, end: 89, direction: 1 }]
+  enzymes: [],
+  copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
+  searchEvent: event => event.key === "Tab"
 };
 
 // const viewerInput = {

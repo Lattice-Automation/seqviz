@@ -4,9 +4,11 @@ const first = arr => arr[0];
 
 /**
  * stackElements
- * takes an array of annotations (a one deep array) and creates an array of
+ *
+ * take an array of elements (a one deep array) and create an array of
  * array of annotations, where non-overlapping annotations can be in the same
  * row. Example:
+ *
  * input (one array):
  * 		[ ---Ann---	---Ann3---
  * 			 ---Ann2--- ]
@@ -15,9 +17,9 @@ const first = arr => arr[0];
  * 		[ ---Ann--- ---Ann3---]
  * 		[		---Ann2---    ]
  *
- * @param {[Annotation]} annotations   all annotations in a single row
- * @return {[[Annotation]]}            annotations grouped into a single array if they're
- *                                     non-overlapping
+ * @param {[Element]} elements   all elements in a single row
+ * @return {[[Element]]}         elements grouped into a single array if they're
+ *                                non-overlapping
  */
 export const stackElements = (elements, seqL) => {
   const sortedElements = [...elements];
@@ -75,8 +77,8 @@ export const stackElements = (elements, seqL) => {
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
  *
- * @param {[Annotation | ORF]}
- * @return {[[Annotation | ORF]]}
+ * @param {[Element]}
+ * @return {[[Element]]}
  */
 export const createMultiRows = (elements, rowLength, rowCount) => {
   const newArr = new Array(rowCount);

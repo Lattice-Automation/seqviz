@@ -379,19 +379,17 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
           />
-          {filteredSearchRows.length ? (
-            <LinearFind
-              {...this.props}
-              filteredRows={filteredSearchRows}
-              findXAndWidth={this.findXAndWidth}
-              indexYDiff={indexYDiff}
-              compYDiff={compYDiff}
-              currSearchIndex={currSearchIndex}
-              seqBlockRef={this}
-              lastBase={lastBase}
-              listenerOnly
-            />
-          ) : null}
+          <LinearFind
+            {...this.props}
+            filteredRows={filteredSearchRows}
+            findXAndWidth={this.findXAndWidth}
+            indexYDiff={indexYDiff}
+            compYDiff={compYDiff}
+            currSearchIndex={currSearchIndex}
+            seqBlockRef={this}
+            lastBase={lastBase}
+            listenerOnly
+          />
         </g>
       </svg>
     );

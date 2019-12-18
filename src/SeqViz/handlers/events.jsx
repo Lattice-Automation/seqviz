@@ -1,6 +1,8 @@
 import { debounce } from "lodash";
 import * as React from "react";
 
+import CentralIndexContext from "./centralIndex";
+
 /**
  * an HOC used one level above the Sequence viewer. It handles the routing of all
  * events, including keypresses, mouse clicks, etc.
@@ -16,6 +18,8 @@ const withEventRouter = WrappedComp =>
   class WithEventRouter extends React.PureComponent {
     // eslint-disable-next-line
     static displayName = `EventRouter`;
+
+    static contextType = CentralIndexContext;
 
     delayedClick = null;
 
@@ -185,7 +189,7 @@ const withEventRouter = WrappedComp =>
      */
     handleCopy = () => {
       const {
-        part: { seq },
+        seq,
         selection: { start, end, ref }
       } = this.props;
 
@@ -294,7 +298,7 @@ const withEventRouter = WrappedComp =>
      * current central index
      */
     handleScrollEvent = e => {
-      const { Linear, circularCentralIndex, seq, setPartState } = this.props;
+      const { Linear, seq } = this.props;
 
       if (!Linear) {
         // a "large scroll" (1000) should rotate through 20% of the plasmid
@@ -307,12 +311,10 @@ const withEventRouter = WrappedComp =>
           else delta = -1;
         }
 
-        let newCentralIndex = circularCentralIndex + delta;
+        let newCentralIndex = this.context.circular + delta;
         newCentralIndex = (newCentralIndex + seq.length) % seq.length;
 
-        setPartState({
-          circularCentralIndex: newCentralIndex
-        });
+        this.context.setCentralIndex("circular", newCentralIndex);
       }
     };
 
@@ -320,7 +322,14 @@ const withEventRouter = WrappedComp =>
     eventRouter;
 
     render() {
-      const { selection, setSelection, mouseEvent, ...rest } = this.props;
+      const {
+        mouseEvent,
+        selection,
+        setSelection,
+        centralIndex,
+        setCentralIndex,
+        ...rest
+      } = this.props;
       const { Circular, name } = this.props;
 
       const type = Circular ? "circular" : "linear";
@@ -330,8 +339,8 @@ const withEventRouter = WrappedComp =>
         <div
           id={id}
           className="la-vz-viewer-event-router"
-          onMouseMove={this.handleMouseEvent}
           onKeyDown={this.handleKeyPress}
+          onMouseMove={mouseEvent}
           onWheel={this.handleScrollEvent}
           role="presentation"
           ref={ref => {

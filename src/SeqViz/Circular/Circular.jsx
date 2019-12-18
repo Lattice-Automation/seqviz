@@ -1,9 +1,10 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 
-import findAllBindingSites from "../findAllBindingSites";
+import bindingSites from "../../utils/bindingSites";
 import withViewerHOCs from "../handlers";
 import { stackElements } from "../elementsToRows";
+import CentralIndexContext from "../handlers/centralIndex";
 import Annotations from "./Annotations/Annotations.jsx";
 import Index from "./Index/Index.jsx";
 import Labels from "./Labels/Labels.jsx";
@@ -18,13 +19,15 @@ import "./Circular.scss";
 export const CHAR_WIDTH = 7.801;
 
 class Circular extends React.Component {
+  static contextType = CentralIndexContext;
+
   static getDerivedStateFromProps = nextProps => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
       nextProps.seq.length
     );
-    const primers = findAllBindingSites(nextProps.primers, nextProps.seq);
+    const primers = bindingSites(nextProps.primers, nextProps.seq);
     const primersInRows = stackElements(primers, nextProps.seq.length);
 
     /**
@@ -109,8 +112,10 @@ class Circular extends React.Component {
    * @return {Coor}
    */
   getRotation = index => {
-    const { center, circularCentralIndex: centralIndex } = this.props;
+    const { center } = this.props;
     const { seqLength } = this.state;
+    const centralIndex = this.context.circular;
+
     // how many degrees should it be rotated?
     const adjustedIndex = index - centralIndex;
     const startPerc = adjustedIndex / seqLength;
@@ -130,9 +135,9 @@ class Circular extends React.Component {
    * @return {Coor}
    */
   findCoor = (index, radius, rotate = false) => {
-    const { center, circularCentralIndex } = this.props;
+    const { center } = this.props;
     const { seqLength } = this.state;
-    const rotatedIndex = rotate ? index - circularCentralIndex : index;
+    const rotatedIndex = rotate ? index - this.context.circular : index;
     const lengthPerc = rotatedIndex / seqLength;
     const lengthPercCentered = lengthPerc - 0.25;
     const radians = lengthPercCentered * Math.PI * 2;
