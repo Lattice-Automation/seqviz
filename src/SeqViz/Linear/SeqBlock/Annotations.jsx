@@ -57,6 +57,9 @@ class AnnotationRow extends React.PureComponent {
     }
   };
 
+  /**
+   * Given a color, create a slightly darker color
+   */
   calcBorderColor = fillColor => {
     const tColor = tinycolor(fillColor);
     const HslColor = tColor.toHsl();
@@ -233,9 +236,7 @@ class AnnotationRow extends React.PureComponent {
     if (a.type === "insert") {
       strokeColor = color;
     } else {
-      strokeColor = COLOR_BORDER_MAP[color]
-        ? COLOR_BORDER_MAP[color]
-        : this.calcBorderColor(color);
+      strokeColor = COLOR_BORDER_MAP[color] || this.calcBorderColor(color);
     }
 
     const annotationPath = (

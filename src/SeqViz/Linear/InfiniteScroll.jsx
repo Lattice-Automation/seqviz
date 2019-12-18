@@ -13,6 +13,13 @@ import CentralIndexContext from "../handlers/centralIndex";
 export default class InfiniteScroll extends React.PureComponent {
   static contextType = CentralIndexContext;
 
+  /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
+  scroller;
+
+  insideDOM;
+
+  timeoutID;
+
   constructor(props) {
     super(props);
 
@@ -89,6 +96,7 @@ export default class InfiniteScroll extends React.PureComponent {
     const {
       seqBlocks,
       blockHeights,
+      bpsPerBlock,
       totalHeight,
       size: { height }
     } = this.props;
@@ -100,7 +108,7 @@ export default class InfiniteScroll extends React.PureComponent {
     const centerBlockIndex = seqBlocks.findIndex(
       block =>
         block.props.firstBase <= centralIndex &&
-        block.props.firstBase + block.props.bpsPerBlock >= centralIndex
+        block.props.firstBase + bpsPerBlock >= centralIndex
     );
 
     // build up the list of blocks that are visible just beneath this first block
@@ -246,13 +254,6 @@ export default class InfiniteScroll extends React.PureComponent {
       this.stopIncrementingScroller();
     }
   };
-
-  /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
-  scroller;
-
-  insideDOM;
-
-  timeoutID;
 
   render() {
     const {

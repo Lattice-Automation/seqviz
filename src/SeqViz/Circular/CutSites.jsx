@@ -106,8 +106,7 @@ export default class CutSites extends React.PureComponent {
             ref: id,
             start: start,
             end: end,
-            type: "ENZYME",
-            element: null
+            type: "ENZYME"
           })}
         />
       </g>
