@@ -126,16 +126,16 @@ const withSelectionHandler = WrappedComp =>
         case "FIND":
         case "TRANSLATION":
         case "ENZYME": {
-          // Annotation or find selection range
-          const clockwise = direction === 1;
-          const selectionStart = clockwise ? start : end;
-          const selectionEnd = clockwise ? end : start;
-
           if (!Linear) {
             // if an element was clicked on the circular viewer, scroll the linear
             // viewer so the element starts on the first SeqBlock
-            this.props.setCentralIndex("linear", selectionStart);
+            this.props.setCentralIndex("linear", start);
           }
+
+          // Annotation or find selection range
+          const clockwise = direction ? direction === 1 : true;
+          const selectionStart = clockwise ? start : end;
+          const selectionEnd = clockwise ? end : start;
 
           this.setSelection({
             ...element,
@@ -144,6 +144,7 @@ const withSelectionHandler = WrappedComp =>
             end: selectionEnd,
             clockwise: clockwise
           });
+
           this.dragEvent = false;
           break;
         }
