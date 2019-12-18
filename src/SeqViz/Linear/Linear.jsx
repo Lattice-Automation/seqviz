@@ -9,7 +9,7 @@ import {
 } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import bindingSites from "../../utils/bindingSites";
-import InfiniteScroll from "./InfiniteScroll/InfiniteScroll.jsx";
+import InfiniteScroll from "./InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 
 import "./Linear.scss";

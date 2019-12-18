@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import CentralIndexContext from "../../handlers/centralIndex";
+import CentralIndexContext from "../handlers/centralIndex";
 
 /**
  * this component renders the following:

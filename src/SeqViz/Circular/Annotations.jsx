@@ -1,7 +1,7 @@
 import * as React from "react";
 import tinycolor from "tinycolor2";
 
-import { COLOR_BORDER_MAP } from "../../../utils/colors";
+import { COLOR_BORDER_MAP } from "../../utils/colors";
 
 /**
  * Used to build up all the path elements. Does not include a display

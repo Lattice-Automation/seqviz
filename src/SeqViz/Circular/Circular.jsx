@@ -5,12 +5,12 @@ import bindingSites from "../../utils/bindingSites";
 import withViewerHOCs from "../handlers";
 import { stackElements } from "../elementsToRows";
 import CentralIndexContext from "../handlers/centralIndex";
-import Annotations from "./Annotations/Annotations.jsx";
-import Index from "./Index/Index.jsx";
-import Labels from "./Labels/Labels.jsx";
-import Selection from "./Selection/Selection.jsx";
-import CutSites from "./CutSites/CutSites.jsx";
-import Primers from "./Primers/Primers.jsx";
+import Annotations from "./Annotations.jsx";
+import Index from "./Index.jsx";
+import Labels from "./Labels.jsx";
+import Selection from "./Selection.jsx";
+import CutSites from "./CutSites.jsx";
+import Primers from "./Primers.jsx";
 
 import "./Circular.scss";
 

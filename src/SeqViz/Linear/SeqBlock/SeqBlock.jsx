@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import Annotations from "./Annotations/Annotations.jsx";
-import CutSiteRow from "./CutSites/CutSites.jsx";
-import IndexRow from "./Index/Index.jsx";
-import LinearFind from "./Find/Find.jsx";
-import Primers from "./Primers/Primers.jsx";
-import Selection from "./Selection/Selection.jsx";
-import TranslationRows from "./Translations/Translations.jsx";
+import Annotations from "./Annotations.jsx";
+import CutSiteRow from "./CutSites.jsx";
+import IndexRow from "./Index.jsx";
+import LinearFind from "./Find.jsx";
+import Primers from "./Primers.jsx";
+import Selection from "./Selection.jsx";
+import TranslationRows from "./Translations.jsx";
 
 /**
  * SeqBlock
