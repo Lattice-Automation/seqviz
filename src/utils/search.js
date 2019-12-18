@@ -18,14 +18,14 @@ export default (query, mismatch, seq) => {
   // search results during the type ahead
   if (!query || !query.length || !seq || !seq.length)
     return {
-      searchResults: [],
-      searchIndex: 0
+      results: [],
+      index: 0
     };
   if (query.length - mismatch < 3) {
     console.error("Search too broad, please narrow parameters.");
     return {
-      searchResults: [],
-      searchIndex: 0
+      results: [],
+      index: 0
     };
   }
   const { compSeq } = dnaComplement(seq);
@@ -40,8 +40,8 @@ export default (query, mismatch, seq) => {
       "Invalid characters found in query. Search only supports nucleotide bases and nucleotide wildcards."
     );
     return {
-      searchResults: [],
-      searchIndex: 0
+      results: [],
+      index: 0
     };
   }
   const revValue = query
@@ -68,8 +68,8 @@ export default (query, mismatch, seq) => {
   if (indices.length > 4000 || compIndices.length > 4000) {
     console.error("Search too broad, please narrow parameters.");
     return {
-      searchResults: [],
-      searchIndex: 0
+      results: [],
+      index: 0
     };
   }
 
@@ -151,7 +151,7 @@ const searchSeq = (indices, compIndices, queryLength, seqLength) => {
     (a, b) => a.loc - b.loc
   );
 
-  const searchResults = fullResult.map((s, i) => {
+  const results = fullResult.map((s, i) => {
     const end = s.loc + queryLength;
     const overflowEnd = end % seqLength;
     return {
@@ -161,5 +161,5 @@ const searchSeq = (indices, compIndices, queryLength, seqLength) => {
       index: i
     };
   });
-  return { searchResults: searchResults, searchIndex: 0 };
+  return { results: results, index: 0 };
 };

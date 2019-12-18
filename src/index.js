@@ -72,7 +72,7 @@ const viewerInput = {
     shift: false,
     alt: false
   },
-  searchQuery: { query: "agatg" },
+  search: { query: "gtac" },
   backbone: "pSB1C3",
   enzymes: [],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),

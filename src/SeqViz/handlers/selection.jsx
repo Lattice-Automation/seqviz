@@ -218,7 +218,7 @@ const withSelectionHandler = WrappedComp =>
       } else if (
         e.type === "mousemove" &&
         this.dragEvent &&
-        currBase > 0 &&
+        currBase &&
         currBase !== this.previousBase
       ) {
         const increased = currBase > this.previousBase; // bases increased
@@ -376,7 +376,7 @@ const withSelectionHandler = WrappedComp =>
      * properties of the selection that should be updated.
      */
     setSelection = newSelection => {
-      const { onSelection, setSelection } = this.props;
+      const { setSelection } = this.props;
 
       if (
         newSelection.start === this.props.selection.start &&
@@ -410,7 +410,6 @@ const withSelectionHandler = WrappedComp =>
       };
 
       setSelection(selection);
-      onSelection(selection);
     };
 
     /**

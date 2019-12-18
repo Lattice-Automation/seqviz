@@ -21,7 +21,6 @@ const defaultProps = {
   annotationRows: [],
   forwardPrimerRows: [],
   reversePrimerRows: [],
-  currSearchIndex: 0,
   firstBase: 0,
   onUnmount: () => {},
   zoomed: false,

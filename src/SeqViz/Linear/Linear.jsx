@@ -68,7 +68,7 @@ class Linear extends React.Component {
       size,
       onUnmount,
 
-      findState: { searchResults = [], searchIndex }
+      search
     } = this.props;
 
     let { primers } = this.props;
@@ -132,8 +132,8 @@ class Linear extends React.Component {
       : new Array(arrSize).fill([]);
 
     const searchRows =
-      searchResults && searchResults.length
-        ? createSingleRows(searchResults, bpsPerBlock, arrSize)
+      search && search.length
+        ? createSingleRows(search, bpsPerBlock, arrSize)
         : new Array(arrSize).fill([]);
 
     const translationRows = translations.length
@@ -203,7 +203,6 @@ class Linear extends React.Component {
           cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
           translations={translationRows[i]}
-          currSearchIndex={searchIndex}
           firstBase={firstBase}
           onUnmount={onUnmount}
           fullSeq={seq}

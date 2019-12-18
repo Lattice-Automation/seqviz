@@ -1,9 +1,11 @@
 import * as React from "react";
+import { isEqual } from "lodash";
 import PropTypes from "prop-types";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { directionality, dnaComplement } from "../utils/parser";
+import search from "../utils/search";
 import { annotationFactory } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
@@ -38,8 +40,7 @@ export default class SeqViz extends React.Component {
     name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
     onSelection: PropTypes.func.isRequired,
-    searchEvent: PropTypes.func.isRequired,
-    searchQuery: PropTypes.shape({
+    search: PropTypes.shape({
       query: PropTypes.string,
       mismatch: PropTypes.number
     }).isRequired,
@@ -75,8 +76,7 @@ export default class SeqViz extends React.Component {
     name: "",
     onSearch: results => results,
     onSelection: selection => selection,
-    searchEvent: () => false,
-    searchQuery: { query: "", mismatch: 0 },
+    search: { query: "", mismatch: 0 },
     seq: "",
     showComplement: true,
     showIndex: true,
@@ -97,10 +97,7 @@ export default class SeqViz extends React.Component {
         setCentralIndex: this.setCentralIndex
       },
       selection: { ...defaultSelection },
-      findState: {
-        searchResults: [],
-        searchIndex: 0
-      },
+      search: [],
       annotations: this.parseAnnotations(props.annotations, props.seq),
       part: {}
     };
@@ -110,12 +107,17 @@ export default class SeqViz extends React.Component {
     this.setPart();
   };
 
-  componentDidUpdate = async ({ accession, backbone }) => {
+  componentDidUpdate = async ({ accession, backbone, part, search }) => {
     if (
       accession !== this.props.accession ||
       backbone !== this.props.backbone
     ) {
       this.setPart();
+    } else if (
+      search.query !== this.props.search.query ||
+      search.mismatch !== this.props.search.mismatch
+    ) {
+      this.search(part);
     }
   };
 
@@ -133,6 +135,7 @@ export default class SeqViz extends React.Component {
           annotations: this.parseAnnotations(part.annotations, part.seq)
         }
       });
+      this.search(part);
     } else if (file) {
       const parts = await filesToParts(file, this.props);
       this.setState({
@@ -141,7 +144,31 @@ export default class SeqViz extends React.Component {
           annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
         }
       });
+      this.search(parts[0]);
     }
+  };
+
+  /**
+   * Search for the query sequence in the part sequence, set in state
+   */
+  search = (part = null) => {
+    const {
+      onSearch,
+      search: { query, mismatch },
+      seq
+    } = this.props;
+
+    if (!(seq || (part && part.seq))) {
+      return;
+    }
+
+    const { results } = search(query, mismatch, seq || part.seq);
+    if (isEqual(results, this.state.search)) {
+      return;
+    }
+
+    this.setState({ search: results });
+    onSearch(results);
   };
 
   /**
@@ -178,34 +205,17 @@ export default class SeqViz extends React.Component {
    * Update selection in state. Should only be performed from handlers/selection.jsx
    */
   setSelection = selection => {
+    const { onSelection } = this.props;
+
     this.setState({ selection });
+
+    onSelection(selection);
   };
-
-  /**
-   * Move one further through the search results
-   */
-  incrementSearch() {
-    const {
-      findState: { searchResults, searchIndex }
-    } = this.state;
-
-    if (!searchResults.length) {
-      return;
-    }
-
-    const newSearchIndex = (searchIndex + 1) % searchResults.length;
-    this.setState({
-      findState: {
-        searchResults: searchResults,
-        searchIndex: newSearchIndex
-      }
-    });
-  }
 
   render() {
     const { viewer } = this.props;
     let { annotations, compSeq, name, seq } = this.props;
-    const { part, findState } = this.state;
+    const { part } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
@@ -228,8 +238,7 @@ export default class SeqViz extends React.Component {
               {circular && (
                 <SeqViewer
                   {...this.props}
-                  incrementSearch={this.incrementSearch}
-                  findState={findState}
+                  search={this.state.search}
                   selection={this.state.selection}
                   setSelection={this.setSelection}
                   annotations={annotations}
@@ -243,8 +252,7 @@ export default class SeqViz extends React.Component {
               {linear && (
                 <SeqViewer
                   {...this.props}
-                  incrementSearch={this.incrementSearch}
-                  findState={findState}
+                  search={this.state.search}
                   selection={this.state.selection}
                   setSelection={this.setSelection}
                   annotations={annotations}

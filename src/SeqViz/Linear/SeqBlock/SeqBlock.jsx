@@ -138,7 +138,6 @@ export default class SeqBlock extends React.PureComponent {
       cutSiteRows,
       searchRows,
       translations,
-      currSearchIndex,
       blockHeight,
 
       showIndex,
@@ -260,7 +259,7 @@ export default class SeqBlock extends React.PureComponent {
 
     const filteredSearchRows = showComplement
       ? searchRows
-      : searchRows.filter(search => search.direction === 1);
+      : searchRows.filter(r => r.direction === 1);
 
     return (
       <svg
@@ -291,7 +290,6 @@ export default class SeqBlock extends React.PureComponent {
               findXAndWidth={this.findXAndWidth}
               indexYDiff={indexYDiff}
               compYDiff={compYDiff}
-              currSearchIndex={currSearchIndex}
               seqBlockRef={this}
               lastBase={lastBase}
             />
@@ -385,7 +383,6 @@ export default class SeqBlock extends React.PureComponent {
             findXAndWidth={this.findXAndWidth}
             indexYDiff={indexYDiff}
             compYDiff={compYDiff}
-            currSearchIndex={currSearchIndex}
             seqBlockRef={this}
             lastBase={lastBase}
             listenerOnly

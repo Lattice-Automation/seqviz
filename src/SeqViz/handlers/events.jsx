@@ -62,14 +62,10 @@ const withEventRouter = WrappedComp =>
      * ["All", "Copy", "Up", "Right", "Down", "Left"]
      */
     keypressMap = e => {
-      const { copyEvent, searchEvent } = this.props;
+      const { copyEvent } = this.props;
 
       if (copyEvent(e)) {
         return "Copy";
-      }
-
-      if (searchEvent(e)) {
-        return "Search";
       }
 
       const { key, shiftKey } = e;
@@ -209,13 +205,6 @@ const withEventRouter = WrappedComp =>
       if (formerFocus) {
         formerFocus.focus();
       }
-    };
-
-    /**
-     * Tell the parent SeqViz component to increment through the search results
-     */
-    handleSearch = () => {
-      this.props.incrementSearch();
     };
 
     /**
