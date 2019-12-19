@@ -1,6 +1,6 @@
 import shortid from "shortid";
 
-import { colorByIndex } from "./colors";
+import { colorByIndex, chooseRandomColor } from "./colors";
 import { dnaComplement } from "./parser";
 
 /**
@@ -275,11 +275,11 @@ export const primerPcrSelectionLimits = { min: 23 };
 /**
  * a default annotation generator
  */
-export const annotationFactory = annName => {
-  const nameSum = (annName || " ")
-    .split("")
-    .reduce((s, c) => s + c.charCodeAt(0), 0);
-  const color = colorByIndex(nameSum);
+export const annotationFactory = (annName, i = -1) => {
+  let color = chooseRandomColor();
+  if (i > -1) {
+    color = colorByIndex(i);
+  }
 
   return {
     id: shortid.generate(),

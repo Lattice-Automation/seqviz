@@ -162,7 +162,6 @@
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
-    "react-router-dom": "^5.0.0",
     "react-sizeme": "^2.6.4",
     "shortid": "^2.2.14",
     "string_decoder": "^1.3.0",
@@ -250,7 +249,6 @@
     "webpack-dev-server": "3.9.0",
     "webpack-manifest-plugin": "2.2.0",
     "webpack-node-externals": "^1.7.2",
-    "why-did-you-update": "^1.0.6",
     "workbox-webpack-plugin": "4.3.1",
     "xml-comment-api": "^1.0.1"
   },

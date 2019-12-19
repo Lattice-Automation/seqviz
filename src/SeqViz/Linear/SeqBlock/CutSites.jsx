@@ -180,7 +180,7 @@ const CutSites = props => {
                 width="1px"
                 height={lineHeight}
                 x={c.cutX - 0.5}
-                y={6 + yDiff}
+                y={lineHeight / 4 + yDiff}
               />
             ) : null}
             {showIndex && zoom > 10 ? (
@@ -188,7 +188,7 @@ const CutSites = props => {
                 width={connectorWidth}
                 height="1px"
                 x={connectorX - 0.5}
-                y={lineHeight + 6 + yDiff}
+                y={lineHeight * 1.25 + yDiff}
               />
             ) : null}
             {complementCutSite && zoom > 10 ? (
@@ -196,7 +196,7 @@ const CutSites = props => {
                 width="1px"
                 height={lineHeight + 1.5}
                 x={c.hangX - 0.5}
-                y={lineHeight + 6 + yDiff}
+                y={lineHeight * 1.25 + yDiff}
               />
             ) : null}
           </React.Fragment>

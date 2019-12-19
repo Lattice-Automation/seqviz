@@ -92,14 +92,14 @@ export class Edges extends React.PureComponent {
         {startEdge !== null && (
           <rect
             {...rect}
-            x={start === end ? x : x - 1}
+            x={start === end ? x - 1 : x - 2}
             height={selectEdgeHeight}
           />
         )}
         {lastEdge !== null && (
           <rect
             {...rect}
-            x={start === end ? secondEdgeX : secondEdgeX - 1}
+            x={start === end ? secondEdgeX - 1 : secondEdgeX - 2}
             height={selectEdgeHeight}
           />
         )}
