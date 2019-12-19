@@ -14,7 +14,6 @@ export default class Index extends React.PureComponent {
       firstBase,
       lineHeight,
       size,
-      resizing,
       findXAndWidth
     } = this.props;
     const seqLength = seq.length;
@@ -67,7 +66,7 @@ export default class Index extends React.PureComponent {
 
     const textStyle = {
       fontSize: 11,
-      textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
+      textRendering: "optimizeLegibility"
     };
 
     return tickIndexes.map(p => {
@@ -89,9 +88,7 @@ export default class Index extends React.PureComponent {
       const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
       return (
         <React.Fragment key={p}>
-          {!resizing && (
-            <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />
-          )}
+          <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />
           <text style={textStyle} transform={transText}>
             {p}
           </text>
@@ -105,7 +102,6 @@ export default class Index extends React.PureComponent {
       lineHeight,
       transform,
       showIndex,
-      resizing,
       findXAndWidth,
       firstBase,
       lastBase
@@ -119,7 +115,7 @@ export default class Index extends React.PureComponent {
     const axisStyle = {
       width: width,
       height: 1,
-      shapeRendering: resizing ? "optimizeSpeed" : "crispEdges"
+      shapeRendering: "crispEdges"
     };
 
     return (

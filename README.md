@@ -6,13 +6,8 @@
 
 [![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
 [![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/Lattice-Automation/seqviz?color=green)](https://github.com/Lattice-Automation/seqviz/blob/master/package.json)
 
-**Latest Production Build:** <!-- exec-bash(cmd:echo `date`) -->Mon Dec 16 15:49:01 EST 2019<!-- /exec-bash -->
-
-**Maintained by:** <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->
-
-<!-- pkg-description(cmd:) -->DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM part input<!-- /pkg-description -->
+<!-- pkg-description(cmd:) -->DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM input<!-- /pkg-description -->
 
 <br>
 
@@ -39,20 +34,20 @@
 
 `SeqViz` aims to be a DNA sequence viewer with a simple API and easy customizability. It currently provides:
 
-- **Multiple input formats**:
+- **Multiple input formats**
 
   - Sequence
   - Accession (NCBI or iGEM)
   - File (FASTA, GenBank, SBOL, SnapGene)
 
-- **Circular Plasmid viewer** :
+- **Circular plasmid viewer**
 
   - Annotations with names and colors
   - Index of sequence
   - Name of plasmid
   - Base pair length of sequence
 
-- **Linear Sequence viewer** :
+- **Linear sequence viewer**
 
   - Annotations with names and colors
   - Amino acid translations
@@ -61,7 +56,7 @@
   - Enzyme cut sites
   - Highlighted sequence search results
 
-- **Selections**:
+- **Selections**
 
   - Clicking on an `annotation`, `translation`, `enzyme` or `searchElement`, or dragging over the sequence, will create a selection
   - Information about selections is available via `options.onSelection()` (see [viewer options](#options))
@@ -79,11 +74,9 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
-
 ```html
-<script src="https://cdn.latticeautomation.com/libs/seqviz/2.0.2/seqviz.min.js"></script>
+<script src="https://cdn.latticeautomation.com/libs/seqviz/3.0.2/seqviz.min.js"></script>
 ```
-
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -119,7 +112,7 @@ export default () => (
 
 The viewer's constructor (Vanilla-JS) accepts two arguments.
 
-#### `seqviz.Viewer(${element}, ${options})`
+#### `seqviz.Viewer(element, options)`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
 - `options` -- options as documented in greater detail [below](#options)
@@ -237,43 +230,33 @@ An array of color hex codes for annotation coloring. Defaults to:
 
 #### `options.onSelection (=null)`
 
-Callback function executed after selection events. Accepts a single `selection` argument: `(selection) => {}`.
+Callback function executed after selection events. Should accept a single `selection` argument: `(selection) => {}`.
 
-This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have an `element` property with info on the selected element. The example below is of a `selection` object following an `annotation` click.
+This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was clicked, the `selection` object will have info on the selected element. The example below is of a `selection` object following an `annotation` click.
 
 ```js
 {
   // selection
-  "sequenceMeta": {
-    "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
-    "GC": 55.3,
-    "Tm": 85
-  },
-  "selectionMeta": {
-    "type": "ANNOTATION",
-    "start": 133,
-    "end": 457,
-    "selectionLength": 324,
-    "clockwise": true
-  },
-  "element": {
-    "id": "lxcC1L3M4z",
-    "color": "#8FDE8C",
-    "name": "lacZ fragment",
-    "type": "CDS",
-    "start": 133,
-    "end": 457,
-    "direction": -1
-  }
+  "name": "lacZ fragment",
+  "type": "ANNOTATION",
+  "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
+  "gc": 55.3,
+  "tm": 85,
+  "start": 133,
+  "end": 457,
+  "length": 324,
+  "direction": -1
+  "clockwise": true,
+  "color": "#8FDE8C",
 }
 ```
 
-#### `options.searchQuery (=null)`
+#### `options.search (=null)`
 
-A `searchQuery` object for specifying search results to highlight on the viewer.
+A `search` object for specifying search results to highlight on the viewer. An example is below:
 
 ```js
-{ "query": "", "mismatch": 0 }
+{ "query": "aatggtctc", "mismatch": 1 }
 ```
 
 Searching supports the following nucleotide wildcards within the `query`.
@@ -299,61 +282,33 @@ Searching supports the following nucleotide wildcards within the `query`.
 
 #### `options.onSearch (=null)`
 
-Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` object is below.
+Callback executed after a search event. Called once on initial render and again after each KeyboardEvent specified within `options.searchNext`. Accepts a single `searchResults` argument: `(searchResults) => {}`. An example of a `searchResults` array is below.
 
 ```js
-{
-  // searchResults
-  "searchResults": [
-    {
-      "start": 728,
-      "end": 733,
-      "direction": 1,
-      "index": 0
-    },
-    {
-      "start": 1788,
-      "end": 1793,
-      "direction": -1,
-      "index": 1
-    }
-  ],
-  "searchIndex": 0
-}
+[
+  {
+    start: 728,
+    end: 733,
+    direction: 1,
+    index: 0
+  },
+  {
+    start: 1788,
+    end: 1793,
+    direction: -1,
+    index: 1
+  }
+];
 ```
 
-#### `options.searchNext (={})`
+#### `options.copyEvent (=(KeyboardEvent) => false)`
 
-`object` used to set key binding for incrementing through search results. Incrementing scrolls the viewer to the next search result.
+A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
 
-You can use any key that is not `ArrowLeft`, `ArrowRight`, `ArrowUp`, or `ArrowDown`. Find the key name for your key press at [keycode.info](https://keycode.info/). If you want to make `searchNext` a special key binding, e.g. `shift + a`, or `alt + .`, you can specify the special key by settings it to `true`.
-
-Defaults to:
+An example of an `options.copyEvent` function for copying after `ctrl+c` or `meta+c` events:
 
 ```js
-{
-  "key": "",
-  "meta": false,
-  "ctrl": false,
-  "shift": false,
-  "alt": false
-}
-```
-
-#### `options.copySeq (={})`
-
-`object` used to set the key binding for copying the template strand sequence of your current selection. See `options.searchNext` for more details. After a copy-event, the copied sequence is written to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
-
-Defaults to:
-
-```js
-{
-  "key": "",
-  "meta": false,
-  "ctrl": false,
-  "shift": false,
-  "alt": false
-}
+event => event.key === "c" && (event.metaKey || event.ctrlKey);
 ```
 
 #### `options.backbone (='')`

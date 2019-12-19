@@ -1,10 +1,18 @@
-import { dnaComplement } from "../utils/parser";
-import {
-  calcTm,
-  getMismatchIndices,
-  returnRanges,
-  reverse
-} from "../utils/sequence";
+import { dnaComplement } from "./parser";
+import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
+
+/**
+ * Gives primers meta information needed by sequence viewers
+ * @param {Array} primers: array of primers
+ * @param {string} vector
+ * @return {Array} array of primers with viewer meta information
+ */
+export default (primers, vector) => {
+  const { seq: vectorSeq, compSeq: vectorComp } = dnaComplement(vector);
+  return findBindingSites(primers, vectorSeq, 1).concat(
+    findBindingSites(primers, vectorComp, -1)
+  );
+};
 
 /**
  * Given a list of primer mismatches and the primer's annealing sequence
@@ -203,18 +211,3 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
   });
   return primerBindingSites;
 };
-
-/**
- * Gives primers meta information needed by sequence viewers
- * @param {Array} primers: array of primers
- * @param {string} vector
- * @return {Array} array of primers with viewer meta information
- */
-export const findAllBindingSites = (primers, vector) => {
-  const { seq: vectorSeq, compSeq: vectorComp } = dnaComplement(vector);
-  return findBindingSites(primers, vectorSeq, 1).concat(
-    findBindingSites(primers, vectorComp, -1)
-  );
-};
-
-export default findAllBindingSites;

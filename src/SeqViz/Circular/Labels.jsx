@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CHAR_WIDTH } from "../Circular.jsx";
+import { CHAR_WIDTH } from "./Circular.jsx";
 import WrappedGroupLabel from "./WrappedGroupLabel.jsx";
 
 import "./Labels.scss";

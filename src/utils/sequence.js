@@ -1,6 +1,6 @@
 import shortid from "shortid";
 
-import { colorByIndex } from "./colors";
+import { colorByIndex, chooseRandomColor } from "./colors";
 import { dnaComplement } from "./parser";
 
 /**
@@ -172,10 +172,15 @@ export const returnRanges = indices => {
  * Calculate the GC% of a sequence
  * @param {string} sequence
  */
-export const calcGC = sequence =>
-  sequence === ""
-    ? 0
-    : ((sequence.match(/[CG]/gi) || []).length / sequence.length) * 100;
+export const calcGC = sequence => {
+  if (!sequence) {
+    return 0;
+  }
+  const gcCount = (sequence.match(/[CG]/gi) || []).length;
+  const gcPerc = (gcCount / sequence.length) * 100;
+
+  return parseFloat(gcPerc.toFixed(2));
+};
 
 /**
  * Calculate the melting temp for a given sequence
@@ -254,19 +259,6 @@ export const reIndex = (sequence, start) => {
   return reIndexed;
 };
 
-export const defaultSelection = {
-  ref: null,
-  sequenceMeta: { seq: "", GC: 0, Tm: 0 },
-  selectionMeta: {
-    type: "",
-    start: 0,
-    end: 0,
-    selectionLength: 0,
-    clockwise: true
-  },
-  element: null
-};
-
 export const trimNewLines = str =>
   str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");
 
@@ -283,11 +275,11 @@ export const primerPcrSelectionLimits = { min: 23 };
 /**
  * a default annotation generator
  */
-export const annotationFactory = annName => {
-  const nameSum = (annName || " ")
-    .split("")
-    .reduce((s, c) => s + c.charCodeAt(0), 0);
-  const color = colorByIndex(nameSum);
+export const annotationFactory = (annName, i = -1) => {
+  let color = chooseRandomColor();
+  if (i > -1) {
+    color = colorByIndex(i);
+  }
 
   return {
     id: shortid.generate(),

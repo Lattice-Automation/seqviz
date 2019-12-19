@@ -1,7 +1,8 @@
 import * as React from "react";
 import tinycolor from "tinycolor2";
 
-import { COLOR_BORDER_MAP } from "../../../utils/colors";
+import CentralIndexContext from "../handlers/centralIndex";
+import { COLOR_BORDER_MAP } from "../../utils/colors";
 
 /**
  * Used to build up all the path elements. Does not include a display
@@ -62,32 +63,37 @@ export default class Annotations extends React.PureComponent {
     };
 
     return (
-      <g className="la-vz-circular-annotations">
-        {annotations.reduce((acc, anns, i) => {
-          if (i) {
-            currBRadius -= lineHeight + 3;
-            currTRadius -= lineHeight + 3;
-          } // increment the annRow radii if on every loop after first
+      <CentralIndexContext.Consumer>
+        {({ circular }) => (
+          <g className="la-vz-circular-annotations">
+            {annotations.reduce((acc, anns, i) => {
+              if (i) {
+                currBRadius -= lineHeight + 3;
+                currTRadius -= lineHeight + 3;
+              } // increment the annRow radii if on every loop after first
 
-          return acc.concat(
-            anns.map(a => (
-              <SingleAnnotation
-                {...this.props}
-                key={`la-vz-${a.id}-annotation-circular-row`}
-                id={`la-vz-${a.id}-annotation-circular-row`}
-                annotation={a}
-                currBRadius={currBRadius}
-                currTRadius={currTRadius}
-                transparentPath={transparentPath}
-                labelStyle={labelStyle}
-                annStyle={annStyle}
-                hoverAnnotation={this.hoverAnnotation}
-                calcBorderColor={this.calcBorderColor}
-              />
-            ))
-          );
-        }, [])}
-      </g>
+              return acc.concat(
+                anns.map(a => (
+                  <SingleAnnotation
+                    {...this.props}
+                    key={`la-vz-${a.id}-annotation-circular-row`}
+                    id={`la-vz-${a.id}-annotation-circular-row`}
+                    annotation={a}
+                    currBRadius={currBRadius}
+                    currTRadius={currTRadius}
+                    transparentPath={transparentPath}
+                    labelStyle={labelStyle}
+                    annStyle={annStyle}
+                    hoverAnnotation={this.hoverAnnotation}
+                    calcBorderColor={this.calcBorderColor}
+                    centralIndex={circular}
+                  />
+                ))
+              );
+            }, [])}
+          </g>
+        )}
+      </CentralIndexContext.Consumer>
     );
   }
 }
@@ -105,7 +111,7 @@ const SingleAnnotation = props => {
     generateArc,
     currBRadius,
     currTRadius,
-    circularCentralIndex,
+    centralIndex,
     lineHeight,
     transparentPath,
     inputRef,
@@ -130,6 +136,10 @@ const SingleAnnotation = props => {
     return null;
   }
 
+  //is name in top or bottom half?
+  const mid = (annLength / 2 + a.start + seqLength - centralIndex) % seqLength;
+  const bottomHalf = mid > seqLength * 0.25 && mid < seqLength * 0.75;
+
   const path = generateArc({
     innerRadius: currBRadius,
     outerRadius: currTRadius,
@@ -139,31 +149,20 @@ const SingleAnnotation = props => {
     arrowFWD: a.direction === 1,
     arrowREV: a.direction === -1
   });
-
-  // determine whether the annotation's name is in the top or bottom
-  // half of the plasmid (used in rendering inline annotation)
-  const annMiddle =
-    (annLength / 2 + a.start + seqLength - circularCentralIndex) % seqLength; // in bps
-  const bottomHalf =
-    annMiddle > seqLength * 0.25 && annMiddle < seqLength * 0.75;
-
-  // find the length from the start of the arc to its middle to adjust the name inward
-  const topLengthToMid = Math.PI * (annLength / seqLength) * currBRadius;
-  const bottomLengthToMid = Math.PI * (annLength / seqLength) * currTRadius;
-  let lengthToMidpoint = topLengthToMid;
-  if (!bottomHalf) {
-    lengthToMidpoint += topLengthToMid + bottomLengthToMid;
-    if (a.direction === -1) {
-      lengthToMidpoint += 0.75 * lineHeight;
-    } else if (a.direction === "NONE") {
-      lengthToMidpoint += lineHeight;
-    }
-  }
+  const namePath = generateArc({
+    innerRadius: bottomHalf ? currBRadius : currTRadius,
+    outerRadius: bottomHalf ? currBRadius : currTRadius,
+    length: annLength,
+    largeArc: annLength > seqLength / 2,
+    sweepFWD: true,
+    arrowFWD: false,
+    arrowREV: false
+  });
 
   const circAnnID = `la-vz-${a.id}-circular`;
   return (
     <g id={`la-vz-${a.id}-annotation-circular`} transform={rotation}>
-      <path id={circAnnID} d={path} {...transparentPath} />
+      <path id={circAnnID} d={namePath} {...transparentPath} />
       <path
         d={path}
         id={a.id}
@@ -173,14 +172,10 @@ const SingleAnnotation = props => {
           start: a.start,
           end: a.end,
           type: "ANNOTATION",
-          element: null
+          direction: a.direction
         })}
         fill={a.color}
-        stroke={
-          COLOR_BORDER_MAP[a.color]
-            ? COLOR_BORDER_MAP[a.color]
-            : calcBorderColor(a.color)
-        }
+        stroke={COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color)}
         onMouseOver={() => hoverAnnotation(a.id, 1.0)}
         onMouseOut={() => hoverAnnotation(a.id, 0.7)}
         onFocus={() => {}}
@@ -199,8 +194,8 @@ const SingleAnnotation = props => {
           <textPath
             id={a.id}
             textAnchor="middle"
+            startOffset={bottomHalf ? "25%" : "75%"}
             alignmentBaseline="middle"
-            startOffset={lengthToMidpoint}
             xlinkHref={`#${circAnnID}`}
             {...labelStyle}
           >

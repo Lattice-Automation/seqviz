@@ -1,13 +1,6 @@
 import * as React from "react";
-import { isEqual } from "lodash";
 
-export default class CircularFind extends React.Component {
-  shouldComponentUpdate = nextProps => {
-    const { findState } = this.props;
-
-    return !isEqual(findState, nextProps.findState);
-  };
-
+export default class CircularFind extends React.PureComponent {
   createHighlight = result => {
     const {
       radius,
@@ -16,9 +9,8 @@ export default class CircularFind extends React.Component {
       seqLength,
       getRotation,
       generateArc,
-      resizing,
       inputRef,
-      findState: { searchIndex }
+      search: { index }
     } = this.props;
     let { start, end } = result;
     // crosses the zero index
@@ -53,7 +45,7 @@ export default class CircularFind extends React.Component {
     });
 
     const fill =
-      result.index === searchIndex
+      result.index === index
         ? "rgba(255, 165, 7, 0.5)"
         : "rgba(255, 251, 7, 0.5)";
 
@@ -61,7 +53,7 @@ export default class CircularFind extends React.Component {
       stroke: "black",
       strokeWidth: 0.8,
       fill: fill,
-      shapeRendering: resizing ? "optimizeSpeed" : "auto",
+      shapeRendering: "auto",
       cursor: "pointer"
     };
 
@@ -87,16 +79,16 @@ export default class CircularFind extends React.Component {
   render() {
     const {
       seqLength,
-      findState: { searchResults }
+      search: { results }
     } = this.props;
     const threshold =
-      seqLength >= 200 ? searchResults.length / seqLength <= 0.01 : true;
+      seqLength >= 200 ? results.length / seqLength <= 0.01 : true;
 
     let firstBase = 0;
     let lastBase = seqLength;
-    return searchResults.length ? (
+    return results.length ? (
       <g className="la-vz-circular-find-results">
-        {searchResults.map(s => {
+        {results.map(s => {
           const hideRender =
             s.start < firstBase && s.start > lastBase - seqLength;
           if (hideRender) return null;

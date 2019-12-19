@@ -1,5 +1,7 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
+
+import CentralIndexContext from "../handlers/centralIndex";
 
 /**
  * A wrapper around the seqBlocks. Renders only the seqBlocks that are
@@ -9,15 +11,24 @@ import * as React from "react";
  * seqBlocks should currently be shown
  */
 export default class InfiniteScroll extends React.PureComponent {
+  static contextType = CentralIndexContext;
+
+  /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
+  scroller;
+
+  insideDOM;
+
+  timeoutID;
+
   constructor(props) {
     super(props);
 
     this.state = {
-      visibleBlocks:
-        // start off with first 5 blocks shown
-        new Array(Math.min(5, props.seqBlocks.length))
-          .fill(null)
-          .map((_, i) => i)
+      // start off with first 5 blocks shown
+      visibleBlocks: new Array(Math.min(5, props.seqBlocks.length))
+        .fill(null)
+        .map((_, i) => i),
+      centralIndex: 0
     };
     this.scroller = React.createRef();
     this.insideDOM = React.createRef();
@@ -35,12 +46,9 @@ export default class InfiniteScroll extends React.PureComponent {
     }
 
     const { seqBlocks, size } = this.props;
-    const { visibleBlocks } = this.state;
+    const { centralIndex, visibleBlocks } = this.state;
 
-    if (
-      prevProps.seqBlocks[0].props.linearCentralIndex !==
-      seqBlocks[0].props.linearCentralIndex
-    ) {
+    if (this.context && centralIndex !== this.context.linear) {
       this.scrollToCentralIndex();
     } else if (
       !isEqual(prevProps.size, size) ||
@@ -81,24 +89,26 @@ export default class InfiniteScroll extends React.PureComponent {
   };
 
   /**
-   * Scroll to centralIndex
+   * Scroll to centralIndex. Likely from circular clicking on an element
+   * that should then be scrolled to in linear
    */
   scrollToCentralIndex = () => {
     const {
       seqBlocks,
       blockHeights,
+      bpsPerBlock,
       totalHeight,
       size: { height }
     } = this.props;
     const { visibleBlocks } = this.state;
     const { clientHeight, scrollHeight } = this.scroller.current;
+    const centralIndex = this.context.linear;
 
     // find the first block that contains the new central index
     const centerBlockIndex = seqBlocks.findIndex(
       block =>
-        block.props.firstBase <= block.props.linearCentralIndex &&
-        block.props.firstBase + block.props.bpsPerBlock >=
-          block.props.linearCentralIndex
+        block.props.firstBase <= centralIndex &&
+        block.props.firstBase + bpsPerBlock >= centralIndex
     );
 
     // build up the list of blocks that are visible just beneath this first block
@@ -132,7 +142,10 @@ export default class InfiniteScroll extends React.PureComponent {
     }
 
     if (!isEqual(newVisibleBlocks, visibleBlocks)) {
-      this.setState({ visibleBlocks: newVisibleBlocks });
+      this.setState({
+        visibleBlocks: newVisibleBlocks,
+        centralIndex: centralIndex
+      });
     }
   };
 
@@ -193,7 +206,7 @@ export default class InfiniteScroll extends React.PureComponent {
     this.timeoutID = setTimeout(() => {
       this.scroller.current.scrollTop += incAmount;
       this.incrementScroller(incAmount);
-    }, 10);
+    }, 5);
   };
 
   stopIncrementingScroller = () => {
@@ -226,28 +239,21 @@ export default class InfiniteScroll extends React.PureComponent {
     // centralIndex (triggering a downward scroll event)
     const scrollerBlock = this.scroller.current.getBoundingClientRect();
     let percFromTop = (e.clientY - scrollerBlock.top) / scrollerBlock.height;
-    if (percFromTop > 0.95) {
+    if (percFromTop > 0.9) {
       percFromTop = Math.min(1, percFromTop);
-      let scaledPerc = percFromTop - 0.95; // [0.0, 0.05]
-      scaledPerc *= 20; // [0, 1]
-      const scaledScroll = 40 * scaledPerc; // [0, 40]
+      let scaledPerc = percFromTop - 0.9;
+      scaledPerc *= 10;
+      const scaledScroll = 30 * scaledPerc;
       this.incrementScroller(scaledScroll);
-    } else if (percFromTop < 0.05) {
-      percFromTop = 0.05 - Math.max(0, percFromTop);
-      const scaledPerc = 20 * percFromTop; // [0, 1]
-      const scaledScroll = -40 * scaledPerc; // [-40, 0]
+    } else if (percFromTop < 0.1) {
+      percFromTop = 0.1 - Math.max(0, percFromTop);
+      const scaledPerc = 10 * percFromTop;
+      const scaledScroll = -30 * scaledPerc;
       this.incrementScroller(scaledScroll);
     } else {
       this.stopIncrementingScroller();
     }
   };
-
-  /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
-  scroller;
-
-  insideDOM;
-
-  timeoutID;
 
   render() {
     const {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import shortid from "shortid";
 
-import { reverse } from "../../../../utils/sequence";
+import { reverse } from "../../../utils/sequence";
 
 /**
  * a single row of primers. Multiple of these may be in one seqBlock
@@ -16,7 +16,6 @@ class PrimerRow extends React.PureComponent {
       findXAndWidth,
       firstBase,
       lastBase,
-      resizing,
       fullSeq,
       charWidth: characterWidth,
       fontSize,
@@ -75,14 +74,14 @@ class PrimerRow extends React.PureComponent {
     height *= 0.4;
 
     const rectProps = {
-      shapeRendering: resizing ? "optimizeSpeed" : "geometricPrecision"
+      shapeRendering: "geometricPrecision"
     };
 
     const textProps = {
       alignmentBaseline: "middle",
       cursor: "pointer",
       lengthAdjust: "spacing",
-      textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility",
+      textRendering: "optimizeLegibility",
       style: {
         color: "black",
         fontWeight: 150
@@ -637,7 +636,6 @@ export default class PrimerRows extends React.PureComponent {
       onUnmount,
       firstBase,
       lastBase,
-      resizing,
       fullSeq,
       charWidth,
       zoomed,
@@ -672,7 +670,6 @@ export default class PrimerRows extends React.PureComponent {
               findXAndWidth={findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
-              resizing={resizing}
               fullSeq={fullSeq}
               direction={direction}
               charWidth={charWidth}

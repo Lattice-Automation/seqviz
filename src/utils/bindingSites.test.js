@@ -1,4 +1,4 @@
-import findAllBindingSites from "./findAllBindingSites.js";
+import primerBindingSites from "./bindingSites";
 
 describe("Primer Binding Sites", () => {
   const testVector =
@@ -57,7 +57,7 @@ describe("Primer Binding Sites", () => {
   };
 
   it("finds binding sites", () => {
-    const testBindingSites = findAllBindingSites(
+    const testBindingSites = primerBindingSites(
       [testPrimerOne, testPrimerTwo],
       testVector
     );
@@ -66,7 +66,7 @@ describe("Primer Binding Sites", () => {
 
   it("correctly find binding sites that aren't perfect matches", () => {
     const primerSequence = testPrimerTwo.seq.toLowerCase();
-    const testBindingSites = findAllBindingSites(
+    const testBindingSites = primerBindingSites(
       [testPrimerOne, testPrimerTwo],
       testVector
     );
@@ -85,7 +85,7 @@ describe("Primer Binding Sites", () => {
   });
 
   it("correctly find binding sites that crosses zero index", () => {
-    const testBindingSites = findAllBindingSites([testPrimerTwo], testVector);
+    const testBindingSites = primerBindingSites([testPrimerTwo], testVector);
     const bindingSiteCrossZero = testBindingSites.filter(
       binding => binding.start > binding.end
     );
@@ -93,7 +93,7 @@ describe("Primer Binding Sites", () => {
   });
 
   it("binding sites of primers with overhang all have the correct length", () => {
-    const testBindingSites = findAllBindingSites([testPrimerThree], testVector);
+    const testBindingSites = primerBindingSites([testPrimerThree], testVector);
     const seqLength =
       testPrimerThree.seq.length + testPrimerThree.overhang.length;
     const bindingSitesCorrectLength = testBindingSites.filter(

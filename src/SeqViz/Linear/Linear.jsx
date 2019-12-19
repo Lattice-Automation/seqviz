@@ -1,15 +1,15 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 
 import { createLinearTranslations } from "../../utils/sequence";
-import withViewerHOCs from "../handlers";
 import {
   createMultiRows,
   createSingleRows,
   stackElements
 } from "../elementsToRows";
-import findAllBindingSites from "../findAllBindingSites";
-import InfiniteScroll from "./InfiniteScroll/InfiniteScroll.jsx";
+import withViewerHOCs from "../handlers";
+import bindingSites from "../../utils/bindingSites";
+import InfiniteScroll from "./InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 
 import "./Linear.scss";
@@ -35,13 +35,10 @@ import "./Linear.scss";
  * primers: an array of primers to show above and below the seq
  */
 class Linear extends React.Component {
-  shouldComponentUpdate = nextProps => {
-    // check whether we even want to update props. Don't do anything if relevant prop
-    // have not changed
-    const { name, ...rest } = nextProps;
-    const { name: origName, ...origRest } = this.props;
-    return !isEqual(rest, origRest);
-  };
+  /**
+   * Deep equality comparison
+   */
+  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
 
   /**
    * given all the information needed to render all the seqblocks (ie, sequence, compSeq
@@ -71,12 +68,12 @@ class Linear extends React.Component {
       size,
       onUnmount,
 
-      findState: { searchResults = [], searchIndex }
+      search
     } = this.props;
 
     let { primers } = this.props;
 
-    primers = findAllBindingSites(primers, seq);
+    primers = bindingSites(primers, seq);
 
     const forwardPrimers = primers.filter(primer => primer.direction === 1);
     const reversePrimers = primers.filter(primer => primer.direction === -1);
@@ -135,8 +132,8 @@ class Linear extends React.Component {
       : new Array(arrSize).fill([]);
 
     const searchRows =
-      searchResults && searchResults.length
-        ? createSingleRows(searchResults, bpsPerBlock, arrSize)
+      search && search.length
+        ? createSingleRows(search, bpsPerBlock, arrSize)
         : new Array(arrSize).fill([]);
 
     const translationRows = translations.length
@@ -206,7 +203,6 @@ class Linear extends React.Component {
           cutSiteRows={cutSiteRows[i]}
           searchRows={searchRows[i]}
           translations={translationRows[i]}
-          currSearchIndex={searchIndex}
           firstBase={firstBase}
           onUnmount={onUnmount}
           fullSeq={seq}
