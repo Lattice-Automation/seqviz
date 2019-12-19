@@ -45,7 +45,7 @@
     "patch": "npm run test:ci && npm version patch && npm run update",
     "start": "PORT=8000 node scripts/start.js",
     "test": "node scripts/test.js",
-    "test:ci": "CI=true npm run test"
+    "test:ci": "CI=true npm run test && npm run build"
   },
   "babel": {
     "presets": [
