@@ -33,7 +33,7 @@ export default class Primers extends React.PureComponent {
     let currTRadius = currBRadius - lineHeight; // top radius
 
     return (
-      <g id="circular-primers">
+      <g className="la-vz-circular-primers">
         {primers.reduce((acc, primerRows, i) => {
           if (i) {
             currBRadius -= lineHeight + 3;

@@ -1,11 +1,10 @@
-import { isEqual } from "lodash";
 import * as React from "react";
+import { isEqual } from "lodash";
 import sizeMe from "react-sizeme";
 
-import { cutSitesInRows } from "../utils/digest/digest";
 import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
-import seqSearch from "./find";
+import CentralIndexContext from "./handlers/centralIndex";
 
 import "./SeqViewer.scss";
 
@@ -14,49 +13,9 @@ import "./SeqViewer.scss";
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component {
-  static WIDTH_MULTIPLIER = 0.97;
-
-  constructor(props) {
-    super(props);
-    this.state = { resizing: false };
-  }
-
-  componentDidMount = () => {
-    const {
-      searchQuery: { query, mismatch },
-      seq,
-      setPartState,
-      onSearch
-    } = this.props;
-
-    const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
-    onSearch({ searchResults, searchIndex });
-    setPartState({ findState: { searchResults, searchIndex } });
-  };
-
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps, nextState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
-
-  componentDidUpdate = prevProps => {
-    const {
-      searchQuery: { query, mismatch },
-      seq,
-      setPartState,
-      onSearch
-    } = this.props;
-
-    const {
-      searchQuery: { query: prevQuery, mismatch: prevMismatch },
-      seq: prevSeq
-    } = prevProps;
-
-    if (query !== prevQuery || mismatch !== prevMismatch || seq !== prevSeq) {
-      const { searchResults, searchIndex } = seqSearch(query, mismatch, seq);
-      onSearch({ searchResults, searchIndex });
-      setPartState({ findState: { searchResults, searchIndex } });
-    }
-  };
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed
@@ -74,7 +33,7 @@ class SeqViewer extends React.Component {
 
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of zoom currently active
-    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.6) || 1; // width / 1 * seqFontSize
+    let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.4) || 1; // width / 1 * seqFontSize
 
     if (zoom <= 5) {
       bpsPerBlock *= 3;
@@ -151,14 +110,12 @@ class SeqViewer extends React.Component {
   };
 
   render() {
-    const { Circular: circular, seq, enzymes, size, style } = this.props;
+    const { Circular: circular, seq, cutSites, size, style } = this.props;
 
     if (!size.width && !size.height && style) {
       size.width = style.width; // for testing, mostly
       size.height = style.height;
     }
-
-    const cutSites = enzymes.length ? cutSitesInRows(seq, enzymes) : [];
 
     return (
       <div
@@ -166,12 +123,18 @@ class SeqViewer extends React.Component {
         style={{ zIndex: circular ? 2 : 3 }}
       >
         {circular && (
-          <CircularViewer
-            {...this.props}
-            {...this.state}
-            {...this.circularProps()}
-            cutSites={cutSites}
-          />
+          <CentralIndexContext.Consumer>
+            {({ circular, setCentralIndex }) => (
+              <CircularViewer
+                {...this.props}
+                {...this.state}
+                {...this.circularProps()}
+                centralIndex={circular}
+                setCentralIndex={setCentralIndex}
+                cutSites={cutSites}
+              />
+            )}
+          </CentralIndexContext.Consumer>
         )}
         {!circular && (
           <LinearViewer

@@ -1,27 +1,7 @@
-#config-root {
-  margin: 1px;
-  padding: 5px;
-  order: 1;
-  flex: 1 0 auto;
-}
-
 #app-root {
   order: 2;
   flex: 1 1 auto;
   overflow: hidden;
-}
-
-#data-root {
-  margin: 1px;
-  padding: 5px;
-  order: 3;
-  flex: 1 0 auto;
-}
-#enzymes {
-  height: 1.5em;
-}
-#enzyme {
-  display: inline-block;
 }
 
 #submit:hover {

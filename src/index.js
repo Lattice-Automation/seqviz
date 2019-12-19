@@ -7,22 +7,6 @@ import { Viewer } from "./viewer";
 
 import "./index.css";
 
-// const { whyDidYouUpdate } = require("why-did-you-update");
-// whyDidYouUpdate(React);
-
-// const parts = [
-//   "KJ668651.1",
-//   "BBa_E0040",
-//   pUC,
-//   "ATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAAATCGAAAAATTTTTGGGGGCCCCCAAAAAGGGGGGAAA",
-//   ""
-// ];
-// let part = parts[Math.floor(Math.random() * parts.length)];
-// const part = "KJ668651.1";
-// const part = "BBa_K1598008";
-// const part = "BBa_E0040";
-
-// const types = ["circular", "linear", "both"];
 const type = "both";
 
 const annotations = true;
@@ -31,15 +15,6 @@ const complement = true;
 const index = true;
 
 const viewerInput = {
-  // name: "test",
-  // annotations: [
-  //   {
-  //     name: "",
-  //     start: 0,
-  //     end: 5
-  //   }
-  // ],
-  // seq: "ATGAT",
   accession: "BBa_K1598008",
   viewer: type,
   showAnnotations: annotations,
@@ -48,34 +23,13 @@ const viewerInput = {
   showIndex: index,
   zoom: { linear: 50 },
   colors: [],
-  bpColors: {
-    a: "#FF0000",
-    t: "#00ff00"
-  },
-  //   onSelection: selection => {
-  //     console.log("Your Selection: ", selection);
-  //   },
   onSearch: results => {
     console.log("Your Search Results: ", results);
   },
-  searchNext: {
-    key: "a",
-    meta: false,
-    ctrl: false,
-    shift: false,
-    alt: false
-  },
-  copySeq: {
-    key: "c",
-    meta: true,
-    ctrl: false,
-    shift: false,
-    alt: false
-  },
-  // searchQuery: { query: "GCGGX" },
+  search: { query: "gtacc" },
   backbone: "pSB1C3",
-  enzymes: []
-  // translations: [{ start: 0, end: 89, direction: 1 }]
+  enzymes: ["EcoRI"],
+  copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey)
 };
 
 // const viewerInput = {

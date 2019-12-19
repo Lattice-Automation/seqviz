@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import Annotations from "./Annotations/Annotations.jsx";
-import CutSiteRow from "./CutSites/CutSites.jsx";
-import IndexRow from "./Index/Index.jsx";
-import LinearFind from "./LinearFind/LinearFind.jsx";
-import Primers from "./Primers/Primers.jsx";
-import Selection from "./Selection/Selection.jsx";
-import TranslationRows from "./Translations/Translations.jsx";
+import Annotations from "./Annotations.jsx";
+import CutSiteRow from "./CutSites.jsx";
+import IndexRow from "./Index.jsx";
+import LinearFind from "./Find.jsx";
+import Primers from "./Primers.jsx";
+import Selection from "./Selection.jsx";
+import TranslationRows from "./Translations.jsx";
 
 /**
  * SeqBlock
@@ -138,14 +138,13 @@ export default class SeqBlock extends React.PureComponent {
       cutSiteRows,
       searchRows,
       translations,
-      currSearchIndex,
       blockHeight,
 
       showIndex,
       showComplement,
       showPrimers,
 
-      seqSelection,
+      selection,
       seqFontSize,
       firstBase,
       size,
@@ -156,7 +155,6 @@ export default class SeqBlock extends React.PureComponent {
       inputRef,
       id,
       onUnmount,
-      resizing,
 
       charWidth,
       zoomed
@@ -175,7 +173,7 @@ export default class SeqBlock extends React.PureComponent {
       lengthAdjust: "spacing",
       textAnchor: "start",
       textLength: size.width,
-      textRendering: resizing ? "optimizeSpeed" : "optimizeLegibility"
+      textRendering: "optimizeLegibility"
     };
 
     const lastBase = firstBase + seq.length;
@@ -261,7 +259,7 @@ export default class SeqBlock extends React.PureComponent {
 
     const filteredSearchRows = showComplement
       ? searchRows
-      : searchRows.filter(search => search.direction === 1);
+      : searchRows.filter(r => r.direction === 1);
 
     return (
       <svg
@@ -276,7 +274,7 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
-            seqSelection={seqSelection}
+            selection={selection}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
             inputRef={inputRef}
@@ -285,6 +283,16 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             fullSeq={fullSeq}
           />
+          <Selection.Edges
+            lastBase={lastBase}
+            findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            onUnmount={onUnmount}
+            selection={selection}
+            selectEdgeHeight={selectEdgeHeight}
+          />
           {searchRows.length > 0 && (
             <LinearFind
               {...this.props}
@@ -292,7 +300,6 @@ export default class SeqBlock extends React.PureComponent {
               findXAndWidth={this.findXAndWidth}
               indexYDiff={indexYDiff}
               compYDiff={compYDiff}
-              currSearchIndex={currSearchIndex}
               seqBlockRef={this}
               lastBase={lastBase}
             />
@@ -335,16 +342,6 @@ export default class SeqBlock extends React.PureComponent {
               zoomed={zoomed}
             />
           )}
-          <Selection.Edges
-            lastBase={lastBase}
-            findXAndWidth={this.findXAndWidth}
-            firstBase={firstBase}
-            fullSeq={fullSeq}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            seqSelection={seqSelection}
-            selectEdgeHeight={selectEdgeHeight}
-          />
           {showIndex && (
             <IndexRow
               {...this.props}
@@ -380,19 +377,16 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
           />
-          {filteredSearchRows.length ? (
-            <LinearFind
-              {...this.props}
-              filteredRows={filteredSearchRows}
-              findXAndWidth={this.findXAndWidth}
-              indexYDiff={indexYDiff}
-              compYDiff={compYDiff}
-              currSearchIndex={currSearchIndex}
-              seqBlockRef={this}
-              lastBase={lastBase}
-              listenerOnly
-            />
-          ) : null}
+          <LinearFind
+            {...this.props}
+            filteredRows={filteredSearchRows}
+            findXAndWidth={this.findXAndWidth}
+            indexYDiff={indexYDiff}
+            compYDiff={compYDiff}
+            seqBlockRef={this}
+            lastBase={lastBase}
+            listenerOnly
+          />
         </g>
       </svg>
     );

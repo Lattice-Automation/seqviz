@@ -1,13 +1,6 @@
 import * as React from "react";
 
 /**
- * CutSites
- *
- * a component shown above the sequence viewer that shows the name of the
- * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
- */
-
-/**
  * on hover, an enzyme recognition site should have an opacity of 0.5. 0 otherwise
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
  *
@@ -24,6 +17,12 @@ const hoverCutSite = (className, on = false) => {
   }
 };
 
+/**
+ * CutSites
+ *
+ * a component shown above the sequence viewer that shows the name of the
+ * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
+ */
 const CutSites = props => {
   const {
     zoom: { linear: zoom },
@@ -116,7 +115,7 @@ const CutSites = props => {
   };
 
   return (
-    <g className="cutSites">
+    <g className="la-vz-cut-sites">
       {sitesWithX.map(c => {
         // prevent double rendering, by placing the indeces only in the seqBlock
         // that they need to be shown. Important for the zero-index edge case
@@ -181,7 +180,7 @@ const CutSites = props => {
                 width="1px"
                 height={lineHeight}
                 x={c.cutX - 0.5}
-                y={6 + yDiff}
+                y={lineHeight / 4 + yDiff}
               />
             ) : null}
             {showIndex && zoom > 10 ? (
@@ -189,7 +188,7 @@ const CutSites = props => {
                 width={connectorWidth}
                 height="1px"
                 x={connectorX - 0.5}
-                y={lineHeight + 6 + yDiff}
+                y={lineHeight * 1.25 + yDiff}
               />
             ) : null}
             {complementCutSite && zoom > 10 ? (
@@ -197,7 +196,7 @@ const CutSites = props => {
                 width="1px"
                 height={lineHeight + 1.5}
                 x={c.hangX - 0.5}
-                y={lineHeight + 6 + yDiff}
+                y={lineHeight * 1.25 + yDiff}
               />
             ) : null}
           </React.Fragment>

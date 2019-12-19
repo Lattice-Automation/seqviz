@@ -1,14 +1,16 @@
 import * as React from "react";
+import { isEqual } from "lodash";
 
-import findAllBindingSites from "../findAllBindingSites";
+import bindingSites from "../../utils/bindingSites";
 import withViewerHOCs from "../handlers";
 import { stackElements } from "../elementsToRows";
-import Annotations from "./Annotations/Annotations.jsx";
-import Index from "./Index/Index.jsx";
-import Labels from "./Labels/Labels.jsx";
-import Selection from "./Selection/Selection.jsx";
-import CutSites from "./CutSites/CutSites.jsx";
-import Primers from "./Primers/Primers.jsx";
+import CentralIndexContext from "../handlers/centralIndex";
+import Annotations from "./Annotations.jsx";
+import Index from "./Index.jsx";
+import Labels from "./Labels.jsx";
+import Selection from "./Selection.jsx";
+import CutSites from "./CutSites.jsx";
+import Primers from "./Primers.jsx";
 
 import "./Circular.scss";
 
@@ -16,14 +18,16 @@ import "./Circular.scss";
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
-class Circular extends React.PureComponent {
+class Circular extends React.Component {
+  static contextType = CentralIndexContext;
+
   static getDerivedStateFromProps = nextProps => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
       nextProps.seq.length
     );
-    const primers = findAllBindingSites(nextProps.primers, nextProps.seq);
+    const primers = bindingSites(nextProps.primers, nextProps.seq);
     const primersInRows = stackElements(primers, nextProps.seq.length);
 
     /**
@@ -94,6 +98,11 @@ class Circular extends React.PureComponent {
   };
 
   /**
+   * Deep equality comparison
+   */
+  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
+
+  /**
    * find the rotation transformation needed to put a child element in the
    * correct location around the plasmid
    *
@@ -102,10 +111,11 @@ class Circular extends React.PureComponent {
    *
    * @return {Coor}
    */
-
   getRotation = index => {
-    const { center, circularCentralIndex: centralIndex } = this.props;
+    const { center } = this.props;
     const { seqLength } = this.state;
+    const centralIndex = this.context.circular;
+
     // how many degrees should it be rotated?
     const adjustedIndex = index - centralIndex;
     const startPerc = adjustedIndex / seqLength;
@@ -125,9 +135,9 @@ class Circular extends React.PureComponent {
    * @return {Coor}
    */
   findCoor = (index, radius, rotate = false) => {
-    const { center, circularCentralIndex } = this.props;
+    const { center } = this.props;
     const { seqLength } = this.state;
-    const rotatedIndex = rotate ? index - circularCentralIndex : index;
+    const rotatedIndex = rotate ? index - this.context.circular : index;
     const lengthPerc = rotatedIndex / seqLength;
     const lengthPercCentered = lengthPerc - 0.25;
     const radians = lengthPercCentered * Math.PI * 2;
@@ -249,7 +259,6 @@ class Circular extends React.PureComponent {
       center,
       radius,
       yDiff,
-      resizing,
       size,
 
       seq,
@@ -278,8 +287,7 @@ class Circular extends React.PureComponent {
       getRotation,
       generateArc,
       rotateCoor,
-      inputRef,
-      resizing
+      inputRef
     };
 
     // an inward shift is needed for primers if the annotations are shown
@@ -344,15 +352,13 @@ class Circular extends React.PureComponent {
               totalRows={totalRows}
             />
           )}
-          {!resizing && (
-            <Labels
-              {...this.props}
-              {...general}
-              labels={outerLabels}
-              size={size}
-              yDiff={yDiff}
-            />
-          )}
+          <Labels
+            {...this.props}
+            {...general}
+            labels={outerLabels}
+            size={size}
+            yDiff={yDiff}
+          />
         </g>
       </svg>
     );

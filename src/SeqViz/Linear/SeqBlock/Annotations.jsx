@@ -2,7 +2,7 @@ import * as React from "react";
 import shortid from "shortid";
 import tinycolor from "tinycolor2";
 
-import { COLOR_BORDER_MAP } from "../../../../utils/colors";
+import { COLOR_BORDER_MAP } from "../../../utils/colors";
 
 export default class AnnotationRows extends React.PureComponent {
   render() {
@@ -57,6 +57,9 @@ class AnnotationRow extends React.PureComponent {
     }
   };
 
+  /**
+   * Given a color, create a slightly darker color
+   */
   calcBorderColor = fillColor => {
     const tColor = tinycolor(fillColor);
     const HslColor = tColor.toHsl();
@@ -177,7 +180,7 @@ class AnnotationRow extends React.PureComponent {
       linePath = `${topLeft} ${topRight}`;
     } else {
       let bottomRight = `L ${width} ${height}`; // flat right edge
-      if ((overflowRight && width > 10 * cW) || crossZero) {
+      if ((overflowRight && width > 2 * cW) || crossZero) {
         bottomRight = `
 				L ${width - cW} ${cH}
 				L ${width} ${2 * cH}
@@ -190,7 +193,7 @@ class AnnotationRow extends React.PureComponent {
       }
 
       let bottomLeft = `L 0 ${height} L 0 0`; // flat left edge
-      if (overflowLeft && width > 10 * cW) {
+      if (overflowLeft && width > 2 * cW) {
         bottomLeft = `
 				L 0 ${height}
 				L ${cW} ${3 * cH}
@@ -233,9 +236,7 @@ class AnnotationRow extends React.PureComponent {
     if (a.type === "insert") {
       strokeColor = color;
     } else {
-      strokeColor = COLOR_BORDER_MAP[color]
-        ? COLOR_BORDER_MAP[color]
-        : this.calcBorderColor(color);
+      strokeColor = COLOR_BORDER_MAP[color] || this.calcBorderColor(color);
     }
 
     const annotationPath = (

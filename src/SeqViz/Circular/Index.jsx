@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import CentralIndexContext from "../handlers/centralIndex";
+
 /**
  * this component renders the following:
  * 		1. the Name of the part (center or bottom)
@@ -12,8 +14,15 @@ import * as React from "react";
  * are too many elements in the circular viewer and the name won't fit
  */
 export default class Index extends React.PureComponent {
+  static contextType = CentralIndexContext;
+
   static getDerivedStateFromProps = nextProps => {
-    const { circularCentralIndex: centralIndex, seqLength } = nextProps;
+    const { seqLength } = nextProps;
+    let centralIndex = 0;
+    if (this.context) {
+      centralIndex = this.context.circular;
+    }
+
     const tickCount = 6;
     // make each increment a multiple of 10 with two sig figs
     const increments = Math.floor(seqLength / tickCount);
@@ -48,7 +57,6 @@ export default class Index extends React.PureComponent {
     const {
       seq,
       compSeq,
-      circularCentralIndex: centralIndex,
       seqLength,
       lineHeight,
       radius,
@@ -56,6 +64,7 @@ export default class Index extends React.PureComponent {
       getRotation
     } = this.props;
     const { indexInc } = this.state;
+    const centralIndex = this.context.circular;
 
     // we should show all basepairs, with only 4 ticks
     const seqForCircular = seq + seq;
@@ -101,7 +110,6 @@ export default class Index extends React.PureComponent {
       getRotation,
       generateArc,
       findCoor,
-      resizing,
       totalRows
     } = this.props;
     const { ticks } = this.state;
@@ -163,7 +171,7 @@ export default class Index extends React.PureComponent {
       fill: "transparent",
       stroke: "black",
       strokeWidth: 2.5,
-      shapeRendering: resizing ? "optimizeSpeed" : "geometricPrecision"
+      shapeRendering: "geometricPrecision"
     };
     const tickTextStyle = {
       textAnchor: "middle",

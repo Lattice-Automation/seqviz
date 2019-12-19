@@ -17,8 +17,7 @@ export default class CutSites extends React.PureComponent {
       seqLength,
       getRotation,
       inputRef,
-      generateArc,
-      resizing
+      generateArc
     } = this.props;
     const { id, start } = cutSite;
     let { sequenceCutIdx, complementCutIdx, end } = cutSite;
@@ -78,7 +77,7 @@ export default class CutSites extends React.PureComponent {
       stroke: "black",
       strokeWidth: 1,
       fill: fill,
-      shapeRendering: resizing ? "optimizeSpeed" : "auto",
+      shapeRendering: "auto",
       cursor: "pointer",
       fillOpacity: 0
     };
@@ -107,8 +106,7 @@ export default class CutSites extends React.PureComponent {
             ref: id,
             start: start,
             end: end,
-            type: "ENZYME",
-            element: null
+            type: "ENZYME"
           })}
         />
       </g>
