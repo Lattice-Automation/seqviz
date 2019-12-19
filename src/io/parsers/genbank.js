@@ -141,7 +141,7 @@ export default async (fileInput, fileName, colors = []) =>
         // Currently interpreting a primer
         let primerFlag = false;
 
-        FEATURES_ROWS.forEach(r => {
+        FEATURES_ROWS.forEach((r, row_i) => {
           // in the example above, the following converts it to ['source', '1..5028']
           const currLine = r.split(/\s{2,}/g).filter(l => l);
           if (currLine.length > 1) {
@@ -186,7 +186,7 @@ export default async (fileInput, fileName, colors = []) =>
               primerFlag = false;
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
-                ...annotationFactory(`${type}-${start}`),
+                ...annotationFactory(`${type}-${start}`, row_i),
                 type,
                 start,
                 end,

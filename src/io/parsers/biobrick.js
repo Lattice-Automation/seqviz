@@ -57,13 +57,16 @@ export default async (file, options) =>
 
       // parse the iGEM annotations
       const annotations = features
-        .map(f => {
+        .map((f, i) => {
           if (!f) return null;
 
           const { direction, startpos, endpos, type, title } = f;
 
           return {
-            ...annotationFactory(title[0] || `${direction[0]}-${startpos[0]}`),
+            ...annotationFactory(
+              title[0] || `${direction[0]}-${startpos[0]}`,
+              i
+            ),
             direction: direction[0] === "forward" ? 1 : -1,
             start: +startpos[0] || 0,
             end: +endpos[0] || 0,
@@ -75,7 +78,7 @@ export default async (file, options) =>
 
       // add another annotation for the backbone
       annotations.push({
-        ...annotationFactory(backbone.name),
+        ...annotationFactory(backbone.name, annotations.length),
         start: firstElement(seq_data.seq_data).length,
         end: 0
       });

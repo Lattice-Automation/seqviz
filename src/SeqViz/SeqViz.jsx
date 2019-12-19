@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
+import { cutSitesInRows } from "../utils/digest/digest";
 import { directionality, dnaComplement } from "../utils/parser";
 import search from "../utils/search";
 import { annotationFactory } from "../utils/sequence";
@@ -96,6 +97,7 @@ export default class SeqViz extends React.Component {
         linear: 0,
         setCentralIndex: this.setCentralIndex
       },
+      cutSites: [],
       selection: { ...defaultSelection },
       search: [],
       annotations: this.parseAnnotations(props.annotations, props.seq),
@@ -107,7 +109,13 @@ export default class SeqViz extends React.Component {
     this.setPart();
   };
 
-  componentDidUpdate = async ({ accession, backbone, part, search }) => {
+  componentDidUpdate = async ({
+    accession,
+    backbone,
+    enzymes,
+    part,
+    search
+  }) => {
     if (
       accession !== this.props.accession ||
       backbone !== this.props.backbone
@@ -118,6 +126,8 @@ export default class SeqViz extends React.Component {
       search.mismatch !== this.props.search.mismatch
     ) {
       this.search(part);
+    } else if (!isEqual(enzymes, this.props.enzymes)) {
+      this.cut();
     }
   };
 
@@ -136,6 +146,7 @@ export default class SeqViz extends React.Component {
         }
       });
       this.search(part);
+      this.cut(part);
     } else if (file) {
       const parts = await filesToParts(file, this.props);
       this.setState({
@@ -145,6 +156,7 @@ export default class SeqViz extends React.Component {
         }
       });
       this.search(parts[0]);
+      this.cut(parts[0]);
     }
   };
 
@@ -172,12 +184,25 @@ export default class SeqViz extends React.Component {
   };
 
   /**
+   * Find and save enzymes' cutsite locations
+   */
+  cut = (part = null) => {
+    const { enzymes, seq } = this.props;
+
+    const cutSites = enzymes.length
+      ? cutSitesInRows(seq || part.seq, enzymes)
+      : [];
+
+    this.setState({ cutSites });
+  };
+
+  /**
    * Modify the annotations to add unique ids, fix directionality and
    * modulo the start and end of each to match SeqViz's API
    */
   parseAnnotations = (annotations, seq) =>
-    (annotations || []).map(a => ({
-      ...annotationFactory(a.name),
+    (annotations || []).map((a, i) => ({
+      ...annotationFactory(a.name, i),
       ...a,
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
@@ -245,6 +270,7 @@ export default class SeqViz extends React.Component {
                   compSeq={compSeq}
                   name={name}
                   seq={seq}
+                  cutSites={this.state.cutSites}
                   Circular
                 />
               )}
@@ -259,6 +285,7 @@ export default class SeqViz extends React.Component {
                   compSeq={compSeq}
                   name={name}
                   seq={seq}
+                  cutSites={this.state.cutSites}
                   Circular={false}
                 />
               )}

@@ -2,7 +2,6 @@ import * as React from "react";
 import { isEqual } from "lodash";
 import sizeMe from "react-sizeme";
 
-import { cutSitesInRows } from "../utils/digest/digest";
 import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
 import CentralIndexContext from "./handlers/centralIndex";
@@ -111,14 +110,12 @@ class SeqViewer extends React.Component {
   };
 
   render() {
-    const { Circular: circular, seq, enzymes, size, style } = this.props;
+    const { Circular: circular, seq, cutSites, size, style } = this.props;
 
     if (!size.width && !size.height && style) {
       size.width = style.width; // for testing, mostly
       size.height = style.height;
     }
-
-    const cutSites = enzymes.length ? cutSitesInRows(seq, enzymes) : [];
 
     return (
       <div
