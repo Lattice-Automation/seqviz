@@ -14,7 +14,7 @@
 ---
 
 <div align="center">
-  <img width="600" src="https://media.giphy.com/media/KH8oxeI0eeu4rpAi0O/giphy.gif">
+  <img width="600" src="https://gfycat.com/optimalunequaledadmiralbutterfly">
 </div>
 
 ---
