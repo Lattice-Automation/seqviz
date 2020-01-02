@@ -14,7 +14,7 @@
 ---
 
 <div align="center">
-  <img width="600" src="http://www.giphy.com/gifs/Wm9c4F1QArALrp918A">
+  <img width="600" src="https://giphy.com/gifs/dna-biology-seqviz-H6DXUya1g95aAWCWvW">
 </div>
 
 ---
