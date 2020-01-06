@@ -74,11 +74,9 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
-
 ```html
-<script src="https://cdn.latticeautomation.com/libs/seqviz/3.0.2/seqviz.min.js"></script>
+<script src="https://cdn.latticeautomation.com/libs/seqviz/3.0.3/seqviz.min.js"></script>
 ```
-
 <!-- /cdn-example -->
 
 ### Instantiation
