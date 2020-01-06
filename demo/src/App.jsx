@@ -417,7 +417,7 @@ export class SequenceViewer extends Component {
           shift: false,
           alt: false
         }}
-        enzymes={Object.values(enzymes)}
+        enzymes={enzymes}
         zoom={{ linear: lzoom }}
       />
     );

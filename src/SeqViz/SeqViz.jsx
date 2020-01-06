@@ -109,13 +109,10 @@ export default class SeqViz extends React.Component {
     this.setPart();
   };
 
-  componentDidUpdate = async ({
-    accession,
-    backbone,
-    enzymes,
-    part,
-    search
-  }) => {
+  componentDidUpdate = async (
+    { accession, backbone, enzymes, search },
+    { part }
+  ) => {
     if (
       accession !== this.props.accession ||
       backbone !== this.props.backbone
@@ -127,7 +124,7 @@ export default class SeqViz extends React.Component {
     ) {
       this.search(part);
     } else if (!isEqual(enzymes, this.props.enzymes)) {
-      this.cut();
+      this.cut(part);
     }
   };
 
@@ -190,7 +187,7 @@ export default class SeqViz extends React.Component {
     const { enzymes, seq } = this.props;
 
     const cutSites = enzymes.length
-      ? cutSitesInRows(seq || part.seq, enzymes)
+      ? cutSitesInRows(seq || (part && part.seq) || "", enzymes)
       : [];
 
     this.setState({ cutSites });
