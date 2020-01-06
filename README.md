@@ -14,7 +14,7 @@
 ---
 
 <div align="center">
-  <img width="600" src="https://media.giphy.com/media/H6DXUya1g95aAWCWvW/giphy.gif">
+  <img src="./demo/seqviz-gif-v2.gif">
 </div>
 
 ---
@@ -74,9 +74,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://cdn.latticeautomation.com/libs/seqviz/3.0.2/seqviz.min.js"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
