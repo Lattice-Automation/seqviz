@@ -120,20 +120,20 @@ export class SideBarMenu extends Component {
                 searchResults={this.props.searchResults}
               />
             </Menu.Item>
-            <Menu.Item as="a" className="options-checkbox">
+            {/* <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="annotations"
                 label="Show annotations"
               />
-            </Menu.Item>
-            <Menu.Item as="a" className="options-checkbox">
+            </Menu.Item> */}
+            {/* <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
                 name="primers"
                 label="Show primers"
               />
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
                 setDemoState={setDemoState}
