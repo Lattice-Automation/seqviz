@@ -243,12 +243,12 @@ export default class InfiniteScroll extends React.PureComponent {
       percFromTop = Math.min(1, percFromTop);
       let scaledPerc = percFromTop - 0.9;
       scaledPerc *= 10;
-      const scaledScroll = 30 * scaledPerc;
+      const scaledScroll = 15 * scaledPerc;
       this.incrementScroller(scaledScroll);
     } else if (percFromTop < 0.1) {
       percFromTop = 0.1 - Math.max(0, percFromTop);
       const scaledPerc = 10 * percFromTop;
-      const scaledScroll = -30 * scaledPerc;
+      const scaledScroll = -15 * scaledPerc;
       this.incrementScroller(scaledScroll);
     } else {
       this.stopIncrementingScroller();
