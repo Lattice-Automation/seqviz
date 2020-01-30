@@ -13,7 +13,7 @@
     "plasmid",
     "plasmid viewer"
   ],
-  "homepage": "https://github.com/Lattice-Automation/seqviz/blob/master/README.md",
+  "homepage": "https://github.com/Lattice-Automation/seqviz",
   "bugs": {
     "url": "https://github.com/Lattice-Automation/seqviz/issues",
     "email": "contact@latticeautomation.com"
@@ -28,22 +28,23 @@
     "**/*.scss"
   ],
   "files": [
-    "./dist/index.js",
+    "./dist/**.*.js",
     "LICENSE",
     "README.md"
   ],
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "unpkg": "./dist/seqviz.min.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
     "demo": "cd demo && npm install && npm run deploy && cd ../..",
     "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && aws s3 cp ./dist/seqviz.cdn.js s3://lattice-cdn-s3/libs/seqviz/\"$PKG_VERSION\"/ && npm run demo",
-    "markdown": "node ./scripts/markdown.js ./README.md",
+    "markdown": "node ./config/scripts/markdown.js ./README.md",
     "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
     "major": "npm run test:ci && npm version major && npm run update",
     "minor": "npm run test:ci && npm version minor && npm run update",
     "patch": "npm run test:ci && npm version patch && npm run update",
-    "start": "PORT=8000 node scripts/start.js",
-    "test": "node scripts/test.js",
+    "start": "PORT=8000 node ./config/scripts/start.js",
+    "test": "node ./config/scripts/test.js",
     "test:ci": "CI=true npm run test && npm run build"
   },
   "babel": {

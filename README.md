@@ -75,7 +75,7 @@ npm install seqviz
 
 <!-- cdn-example(cmd:) -->
 ```html
-<script src="https://cdn.latticeautomation.com/libs/seqviz/3.0.4/seqviz.min.js"></script>
+<script src="unpkg.com/seqviz"></script>
 ```
 <!-- /cdn-example -->
 
