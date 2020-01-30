@@ -29,12 +29,11 @@
   ],
   "files": [
     "./dist/index.js",
-    "./dist/seqviz.min.js",
     "LICENSE",
     "README.md"
   ],
-  "main": "./dist/index.js",
-  "unpkg": "./dist/seqviz.min.js",
+  "main": "dist/index.js",
+  "unpkg": "dist/index.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
     "demo": "cd demo && npm run deploy && cd ../..",
