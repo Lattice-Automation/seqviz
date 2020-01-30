@@ -28,7 +28,8 @@
     "**/*.scss"
   ],
   "files": [
-    "./dist/**.*.js",
+    "./dist/index.js",
+    "./dist/seqviz.min.js",
     "LICENSE",
     "README.md"
   ],
