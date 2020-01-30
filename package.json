@@ -37,10 +37,9 @@
   "unpkg": "./dist/seqviz.min.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
-    "demo": "cd demo && npm install && npm run deploy && cd ../..",
-    "deploy": "PKG_VERSION=$(node -pe \"require('./package.json').version\") && npm run demo",
+    "demo": "cd demo && npm run deploy && cd ../..",
     "markdown": "node ./config/scripts/markdown.js ./README.md",
-    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish && npm run deploy",
+    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
     "major": "npm run test:ci && npm version major && npm run update",
     "minor": "npm run test:ci && npm version minor && npm run update",
     "patch": "npm run test:ci && npm version patch && npm run update",
