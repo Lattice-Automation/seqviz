@@ -19,7 +19,7 @@ const cdnBuild = {
   target: "web",
   output: {
     path: path.join(__dirname, "..", "dist"),
-    filename: "seqviz.cdn.js",
+    filename: "seqviz.min.js",
     library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true,

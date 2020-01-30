@@ -3,13 +3,13 @@ const path = require("path");
 const xmlComment = require("xml-comment-api");
 const { execSync } = require("child_process");
 
-const PACKAGE = require("../package.json");
+const PACKAGE = require("../../package.json");
 const VERSION = PACKAGE.version;
 const PKGNAME = PACKAGE.name;
 const PKGAUTHOR = PACKAGE.author;
 const PKGDESCR = PACKAGE.description;
 const PKGBUGS = PACKAGE.bugs;
-const DISTBASE = "https://cdn.latticeautomation.com/libs/seqviz/";
+const DISTBASE = "unpkg.com";
 
 /**
  * Searches for xml comments in the file and inserts package meta-data
@@ -20,7 +20,7 @@ const replaceXML = (file, cwd) => {
     .replace(
       "cdn-example",
       () =>
-        `\n\`\`\`html\n<script src="${DISTBASE}${VERSION}/${PKGNAME}.min.js"></script>\n\`\`\`\n`
+        `\n\`\`\`html\n<script src="${DISTBASE}/${PKGNAME}"></script>\n\`\`\`\n`
     )
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
