@@ -1,4 +1,4 @@
-import { isEqual, repeat, sortBy, uniqBy } from "lodash";
+import { isEqual } from "lodash";
 import shortid from "shortid";
 
 import { dnaComplement } from "../parser";
@@ -22,13 +22,13 @@ const findCutSites = (
   seqToCutLength,
   enzymeName = null
 ) => {
-  // get the recognitionSite, sequenceCutIdx, and complementCutIdx
-  let { sequenceCutIdx, complementCutIdx, recognitionSeq } = enzyme;
-  if (!recognitionSeq) {
-    ({ sequenceCutIdx, complementCutIdx, recognitionSeq } = enzymes[enzyme]);
+  // get the recognitionSite, fcut, and rcut
+  let { fcut, rcut, rseq } = enzyme;
+  if (!rseq) {
+    ({ fcut, rcut, rseq } = enzymes[enzyme]);
   }
 
-  const recogSeq = recognitionSeq.toUpperCase();
+  const recogSeq = rseq.toUpperCase();
   let recogStart = 0;
   let recogEnd = recogSeq.length;
   while (recogSeq[recogStart] === "N") {
@@ -38,11 +38,10 @@ const findCutSites = (
     recogEnd -= 1;
   }
 
-  const recogLength = recognitionSeq.length;
+  const recogLength = rseq.length;
   const nucAmbig = new RegExp(/[^ATGC]/, "gi");
-  if (nucAmbig.test(recognitionSeq))
-    recognitionSeq = translateWildNucleotides(recognitionSeq);
-  const regTest = new RegExp(recognitionSeq, "gi");
+  if (nucAmbig.test(rseq)) rseq = translateWildNucleotides(rseq);
+  const regTest = new RegExp(rseq, "gi");
 
   // this is in the forward direction, ie, when not checking the complement possibility
   // start search for cut sites
@@ -58,8 +57,8 @@ const findCutSites = (
       cutEnzymes: enzymeName
         ? { start: [enzymeName], end: [enzymeName] }
         : null, // enzymes that contributed to this cut site
-      sequenceCutIdx: index + sequenceCutIdx,
-      complementCutIdx: index + complementCutIdx,
+      fcut: index + fcut,
+      rcut: index + rcut,
       start: index,
       end: index + recogLength,
       recogStrand: 1,
@@ -67,11 +66,11 @@ const findCutSites = (
       recogEnd: index + recogEnd
     });
     startIndex = index + 1;
-    index = seqToSearch.indexOf(recognitionSeq, startIndex);
+    index = seqToSearch.indexOf(rseq, startIndex);
   }
 
   // this is in the reverse direction, ie, when checking the complement
-  const recogComp = recognitionSeq
+  const recogComp = rseq
     .split("")
     .reverse()
     .join("");
@@ -79,8 +78,8 @@ const findCutSites = (
   let { compSeq: inverComp } = dnaComplement(recogComp);
   if (nucAmbig.test(inverComp)) inverComp = translateWildNucleotides(inverComp);
 
-  const sequenceCutIdxComp = recogLength - sequenceCutIdx; // flip the cut and hang indices
-  const complementCutIdxComp = recogLength - complementCutIdx;
+  const fcutComp = recogLength - fcut; // flip the cut and hang indices
+  const rcutComp = recogLength - rcut;
 
   startIndex = 0; // restart the search, again over the template sequence
   result = regTest.exec(seqToSearch); // returns null if nothing found
@@ -92,8 +91,8 @@ const findCutSites = (
       cutEnzymes: enzymeName
         ? { start: [enzymeName], end: [enzymeName] }
         : null, // enzymes that contributed to this cut site
-      sequenceCutIdx: index + recogLength - sequenceCutIdxComp,
-      complementCutIdx: index + recogLength - complementCutIdxComp,
+      fcut: index + recogLength - fcutComp,
+      rcut: index + recogLength - rcutComp,
       start: index,
       end: index + recogLength,
       recogStrand: -1,
@@ -104,10 +103,15 @@ const findCutSites = (
     index = seqToSearch.indexOf(inverComp, startIndex);
   }
 
-  return sortBy(
-    uniqBy(cutSiteIndices, "sequenceCutIdx"),
-    c => c.sequenceCutIdx
+  // reduce so there's only one enzyme per template cut index
+  const uniqueCuts = Object.values(
+    cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {})
   );
+
+  // sort with increasing sequence cut index
+  uniqueCuts.sort((a, b) => a.fcut - b.fcut);
+
+  return uniqueCuts;
 };
 
 /**
@@ -182,17 +186,17 @@ const digestPart = (enzymeName, part, circularCheck) => {
     // versus the start index of the complement strand
     const startDiff = Math.abs(cutSequenceStart - cutComplementStart);
     if (cutSequenceStart < cutComplementStart) {
-      cutCompSeq = `${repeat("*", startDiff)}${cutCompSeq}`;
+      cutCompSeq = compSeq.padStart(startDiff, "*");
     } else if (cutSequenceStart > cutComplementStart) {
-      cutSeq = `${repeat("*", startDiff)}${cutSeq}`;
+      cutSeq = cutSeq.padStart(startDiff, "*");
     }
 
     // and now for differences in last indices at the end of the sequences
     const endDiff = Math.abs(cutSequenceEnd - cutComplementEnd);
     if (cutSequenceEnd > cutComplementEnd) {
-      cutCompSeq = `${cutCompSeq}${repeat("*", endDiff)}`;
+      cutCompSeq = cutCompSeq.padEnd(endDiff, "*");
     } else if (cutSequenceEnd < cutComplementEnd) {
-      cutSeq = `${cutSeq}${repeat("*", endDiff)}`;
+      cutSeq = cutSeq.padEnd(endDiff, "*");
     }
 
     // adjust the locations of all annotations to match their new locations
@@ -227,14 +231,14 @@ const digestPart = (enzymeName, part, circularCheck) => {
 
   const singleCut = cutSiteIndices.length === 1;
   cutSiteIndices.forEach((cutInfo, i) => {
-    const { sequenceCutIdx: seqCutIdx, complementCutIdx: compCutIdx } = cutInfo;
+    const { fcut: seqCutIdx, rcut: compCutIdx } = cutInfo;
     if (cutSiteIndices[i + 1]) {
       // not final site
       cutSeqsGenerator(
         seqCutIdx, // this site until next cut site
-        cutSiteIndices[i + 1].sequenceCutIdx,
+        cutSiteIndices[i + 1].fcut,
         compCutIdx,
-        cutSiteIndices[i + 1].complementCutIdx
+        cutSiteIndices[i + 1].rcut
       );
     } else if (circularCheck) {
       // final cut site on plasmid
@@ -242,11 +246,11 @@ const digestPart = (enzymeName, part, circularCheck) => {
         seqCutIdx, // this site until index of first cut site on other side of plasmid
         singleCut
           ? seqCutIdx + seqToCutLength // if it's the only one, add the full length
-          : cutSiteIndices[0].sequenceCutIdx + seqToCutLength, // else, stop at the first one
+          : cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
         compCutIdx,
         singleCut
           ? compCutIdx + seqToCutLength // if it's the only one, add the full length
-          : cutSiteIndices[0].complementCutIdx + seqToCutLength // else, stop at the first one
+          : cutSiteIndices[0].rcut + seqToCutLength // else, stop at the first one
       );
     } else {
       // final cut site on linear piece of dna
@@ -355,20 +359,14 @@ export const cutSitesInRows = (seq, enzymeList) => {
   // find all the cut sites for the given row
   const cutSites = filteredEnzymes.reduce((acc, e) => {
     const cuts = findCutSites(enzymes[e], seqToCut, seq.length)
-      .filter(c => !(c.sequenceCutIdx === 0 && c.complementCutIdx === 0))
+      .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: shortid.generate(),
         name: e,
         start: c.start,
         end: c.end % seq.length,
-        sequenceCutIdx:
-          c.sequenceCutIdx < seq.length
-            ? c.sequenceCutIdx
-            : c.sequenceCutIdx - seq.length,
-        complementCutIdx:
-          c.complementCutIdx < seq.length
-            ? c.complementCutIdx
-            : c.complementCutIdx - seq.length,
+        fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
+        rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
         recogStrand: c.recogStrand,
         recogStart: c.recogStart,
         recogEnd: c.recogEnd % seq.length
@@ -596,20 +594,16 @@ const addSingleDigestFragments = (
   const singleCut = cutSiteIndices.length === 1;
   let newDigestFragments = alreadyDigested;
   cutSiteIndices.forEach((cutInfo, i) => {
-    const {
-      sequenceCutIdx: seqCutIdx,
-      complementCutIdx: compCutIdx,
-      cutEnzymes
-    } = cutInfo;
+    const { fcut: seqCutIdx, rcut: compCutIdx, cutEnzymes } = cutInfo;
     if (seqCutIdx) {
       if (cutSiteIndices[i + 1]) {
         // not final site
         newDigestFragments = addFragment(
           cutEnzymes,
           seqCutIdx, // this site until next cut site
-          cutSiteIndices[i + 1].sequenceCutIdx,
+          cutSiteIndices[i + 1].fcut,
           compCutIdx,
-          cutSiteIndices[i + 1].complementCutIdx,
+          cutSiteIndices[i + 1].rcut,
           alreadyDigested
         );
       } else if (circularCheck) {
@@ -619,11 +613,11 @@ const addSingleDigestFragments = (
           seqCutIdx, // this site until index of first cut site on other side of plasmid
           singleCut
             ? seqCutIdx + seqToCutLength // if it's the only one, add the full length
-            : cutSiteIndices[0].sequenceCutIdx + seqToCutLength, // else, stop at the first one
+            : cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
           compCutIdx,
           singleCut
             ? compCutIdx + seqToCutLength // if it's the only one, add the full length
-            : cutSiteIndices[0].complementCutIdx + seqToCutLength, // else, stop at the first one
+            : cutSiteIndices[0].rcut + seqToCutLength, // else, stop at the first one
           alreadyDigested
         );
       } else {

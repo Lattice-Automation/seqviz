@@ -182,14 +182,10 @@ export const createSingleRows = (
     let { start, end } = elements[i];
 
     // special case for enzymes that have cutsites away from recog (BsaI)
-    if (elements[i].sequenceCutIdx !== undefined) {
-      const { sequenceCutIdx, complementCutIdx } = elements[i];
-      start =
-        sequenceCutIdx > end || sequenceCutIdx < start ? sequenceCutIdx : start;
-      end =
-        complementCutIdx > end || complementCutIdx < start
-          ? complementCutIdx
-          : end;
+    if (elements[i].fcut !== undefined) {
+      const { fcut, rcut } = elements[i];
+      start = fcut > end || fcut < start ? fcut : start;
+      end = rcut > end || rcut < start ? rcut : end;
     }
 
     if (start < end) {

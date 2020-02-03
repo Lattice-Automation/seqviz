@@ -2,1228 +2,1228 @@
  * NEB Restriction Enzymes
  *
  * a list of enzyme objects with their name as the key,
- * their recognition site sequence as "recognitionSeq", and cut site relative to the
- * start of the recognition site as "sequenceCutIdx", and the start of the resulting overhang
- * from the recognition site as "complementCutIdx"
+ * their recognition site sequence as "rseq", and cut site relative to the
+ * start of the recognition site as "fcut", and the start of the resulting overhang
+ * from the recognition site as "rcut"
  *
  * eg: PstI with recognition site "CTGCAG" cuts so that the break is
  * at (cutSite = 5):
  * 		..C TGCA|G..
  * 		..G|ACGT C..
  *
- * and the resulting fragment looks like (complementCutIdx = 1):
+ * and the resulting fragment looks like (rcut = 1):
  * 		..CTGCA
  * 		..G****
  *
  * @typedef {Object}  EnzymeInfo
- * @property {String}    recognitionSeq    the recognition sequence associated with the enzyme
- * @property {Number}    complementCutIdx  the index of the hangSite, relative to the recognitionSeq start
- * @property {Number}    sequenceCutIdx   the cut index of the enzyme relative to recognitionSeq start
+ * @property {String}    rseq   the recognition sequence associated with the enzyme
+ * @property {Number}    rcut   the index of the hangSite, relative to the rseq start
+ * @property {Number}    fcut   the cut index of the enzyme relative to rseq start
  */
 export default {
   "PI-SceI": {
-    recognitionSeq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
-    complementCutIdx: 11,
-    sequenceCutIdx: 15
+    rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
+    rcut: 11,
+    fcut: 15
   },
   "PI-PspI": {
-    recognitionSeq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
-    complementCutIdx: 13,
-    sequenceCutIdx: 17
+    rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
+    rcut: 13,
+    fcut: 17
   },
   "I-CeuI": {
-    recognitionSeq: "TAACTATAACGGTCCTAAGGTAGCGAA",
-    complementCutIdx: 14,
-    sequenceCutIdx: 18
+    rseq: "TAACTATAACGGTCCTAAGGTAGCGAA",
+    rcut: 14,
+    fcut: 18
   },
   "I-SceI": {
-    recognitionSeq: "TAGGGATAACAGGGTAAT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 9
+    rseq: "TAGGGATAACAGGGTAAT",
+    rcut: 5,
+    fcut: 9
   },
   AscI: {
-    recognitionSeq: "GGCGCGCC",
-    complementCutIdx: 6,
-    sequenceCutIdx: 2
+    rseq: "GGCGCGCC",
+    rcut: 6,
+    fcut: 2
   },
   AsiSI: {
-    recognitionSeq: "GCGATCGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 5
+    rseq: "GCGATCGC",
+    rcut: 3,
+    fcut: 5
   },
   FseI: {
-    recognitionSeq: "GGCCGGCC",
-    complementCutIdx: 2,
-    sequenceCutIdx: 6
+    rseq: "GGCCGGCC",
+    rcut: 2,
+    fcut: 6
   },
   NotI: {
-    recognitionSeq: "GCGGCCGC",
-    complementCutIdx: 6,
-    sequenceCutIdx: 2
+    rseq: "GCGGCCGC",
+    rcut: 6,
+    fcut: 2
   },
   PacI: {
-    recognitionSeq: "TTAATTAA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 5
+    rseq: "TTAATTAA",
+    rcut: 3,
+    fcut: 5
   },
   PmeI: {
-    recognitionSeq: "GTTTAAAC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 4
+    rseq: "GTTTAAAC",
+    rcut: 4,
+    fcut: 4
   },
   PspXI: {
-    recognitionSeq: "VCTCGAGB",
-    complementCutIdx: 6,
-    sequenceCutIdx: 2
+    rseq: "VCTCGAGB",
+    rcut: 6,
+    fcut: 2
   },
   SbfI: {
-    recognitionSeq: "CCTGCAGG",
-    complementCutIdx: 2,
-    sequenceCutIdx: 6
+    rseq: "CCTGCAGG",
+    rcut: 2,
+    fcut: 6
   },
   SfiI: {
-    recognitionSeq: "GGCCNNNNNGGCC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 8
+    rseq: "GGCCNNNNNGGCC",
+    rcut: 5,
+    fcut: 8
   },
   SgrAI: {
-    recognitionSeq: "CRCCGGYG",
-    complementCutIdx: 6,
-    sequenceCutIdx: 2
+    rseq: "CRCCGGYG",
+    rcut: 6,
+    fcut: 2
   },
   SrfI: {
-    recognitionSeq: "GCCCGGGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 4
+    rseq: "GCCCGGGC",
+    rcut: 4,
+    fcut: 4
   },
   SwaI: {
-    recognitionSeq: "ATTTAAAT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 4
+    rseq: "ATTTAAAT",
+    rcut: 4,
+    fcut: 4
   },
   BaeI: {
-    recognitionSeq: "NNNNNNNNNNNNNNNACNNNNGTAYCNNNNNNNNNNNN",
-    complementCutIdx: 33,
-    sequenceCutIdx: 38
+    rseq: "NNNNNNNNNNNNNNNACNNNNGTAYCNNNNNNNNNNNN",
+    rcut: 33,
+    fcut: 38
   },
   BbvCI: {
-    recognitionSeq: "CCTCAGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "CCTCAGC",
+    rcut: 5,
+    fcut: 2
   },
   BspQI: {
-    recognitionSeq: "GCTCTTCNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 8
+    rseq: "GCTCTTCNNNN",
+    rcut: 11,
+    fcut: 8
   },
   CspCI: {
-    recognitionSeq: "NNNNNNNNNNNNNCAANNNNNGTGGNNNNNNNNNNNN",
-    complementCutIdx: 35,
-    sequenceCutIdx: 37
+    rseq: "NNNNNNNNNNNNNCAANNNNNGTGGNNNNNNNNNNNN",
+    rcut: 35,
+    fcut: 37
   },
   PpuMI: {
-    recognitionSeq: "RGGWCCY",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "RGGWCCY",
+    rcut: 5,
+    fcut: 2
   },
   RsrII: {
-    recognitionSeq: "CGGWCCG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "CGGWCCG",
+    rcut: 5,
+    fcut: 2
   },
   SapI: {
-    recognitionSeq: "GCTCTTCNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 8
+    rseq: "GCTCTTCNNNN",
+    rcut: 11,
+    fcut: 8
   },
   SexAI: {
-    recognitionSeq: "ACCWGGT",
-    complementCutIdx: 6,
-    sequenceCutIdx: 1
+    rseq: "ACCWGGT",
+    rcut: 6,
+    fcut: 1
   },
   AatII: {
-    recognitionSeq: "GACGTC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GACGTC",
+    rcut: 1,
+    fcut: 5
   },
   Acc65I: {
-    recognitionSeq: "GGTACC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GGTACC",
+    rcut: 5,
+    fcut: 1
   },
   AccI: {
-    recognitionSeq: "GTMKAC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "GTMKAC",
+    rcut: 4,
+    fcut: 2
   },
   AclI: {
-    recognitionSeq: "AACGTT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "AACGTT",
+    rcut: 4,
+    fcut: 2
   },
   AcuI: {
-    recognitionSeq: "CTGAAGNNNNNNNNNNNNNNNN",
-    complementCutIdx: 20,
-    sequenceCutIdx: 22
+    rseq: "CTGAAGNNNNNNNNNNNNNNNN",
+    rcut: 20,
+    fcut: 22
   },
   AfeI: {
-    recognitionSeq: "AGCGCT",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "AGCGCT",
+    rcut: 3,
+    fcut: 3
   },
   AflII: {
-    recognitionSeq: "CTTAAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CTTAAG",
+    rcut: 5,
+    fcut: 1
   },
   AflIII: {
-    recognitionSeq: "ACRYGT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "ACRYGT",
+    rcut: 5,
+    fcut: 1
   },
   AgeI: {
-    recognitionSeq: "ACCGGT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "ACCGGT",
+    rcut: 5,
+    fcut: 1
   },
   AhdI: {
-    recognitionSeq: "GACNNNNNGTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 6
+    rseq: "GACNNNNNGTC",
+    rcut: 5,
+    fcut: 6
   },
   AleI: {
-    recognitionSeq: "CACNNNNGTG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 5
+    rseq: "CACNNNNGTG",
+    rcut: 5,
+    fcut: 5
   },
   AlwNI: {
-    recognitionSeq: "CAGNNNCTG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 6
+    rseq: "CAGNNNCTG",
+    rcut: 3,
+    fcut: 6
   },
   ApaI: {
-    recognitionSeq: "GGGCCC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GGGCCC",
+    rcut: 1,
+    fcut: 5
   },
   ApaLI: {
-    recognitionSeq: "GTGCAC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GTGCAC",
+    rcut: 5,
+    fcut: 1
   },
   ApoI: {
-    recognitionSeq: "RAATTY",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "RAATTY",
+    rcut: 5,
+    fcut: 1
   },
   AseI: {
-    recognitionSeq: "ATTAAT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "ATTAAT",
+    rcut: 4,
+    fcut: 2
   },
   AvaI: {
-    recognitionSeq: "CYCGRG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CYCGRG",
+    rcut: 5,
+    fcut: 1
   },
   AvrII: {
-    recognitionSeq: "CCTAGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCTAGG",
+    rcut: 5,
+    fcut: 1
   },
   BaeGI: {
-    recognitionSeq: "GKGCMC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GKGCMC",
+    rcut: 1,
+    fcut: 5
   },
   BamHI: {
-    recognitionSeq: "GGATCC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GGATCC",
+    rcut: 5,
+    fcut: 1
   },
   BanI: {
-    recognitionSeq: "GGYRCC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GGYRCC",
+    rcut: 5,
+    fcut: 1
   },
   BanII: {
-    recognitionSeq: "GRGCYC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GRGCYC",
+    rcut: 1,
+    fcut: 5
   },
   BbsI: {
-    recognitionSeq: "GAAGACNNNNNN",
-    complementCutIdx: 12,
-    sequenceCutIdx: 8
+    rseq: "GAAGACNNNNNN",
+    rcut: 12,
+    fcut: 8
   },
   BcgI: {
-    recognitionSeq: "NNNNNNNNNNNNCGANNNNNNTGCNNNNNNNNNNNN",
-    complementCutIdx: 34,
-    sequenceCutIdx: 36
+    rseq: "NNNNNNNNNNNNCGANNNNNNTGCNNNNNNNNNNNN",
+    rcut: 34,
+    fcut: 36
   },
   BciVI: {
-    recognitionSeq: "GTATCCNNNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 12
+    rseq: "GTATCCNNNNNN",
+    rcut: 11,
+    fcut: 12
   },
   BclI: {
-    recognitionSeq: "TGATCA",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "TGATCA",
+    rcut: 5,
+    fcut: 1
   },
   BfuAI: {
-    recognitionSeq: "ACCTGCNNNNNNNN",
-    complementCutIdx: 14,
-    sequenceCutIdx: 10
+    rseq: "ACCTGCNNNNNNNN",
+    rcut: 14,
+    fcut: 10
   },
   BglI: {
-    recognitionSeq: "GCCNNNNNGGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 7
+    rseq: "GCCNNNNNGGC",
+    rcut: 4,
+    fcut: 7
   },
   BglII: {
-    recognitionSeq: "AGATCT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "AGATCT",
+    rcut: 5,
+    fcut: 1
   },
   BlpI: {
-    recognitionSeq: "GCTNAGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "GCTNAGC",
+    rcut: 5,
+    fcut: 2
   },
   BmgBI: {
-    recognitionSeq: "CACGTC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CACGTC",
+    rcut: 3,
+    fcut: 3
   },
   BmrI: {
-    recognitionSeq: "ACTGGGNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 11
+    rseq: "ACTGGGNNNNN",
+    rcut: 10,
+    fcut: 11
   },
   BmtI: {
-    recognitionSeq: "GCTAGC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GCTAGC",
+    rcut: 1,
+    fcut: 5
   },
   BpmI: {
-    recognitionSeq: "CTGGAGNNNNNNNNNNNNNNNN",
-    complementCutIdx: 20,
-    sequenceCutIdx: 22
+    rseq: "CTGGAGNNNNNNNNNNNNNNNN",
+    rcut: 20,
+    fcut: 22
   },
   Bpu10I: {
-    recognitionSeq: "CCTNAGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "CCTNAGC",
+    rcut: 5,
+    fcut: 2
   },
   BpuEI: {
-    recognitionSeq: "CTTGAGNNNNNNNNNNNNNNNN",
-    complementCutIdx: 20,
-    sequenceCutIdx: 22
+    rseq: "CTTGAGNNNNNNNNNNNNNNNN",
+    rcut: 20,
+    fcut: 22
   },
   BsaAI: {
-    recognitionSeq: "YACGTR",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "YACGTR",
+    rcut: 3,
+    fcut: 3
   },
   BsaBI: {
-    recognitionSeq: "GATNNNNATC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 5
+    rseq: "GATNNNNATC",
+    rcut: 5,
+    fcut: 5
   },
   BsaHI: {
-    recognitionSeq: "GRCGYC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "GRCGYC",
+    rcut: 4,
+    fcut: 2
   },
   BsaI: {
-    recognitionSeq: "GGTCTCNNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 7
+    rseq: "GGTCTCNNNNN",
+    rcut: 11,
+    fcut: 7
   },
   BsaWI: {
-    recognitionSeq: "WCCGGW",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "WCCGGW",
+    rcut: 5,
+    fcut: 1
   },
   BsaXI: {
-    recognitionSeq: "NNNNNNNNNNNNACNNNNNCTCCNNNNNNNNNN",
-    complementCutIdx: 30,
-    sequenceCutIdx: 33
+    rseq: "NNNNNNNNNNNNACNNNNNCTCCNNNNNNNNNN",
+    rcut: 30,
+    fcut: 33
   },
   BseRI: {
-    recognitionSeq: "GAGGAGNNNNNNNNNN",
-    complementCutIdx: 14,
-    sequenceCutIdx: 16
+    rseq: "GAGGAGNNNNNNNNNN",
+    rcut: 14,
+    fcut: 16
   },
   BseYI: {
-    recognitionSeq: "CCCAGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCCAGC",
+    rcut: 5,
+    fcut: 1
   },
   BsgI: {
-    recognitionSeq: "GTGCAGNNNNNNNNNNNNNNNN",
-    complementCutIdx: 20,
-    sequenceCutIdx: 22
+    rseq: "GTGCAGNNNNNNNNNNNNNNNN",
+    rcut: 20,
+    fcut: 22
   },
   BsiEI: {
-    recognitionSeq: "CGRYCG",
-    complementCutIdx: 2,
-    sequenceCutIdx: 4
+    rseq: "CGRYCG",
+    rcut: 2,
+    fcut: 4
   },
   BsiHKAI: {
-    recognitionSeq: "GWGCWC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GWGCWC",
+    rcut: 1,
+    fcut: 5
   },
   BsiWI: {
-    recognitionSeq: "CGTACG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CGTACG",
+    rcut: 5,
+    fcut: 1
   },
   BsmBI: {
-    recognitionSeq: "CGTCTCNNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 7
+    rseq: "CGTCTCNNNNN",
+    rcut: 11,
+    fcut: 7
   },
   BsmI: {
-    recognitionSeq: "GAATGCN",
-    complementCutIdx: 5,
-    sequenceCutIdx: 7
+    rseq: "GAATGCN",
+    rcut: 5,
+    fcut: 7
   },
   BsoBI: {
-    recognitionSeq: "CYCGRG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CYCGRG",
+    rcut: 5,
+    fcut: 1
   },
   Bsp1286I: {
-    recognitionSeq: "GDGCHC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GDGCHC",
+    rcut: 1,
+    fcut: 5
   },
   BspDI: {
-    recognitionSeq: "ATCGAT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "ATCGAT",
+    rcut: 4,
+    fcut: 2
   },
   BspEI: {
-    recognitionSeq: "TCCGGA",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "TCCGGA",
+    rcut: 5,
+    fcut: 1
   },
   BspHI: {
-    recognitionSeq: "TCATGA",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "TCATGA",
+    rcut: 5,
+    fcut: 1
   },
   BspMI: {
-    recognitionSeq: "ACCTGCNNNNNNNN",
-    complementCutIdx: 14,
-    sequenceCutIdx: 10
+    rseq: "ACCTGCNNNNNNNN",
+    rcut: 14,
+    fcut: 10
   },
   BsrBI: {
-    recognitionSeq: "CCGCTC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CCGCTC",
+    rcut: 3,
+    fcut: 3
   },
   BsrDI: {
-    recognitionSeq: "GCAATGNN",
-    complementCutIdx: 6,
-    sequenceCutIdx: 8
+    rseq: "GCAATGNN",
+    rcut: 6,
+    fcut: 8
   },
   BsrFI: {
-    recognitionSeq: "RCCGGY",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "RCCGGY",
+    rcut: 5,
+    fcut: 1
   },
   BsrGI: {
-    recognitionSeq: "TGTACA",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "TGTACA",
+    rcut: 5,
+    fcut: 1
   },
   BssHII: {
-    recognitionSeq: "GCGCGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GCGCGC",
+    rcut: 5,
+    fcut: 1
   },
   BssSI: {
-    recognitionSeq: "CACGAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CACGAG",
+    rcut: 5,
+    fcut: 1
   },
   BstAPI: {
-    recognitionSeq: "GCANNNNNTGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 7
+    rseq: "GCANNNNNTGC",
+    rcut: 4,
+    fcut: 7
   },
   BstBI: {
-    recognitionSeq: "TTCGAA",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "TTCGAA",
+    rcut: 4,
+    fcut: 2
   },
   BstEII: {
-    recognitionSeq: "GGTNACC",
-    complementCutIdx: 6,
-    sequenceCutIdx: 1
+    rseq: "GGTNACC",
+    rcut: 6,
+    fcut: 1
   },
   BstXI: {
-    recognitionSeq: "CCANNNNNNTGG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 8
+    rseq: "CCANNNNNNTGG",
+    rcut: 4,
+    fcut: 8
   },
   BstYI: {
-    recognitionSeq: "RGATCY",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "RGATCY",
+    rcut: 5,
+    fcut: 1
   },
   BstZ17I: {
-    recognitionSeq: "GTATAC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GTATAC",
+    rcut: 3,
+    fcut: 3
   },
   Bsu36I: {
-    recognitionSeq: "CCTNAGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "CCTNAGG",
+    rcut: 5,
+    fcut: 2
   },
   BtgI: {
-    recognitionSeq: "CCRYGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCRYGG",
+    rcut: 5,
+    fcut: 1
   },
   BtgZI: {
-    recognitionSeq: "GCGATGNNNNNNNNNNNNNN",
-    complementCutIdx: 20,
-    sequenceCutIdx: 16
+    rseq: "GCGATGNNNNNNNNNNNNNN",
+    rcut: 20,
+    fcut: 16
   },
   BtsI: {
-    recognitionSeq: "GCAGTGNN",
-    complementCutIdx: 6,
-    sequenceCutIdx: 8
+    rseq: "GCAGTGNN",
+    rcut: 6,
+    fcut: 8
   },
   ClaI: {
-    recognitionSeq: "ATCGAT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "ATCGAT",
+    rcut: 4,
+    fcut: 2
   },
   DraI: {
-    recognitionSeq: "TTTAAA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TTTAAA",
+    rcut: 3,
+    fcut: 3
   },
   DraIII: {
-    recognitionSeq: "CACNNNGTG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 6
+    rseq: "CACNNNGTG",
+    rcut: 3,
+    fcut: 6
   },
   DrdI: {
-    recognitionSeq: "GACNNNNNNGTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 7
+    rseq: "GACNNNNNNGTC",
+    rcut: 5,
+    fcut: 7
   },
   EaeI: {
-    recognitionSeq: "YGGCCR",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "YGGCCR",
+    rcut: 5,
+    fcut: 1
   },
   EagI: {
-    recognitionSeq: "CGGCCG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CGGCCG",
+    rcut: 5,
+    fcut: 1
   },
   EarI: {
-    recognitionSeq: "CTCTTCNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 7
+    rseq: "CTCTTCNNNN",
+    rcut: 10,
+    fcut: 7
   },
   EciI: {
-    recognitionSeq: "GGCGGANNNNNNNNNNN",
-    complementCutIdx: 15,
-    sequenceCutIdx: 17
+    rseq: "GGCGGANNNNNNNNNNN",
+    rcut: 15,
+    fcut: 17
   },
   Eco53kI: {
-    recognitionSeq: "GAGCTC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GAGCTC",
+    rcut: 3,
+    fcut: 3
   },
   EcoNI: {
-    recognitionSeq: "CCTNNNNNAGG",
-    complementCutIdx: 6,
-    sequenceCutIdx: 5
+    rseq: "CCTNNNNNAGG",
+    rcut: 6,
+    fcut: 5
   },
   EcoO109I: {
-    recognitionSeq: "RGGNCCY",
-    complementCutIdx: 5,
-    sequenceCutIdx: 2
+    rseq: "RGGNCCY",
+    rcut: 5,
+    fcut: 2
   },
   EcoRI: {
-    recognitionSeq: "GAATTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GAATTC",
+    rcut: 5,
+    fcut: 1
   },
   EcoRV: {
-    recognitionSeq: "GATATC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GATATC",
+    rcut: 3,
+    fcut: 3
   },
   Esp3I: {
-    recognitionSeq: "CGTCTCNNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 7
+    rseq: "CGTCTCNNNNN",
+    rcut: 11,
+    fcut: 7
   },
   FspI: {
-    recognitionSeq: "TGCGCA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TGCGCA",
+    rcut: 3,
+    fcut: 3
   },
   HaeII: {
-    recognitionSeq: "RGCGCY",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "RGCGCY",
+    rcut: 1,
+    fcut: 5
   },
   HincII: {
-    recognitionSeq: "GTYRAC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GTYRAC",
+    rcut: 3,
+    fcut: 3
   },
   HindIII: {
-    recognitionSeq: "AAGCTT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "AAGCTT",
+    rcut: 5,
+    fcut: 1
   },
   HpaI: {
-    recognitionSeq: "GTTAAC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GTTAAC",
+    rcut: 3,
+    fcut: 3
   },
   KasI: {
-    recognitionSeq: "GGCGCC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GGCGCC",
+    rcut: 5,
+    fcut: 1
   },
   KpnI: {
-    recognitionSeq: "GGTACC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GGTACC",
+    rcut: 1,
+    fcut: 5
   },
   MfeI: {
-    recognitionSeq: "CAATTG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CAATTG",
+    rcut: 5,
+    fcut: 1
   },
   MluI: {
-    recognitionSeq: "ACGCGT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "ACGCGT",
+    rcut: 5,
+    fcut: 1
   },
   MmeI: {
-    recognitionSeq: "TCCRACNNNNNNNNNNNNNNNNNNNN",
-    complementCutIdx: 24,
-    sequenceCutIdx: 26
+    rseq: "TCCRACNNNNNNNNNNNNNNNNNNNN",
+    rcut: 24,
+    fcut: 26
   },
   MscI: {
-    recognitionSeq: "TGGCCA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TGGCCA",
+    rcut: 3,
+    fcut: 3
   },
   MslI: {
-    recognitionSeq: "CAYNNNNRTG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 5
+    rseq: "CAYNNNNRTG",
+    rcut: 5,
+    fcut: 5
   },
   MspA1I: {
-    recognitionSeq: "CMGCKG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CMGCKG",
+    rcut: 3,
+    fcut: 3
   },
   NaeI: {
-    recognitionSeq: "GCCGGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GCCGGC",
+    rcut: 3,
+    fcut: 3
   },
   NarI: {
-    recognitionSeq: "GGCGCC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "GGCGCC",
+    rcut: 4,
+    fcut: 2
   },
   NcoI: {
-    recognitionSeq: "CCATGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCATGG",
+    rcut: 5,
+    fcut: 1
   },
   NdeI: {
-    recognitionSeq: "CATATG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "CATATG",
+    rcut: 4,
+    fcut: 2
   },
   NgoMIV: {
-    recognitionSeq: "GCCGGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GCCGGC",
+    rcut: 5,
+    fcut: 1
   },
   NheI: {
-    recognitionSeq: "GCTAGC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GCTAGC",
+    rcut: 5,
+    fcut: 1
   },
   NmeAIII: {
-    recognitionSeq: "GCCGAGNNNNNNNNNNNNNNNNNNNN",
-    complementCutIdx: 25,
-    sequenceCutIdx: 26
+    rseq: "GCCGAGNNNNNNNNNNNNNNNNNNNN",
+    rcut: 25,
+    fcut: 26
   },
   NruI: {
-    recognitionSeq: "TCGCGA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TCGCGA",
+    rcut: 3,
+    fcut: 3
   },
   NsiI: {
-    recognitionSeq: "ATGCAT",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "ATGCAT",
+    rcut: 1,
+    fcut: 5
   },
   NspI: {
-    recognitionSeq: "RCATGY",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "RCATGY",
+    rcut: 1,
+    fcut: 5
   },
   PaeR7I: {
-    recognitionSeq: "CTCGAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CTCGAG",
+    rcut: 5,
+    fcut: 1
   },
   PciI: {
-    recognitionSeq: "ACATGT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "ACATGT",
+    rcut: 5,
+    fcut: 1
   },
   PflFI: {
-    recognitionSeq: "GACNNNGTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 4
+    rseq: "GACNNNGTC",
+    rcut: 5,
+    fcut: 4
   },
   PflMI: {
-    recognitionSeq: "CCANNNNNTGG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 7
+    rseq: "CCANNNNNTGG",
+    rcut: 4,
+    fcut: 7
   },
   PluTI: {
-    recognitionSeq: "GGCGCC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GGCGCC",
+    rcut: 1,
+    fcut: 5
   },
   PmlI: {
-    recognitionSeq: "CACGTG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CACGTG",
+    rcut: 3,
+    fcut: 3
   },
   PshAI: {
-    recognitionSeq: "GACNNNNGTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 5
+    rseq: "GACNNNNGTC",
+    rcut: 5,
+    fcut: 5
   },
   PsiI: {
-    recognitionSeq: "TTATAA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TTATAA",
+    rcut: 3,
+    fcut: 3
   },
   PspOMI: {
-    recognitionSeq: "GGGCCC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GGGCCC",
+    rcut: 5,
+    fcut: 1
   },
   PstI: {
-    recognitionSeq: "CTGCAG",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "CTGCAG",
+    rcut: 1,
+    fcut: 5
   },
   PvuI: {
-    recognitionSeq: "CGATCG",
-    complementCutIdx: 2,
-    sequenceCutIdx: 4
+    rseq: "CGATCG",
+    rcut: 2,
+    fcut: 4
   },
   PvuII: {
-    recognitionSeq: "CAGCTG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CAGCTG",
+    rcut: 3,
+    fcut: 3
   },
   SacI: {
-    recognitionSeq: "GAGCTC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GAGCTC",
+    rcut: 1,
+    fcut: 5
   },
   SacII: {
-    recognitionSeq: "CCGCGG",
-    complementCutIdx: 2,
-    sequenceCutIdx: 4
+    rseq: "CCGCGG",
+    rcut: 2,
+    fcut: 4
   },
   SalI: {
-    recognitionSeq: "GTCGAC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "GTCGAC",
+    rcut: 5,
+    fcut: 1
   },
   ScaI: {
-    recognitionSeq: "AGTACT",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "AGTACT",
+    rcut: 3,
+    fcut: 3
   },
   SfcI: {
-    recognitionSeq: "CTRYAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CTRYAG",
+    rcut: 5,
+    fcut: 1
   },
   SfoI: {
-    recognitionSeq: "GGCGCC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GGCGCC",
+    rcut: 3,
+    fcut: 3
   },
   SmaI: {
-    recognitionSeq: "CCCGGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "CCCGGG",
+    rcut: 3,
+    fcut: 3
   },
   SmlI: {
-    recognitionSeq: "CTYRAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CTYRAG",
+    rcut: 5,
+    fcut: 1
   },
   SnaBI: {
-    recognitionSeq: "TACGTA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "TACGTA",
+    rcut: 3,
+    fcut: 3
   },
   SpeI: {
-    recognitionSeq: "ACTAGT",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "ACTAGT",
+    rcut: 5,
+    fcut: 1
   },
   SphI: {
-    recognitionSeq: "GCATGC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 5
+    rseq: "GCATGC",
+    rcut: 1,
+    fcut: 5
   },
   SspI: {
-    recognitionSeq: "AATATT",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "AATATT",
+    rcut: 3,
+    fcut: 3
   },
   StuI: {
-    recognitionSeq: "AGGCCT",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "AGGCCT",
+    rcut: 3,
+    fcut: 3
   },
   StyI: {
-    recognitionSeq: "CCWWGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCWWGG",
+    rcut: 5,
+    fcut: 1
   },
   TspMI: {
-    recognitionSeq: "CCCGGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCCGGG",
+    rcut: 5,
+    fcut: 1
   },
   Tth111I: {
-    recognitionSeq: "GACNNNGTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 4
+    rseq: "GACNNNGTC",
+    rcut: 5,
+    fcut: 4
   },
   XbaI: {
-    recognitionSeq: "TCTAGA",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "TCTAGA",
+    rcut: 5,
+    fcut: 1
   },
   XcmI: {
-    recognitionSeq: "CCANNNNNNNNNTGG",
-    complementCutIdx: 7,
-    sequenceCutIdx: 8
+    rseq: "CCANNNNNNNNNTGG",
+    rcut: 7,
+    fcut: 8
   },
   XhoI: {
-    recognitionSeq: "CTCGAG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CTCGAG",
+    rcut: 5,
+    fcut: 1
   },
   XmaI: {
-    recognitionSeq: "CCCGGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCCGGG",
+    rcut: 5,
+    fcut: 1
   },
   XmnI: {
-    recognitionSeq: "GAANNNNTTC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 5
+    rseq: "GAANNNNTTC",
+    rcut: 5,
+    fcut: 5
   },
   ZraI: {
-    recognitionSeq: "GACGTC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GACGTC",
+    rcut: 3,
+    fcut: 3
   },
   AlwI: {
-    recognitionSeq: "GGATCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 9
+    rseq: "GGATCNNNNN",
+    rcut: 10,
+    fcut: 9
   },
   ApeKI: {
-    recognitionSeq: "GCWGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GCWGC",
+    rcut: 4,
+    fcut: 1
   },
   AvaII: {
-    recognitionSeq: "GGWCC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GGWCC",
+    rcut: 4,
+    fcut: 1
   },
   BbvI: {
-    recognitionSeq: "GCAGCNNNNNNNNNNNN",
-    complementCutIdx: 17,
-    sequenceCutIdx: 13
+    rseq: "GCAGCNNNNNNNNNNNN",
+    rcut: 17,
+    fcut: 13
   },
   BccI: {
-    recognitionSeq: "CCATCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 9
+    rseq: "CCATCNNNNN",
+    rcut: 10,
+    fcut: 9
   },
   BceAI: {
-    recognitionSeq: "ACGGCNNNNNNNNNNNNNN",
-    complementCutIdx: 19,
-    sequenceCutIdx: 17
+    rseq: "ACGGCNNNNNNNNNNNNNN",
+    rcut: 19,
+    fcut: 17
   },
   BcoDI: {
-    recognitionSeq: "GTCTCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 6
+    rseq: "GTCTCNNNNN",
+    rcut: 10,
+    fcut: 6
   },
   BsmAI: {
-    recognitionSeq: "GTCTCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 6
+    rseq: "GTCTCNNNNN",
+    rcut: 10,
+    fcut: 6
   },
   BsmFI: {
-    recognitionSeq: "GGGACNNNNNNNNNNNNNN",
-    complementCutIdx: 19,
-    sequenceCutIdx: 15
+    rseq: "GGGACNNNNNNNNNNNNNN",
+    rcut: 19,
+    fcut: 15
   },
   BspCNI: {
-    recognitionSeq: "CTCAGNNNNNNNNN",
-    complementCutIdx: 12,
-    sequenceCutIdx: 14
+    rseq: "CTCAGNNNNNNNNN",
+    rcut: 12,
+    fcut: 14
   },
   BsrI: {
-    recognitionSeq: "ACTGGN",
-    complementCutIdx: 4,
-    sequenceCutIdx: 6
+    rseq: "ACTGGN",
+    rcut: 4,
+    fcut: 6
   },
   BstNI: {
-    recognitionSeq: "CCWGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 2
+    rseq: "CCWGG",
+    rcut: 3,
+    fcut: 2
   },
   BtsCI: {
-    recognitionSeq: "GGATGNN",
-    complementCutIdx: 5,
-    sequenceCutIdx: 7
+    rseq: "GGATGNN",
+    rcut: 5,
+    fcut: 7
   },
   BtsIMutI: {
-    recognitionSeq: "CAGTGNN",
-    complementCutIdx: 5,
-    sequenceCutIdx: 7
+    rseq: "CAGTGNN",
+    rcut: 5,
+    fcut: 7
   },
   DpnI: {
-    recognitionSeq: "GmATC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GmATC",
+    rcut: 3,
+    fcut: 3
   },
   FauI: {
-    recognitionSeq: "CCCGCNNNNNN",
-    complementCutIdx: 11,
-    sequenceCutIdx: 9
+    rseq: "CCCGCNNNNNN",
+    rcut: 11,
+    fcut: 9
   },
   FokI: {
-    recognitionSeq: "GGATGNNNNNNNNNNNNN",
-    complementCutIdx: 18,
-    sequenceCutIdx: 14
+    rseq: "GGATGNNNNNNNNNNNNN",
+    rcut: 18,
+    fcut: 14
   },
   HgaI: {
-    recognitionSeq: "GACGCNNNNNNNNNN",
-    complementCutIdx: 15,
-    sequenceCutIdx: 10
+    rseq: "GACGCNNNNNNNNNN",
+    rcut: 15,
+    fcut: 10
   },
   HphI: {
-    recognitionSeq: "GGTGANNNNNNNN",
-    complementCutIdx: 12,
-    sequenceCutIdx: 13
+    rseq: "GGTGANNNNNNNN",
+    rcut: 12,
+    fcut: 13
   },
   Hpy99I: {
-    recognitionSeq: "CGWCG",
-    complementCutIdx: 0,
-    sequenceCutIdx: 5
+    rseq: "CGWCG",
+    rcut: 0,
+    fcut: 5
   },
   HpyAV: {
-    recognitionSeq: "CCTTCNNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 11
+    rseq: "CCTTCNNNNNN",
+    rcut: 10,
+    fcut: 11
   },
   LpnPI: {
-    recognitionSeq: "CmCDGNNNNNNNNNNNNNN",
-    complementCutIdx: 19,
-    sequenceCutIdx: 15
+    rseq: "CmCDGNNNNNNNNNNNNNN",
+    rcut: 19,
+    fcut: 15
   },
   MboII: {
-    recognitionSeq: "GAAGANNNNNNNN",
-    complementCutIdx: 12,
-    sequenceCutIdx: 13
+    rseq: "GAAGANNNNNNNN",
+    rcut: 12,
+    fcut: 13
   },
   MlyI: {
-    recognitionSeq: "GAGTCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 10
+    rseq: "GAGTCNNNNN",
+    rcut: 10,
+    fcut: 10
   },
   NciI: {
-    recognitionSeq: "CCSGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 2
+    rseq: "CCSGG",
+    rcut: 3,
+    fcut: 2
   },
   PleI: {
-    recognitionSeq: "GAGTCNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 9
+    rseq: "GAGTCNNNNN",
+    rcut: 10,
+    fcut: 9
   },
   PspGI: {
-    recognitionSeq: "CCWGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 0
+    rseq: "CCWGG",
+    rcut: 5,
+    fcut: 0
   },
   SfaNI: {
-    recognitionSeq: "GCATCNNNNNNNNN",
-    complementCutIdx: 14,
-    sequenceCutIdx: 10
+    rseq: "GCATCNNNNNNNNN",
+    rcut: 14,
+    fcut: 10
   },
   TfiI: {
-    recognitionSeq: "GAWTC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GAWTC",
+    rcut: 4,
+    fcut: 1
   },
   TseI: {
-    recognitionSeq: "GCWGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GCWGC",
+    rcut: 4,
+    fcut: 1
   },
   Tsp45I: {
-    recognitionSeq: "GTSAC",
-    complementCutIdx: 5,
-    sequenceCutIdx: 0
+    rseq: "GTSAC",
+    rcut: 5,
+    fcut: 0
   },
   TspRI: {
-    recognitionSeq: "NNCASTGNN",
-    complementCutIdx: 0,
-    sequenceCutIdx: 9
+    rseq: "NNCASTGNN",
+    rcut: 0,
+    fcut: 9
   },
   AciI: {
-    recognitionSeq: "CCGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "CCGC",
+    rcut: 3,
+    fcut: 1
   },
   AluI: {
-    recognitionSeq: "AGCT",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "AGCT",
+    rcut: 2,
+    fcut: 2
   },
   BfaI: {
-    recognitionSeq: "CTAG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "CTAG",
+    rcut: 3,
+    fcut: 1
   },
   BsaJI: {
-    recognitionSeq: "CCNNGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 1
+    rseq: "CCNNGG",
+    rcut: 5,
+    fcut: 1
   },
   BslI: {
-    recognitionSeq: "CCNNNNNNNGG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 7
+    rseq: "CCNNNNNNNGG",
+    rcut: 4,
+    fcut: 7
   },
   BstUI: {
-    recognitionSeq: "CGCG",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "CGCG",
+    rcut: 2,
+    fcut: 2
   },
   Cac8I: {
-    recognitionSeq: "GCNNGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GCNNGC",
+    rcut: 3,
+    fcut: 3
   },
   CviAII: {
-    recognitionSeq: "CATG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "CATG",
+    rcut: 3,
+    fcut: 1
   },
   "CviKI-1": {
-    recognitionSeq: "RGCY",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "RGCY",
+    rcut: 2,
+    fcut: 2
   },
   CviQI: {
-    recognitionSeq: "GTAC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "GTAC",
+    rcut: 3,
+    fcut: 1
   },
   DdeI: {
-    recognitionSeq: "CTNAG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "CTNAG",
+    rcut: 4,
+    fcut: 1
   },
   DpnII: {
-    recognitionSeq: "GATC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 0
+    rseq: "GATC",
+    rcut: 4,
+    fcut: 0
   },
   FatI: {
-    recognitionSeq: "CATG",
-    complementCutIdx: 4,
-    sequenceCutIdx: 0
+    rseq: "CATG",
+    rcut: 4,
+    fcut: 0
   },
   Fnu4HI: {
-    recognitionSeq: "GCNGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 2
+    rseq: "GCNGC",
+    rcut: 3,
+    fcut: 2
   },
   HaeIII: {
-    recognitionSeq: "GGCC",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "GGCC",
+    rcut: 2,
+    fcut: 2
   },
   HhaI: {
-    recognitionSeq: "GCGC",
-    complementCutIdx: 1,
-    sequenceCutIdx: 3
+    rseq: "GCGC",
+    rcut: 1,
+    fcut: 3
   },
   HinP1I: {
-    recognitionSeq: "GCGC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "GCGC",
+    rcut: 3,
+    fcut: 1
   },
   HinfI: {
-    recognitionSeq: "GANTC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GANTC",
+    rcut: 4,
+    fcut: 1
   },
   HpaII: {
-    recognitionSeq: "CCGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "CCGG",
+    rcut: 3,
+    fcut: 1
   },
   Hpy166II: {
-    recognitionSeq: "GTNNAC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GTNNAC",
+    rcut: 3,
+    fcut: 3
   },
   Hpy188I: {
-    recognitionSeq: "TCNGA",
-    complementCutIdx: 2,
-    sequenceCutIdx: 3
+    rseq: "TCNGA",
+    rcut: 2,
+    fcut: 3
   },
   Hpy188III: {
-    recognitionSeq: "TCNNGA",
-    complementCutIdx: 4,
-    sequenceCutIdx: 2
+    rseq: "TCNNGA",
+    rcut: 4,
+    fcut: 2
   },
   HpyCH4III: {
-    recognitionSeq: "ACNGT",
-    complementCutIdx: 2,
-    sequenceCutIdx: 3
+    rseq: "ACNGT",
+    rcut: 2,
+    fcut: 3
   },
   HpyCH4IV: {
-    recognitionSeq: "ACGT",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    seq: "ACGT",
+    rcut: 3,
+    fcut: 1
   },
   HpyCH4V: {
-    recognitionSeq: "TGCA",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "TGCA",
+    rcut: 2,
+    fcut: 2
   },
   MboI: {
-    recognitionSeq: "GATC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 0
+    rseq: "GATC",
+    rcut: 4,
+    fcut: 0
   },
   MluCI: {
-    recognitionSeq: "AATT",
-    complementCutIdx: 4,
-    sequenceCutIdx: 0
+    rseq: "AATT",
+    rcut: 4,
+    fcut: 0
   },
   MnlI: {
-    recognitionSeq: "CCTCNNNNNNN",
-    complementCutIdx: 10,
-    sequenceCutIdx: 11
+    rseq: "CCTCNNNNNNN",
+    rcut: 10,
+    fcut: 11
   },
   MseI: {
-    recognitionSeq: "TTAA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "TTAA",
+    rcut: 3,
+    fcut: 1
   },
   MspI: {
-    recognitionSeq: "CCGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "CCGG",
+    rcut: 3,
+    fcut: 1
   },
   MwoI: {
-    recognitionSeq: "GCNNNNNNNGC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 7
+    rseq: "GCNNNNNNNGC",
+    rcut: 4,
+    fcut: 7
   },
   NlaIII: {
-    recognitionSeq: "CATG",
-    complementCutIdx: 0,
-    sequenceCutIdx: 4
+    rseq: "CATG",
+    rcut: 0,
+    fcut: 4
   },
   NlaIV: {
-    recognitionSeq: "GGNNCC",
-    complementCutIdx: 3,
-    sequenceCutIdx: 3
+    rseq: "GGNNCC",
+    rcut: 3,
+    fcut: 3
   },
   RsaI: {
-    recognitionSeq: "GTAC",
-    complementCutIdx: 2,
-    sequenceCutIdx: 2
+    rseq: "GTAC",
+    rcut: 2,
+    fcut: 2
   },
   Sau3AI: {
-    recognitionSeq: "GATC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 0
+    rseq: "GATC",
+    rcut: 4,
+    fcut: 0
   },
   Sau96I: {
-    recognitionSeq: "GGNCC",
-    complementCutIdx: 4,
-    sequenceCutIdx: 1
+    rseq: "GGNCC",
+    rcut: 4,
+    fcut: 1
   },
   ScrFI: {
-    recognitionSeq: "CCNGG",
-    complementCutIdx: 3,
-    sequenceCutIdx: 2
+    rseq: "CCNGG",
+    rcut: 3,
+    fcut: 2
   },
   StyD4I: {
-    recognitionSeq: "CCNGG",
-    complementCutIdx: 5,
-    sequenceCutIdx: 0
+    rseq: "CCNGG",
+    rcut: 5,
+    fcut: 0
   },
   TaqI: {
-    recognitionSeq: "TCGA",
-    complementCutIdx: 3,
-    sequenceCutIdx: 1
+    rseq: "TCGA",
+    rcut: 3,
+    fcut: 1
   },
   AbaSI: {
-    recognitionSeq: "hmCNNNNNNNNNNN",
-    complementCutIdx: 12,
-    sequenceCutIdx: 14
+    rseq: "hmCNNNNNNNNNNN",
+    rcut: 12,
+    fcut: 14
   },
   FspEI: {
-    recognitionSeq: "CmCNNNNNNNNNNNNNNNN",
-    complementCutIdx: 19,
-    sequenceCutIdx: 15
+    rseq: "CmCNNNNNNNNNNNNNNNN",
+    rcut: 19,
+    fcut: 15
   },
   MspJI: {
-    recognitionSeq: "mCNNRNNNNNNNNNNNNN",
-    complementCutIdx: 18,
-    sequenceCutIdx: 14
+    rseq: "mCNNRNNNNNNNNNNNNN",
+    rcut: 18,
+    fcut: 14
   }
 };
