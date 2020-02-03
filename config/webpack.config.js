@@ -34,6 +34,7 @@ const cdnBuild = {
     net: "empty",
     tls: "empty"
   },
+  devtool: "eval-cheap-module-source-map",
   module: {
     rules: [
       {
