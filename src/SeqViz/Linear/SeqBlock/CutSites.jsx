@@ -48,8 +48,8 @@ const CutSites = props => {
   };
 
   const sitesWithX = cutSiteRows.map(c => {
-    const { x: cutX } = findXAndWidth(c.sequenceCutIdx, c.sequenceCutIdx);
-    const { x: hangX } = findXAndWidth(c.complementCutIdx, c.complementCutIdx);
+    const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
+    const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { x: highlightX, width: highlightWidth } = findXAndWidth(
       c.recogStart,
       c.recogEnd
@@ -97,19 +97,17 @@ const CutSites = props => {
     }
     if (sequenceCutSite) {
       if (c.start + c.cutX > c.end + c.hangX) {
-        return findXAndWidth(firstBase, c.sequenceCutIdx);
+        return findXAndWidth(firstBase, c.fcut);
       }
-      if (c.sequenceCutIdx > c.complementCutIdx)
-        return findXAndWidth(firstBase, c.sequenceCutIdx);
-      return findXAndWidth(c.sequenceCutIdx, lastBase);
+      if (c.fcut > c.rcut) return findXAndWidth(firstBase, c.fcut);
+      return findXAndWidth(c.fcut, lastBase);
     }
     if (complementCutSite) {
       if (c.start + c.cutX > c.end + c.hangX) {
-        return findXAndWidth(c.complementCutIdx, lastBase);
+        return findXAndWidth(c.rcut, lastBase);
       }
-      if (c.sequenceCutIdx > c.complementCutIdx)
-        return findXAndWidth(c.complementCutIdx, lastBase);
-      return findXAndWidth(firstBase, c.complementCutIdx);
+      if (c.fcut > c.rcut) return findXAndWidth(c.rcut, lastBase);
+      return findXAndWidth(firstBase, c.rcut);
     }
     return { x: 0, width: 0 };
   };
@@ -119,10 +117,8 @@ const CutSites = props => {
       {sitesWithX.map(c => {
         // prevent double rendering, by placing the indeces only in the seqBlock
         // that they need to be shown. Important for the zero-index edge case
-        const sequenceCutSite =
-          c.sequenceCutIdx >= firstBase && c.sequenceCutIdx < lastBase;
-        const complementCutSite =
-          c.complementCutIdx >= firstBase && c.complementCutIdx < lastBase;
+        const sequenceCutSite = c.fcut >= firstBase && c.fcut < lastBase;
+        const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
         const showIndex = sequenceCutSite || complementCutSite;
 
         const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(

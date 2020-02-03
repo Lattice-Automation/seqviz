@@ -20,13 +20,13 @@ export default class CutSites extends React.PureComponent {
       generateArc
     } = this.props;
     const { id, start } = cutSite;
-    let { sequenceCutIdx, complementCutIdx, end } = cutSite;
+    let { fcut, rcut, end } = cutSite;
 
     // crosses the zero index
-    if (start + sequenceCutIdx > end + complementCutIdx) {
+    if (start + fcut > end + rcut) {
       end = start > end ? end + seqLength : end;
-      if (sequenceCutIdx > complementCutIdx) complementCutIdx += seqLength;
-      else sequenceCutIdx += seqLength;
+      if (fcut > rcut) rcut += seqLength;
+      else fcut += seqLength;
     }
 
     // length for highlighted recog area
@@ -49,7 +49,7 @@ export default class CutSites extends React.PureComponent {
 
     // find start and stop coordinates to cut site line
     const cutLinePath = this.calculateLinePath(
-      sequenceCutIdx - start,
+      fcut - start,
       radius + lineHeight * 2,
       radius + lineHeight * 1.5
     );
@@ -58,15 +58,15 @@ export default class CutSites extends React.PureComponent {
     const connectorLinePath = generateArc({
       innerRadius: radius + lineHeight * 1.5,
       outerRadius: radius + lineHeight * 1.5,
-      length: Math.abs(sequenceCutIdx - complementCutIdx),
-      largeArc: Math.abs(sequenceCutIdx - complementCutIdx) > seqLength / 2,
+      length: Math.abs(fcut - rcut),
+      largeArc: Math.abs(fcut - rcut) > seqLength / 2,
       sweepFWD: true,
-      offset: Math.min(sequenceCutIdx, complementCutIdx) - start
+      offset: Math.min(fcut, rcut) - start
     });
 
     // find start and stop coordinates to hang site line
     const hangLinePath = this.calculateLinePath(
-      complementCutIdx - start,
+      rcut - start,
       radius + lineHeight * 1.5,
       radius + lineHeight / 1.2
     );
