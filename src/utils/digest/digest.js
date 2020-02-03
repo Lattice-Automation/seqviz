@@ -186,17 +186,17 @@ const digestPart = (enzymeName, part, circularCheck) => {
     // versus the start index of the complement strand
     const startDiff = Math.abs(cutSequenceStart - cutComplementStart);
     if (cutSequenceStart < cutComplementStart) {
-      cutCompSeq = compSeq.padStart(startDiff, "*");
+      cutCompSeq = cutCompSeq.padStart(cutCompSeq.length + startDiff, "*");
     } else if (cutSequenceStart > cutComplementStart) {
-      cutSeq = cutSeq.padStart(startDiff, "*");
+      cutSeq = cutSeq.padStart(cutSeq.length + startDiff, "*");
     }
 
     // and now for differences in last indices at the end of the sequences
     const endDiff = Math.abs(cutSequenceEnd - cutComplementEnd);
     if (cutSequenceEnd > cutComplementEnd) {
-      cutCompSeq = cutCompSeq.padEnd(endDiff, "*");
+      cutCompSeq = cutCompSeq.padEnd(cutCompSeq.length + endDiff, "*");
     } else if (cutSequenceEnd < cutComplementEnd) {
-      cutSeq = cutSeq.padEnd(endDiff, "*");
+      cutSeq = cutSeq.padEnd(cutSeq.length + endDiff, "*");
     }
 
     // adjust the locations of all annotations to match their new locations
