@@ -75,7 +75,7 @@ npm install seqviz
 
 <!-- cdn-example(cmd:) -->
 ```html
-<script src="unpkg.com/seqviz"></script>
+<script src="https://unpkg.com/seqviz"></script>
 ```
 <!-- /cdn-example -->
 
