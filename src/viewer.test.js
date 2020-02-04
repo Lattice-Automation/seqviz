@@ -32,29 +32,41 @@ const defaultOptions = {
   ]
 };
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  let viewer = Viewer(div, { ...defaultOptions, ...PUC });
+describe("Viewer rendering", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
+    let viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
-  viewer.render();
-});
-
-it("renders while querying an iGEM part", () => {
-  const div = document.createElement("div");
-  let viewer = Viewer(div, {
-    ...defaultOptions,
-    part: "BBa_K1598008",
-    backbone: "pSB1C3"
+    viewer.render();
   });
 
-  viewer.render();
-});
+  it("renders while querying an iGEM part", () => {
+    const div = document.createElement("div");
+    let viewer = Viewer(div, {
+      ...defaultOptions,
+      part: "BBa_K1598008",
+      backbone: "pSB1C3"
+    });
 
-it("updates props with setState", () => {
-  const div = document.createElement("div");
-  let viewer = Viewer(div, { ...defaultOptions, ...PUC });
+    viewer.render();
+  });
 
-  viewer.render();
+  it("updates props with setState", () => {
+    const div = document.createElement("div");
+    let viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
-  viewer.setState({ bpColors: {} });
+    viewer.render();
+
+    viewer.setState({ bpColors: {} });
+  });
+
+  it("renders with just a sequence and name", () => {
+    const div = document.createElement("div");
+    let viewer = Viewer(div, {
+      name: "seq_name",
+      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
+    });
+
+    viewer.render();
+  });
 });

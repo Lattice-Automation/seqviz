@@ -66,7 +66,7 @@ export default class SeqViz extends React.Component {
 
   static defaultProps = {
     accession: "",
-    annotations: null,
+    annotations: [],
     backbone: "",
     bpColors: {},
     colors: [],
