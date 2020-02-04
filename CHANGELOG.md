@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.14]
+
+### Fixed
+
+- Default for annotations array changed to an empty array, instead of null. Was breaking when annotations weren't provided
+
+## [3.0.10]
+
+### Changed
+
+- Add a CDN build output, in dist/seqviz.min.js, that's pointed to for UNPKG installation
+
 ## [3.0.0]
 
 ### Changed
