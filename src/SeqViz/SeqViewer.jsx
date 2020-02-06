@@ -22,12 +22,11 @@ class SeqViewer extends React.Component {
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    const { seq, size, zoom: { linear: zoom } = 50, style } = this.props;
+    const { seq, size } = this.props;
 
-    if (!size.width && !size.height && style) {
-      size.width = style.width; // for testing, mostly
-      size.height = style.height;
-    }
+    let zoom = this.props.zoom.linear || 0;
+    zoom = Math.max(zoom, 0);
+    zoom = Math.min(zoom, 100);
 
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
@@ -61,6 +60,7 @@ class SeqViewer extends React.Component {
       bpsPerBlock,
       charWidth,
       size,
+      zoom: { linear: zoom },
       Linear: true
     };
   };
@@ -77,14 +77,12 @@ class SeqViewer extends React.Component {
   circularProps = () => {
     const {
       size,
-      seq: { length: seqLength },
-      style
+      seq: { length: seqLength }
     } = this.props;
 
-    if (!size.width && !size.height && style) {
-      size.width = style.width; // for testing, mostly
-      size.height = style.height;
-    }
+    let zoom = this.props.zoom.circular || 0;
+    zoom = Math.max(zoom, 0);
+    zoom = Math.min(zoom, 100);
 
     const center = {
       x: size.width / 2,
@@ -106,22 +104,22 @@ class SeqViewer extends React.Component {
     radius = totalPixelsOfArc / (Math.PI * (bpsOnArc / seqLength));
     radius = radius === 0 ? 1 : radius;
     const yDiff = 0;
-    return { radius, yDiff, Linear: false, size, bpsOnArc, center };
+    return {
+      radius,
+      yDiff,
+      Linear: false,
+      size,
+      zoom: { circular: zoom },
+      bpsOnArc,
+      center
+    };
   };
 
   render() {
-    const { Circular: circular, seq, cutSites, size, style } = this.props;
-
-    if (!size.width && !size.height && style) {
-      size.width = style.width; // for testing, mostly
-      size.height = style.height;
-    }
+    const { Circular: circular, seq, cutSites } = this.props;
 
     return (
-      <div
-        className="la-vz-viewer-container"
-        style={{ zIndex: circular ? 2 : 3 }}
-      >
+      <div className="la-vz-viewer-container">
         {circular && (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (

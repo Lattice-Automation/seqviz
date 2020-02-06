@@ -7,7 +7,7 @@ import CentralIndexContext from "../handlers/centralIndex";
  * 		1. the Name of the part (center or bottom)
  * 		2. the number of bps (center or bottom)
  * 		3. the plasmid circle
- * 		4. the index numbers along the plasmid circle
+ * 		4. the index ticks and numbers along the plasmid circle
  *
  * center or bottom here refers to the fact that the name/bps of the
  * part need to be pushed to the bottom of the circular viewer if there
@@ -159,7 +159,6 @@ export default class Index extends React.PureComponent {
     const subtitleStyle = {
       fontSize: 14,
       textAnchor: "middle",
-      alignmentBaseline: "hanging",
       fill: "gray"
     };
     const indexCircleStyle = {
@@ -170,13 +169,12 @@ export default class Index extends React.PureComponent {
     const tickLineStyle = {
       fill: "transparent",
       stroke: "black",
-      strokeWidth: 2.5,
+      strokeWidth: 1,
       shapeRendering: "geometricPrecision"
     };
     const tickTextStyle = {
       textAnchor: "middle",
-      alignmentBaseline: "hanging",
-      fontWeight: 500
+      fontWeight: 300
     };
 
     // generate the full circle around the edge of the plasmid
@@ -188,6 +186,7 @@ export default class Index extends React.PureComponent {
     });
     return (
       <g className="la-vz-circular-index">
+        {/* A label showing the name of the plasmid */}
         <text {...nameStyle}>
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
@@ -195,6 +194,8 @@ export default class Index extends React.PureComponent {
             </tspan>
           ))}
         </text>
+
+        {/* A label for the length of the plasmid */}
         <text
           x={nameCoor.x}
           y={nameCoor.y + 14 + 25 * (nameSpans.length - 1)}
@@ -202,9 +203,13 @@ export default class Index extends React.PureComponent {
         >
           {`${seqLength} bp`}
         </text>
+
+        {/* If less than 200bp long, render the bp of the plasmid */}
         {seq.length < 200 ? (
           <g className="la-vz-circular-bps">{this.renderBasepairs()}</g>
         ) : null}
+
+        {/* The ticks and their index labels */}
         {ticks.map(t => (
           <g key={`la-vz-${t}_tick`} transform={getRotation(t - 0.5)}>
             <path
@@ -212,11 +217,17 @@ export default class Index extends React.PureComponent {
                 L ${tickCoorEnd.x} ${tickCoorEnd.y}`}
               {...tickLineStyle}
             />
-            <text x={tickCoorEnd.x} y={tickCoorEnd.y + 4} {...tickTextStyle}>
+            <text
+              x={tickCoorEnd.x}
+              y={tickCoorEnd.y + lineHeight}
+              {...tickTextStyle}
+            >
               {t}
             </text>
           </g>
         ))}
+
+        {/* The two arcs that make the plasmid's circle */}
         <g>
           <path
             d={indexCurve}
