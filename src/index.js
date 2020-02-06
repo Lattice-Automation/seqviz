@@ -8,11 +8,11 @@ import { Viewer } from "./viewer";
 import "./index.css";
 
 const viewerInput = {
-  name: "L09136",
-  seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+  // name: "L09136",
+  // seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
   viewer: "both",
-  // accession: "BBa_K1598008",
-  // backbone: "pSB1C3",
+  accession: "BBa_K1598008",
+  backbone: "pSB1C3",
   showAnnotations: true,
   showPrimers: true,
   showComplement: true,

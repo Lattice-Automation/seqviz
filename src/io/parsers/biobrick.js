@@ -83,13 +83,15 @@ export default async (file, options) =>
         end: 0
       });
 
-      resolve([
-        {
-          ...partFactory(),
-          ...dnaComplement(seq), // seq and compSeq
-          name: name,
-          annotations: annotations
-        }
-      ]);
+      const newPart = {
+        ...partFactory(),
+        ...dnaComplement(seq), // seq and compSeq
+        name: name,
+        annotations: annotations
+      };
+
+      console.log(newPart);
+
+      resolve([newPart]);
     });
   });
