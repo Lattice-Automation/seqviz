@@ -29,5 +29,5 @@ const viewerInput = {
 };
 
 // let viewer = window.seqviz.Viewer("app-root", viewerInput);
-let viewer = Viewer("app-root", viewerInput);
+let viewer = Viewer("root", viewerInput);
 viewer.render();
