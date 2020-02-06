@@ -12,14 +12,7 @@ const defaultOptions = {
   colors: [],
   onSelection: () => {},
   onSearch: () => {},
-  searchNext: {
-    key: "a",
-    meta: false,
-    ctrl: false,
-    shift: false,
-    alt: false
-  },
-  searchQuery: { query: "GCGG" },
+  search: { query: "GCGG" },
   backbone: "",
   enzymes: [],
   annotations: [
@@ -65,6 +58,17 @@ describe("Viewer rendering", () => {
     let viewer = Viewer(div, {
       name: "seq_name",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
+    });
+
+    viewer.render();
+  });
+
+  it("renders with zoom outside 0-100", () => {
+    const div = document.createElement("div");
+    let viewer = Viewer(div, {
+      name: "seq_name",
+      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+      zoom: { linear: -10, circular: 150 }
     });
 
     viewer.render();

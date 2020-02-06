@@ -235,7 +235,7 @@ export default class SeqBlock extends React.PureComponent {
       cutSiteHeight +
       cutSiteYDiff +
       reversePrimerHeight;
-    let selectEdgeHeight = showIndex ? selectHeight + lineHeight : selectHeight;
+    let selectEdgeHeight = showIndex ? selectHeight + 13 : selectHeight;
 
     // small edge-case for translation shifting downward
     if (translations.length) {

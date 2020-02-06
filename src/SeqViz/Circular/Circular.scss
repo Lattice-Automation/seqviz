@@ -4,10 +4,20 @@
   font-weight: 400;
 }
 
-.la-vz-circular-index {
-  font-weight: 500;
-}
-
 .la-vz-circular-bps {
   cursor: text;
+}
+
+.la-vz-label-line {
+  stroke: #9eaab8;
+  stroke-width: 1;
+  fill: none;
+}
+
+.la-vz-circular-label {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

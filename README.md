@@ -74,9 +74,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -102,7 +104,8 @@ export default () => (
   window.seqviz
     .Viewer("root", {
       name: "L09136",
-      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
+      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+      style: { height: "100vh", width: "100vw" }
     })
     .render();
 </script>
@@ -226,6 +229,14 @@ An array of color hex codes for annotation coloring. Defaults to:
   "#6B81FF", // blue
   "#85A6FF" // light blue
 ];
+```
+
+#### `options.style (={})`
+
+Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer, if the div around `seqviz` lacks a defined height and/or width. For example:
+
+```js
+{ height: "100vh", width: "100vw" }
 ```
 
 #### `options.onSelection (=null)`

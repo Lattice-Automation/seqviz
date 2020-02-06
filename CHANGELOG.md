@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.15]
+
+### Added
+
+- `options.style`/`props.style` that's given to the top-level container div of SeqViz. Useful for setting high manually if the parent div doesn't have height.
+- Description of `options.style` to the README.md
+
+### Changed
+
+- Shortened the height of selection edges in Linear. Their bottom should now align with the bottom of ticks
+- Narrowed tick width and tick font weight to match the Linear viewer
+- Zoom calculation so zooms outside the [0, 100] range are brought to within it
+- render and setState both return the React Component, where they returned nothing before
+
+### Fixed
+
+- Alignment of tick labels in Circular to add Firefox support
+
 ## [3.0.14]
 
 ### Fixed

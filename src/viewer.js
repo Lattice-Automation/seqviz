@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 
 import SeqViz from "./SeqViz/SeqViz.jsx";
-import "./viewer.scss";
 
 /**
  * Export a React component directly for React-based development
@@ -38,6 +37,7 @@ export const Viewer = (element = "root", options) => {
   const render = () => {
     rendered = true;
     ReactDOM.render(viewer, domElement);
+    return viewer;
   };
 
   /**
@@ -67,6 +67,7 @@ export const Viewer = (element = "root", options) => {
     if (rendered) {
       ReactDOM.render(viewer, domElement);
     }
+    return viewer;
   };
 
   return {
