@@ -10,3 +10,5 @@ Enzyme.configure({ adapter: new Adapter() });
 sizeMe.noPlaceholders = true;
 // global.fetch = fetch;
 localStorage.clear();
+
+jest.setTimeout(30000);
