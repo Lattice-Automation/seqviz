@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.16]
+
+### Fixed
+
+- Issue where annotations weren't being passed down from external sources like iGEM or NCBI
+
 ## [3.0.15]
 
 ### Added
