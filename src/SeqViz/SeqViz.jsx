@@ -245,7 +245,7 @@ export default class SeqViz extends React.Component {
     compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
     name = name || part.name;
     annotations =
-      annotations && annotations.length ? annotations : part.annotations;
+      annotations && annotations.length ? annotations : part.annotations || [];
 
     const linear = viewer === "linear" || viewer === "both";
     const circular = viewer === "circular" || viewer === "both";

@@ -90,8 +90,6 @@ export default async (file, options) =>
         annotations: annotations
       };
 
-      console.log(newPart);
-
       resolve([newPart]);
     });
   });
