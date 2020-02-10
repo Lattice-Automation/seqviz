@@ -291,7 +291,7 @@ export default class Labels extends React.Component {
                   className="la-vz-circular-label"
                   {...g.textCoor}
                   textAnchor={g.textAnchor}
-                  alignmentBaseline="middle"
+                  dominantBaseline="middle"
                 >
                   {g.name}
                 </text>
@@ -311,7 +311,7 @@ export default class Labels extends React.Component {
                 className="la-vz-circular-label"
                 textAnchor={g.textAnchor}
                 onMouseEnter={() => this.setHoveredGroup(first.id)}
-                alignmentBaseline="middle"
+                dominantBaseline="middle"
                 {...g.textCoor}
               >
                 {g.name}

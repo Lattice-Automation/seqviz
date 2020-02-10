@@ -74,9 +74,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -231,7 +233,7 @@ An array of color hex codes for annotation coloring. Defaults to:
 
 #### `options.style (={})`
 
-Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer, if the div around `seqviz` lacks a defined height and/or width. For example:
+Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if the element around `seqviz` lacks a defined height and/or width. For example:
 
 ```js
 { height: "100vh", width: "100vw" }

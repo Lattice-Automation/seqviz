@@ -78,7 +78,7 @@ class PrimerRow extends React.PureComponent {
     };
 
     const textProps = {
-      alignmentBaseline: "middle",
+      dominantBaseline: "middle",
       cursor: "pointer",
       lengthAdjust: "spacing",
       textRendering: "optimizeLegibility",

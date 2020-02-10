@@ -153,7 +153,7 @@ class AnnotationRow extends React.PureComponent {
     };
 
     const textProps = {
-      alignmentBaseline: "middle",
+      dominantBaseline: "middle",
       cursor: "pointer",
       textAnchor: "middle",
       textRendering: "optimizeLegibility",
