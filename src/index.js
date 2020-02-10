@@ -24,8 +24,8 @@ const viewerInput = {
   },
   search: { query: "gtacc" },
   enzymes: ["EcoRI"],
-  copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
-  style: { height: "100vh", width: "100vw" }
+  copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey)
+  // style: { height: "calc(100vh - 20px)", width: "calc(100vw)" }
 };
 
 // let viewer = window.seqviz.Viewer("app-root", viewerInput);

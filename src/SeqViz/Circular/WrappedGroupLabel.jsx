@@ -119,7 +119,7 @@ export default class WrappedGroupLabel extends React.Component {
               key={`${key}_${i}`}
               y={groupCoor.y + (i + 0.5) * lineHeight}
               x={groupCoor.x}
-              alignmentBaseline="middle"
+              dominantBaseline="middle"
             >
               {r.map((l, i2) => (
                 // every label should have its own id (used by selection
@@ -130,7 +130,7 @@ export default class WrappedGroupLabel extends React.Component {
                     id={l.id}
                     className="la-vz-circular-label"
                     y={groupCoor.y + (i + 0.5) * lineHeight}
-                    alignmentBaseline="middle"
+                    dominantBaseline="middle"
                     tabIndex={-1}
                   >
                     {l.name}

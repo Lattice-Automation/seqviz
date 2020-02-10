@@ -59,7 +59,7 @@ export default class TranslationRows extends React.PureComponent {
  */
 class TranslationRow extends React.Component {
   static textProps = {
-    alignmentBaseline: "middle",
+    dominantBaseline: "middle",
     cursor: "pointer",
     textAnchor: "middle",
     style: {

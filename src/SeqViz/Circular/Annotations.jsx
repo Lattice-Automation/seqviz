@@ -195,7 +195,7 @@ const SingleAnnotation = props => {
             id={a.id}
             textAnchor="middle"
             startOffset={bottomHalf ? "25%" : "75%"}
-            alignmentBaseline="middle"
+            dominantBaseline="middle"
             xlinkHref={`#${circAnnID}`}
             {...labelStyle}
           >
