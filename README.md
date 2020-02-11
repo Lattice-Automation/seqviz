@@ -22,7 +22,7 @@
   - [Installation](#installation)
   - [Instantiation](#instantiation)
   - [Viewer](#viewer)
-  - [Options](#options/props)
+  - [Options](#optionsprops)
 - [Demo](#demo)
 - [Contact Us](#contact-us)
 
@@ -72,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
