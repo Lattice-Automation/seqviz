@@ -57,7 +57,7 @@
 - **Selections**
 
   - Clicking on an `annotation`, `translation`, `enzyme` or `searchElement`, or dragging over the sequence, will create a selection
-  - Information about selections is available via `options.onSelection()` (see [viewer options](#options))
+  - Information about selections is available via `options.onSelection()` (see [viewer options](#optionsprops))
 
 ## Usage
 
@@ -116,7 +116,7 @@ The viewer's constructor (Vanilla-JS) accepts two arguments.
 #### `var viewer = seqviz.Viewer(element, options)`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
-- `options` -- options as documented in greater detail [below](#options)
+- `options` -- options as documented in greater detail [below](#optionsprops)
 
 #### `viewer.render()`
 
