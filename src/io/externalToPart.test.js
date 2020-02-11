@@ -1,6 +1,6 @@
 import externalToPart from "./externalToPart";
 
-describe("Import parts from external apis and repositories (IO)", () => {
+describe("Import parts from external repositories", () => {
   // test import of some known parts against their expected properties
 
   // test a couple files with a known number of annotations/seq length/name

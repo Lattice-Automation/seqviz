@@ -4,18 +4,16 @@
 
 &nbsp;
 
+<div align="center">
+  <img src="./demo/seqviz-gif-v2.gif">
+</div>
+
+&nbsp;
+
 [![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
 [![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
 
 <!-- pkg-description(cmd:) -->DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM input<!-- /pkg-description -->
-
-<br>
-
----
-
-<div align="center">
-  <img src="./demo/seqviz-gif-v2.gif">
-</div>
 
 ---
 
@@ -24,7 +22,7 @@
   - [Installation](#installation)
   - [Instantiation](#instantiation)
   - [Viewer](#viewer)
-  - [Options](#options)
+  - [Options](#options/props)
 - [Demo](#demo)
 - [Contact Us](#contact-us)
 
@@ -74,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -113,7 +113,7 @@ export default () => (
 
 The viewer's constructor (Vanilla-JS) accepts two arguments.
 
-#### `seqviz.Viewer(element, options)`
+#### `var viewer = seqviz.Viewer(element, options)`
 
 - `element` -- either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
 - `options` -- options as documented in greater detail [below](#options)
@@ -130,7 +130,7 @@ Renders the viewer and returns as an HTML string.
 
 Update the viewer's configuration and re-renders.
 
-### Options
+### Options/Props
 
 All the following are usable as props via the React component (`seqviz.SeqViz`) or as properties of an `options` object via the JS implementation (`seqviz.Viewer()`).
 
@@ -146,7 +146,7 @@ An NCBI accession ID or iGEM part ID. Populates `options.name`, `options.seq`, a
 
 #### `options.file (=null)`
 
-A [File](https://developer.mozilla.org/en-US/docs/Web/API/File) object from a FASTA, Genbank, SnapGene, or SBOL file. Populates `options.name`, `options.seq`, and `options.annotations`.
+A [File](https://developer.mozilla.org/en-US/docs/Web/API/File), [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob), or body (string/utf8) from a FASTA, Genbank, SnapGene, or SBOL file. Populates `options.name`, `options.seq`, and `options.annotations`.
 
 #### Optional
 

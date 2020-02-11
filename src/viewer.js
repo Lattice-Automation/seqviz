@@ -15,8 +15,10 @@ export { SeqViz };
 export { default as pUC } from "./parts/pUC";
 
 /**
- * Return an object with a `viewer` (React component), `viewerHTML` (HTML string),
- * and a `render` function for rendering the viewer to the `element`
+ * Return a Viewer object with three properties:
+ *  - `render` to an HTML element
+ *  - `setState(options)` to update the viewer's internal state
+ *  - `renderToString` to return an HTML representation of the Viewer
  *
  * @param {ViewerOptions} options - The {ViewerOptions} for the viewer
  */

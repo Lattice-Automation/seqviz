@@ -1,6 +1,7 @@
-// note: Huge credit and thanks go to IsaacLuo from whose python repository this code was adapted
-// https://github.com/IsaacLuo/SnapGeneFileReader
-// https://github.com/ediezben/dgparse/blob/master/specs/SnapGene_File_Format_%202.0.pdf
+/**
+ * Source code for this parser comes from:
+ * https://github.com/IsaacLuo/SnapGeneFileReader
+ */
 
 import { StringDecoder } from "string_decoder";
 import bufferpack from "bufferpack";
@@ -22,32 +23,30 @@ export default async (fileArrayBuffer, options) => {
     return buffer;
   };
 
-  async function unpack(size, mode) {
-    const buffer = await read(size);
+  const unpack = async (size, mode) => {
+    const buffer = read(size);
     const unpacked = await bufferpack.unpack(`>${mode}`, buffer);
     if (unpacked === undefined) return undefined;
     return unpacked[0];
-  }
+  };
 
-  await read(1); // read the first byte
+  read(1); // read the first byte
+
   // READ THE DOCUMENT PROPERTIES
   const length = await unpack(4, "I");
-  const title = await read(8, "ascii");
+  const title = read(8, "ascii");
   if (length !== 14 || title !== "SnapGene") {
-    throw new Error("Wrong format for a SnapGene file");
+    throw new Error("wrong format for a SnapGene file");
   }
   const data = {};
-  // data.isDNA =
-  await unpack(2, "H");
-  // data.exportVersion =
-  await unpack(2, "H");
-  // data.importVersion =
-  await unpack(2, "H");
-  // data.other = [];
+  data.isDNA = await unpack(2, "H");
+  data.exportVersion = await unpack(2, "H");
+  data.importVersion = await unpack(2, "H");
+
   /* eslint-disable no-await-in-loop */
   while (offset <= fileArrayBuffer.byteLength) {
     // # READ THE WHOLE FILE, BLOCK BY BLOCK, UNTIL THE END
-    const nextByte = await read(1);
+    const nextByte = read(1);
 
     // # next_byte table
     // # 0: dna sequence
@@ -78,13 +77,13 @@ export default async (fileArrayBuffer, options) => {
       data.circular = isFirstBitA1(binaryRep);
       const size = blockSize - 1;
       if (size < 0) {
-        throw new Error("Error parsing sequence data");
+        throw new Error("error parsing sequence data");
       }
-      data.seq = await read(size, "ascii");
+      data.seq = read(size, "ascii");
       data.compSeq = dnaComplement(data.seq).compSeq;
     } else if (ordOfNB === 6) {
       //  # READ THE NOTES
-      const blockContent = await read(blockSize, "utf8");
+      const blockContent = read(blockSize, "utf8");
       const notes = await editMD(blockContent);
       data.notes = notes ? notes.description : "";
     } else if (ordOfNB === 10) {
@@ -97,7 +96,7 @@ export default async (fileArrayBuffer, options) => {
         "3": "BIDIRECTIONAL"
       };
 
-      const xml = await read(blockSize, "utf8");
+      const xml = read(blockSize, "utf8");
       const b = await editMD(xml);
       const { Features: { Feature = [] } = {} } = b;
       data.annotations = [];
@@ -123,20 +122,19 @@ export default async (fileArrayBuffer, options) => {
           end: maxEnd - 1
         });
       });
-    } else if (ordOfNB === 2 || ordOfNB === 3 || ordOfNB === 13) {
-      // # UNKNOWN: WE IGNORE THE WHOLE BLOCK
-      await read(blockSize);
     } else {
-      console.warn("failed to parse snapgene file");
+      // # UNKNOWN: WE IGNORE THE WHOLE BLOCK
+      read(blockSize);
     }
   }
-  /* eslint-enable no-await-in-loop */
 
-  return {
-    ...partFactory(),
-    ...data,
-    name: fileName.replace(".dna", "")
-  };
+  return [
+    {
+      ...partFactory(),
+      ...data,
+      name: fileName.replace(".dna", "")
+    }
+  ];
 };
 
 const ord = string => {
@@ -152,30 +150,6 @@ const ord = string => {
 
   const str = string.toString();
   const code = str.charCodeAt(0);
-
-  if (code >= 0xd800 && code <= 0xdbff) {
-    // High surrogate (could change last hex to 0xDB7F to treat
-    // high private surrogates as single characters)
-    const hi = code;
-    if (str.length === 1) {
-      // This is just a high surrogate with no following low surrogate,
-      // so we return its value;
-      return code;
-      // we could also throw an error as it is not a complete character,
-      // but someone may want to know
-    }
-    const low = str.charCodeAt(1);
-    return (hi - 0xd800) * 0x400 + (low - 0xdc00) + 0x10000;
-  }
-  if (code >= 0xdc00 && code <= 0xdfff) {
-    // Low surrogate
-    // This is just a low surrogate with no preceding high surrogate,
-    // so we return its value;
-    return code;
-    // we could also throw an error as it is not a complete character,
-    // but someone may want to know
-  }
-
   return code;
 };
 
