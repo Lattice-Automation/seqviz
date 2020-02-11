@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import PUC from "./parts/pUC";
 import { Viewer } from "./viewer";
 
@@ -20,12 +23,13 @@ const defaultOptions = {
       name: "test_annotation",
       start: 0,
       end: 15,
-      direction: "FORWARD" // old prop-type, still supported
+      direction: "FORWARD" // old prop-type, still supported; now using -1, 0, 1
     }
-  ]
+  ],
+  style: { height: 500, width: 800 }
 };
 
-describe("Viewer rendering", () => {
+describe("Viewer rendering (JS)", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
     let viewer = Viewer(div, { ...defaultOptions, ...PUC });
@@ -70,6 +74,18 @@ describe("Viewer rendering", () => {
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
       zoom: { linear: -10, circular: 150 }
     });
+
+    viewer.render();
+  });
+
+  it("renders from a Genbank file", () => {
+    const div = document.createElement("div");
+    const gbContents = fs.readFileSync(
+      path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb"),
+      "utf8"
+    );
+
+    let viewer = Viewer(div, { file: gbContents });
 
     viewer.render();
   });

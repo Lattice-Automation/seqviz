@@ -24,9 +24,7 @@ export default async (accession, options = { backbone: "", colors: [] }) => {
     igem = true;
     url = `https://cors-anywhere.herokuapp.com/http://parts.igem.org/xml/part.${accession.trim()}`;
   } else if (backbone.length) {
-    throw new Error(
-      "You've specified a backbone. Were you trying to display a BioBrick part? If so, please specify the BioBrick through the 'accession' prop."
-    );
+    console.error("backbone specified without a BioBrick");
   }
 
   const response = await fetch(
@@ -48,9 +46,7 @@ export default async (accession, options = { backbone: "", colors: [] }) => {
       : "";
 
   if (igem && igemBackbone === "") {
-    throw new Error(
-      `Failed to find an iGEM backbone with ID ${backbone}. Please contact us if you think this is a mistake.`
-    );
+    console.error("iGEM BioBrick ID used, but no backbone ID specified.");
   }
 
   const parts = await fileToParts(response, {

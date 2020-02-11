@@ -28,14 +28,42 @@ describe("Converts files to parts (IO)", () => {
     .forEach((file, i) => {
       it(`converts: ${file} ${i}`, async () => {
         const fileString = fs.readFileSync(allFiles[file], "utf8");
-        // does it resolve
-        await expect(
-          filesToParts(fileString, allFiles[file])
-        ).resolves.toBeTruthy();
+
         // does it include a name, seq, and source?
-        const result = await filesToParts(fileString, allFiles[file]);
-        expect(result[0].name).toMatch(/.{2,}/);
-        expect(result[0].seq).toMatch(/.{2,}/);
+        try {
+          const result = await filesToParts(fileString, allFiles[file]);
+          expect(typeof result).toEqual(typeof []);
+          expect(typeof result[0]).toEqual(typeof {});
+          expect(result[0].name).toMatch(/.{2,}/);
+          expect(result[0].seq).toMatch(/.{2,}/);
+          expect(result[0].compSeq).toMatch(/.{2,}/);
+        } catch (err) {
+          console.error(err);
+          throw err;
+        }
       });
     });
+
+  // convert an array of files at one time
+  it("converts multiple files at once", async () => {
+    const files = Object.keys(allFiles)
+      .filter(f => !f.includes("empty"))
+      .slice(0, 3);
+
+    try {
+      const result = await filesToParts(
+        files.map(f => fs.readFileSync(allFiles[f], "utf8"))
+      );
+
+      expect(typeof result).toEqual(typeof []);
+      result.forEach(part => {
+        expect(typeof part).toEqual(typeof {});
+        expect(part.name).toMatch(/.{2,}/);
+        expect(part.seq).toMatch(/.{2,}/);
+      });
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  });
 });

@@ -46,8 +46,12 @@ export default async (file, options) =>
         features = [];
       }
 
-      const seq = firstElement(seq_data.seq_data) + backbone.backbone;
-      const backboneName = backbone.name.length < 20 ? backbone.name : "";
+      let seq = firstElement(seq_data.seq_data);
+      if (backbone.backbone) {
+        seq += backbone.backbone;
+      }
+      const backboneName =
+        backbone.name && backbone.name.length < 20 ? backbone.name : "";
       const name = `${firstElement(part_name)}-${backboneName}`;
 
       if (!seq || !name) {

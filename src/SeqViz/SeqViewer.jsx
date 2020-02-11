@@ -17,7 +17,7 @@ class SeqViewer extends React.Component {
     super(props);
     const { size } = props;
 
-    if (!size.height || !size.width) {
+    if ((!size.height || !size.width) && process.env.NODE_ENV != "test") {
       console.error(`SeqViz viewer rendered in an element without a height or width.
 Generally, SeqViz expands to fill the height/width of its parent element.
 

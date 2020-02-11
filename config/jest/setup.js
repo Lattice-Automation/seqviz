@@ -8,6 +8,7 @@ import "regenerator-runtime/runtime";
 Enzyme.configure({ adapter: new Adapter() });
 
 sizeMe.noPlaceholders = true;
+
 // global.fetch = fetch;
 localStorage.clear();
 

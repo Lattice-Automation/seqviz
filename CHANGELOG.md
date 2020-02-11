@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.17]
+
+### Added
+
+- Integration tests for file inputs.
+- React E2E testing in viewer.test.jsx
+
+### Fixed
+
+- SnapGene file parsing. It wasn't traversing the SnapGene ArrayBuffer fully.
+
 ## [3.0.16]
 
 ### Fixed

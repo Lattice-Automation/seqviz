@@ -37,7 +37,7 @@ export default class SeqViz extends React.Component {
     compSeq: PropTypes.string,
     copyEvent: PropTypes.func.isRequired,
     enzymes: PropTypes.arrayOf(PropTypes.string).isRequired,
-    file: PropTypes.object,
+    file: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
     onSelection: PropTypes.func.isRequired,
@@ -107,7 +107,7 @@ export default class SeqViz extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.setPart();
+    await this.setPart();
   };
 
   componentDidUpdate = async (
@@ -118,7 +118,7 @@ export default class SeqViz extends React.Component {
       accession !== this.props.accession ||
       backbone !== this.props.backbone
     ) {
-      this.setPart();
+      await this.setPart();
     } else if (
       search.query !== this.props.search.query ||
       search.mismatch !== this.props.search.mismatch
@@ -135,26 +135,33 @@ export default class SeqViz extends React.Component {
   setPart = async () => {
     const { accession, file } = this.props;
 
-    if (accession) {
-      const part = await externalToPart(accession, this.props);
-      this.setState({
-        part: {
-          ...part,
-          annotations: this.parseAnnotations(part.annotations, part.seq)
-        }
-      });
-      this.search(part);
-      this.cut(part);
-    } else if (file) {
-      const parts = await filesToParts(file, this.props);
-      this.setState({
-        part: {
-          ...parts[0],
-          annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
-        }
-      });
-      this.search(parts[0]);
-      this.cut(parts[0]);
+    try {
+      if (accession) {
+        const part = await externalToPart(accession, this.props);
+        this.setState({
+          part: {
+            ...part,
+            annotations: this.parseAnnotations(part.annotations, part.seq)
+          }
+        });
+        this.search(part);
+        this.cut(part);
+      } else if (file) {
+        const parts = await filesToParts([file], this.props);
+        this.setState({
+          part: {
+            ...parts[0],
+            annotations: this.parseAnnotations(
+              parts[0].annotations,
+              parts[0].seq
+            )
+          }
+        });
+        this.search(parts[0]);
+        this.cut(parts[0]);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
