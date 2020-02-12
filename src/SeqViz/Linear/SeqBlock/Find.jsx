@@ -1,5 +1,6 @@
 import * as React from "react";
-import shortid from "shortid";
+
+import randomid from "../../../utils/randomid";
 
 /**
  * Render rectangles around Search results. Yellow by default. Orange if active search element
@@ -47,7 +48,7 @@ export default props => {
       ));
     }
     const fill = "rgba(255, 251, 7, 0.5)";
-    const id = shortid.generate();
+    const id = randomid();
     const selReference = {
       id: id,
       start: s.start,

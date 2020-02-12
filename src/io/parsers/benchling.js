@@ -1,5 +1,5 @@
 import { partFactory, dnaComplement } from "../../utils/parser";
-import shortid from "shortid";
+import randomid from "../../utils/randomid";
 
 /**
  * Benchling presents the easiest format to parse, because their JSON
@@ -24,7 +24,7 @@ export default async text => {
     compSeq: compSeq,
     annotations: partJSON.annotations.map(a => ({
       ...a,
-      id: shortid.generate(),
+      id: randomid(),
       direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE"
     }))
   };

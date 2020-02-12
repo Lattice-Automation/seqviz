@@ -1,11 +1,6 @@
-import shortid from "shortid";
-
 import { colorByIndex, chooseRandomColor } from "./colors";
 import { dnaComplement } from "./parser";
-
-/**
- * Resources shareable throughout Loom
- */
+import randomid from "./randomid";
 
 /**
  * Map of nucleotide bases
@@ -101,11 +96,6 @@ const codon2AA = {
   CCT: "P",
   CCG: "P",
   CCC: "P"
-};
-
-export const validSequenceCharacters = {
-  ...nucleotides,
-  ...nucleotideWildCards
 };
 
 /**
@@ -241,39 +231,7 @@ export const reverse = sequence =>
     .join("");
 
 /**
- * reverse the direction
- * @param direction
- */
-export const reverseDirection = direction => {
-  if (direction === 1) {
-    return -1;
-  }
-  if (direction === -1) {
-    return 1;
-  }
-  return "NONE";
-};
-
-export const reIndex = (sequence, start) => {
-  const reIndexed = sequence.substr(start) + sequence.substr(0, start);
-  return reIndexed;
-};
-
-export const trimNewLines = str =>
-  str.replace(/^\s+|^\n+|\s+|\n+|\s+$|\n+$/g, "");
-
-/**
- * Minimum and maximum size of a selection used to create a primer
- */
-export const primerSizeLimits = { min: 10, max: 500 };
-
-/**
- * Minumum size of selection used to generate PCR primer pairs
- */
-export const primerPcrSelectionLimits = { min: 23 };
-
-/**
- * a default annotation generator
+ * an annotation generator
  */
 export const annotationFactory = (annName, i = -1) => {
   let color = chooseRandomColor();
@@ -282,7 +240,7 @@ export const annotationFactory = (annName, i = -1) => {
   }
 
   return {
-    id: shortid.generate(),
+    id: randomid(),
     color: color,
     name: annName || "Untitled",
     type: "",
@@ -295,7 +253,7 @@ export const annotationFactory = (annName, i = -1) => {
 export const primerFactory = () => ({
   overhang: "",
   name: "",
-  id: shortid.generate(),
+  id: randomid(),
   complementId: "",
   gc: 0,
   tm: 0,
@@ -314,7 +272,7 @@ export const primerFactory = () => ({
  *
  * given a sequence of DNA, translate it into an AMINO ACID sequence
  */
-const translateDNA = seqInput => {
+export const translateDNA = seqInput => {
   const seq = seqInput.toUpperCase();
   const seqLength = seq.length;
   let aaSeq = "";
@@ -325,8 +283,6 @@ const translateDNA = seqInput => {
   }
   return aaSeq;
 };
-
-export default translateDNA;
 
 /**
  * createLinearTranslations

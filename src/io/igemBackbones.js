@@ -9,6 +9,22 @@
  * Please note that the parts are stored with all capital ids to facilitate
  * case-insensitive lookup
  */
+export const fetchBBB = name => {
+  const lookupName = name.toUpperCase();
+  const BBB = igemBackbones[lookupName];
+  if (BBB) {
+    return BBB;
+  } else {
+    console.warn(
+      `Your backbone input ${name} did not match the name of any iGEM Backbone packaged with this library.
+      Please check if the backbone you are using is listed at https://parts.igem.org/Plasmid_backbones/Assembly.
+      If you are using a custom backbone please be aware that this library does not check for the validity of your prefix and suffix.
+      You can read more about prefixes and suffixes here: http://parts.igem.org/Help:Prefix-Suffix.`
+    );
+    return name;
+  }
+};
+
 export const igemBackbones = {
   //http://parts.igem.org/wiki/index.php?title=Part:pSB1A3
   PSB1A3: `tactagtagcggccgctgcagtccggcaaaaaagggcaaggtgtcaccaccctgccctttttctttaaaaccgaaaagattacttcgcgttatgcaggct
@@ -279,20 +295,4 @@ tggtatatccagtgatttttttctccattttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggt
 gtgaaagttggaacctcttacgtgcccgatcaactcgagtgccacctgacgtctaagaaaccattattatcatgacattaacctataaaaataggcgtat
 cacgaggcagaatttcagataaaaaaaatccttagctttcgctaaggatgatttctggaattcgcggccgcttctagataaggaggaactactatggccg
 gc`
-};
-
-export const fetchBBB = name => {
-  const lookupName = name.toUpperCase();
-  const BBB = igemBackbones[lookupName];
-  if (BBB) {
-    return BBB;
-  } else {
-    console.warn(
-      `Your backbone input did not match the name of any iGEM Backbone packaged with this library.
-      Please check if the backbone you are using is listed at https://parts.igem.org/Plasmid_backbones/Assembly.
-      If you are using a custom backbone please be aware that this library does not check for the validity of your prefix and suffix.
-      You can read more about prefixes and suffixes here: http://parts.igem.org/Help:Prefix-Suffix.`
-    );
-    return name;
-  }
 };

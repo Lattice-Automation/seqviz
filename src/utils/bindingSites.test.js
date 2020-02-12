@@ -1,6 +1,6 @@
 import primerBindingSites from "./bindingSites";
 
-describe("Primer Binding Sites", () => {
+describe("Primer binding sites", () => {
   const testVector =
     "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg";
   const testPrimerOne = {

@@ -1,5 +1,3 @@
-import { annotationFactory } from "./sequence";
-
 /**
  * returns an object with sequence and complement sequence as strings
  *
@@ -48,15 +46,16 @@ const DNAComplement = {
 
 /**
  * @typedef {Object} SeqReturn
- * @param {String} [seq] [the template sequence]
- * @param {String} [compSeq] [the complement sequence]
+ * @type {object}
+ * @property {string} seq the template sequence
+ * @property {string} compSeq the complement sequence
  */
 
 /**
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
- * @param  {String} origSeq [the incoming sequence]
- * @return {SeqReturn}         [the resulting sequence and complement sequence]
+ * @param  {string} origSeq the incoming sequence
+ * @return {SeqReturn}         the resulting sequence and complement sequence
  */
 export const dnaComplement = origSeq => {
   if (!origSeq) {
@@ -76,9 +75,9 @@ export const dnaComplement = origSeq => {
 };
 
 /**
- * just like dnaComplement except the dna is reversed as well to get the reverseComplement
+ * Return the reverse complement of a DNA sequence
  *
- * @param {string}  seq  the seq that we're interested in finding the reverse complement of
+ * @param {string}  seq the seq that we're interested in finding the reverse complement of
  * @return {string}     the reverse complement of the input
  */
 export const reverseComplement = inputSeq => {
@@ -111,6 +110,17 @@ export const firstElement = arr => {
 const fwd = new Set(["FWD", "FORWARD", "FOR", "1", 1]);
 const rev = new Set(["REV", "REVERSE", "-1", -1]);
 
+/**
+ * Parse the user defined direction, estimate the direction of the element
+ *
+ * ```js
+ * directionality("FWD") => 1
+ * directionality("FORWARD") => 1
+ * directionaltiy("NONSENSE") => 0
+ * ```
+ *
+ * @param {String} direction user defined direction for a SeqViz element
+ */
 export const directionality = direction => {
   if (!direction) {
     return 0;
@@ -135,30 +145,3 @@ export const partFactory = () => ({
   cutSites: [],
   note: ""
 });
-
-export const partStub = colors => {
-  const sequence =
-    "atcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXNatcguyrwskmdvhbxnATCGUYRWSKMDVHBXN";
-  return {
-    ...partFactory(),
-    name: "No Part to Display",
-    seq: sequence,
-    compSeq: dnaComplement(sequence).compSeq,
-    annotations: [
-      {
-        ...annotationFactory("ann-20"),
-        start: 20,
-        end: 30,
-        direction: 1,
-        name: "forward annotation"
-      },
-      {
-        ...annotationFactory("ann-50"),
-        start: 50,
-        end: 70,
-        direction: -1,
-        name: "reverse annotation"
-      }
-    ]
-  };
-};

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.19]
+
+### Changed
+
+- Removed unused function from utilities. For example, functions for agarose gels from digest.js
+- Removed `shortid`, `lodash` and `tinycolor2` from dependencies. Replaced each with functions in `src/utils`
+
 ## [3.0.18]
 
 ### Added

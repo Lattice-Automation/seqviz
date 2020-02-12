@@ -1,7 +1,7 @@
 import * as React from "react";
-import shortid from "shortid";
 
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
+import randomid from "../../../utils/randomid";
 
 export default class TranslationRows extends React.PureComponent {
   render() {
@@ -135,7 +135,7 @@ class TranslationRow extends React.Component {
       <g transform={`translate(0, ${y})`} ref={inputRef(id, ref)} id={id}>
         {AAs.map((a, i) => {
           // generate and store an id reference (that's used for selection)
-          const aaId = shortid.generate();
+          const aaId = randomid();
           this.AAs.push(aaId);
 
           // calculate the start and end point of each amino acid

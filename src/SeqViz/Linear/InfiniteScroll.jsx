@@ -1,7 +1,7 @@
 import * as React from "react";
-import { isEqual } from "lodash";
 
 import CentralIndexContext from "../handlers/centralIndex";
+import isEqual from "../../utils/isEqual";
 
 /**
  * A wrapper around the seqBlocks. Renders only the seqBlocks that are

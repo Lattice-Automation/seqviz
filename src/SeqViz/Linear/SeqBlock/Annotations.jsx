@@ -1,8 +1,6 @@
 import * as React from "react";
-import shortid from "shortid";
-import tinycolor from "tinycolor2";
 
-import { COLOR_BORDER_MAP } from "../../../utils/colors";
+import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
 
 export default class AnnotationRows extends React.PureComponent {
   render() {
@@ -26,7 +24,7 @@ export default class AnnotationRows extends React.PureComponent {
 
           return (
             <AnnotationRow
-              key={shortid.generate()}
+              key={`ann-row-${y}${firstBase}${lastBase}`}
               annotations={a}
               y={y}
               height={elementHeight}
@@ -55,18 +53,6 @@ class AnnotationRow extends React.PureComponent {
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].style.fillOpacity = opacity;
     }
-  };
-
-  /**
-   * Given a color, create a slightly darker color
-   */
-  calcBorderColor = fillColor => {
-    const tColor = tinycolor(fillColor);
-    const HslColor = tColor.toHsl();
-    HslColor.s + 0.1 > 1 ? (HslColor.s = 1) : (HslColor.s += 0.1);
-    HslColor.l -= 0.26;
-    const borderColor = tinycolor(HslColor);
-    return `#${borderColor.toHex()}`;
   };
 
   renderAnnotation = (a, index) => {
@@ -236,7 +222,7 @@ class AnnotationRow extends React.PureComponent {
     if (a.type === "insert") {
       strokeColor = color;
     } else {
-      strokeColor = COLOR_BORDER_MAP[color] || this.calcBorderColor(color);
+      strokeColor = COLOR_BORDER_MAP[color] || darkerColor(color);
     }
 
     const annotationPath = (
