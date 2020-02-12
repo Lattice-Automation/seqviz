@@ -105,8 +105,8 @@ const npmBuild = Object.assign({}, cdnBuild, {
   ],
   plugins: [
     new UglifyJsPlugin(),
-    new webpack.BannerPlugin(banner),
-    new BundleAnalyzerPlugin({ defaultSizes: "stat" })
+    new webpack.BannerPlugin(banner)
+    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
   ]
 });
 
