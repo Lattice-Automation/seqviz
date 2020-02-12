@@ -1,8 +1,8 @@
-import shortid from "shortid";
 import xml2js, { processors } from "xml2js";
 
 import { colorByIndex } from "../../utils/colors";
 import { dnaComplement, partFactory } from "../../utils/parser";
+import randomid from "../../utils/randomid";
 
 /*
   <sbol:Sequence rdf:about="https://synbiohub.cidarlab.org/public/Demo/A1_sequence/1">
@@ -89,7 +89,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
         } = subComponent[0].DnaComponent[0];
 
         annotations.push({
-          id: shortid.generate(),
+          id: randomid(),
           color: colorByIndex(i),
           start: bioStart[0]._ - 1 || 0, // sbol is 1-based
           end: bioEnd[0]._ || 0, // we're 0-based

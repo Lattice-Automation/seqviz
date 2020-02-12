@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
@@ -49,8 +48,7 @@ const cdnBuild = {
             "@babel/plugin-proposal-class-properties",
             "@babel/plugin-proposal-object-rest-spread",
             "babel-plugin-module-resolver",
-            "babel-plugin-transform-imports",
-            "lodash"
+            "babel-plugin-transform-imports"
           ]
         }
       },
@@ -79,8 +77,7 @@ const cdnBuild = {
   },
   plugins: [
     new UglifyJsPlugin(),
-    new webpack.BannerPlugin(banner),
-    new LodashModuleReplacementPlugin()
+    new webpack.BannerPlugin(banner)
     // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
   ],
   optimization: {
@@ -109,8 +106,7 @@ const npmBuild = Object.assign({}, cdnBuild, {
   plugins: [
     new UglifyJsPlugin(),
     new webpack.BannerPlugin(banner),
-    new LodashModuleReplacementPlugin()
-    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
+    new BundleAnalyzerPlugin({ defaultSizes: "stat" })
   ]
 });
 

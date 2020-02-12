@@ -1,16 +1,16 @@
 import * as React from "react";
-import { isEqual } from "lodash";
 
 import bindingSites from "../../utils/bindingSites";
-import withViewerHOCs from "../handlers";
+import isEqual from "../../utils/isEqual";
 import { stackElements } from "../elementsToRows";
+import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
 import Annotations from "./Annotations.jsx";
+import CutSites from "./CutSites.jsx";
 import Index from "./Index.jsx";
 import Labels from "./Labels.jsx";
-import Selection from "./Selection.jsx";
-import CutSites from "./CutSites.jsx";
 import Primers from "./Primers.jsx";
+import Selection from "./Selection.jsx";
 
 import "./Circular.scss";
 

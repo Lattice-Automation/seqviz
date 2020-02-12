@@ -1,7 +1,7 @@
 import * as React from "react";
-import shortid from "shortid";
 
 import { SelectionContext } from "../../handlers/selection.jsx";
+import randomid from "../../../utils/randomid";
 
 /**
  * Edges on the side of selections of the Selection Viewer
@@ -12,7 +12,7 @@ import { SelectionContext } from "../../handlers/selection.jsx";
 export class Edges extends React.PureComponent {
   static contextType = SelectionContext;
 
-  id = shortid.generate();
+  id = randomid();
 
   render() {
     const {
@@ -112,7 +112,7 @@ export class Edges extends React.PureComponent {
 export class Block extends React.PureComponent {
   static contextType = SelectionContext;
 
-  id = shortid.generate();
+  id = randomid();
 
   render() {
     const {
@@ -224,12 +224,9 @@ export class Block extends React.PureComponent {
     // nothing was set for this selection block
     if (!x && !width) return null;
 
-    const rectId = shortid.generate(); // TODO: why is this here?
-
     return (
       <React.Fragment>
         <rect
-          id={rectId}
           className="la-vz-linear-sel-block"
           x={x}
           y={-10}

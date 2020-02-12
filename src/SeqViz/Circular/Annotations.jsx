@@ -1,8 +1,7 @@
 import * as React from "react";
-import tinycolor from "tinycolor2";
 
 import CentralIndexContext from "../handlers/centralIndex";
-import { COLOR_BORDER_MAP } from "../../utils/colors";
+import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
 
 /**
  * Used to build up all the path elements. Does not include a display
@@ -22,16 +21,6 @@ export default class Annotations extends React.PureComponent {
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].style.fillOpacity = opacity;
     }
-  };
-
-  /** given the interior color of an annotation, calculate the color of its border */
-  calcBorderColor = fillColor => {
-    const tColor = tinycolor(fillColor);
-    const HslColor = tColor.toHsl();
-    HslColor.s = HslColor.s + 0.1 > 1 ? (HslColor.s = 1) : (HslColor.s += 0.1);
-    HslColor.l -= 0.26;
-    const borderColor = tinycolor(HslColor);
-    return `#${borderColor.toHex()}`;
   };
 
   render() {
@@ -85,7 +74,7 @@ export default class Annotations extends React.PureComponent {
                     labelStyle={labelStyle}
                     annStyle={annStyle}
                     hoverAnnotation={this.hoverAnnotation}
-                    calcBorderColor={this.calcBorderColor}
+                    calcBorderColor={darkerColor}
                     centralIndex={circular}
                   />
                 ))

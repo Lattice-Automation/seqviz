@@ -1,6 +1,6 @@
-import { debounce } from "lodash";
 import * as React from "react";
 
+import debounce from "../../utils/debounce";
 import CentralIndexContext from "./centralIndex";
 
 /**
@@ -20,8 +20,6 @@ const withEventRouter = WrappedComp =>
     static displayName = `EventRouter`;
 
     static contextType = CentralIndexContext;
-
-    delayedClick = null;
 
     clickedOnce = null;
 
@@ -232,10 +230,10 @@ const withEventRouter = WrappedComp =>
       this.selectAllHotkey();
     };
 
-    resetClicked = () => {
+    resetClicked = debounce(() => {
       this.clickedOnce = null;
       this.clickedTwice = null;
-    };
+    }, 250);
 
     /**
      * if the contextMenu button is clicked, check whether it was clicked
@@ -252,25 +250,20 @@ const withEventRouter = WrappedComp =>
       const { mouseEvent } = this.props;
 
       if (e.type === "mouseup") {
-        if (!this.delayedClick) {
-          this.delayedClick = debounce(this.resetClicked, 250);
-        }
+        this.resetClicked();
         if (this.clickedOnce === e.target && this.clickedTwice === e.target) {
-          this.delayedClick.cancel();
           this.handleTripleClick();
-          this.delayedClick();
+          this.resetClicked();
         } else if (
           this.clickedOnce === e.target &&
           this.clickedTwice === null
         ) {
-          this.delayedClick.cancel();
           this.clickedOnce = e.target;
           this.clickedTwice = e.target;
-          this.delayedClick();
+          this.resetClicked();
         } else {
-          this.delayedClick.cancel();
           this.clickedOnce = e.target;
-          this.delayedClick();
+          this.resetClicked();
         }
       }
       const { type, button, ctrlKey } = e;

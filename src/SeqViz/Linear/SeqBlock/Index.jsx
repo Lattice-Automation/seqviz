@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 /**
  * a basepair indexing row for tracking the location of the current bp of DNA.

@@ -1,6 +1,6 @@
 import * as React from "react";
-import shortid from "shortid";
 
+import randomid from "../../../utils/randomid";
 import { reverse } from "../../../utils/sequence";
 
 /**
@@ -21,7 +21,7 @@ class PrimerRow extends React.PureComponent {
       fontSize,
       zoomed
     } = this.props;
-    const primerUUID = shortid.generate();
+    const primerUUID = randomid();
     const { direction, start = 0, end = 0, sequence, id } = singlePrimer;
 
     const primerLength =
@@ -650,7 +650,7 @@ export default class PrimerRows extends React.PureComponent {
     return (
       <g className="la-vs-linear-primers">
         {primerRows.map((primerRow, i) => {
-          const id = shortid.generate();
+          const id = randomid();
 
           let rowDiff = yDiff + i * elementHeight;
           if (direction === 1) {

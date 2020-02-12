@@ -1,7 +1,8 @@
+import xml2js, { processors } from "xml2js";
+
 import { colorByIndex } from "../../utils/colors";
 import { dnaComplement, partFactory } from "../../utils/parser";
-import shortid from "shortid";
-import xml2js, { processors } from "xml2js";
+import randomid from "../../utils/randomid";
 
 /**
  * takes an JBEI file, as a string, and converts it into our DB
@@ -75,7 +76,7 @@ export default async (JBEI, colors = []) =>
               location[0].end
             ) {
               annotations.push({
-                id: shortid.generate(),
+                id: randomid(),
                 color: colorByIndex(i),
                 start: +location[0].genbankStart[0]._ - 1 || 0, // JBEI is 1-based
                 end: +location[0].end[0]._ || 0,

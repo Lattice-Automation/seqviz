@@ -1,6 +1,7 @@
 import * as React from "react";
-import { isEqual } from "lodash";
 
+import bindingSites from "../../utils/bindingSites";
+import isEqual from "../../utils/isEqual";
 import { createLinearTranslations } from "../../utils/sequence";
 import {
   createMultiRows,
@@ -8,7 +9,6 @@ import {
   stackElements
 } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
-import bindingSites from "../../utils/bindingSites";
 import InfiniteScroll from "./InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 

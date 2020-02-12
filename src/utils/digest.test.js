@@ -1,5 +1,5 @@
-import { partFactory } from "../parser";
-import { agaroseDigest, digest, DIGEST_MAP_LADDER } from "./digest.js";
+import { partFactory } from "./parser";
+import { digest } from "./digest.js";
 
 describe("DNATools: Digest", () => {
   const ecoriTestPart = () => ({
@@ -87,75 +87,6 @@ describe("DNATools: Digest", () => {
         expect.objectContaining({
           seq: "GGGGAA",
           compSeq: "****TT"
-        })
-      ])
-    );
-  });
-
-  /**
-   * make agarose digest works for linear sequences
-   */
-  test("Agarose digest linear part with BsaI correctly", () => {
-    const part = {
-      ...partFactory(),
-      seq: "TTAGGTCTCGGGGGAA",
-      compSeq: "AATCCAGAGCCCCCTT",
-      circular: false
-    };
-
-    const digestResults = agaroseDigest(["BsaI"], part, DIGEST_MAP_LADDER);
-    expect(digestResults).toHaveLength(3);
-    expect(digestResults).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          end: [{ enzymes: ["End of sequence"], index: 15 }],
-          meta: {},
-          size: "1",
-          start: [{ enzymes: ["BsaI"], index: 14 }],
-          top: 97.9
-        }),
-        expect.objectContaining({
-          end: [{ enzymes: ["BsaI"], index: 14 }],
-          meta: {},
-          size: "4",
-          start: [{ enzymes: ["BsaI"], index: 10 }],
-          top: 97.9
-        }),
-        expect.objectContaining({
-          end: [{ enzymes: ["BsaI"], index: 10 }],
-          meta: {},
-          size: "10",
-          start: [{ enzymes: ["BsaI", "Start of sequence"], index: 0 }],
-          top: 97.9
-        })
-      ])
-    );
-  });
-
-  /**
-   * make sure agarose digest works for plasmids
-   */
-  test("Agarose digest circular part with BsaI correctly", () => {
-    const part = {
-      ...partFactory(),
-      seq: "TTAGGTCTCGGGGGAA",
-      compSeq: "AATCCAGAGCCCCCTT",
-      circular: true
-    };
-
-    const digestResults = agaroseDigest(["BsaI"], part, DIGEST_MAP_LADDER);
-    expect(digestResults).toHaveLength(1);
-    expect(digestResults).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          end: [{ enzymes: [], index: 16 }],
-          meta: {
-            centralIndex: 10,
-            message: "Digest resulted in only one fragment"
-          },
-          size: "16",
-          start: [{ enzymes: ["BsaI"], index: 0 }],
-          top: 97.9
         })
       ])
     );

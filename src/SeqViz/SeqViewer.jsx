@@ -1,7 +1,7 @@
 import * as React from "react";
-import { isEqual } from "lodash";
 import sizeMe from "react-sizeme";
 
+import isEqual from "../utils/isEqual";
 import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
 import CentralIndexContext from "./handlers/centralIndex";
@@ -17,7 +17,7 @@ class SeqViewer extends React.Component {
     super(props);
     const { size } = props;
 
-    if ((!size.height || !size.width) && process.env.NODE_ENV != "test") {
+    if ((!size.height || !size.width) && process.env.NODE_ENV !== "test") {
       console.error(`SeqViz viewer rendered in an element without a height or width.
 Generally, SeqViz expands to fill the height/width of its parent element.
 

@@ -11,7 +11,7 @@ import filesToParts from "./filesToParts";
  * filesToParts completely bails on files
  */
 describe("Converts files to parts (IO)", () => {
-  const types = ["genbank", "fasta", "jbei", "benchling"];
+  const types = ["genbank", "fasta", "jbei", "benchling", "snapgene"];
   const folders = types.map(t => `${__dirname}/examples/${t}`);
 
   // key is type/file-name, value is it's path
@@ -35,8 +35,8 @@ describe("Converts files to parts (IO)", () => {
           expect(typeof result).toEqual(typeof []);
           expect(typeof result[0]).toEqual(typeof {});
           expect(result[0].name).toMatch(/.{2,}/);
-          expect(result[0].seq).toMatch(/.{2,}/);
-          expect(result[0].compSeq).toMatch(/.{2,}/);
+          expect(result[0].seq).toMatch(/[atgcATGC]{10,}/);
+          expect(result[0].compSeq).toMatch(/[atgcATGC]{10,}/);
         } catch (err) {
           console.error(err);
           throw err;
