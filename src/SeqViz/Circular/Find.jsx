@@ -1,16 +1,19 @@
 import * as React from "react";
 
 export default class CircularFind extends React.PureComponent {
+  /**
+   * Create an SVG `path` element that highlights the search result
+   *
+   * @param {SearchResult} result a single search result with start, end, direction
+   */
   createHighlight = result => {
     const {
       radius,
-      selectionRows,
       lineHeight,
       seqLength,
       getRotation,
       generateArc,
-      inputRef,
-      search: { index }
+      inputRef
     } = this.props;
     let { start, end } = result;
     // crosses the zero index
@@ -19,40 +22,18 @@ export default class CircularFind extends React.PureComponent {
     }
 
     const resultLength = Math.abs(end - start);
-
-    // const calc the size of the result radii
-    let topR = radius + lineHeight; // outer radius
-
-    // adjustment for the top/bottom of the rectangle, based on row number
-    const aAdjust = result.direction > 0 ? lineHeight / 2 : lineHeight * 1.5;
-    let bAdjust = result.direction > 0 ? lineHeight / 1.5 : lineHeight * 1.7;
-
-    let bottomR = radius + bAdjust;
-    if (seqLength < 200) {
-      topR += aAdjust;
-    } else {
-      topR += 1.3 * lineHeight;
-      bAdjust = lineHeight * selectionRows;
-      bottomR = radius - bAdjust / 4;
-    }
-
     const findPath = generateArc({
-      innerRadius: bottomR,
-      outerRadius: topR,
+      innerRadius: radius - lineHeight / 2,
+      outerRadius: radius + lineHeight / 2,
       length: resultLength,
       largeArc: resultLength > seqLength / 2,
       sweepFWD: true
     });
 
-    const fill =
-      result.index === index
-        ? "rgba(255, 165, 7, 0.5)"
-        : "rgba(255, 251, 7, 0.5)";
-
     const resultStyle = {
-      stroke: "black",
-      strokeWidth: 0.8,
-      fill: fill,
+      stroke: "rgba(0, 0, 0, 0.5)",
+      strokeWidth: 1,
+      fill: "rgba(255, 251, 7, 0.5)",
       shapeRendering: "auto",
       cursor: "pointer"
     };
@@ -61,41 +42,36 @@ export default class CircularFind extends React.PureComponent {
 
     return (
       <path
-        d={findPath}
         key={id}
-        transform={getRotation(result.start)}
-        {...resultStyle}
         id={id}
+        d={findPath}
+        transform={getRotation(result.start)}
         ref={inputRef(id, {
           ref: id,
           start: result.start,
           end: result.end,
           type: "FIND"
         })}
+        {...resultStyle}
       />
     );
   };
 
   render() {
-    const {
-      seqLength,
-      search: { results }
-    } = this.props;
+    const { seqLength, search } = this.props;
     const threshold =
-      seqLength >= 200 ? results.length / seqLength <= 0.01 : true;
+      seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
 
-    let firstBase = 0;
-    let lastBase = seqLength;
-    return results.length ? (
-      <g className="la-vz-circular-find-results">
-        {results.map(s => {
-          const hideRender =
-            s.start < firstBase && s.start > lastBase - seqLength;
-          if (hideRender) return null;
-          if (!threshold) return null;
-          return this.createHighlight(s, threshold);
-        })}
-      </g>
-    ) : null;
+    if (!search.length) {
+      return null;
+    }
+
+    return (
+      threshold && (
+        <g className="la-vz-circular-search-results">
+          {search.map(this.createHighlight)}
+        </g>
+      )
+    );
   }
 }

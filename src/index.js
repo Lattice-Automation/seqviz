@@ -2,10 +2,7 @@
  * This module is only used for developing seqviz
  * See viewer.js for the library's entrypoint
  */
-
 import { Viewer } from "./viewer";
-
-import "./index.css";
 
 const viewerInput = {
   // name: "L09136",

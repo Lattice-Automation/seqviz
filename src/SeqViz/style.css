@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap");
+
+/* outer level viewer container */
+.la-vz-seqviz {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.la-vz-seqviz svg text {
+  user-select: none;
+  fill: #2a2a2a;
+  font-family: Roboto Mono, Monaco, monospace;
+}
+
+.la-vz-seqviz svg text:selection {
+  background: none;
+}
+
+.la-vz-viewer-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 2 !important;
+}
+
+.la-vz-viewer-event-router {
+  position: absolute;
+  outline: none;
+  height: 100%;
+  width: inherit;
+}
+
+/* circular viewer */
+.la-vz-circular-viewer {
+  margin: auto;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.la-vz-circular-bps {
+  cursor: text;
+}
+
+.la-vz-label-line {
+  stroke: #9eaab8;
+  stroke-width: 1;
+  fill: none;
+}
+
+.la-vz-circular-label {
+  cursor: pointer;
+}
+
+.la-vz-circular-label:hover {
+  text-decoration: underline;
+}
+
+/* linear viewer */
+.la-vz-linear-scroller {
+  height: 100%;
+
+  outline: none !important;
+  position: relative;
+  font-weight: 300;
+  padding: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  cursor: text;
+}
+
+.la-vz-seqblock-container {
+  width: 100%;
+}
+
+.la-vz-seqblock {
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+}
+
+.la-vz-cut-site-text {
+  font-family: "Roboto", sans-serif !important;
+  font-size: 14px;
+}
+
+.la-vz-linear-sel-block {
+  fill: #def6ff;
+}
+
+.la-vz-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.la-vz-scroll::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  border-radius: 7px;
+  background-color: #a6a6a6;
+}
+
+.la-vz-scroll::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+.la-vz-scroll::-webkit-scrollbar-track-piece {
+  background-clip: padding-box;
+  border-radius: 7px;
+  background-color: #ececec;
+}

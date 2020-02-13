@@ -3,7 +3,7 @@ import * as React from "react";
 import randomid from "../../../utils/randomid";
 
 /**
- * Render rectangles around Search results. Yellow by default. Orange if active search element
+ * Render rectangles around Search results.
  */
 export default props => {
   const {
@@ -22,22 +22,13 @@ export default props => {
     return null;
   }
 
-  const findProps = listenerOnly
-    ? {
-        stroke: "none",
-        height: 18,
-        fill: "transparent",
-        cursor: "pointer",
-        style: { fill: "transparent" },
-        className: "la-vz-linear-sel-block"
-      }
-    : {
-        height: 18,
-        stroke: "black",
-        strokeWidth: 0.8,
-        cursor: "pointer",
-        className: "la-vz-linear-sel-block"
-      };
+  const findProps = {
+    height: 18,
+    stroke: listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
+    cursor: "pointer",
+    strokeWidth: 1,
+    style: { fill: listenerOnly ? "transparent" : "rgba(255, 251, 7, 0.5)" }
+  };
 
   return searchRows.map(s => {
     let { x, width } = findXAndWidth(s.start, s.end);
@@ -47,7 +38,7 @@ export default props => {
         s.end < firstBase ? lastBase : Math.min(lastBase, s.end)
       ));
     }
-    const fill = "rgba(255, 251, 7, 0.5)";
+
     const id = randomid();
     const selReference = {
       id: id,
@@ -64,12 +55,11 @@ export default props => {
 
     return (
       <rect
-        x={x}
-        y={y}
-        width={width}
-        style={{ fill }}
         key={id}
         id={id}
+        x={x - 1}
+        y={y}
+        width={width}
         ref={inputRef(id, selReference)}
         {...findProps}
       />

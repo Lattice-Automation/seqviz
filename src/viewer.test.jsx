@@ -28,11 +28,43 @@ describe("SeqViz rendering (React)", () => {
 
     // renders both a circular and linear viewer by default
     expect(wrapper.find(SeqViewer)).toHaveLength(2);
+    expect(wrapper.find(".la-vz-linear-scroller")).toHaveLength(1);
+    expect(wrapper.find(".la-vz-circular-viewer")).toHaveLength(1);
+    const firstViewer = wrapper.find(SeqViewer).first();
+    expect(firstViewer.find(".la-vz-linear-scroller").length).toBeFalsy();
+    expect(firstViewer.find(".la-vz-circular-viewer").length).toBeTruthy();
     // renders bp for the sequence (only works for smaller seqs
     // where the infinite scroll doesn't truncate)
     expect(wrapper.find("text").length).toBeGreaterThanOrEqual(
       defaultProps.seq.length * 2
     );
+  });
+
+  it("renders with linear viewer only", async () => {
+    const wrapper = mount(<SeqViz {...defaultProps} viewer="linear" />);
+
+    expect(wrapper.find(SeqViewer)).toHaveLength(1);
+    expect(wrapper.find(".la-vz-linear-scroller")).toHaveLength(1);
+    expect(wrapper.find(".la-vz-circular-viewer")).toHaveLength(0);
+  });
+
+  it("renders with circular viewer only", () => {
+    const wrapper = mount(<SeqViz {...defaultProps} viewer="circular" />);
+
+    expect(wrapper.find(SeqViewer)).toHaveLength(1);
+    expect(wrapper.find(".la-vz-linear-scroller")).toHaveLength(0);
+    expect(wrapper.find(".la-vz-circular-viewer")).toHaveLength(1);
+  });
+
+  it("renders with both viewers flipped", () => {
+    const wrapper = mount(<SeqViz {...defaultProps} viewer="both_flip" />);
+
+    expect(wrapper.find(SeqViewer)).toHaveLength(2);
+    expect(wrapper.find(".la-vz-linear-scroller")).toHaveLength(1);
+    expect(wrapper.find(".la-vz-circular-viewer")).toHaveLength(1);
+    const firstViewer = wrapper.find(SeqViewer).first();
+    expect(firstViewer.find(".la-vz-linear-scroller").length).toBeTruthy();
+    expect(firstViewer.find(".la-vz-circular-viewer").length).toBeFalsy();
   });
 
   it("renders with Genbank file string input", async () => {

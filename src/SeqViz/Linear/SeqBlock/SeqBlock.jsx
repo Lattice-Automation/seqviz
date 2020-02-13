@@ -3,7 +3,7 @@ import * as React from "react";
 import Annotations from "./Annotations.jsx";
 import CutSiteRow from "./CutSites.jsx";
 import IndexRow from "./Index.jsx";
-import LinearFind from "./Find.jsx";
+import Find from "./Find.jsx";
 import Primers from "./Primers.jsx";
 import Selection from "./Selection.jsx";
 import TranslationRows from "./Translations.jsx";
@@ -264,7 +264,7 @@ export default class SeqBlock extends React.PureComponent {
     return (
       <svg
         {...svgProps}
-        className="la-vz-seq-block"
+        className="la-vz-seqblock"
         id={id}
         ref={inputRef(id, seqRange)}
         onMouseDown={mouseEvent}
@@ -293,17 +293,15 @@ export default class SeqBlock extends React.PureComponent {
             selection={selection}
             selectEdgeHeight={selectEdgeHeight}
           />
-          {searchRows.length > 0 && (
-            <LinearFind
-              {...this.props}
-              filteredRows={filteredSearchRows}
-              findXAndWidth={this.findXAndWidth}
-              indexYDiff={indexYDiff}
-              compYDiff={compYDiff}
-              seqBlockRef={this}
-              lastBase={lastBase}
-            />
-          )}
+          <Find
+            {...this.props}
+            filteredRows={filteredSearchRows}
+            findXAndWidth={this.findXAndWidth}
+            indexYDiff={indexYDiff}
+            compYDiff={compYDiff}
+            seqBlockRef={this}
+            lastBase={lastBase}
+          />
           <Annotations
             {...this.props}
             findXAndWidth={this.findXAndWidth}
@@ -377,7 +375,7 @@ export default class SeqBlock extends React.PureComponent {
             lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
           />
-          <LinearFind
+          <Find
             {...this.props}
             filteredRows={filteredSearchRows}
             findXAndWidth={this.findXAndWidth}

@@ -7,12 +7,11 @@ import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
 import Annotations from "./Annotations.jsx";
 import CutSites from "./CutSites.jsx";
+import Find from "./Find.jsx";
 import Index from "./Index.jsx";
 import Labels from "./Labels.jsx";
 import Primers from "./Primers.jsx";
 import Selection from "./Selection.jsx";
-
-import "./Circular.scss";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -263,7 +262,8 @@ class Circular extends React.Component {
 
       seq,
       compSeq,
-      cutSites
+      cutSites,
+      search
     } = this.props;
 
     const {
@@ -315,50 +315,38 @@ class Circular extends React.Component {
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection
-            {...this.props}
             {...general}
             onUnmount={onUnmount}
             totalRows={totalRows}
             seq={seq}
           />
           <Annotations
-            {...this.props}
             {...general}
             annotations={annotationsInRows}
             size={size}
             rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
           />
-          {showPrimers && primersInRows.length && (
-            <Primers
-              {...general}
-              primers={primersInRows}
-              size={size}
-              rowsToSkip={primerRowsToSkip}
-            />
-          )}
-          {cutSites.length && (
-            <CutSites {...general} selectionRows={4} cutSites={cutSites} />
-          )}
-          {showIndex && (
-            <Index
-              {...this.props}
-              {...general}
-              name={name}
-              size={size}
-              yDiff={yDiff}
-              seq={seq}
-              compSeq={compSeq}
-              totalRows={totalRows}
-            />
-          )}
-          <Labels
-            {...this.props}
+          <Find {...general} search={search} />
+          <Primers
             {...general}
-            labels={outerLabels}
+            primers={primersInRows}
+            showPrimers={showPrimers}
+            size={size}
+            rowsToSkip={primerRowsToSkip}
+          />
+          <CutSites {...general} selectionRows={4} cutSites={cutSites} />
+          <Index
+            {...general}
+            name={name}
             size={size}
             yDiff={yDiff}
+            seq={seq}
+            compSeq={compSeq}
+            totalRows={totalRows}
+            showIndex={showIndex}
           />
+          <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>
       </svg>
     );
