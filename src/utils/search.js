@@ -1,165 +1,136 @@
+import { dnaComplement } from "./parser";
 import {
   nucleotides,
   nucleotideWildCards,
+  reverse,
   translateWildNucleotides
 } from "./sequence";
-import { dnaComplement } from "./parser";
 
 /**
- * Check that the query warrants a search
- * Also determines whether no search or invalid search
- * messages need to be displayed.
+ * @typedef {Object} SearchResult
+ * @type {object}
+ * @property {number} start the start index of the search result
+ * @property {number} end the end index of the search result
+ * @property {number} direction -1, 0, or 1 for the direction of the search result
+ */
+
+/**
+ * Search the seq in the forward and reverse complement strands.
+ * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
+ *
+ * @param {string} query the query string to search with
+ * @param {number} mismatch the number of allowable mismatches
+ * @param {string} seq the sequence being searched
+ * @returns {[SearchResult]} an array of search results
  */
 export default (query, mismatch, seq) => {
-  // Only start searching after query is at least 3 letters
-  // which is the length of a codon, probably the lowest
-  // meaningful number of letters for a search
-  // this prevents initial searches with ridiculous number or
-  // search results during the type ahead
-  if (!query || !query.length || !seq || !seq.length)
-    return {
-      results: [],
-      index: 0
-    };
+  if (!query || !query.length || !seq || !seq.length) {
+    return [];
+  }
+
+  // Only start searching after query is at least 3 letters, lowest meaningful length
   if (query.length - mismatch < 3) {
-    console.error("Search too broad, please narrow parameters.");
-    return {
-      results: [],
-      index: 0
-    };
+    console.error("search too broad, please narrow parameters.");
+    return [];
   }
+
   const { compSeq } = dnaComplement(seq);
-  // Only start searching if search sequence contains recognized characters
-  const translatedQuery = translateWildNucleotides(query.toLowerCase()).trim();
-  const regTest = new RegExp(
-    `[^${Object.keys(nucleotides).join("")}()|]`,
-    "gi"
-  );
-  if (regTest.test(translatedQuery)) {
-    console.error(
-      "Invalid characters found in query. Search only supports nucleotide bases and nucleotide wildcards."
-    );
-    return {
-      results: [],
-      index: 0
-    };
-  }
-  const revValue = query
-    .split("")
-    .reverse()
-    .join("");
 
-  const tempSearchParams = {
-    query: query,
-    targetString: seq,
-    mismatch: mismatch
-  };
-  const compSearchParams = {
-    query: revValue,
-    targetString: compSeq,
-    mismatch: mismatch
-  };
+  const indices = search(query, seq, mismatch, true);
+  const compIndices = search(reverse(query), compSeq, mismatch, false);
 
-  const indices = findString(tempSearchParams, true, seq.length);
-  const compIndices = findString(compSearchParams, false, seq.length);
-
-  // If results are greater than 4000 on either strand
-  // throw out the search and tell user the search was too broad
   if (indices.length > 4000 || compIndices.length > 4000) {
-    console.error("Search too broad, please narrow parameters.");
-    return {
-      results: [],
-      index: 0
-    };
+    // failing out here because rendering will be too expensive
+    console.error(
+      `Search too broad, ${indices.length +
+        compIndices.length} matches. Please narrow parameters.`
+    );
+    return [];
   }
 
-  return searchSeq(indices, compIndices, query.length, seq.length);
+  const searchResults = indices
+    .concat(compIndices)
+    .sort((a, b) => a.start - b.start);
+
+  return searchResults;
 };
 
 /**
- * findString
- * create an array of locations of the found substring, given the search term
- * and the target string to search through
- * row specifies whether the search result is on the template strand or complement
+ * Search the sequence
+ *
+ * If there's no mismatch, just use a RegExp to search over the sequence repeatedly
+ * Otherwise, use the modified hamming search in `searchWithMismatch()`
+ *
+ * @param {string} query the search pattern
+ * @param {string} subject the sequence to search over
+ * @param {number} mismatch the number of allowable mismatches
+ * @param {boolean} fwd whether this is in the FWD direction
+ * @returns {[SeqReturn]}
  */
-const findString = (params, template, seqLength) => {
-  const { query, targetString, mismatch } = params;
-  const indices = [];
-
-  const translatedQuery = translateWildNucleotides(query).trim();
-
+const search = (query, subject, mismatch, fwd) => {
   if (mismatch > 0) {
-    const searchParams = {
-      query,
-      targetString,
-      mismatch,
-      template
-    };
-    return findWithMismatch(searchParams);
+    return searchWithMismatch(query, subject, mismatch, fwd);
   }
+
+  const seqLength = subject.length;
+  const translatedQuery = translateWildNucleotides(query).trim();
   const regex = new RegExp(translatedQuery, "gi");
-
-  let result = regex.exec(targetString);
-  while (result) {
-    indices.push({
-      loc: result.index % seqLength,
-      direction: template ? 1 : -1
-    });
-    result = regex.exec(targetString);
-  }
-  return indices;
-};
-
-/**
- * findWithMismatch
- * A slightly modified Hamming Distance algorithm for approximate
- * string Matching for patterns
- */
-const findWithMismatch = searchParams => {
-  const { query, targetString, mismatch, template } = searchParams;
+  let result = regex.exec(subject);
   const results = [];
-  const indexMax = targetString.length - query.length;
-
-  for (let targetIndex = 0; targetIndex < indexMax; targetIndex += 1) {
-    let missed = 0;
-
-    for (let queryIndex = 0; queryIndex < query.length; queryIndex += 1) {
-      const targetChar = targetString[targetIndex + queryIndex];
-      const queryChar = query[queryIndex];
-      if (nucleotides[queryChar]) {
-        if (targetChar !== queryChar) missed += 1;
-      } else if (nucleotideWildCards[queryChar]) {
-        if (!nucleotideWildCards[queryChar][targetChar]) missed += 1;
-      }
-      if (missed > mismatch) break;
-    }
-    if (missed <= mismatch) {
-      results.push({ loc: targetIndex, direction: template ? 1 : -1 });
-    }
+  while (result) {
+    const start = result.index % seqLength;
+    const end = (start + query.length) % seqLength || seqLength;
+    results.push({
+      start: start,
+      end: end,
+      direction: fwd ? 1 : -1
+    });
+    result = regex.exec(subject);
   }
-
   return results;
 };
 
 /**
- * searchSeq
- * For the reverse compliment, the search term is reversed before being sent to the Regex
- * function above
+ * A slightly modified Hamming Distance algorithm for approximate
+ * string Matching for patterns
+ *
+ * @param {string} query the query pattern
+ * @param {string} subject the sequence being searched
+ * @param {number} mismatch the number of allowable mismatches
+ * @param {boolean} fwd true if FWD, false otherwise
+ * @returns {[SearchResult]}
  */
-const searchSeq = (indices, compIndices, queryLength, seqLength) => {
-  const fullResult = [...new Set([...indices, ...compIndices])].sort(
-    (a, b) => a.loc - b.loc
-  );
+const searchWithMismatch = (query, subject, mismatch, fwd) => {
+  const results = [];
+  for (let i = 0; i < subject.length - query.length; i += 1) {
+    let missed = 0;
 
-  const results = fullResult.map((s, i) => {
-    const end = s.loc + queryLength;
-    const overflowEnd = end % seqLength;
-    return {
-      start: s.loc,
-      end: overflowEnd > 0 ? overflowEnd : seqLength,
-      direction: s.direction,
-      index: i
-    };
-  });
-  return { results: results, index: 0 };
+    for (let j = 0; j < query.length; j += 1) {
+      const targetChar = subject[i + j];
+      const queryChar = query[j];
+      if (nucleotides[queryChar]) {
+        if (targetChar !== queryChar) {
+          missed += 1;
+        }
+      } else if (nucleotideWildCards[queryChar]) {
+        if (!nucleotideWildCards[queryChar][targetChar]) {
+          missed += 1;
+        }
+      }
+      if (missed > mismatch) {
+        break;
+      }
+    }
+
+    if (missed <= mismatch) {
+      const end = (i + query.length) % subject.length || subject.length;
+      results.push({
+        start: i,
+        end: end,
+        direction: fwd ? 1 : -1
+      });
+    }
+  }
+
+  return results;
 };

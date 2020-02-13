@@ -36,8 +36,8 @@ const defaultProps = {
  * at the time of writing this test, the annotation and index are
  * longer than the sequence (whose width is determined by charWidth)
  */
-describe("SeqBlock renders", () => {
-  it("renders single SeqBlock", () => {
+describe("SeqBlock", () => {
+  it("renders with a single block", () => {
     const seq =
       "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
     const wrapper = shallow(

@@ -12,11 +12,11 @@ import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
 
-import "./SeqViz.scss";
+import "./style.css";
 
 /**
  * A container for processing part input and rendering either
- * a linear or circular viewer
+ * a linear or circular viewer or both
  */
 export default class SeqViz extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ export default class SeqViz extends React.Component {
         start: PropTypes.number.isRequired,
         end: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        direction: PropTypes.oneOf(["REVERSE", "NONE", "FORWARD", 1, 0, -1]),
+        direction: PropTypes.oneOf([1, 0, -1, "REVERSE", "NONE", "FORWARD"]),
         color: PropTypes.string,
         type: PropTypes.string
       })
@@ -54,10 +54,11 @@ export default class SeqViz extends React.Component {
       PropTypes.shape({
         start: PropTypes.number.isRequired,
         end: PropTypes.number.isRequired,
-        direction: PropTypes.oneOf(["FORWARD", "REVERSE", 1, -1]).isRequired
+        direction: PropTypes.oneOf([1, -1, "FORWARD", "REVERSE"]).isRequired
       })
     ).isRequired,
-    viewer: PropTypes.oneOf(["linear", "circular", "both"]).isRequired,
+    viewer: PropTypes.oneOf(["linear", "circular", "both", "both_flip"])
+      .isRequired,
     zoom: PropTypes.shape({
       circular: PropTypes.number,
       linear: PropTypes.number
@@ -179,7 +180,7 @@ export default class SeqViz extends React.Component {
       return;
     }
 
-    const { results } = search(query, mismatch, seq || part.seq);
+    const results = search(query, mismatch, seq || part.seq);
     if (isEqual(results, this.state.search)) {
       return;
     }
@@ -245,7 +246,7 @@ export default class SeqViz extends React.Component {
   render() {
     const { style, viewer } = this.props;
     let { annotations, compSeq, name, seq } = this.props;
-    const { part } = this.state;
+    const { centralIndex, cutSites, part, search, selection } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
@@ -254,46 +255,48 @@ export default class SeqViz extends React.Component {
     annotations =
       annotations && annotations.length ? annotations : part.annotations || [];
 
-    const linear = viewer === "linear" || viewer === "both";
-    const circular = viewer === "circular" || viewer === "both";
-
     if (!seq.length) {
       return <div className="la-vz-seqviz" />;
     }
 
+    const linear = (viewer === "linear" || viewer.includes("both")) && (
+      <SeqViewer
+        key="linear"
+        {...this.props}
+        search={search}
+        selection={selection}
+        setSelection={this.setSelection}
+        annotations={annotations}
+        compSeq={compSeq}
+        name={name}
+        seq={seq}
+        cutSites={cutSites}
+        Circular={false}
+      />
+    );
+    const circular = (viewer === "circular" || viewer.includes("both")) && (
+      <SeqViewer
+        key="circular"
+        {...this.props}
+        search={search}
+        selection={selection}
+        setSelection={this.setSelection}
+        annotations={annotations}
+        compSeq={compSeq}
+        name={name}
+        seq={seq}
+        cutSites={cutSites}
+        Circular
+      />
+    );
+    const bothFlipped = viewer === "both_flip";
+    const viewers = bothFlipped ? [linear, circular] : [circular, linear];
+
     return (
       <div className="la-vz-seqviz" style={style}>
-        <CentralIndexContext.Provider value={this.state.centralIndex}>
-          <SelectionContext.Provider value={this.state.selection}>
-            {circular && (
-              <SeqViewer
-                {...this.props}
-                search={this.state.search}
-                selection={this.state.selection}
-                setSelection={this.setSelection}
-                annotations={annotations}
-                compSeq={compSeq}
-                name={name}
-                seq={seq}
-                cutSites={this.state.cutSites}
-                Circular
-              />
-            )}
-
-            {linear && (
-              <SeqViewer
-                {...this.props}
-                search={this.state.search}
-                selection={this.state.selection}
-                setSelection={this.setSelection}
-                annotations={annotations}
-                compSeq={compSeq}
-                name={name}
-                seq={seq}
-                cutSites={this.state.cutSites}
-                Circular={false}
-              />
-            )}
+        <CentralIndexContext.Provider value={centralIndex}>
+          <SelectionContext.Provider value={selection}>
+            {viewers.filter(v => v).map(v => v)}
           </SelectionContext.Provider>
         </CentralIndexContext.Provider>
       </div>

@@ -1,9 +1,9 @@
 const path = require("path");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
+let BundleAnalyzerPlugin = require("webpack-bundle-analyzer");
+BundleAnalyzerPlugin = BundleAnalyzerPlugin.BundleAnalyzerPlugin;
 
 const PACKAGE = require("../package.json");
 
@@ -63,9 +63,9 @@ const cdnBuild = {
         ]
       },
       {
-        test: /\.(css|scss)$/,
+        test: /\.(css)$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ["style-loader", "css-loader"]
       }
     ]
   },
@@ -102,11 +102,6 @@ const npmBuild = Object.assign({}, cdnBuild, {
   },
   externals: [
     nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })
-  ],
-  plugins: [
-    new UglifyJsPlugin(),
-    new webpack.BannerPlugin(banner)
-    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
   ]
 });
 

@@ -6,8 +6,6 @@ import CircularViewer from "./Circular/Circular.jsx";
 import LinearViewer from "./Linear/Linear.jsx";
 import CentralIndexContext from "./handlers/centralIndex";
 
-import "./SeqViewer.scss";
-
 /**
  * a parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
@@ -136,7 +134,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
 
     return (
       <div className="la-vz-viewer-container">
-        {circular && (
+        {circular ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
               <CircularViewer
@@ -149,8 +147,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
               />
             )}
           </CentralIndexContext.Consumer>
-        )}
-        {!circular && (
+        ) : (
           <LinearViewer
             {...this.props}
             {...this.state}

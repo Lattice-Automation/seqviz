@@ -102,10 +102,6 @@ const withEventRouter = WrappedComp =>
           this.handleCopy();
           break;
         }
-        case "Search": {
-          this.handleSearch();
-          break;
-        }
         case "ArrowUp":
         case "ArrowRight":
         case "ArrowDown":

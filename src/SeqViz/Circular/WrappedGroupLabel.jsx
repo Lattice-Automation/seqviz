@@ -96,7 +96,7 @@ export default class WrappedGroupLabel extends React.Component {
 
     // add padding to the box by adding/subbing a CHAR_WIDTH from edges
     const groupCoor = { x, y };
-    const rectCoor = { x: x - CHAR_WIDTH, y: y - CHAR_WIDTH };
+    const rectCoor = { x: x - CHAR_WIDTH, y: y - CHAR_WIDTH - 2 };
 
     const key = `${group.labels[0].id}_overlay`;
 

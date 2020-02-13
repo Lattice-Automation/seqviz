@@ -114,9 +114,15 @@ export default class CutSites extends React.PureComponent {
   };
 
   render() {
+    const { cutSites } = this.props;
+
+    if (!cutSites.length) {
+      return null;
+    }
+
     return (
       <g className="la-vz-circular-cutsites">
-        {this.props.cutSites.map(this.displayCutSite)}
+        {cutSites.map(this.displayCutSite)}
       </g>
     );
   }

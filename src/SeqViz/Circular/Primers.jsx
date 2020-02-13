@@ -23,7 +23,14 @@ export default class Primers extends React.PureComponent {
   };
 
   render() {
-    const { radius, rowsToSkip, Zoom, lineHeight, primers } = this.props;
+    const {
+      radius,
+      rowsToSkip,
+      Zoom,
+      lineHeight,
+      primers,
+      showPrimers
+    } = this.props;
 
     const rowShiftHeight = lineHeight * rowsToSkip;
     const radiusAdjust = lineHeight * 3;
@@ -31,6 +38,10 @@ export default class Primers extends React.PureComponent {
 
     // increasing the size of the primers during a "zoom"
     let currTRadius = currBRadius - lineHeight; // top radius
+
+    if (!primers.length || !showPrimers) {
+      return null;
+    }
 
     return (
       <g className="la-vz-circular-primers">

@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.20]
+
+### Added
+
+- A new option to `options.viewer` enum: "both_flip". With "both_flip", the linear viewer is rendered on the left and the circular viewer is rendered on the right.
+
+### Fixed
+
+- Search in Circular Viewer now renders as it used to. These search results, though usually small, weren't rendering
+- Labels for GroupedLabels in the Circular Viewer are now properly centered within their boxes
+
+### Changed
+
+- Refactor to remove SCSS and move to a single CSS file in style.css
+
 ## [3.0.19]
 
 ### Changed

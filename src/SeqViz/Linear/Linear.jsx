@@ -12,8 +12,6 @@ import withViewerHOCs from "../handlers";
 import InfiniteScroll from "./InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
 
-import "./Linear.scss";
-
 /**
  * A linear sequence viewer.
  *
@@ -22,7 +20,10 @@ import "./Linear.scss";
  * 		SeqRow
  * 		IndexRow (axis)
  * 		Annotations
- *      Primers
+ *    Primers
+ *    Finds
+ *    Translations
+ *    Selections
  *
  * the width, sequence of each seqBlock, annotations,
  * indexRow, is passed in the child component

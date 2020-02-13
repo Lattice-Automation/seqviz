@@ -72,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -150,7 +152,7 @@ A [File](https://developer.mozilla.org/en-US/docs/Web/API/File), [Blob](https://
 
 #### `options.viewer (='both')`
 
-One of _\["linear", "circular", "both"\]_) the type of viewer to show. "both" by default.
+One of _\["linear", "circular", "both", "both_flip"\]_) the type of viewer to show. "both" by default. "both" means the circular viewer fills the left side of SeqViz and the linear viewer fills the right. "both_flip" is the opposite: the linear viewer is on the left and the circular viewer is on the right.
 
 #### `options.name (='')`
 

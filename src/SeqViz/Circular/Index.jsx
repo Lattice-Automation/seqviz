@@ -4,7 +4,7 @@ import CentralIndexContext from "../handlers/centralIndex";
 
 /**
  * this component renders the following:
- * 		1. the Name of the part (center or bottom)
+ * 		1. the name (center or bottom)
  * 		2. the number of bps (center or bottom)
  * 		3. the plasmid circle
  * 		4. the index ticks and numbers along the plasmid circle
@@ -110,9 +110,15 @@ export default class Index extends React.PureComponent {
       getRotation,
       generateArc,
       findCoor,
-      totalRows
+      totalRows,
+      showIndex
     } = this.props;
     const { ticks } = this.state;
+
+    if (!showIndex) {
+      return null; // don't waste time, don't show
+    }
+
     // split up the name so it fits within spans in the center
     // 30 letters is arbitrary. would be better to first search for "cleaveable characters"
     // like "|" or "," and revert to all chars if those aren't found. Or to decrease
