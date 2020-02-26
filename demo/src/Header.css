@@ -37,6 +37,20 @@ input#part-input {
   background-color: white !important;
 }
 
+/* Github logo */
+#github-link {
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  padding: 0 15px;
+  color: black;
+  height: 100%;
+  display: flex;
+}
+
+#github-link i {
+  margin: auto;
+}
+
 /* New new */
 #header-primary {
   height: 64px;
@@ -52,7 +66,6 @@ input#part-input {
 #header-primary #brand {
   height: 48px;
   padding: 0 0 0 16px;
-  border-left: 1px solid #f0f0f0;
   margin: auto;
   cursor: pointer;
 }
@@ -160,6 +173,9 @@ input#part-input {
   display: flex;
   background-color: white;
   box-shadow: 0 2px 8px #f0f1f2;
+  position: absolute;
+  width: calc(50% - 20px);
+  left: 10px;
 }
 
 .label-bar {
@@ -176,9 +192,12 @@ input#part-input {
 .meta-datum {
   display: flex;
   margin: auto 0;
-  border-right: 1px solid #f0f0f0;
   padding: 0 8px;
   font-size: 0.8em !important;
+}
+
+.meta-datum:not(:last-child) {
+  border-right: 1px solid #f0f0f0;
 }
 
 .meta-datum#feature-name {

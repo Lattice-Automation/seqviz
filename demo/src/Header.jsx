@@ -2,6 +2,7 @@ import * as React from "react";
 import {
   Button,
   Dropdown,
+  Icon,
   Image,
   Input,
   Label,
@@ -71,6 +72,14 @@ export class Header extends React.Component {
             active={this.state.active}
             handleMetaClick={this.handleMetaClick}
           />
+          <a
+            id="github-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/Lattice-Automation/seqviz"
+          >
+            <Icon name="github" size="large" />
+          </a>
           <Image
             id="brand"
             src={SeqvizLogo}

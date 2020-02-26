@@ -75,11 +75,11 @@ export class Demo extends Component {
   };
 
   render() {
-    return <SideBarMenu {...this.state} setDemoState={this.setDemoState} />;
+    return <App {...this.state} setDemoState={this.setDemoState} />;
   }
 }
 
-export class SideBarMenu extends Component {
+class App extends Component {
   state = { visible: false };
 
   toggleSidebar = () => {
@@ -154,7 +154,7 @@ export class SideBarMenu extends Component {
             <SidebarFooter />
           </Sidebar>
           <Sidebar.Pusher as={Container} fluid dimmed={visible}>
-            <div className="seqviz-container">
+            <div id="seqviz-container">
               <Header {...this.props} toggleSidebar={this.toggleSidebar} />
               {part ? (
                 <div id="seqviewer">
@@ -187,16 +187,30 @@ export class SideBarMenu extends Component {
                     <StartButton setDemoState={setDemoState} />
                   </div>
                   <div id="lattice-card" className="card">
-                    <p>
-                      Created by{" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://latticeautomation.com/"
-                      >
-                        Lattice Automation
-                      </a>
-                    </p>
+                    <div>
+                      <p>
+                        Created by{" "}
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://latticeautomation.com/"
+                        >
+                          Lattice Automation
+                        </a>
+                      </p>
+                    </div>{" "}
+                    <div>
+                      <Icon name="github" />
+                      <span>
+                        <a
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          href="https://github.com/Lattice-Automation/seqviz"
+                        >
+                          seqviz
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               )}
@@ -228,7 +242,7 @@ export class ViewerTypeInput extends Component {
   }
 }
 
-export class LinearZoomInput extends Component {
+class LinearZoomInput extends Component {
   render() {
     const { setDemoState } = this.props;
 
@@ -251,7 +265,7 @@ export class LinearZoomInput extends Component {
   }
 }
 
-export class SearchQueryInput extends Component {
+class SearchQueryInput extends Component {
   render() {
     const {
       setDemoState,
@@ -273,7 +287,7 @@ export class SearchQueryInput extends Component {
   }
 }
 
-export class EnzymeInput extends Component {
+class EnzymeInput extends Component {
   state = { PstI: false, EcoRI: false, XbaI: false, SpeI: false };
 
   handleChange = enzyme => {
@@ -348,7 +362,7 @@ export class EnzymeInput extends Component {
   }
 }
 
-export class CheckboxInput extends Component {
+class CheckboxInput extends Component {
   render() {
     const { name, label, setDemoState } = this.props;
 
@@ -366,7 +380,7 @@ export class CheckboxInput extends Component {
   }
 }
 
-export class SequenceViewer extends Component {
+class SequenceViewer extends Component {
   shouldComponentUpdate = nextProps => {
     const { searchResults, selection, ...rest } = this.props;
     const {
@@ -424,7 +438,7 @@ export class SequenceViewer extends Component {
   }
 }
 
-export class SidebarHeader extends Component {
+class SidebarHeader extends Component {
   render() {
     const { toggleSidebar } = this.props;
 
@@ -447,90 +461,82 @@ export class SidebarHeader extends Component {
   }
 }
 
-export class SidebarFooter extends Component {
-  render() {
-    return (
-      <div className="sidebar-footer">
-        <Divider clearing />
-        <Image id="lattice-brand" src={LatticeLogo} />
-        <p>
-          Created by{" "}
-          <span>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://latticeautomation.com/"
-            >
-              Lattice Automation
-            </a>
-          </span>
-        </p>
-        <p>
-          <Icon name="github" />
-          <span>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/Lattice-Automation/seqviz"
-            >
-              seqviz
-            </a>
-          </span>
-          <span>{"  |  "}</span>
-          <Icon name="medium" />
-          <span>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://medium.com/@lattice.core/visualize-your-dna-sequences-with-seqviz-b1d945eb9684"
-            >
-              Story
-            </a>
-          </span>
-          <span>{"  |  "}</span>
-          <Icon name="edit outline" />
-          <span>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://docs.google.com/forms/d/1ILD3UwPvdkQlM06En7Pl9VqVpN_-g5iWs-B6gjKh9b0/viewform?edit_requested=true"
-            >
-              Survey
-            </a>
-          </span>
-        </p>
-        <p>
-          <span>contact@latticeautomation.com</span>
-        </p>
-      </div>
-    );
-  }
-}
-
-export class StartButton extends Component {
-  render() {
-    return (
-      <div id="easy-start">
-        <Button
-          id="default-part-button"
-          onClick={() => {
-            updateUrl({ backbone: "pSB1C3", biobrick: "BBa_K1598008" });
-          }}
+const SidebarFooter = () => (
+  <div className="sidebar-footer">
+    <Divider clearing />
+    <Image id="lattice-brand" src={LatticeLogo} />
+    <p>
+      Created by{" "}
+      <span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://latticeautomation.com/"
         >
-          CLICK
-        </Button>
-        <span>
-          to load default part (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="http://parts.igem.org/Part:BBa_K1598008"
-          >
-            BBa_K1598008
-          </a>
-          )
-        </span>
-      </div>
-    );
-  }
-}
+          Lattice Automation
+        </a>
+      </span>
+    </p>
+    <p>
+      <Icon name="github" />
+      <span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://github.com/Lattice-Automation/seqviz"
+        >
+          seqviz
+        </a>
+      </span>
+      <span>{"  |  "}</span>
+      <Icon name="medium" />
+      <span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://medium.com/@lattice.core/visualize-your-dna-sequences-with-seqviz-b1d945eb9684"
+        >
+          Story
+        </a>
+      </span>
+      <span>{"  |  "}</span>
+      <Icon name="edit outline" />
+      <span>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://docs.google.com/forms/d/1ILD3UwPvdkQlM06En7Pl9VqVpN_-g5iWs-B6gjKh9b0/viewform?edit_requested=true"
+        >
+          Survey
+        </a>
+      </span>
+    </p>
+    <p>
+      <span>contact@latticeautomation.com</span>
+    </p>
+  </div>
+);
+
+const StartButton = () => (
+  <div id="easy-start">
+    <Button
+      id="default-part-button"
+      onClick={() => {
+        updateUrl({ backbone: "pSB1C3", biobrick: "BBa_K1598008" });
+      }}
+    >
+      CLICK
+    </Button>
+    <span>
+      to load default part (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="http://parts.igem.org/Part:BBa_K1598008"
+      >
+        BBa_K1598008
+      </a>
+      )
+    </span>
+  </div>
+);
