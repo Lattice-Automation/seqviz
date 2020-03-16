@@ -191,4 +191,45 @@ describe("SeqViz rendering (React)", () => {
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
   });
+
+  // it("re-renders the viewer with a changed File object", async () => {
+  //   const fileName1 = path.join(
+  //     __dirname,
+  //     "io",
+  //     "examples",
+  //     "snapgene",
+  //     "pBbB8c-GFP.dna"
+  //   );
+  //   const fileName2 = path.join(
+  //     __dirname,
+  //     "io",
+  //     "examples",
+  //     "genbank",
+  //     "NC_011521.gb"
+  //   );
+  //   const fileContents1 = fs.readFileSync(fileName1);
+  //   const file1 = new File([fileContents1], fileName1);
+  //   const fileContents2 = fs.readFileSync(fileName2);
+  //   const file2 = new File([fileContents2], fileName2);
+
+  //   const parts1 = await filesToParts([file1], { fileName: fileName1 });
+  //   const part1 = parts1[0];
+  //   const parts2 = await filesToParts([file2], { fileName: fileName2 });
+  //   const part2 = parts2[0];
+
+  //   const wrapper = mount(<SeqViz {...defaultProps} file={file1} />);
+  //   await wrapper.instance().componentDidMount();
+
+  //   expect(wrapper.state().part).toMatchObject({
+  //     seq: part1.seq,
+  //     compSeq: part1.compSeq
+  //   });
+
+  //   // change the file prop
+  //   await wrapper.setProps({ file: file2 });
+  //   expect(wrapper.state().part).toMatchObject({
+  //     seq: part2.seq,
+  //     compSeq: part2.compSeq
+  //   });
+  // });
 });

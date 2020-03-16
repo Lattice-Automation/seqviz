@@ -112,21 +112,22 @@ export default class SeqViz extends React.Component {
   };
 
   componentDidUpdate = async (
-    { accession, backbone, enzymes, search },
+    { accession, backbone, enzymes, file, search },
     { part }
   ) => {
     if (
       accession !== this.props.accession ||
-      backbone !== this.props.backbone
+      backbone !== this.props.backbone ||
+      file !== this.props.file
     ) {
-      await this.setPart();
+      await this.setPart(); // new accesion/remote ID
     } else if (
       search.query !== this.props.search.query ||
       search.mismatch !== this.props.search.mismatch
     ) {
-      this.search(part);
+      this.search(part); // new search parameters
     } else if (!isEqual(enzymes, this.props.enzymes)) {
-      this.cut(part);
+      this.cut(part); // new set of enzymes for digest
     }
   };
 
@@ -149,6 +150,7 @@ export default class SeqViz extends React.Component {
         this.cut(part);
       } else if (file) {
         const parts = await filesToParts([file], this.props);
+        console.log(parts);
         this.setState({
           part: {
             ...parts[0],
