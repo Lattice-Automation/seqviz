@@ -150,7 +150,6 @@ export default class SeqViz extends React.Component {
         this.cut(part);
       } else if (file) {
         const parts = await filesToParts([file], this.props);
-        console.log(parts);
         this.setState({
           part: {
             ...parts[0],
