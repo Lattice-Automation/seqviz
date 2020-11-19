@@ -30,9 +30,7 @@ const convertAB1 = inputArrayBuffer => {
     getChar: (inOffset, numEntries) => {
       const retArray = [];
       for (let counter = 0; counter < numEntries; counter += 1) {
-        retArray.push(
-          String.fromCharCode(inputArrayBuffer.getInt8(inOffset + counter))
-        );
+        retArray.push(String.fromCharCode(inputArrayBuffer.getInt8(inOffset + counter)));
       }
       return retArray;
     },
@@ -47,11 +45,7 @@ const convertAB1 = inputArrayBuffer => {
 
   const getTagName = inOffset => {
     let name = "";
-    for (
-      let loopOffset = inOffset;
-      loopOffset < inOffset + 4;
-      loopOffset += 1
-    ) {
+    for (let loopOffset = inOffset; loopOffset < inOffset + 4; loopOffset += 1) {
       name += String.fromCharCode(inputArrayBuffer.getInt8(loopOffset));
     }
     return name;
@@ -66,10 +60,7 @@ const convertAB1 = inputArrayBuffer => {
       if (currTagName === inTag.tagName && tagNum === inTag.tagNum) {
         const numEntries = inputArrayBuffer.getInt32(curElem + 16);
         const entryOffset = inputArrayBuffer.getInt32(curElem + 20);
-        output = extractionFunctions[inTag.typeToReturn](
-          entryOffset,
-          numEntries
-        );
+        output = extractionFunctions[inTag.typeToReturn](entryOffset, numEntries);
       }
       curElem += 28;
     } while (curElem < lastEntry);
@@ -103,8 +94,7 @@ export default (file, name) => {
     AB = file;
   } else {
     // all ab1 files start w/ ABIF
-    if (file.slice(0, 4).toString() !== "ABIF")
-      throw new Error("Not an ab1 file");
+    if (file.slice(0, 4).toString() !== "ABIF") throw new Error("Not an ab1 file");
     AB = new ArrayBuffer(file.length);
     const Uint8 = new Uint8Array(AB);
     for (let i = 0; i < file.length; i += 1) {
@@ -114,15 +104,7 @@ export default (file, name) => {
 
   // make a DataView for the ArrayBuffer
   const view = new DataView(AB);
-  const {
-    baseCalls,
-    basePos,
-    qualNums,
-    aTrace,
-    tTrace,
-    gTrace,
-    cTrace
-  } = convertAB1(view); // parse the buffer
+  const { baseCalls, basePos, qualNums, aTrace, tTrace, gTrace, cTrace } = convertAB1(view); // parse the buffer
 
   // there are more trace data points and quality number than guessed basepairs
   // we take the basePos array and get the trace/qual numbers out of the arrays based

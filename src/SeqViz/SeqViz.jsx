@@ -57,8 +57,7 @@ export default class SeqViz extends React.Component {
         direction: PropTypes.oneOf([1, -1, "FORWARD", "REVERSE"]).isRequired
       })
     ).isRequired,
-    viewer: PropTypes.oneOf(["linear", "circular", "both", "both_flip"])
-      .isRequired,
+    viewer: PropTypes.oneOf(["linear", "circular", "both", "both_flip"]).isRequired,
     zoom: PropTypes.shape({
       circular: PropTypes.number,
       linear: PropTypes.number
@@ -111,20 +110,10 @@ export default class SeqViz extends React.Component {
     await this.setPart();
   };
 
-  componentDidUpdate = async (
-    { accession, backbone, enzymes, file, search },
-    { part }
-  ) => {
-    if (
-      accession !== this.props.accession ||
-      backbone !== this.props.backbone ||
-      file !== this.props.file
-    ) {
+  componentDidUpdate = async ({ accession, backbone, enzymes, file, search }, { part }) => {
+    if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
       await this.setPart(); // new accesion/remote ID
-    } else if (
-      search.query !== this.props.search.query ||
-      search.mismatch !== this.props.search.mismatch
-    ) {
+    } else if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
       this.search(part); // new search parameters
     } else if (!isEqual(enzymes, this.props.enzymes)) {
       this.cut(part); // new set of enzymes for digest
@@ -154,10 +143,7 @@ export default class SeqViz extends React.Component {
         this.setState({
           part: {
             ...parts[0],
-            annotations: this.parseAnnotations(
-              parts[0].annotations,
-              parts[0].seq
-            )
+            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
           }
         });
         this.search(parts[0]);
@@ -197,9 +183,7 @@ export default class SeqViz extends React.Component {
   cut = (part = null) => {
     const { enzymes, seq } = this.props;
 
-    const cutSites = enzymes.length
-      ? cutSitesInRows(seq || (part && part.seq) || "", enzymes)
-      : [];
+    const cutSites = enzymes.length ? cutSitesInRows(seq || (part && part.seq) || "", enzymes) : [];
 
     this.setState({ cutSites });
   };
@@ -254,8 +238,7 @@ export default class SeqViz extends React.Component {
     seq = seq || part.seq || "";
     compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
     name = name || part.name;
-    annotations =
-      annotations && annotations.length ? annotations : part.annotations || [];
+    annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
     if (!seq.length) {
       return <div className="la-vz-seqviz" />;
@@ -297,9 +280,7 @@ export default class SeqViz extends React.Component {
     return (
       <div className="la-vz-seqviz" style={style}>
         <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={selection}>
-            {viewers.filter(v => v).map(v => v)}
-          </SelectionContext.Provider>
+          <SelectionContext.Provider value={selection}>{viewers.filter(v => v).map(v => v)}</SelectionContext.Provider>
         </CentralIndexContext.Provider>
       </div>
     );

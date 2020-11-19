@@ -112,8 +112,7 @@ const SingleAnnotation = props => {
   } = props;
 
   // if it crosses the zero index, correct for actual length
-  let annLength =
-    a.end >= a.start ? a.end - a.start : seqLength - a.start + a.end;
+  let annLength = a.end >= a.start ? a.end - a.start : seqLength - a.start + a.end;
 
   // can't make an arc from a full circle
   annLength = annLength === 0 ? seqLength - 0.1 : annLength;

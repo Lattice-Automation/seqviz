@@ -25,9 +25,7 @@ export default class InfiniteScroll extends React.PureComponent {
 
     this.state = {
       // start off with first 5 blocks shown
-      visibleBlocks: new Array(Math.min(5, props.seqBlocks.length))
-        .fill(null)
-        .map((_, i) => i),
+      visibleBlocks: new Array(Math.min(5, props.seqBlocks.length)).fill(null).map((_, i) => i),
       centralIndex: 0
     };
     this.scroller = React.createRef();
@@ -50,10 +48,7 @@ export default class InfiniteScroll extends React.PureComponent {
 
     if (this.context && centralIndex !== this.context.linear) {
       this.scrollToCentralIndex();
-    } else if (
-      !isEqual(prevProps.size, size) ||
-      seqBlocks.length !== prevProps.seqBlocks.length
-    ) {
+    } else if (!isEqual(prevProps.size, size) || seqBlocks.length !== prevProps.seqBlocks.length) {
       this.handleScrollOrResize(); // reset
     } else if (isEqual(prevState.visibleBlocks, visibleBlocks)) {
       this.restoreSnapshot(snapshot); // something, like ORFs or index view, has changed
@@ -79,10 +74,7 @@ export default class InfiniteScroll extends React.PureComponent {
     do {
       accumulatedY += blockHeights[blockIndex];
       blockIndex += 1;
-    } while (
-      accumulatedY + blockHeights[blockIndex] < top &&
-      blockIndex < blockHeights.length
-    );
+    } while (accumulatedY + blockHeights[blockIndex] < top && blockIndex < blockHeights.length);
 
     const blockY = top - accumulatedY; // last extra distance
     return { blockY, blockIndex };
@@ -106,9 +98,7 @@ export default class InfiniteScroll extends React.PureComponent {
 
     // find the first block that contains the new central index
     const centerBlockIndex = seqBlocks.findIndex(
-      block =>
-        block.props.firstBase <= centralIndex &&
-        block.props.firstBase + bpsPerBlock >= centralIndex
+      block => block.props.firstBase <= centralIndex && block.props.firstBase + bpsPerBlock >= centralIndex
     );
 
     // build up the list of blocks that are visible just beneath this first block
@@ -119,8 +109,7 @@ export default class InfiniteScroll extends React.PureComponent {
       const centerBlock = seqBlocks[centerBlockIndex];
 
       // create some padding above the new center block
-      const topAdjust =
-        centerBlockIndex > 0 ? blockHeights[centerBlockIndex - 1] : 0;
+      const topAdjust = centerBlockIndex > 0 ? blockHeights[centerBlockIndex - 1] : 0;
       let top = centerBlock.props.y - topAdjust;
       let bottom = top + height;
       if (bottom > totalHeight) {
@@ -137,8 +126,7 @@ export default class InfiniteScroll extends React.PureComponent {
       // Don't scroll exactly to centralIndex because most of the time
       // item of interest is at centralIndex and if this is at the top
       // it can be obscured by things like the search box
-      this.scroller.current.scrollTop =
-        centerBlock.props.y - blockHeights[0] / 2;
+      this.scroller.current.scrollTop = centerBlock.props.y - blockHeights[0] / 2;
     }
 
     if (!isEqual(newVisibleBlocks, visibleBlocks)) {
@@ -157,8 +145,7 @@ export default class InfiniteScroll extends React.PureComponent {
     const { blockHeights } = this.props;
     const { blockIndex, blockY } = snapshot;
 
-    const scrollTop =
-      blockHeights.slice(0, blockIndex).reduce((acc, h) => acc + h, 0) + blockY;
+    const scrollTop = blockHeights.slice(0, blockIndex).reduce((acc, h) => acc + h, 0) + blockY;
 
     this.scroller.current.scrollTop = scrollTop;
   };
@@ -266,9 +253,7 @@ export default class InfiniteScroll extends React.PureComponent {
 
     // find the height of the empty div needed to correctly position the rest
     const [firstRendered] = visibleBlocks;
-    const spaceAbove = blockHeights
-      .slice(0, firstRendered)
-      .reduce((acc, h) => acc + h, 0);
+    const spaceAbove = blockHeights.slice(0, firstRendered).reduce((acc, h) => acc + h, 0);
 
     return (
       <div
@@ -278,11 +263,7 @@ export default class InfiniteScroll extends React.PureComponent {
         onMouseOver={this.handleMouseOver}
         onFocus={() => {}}
       >
-        <div
-          className="la-vz-seqblock-container"
-          style={{ height }}
-          ref={this.insideDOM}
-        >
+        <div className="la-vz-seqblock-container" style={{ height }} ref={this.insideDOM}>
           <div style={{ width: width || 0, height: spaceAbove }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>

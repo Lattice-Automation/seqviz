@@ -70,23 +70,9 @@ const dnaComponentToPart = (DnaComponent, options) => {
     annotation.forEach(({ SequenceAnnotation }, i) => {
       if (!SequenceAnnotation || !SequenceAnnotation[0]) return;
 
-      const {
-        bioStart = [{}],
-        bioEnd = [{}],
-        strand,
-        subComponent
-      } = SequenceAnnotation[0];
-      if (
-        subComponent &&
-        subComponent[0] &&
-        subComponent[0].DnaComponent &&
-        subComponent[0].DnaComponent[0]
-      ) {
-        const {
-          type: annType = [{}],
-          displayId: annId = [{}],
-          name: annName = [{}]
-        } = subComponent[0].DnaComponent[0];
+      const { bioStart = [{}], bioEnd = [{}], strand, subComponent } = SequenceAnnotation[0];
+      if (subComponent && subComponent[0] && subComponent[0].DnaComponent && subComponent[0].DnaComponent[0]) {
+        const { type: annType = [{}], displayId: annId = [{}], name: annName = [{}] } = subComponent[0].DnaComponent[0];
 
         annotations.push({
           id: randomid(),
@@ -123,10 +109,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
  */
 const sequenceToPart = (Seq, file) => {
   // get the name
-  const name =
-    (Seq.displayId[0] && Seq.displayId[0]._) ||
-    (Seq.title[0] && Seq.title[0]._) ||
-    "Unnamed";
+  const name = (Seq.displayId[0] && Seq.displayId[0]._) || (Seq.title[0] && Seq.title[0]._) || "Unnamed";
 
   // get the sequence
   const seqOrig = (Seq.elements[0] && Seq.elements[0]._) || "";
@@ -186,8 +169,7 @@ export default async (sbol, colors = []) =>
     }, 2000);
 
     // util reject function that will be triggered if any fields fail
-    const rejectSBOL = errType =>
-      reject(new Error(`Failed on SBOL file; ${errType}`));
+    const rejectSBOL = errType => reject(new Error(`Failed on SBOL file; ${errType}`));
 
     // weird edge case with directed quotation characters
     const fileString = sbol.replace(/“|”/g, '"');
@@ -255,9 +237,7 @@ export default async (sbol, colors = []) =>
         // go on another fishing expidition, but for Sequence nodes
         const dnaSequenceAccumulator = [];
         findSequenceNodes(dnaSequenceAccumulator, RDF);
-        const sequenceNodes = dnaSequenceAccumulator
-          .map(p => sequenceToPart(p, sbol))
-          .filter(p => p); // invalid parts will be null
+        const sequenceNodes = dnaSequenceAccumulator.map(p => sequenceToPart(p, sbol)).filter(p => p); // invalid parts will be null
         if (sequenceNodes.length) resolve(sequenceNodes);
 
         // neither a DnaComponent nor Collection was found anywhere in document

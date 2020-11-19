@@ -1,27 +1,8 @@
-import {
-  dnaComplement,
-  partFactory,
-  extractDate,
-  trimCarriageReturn
-} from "../../utils/parser";
-import {
-  calcGC,
-  calcTm,
-  reverse,
-  annotationFactory,
-  primerFactory
-} from "../../utils/sequence";
+import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
+import { calcGC, calcTm, reverse, annotationFactory, primerFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
-const tagNameList = [
-  "gene",
-  "product",
-  "note",
-  "db_xref",
-  "protein_id",
-  "label",
-  "lab_host"
-];
+const tagNameList = ["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host", "locus_tag"];
 
 // a list of tags that could represent colors
 const tagColorList = ["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"];
@@ -42,13 +23,8 @@ export default async (fileInput, fileName, colors = []) =>
     .map(file => {
       // the first row contains the name of the part and its creation date
       // LOCUS       SCU49845     5028 bp    DNA             PLN       21-JUN-1999
-      const HEADER_ROW = file.substring(
-        file.indexOf("LOCUS"),
-        file.search(/\\n|\n/)
-      );
-      const [, name, ...headerRest] = HEADER_ROW.split(/\s{2,}/g).filter(
-        h => h
-      );
+      const HEADER_ROW = file.substring(file.indexOf("LOCUS"), file.search(/\\n|\n/));
+      const [, name, ...headerRest] = HEADER_ROW.split(/\s{2,}/g).filter(h => h);
       // trying to avoid giving a stupid name like Exported which Snapgene has by default
       // also, if there is not name in header, the seq length will be used as name, which should
       // be corrected (Number.parseInt to check for this case) https://stackoverflow.com/a/175787/7541747
@@ -64,10 +40,7 @@ export default async (fileInput, fileName, colors = []) =>
         if (file.includes("ACCESSION")) {
           // this will be undefined is there is no
           const accession = file
-            .substring(
-              file.indexOf("ACCESSION"),
-              file.indexOf("\n", file.indexOf("ACCESSION"))
-            )
+            .substring(file.indexOf("ACCESSION"), file.indexOf("\n", file.indexOf("ACCESSION")))
             .replace(".", "")
             .split(/\s{2,}/)
             .filter(a => a !== "ACCESSION")
@@ -81,10 +54,7 @@ export default async (fileInput, fileName, colors = []) =>
         // otherwise, revert to trying to get the part name from the file name
         if (!accessionName && fileName) {
           parsedName = fileName
-            .substring(
-              0,
-              Math.max(fileName.search(/\n|\||\./), fileName.lastIndexOf("."))
-            )
+            .substring(0, Math.max(fileName.search(/\n|\||\./), fileName.lastIndexOf(".")))
             .replace(/\/\s/g, "");
         } else if (!accessionName) {
           parsedName = "Unnamed"; // give up
@@ -100,10 +70,7 @@ export default async (fileInput, fileName, colors = []) =>
       // ORIGIN
       //    1 gatcctccat atacaacggt atctccacct caggtttaga tctcaacaac ggaaccattg
       //    61 ccgacatgag acagttaggt atcgtcgaga gttacaagct aaaacgagca gtagtcagct
-      const SEQ_ROWS = file.substring(
-        file.lastIndexOf("ORIGIN") + "ORIGIN".length,
-        file.length
-      );
+      const SEQ_ROWS = file.substring(file.lastIndexOf("ORIGIN") + "ORIGIN".length, file.length);
       let seq = SEQ_ROWS.replace(/[^gatc]/gi, "");
       let compSeq = "";
       ({ seq, compSeq } = dnaComplement(seq)); // seq and compSeq
@@ -170,16 +137,10 @@ export default async (fileInput, fileName, colors = []) =>
               const forward = direction === 1;
               primers.push({
                 ...primerFactory(),
-                gc: forward
-                  ? calcGC(seq.slice(start, end))
-                  : calcGC(compSeq.slice(start, end)),
-                tm: forward
-                  ? calcTm(seq.slice(start, end))
-                  : calcTm(compSeq.slice(start, end)),
+                gc: forward ? calcGC(seq.slice(start, end)) : calcGC(compSeq.slice(start, end)),
+                tm: forward ? calcTm(seq.slice(start, end)) : calcTm(compSeq.slice(start, end)),
                 vector: seq,
-                seq: forward
-                  ? seq.slice(start, end).trim()
-                  : reverse(compSeq.slice(start, end)).trim()
+                seq: forward ? seq.slice(start, end).trim() : reverse(compSeq.slice(start, end)).trim()
               });
             } else if (type !== "source") {
               // source would just be an annotation for the entire sequence so remove
@@ -197,8 +158,7 @@ export default async (fileInput, fileName, colors = []) =>
             // it's a continuation of a prior feature/annotation
             // any updates (to name or color) to the last annotation should affect
             // the last annotation that's in the array
-            if(currLine[0].startsWith("/")){
-            
+            if (currLine[0].startsWith("/")) {
               let [tag] = currLine;
               tag = tag.replace(/[/"]/g, ""); // get rid of quotation marks and forward slaches
               // should now look like ['organism', 'Saccharomyces cerevisiae']
@@ -210,18 +170,15 @@ export default async (fileInput, fileName, colors = []) =>
                 // it's key value pair where the key is something we recognize as an annotation name
                 if (
                   lastAnnIndex > -1 &&
-                  (annotations[annotations.length - 1].name === annotations[annotations.length - 1].type + "-" + annotations[annotations.length - 1].start || annotations[annotations.length - 1].name === "Untitled") &&
+                  (annotations[annotations.length - 1].name ===
+                    annotations[annotations.length - 1].type + "-" + annotations[annotations.length - 1].start ||
+                    annotations[annotations.length - 1].name === "Untitled") &&
                   !primerFlag
                 ) {
                   // defensively check that there isn't already a defined annotation w/o a name
-                  annotations[annotations.length - 1].name = trimCarriageReturn(
-                    tagValue
-                  );
-                } else if (
-                  primerFlag &&
-                  primers[primers.length - 1].name === ""
-                ) {
-                  primers[primers.length - 1].name = trimCarriageReturn(tagValue);
+                  annotations[annotations.length - 1].name = tagValue.trim();
+                } else if (primerFlag && primers[primers.length - 1].name === "") {
+                  primers[primers.length - 1].name = tagValue.trim();
                 }
               } else if (tagColorList.includes(tagName)) {
                 // it's key value pair where the key is something we recognize as an annotation color
@@ -247,18 +204,13 @@ export default async (fileInput, fileName, colors = []) =>
       // words like circular within the circular row
       // words like plasmid within the text/name
       let circular = false;
-      if (
-        annotations.find(a => !(a.end === 0 && a.start) && a.start > a.end) ||
-        HEADER_ROW.includes("circular")
-      ) {
+      if (annotations.find(a => !(a.end === 0 && a.start) && a.start > a.end) || HEADER_ROW.includes("circular")) {
         circular = true;
       }
 
-      parsedName = trimCarriageReturn(parsedName);
-
       return {
         ...partFactory(),
-        name: parsedName || fileName,
+        name: parsedName.trim() || fileName,
         date: date,
         seq: seq,
         compSeq: compSeq,

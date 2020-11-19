@@ -88,8 +88,7 @@ export const reverseComplement = inputSeq => {
     .join("");
 };
 
-export const trimCarriageReturn = untrimmed =>
-  untrimmed.replace(/^[\n\r]+|[\n\r]+$/g, "");
+export const trimCarriageReturn = untrimmed => untrimmed.replace(/^[\n\r]+|[\n\r]+$/g, "");
 
 export const extractDate = data => {
   let date = Date.now();

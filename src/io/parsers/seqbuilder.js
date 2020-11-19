@@ -1,23 +1,10 @@
 // @flow
 
-import {
-  dnaComplement,
-  partFactory,
-  extractDate,
-  trimCarriageReturn
-} from "../../utils/parser";
+import { dnaComplement, partFactory, extractDate, trimCarriageReturn } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
-const tagNameList = [
-  "gene",
-  "product",
-  "note",
-  "db_xref",
-  "protein_id",
-  "label",
-  "lab_host"
-];
+const tagNameList = ["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host"];
 
 // a list of tags that could represent colors
 const tagColorList = ["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"];
@@ -56,14 +43,9 @@ export default async (fileInput, fileName, colors = []) =>
       );
     }
     if (~file.indexOf("LOCUS")) {
-      const HEADER_ROW = file.substring(
-        file.indexOf("LOCUS"),
-        file.search(/\\n|\n/)
-      );
+      const HEADER_ROW = file.substring(file.indexOf("LOCUS"), file.search(/\\n|\n/));
       if (HEADER_ROW && HEADER_ROW.split(/\s{2,}/g)) {
-        const [, name, ...headerRest] = HEADER_ROW.split(/\s{2,}/g).filter(
-          h => h
-        );
+        const [, name, ...headerRest] = HEADER_ROW.split(/\s{2,}/g).filter(h => h);
         parsedName = name;
         date = extractDate(headerRest);
         if (HEADER_ROW.includes("circular")) {
@@ -81,10 +63,7 @@ export default async (fileInput, fileName, colors = []) =>
       if (file.includes("ACCESSION")) {
         // this will be undefined is there is no
         const accession = file
-          .substring(
-            file.indexOf("ACCESSION"),
-            file.indexOf("\n", file.indexOf("ACCESSION"))
-          )
+          .substring(file.indexOf("ACCESSION"), file.indexOf("\n", file.indexOf("ACCESSION")))
           .replace(".", "")
           .split(/\s{2,}/)
           .filter(a => a !== "ACCESSION")
@@ -98,10 +77,7 @@ export default async (fileInput, fileName, colors = []) =>
       // otherwise, revert to trying to get the part name from the file name
       if (!accessionName && fileName) {
         parsedName = fileName
-          .substring(
-            0,
-            Math.max(fileName.search(/\n|\||\./), fileName.lastIndexOf("."))
-          )
+          .substring(0, Math.max(fileName.search(/\n|\||\./), fileName.lastIndexOf(".")))
           .replace(/\/\s/g, "");
       } else if (!accessionName) {
         parsedName = "Unnamed"; // give up
@@ -185,14 +161,9 @@ export default async (fileInput, fileName, colors = []) =>
           const lastAnnIndex = annotations.length - 1;
           if (tagNameList.includes(tagName)) {
             // it's key value pair where the key is something we recognize as an annotation name
-            if (
-              lastAnnIndex > -1 &&
-              annotations[annotations.length - 1].name === "Untitled"
-            ) {
+            if (lastAnnIndex > -1 && annotations[annotations.length - 1].name === "Untitled") {
               // defensively check that there isn't already a defined annotation w/o a name
-              annotations[annotations.length - 1].name = trimCarriageReturn(
-                tagValue
-              );
+              annotations[annotations.length - 1].name = trimCarriageReturn(tagValue);
             }
           } else if (tagColorList.includes(tagName)) {
             // it's key value pair where the key is something we recognize as an annotation color
@@ -215,11 +186,9 @@ export default async (fileInput, fileName, colors = []) =>
       circular = true;
     }
 
-    parsedName = trimCarriageReturn(parsedName);
-
     return {
       ...partFactory(),
-      name: parsedName || fileName,
+      name: parsedName.trim() || fileName,
       date: date,
       seq: seq,
       compSeq: compSeq,

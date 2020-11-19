@@ -23,8 +23,7 @@ export default class WrappedGroupLabel extends React.Component {
 
     // utility function for calculating the width of the last row before this one
     // the +1 after name.length is for a comma
-    const calcRowWidth = row =>
-      row.reduce((acc, label) => acc + (label.name.length + 1) * CHAR_WIDTH, 0);
+    const calcRowWidth = row => row.reduce((acc, label) => acc + (label.name.length + 1) * CHAR_WIDTH, 0);
 
     // group the labels into rows with a preference with widths less than 200px
     const lastRow = acc => acc[acc.length - 1];
@@ -61,17 +60,11 @@ export default class WrappedGroupLabel extends React.Component {
     // find the grouping's height and width (max row width)
     const groupHeight = labelRows.length * lineHeight;
     const groupWidth = labelRows.reduce(
-      (max, row, i) =>
-        Math.max(
-          max,
-          calcRowWidth(row) - (i === labelRows.length - 1 ? CHAR_WIDTH : 0)
-        ), // no comma on last row, correct
+      (max, row, i) => Math.max(max, calcRowWidth(row) - (i === labelRows.length - 1 ? CHAR_WIDTH : 0)), // no comma on last row, correct
       0
     );
     // add one CHAR_WIDTH padding to all sides of label box
-    const [rectHeight, rectWidth] = [groupHeight, groupWidth].map(
-      x => x + 2 * CHAR_WIDTH
-    );
+    const [rectHeight, rectWidth] = [groupHeight, groupWidth].map(x => x + 2 * CHAR_WIDTH);
 
     // generate the line between the name and plasmid surface
     const forkCoor = group.forkCoor || group.textCoor;
@@ -84,10 +77,7 @@ export default class WrappedGroupLabel extends React.Component {
     // the plasmid, it should be upper right
     let { x, y } = group.textCoor;
     // the +3) is for ",+#"
-    x =
-      group.textAnchor === "end"
-        ? x - (group.labels[0].name.length + 3) * CHAR_WIDTH
-        : x;
+    x = group.textAnchor === "end" ? x - (group.labels[0].name.length + 3) * CHAR_WIDTH : x;
     y -= CHAR_WIDTH;
     x = Math.max(x, 2 * CHAR_WIDTH); // prevent overflow of left or right side
     x = Math.min(x, width - 2 * CHAR_WIDTH - groupWidth);
@@ -103,13 +93,7 @@ export default class WrappedGroupLabel extends React.Component {
     return (
       <g key={key} onMouseLeave={() => setHoveredGroup("")}>
         <path d={linePath} className="la-vz-label-line" />
-        <rect
-          fill="white"
-          stroke="none"
-          height={rectHeight}
-          width={rectWidth}
-          {...rectCoor}
-        />
+        <rect fill="white" stroke="none" height={rectHeight} width={rectWidth} {...rectCoor} />
         <text {...groupCoor}>
           {labelRows.map((r, i) => (
             // turn each group of label rows into a text span
@@ -141,14 +125,7 @@ export default class WrappedGroupLabel extends React.Component {
             </tspan>
           ))}
         </text>
-        <rect
-          fill="none"
-          stroke="black"
-          strokeWidth={1.5}
-          height={rectHeight}
-          width={rectWidth}
-          {...rectCoor}
-        />
+        <rect fill="none" stroke="black" strokeWidth={1.5} height={rectHeight} width={rectWidth} {...rectCoor} />
       </g>
     );
   }

@@ -56,16 +56,7 @@ class AnnotationRow extends React.PureComponent {
   };
 
   renderAnnotation = (a, index) => {
-    const {
-      inputRef,
-      seqBlockRef,
-      findXAndWidth,
-      firstBase,
-      lastBase,
-      annotations,
-      fullSeq,
-      bpsPerBlock
-    } = this.props;
+    const { inputRef, seqBlockRef, findXAndWidth, firstBase, lastBase, annotations, fullSeq, bpsPerBlock } = this.props;
 
     const { color, name, direction, start, end } = a;
     const forward = direction === 1;
@@ -79,8 +70,7 @@ class AnnotationRow extends React.PureComponent {
 
     // does the annotation overflow to the left or the right of this seqBlock?
     let overflowLeft = start < firstBase;
-    let overflowRight =
-      end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
+    let overflowRight = end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
 
     // if the annotation starts and ends in a SeqBlock, by circling all the way around,
     // it will be rendered twice (once from the firstBase to start and another from
@@ -257,11 +247,7 @@ class AnnotationRow extends React.PureComponent {
     const nameFits = nameLength < width - 15;
 
     return (
-      <g
-        key={`${a.id}-${firstBase}`}
-        id={a.id}
-        transform={`translate(${x}, 0)`}
-      >
+      <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, 0)`}>
         {annotationPath},
         {nameFits ? (
           <text
@@ -288,11 +274,7 @@ class AnnotationRow extends React.PureComponent {
     const gTranslate = `translate(0, ${y - 5})`;
 
     return (
-      <g
-        {...size}
-        transform={gTranslate}
-        className="la-vz-linear-annotation-row"
-      >
+      <g {...size} transform={gTranslate} className="la-vz-linear-annotation-row">
         {annotations.map(this.renderAnnotation)}
       </g>
     );

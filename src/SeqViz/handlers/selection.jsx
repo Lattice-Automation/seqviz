@@ -113,8 +113,7 @@ const withSelectionHandler = WrappedComp =>
 
       const knownRange = this.dragEvent
         ? this.idToRange.get(e.currentTarget.id) // only look for SeqBlocks
-        : this.idToRange.get(e.target.id) || // elements and SeqBlocks
-          this.idToRange.get(e.currentTarget.id);
+        : this.idToRange.get(e.target.id) || this.idToRange.get(e.currentTarget.id); // elements and SeqBlocks
       if (!knownRange) {
         return; // there isn't a known range with the id of the element
       }
@@ -167,8 +166,7 @@ const withSelectionHandler = WrappedComp =>
       const { selection } = this.props;
 
       const currBase = this.calculateBaseLinear(e, knownRange);
-      const clockwiseDrag =
-        selection.start !== null && currBase >= selection.start;
+      const clockwiseDrag = selection.start !== null && currBase >= selection.start;
 
       if (e.type === "mousedown" && currBase !== null) {
         // this is the start of a drag event
@@ -216,12 +214,7 @@ const withSelectionHandler = WrappedComp =>
           ref: "",
           clockwise: clockwise
         });
-      } else if (
-        e.type === "mousemove" &&
-        this.dragEvent &&
-        currBase &&
-        currBase !== this.previousBase
-      ) {
+      } else if (e.type === "mousemove" && this.dragEvent && currBase && currBase !== this.previousBase) {
         const increased = currBase > this.previousBase; // bases increased
         const changeThreshold = seqLength * 0.9; // threshold for unrealistic change by mouse movement
         const change = Math.abs(this.previousBase - currBase); // index change from this mouse movement
@@ -229,8 +222,7 @@ const withSelectionHandler = WrappedComp =>
         this.forward = increased ? !crossedZero : crossedZero; // bases increased XOR crossed zero
         const lengthChange = crossedZero ? seqLength - change : change; // the change at the point where we cross zero has to be normalized by seqLength
         let sameDirectionMove =
-          this.forward === this.props.selection.clockwise ||
-          this.props.selection.clockwise === null; // moving in same direction as start of drag or start of drag
+          this.forward === this.props.selection.clockwise || this.props.selection.clockwise === null; // moving in same direction as start of drag or start of drag
 
         if (sameDirectionMove) {
           this.fullSelectionLength += lengthChange;
@@ -239,16 +231,9 @@ const withSelectionHandler = WrappedComp =>
         }
 
         this.previousBase = currBase; // done comparing with previous base, update previous base
-        if (
-          this.fullSelectionLength < seqLength * 0.01 &&
-          !this.shiftSelection
-        ) {
+        if (this.fullSelectionLength < seqLength * 0.01 && !this.shiftSelection) {
           clockwise = this.forward; // near selection start so selection direction is up for grabs
-          const check = this.calcSelectionLength(
-            this.props.selection.start,
-            currBase,
-            this.forward
-          ); // check actual current selection length
+          const check = this.calcSelectionLength(this.props.selection.start, currBase, this.forward); // check actual current selection length
           if (this.fullSelectionLength < 0) {
             this.fullSelectionLength = check; // This is to correct for errors when dragging too fast
           }
@@ -260,31 +245,21 @@ const withSelectionHandler = WrappedComp =>
         }
         sameDirectionMove = this.forward === this.props.selection.clockwise; // recalculate this in case we've switched selection directionality
 
-        const check = this.calcSelectionLength(
-          this.props.selection.start,
-          currBase,
-          this.props.selection.clockwise
-        ); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
+        const check = this.calcSelectionLength(this.props.selection.start, currBase, this.props.selection.clockwise); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
 
-        if (
-          this.selectionStarted &&
-          this.shiftSelection &&
-          check > this.fullSelectionLength
-        ) {
+        if (this.selectionStarted && this.shiftSelection && check > this.fullSelectionLength) {
           this.fullSelectionLength = check; // shift select catch up
         }
 
         const sameDirectionDrag = this.dragEvent && sameDirectionMove; // there is an ongoing drag in the same direction as the direction the selection started in
         const fullSelection = currRef === "ALL"; // selection is full sequence
-        const hitFullSelection =
-          !fullSelection && this.fullSelectionLength >= seqLength; // selection became full sequence
+        const hitFullSelection = !fullSelection && this.fullSelectionLength >= seqLength; // selection became full sequence
         if (sameDirectionDrag && hitFullSelection) {
           ref = "ALL"; // intial set of ALL selection on selection full sequence
           end = start;
         } else if (fullSelection) {
           // this ensures that backtracking doesn't require making up to your overshoot forward circles
-          this.fullSelectionLength =
-            seqLength + (this.fullSelectionLength % seqLength);
+          this.fullSelectionLength = seqLength + (this.fullSelectionLength % seqLength);
           ref = "ALL";
 
           if (

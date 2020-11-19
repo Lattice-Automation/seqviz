@@ -1,10 +1,5 @@
 import { dnaComplement } from "./parser";
-import {
-  nucleotides,
-  nucleotideWildCards,
-  reverse,
-  translateWildNucleotides
-} from "./sequence";
+import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
 
 /**
  * @typedef {Object} SearchResult
@@ -41,16 +36,11 @@ export default (query, mismatch, seq) => {
 
   if (indices.length > 4000 || compIndices.length > 4000) {
     // failing out here because rendering will be too expensive
-    console.error(
-      `Search too broad, ${indices.length +
-        compIndices.length} matches. Please narrow parameters.`
-    );
+    console.error(`Search too broad, ${indices.length + compIndices.length} matches. Please narrow parameters.`);
     return [];
   }
 
-  const searchResults = indices
-    .concat(compIndices)
-    .sort((a, b) => a.start - b.start);
+  const searchResults = indices.concat(compIndices).sort((a, b) => a.start - b.start);
 
   return searchResults;
 };

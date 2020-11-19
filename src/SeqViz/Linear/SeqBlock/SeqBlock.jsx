@@ -118,11 +118,7 @@ export default class SeqBlock extends React.PureComponent {
   bpColorLookup = bp => {
     const { bpColors } = this.props;
 
-    const color =
-      bpColors[bp] ||
-      bpColors[bp.toUpperCase()] ||
-      bpColors[bp.toLowerCase()] ||
-      null;
+    const color = bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || null;
 
     return color;
   };
@@ -188,15 +184,10 @@ export default class SeqBlock extends React.PureComponent {
     // height and yDiff of forward primers (above sequence)
     const forwardPrimerYDiff = 0;
     const forwardPrimerHeight =
-      showPrimers && forwardPrimerRows.length
-        ? elementHeight * 3 * forwardPrimerRows.length
-        : 0;
+      showPrimers && forwardPrimerRows.length ? elementHeight * 3 * forwardPrimerRows.length : 0;
 
     // height and yDiff of cut sites
-    const cutSiteYDiff =
-      zoomed && cutSiteRows.length
-        ? elementHeight / 2 + forwardPrimerHeight
-        : forwardPrimerHeight; // spacing for cutSite names
+    const cutSiteYDiff = zoomed && cutSiteRows.length ? elementHeight / 2 + forwardPrimerHeight : forwardPrimerHeight; // spacing for cutSite names
     const cutSiteHeight = zoomed && cutSiteRows.length ? elementHeight : 0;
 
     // height and yDiff of the sequence strand
@@ -210,9 +201,7 @@ export default class SeqBlock extends React.PureComponent {
     // height and yDiff of reverse primers (below sequence)
     const reversePrimerYDiff = compYDiff + compHeight;
     const reversePrimerHeight =
-      showPrimers && reversePrimerRows.length
-        ? elementHeight * 3 * reversePrimerRows.length
-        : 0;
+      showPrimers && reversePrimerRows.length ? elementHeight * 3 * reversePrimerRows.length : 0;
 
     // height and yDiff of translations
     let translationYDiff = reversePrimerYDiff + reversePrimerHeight;
@@ -257,9 +246,7 @@ export default class SeqBlock extends React.PureComponent {
       selectEdgeHeight += 0.25 * elementHeight;
     }
 
-    const filteredSearchRows = showComplement
-      ? searchRows
-      : searchRows.filter(r => r.direction === 1);
+    const filteredSearchRows = showComplement ? searchRows : searchRows.filter(r => r.direction === 1);
 
     return (
       <svg
@@ -350,12 +337,7 @@ export default class SeqBlock extends React.PureComponent {
             />
           )}
           {zoomed ? (
-            <CutSiteRow
-              {...this.props}
-              findXAndWidth={this.findXAndWidth}
-              lastBase={lastBase}
-              yDiff={cutSiteYDiff}
-            />
+            <CutSiteRow {...this.props} findXAndWidth={this.findXAndWidth} lastBase={lastBase} yDiff={cutSiteYDiff} />
           ) : null}
           {zoomed ? (
             <text {...textProps} y={indexYDiff} id={id}>

@@ -28,8 +28,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps, nextState) =>
-    !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
+  shouldComponentUpdate = (nextProps, nextState) => !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed

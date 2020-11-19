@@ -3,11 +3,7 @@ import * as React from "react";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { createLinearTranslations } from "../../utils/sequence";
-import {
-  createMultiRows,
-  createSingleRows,
-  stackElements
-} from "../elementsToRows";
+import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import InfiniteScroll from "./InfiniteScroll.jsx";
 import SeqBlock from "./SeqBlock/SeqBlock.jsx";
@@ -117,32 +113,18 @@ class Linear extends React.Component {
     );
 
     const forwardPrimerRows = showPrimers // primers...
-      ? createMultiRows(
-          stackElements(forwardPrimers, seq.length),
-          bpsPerBlock,
-          arrSize
-        )
+      ? createMultiRows(stackElements(forwardPrimers, seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     const reversePrimerRows = showPrimers // primers...
-      ? createMultiRows(
-          stackElements(reversePrimers, seq.length),
-          bpsPerBlock,
-          arrSize
-        )
+      ? createMultiRows(stackElements(reversePrimers, seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     const searchRows =
-      search && search.length
-        ? createSingleRows(search, bpsPerBlock, arrSize)
-        : new Array(arrSize).fill([]);
+      search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
     const translationRows = translations.length
-      ? createSingleRows(
-          createLinearTranslations(translations, seq),
-          bpsPerBlock,
-          arrSize
-        )
+      ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {
@@ -179,8 +161,7 @@ class Linear extends React.Component {
         blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
       }
       if (translationRows[i].length) {
-        blockHeight +=
-          translationRows[i].length * elementHeight + spacingHeight;
+        blockHeight += translationRows[i].length * elementHeight + spacingHeight;
       }
       blockHeights[i] = blockHeight;
     }

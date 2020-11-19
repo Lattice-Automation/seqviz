@@ -89,9 +89,7 @@ const withEventRouter = WrappedComp =>
     handleSeqInteraction = async type => {
       const { seq, Linear } = this.props;
       const seqLength = seq.length;
-      const {
-        bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1)
-      } = this.props;
+      const { bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1) } = this.props;
 
       switch (type) {
         case "SelectAll": {
@@ -250,10 +248,7 @@ const withEventRouter = WrappedComp =>
         if (this.clickedOnce === e.target && this.clickedTwice === e.target) {
           this.handleTripleClick();
           this.resetClicked();
-        } else if (
-          this.clickedOnce === e.target &&
-          this.clickedTwice === null
-        ) {
+        } else if (this.clickedOnce === e.target && this.clickedTwice === null) {
           this.clickedOnce = e.target;
           this.clickedTwice = e.target;
           this.resetClicked();
@@ -300,14 +295,7 @@ const withEventRouter = WrappedComp =>
     eventRouter;
 
     render() {
-      const {
-        mouseEvent,
-        selection,
-        setSelection,
-        centralIndex,
-        setCentralIndex,
-        ...rest
-      } = this.props;
+      const { mouseEvent, selection, setSelection, centralIndex, setCentralIndex, ...rest } = this.props;
       const { Circular, name } = this.props;
 
       const type = Circular ? "circular" : "linear";

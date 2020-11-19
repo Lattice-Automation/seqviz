@@ -23,14 +23,7 @@ export default class Primers extends React.PureComponent {
   };
 
   render() {
-    const {
-      radius,
-      rowsToSkip,
-      Zoom,
-      lineHeight,
-      primers,
-      showPrimers
-    } = this.props;
+    const { radius, rowsToSkip, Zoom, lineHeight, primers, showPrimers } = this.props;
 
     const rowShiftHeight = lineHeight * rowsToSkip;
     const radiusAdjust = lineHeight * 3;
@@ -76,17 +69,7 @@ export default class Primers extends React.PureComponent {
  * @param {PrimerProps} props for a single Primer
  */
 const SinglePrimer = props => {
-  const {
-    primer,
-    seqLength,
-    getRotation,
-    generateArc,
-    currBRadius,
-    currTRadius,
-    inputRef,
-    hoverPrimer,
-    Zoom
-  } = props;
+  const { primer, seqLength, getRotation, generateArc, currBRadius, currTRadius, inputRef, hoverPrimer, Zoom } = props;
 
   // shared style object for inlining
   const primerStyle = {
@@ -105,10 +88,7 @@ const SinglePrimer = props => {
   }
 
   // if it crosses the zero index, correct for actual length
-  let primerLength =
-    primer.end >= primer.start
-      ? primer.end - primer.start
-      : seqLength - primer.start + primer.end;
+  let primerLength = primer.end >= primer.start ? primer.end - primer.start : seqLength - primer.start + primer.end;
 
   // can't make an arc from a full circle
   primerLength = primerLength === 0 ? seqLength - 0.1 : primerLength;

@@ -80,10 +80,7 @@ describe("Viewer rendering (JS)", () => {
 
   it("renders from a Genbank file", () => {
     const div = document.createElement("div");
-    const gbContents = fs.readFileSync(
-      path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb"),
-      "utf8"
-    );
+    const gbContents = fs.readFileSync(path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb"), "utf8");
 
     let viewer = Viewer(div, { file: gbContents });
 

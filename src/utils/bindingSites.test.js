@@ -1,8 +1,7 @@
 import primerBindingSites from "./bindingSites";
 
 describe("Primer binding sites", () => {
-  const testVector =
-    "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg";
+  const testVector = "ATCGatcgAAAAaaaaTTTTttttccGGGGggggATCGatcgAAAAaaaaTTTTttttCCCCccccGGgggg";
   const testPrimerOne = {
     overhang: "AAAA",
     name: "FWD1",
@@ -57,48 +56,33 @@ describe("Primer binding sites", () => {
   };
 
   it("finds binding sites", () => {
-    const testBindingSites = primerBindingSites(
-      [testPrimerOne, testPrimerTwo],
-      testVector
-    );
+    const testBindingSites = primerBindingSites([testPrimerOne, testPrimerTwo], testVector);
     expect(testBindingSites).toHaveLength(3);
   });
 
   it("correctly find binding sites that aren't perfect matches", () => {
     const primerSequence = testPrimerTwo.seq.toLowerCase();
-    const testBindingSites = primerBindingSites(
-      [testPrimerOne, testPrimerTwo],
-      testVector
-    );
-    const primerTwoBindingSites = testBindingSites.filter(
-      binding => binding.seq.toLowerCase() === primerSequence
-    );
+    const testBindingSites = primerBindingSites([testPrimerOne, testPrimerTwo], testVector);
+    const primerTwoBindingSites = testBindingSites.filter(binding => binding.seq.toLowerCase() === primerSequence);
     const annealingSequences = primerTwoBindingSites.reduce((acc, binding) => {
       const annealSequences = acc.concat([binding.annealSequence]);
       return annealSequences;
     }, []);
-    const exactMatches = annealingSequences.filter(
-      seq => seq.toLowerCase() === primerSequence
-    );
+    const exactMatches = annealingSequences.filter(seq => seq.toLowerCase() === primerSequence);
     expect(primerTwoBindingSites).toHaveLength(2);
     expect(exactMatches).toHaveLength(0);
   });
 
   it("correctly find binding sites that crosses zero index", () => {
     const testBindingSites = primerBindingSites([testPrimerTwo], testVector);
-    const bindingSiteCrossZero = testBindingSites.filter(
-      binding => binding.start > binding.end
-    );
+    const bindingSiteCrossZero = testBindingSites.filter(binding => binding.start > binding.end);
     expect(bindingSiteCrossZero).toHaveLength(1);
   });
 
   it("binding sites of primers with overhang all have the correct length", () => {
     const testBindingSites = primerBindingSites([testPrimerThree], testVector);
-    const seqLength =
-      testPrimerThree.seq.length + testPrimerThree.overhang.length;
-    const bindingSitesCorrectLength = testBindingSites.filter(
-      binding => binding.seq.length === seqLength
-    );
+    const seqLength = testPrimerThree.seq.length + testPrimerThree.overhang.length;
+    const bindingSitesCorrectLength = testBindingSites.filter(binding => binding.seq.length === seqLength);
 
     expect(bindingSitesCorrectLength).toHaveLength(4);
   });

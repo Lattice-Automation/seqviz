@@ -164,12 +164,7 @@ export const createMultiRows = (elements, rowLength, rowCount) => {
  * @param {CreateRowInfo}
  * @return {[[Object]]}       an array of an array of the values that were stored on creation
  */
-export const createSingleRows = (
-  elements,
-  rowLength,
-  rowCount,
-  duplicateIdsAllowed = true
-) => {
+export const createSingleRows = (elements, rowLength, rowCount, duplicateIdsAllowed = true) => {
   const newArr = new Array(rowCount);
 
   // initialize the nested rows in each block
@@ -211,10 +206,7 @@ export const createSingleRows = (
         // only add to the array if the user is okay with having duplicates by id.
         // for example, this shouldn't be allowed if multiple translation rows have
         // the same ID
-        if (
-          duplicateIdsAllowed ||
-          newArr[s].every(el => el.id !== elements[i].id)
-        ) {
+        if (duplicateIdsAllowed || newArr[s].every(el => el.id !== elements[i].id)) {
           newArr[s].push(elements[i]);
         }
         s += 1;
