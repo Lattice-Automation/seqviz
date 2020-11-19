@@ -197,40 +197,43 @@ export default async (fileInput, fileName, colors = []) =>
             // it's a continuation of a prior feature/annotation
             // any updates (to name or color) to the last annotation should affect
             // the last annotation that's in the array
-            let [tag] = currLine;
-            tag = tag.replace(/[/"]/g, ""); // get rid of quotation marks and forward slaches
-            // should now look like ['organism', 'Saccharomyces cerevisiae']
-            const [tagName, tagValue] = tag.split(/=/);
+            if(currLine[0].startsWith("/")){
+            
+              let [tag] = currLine;
+              tag = tag.replace(/[/"]/g, ""); // get rid of quotation marks and forward slaches
+              // should now look like ['organism', 'Saccharomyces cerevisiae']
+              const [tagName, tagValue] = tag.split(/=/);
 
-            // the two values that can be extracted are name or color
-            const lastAnnIndex = annotations.length - 1;
-            if (tagNameList.includes(tagName)) {
-              // it's key value pair where the key is something we recognize as an annotation name
-              if (
-                lastAnnIndex > -1 &&
-                annotations[annotations.length - 1].name === "Untitled" &&
-                !primerFlag
-              ) {
-                // defensively check that there isn't already a defined annotation w/o a name
-                annotations[annotations.length - 1].name = trimCarriageReturn(
-                  tagValue
-                );
-              } else if (
-                primerFlag &&
-                primers[primers.length - 1].name === ""
-              ) {
-                primers[primers.length - 1].name = trimCarriageReturn(tagValue);
-              }
-            } else if (tagColorList.includes(tagName)) {
-              // it's key value pair where the key is something we recognize as an annotation color
-              if (lastAnnIndex > -1) {
-                // defensively check that there's already been a defined annotation
-                annotations[annotations.length - 1].color = tagValue;
-              }
-            } else if (tagName === "loom_primer_sequence") {
-              // Loom specific tag used to preserve mismatches
-              if (primerFlag) {
-                primers[primers.length - 1].sequence = tagValue;
+              // the two values that can be extracted are name or color
+              const lastAnnIndex = annotations.length - 1;
+              if (tagNameList.includes(tagName)) {
+                // it's key value pair where the key is something we recognize as an annotation name
+                if (
+                  lastAnnIndex > -1 &&
+                  (annotations[annotations.length - 1].name === annotations[annotations.length - 1].type + "-" + annotations[annotations.length - 1].start || annotations[annotations.length - 1].name === "Untitled") &&
+                  !primerFlag
+                ) {
+                  // defensively check that there isn't already a defined annotation w/o a name
+                  annotations[annotations.length - 1].name = trimCarriageReturn(
+                    tagValue
+                  );
+                } else if (
+                  primerFlag &&
+                  primers[primers.length - 1].name === ""
+                ) {
+                  primers[primers.length - 1].name = trimCarriageReturn(tagValue);
+                }
+              } else if (tagColorList.includes(tagName)) {
+                // it's key value pair where the key is something we recognize as an annotation color
+                if (lastAnnIndex > -1) {
+                  // defensively check that there's already been a defined annotation
+                  annotations[annotations.length - 1].color = tagValue;
+                }
+              } else if (tagName === "loom_primer_sequence") {
+                // Loom specific tag used to preserve mismatches
+                if (primerFlag) {
+                  primers[primers.length - 1].sequence = tagValue;
+                }
               }
             }
           }
