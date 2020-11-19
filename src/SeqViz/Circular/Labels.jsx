@@ -37,20 +37,10 @@ export default class Labels extends React.Component {
    * name by itself or in a grouping
    */
   static groupOverlappingLabels = props => {
-    const {
-      radius,
-      labels,
-      center,
-      seqLength,
-      findCoor,
-      lineHeight,
-      size,
-      yDiff
-    } = props;
+    const { radius, labels, center, seqLength, findCoor, lineHeight, size, yDiff } = props;
 
     // create a radius outside the plasmid map for placing the names
-    const textRadiusAdjust =
-      seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
+    const textRadiusAdjust = seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
     const textRadius = radius + textRadiusAdjust;
 
     /**
@@ -95,10 +85,7 @@ export default class Labels extends React.Component {
       const heightYPos = textCoor.y + yDiff;
       if (heightYPos < 0 || heightYPos > size.height) {
         overflow = true; // vertical overflow
-      } else if (
-        textCoor.x - nameLength < 0 ||
-        textCoor.x + nameLength > size.width
-      ) {
+      } else if (textCoor.x - nameLength < 0 || textCoor.x + nameLength > size.width) {
         overflow = true; // horizontal overflow
       }
       return overflow;
@@ -194,9 +181,7 @@ export default class Labels extends React.Component {
 
       // check whether any of these attempted new labels overlaps with the neighbors
       const overlapWithNeighbors = newLabels.some(l =>
-        [leftNeighbor, rightNeighbor].some(
-          n => n && Math.abs(n.textCoor.y - l.textCoor.y) < 15
-        )
+        [leftNeighbor, rightNeighbor].some(n => n && Math.abs(n.textCoor.y - l.textCoor.y) < 15)
       );
       if (overlapWithNeighbors) return acc.concat(g); // just bail and return the original grouping
       return acc.concat(...newLabels); // add the newly created labels
@@ -258,25 +243,16 @@ export default class Labels extends React.Component {
     const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
 
     return (
-      <g
-        className="la-vz-circular-labels"
-        onMouseLeave={() => this.setHoveredGroup("")}
-      >
+      <g className="la-vz-circular-labels" onMouseLeave={() => this.setHoveredGroup("")}>
         {labelGroups.map(g => {
           const [first] = g.labels;
           // generate the line between the name and plasmid surface
           const fC = g.forkCoor || g.textCoor;
           const labelLines = (
             <React.Fragment>
-              <path
-                d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`}
-                className="la-vz-label-line"
-              />
+              <path d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`} className="la-vz-label-line" />
               {g.forkCoor && (
-                <path
-                  d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`}
-                  className="la-vz-label-line"
-                />
+                <path d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`} className="la-vz-label-line" />
               )}
             </React.Fragment>
           );

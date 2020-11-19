@@ -39,8 +39,7 @@ const CutSites = props => {
   if (enzymes.length < 1) return null;
 
   const recogContiguous = (start, end, first, last) => {
-    if ((start < first && end < first) || (start > last && end > last))
-      return true;
+    if ((start < first && end < first) || (start > last && end > last)) return true;
     if (end >= start) {
       return end < last && start > first;
     }
@@ -50,23 +49,16 @@ const CutSites = props => {
   const sitesWithX = cutSiteRows.map(c => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
-    let { x: highlightX, width: highlightWidth } = findXAndWidth(
-      c.recogStart,
-      c.recogEnd
-    );
+    let { x: highlightX, width: highlightWidth } = findXAndWidth(c.recogStart, c.recogEnd);
     if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
       if (c.recogStart > c.recogEnd) {
         ({ x: highlightX, width: highlightWidth } = findXAndWidth(
           c.recogEnd < firstBase ? lastBase : Math.min(lastBase, c.recogEnd),
-          c.recogStart > lastBase
-            ? firstBase
-            : Math.max(firstBase, c.recogStart)
+          c.recogStart > lastBase ? firstBase : Math.max(firstBase, c.recogStart)
         ));
       } else if (c.recogEnd > c.recogStart) {
         ({ x: highlightX, width: highlightWidth } = findXAndWidth(
-          c.recogStart < firstBase
-            ? lastBase
-            : Math.min(lastBase, c.recogStart),
+          c.recogStart < firstBase ? lastBase : Math.min(lastBase, c.recogStart),
           c.recogEnd > lastBase ? firstBase : Math.max(firstBase, c.recogEnd)
         ));
       }
@@ -121,11 +113,7 @@ const CutSites = props => {
         const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
         const showIndex = sequenceCutSite || complementCutSite;
 
-        const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(
-          c,
-          sequenceCutSite,
-          complementCutSite
-        );
+        const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
 
         return (
           <React.Fragment key={`la-vz-${c.id}-first-base`}>
@@ -172,28 +160,13 @@ const CutSites = props => {
               />
             )}
             {sequenceCutSite ? (
-              <rect
-                width="1px"
-                height={lineHeight}
-                x={c.cutX - 0.5}
-                y={lineHeight / 4 + yDiff}
-              />
+              <rect width="1px" height={lineHeight} x={c.cutX - 0.5} y={lineHeight / 4 + yDiff} />
             ) : null}
             {showIndex && zoom > 10 ? (
-              <rect
-                width={connectorWidth}
-                height="1px"
-                x={connectorX - 0.5}
-                y={lineHeight * 1.25 + yDiff}
-              />
+              <rect width={connectorWidth} height="1px" x={connectorX - 0.5} y={lineHeight * 1.25 + yDiff} />
             ) : null}
             {complementCutSite && zoom > 10 ? (
-              <rect
-                width="1px"
-                height={lineHeight + 1.5}
-                x={c.hangX - 0.5}
-                y={lineHeight * 1.25 + yDiff}
-              />
+              <rect width="1px" height={lineHeight + 1.5} x={c.hangX - 0.5} y={lineHeight * 1.25 + yDiff} />
             ) : null}
           </React.Fragment>
         );

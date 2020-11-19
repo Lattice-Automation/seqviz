@@ -9,9 +9,7 @@ import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
  */
 export default (primers, vector) => {
   const { seq: vectorSeq, compSeq: vectorComp } = dnaComplement(vector);
-  return findBindingSites(primers, vectorSeq, 1).concat(
-    findBindingSites(primers, vectorComp, -1)
-  );
+  return findBindingSites(primers, vectorSeq, 1).concat(findBindingSites(primers, vectorComp, -1));
 };
 
 /**
@@ -31,10 +29,7 @@ const findMismatches = (sequence, subVector) => {
   if (mismatches.length > 0) {
     let index = 0;
     while (index < mismatches.length) {
-      const remainingMismatches = mismatches.slice(
-        0,
-        mismatches.length - index
-      );
+      const remainingMismatches = mismatches.slice(0, mismatches.length - index);
       if (remainingMismatches.length < 2) {
         break;
       }
@@ -42,19 +37,14 @@ const findMismatches = (sequence, subVector) => {
         (acc, mismatch) => acc + (mismatch[1] + 1 - mismatch[0]),
         0
       );
-      const mismatchAreaLength = sequence.slice(
-        0,
-        remainingMismatches[remainingMismatches.length - 1][1] + 1
-      ).length;
+      const mismatchAreaLength = sequence.slice(0, remainingMismatches[remainingMismatches.length - 1][1] + 1).length;
 
       if (mismatchTotalLength / mismatchAreaLength > 0.25) {
         mismatches = mismatches
           .slice(mismatches.length - index, mismatches.length)
           .concat([[0, mismatches[mismatches.length - 1 - index][1]]]);
 
-        annealSequence = sequence.slice(
-          mismatches[mismatches.length - 1][1] + 1
-        );
+        annealSequence = sequence.slice(mismatches[mismatches.length - 1][1] + 1);
         break;
       }
       index += 1;
@@ -96,16 +86,12 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
     const vectorSequence = vectorSeq.toLowerCase();
     const vectorLength = vectorSequence.length;
 
-    const expandedVectorSequence =
-      vectorSequence + vectorSequence.substring(0, sequenceLength); // Used for looking for binding sites that cross 0 index
+    const expandedVectorSequence = vectorSequence + vectorSequence.substring(0, sequenceLength); // Used for looking for binding sites that cross 0 index
 
     let annealSequence = seq;
     let { mismatches, matchSeq } = [];
 
-    matchSeq =
-      sequenceLength < matchLength
-        ? seq
-        : seq.substring(sequenceLength - matchLength, sequenceLength);
+    matchSeq = sequenceLength < matchLength ? seq : seq.substring(sequenceLength - matchLength, sequenceLength);
 
     matchSeq = forward ? matchSeq : reverse(matchSeq);
 
@@ -122,9 +108,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
           : result.index + matchSeq.length > vectorLength;
         const crossZero = tailCrossZero || headCrossZero;
 
-        let startIndex = forward
-          ? result.index - sequenceLength + matchSeq.length
-          : result.index;
+        let startIndex = forward ? result.index - sequenceLength + matchSeq.length : result.index;
         let endIndex = startIndex + sequenceLength;
         let subVector = vectorSequence.substring(startIndex, endIndex);
 
@@ -135,9 +119,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
               : result.index - sequenceLength + matchSeq.length;
           }
           endIndex = sequenceLength - (vectorLength - startIndex);
-          subVector =
-            vectorSequence.substring(startIndex, vectorLength) +
-            vectorSequence.substring(0, endIndex);
+          subVector = vectorSequence.substring(startIndex, vectorLength) + vectorSequence.substring(0, endIndex);
         }
 
         subVector = forward ? subVector : reverse(subVector);
@@ -168,10 +150,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
               mismatches.push({ start: 0, end: overhang.length });
             }
           } else {
-            ({ mismatches = [], annealSequence = "" } = findMismatches(
-              seq,
-              subVector
-            ));
+            ({ mismatches = [], annealSequence = "" } = findMismatches(seq, subVector));
           }
 
           const uniqMismatch = {};

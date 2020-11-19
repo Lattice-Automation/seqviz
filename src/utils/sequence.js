@@ -111,11 +111,7 @@ export const translateWildNucleotides = nucleotideSequence =>
   nucleotideSequence
     .toLowerCase()
     .split("")
-    .map(letter =>
-      nucleotideWildCards[letter]
-        ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})`
-        : letter
-    )
+    .map(letter => (nucleotideWildCards[letter] ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})` : letter))
     .join("");
 
 /**
@@ -191,16 +187,8 @@ export const calcTm = (sequence, match = sequence) => {
 
   // http://depts.washington.edu/bakerpg/primertemp/
   // formula valid for bps  25-45, gc% > 40 and sequence terminates in one or more G/C
-  if (
-    numberbps > 24 &&
-    numberbps < 46 &&
-    gcpercent > 40 &&
-    sequence.slice(0, 1) in { G: "G", C: "C" }
-  ) {
-    return (
-      (100 / numberbps) *
-      (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75)
-    );
+  if (numberbps > 24 && numberbps < 46 && gcpercent > 40 && sequence.slice(0, 1) in { G: "G", C: "C" }) {
+    return (100 / numberbps) * (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75);
   }
 
   // https://www.biophp.org/minitools/melting_temperature/demo.php?formula=basic
@@ -329,10 +317,7 @@ export const createLinearTranslations = (translations, dnaSeq) => {
     // direction). this is later needed to calculate the number of bps needed in the first
     // and last codons
     const tStart = direction === 1 ? start : end - AAseq.length * 3;
-    let tEnd =
-      direction === 1
-        ? (start + AAseq.length * 3) % dnaSeq.length
-        : end % dnaSeq.length;
+    let tEnd = direction === 1 ? (start + AAseq.length * 3) % dnaSeq.length : end % dnaSeq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
     if (tEnd === 0 && direction === -1) {

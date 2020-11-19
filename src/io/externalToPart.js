@@ -27,23 +27,16 @@ export default async (accession, options = { backbone: "", colors: [] }) => {
     console.error("backbone specified without a BioBrick");
   }
 
-  const response = await fetch(
-    new Request(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
-  )
+  const response = await fetch(new Request(url, { headers: { "X-Requested-With": "XMLHttpRequest" } }))
     .then(response => response.text())
     .catch(console.error);
 
   if (!response) {
-    throw new Error(
-      `Failed to retrieve a seq with accession ${accession} from ${url}`
-    );
+    throw new Error(`Failed to retrieve a seq with accession ${accession} from ${url}`);
   }
 
   // convert to a part
-  const igemBackbone =
-    igem && backbone.length
-      ? { name: backbone, backbone: fetchBBB(backbone) }
-      : "";
+  const igemBackbone = igem && backbone.length ? { name: backbone, backbone: fetchBBB(backbone) } : "";
 
   if (igem && igemBackbone === "") {
     console.error("iGEM BioBrick ID used, but no backbone ID specified.");
@@ -62,7 +55,5 @@ export default async (accession, options = { backbone: "", colors: [] }) => {
     }
   }
 
-  throw new Error(
-    `Failed to retrieve a seq with accession ${accession} from ${url}`
-  );
+  throw new Error(`Failed to retrieve a seq with accession ${accession} from ${url}`);
 };

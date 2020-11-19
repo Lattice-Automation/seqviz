@@ -15,10 +15,7 @@ import parseSeqBuilder from "./parsers/seqbuilder";
  * filesToParts can convert either string contents of
  * DNA files or a list of File objects into SeqViz parts
  */
-export default async (
-  files,
-  options = { fileName: "", colors: COLORS, backbone: "" }
-) => {
+export default async (files, options = { fileName: "", colors: COLORS, backbone: "" }) => {
   try {
     const partLists = await new Promise((resolve, reject) => {
       const { fileName = "", colors = [], backbone = "" } = options;
@@ -51,9 +48,7 @@ export default async (
 
               // set fileName in options if available
               // fileName used in naming part and determining which file parser to use
-              const fileOptions = file.name
-                ? { ...options, fileName: file.name }
-                : options;
+              const fileOptions = file.name ? { ...options, fileName: file.name } : options;
 
               // SnapGene files are buffers, rest are strings
               if (fileOptions.fileName.endsWith(".dna")) {
@@ -81,10 +76,7 @@ export default async (
  *
  * @param {String} file  the string representation of the passed file
  */
-const fileToParts = async (
-  file,
-  options = { fileName: "", colors: [], backbone: "" }
-) => {
+const fileToParts = async (file, options = { fileName: "", colors: [], backbone: "" }) => {
   const { fileName = "", colors = [], backbone = "" } = options;
 
   if (!file) {
@@ -97,10 +89,7 @@ const fileToParts = async (
   const dnaCharLength = firstLine.replace(/[^atcgATCG]/, "").length;
   const dnaOnlyFile = dnaCharLength / firstLine.length > 0.8; // is it >80% dna?
   const sourceName = fileName.split(path.sep).pop();
-  const name =
-    fileName && sourceName
-      ? sourceName.substring(0, sourceName.search("\\."))
-      : "Untitled";
+  const name = fileName && sourceName ? sourceName.substring(0, sourceName.search("\\.")) : "Untitled";
   const source = { name: sourceName, file: file };
 
   // another edge case check for whether the part is a JSON part from Benchling
@@ -110,11 +99,7 @@ const fileToParts = async (
   try {
     const benchlingJSON = JSON.parse(file); // will err out if not JSON
     const benchlingJSONKeys = Object.keys(benchlingJSON);
-    if (
-      ["bases", "annotations", "primers"].every(k =>
-        benchlingJSONKeys.includes(k)
-      )
-    ) {
+    if (["bases", "annotations", "primers"].every(k => benchlingJSONKeys.includes(k))) {
       isBenchling = true;
     }
   } catch (_) {}

@@ -8,14 +8,7 @@ export default class Index extends React.PureComponent {
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    const {
-      seq,
-      zoom,
-      firstBase,
-      lineHeight,
-      size,
-      findXAndWidth
-    } = this.props;
+    const { seq, zoom, firstBase, lineHeight, size, findXAndWidth } = this.props;
     const seqLength = seq.length;
 
     // the tallie distance on the x-axis is zoom dependent:
@@ -98,14 +91,7 @@ export default class Index extends React.PureComponent {
   };
 
   render() {
-    const {
-      lineHeight,
-      transform,
-      showIndex,
-      findXAndWidth,
-      firstBase,
-      lastBase
-    } = this.props;
+    const { lineHeight, transform, showIndex, findXAndWidth, firstBase, lastBase } = this.props;
 
     // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const { width } = findXAndWidth(firstBase, lastBase);
@@ -120,11 +106,7 @@ export default class Index extends React.PureComponent {
 
     return (
       <g className="la-vz-linear-index" transform={transform}>
-        <rect
-          style={axisStyle}
-          fill="#B0B9C2"
-          transform={`translate(0, -${0.3 * lineHeight})`}
-        />
+        <rect style={axisStyle} fill="#B0B9C2" transform={`translate(0, -${0.3 * lineHeight})`} />
         {this.genTicks()}
       </g>
     );

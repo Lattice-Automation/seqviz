@@ -27,8 +27,7 @@ const first = elArr => {
 export default async (sbol, fileName, colors = []) =>
   new Promise((resolve, reject) => {
     // util reject function that will be triggered if any fields fail
-    const rejectSBOL = errType =>
-      reject(new Error(`Failed on SBOLv2 file: ${errType}`));
+    const rejectSBOL = errType => reject(new Error(`Failed on SBOLv2 file: ${errType}`));
 
     // weird edge case with directed quotation characters
     const fileString = sbol.replace(/“|”/g, '"');
@@ -94,8 +93,7 @@ export default async (sbol, fileName, colors = []) =>
             s =>
               (s.persistentIdentity &&
                 s.persistentIdentity.length &&
-                s.persistentIdentity[0].xml_tag["rdf:resource"].value ===
-                  seqID) ||
+                s.persistentIdentity[0].xml_tag["rdf:resource"].value === seqID) ||
               s.xml_tag["rdf:about"].value === seqID
           );
 

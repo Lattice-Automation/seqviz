@@ -51,9 +51,7 @@ describe("Converts files to parts (IO)", () => {
       .slice(0, 3);
 
     try {
-      const result = await filesToParts(
-        files.map(f => fs.readFileSync(allFiles[f], "utf8"))
-      );
+      const result = await filesToParts(files.map(f => fs.readFileSync(allFiles[f], "utf8")));
 
       expect(typeof result).toEqual(typeof []);
       result.forEach(part => {

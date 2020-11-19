@@ -11,14 +11,7 @@ export default class CutSites extends React.PureComponent {
   };
 
   displayCutSite = cutSite => {
-    const {
-      radius,
-      lineHeight,
-      seqLength,
-      getRotation,
-      inputRef,
-      generateArc
-    } = this.props;
+    const { radius, lineHeight, seqLength, getRotation, inputRef, generateArc } = this.props;
     const { id, start } = cutSite;
     let { fcut, rcut, end } = cutSite;
 
@@ -48,11 +41,7 @@ export default class CutSites extends React.PureComponent {
     });
 
     // find start and stop coordinates to cut site line
-    const cutLinePath = this.calculateLinePath(
-      fcut - start,
-      radius + lineHeight * 2,
-      radius + lineHeight * 1.5
-    );
+    const cutLinePath = this.calculateLinePath(fcut - start, radius + lineHeight * 2, radius + lineHeight * 1.5);
 
     // find start and stop coordinates of connector line
     const connectorLinePath = generateArc({
@@ -65,11 +54,7 @@ export default class CutSites extends React.PureComponent {
     });
 
     // find start and stop coordinates to hang site line
-    const hangLinePath = this.calculateLinePath(
-      rcut - start,
-      radius + lineHeight * 1.5,
-      radius + lineHeight / 1.2
-    );
+    const hangLinePath = this.calculateLinePath(rcut - start, radius + lineHeight * 1.5, radius + lineHeight / 1.2);
 
     const fill = "rgba(255, 165, 0, 0.2)";
 
@@ -90,11 +75,7 @@ export default class CutSites extends React.PureComponent {
     };
 
     return (
-      <g
-        id={`la-vz-circular-cutsite-${id}`}
-        key={id}
-        transform={getRotation(start)}
-      >
+      <g id={`la-vz-circular-cutsite-${id}`} key={id} transform={getRotation(start)}>
         {<path d={cutLinePath} {...lineStyle} />}
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
@@ -120,10 +101,6 @@ export default class CutSites extends React.PureComponent {
       return null;
     }
 
-    return (
-      <g className="la-vz-circular-cutsites">
-        {cutSites.map(this.displayCutSite)}
-      </g>
-    );
+    return <g className="la-vz-circular-cutsites">{cutSites.map(this.displayCutSite)}</g>;
   }
 }

@@ -12,8 +12,7 @@ import randomid from "../../utils/randomid";
 export default async (JBEI, colors = []) =>
   new Promise((resolve, reject) => {
     // util reject function that will be triggered if any fields fail
-    const rejectJBEI = errType =>
-      reject(new Error(`Failed on JBEI file; ${errType}`));
+    const rejectJBEI = errType => reject(new Error(`Failed on JBEI file; ${errType}`));
 
     // weird edge case with directed quotation characters
     const fileString = JBEI.replace(/“|”/g, '"');
@@ -43,9 +42,7 @@ export default async (JBEI, colors = []) =>
         if (sequence && sequence[0] && sequence[0]._) {
           parsedSeq = sequence[0]._;
         }
-        const { seq: parsedSeq2, compSeq: parsedCompSeq } = dnaComplement(
-          parsedSeq
-        ); // seq and compSeq
+        const { seq: parsedSeq2, compSeq: parsedCompSeq } = dnaComplement(parsedSeq); // seq and compSeq
         if (!parsedSeq2) return null;
 
         // attempt to figure out whether it's circular or linear. if circular
@@ -63,18 +60,8 @@ export default async (JBEI, colors = []) =>
           features[0].feature.forEach((feature, i) => {
             if (!feature) return;
 
-            const {
-              label = [{}],
-              type = [{}],
-              complement = [{}],
-              location = []
-            } = feature;
-            if (
-              location &&
-              location[0] &&
-              location[0].genbankStart &&
-              location[0].end
-            ) {
+            const { label = [{}], type = [{}], complement = [{}], location = [] } = feature;
+            if (location && location[0] && location[0].genbankStart && location[0].end) {
               annotations.push({
                 id: randomid(),
                 color: colorByIndex(i),

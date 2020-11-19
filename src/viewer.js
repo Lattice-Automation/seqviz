@@ -27,8 +27,7 @@ export const Viewer = (element = "root", options) => {
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly
   const domElement =
-    element.constructor.name.startsWith("HTML") &&
-    element.constructor.name.endsWith("Element")
+    element.constructor.name.startsWith("HTML") && element.constructor.name.endsWith("Element")
       ? element
       : document.getElementById(element);
   let viewer = React.createElement(SeqViz, options, null);

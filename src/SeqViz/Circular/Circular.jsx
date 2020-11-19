@@ -72,9 +72,7 @@ class Circular extends React.Component {
     );
 
     // sort all the labels so they're in ascending order
-    outerLabels.sort(
-      (a, b) => Math.min(a.start, a.end) - Math.min(b.start, b.end)
-    );
+    outerLabels.sort((a, b) => Math.min(a.start, a.end) - Math.min(b.start, b.end));
 
     return {
       seqLength: nextProps.seq.length,
@@ -266,14 +264,7 @@ class Circular extends React.Component {
       search
     } = this.props;
 
-    const {
-      seqLength,
-      lineHeight,
-      annotationsInRows,
-      primersInRows,
-      inlinedLabels,
-      outerLabels
-    } = this.state;
+    const { seqLength, lineHeight, annotationsInRows, primersInRows, inlinedLabels, outerLabels } = this.state;
 
     const { getRotation, generateArc, findCoor, rotateCoor } = this;
 
@@ -314,12 +305,7 @@ class Circular extends React.Component {
         {...size}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
-          <Selection
-            {...general}
-            onUnmount={onUnmount}
-            totalRows={totalRows}
-            seq={seq}
-          />
+          <Selection {...general} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
           <Annotations
             {...general}
             annotations={annotationsInRows}

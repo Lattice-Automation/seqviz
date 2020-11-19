@@ -54,8 +54,7 @@ export const chooseRandomColor = (colors = []) => {
 export const colorByIndex = i => COLORS[i % COLORS.length];
 
 /** get an "indexed" color from the colors array */
-export const borderColorByIndex = i =>
-  COLOR_BORDER_MAP[COLORS[i % COLORS.length]];
+export const borderColorByIndex = i => COLOR_BORDER_MAP[COLORS[i % COLORS.length]];
 
 /** cache for input color to those 50% darker */
 const darkerColorCache = {};
@@ -112,15 +111,7 @@ const pSBC = (p, c0, c1, l) => {
     } else {
       if (n === 8 || n === 6 || n < 4) return null;
       if (n < 6) {
-        d =
-          "#" +
-          d[1] +
-          d[1] +
-          d[2] +
-          d[2] +
-          d[3] +
-          d[3] +
-          (n > 4 ? d[4] + d[4] : "");
+        d = "#" + d[1] + d[1] + d[2] + d[2] + d[3] + d[3] + (n > 4 ? d[4] + d[4] : "");
       }
       d = i(d.slice(1), 16);
 
@@ -144,12 +135,7 @@ const pSBC = (p, c0, c1, l) => {
   h = a ? (c1.length > 9 ? true : c1 === "c" ? !h : false) : h;
   f = pSBCr(c0);
   P = p < 0;
-  t =
-    c1 && c1 !== "c"
-      ? pSBCr(c1)
-      : P
-      ? { r: 0, g: 0, b: 0, a: -1 }
-      : { r: 255, g: 255, b: 255, a: -1 };
+  t = c1 && c1 !== "c" ? pSBCr(c1) : P ? { r: 0, g: 0, b: 0, a: -1 } : { r: 255, g: 255, b: 255, a: -1 };
   p = P ? p * -1 : p;
   P = 1 - p;
   if (!f || !t) return null;
@@ -170,23 +156,11 @@ const pSBC = (p, c0, c1, l) => {
   a = f ? (a < 0 ? t : t < 0 ? a : a * P + t * p) : 0;
 
   if (h) {
-    return (
-      "rgb" +
-      (f ? "a(" : "(") +
-      r +
-      "," +
-      g +
-      "," +
-      b +
-      (f ? "," + m(a * 1000) / 1000 : "") +
-      ")"
-    );
+    return "rgb" + (f ? "a(" : "(") + r + "," + g + "," + b + (f ? "," + m(a * 1000) / 1000 : "") + ")";
   } else {
     return (
       "#" +
-      (4294967296 + r * 16777216 + g * 65536 + b * 256 + (f ? m(a * 255) : 0))
-        .toString(16)
-        .slice(1, f ? undefined : -2)
+      (4294967296 + r * 16777216 + g * 65536 + b * 256 + (f ? m(a * 255) : 0)).toString(16).slice(1, f ? undefined : -2)
     );
   }
 };

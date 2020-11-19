@@ -35,9 +35,7 @@ describe("SeqViz rendering (React)", () => {
     expect(firstViewer.find(".la-vz-circular-viewer").length).toBeTruthy();
     // renders bp for the sequence (only works for smaller seqs
     // where the infinite scroll doesn't truncate)
-    expect(wrapper.find("text").length).toBeGreaterThanOrEqual(
-      defaultProps.seq.length * 2
-    );
+    expect(wrapper.find("text").length).toBeGreaterThanOrEqual(defaultProps.seq.length * 2);
   });
 
   it("renders with linear viewer only", async () => {
@@ -68,13 +66,7 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with Genbank file string input", async () => {
-    const file = path.join(
-      __dirname,
-      "io",
-      "examples",
-      "genbank",
-      "pBbE0c-RFP_1.gb"
-    );
+    const file = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
     const fileContents = fs.readFileSync(file, "utf8");
     const parts = await filesToParts([fileContents], {
       fileName: "pBbE0c-RFP_1.gb"
@@ -89,13 +81,7 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with Genbank File/Blob input", async () => {
-    const fileName = path.join(
-      __dirname,
-      "io",
-      "examples",
-      "genbank",
-      "pBbE0c-RFP_1.gb"
-    );
+    const fileName = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
       fileName: fileName
@@ -116,13 +102,7 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with FASTA File/Blob input", async () => {
-    const fileName = path.join(
-      __dirname,
-      "io",
-      "examples",
-      "fasta",
-      "R0010_AB.gb"
-    );
+    const fileName = path.join(__dirname, "io", "examples", "fasta", "R0010_AB.gb");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
       fileName: fileName
@@ -142,14 +122,7 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with SBOL File/Blob input", async () => {
-    const fileName = path.join(
-      __dirname,
-      "io",
-      "examples",
-      "sbol",
-      "v2",
-      "A1.xml"
-    );
+    const fileName = path.join(__dirname, "io", "examples", "sbol", "v2", "A1.xml");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
       fileName: fileName
@@ -169,13 +142,7 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with SnapGene File/Blob input", async () => {
-    const fileName = path.join(
-      __dirname,
-      "io",
-      "examples",
-      "snapgene",
-      "pBbB8c-GFP.dna"
-    );
+    const fileName = path.join(__dirname, "io", "examples", "snapgene", "pBbB8c-GFP.dna");
     const fileContents = fs.readFileSync(fileName);
     const file = new File([fileContents], fileName);
     const parts = await filesToParts([file], { fileName });

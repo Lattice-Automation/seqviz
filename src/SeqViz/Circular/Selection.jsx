@@ -14,16 +14,7 @@ export default class CircularSelection extends React.PureComponent {
   static contextType = SelectionContext;
 
   render() {
-    const {
-      seq,
-      radius,
-      lineHeight,
-      seqLength,
-      getRotation,
-      findCoor,
-      generateArc,
-      totalRows
-    } = this.props;
+    const { seq, radius, lineHeight, seqLength, getRotation, findCoor, generateArc, totalRows } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
     // calculate the length of the current selection region
@@ -32,15 +23,9 @@ export default class CircularSelection extends React.PureComponent {
     if (start === end && ref === "ALL") {
       selLength = seqLength;
     } else if (start > end) {
-      selLength =
-        clockwise !== false
-          ? Math.abs(end - start + seqLength)
-          : -Math.abs(start - end);
+      selLength = clockwise !== false ? Math.abs(end - start + seqLength) : -Math.abs(start - end);
     } else if (start < end) {
-      selLength =
-        clockwise !== false
-          ? Math.abs(end - start)
-          : -Math.abs(start - end + seqLength);
+      selLength = clockwise !== false ? Math.abs(end - start) : -Math.abs(start - end + seqLength);
     }
 
     // for all cases when the entire circle is selected
@@ -106,17 +91,9 @@ export default class CircularSelection extends React.PureComponent {
 
     return (
       <g className="la-vz-circular-selection">
-        {selLength && (
-          <path
-            d={selectPath}
-            transform={getRotation(start)}
-            {...selectStyle}
-          />
-        )}
+        {selLength && <path d={selectPath} transform={getRotation(start)} {...selectStyle} />}
         <path d={edgePath} transform={getRotation(start)} {...edgeStyle} />
-        {selLength && (
-          <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />
-        )}
+        {selLength && <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />}
       </g>
     );
   }

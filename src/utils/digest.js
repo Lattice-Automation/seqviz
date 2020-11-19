@@ -54,12 +54,7 @@ export const cutSitesInRows = (seq, enzymeList) => {
  * @param  {Number}  seqToCutLength [length of the sequence to be cut]
  * @return {[CutSite]} [the list of resulting cut and hang indexes]
  */
-const findCutSites = (
-  enzyme,
-  seqToSearch,
-  seqToCutLength,
-  enzymeName = null
-) => {
+const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -92,9 +87,7 @@ const findCutSites = (
   while (index > -1 && index < seqToCutLength) {
     // add the cut site index, after correcting for actual cut site index
     cutSiteIndices.push({
-      cutEnzymes: enzymeName
-        ? { start: [enzymeName], end: [enzymeName] }
-        : null, // enzymes that contributed to this cut site
+      cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
       fcut: index + fcut,
       rcut: index + rcut,
       start: index,
@@ -126,9 +119,7 @@ const findCutSites = (
   while (index > -1 && index < seqToCutLength) {
     // same above, except correcting for the new reverse complement indexes
     cutSiteIndices.push({
-      cutEnzymes: enzymeName
-        ? { start: [enzymeName], end: [enzymeName] }
-        : null, // enzymes that contributed to this cut site
+      cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
       fcut: index + recogLength - fcutComp,
       rcut: index + recogLength - rcutComp,
       start: index,
@@ -142,9 +133,7 @@ const findCutSites = (
   }
 
   // reduce so there's only one enzyme per template cut index
-  const uniqueCuts = Object.values(
-    cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {})
-  );
+  const uniqueCuts = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
 
   // sort with increasing sequence cut index
   uniqueCuts.sort((a, b) => a.fcut - b.fcut);
@@ -195,11 +184,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
   }
 
   // find the actual sequence cut sites
-  const cutSiteIndices = findCutSites(
-    enzymes[enzymeName],
-    seqToSearch,
-    seqToCutLength
-  );
+  const cutSiteIndices = findCutSites(enzymes[enzymeName], seqToSearch, seqToCutLength);
 
   // no cut sites were found with the given sequence
   if (cutSiteIndices.length < 1) {
@@ -210,12 +195,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
   // 2) pads the overhang site with stars and 3) adds them to the
   // list of cuts pieces of dna
   const fragmentedSequences = [];
-  const cutSeqsGenerator = (
-    cutSequenceStart,
-    cutSequenceEnd,
-    cutComplementStart,
-    cutComplementEnd
-  ) => {
+  const cutSeqsGenerator = (cutSequenceStart, cutSequenceEnd, cutComplementStart, cutComplementEnd) => {
     // cut the dna
     let cutSeq = seq.substring(cutSequenceStart, cutSequenceEnd);
     let cutCompSeq = compSeq.substring(cutComplementStart, cutComplementEnd);

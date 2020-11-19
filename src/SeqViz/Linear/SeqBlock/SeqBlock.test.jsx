@@ -38,8 +38,7 @@ const defaultProps = {
  */
 describe("SeqBlock", () => {
   it("renders with a single block", () => {
-    const seq =
-      "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
+    const seq = "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
     const wrapper = shallow(
       <SeqBlock
         {...defaultProps}

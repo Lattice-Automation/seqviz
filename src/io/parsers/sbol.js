@@ -6,6 +6,4 @@ import sbolV2 from "./sbol.v2";
  * that match the Loom data model
  */
 export default async (sbol, fileName, colors = []) =>
-  sbol.includes("sbols.org/v1#")
-    ? sbolV1(sbol, colors)
-    : sbolV2(sbol, fileName, colors);
+  sbol.includes("sbols.org/v1#") ? sbolV1(sbol, colors) : sbolV2(sbol, fileName, colors);

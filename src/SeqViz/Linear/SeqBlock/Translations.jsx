@@ -184,12 +184,7 @@ class TranslationRow extends React.Component {
           const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
           return (
-            <g
-              key={aaId}
-              id={aaId}
-              transform={`translate(${x}, 0)`}
-              ref={inputRef(aaId, ref)}
-            >
+            <g key={aaId} id={aaId} transform={`translate(${x}, 0)`} ref={inputRef(aaId, ref)}>
               <path
                 id={aaId}
                 d={path}
@@ -198,12 +193,7 @@ class TranslationRow extends React.Component {
                 stroke={borderColorByIndex(a.charCodeAt(0))}
               />
               {textShow && (
-                <text
-                  id={aaId}
-                  x={charWidth * 1.5}
-                  y={`${h / 2 + 1.5}`}
-                  {...TranslationRow.textProps}
-                >
+                <text id={aaId} x={charWidth * 1.5} y={`${h / 2 + 1.5}`} {...TranslationRow.textProps}>
                   {a}
                 </text>
               )}

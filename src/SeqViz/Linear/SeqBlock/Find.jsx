@@ -53,16 +53,6 @@ export default props => {
       y = compYDiff - findProps.height / 2; // complement row result
     }
 
-    return (
-      <rect
-        key={id}
-        id={id}
-        x={x - 1}
-        y={y}
-        width={width}
-        ref={inputRef(id, selReference)}
-        {...findProps}
-      />
-    );
+    return <rect key={id} id={id} x={x - 1} y={y} width={width} ref={inputRef(id, selReference)} {...findProps} />;
   });
 };
