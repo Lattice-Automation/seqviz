@@ -9,7 +9,7 @@ describe("Import parts from external repositories", () => {
   const knownGenbanks = {
     NC_011521: {
       name: "NC_011521",
-      annotationCount: 5,
+      annotationCount: 22,
       seqLength: 6062
     },
     FJ172221: {
@@ -39,6 +39,7 @@ describe("Import parts from external repositories", () => {
       expect(result).toBeDefined();
       expect(result.seq).toHaveLength(seqLength);
       expect(result.annotations).toHaveLength(annotationCount);
+      expect(result.annotations.map(a => a.name)).not.toContain("Untitled");
       expect(result.name).toMatch(name);
     });
   });

@@ -2,10 +2,10 @@ import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
 import { calcGC, calcTm, reverse, annotationFactory, primerFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
-const tagNameList = ["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host", "locus_tag"];
+const tagNameSet = new Set(["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host", "locus_tag"]);
 
 // a list of tags that could represent colors
-const tagColorList = ["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"];
+const tagColorSet = new Set(["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"]);
 
 /**
  * takes in a string representation of a GenBank file and outputs our
@@ -147,7 +147,7 @@ export default async (fileInput, fileName, colors = []) =>
               primerFlag = false;
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
-                ...annotationFactory(`${type}-${start}`, row_i),
+                ...annotationFactory(row_i),
                 type,
                 start,
                 end,
@@ -165,26 +165,20 @@ export default async (fileInput, fileName, colors = []) =>
               const [tagName, tagValue] = tag.split(/=/);
 
               // the two values that can be extracted are name or color
-              const lastAnnIndex = annotations.length - 1;
-              if (tagNameList.includes(tagName)) {
-                // it's key value pair where the key is something we recognize as an annotation name
-                if (
-                  lastAnnIndex > -1 &&
-                  (annotations[annotations.length - 1].name ===
-                    annotations[annotations.length - 1].type + "-" + annotations[annotations.length - 1].start ||
-                    annotations[annotations.length - 1].name === "Untitled") &&
-                  !primerFlag
-                ) {
-                  // defensively check that there isn't already a defined annotation w/o a name
-                  annotations[annotations.length - 1].name = tagValue.trim();
-                } else if (primerFlag && primers[primers.length - 1].name === "") {
-                  primers[primers.length - 1].name = tagValue.trim();
+              const lastAnn = annotations.length - 1;
+              if (tagNameSet.has(tagName.toLowerCase())) {
+                // the key is something we recognize as an annotation name
+                if (primerFlag) {
+                  if (primers[primers.length - 1].name === "") {
+                    primers[primers.length - 1].name = tagValue.trim();
+                  }
+                } else if (lastAnn >= 0 && !annotations[lastAnn].name) {
+                  annotations[lastAnn].name = tagValue.trim();
                 }
-              } else if (tagColorList.includes(tagName)) {
-                // it's key value pair where the key is something we recognize as an annotation color
-                if (lastAnnIndex > -1) {
-                  // defensively check that there's already been a defined annotation
-                  annotations[annotations.length - 1].color = tagValue;
+              } else if (tagColorSet.has(tagName)) {
+                // the key is something we recognize as an annotation color
+                if (lastAnn > -1) {
+                  annotations[lastAnn].color = tagValue;
                 }
               } else if (tagName === "loom_primer_sequence") {
                 // Loom specific tag used to preserve mismatches
