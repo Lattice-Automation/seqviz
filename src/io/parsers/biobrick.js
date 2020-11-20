@@ -65,11 +65,11 @@ export default async (file, options) =>
           const { direction, startpos, endpos, type, title } = f;
 
           return {
-            ...annotationFactory(title[0] || `${direction[0]}-${startpos[0]}`, i),
+            ...annotationFactory(i),
             direction: direction[0] === "forward" ? 1 : -1,
             start: +startpos[0] || 0,
             end: +endpos[0] || 0,
-            name: title[0] || "Untitled",
+            name: `${direction[0]}-${startpos[0]}`,
             type: type[0] || "N/A"
           };
         })
@@ -77,9 +77,10 @@ export default async (file, options) =>
 
       // add another annotation for the backbone
       annotations.push({
-        ...annotationFactory(backbone.name, annotations.length),
+        ...annotationFactory(annotations.length),
         start: firstElement(seq_data.seq_data).length,
-        end: 0
+        end: 0,
+        name: backbone.name
       });
 
       const newPart = {

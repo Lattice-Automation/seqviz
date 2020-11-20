@@ -218,25 +218,15 @@ export const reverse = sequence =>
     .reverse()
     .join("");
 
-/**
- * an annotation generator
- */
-export const annotationFactory = (annName, i = -1) => {
-  let color = chooseRandomColor();
-  if (i > -1) {
-    color = colorByIndex(i);
-  }
-
-  return {
-    id: randomid(),
-    color: color,
-    name: annName || "Untitled",
-    type: "",
-    start: 0,
-    end: 0,
-    direction: "NONE"
-  };
-};
+export const annotationFactory = (i = -1) => ({
+  id: randomid(),
+  color: i >= 0 ? colorByIndex(i) : chooseRandomColor(),
+  name: "",
+  type: "",
+  start: 0,
+  end: 0,
+  direction: "NONE"
+});
 
 export const primerFactory = () => ({
   overhang: "",

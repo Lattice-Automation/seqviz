@@ -114,7 +114,7 @@ export default async (fileArrayBuffer, options) => {
         }
         const { directionality } = attrs;
         data.annotations.push({
-          ...annotationFactory(attrs.name),
+          ...annotationFactory(),
           name: attrs.name,
           type: attrs.type,
           direction: directionalityDict[directionality],

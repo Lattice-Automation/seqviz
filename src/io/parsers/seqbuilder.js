@@ -1,6 +1,6 @@
 // @flow
 
-import { dnaComplement, partFactory, extractDate, trimCarriageReturn } from "../../utils/parser";
+import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
@@ -141,7 +141,7 @@ export default async (fileInput, fileName, colors = []) =>
             // source would just be an annotation for the entire sequence so remove
             // create a new annotation around the properties in this line (type and range)
             annotations.push({
-              ...annotationFactory(`${type}-${start}`),
+              ...annotationFactory(),
               type,
               start,
               end,
@@ -161,9 +161,9 @@ export default async (fileInput, fileName, colors = []) =>
           const lastAnnIndex = annotations.length - 1;
           if (tagNameList.includes(tagName)) {
             // it's key value pair where the key is something we recognize as an annotation name
-            if (lastAnnIndex > -1 && annotations[annotations.length - 1].name === "Untitled") {
+            if (lastAnnIndex > -1 && !annotations[annotations.length - 1].name) {
               // defensively check that there isn't already a defined annotation w/o a name
-              annotations[annotations.length - 1].name = trimCarriageReturn(tagValue);
+              annotations[annotations.length - 1].name = tagValue.trim();
             }
           } else if (tagColorList.includes(tagName)) {
             // it's key value pair where the key is something we recognize as an annotation color

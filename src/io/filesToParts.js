@@ -183,7 +183,11 @@ const fileToParts = async (file, options = { fileName: "", colors: [], backbone:
 
   // add the source information to all parts
   if (parts) {
-    return parts.map(p => ({ ...p, source }));
+    return parts.map(p => ({
+      ...p,
+      source,
+      annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" }))
+    }));
   }
   throw Error("unparsable file");
 };

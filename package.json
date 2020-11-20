@@ -3,6 +3,19 @@
   "version": "3.0.23",
   "private": false,
   "description": "A DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM input",
+  "scripts": {
+    "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
+    "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
+    "format": "npx prettier src/**/* --config package.json --write",
+    "markdown": "node ./config/scripts/markdown.js ./README.md",
+    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
+    "major": "npm run test:ci && npm version major && npm run update",
+    "minor": "npm run test:ci && npm version minor && npm run update",
+    "patch": "npm run test:ci && npm version patch && npm run update",
+    "start": "PORT=8000 node ./config/scripts/start.js",
+    "test": "node ./config/scripts/test.js",
+    "test:ci": "CI=true npm run test && npm run build"
+  },
   "keywords": [
     "seqviz",
     "DNA",
@@ -31,19 +44,6 @@
   ],
   "main": "dist/index.js",
   "unpkg": "dist/seqviz.min.js",
-  "scripts": {
-    "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
-    "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "format": "npx prettier src/**/* --config package.json --write",
-    "markdown": "node ./config/scripts/markdown.js ./README.md",
-    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
-    "major": "npm run test:ci && npm version major && npm run update",
-    "minor": "npm run test:ci && npm version minor && npm run update",
-    "patch": "npm run test:ci && npm version patch && npm run update",
-    "start": "PORT=8000 node ./config/scripts/start.js",
-    "test": "node ./config/scripts/test.js",
-    "test:ci": "CI=true npm run test && npm run build"
-  },
   "babel": {
     "presets": [
       [
