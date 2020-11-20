@@ -40,10 +40,7 @@ const cdnBuild = {
         exclude: /node_modules/,
         loader: "babel-loader",
         options: {
-          presets: [
-            ["@babel/preset-env", { modules: false }],
-            "@babel/preset-react"
-          ],
+          presets: [["@babel/preset-env", { modules: false }], "@babel/preset-react"],
           plugins: [
             "@babel/plugin-proposal-class-properties",
             "@babel/plugin-proposal-object-rest-spread",
@@ -100,9 +97,7 @@ const npmBuild = Object.assign({}, cdnBuild, {
     umdNamedDefine: true,
     publicPath: "/dist/"
   },
-  externals: [
-    nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })
-  ]
+  externals: [nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })]
 });
 
 module.exports = [cdnBuild, npmBuild];

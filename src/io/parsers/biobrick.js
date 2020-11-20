@@ -62,7 +62,7 @@ export default async (file, options) =>
         .map((f, i) => {
           if (!f) return null;
 
-          const { direction, startpos, endpos, type, title } = f;
+          const { direction, startpos, endpos, type } = f;
 
           return {
             ...annotationFactory(i),
