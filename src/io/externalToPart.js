@@ -18,16 +18,18 @@ export default async (accession, options = { backbone: "", colors: [] }) => {
   const { colors = [], backbone = "" } = options;
   // right now, we support either NCBI or iGEM. We parse this automatically. the user
   // doesn't specify the target registry, so we have to infer it from the passed accession
-  let url = `https://cors-anywhere.herokuapp.com/https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
+  let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
   if (accession.startsWith("BB")) {
     // it's a BioBrick... target the iGEM repo
     igem = true;
-    url = `https://cors-anywhere.herokuapp.com/http://parts.igem.org/xml/part.${accession.trim()}`;
+    url = `http://parts.igem.org/xml/part.${accession.trim()}`;
   } else if (backbone.length) {
     console.error("backbone specified without a BioBrick");
   }
 
-  const response = await fetch(new Request(url, { headers: { "X-Requested-With": "XMLHttpRequest" } }))
+  const response = await fetch(
+    new Request(url, { headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" } })
+  )
     .then(response => response.text())
     .catch(console.error);
 

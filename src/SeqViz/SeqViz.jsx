@@ -6,6 +6,7 @@ import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
+import randomid from "../utils/randomid";
 import search from "../utils/search";
 import { annotationFactory } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
@@ -108,6 +109,10 @@ export default class SeqViz extends React.Component {
 
   componentDidMount = async () => {
     await this.setPart();
+
+    if (!this.props.accession && !this.props.file && !this.props.seq) {
+      console.warn("No file, accession, or seq provided to SeqViz... Nothing to render");
+    }
   };
 
   componentDidUpdate = async ({ accession, backbone, enzymes, file, search }, { part }) => {
@@ -124,7 +129,7 @@ export default class SeqViz extends React.Component {
    * Set the part from a file or an accession ID
    */
   setPart = async () => {
-    const { accession, file } = this.props;
+    const { accession, file, seq } = this.props;
 
     try {
       if (accession) {
@@ -148,6 +153,8 @@ export default class SeqViz extends React.Component {
         });
         this.search(parts[0]);
         this.cut(parts[0]);
+      } else if (seq) {
+        this.cut({ seq });
       }
     } catch (err) {
       console.error(err);
@@ -231,8 +238,9 @@ export default class SeqViz extends React.Component {
 
   render() {
     const { style, viewer } = this.props;
-    let { annotations, compSeq, name, seq } = this.props;
+    let { compSeq, name, seq } = this.props;
     const { centralIndex, cutSites, part, search, selection } = this.state;
+    let { annotations } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";

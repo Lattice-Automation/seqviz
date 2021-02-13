@@ -51,7 +51,7 @@ export default async (files, options = { fileName: "", colors: COLORS, backbone:
               const fileOptions = file.name ? { ...options, fileName: file.name } : options;
 
               // SnapGene files are buffers, rest are strings
-              if (fileOptions.fileName.endsWith(".dna")) {
+              if (fileOptions.fileName != null && fileOptions.fileName.endsWith(".dna")) {
                 reader.readAsArrayBuffer(file);
               } else {
                 reader.readAsText(file);
