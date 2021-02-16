@@ -19,6 +19,11 @@ const viewerInput = {
   onSearch: results => {
     console.log("Your Search Results: ", results);
   },
+  bpColors: {
+    10: "green",
+    200: "blue",
+    201: "red"
+  },
   search: { query: "gtacc" },
   enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),

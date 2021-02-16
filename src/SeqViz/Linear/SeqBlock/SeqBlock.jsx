@@ -94,7 +94,7 @@ export default class SeqBlock extends React.PureComponent {
   seqTextSpan = (bp, i) => {
     const { id, charWidth } = this.props;
 
-    const color = this.bpColorLookup(bp);
+    const color = this.bpColorLookup(bp, i);
 
     if (color) {
       return (
@@ -115,10 +115,11 @@ export default class SeqBlock extends React.PureComponent {
    * Lookup a bp in the bpColors prop and return the color
    * associated with the character, if one exists. Store the results
    */
-  bpColorLookup = bp => {
-    const { bpColors } = this.props;
+  bpColorLookup = (bp, i) => {
+    const { bpColors, firstBase } = this.props;
 
-    const color = bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || null;
+    const color =
+      bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || bpColors[i + firstBase] || null;
 
     return color;
   };
