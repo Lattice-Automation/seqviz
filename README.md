@@ -72,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -192,7 +194,7 @@ An array of `translation` objects for rendering ranges of amino acids beneath th
 
 #### `options.enzymes (=[])`
 
-An array of restriction enzyme names whose recognition sites should be shown. Example: `["PstI", "EcoRI"]`. This is case-insensitive. The list of supported enzymes is in [src/utils/digest/enzymes.js](src/utils/digest/enzymes.js).
+An array of restriction enzyme names whose recognition sites should be shown. Example: `["PstI", "EcoRI"]`. This is case-insensitive. The list of supported enzymes is in [src/utils/enzymes.js](src/utils/enzymes.js).
 
 #### `options.zoom (={ linear: 50, circular: 0 })`
 
@@ -200,10 +202,10 @@ How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`options.viewe
 
 #### `options.bpColors (={})`
 
-An object mapping bp to color. Example:
+An object mapping bp to color where bp is a nucleotide or 0-based index. Example:
 
 ```js
-{ "A": "#FF0000", "T": "#00FFFF" }
+{ "A": "#FF0000", "T": "blue", 12: "#00FFFF" }
 ```
 
 #### `options.colors (=[])`
