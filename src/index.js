@@ -6,9 +6,9 @@ import { Viewer } from "./viewer";
 
 const viewerInput = {
   // name: "L09136",
-  // seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+  seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
   viewer: "both",
-  accession: "NC_011521",
+  // accession: "NC_011521",
   // backbone: "pSB1C3",
   showAnnotations: true,
   showPrimers: true,
@@ -33,3 +33,9 @@ const viewerInput = {
 // let viewer = window.seqviz.Viewer("app-root", viewerInput);
 let viewer = Viewer("root", viewerInput);
 viewer.render();
+
+setTimeout(() => {
+  viewer.setState({
+    annotations: [{start: 1, end: 7, color: "red", name: "test"}]
+  })
+}, 1250)

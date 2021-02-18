@@ -57,8 +57,8 @@ export const Viewer = (element = "root", options) => {
    */
   const setState = state => {
     Object.keys(state).forEach(key => {
-      if (!Object.keys(options).includes(key)) {
-        console.error(`Invalid viewer setting: ${key}`);
+      if (!Object.keys(SeqViz.defaultProps).includes(key)) {
+        console.error(`Unrecognized viewer setting: ${key}`);
       }
     });
 

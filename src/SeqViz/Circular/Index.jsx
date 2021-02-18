@@ -121,7 +121,7 @@ export default class Index extends React.PureComponent {
     // generate the name text for the middle of the plasmid
     const spanCountAdjust = 20 * nameSpans.length; // adjust for each tspan off name
     const nameYAdjust = 14 + spanCountAdjust; // correct for both
-    const nameCoorRadius = (nameSpans[0].length / 2) * 12; // 12 px per character
+    const nameCoorRadius = nameSpans.length ? (nameSpans[0].length / 2) * 12 : 0; // 12 px per character
 
     // if the elements will begin to overlap with the
     // name, move the name downward to the bottom of the viewer
