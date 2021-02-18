@@ -6,7 +6,6 @@ import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
-import randomid from "../utils/randomid";
 import search from "../utils/search";
 import { annotationFactory } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
@@ -14,6 +13,7 @@ import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
 
 import "./style.css";
+import { createSingleRows } from "./elementsToRows";
 
 /**
  * A container for processing part input and rendering either
@@ -37,7 +37,8 @@ export default class SeqViz extends React.Component {
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     compSeq: PropTypes.string,
     copyEvent: PropTypes.func.isRequired,
-    enzymes: PropTypes.arrayOf(PropTypes.string).isRequired,
+    enzymes: PropTypes.arrayOf(PropTypes.string),
+    enzymesCustom: PropTypes.object,
     file: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
@@ -188,9 +189,9 @@ export default class SeqViz extends React.Component {
    * Find and save enzymes' cutsite locations
    */
   cut = (part = null) => {
-    const { enzymes, seq } = this.props;
+    const { enzymes, seq, enzymesCustom } = this.props;
 
-    const cutSites = enzymes.length ? cutSitesInRows(seq || (part && part.seq) || "", enzymes) : [];
+    const cutSites = enzymes.length ? cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom) : [];
 
     this.setState({ cutSites });
   };

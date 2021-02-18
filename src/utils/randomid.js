@@ -1,9 +1,9 @@
 /**
- * Create a random 7 digit string ID
+ * Create a random 10 digit string ID
  *
  * Lazily copied from StackOverflow: https://stackoverflow.com/a/57355127
  */
-export default (n = 7) => {
+export default (n = 10) => {
   const add = 1;
   let max = 12 - add;
   max = Math.pow(10, n + add);
