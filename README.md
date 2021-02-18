@@ -72,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -194,7 +196,7 @@ An array of `translation` objects for rendering ranges of amino acids beneath th
 
 An array of restriction enzyme names whose recognition sites should be shown. Example: `["PstI", "EcoRI"]`. This is case-insensitive. The list of supported enzymes is in [src/utils/enzymes.js](src/utils/enzymes.js).
 
-### `options.enzymesCustom (={})`
+#### `options.enzymesCustom (={})`
 
 Unsupported enzymes can also be passed through an object where the keys are the enzymes' names and the values are the enzymes:
 
