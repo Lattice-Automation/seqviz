@@ -116,13 +116,18 @@ export default class SeqViz extends React.Component {
     }
   };
 
-  componentDidUpdate = async ({ accession, backbone, enzymes, file, search }, { part }) => {
+  componentDidUpdate = async ({ accession, annotations, backbone, enzymes, file, search, seq }, { part }) => {
     if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
       await this.setPart(); // new accesion/remote ID
-    } else if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
+    }
+    if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
       this.search(part); // new search parameters
-    } else if (!isEqual(enzymes, this.props.enzymes)) {
+    }
+    if (!isEqual(enzymes, this.props.enzymes)) {
       this.cut(part); // new set of enzymes for digest
+    }
+    if (!isEqual(annotations, this.props.annotations)) {
+      this.setState({ annotations: this.parseAnnotations(this.props.annotations, seq) });
     }
   };
 
@@ -246,7 +251,7 @@ export default class SeqViz extends React.Component {
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
     compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
-    name = name || part.name;
+    name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
     if (!seq.length) {
