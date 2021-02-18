@@ -8,7 +8,7 @@ describe("Create random IDs", () => {
       const id = randomid();
 
       expect(typeof id).toEqual(typeof "");
-      expect(id.length).toEqual(7);
+      expect(id.length).toEqual(10);
       expect(seenIDs.has(id)).toBe(false);
 
       seenIDs.add(id);
