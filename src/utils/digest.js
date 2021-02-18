@@ -1,6 +1,6 @@
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
-import { dnaComplement } from "./parser";
+import { dnaComplement, reverseComplement } from "./parser";
 import randomid from "./randomid";
 import { translateWildNucleotides } from "./sequence";
 
@@ -18,18 +18,18 @@ import { translateWildNucleotides } from "./sequence";
  *         {Number}  index         [index of the enzyme cutsite]
  * }]}  [the cutSites in a format compatible with the SeqBlocks/CutSites]
  */
-export const cutSitesInRows = (seq, enzymeList) => {
+export const cutSitesInRows = (seq, enzymeList, enzymesProp = {}) => {
   const seqToCut = (seq + seq).toUpperCase();
-  const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]);
+  const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesProp));
 
   // find all the cut sites for the given row
-  const cutSites = filteredEnzymes.reduce((acc, e) => {
-    const cuts = findCutSites(enzymes[e], seqToCut, seq.length)
+  const cutSites = Array.from(new Set(filteredEnzymes)).reduce((acc, e) => {
+    const cuts = findCutSites(enzymesProp[e] || enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: randomid(),
         name: e,
-        start: c.start,
+        start: c.start % seq.length,
         end: c.end % seq.length,
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
         rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
@@ -40,7 +40,8 @@ export const cutSitesInRows = (seq, enzymeList) => {
     return acc.concat(cuts);
   }, []);
 
-  return cutSites;
+  const uniqueCuts = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  return uniqueCuts;
 };
 
 /**
@@ -61,31 +62,33 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) =>
     ({ fcut, rcut, rseq } = enzymes[enzyme]);
   }
 
-  const recogSeq = rseq.toUpperCase();
+  let recogSeq = rseq.toUpperCase();
+  let shiftRecogStart = 0;
+  let shiftRecogEnd = 0;
   let recogStart = 0;
   let recogEnd = recogSeq.length;
   while (recogSeq[recogStart] === "N") {
+    shiftRecogStart += 1;
     recogStart += 1;
   }
   while (recogSeq[recogEnd - 1] === "N") {
+    shiftRecogEnd += 1;
     recogEnd -= 1;
   }
 
-  const recogLength = rseq.length;
+  const recogLength = recogSeq.length;
   const nucAmbig = new RegExp(/[^ATGC]/, "gi");
-  if (nucAmbig.test(rseq)) rseq = translateWildNucleotides(rseq);
-  const regTest = new RegExp(rseq, "gi");
+  if (nucAmbig.test(rseq)) recogSeq = translateWildNucleotides(recogSeq).toUpperCase();
+  let regTest = new RegExp(recogSeq, "gi");
 
   // this is in the forward direction, ie, when not checking the complement possibility
   // start search for cut sites
   const cutSiteIndices = [];
-  let startIndex = 0;
   let result = regTest.exec(seqToSearch); // returns null if nothing found
-  let index = result ? result.index : -1;
-
   // while another match is found and we haven't exceeded input sequence length
-  while (index > -1 && index < seqToCutLength) {
+  while (result) {
     // add the cut site index, after correcting for actual cut site index
+    let index = result.index;
     cutSiteIndices.push({
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
       fcut: index + fcut,
@@ -93,43 +96,32 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) =>
       start: index,
       end: index + recogLength,
       recogStrand: 1,
-      recogStart: index + recogStart,
-      recogEnd: index + recogEnd
+      recogStart: index + recogStart - shiftRecogStart,
+      recogEnd: index + recogEnd + shiftRecogEnd
     });
-    startIndex = index + 1;
-    index = seqToSearch.indexOf(rseq, startIndex);
+    result = regTest.exec(seqToSearch);
   }
 
-  // this is in the reverse direction, ie, when checking the complement
-  const recogComp = rseq
-    .split("")
-    .reverse()
-    .join("");
-
-  let { compSeq: inverComp } = dnaComplement(recogComp);
-  if (nucAmbig.test(inverComp)) inverComp = translateWildNucleotides(inverComp);
-
-  const fcutComp = recogLength - fcut; // flip the cut and hang indices
-  const rcutComp = recogLength - rcut;
-
-  startIndex = 0; // restart the search, again over the template sequence
-  result = regTest.exec(seqToSearch); // returns null if nothing found
-  index = result ? result.index : -1;
-
-  while (index > -1 && index < seqToCutLength) {
+  let inverComp = reverseComplement(rseq);
+  if (new RegExp(/[^ATGC]/, "gi").test(inverComp.toUpperCase())) {
+    inverComp = translateWildNucleotides(inverComp).toUpperCase();
+  }
+  const reqTestRC = new RegExp(inverComp, "gi");
+  result = reqTestRC.exec(seqToSearch); // returns null if nothing found
+  while (result) {
     // same above, except correcting for the new reverse complement indexes
+    let index = result.index;
     cutSiteIndices.push({
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      fcut: index + recogLength - fcutComp,
-      rcut: index + recogLength - rcutComp,
+      fcut: index + recogLength - rcut,
+      rcut: index + recogLength - fcut,
       start: index,
       end: index + recogLength,
       recogStrand: -1,
-      recogStart: index + recogStart,
-      recogEnd: index + recogEnd
+      recogStart: index + recogStart - shiftRecogStart,
+      recogEnd: index + recogEnd + shiftRecogEnd
     });
-    startIndex = index + 1;
-    index = seqToSearch.indexOf(inverComp, startIndex);
+    result = reqTestRC.exec(seqToSearch);
   }
 
   // reduce so there's only one enzyme per template cut index
