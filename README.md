@@ -72,11 +72,9 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
-
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
-
 <!-- /cdn-example -->
 
 ### Instantiation
