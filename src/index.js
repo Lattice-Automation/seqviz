@@ -7,7 +7,7 @@ import { Viewer } from "./viewer";
 const viewerInput = {
   // name: "L09136",
   // seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
-  seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
+  // seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
   // enzymesCustom: {
   //   Cas9: {
   //     rseq: "NGG", // recognition sequence
@@ -15,6 +15,12 @@ const viewerInput = {
   //     rcut: 1, // cut index on REV strand, relative to start of rseq
   //   }
   // },
+
+  seq: "TTATGTATGGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTTATGTATGGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGT",
+  annotations: [
+    {start: 50, end: 70, name: "test2 with long text inside", direction: 1},
+    {start: 75, end: 95, name: "test2 with long text inside", direction: 1}
+  ],
   viewer: "both",
   // accession: "NC_011521",
   // backbone: "pSB1C3",

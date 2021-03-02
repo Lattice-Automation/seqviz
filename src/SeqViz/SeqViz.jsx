@@ -206,7 +206,6 @@ export default class SeqViz extends React.Component {
     let cutSites = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
-      console.log(cutSites);
     }
 
     this.setState({ cutSites });
