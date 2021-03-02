@@ -42,6 +42,7 @@ export default class SeqViz extends React.Component {
     name: PropTypes.string,
     onSearch: PropTypes.func.isRequired,
     onSelection: PropTypes.func.isRequired,
+    rotateOnScroll: PropTypes.bool,
     search: PropTypes.shape({
       query: PropTypes.string,
       mismatch: PropTypes.number
@@ -78,6 +79,7 @@ export default class SeqViz extends React.Component {
     name: "",
     onSearch: results => results,
     onSelection: selection => selection,
+    rotateOnScroll: true,
     search: { query: "", mismatch: 0 },
     seq: "",
     showComplement: true,

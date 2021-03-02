@@ -271,9 +271,9 @@ const withEventRouter = WrappedComp =>
      * current central index
      */
     handleScrollEvent = e => {
-      const { Linear, seq } = this.props;
+      const { Linear, rotateOnScroll, seq } = this.props;
 
-      if (!Linear) {
+      if (!Linear && rotateOnScroll) {
         // a "large scroll" (1000) should rotate through 20% of the plasmid
         let delta = seq.length * (e.deltaY / 5000);
         delta = Math.floor(delta);
