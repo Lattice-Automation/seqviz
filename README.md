@@ -202,10 +202,10 @@ Unsupported enzymes can also be passed through an object where the keys are the 
 
 ```js
 {
-  "Cas9": {
+  Cas9: {
     rseq: "NGG", // recognition sequence
     fcut: 0, // cut index on FWD strand, relative to start of rseq
-    rcut: 1, // cut index on REV strand, relative to start of rseq
+    rcut: 1 // cut index on REV strand, relative to start of rseq
   }
 }
 ```

@@ -13,7 +13,6 @@ import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
 
 import "./style.css";
-import { createSingleRows } from "./elementsToRows";
 
 /**
  * A container for processing part input and rendering either
@@ -116,7 +115,10 @@ export default class SeqViz extends React.Component {
     }
   };
 
-  componentDidUpdate = async ({ accession, annotations, backbone, enzymes, file, search, seq }, { part }) => {
+  componentDidUpdate = async (
+    { accession, annotations, backbone, enzymes, enzymesCustom, file, search, seq },
+    { part }
+  ) => {
     if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
       await this.setPart(); // new accesion/remote ID
     }
@@ -125,6 +127,9 @@ export default class SeqViz extends React.Component {
     }
     if (!isEqual(enzymes, this.props.enzymes)) {
       this.cut(part); // new set of enzymes for digest
+    }
+    if (!isEqual(enzymesCustom, this.props.enzymesCustom)) {
+      this.cut(part);
     }
     if (!isEqual(annotations, this.props.annotations)) {
       this.setState({ annotations: this.parseAnnotations(this.props.annotations, seq) });
@@ -196,7 +201,11 @@ export default class SeqViz extends React.Component {
   cut = (part = null) => {
     const { enzymes, seq, enzymesCustom } = this.props;
 
-    const cutSites = enzymes.length ? cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom) : [];
+    let cutSites = [];
+    if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
+      cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
+      console.log(cutSites);
+    }
 
     this.setState({ cutSites });
   };
