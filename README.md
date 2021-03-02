@@ -72,9 +72,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -331,6 +333,10 @@ An example of an `options.copyEvent` function for copying after `ctrl+c` or `met
 ```js
 event => event.key === "c" && (event.metaKey || event.ctrlKey);
 ```
+
+#### `options.rotateOnScroll (=true)`
+
+By default, the circular viewer rotates when scrolling with a mouse over the viewer. That can be disabled by setting `rotateOnScroll` to false.
 
 #### `options.backbone (='')`
 
