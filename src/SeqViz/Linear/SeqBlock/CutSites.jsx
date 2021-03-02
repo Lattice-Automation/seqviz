@@ -29,14 +29,11 @@ const CutSites = props => {
     cutSiteRows,
     findXAndWidth,
     lineHeight,
-    enzymes,
     firstBase,
     lastBase,
     inputRef,
     yDiff
   } = props;
-
-  if (enzymes.length < 1) return null;
 
   const recogContiguous = (start, end, first, last) => {
     if ((start < first && end < first) || (start > last && end > last)) return true;

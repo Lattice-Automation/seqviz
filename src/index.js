@@ -6,7 +6,15 @@ import { Viewer } from "./viewer";
 
 const viewerInput = {
   // name: "L09136",
-  seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+  // seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+  seq: "TTATGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
+  enzymesCustom: {
+    Cas9: {
+      rseq: "NGG", // recognition sequence
+      fcut: 0, // cut index on FWD strand, relative to start of rseq
+      rcut: 1, // cut index on REV strand, relative to start of rseq
+    }
+  },
   viewer: "both",
   // accession: "NC_011521",
   // backbone: "pSB1C3",
@@ -25,7 +33,7 @@ const viewerInput = {
     201: "red"
   },
   search: { query: "gtacc" },
-  enzymes: ["EcoRI"],
+  // enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
   style: { height: "calc(100vh - 20px)", width: "calc(100vw)" }
 };
@@ -34,8 +42,8 @@ const viewerInput = {
 let viewer = Viewer("root", viewerInput);
 viewer.render();
 
-setTimeout(() => {
-  viewer.setState({
-    annotations: [{start: 1, end: 7, color: "red", name: "test"}]
-  })
-}, 1250)
+// setTimeout(() => {
+//   viewer.setState({
+//     annotations: [{start: 1, end: 7, color: "red", name: "test"}]
+//   })
+// }, 1250)

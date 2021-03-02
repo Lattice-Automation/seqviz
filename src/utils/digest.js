@@ -18,13 +18,13 @@ import { translateWildNucleotides } from "./sequence";
  *         {Number}  index         [index of the enzyme cutsite]
  * }]}  [the cutSites in a format compatible with the SeqBlocks/CutSites]
  */
-export const cutSitesInRows = (seq, enzymeList, enzymesProp = {}) => {
+export const cutSitesInRows = (seq, enzymeList, enzymesCustom = {}) => {
   const seqToCut = (seq + seq).toUpperCase();
-  const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesProp));
+  const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
 
   // find all the cut sites for the given row
   const cutSites = Array.from(new Set(filteredEnzymes)).reduce((acc, e) => {
-    const cuts = findCutSites(enzymesProp[e] || enzymes[e], seqToCut, seq.length)
+    const cuts = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: randomid(),
