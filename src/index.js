@@ -4,7 +4,7 @@
  */
 import { Viewer } from "./viewer";
 
-const viewerInput = {
+let viewerInput = {
   // name: "L09136",
   // seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
   // seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
@@ -16,12 +16,9 @@ const viewerInput = {
   //   }
   // },
 
-  seq: "TTATGTATGGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTTATGTATGGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGT",
-  annotations: [
-    {start: 50, end: 70, name: "test2 with long text inside", direction: 1},
-    {start: 75, end: 95, name: "test2 with long text inside", direction: 1}
-  ],
+  seq: "ctcgcgcgtttcggtgatgacggtgaaaacctctgacacatgc",
   viewer: "both",
+  annotations: [{start: 1, end: 7, color: "red", name: "test"}],
   // accession: "NC_011521",
   // backbone: "pSB1C3",
   showAnnotations: true,
@@ -30,6 +27,7 @@ const viewerInput = {
   showIndex: true,
   zoom: { linear: 50 },
   colors: [],
+  onSelection: console.log,
   onSearch: results => {
     console.log("Your Search Results: ", results);
   },
@@ -45,12 +43,19 @@ const viewerInput = {
   // rotateOnScroll: false
 };
 
+// const viewerInput = {
+//   name: "L09136",
+// seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
+// style: { height: "100vh", width: "100vw" },
+// annotations: [{start: 5, end: 10, color: "red", name: "test"}]
+// }
+
 // let viewer = window.seqviz.Viewer("app-root", viewerInput);
 let viewer = Viewer("root", viewerInput);
 viewer.render();
 
 // setTimeout(() => {
 //   viewer.setState({
-//     annotations: [{start: 1, end: 7, color: "red", name: "test"}]
+//   annotations: [{start: 1, end: 7, color: "red", name: "test"}]
 //   })
-// }, 1250)
+//   }, 1250)
