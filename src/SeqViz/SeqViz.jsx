@@ -75,6 +75,7 @@ export default class SeqViz extends React.Component {
     compSeq: "",
     copyEvent: () => false,
     enzymes: [],
+    enzymesCustom: {},
     file: null,
     name: "",
     onSearch: results => results,
