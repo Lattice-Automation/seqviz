@@ -59,3 +59,15 @@ viewer.render();
 //   annotations: [{start: 1, end: 7, color: "red", name: "test"}]
 //   })
 //   }, 1250)
+
+setTimeout(() => {
+  viewer.setState({
+  enzymesCustom: {
+	  TestEnzyme: {
+	    rseq: "GGT", // recognition sequence
+	    fcut: 0, // cut index on FWD strand, relative to start of rseq
+	    rcut: 1 // cut index on REV strand, relative to start of rseq
+	  }
+	}
+  })
+  }, 1250)
