@@ -220,6 +220,7 @@ class AnnotationRow extends React.PureComponent {
         id={a.id}
         ref={inputRef(a.id, {
           ref: a.id,
+          name: a.name,
           start: start,
           end: end,
           type: "ANNOTATION",

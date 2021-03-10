@@ -362,7 +362,7 @@ const withSelectionHandler = WrappedComp =>
         return;
       }
 
-      const { clockwise, start, end, ref, type, element } = {
+      const { clockwise, start, end, ref, type, element, name } = {
         ...this.props.selection,
         ...newSelection
       };
@@ -373,6 +373,7 @@ const withSelectionHandler = WrappedComp =>
       const tm = calcTm(seq);
 
       const selection = {
+        name,
         ref,
         seq,
         gc,
