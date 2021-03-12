@@ -10,7 +10,6 @@
 
 &nbsp;
 
-[![David](https://img.shields.io/david/Lattice-Automation/seqviz)](https://david-dm.org/Lattice-Automation/seqviz)
 [![GitHub](https://img.shields.io/github/license/Lattice-Automation/seqviz)](https://github.com/Lattice-Automation/seqviz/blob/master/LICENSE)
 
 <!-- pkg-description(cmd:) -->A DNA sequence viewer supporting custom, GenBank, FASTA, NCBI accession, and iGEM input<!-- /pkg-description -->
@@ -72,9 +71,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
