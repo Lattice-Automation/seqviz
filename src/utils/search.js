@@ -96,8 +96,8 @@ const searchWithMismatch = (query, subject, mismatch, fwd) => {
     let missed = 0;
 
     for (let j = 0; j < query.length; j += 1) {
-      const targetChar = subject[i + j];
-      const queryChar = query[j];
+      const targetChar = subject[i + j].toLowerCase();
+      const queryChar = query[j].toLowerCase();
       if (nucleotides[queryChar]) {
         if (targetChar !== queryChar) {
           missed += 1;
