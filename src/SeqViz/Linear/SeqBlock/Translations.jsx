@@ -126,7 +126,7 @@ class TranslationRow extends React.Component {
     // build up a reference to this whole translation for
     // selection handler (used only for context clicking right now)
     const type = "TRANSLATION";
-    const ref = { start, end, type, element };
+    const ref = { name: "translation", start, end, type, element };
 
     // substring and split only the amino acids that are relevant to this
     // particular sequence block
@@ -141,7 +141,7 @@ class TranslationRow extends React.Component {
           // calculate the start and end point of each amino acid
           // modulo needed here for translations that cross zero index
           let AAStart = (start + i * 3) % fullSeq.length;
-          let AAEnd = (start + i * 3 + 3) % fullSeq.length;
+          let AAEnd = start + i * 3 + 3;
 
           if (AAStart > AAEnd && firstBase >= bpsPerBlock) {
             // amino acid has crossed zero index in the last SeqBlock

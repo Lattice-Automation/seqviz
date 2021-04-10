@@ -310,11 +310,13 @@ export const createLinearTranslations = (translations, dnaSeq) => {
     let tEnd = direction === 1 ? (start + AAseq.length * 3) % dnaSeq.length : end % dnaSeq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
-    if (tEnd === 0 && direction === -1) {
+    if (tEnd === 0) {
       tEnd += dnaSeq.length;
     }
 
     return {
+      id: randomid(),
+      name: "translation",
       ...t,
       start: tStart,
       end: tEnd,
