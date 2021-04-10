@@ -16,9 +16,9 @@ let viewerInput = {
   //   }
   // },
 
-  seq: "ctcgcgcgtttcggtgatgacggtgaaaacctctgacacatgc",
+  seq: "TACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAG",
   viewer: "both",
-  annotations: [{start: 1, end: 7, color: "red", name: "test"}],
+  annotations: [{start: 0, end: 8, color: "red", name: "test"}],
   // accession: "NC_011521",
   // backbone: "pSB1C3",
   showAnnotations: true,
@@ -40,6 +40,7 @@ let viewerInput = {
   enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
   style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
+  translations: [{"start":0,"end":9,"direction":1}]
   // rotateOnScroll: false
 };
 

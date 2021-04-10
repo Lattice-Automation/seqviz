@@ -171,23 +171,25 @@ Whether to show the index line and ticks below the sequence.
 
 #### `options.annotations (=[])`
 
-An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start and end indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows (optional). Names (optional) are rendered on top the annotation.
+An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start (inclusive) and end (exclusive) indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows (optional). Names (optional) are rendered on top the annotation.
 
 ```js
 [
-  { start: 0, end: 22, name: "Strong promoter", direction: 1 },
+  { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
   { start: 300, end: 325, name: "Weak promoter", direction: -1 }
 ];
 ```
 
+In the example above, the "Strong promoter" would span the first to twenty-second basepair.
+
 #### `options.translations (=[])`
 
-An array of `translation` objects for rendering ranges of amino acids beneath the DNA sequence. Like `annotation`'s, `translation` objects requires 0-based start and end indexes, relative the DNA sequence, and a direction is required (1 (FWD) or -1 (REV)).
+An array of `translation` objects for rendering ranges of amino acids beneath the DNA sequence. Like `annotation`'s, `translation` objects requires 0-based start (inclusive) and end (exclusive) indexes relative the DNA sequence. A direction is required (1 (FWD) or -1 (REV)).
 
 ```js
 [
-  { start: 0, end: 89, direction: 1 },
-  { start: 191, end: 521, direction: -1 }
+  { start: 0, end: 90, direction: 1 }, // [0, 90)
+  { start: 191, end: 522, direction: -1 }
 ];
 ```
 
