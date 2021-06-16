@@ -71,9 +71,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -87,7 +89,7 @@ export default () => (
   <SeqViz
     name="J23100"
     seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
-    annotations={[{ name: "promoter", start: 0, end: 34, direction: 1 }]}
+    annotations={[{ name: "promoter", start: 0, end: 34, direction: 1, color: "blue" }]}
   />
 );
 ```
@@ -174,7 +176,7 @@ An array of `annotation` objects for the viewer. Each `annotation` object requir
 ```js
 [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
-  { start: 300, end: 325, name: "Weak promoter", direction: -1 }
+  { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" }
 ];
 ```
 
