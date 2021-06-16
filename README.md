@@ -71,9 +71,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -169,11 +171,12 @@ Whether to show the index line and ticks below the sequence.
 
 #### `options.annotations (=[])`
 
-An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start (inclusive) and end (exclusive) indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows (optional). Names (optional) are rendered on top the annotation.
+An array of `annotation` objects for the viewer. Each `annotation` object requires 0-based start (inclusive) and end (exclusive) indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows. A direction of `0` or no direction produces annotations without arrows. Names (optional) are rendered on top the annotation.
 
 ```js
 [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
+  { start: 23, end: 273, name: "GFP" },
   { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" }
 ];
 ```
