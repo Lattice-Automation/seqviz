@@ -218,9 +218,9 @@ export const reverse = sequence =>
     .reverse()
     .join("");
 
-export const annotationFactory = (i = -1) => ({
+export const annotationFactory = (i = -1, colors = null) => ({
   id: randomid(),
-  color: i >= 0 ? colorByIndex(i) : chooseRandomColor(),
+  color: i >= 0 ? colorByIndex(i, colors) : chooseRandomColor(colors),
   name: "",
   type: "",
   start: 0,

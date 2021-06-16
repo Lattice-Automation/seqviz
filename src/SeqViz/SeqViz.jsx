@@ -218,7 +218,7 @@ export default class SeqViz extends React.Component {
    */
   parseAnnotations = (annotations, seq) =>
     (annotations || []).map((a, i) => ({
-      ...annotationFactory(i),
+      ...annotationFactory(i, this.props.colors),
       ...a,
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),

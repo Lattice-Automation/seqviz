@@ -18,7 +18,7 @@ let viewerInput = {
 
   seq: "TACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAGTACCAGCAG",
   viewer: "both",
-  annotations: [{start: 0, end: 8, color: "red", name: "test"}],
+  annotations: [{ start: 0, end: 8, name: "test" }],
   // accession: "NC_011521",
   // backbone: "pSB1C3",
   showAnnotations: true,
@@ -26,7 +26,7 @@ let viewerInput = {
   showComplement: true,
   showIndex: true,
   zoom: { linear: 50 },
-  colors: [],
+  colors: ["#8CDEBD"],
   onSelection: console.log,
   onSearch: results => {
     console.log("Your Search Results: ", results);
@@ -40,7 +40,7 @@ let viewerInput = {
   enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
   style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-  translations: [{"start":0,"end":9,"direction":1}]
+  translations: [{ start: 0, end: 9, direction: 1 }]
   // rotateOnScroll: false
 };
 
@@ -63,12 +63,12 @@ viewer.render();
 
 setTimeout(() => {
   viewer.setState({
-  enzymesCustom: {
-	  TestEnzyme: {
-	    rseq: "GGT", // recognition sequence
-	    fcut: 0, // cut index on FWD strand, relative to start of rseq
-	    rcut: 1 // cut index on REV strand, relative to start of rseq
-	  }
-	}
-  })
-  }, 1250)
+    enzymesCustom: {
+      TestEnzyme: {
+        rseq: "GGT", // recognition sequence
+        fcut: 0, // cut index on FWD strand, relative to start of rseq
+        rcut: 1 // cut index on REV strand, relative to start of rseq
+      }
+    }
+  });
+}, 1250);
