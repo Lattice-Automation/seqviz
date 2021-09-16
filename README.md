@@ -71,12 +71,9 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
-
 ```html
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.3/runtime.min.js"></script>
-<script type="text/javascript" src="https://unpkg.com/seqviz"></script>
+<script src="https://unpkg.com/seqviz"></script>
 ```
-
 <!-- /cdn-example -->
 
 ### Instantiation
