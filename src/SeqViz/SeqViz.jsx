@@ -135,7 +135,7 @@ export default class SeqViz extends React.Component {
       this.cut(part);
     }
     if (!isEqual(annotations, this.props.annotations)) {
-      this.setState({ annotations: this.parseAnnotations(this.props.annotations, seq) });
+      this.setState({ annotations: this.parseAnnotations(this.props.annotations, this.props.seq) });
     }
   };
 
