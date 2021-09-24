@@ -47,6 +47,8 @@ const withSelectionHandler = WrappedComp =>
 
     shiftSelection = false; // was the last selection action a shift click, used for shift-click catch up
 
+    lastClick = Date.now(); // unix time of the last click (awful attempt at detecting double clicks)
+
     /**
      * a map between the id of child elements and their associated SelectRanges
      * @type {Object.<string, SelectRange>}
@@ -111,7 +113,10 @@ const withSelectionHandler = WrappedComp =>
         return;
       }
 
-      const knownRange = this.dragEvent
+      // storing this to figure out if it was a double click
+      const msSinceLastClick = Date.now() - this.lastClick;
+
+      let knownRange = this.dragEvent
         ? this.idToRange.get(e.currentTarget.id) // only look for SeqBlocks
         : this.idToRange.get(e.target.id) || this.idToRange.get(e.currentTarget.id); // elements and SeqBlocks
       if (!knownRange) {
@@ -145,6 +150,33 @@ const withSelectionHandler = WrappedComp =>
           });
 
           this.dragEvent = false;
+          this.lastClick = Date.now();
+          break;
+        }
+        case "AMINOACID": {
+          // Annotation or find selection range
+          const clockwise = direction ? direction === 1 : true;
+          let selectionStart = clockwise ? start : end;
+          let selectionEnd = clockwise ? end : start;
+
+          // if they double clicked, select the whole translation
+          // https://en.wikipedia.org/wiki/Double-click#Speed_and_timing
+          if (msSinceLastClick < 500) {
+            knownRange = knownRange.parent;
+            selectionStart = clockwise ? knownRange.start : knownRange.end;
+            selectionEnd = clockwise ? knownRange.end : knownRange.start;
+          }
+
+          this.setSelection({
+            ...element,
+            ...knownRange,
+            start: selectionStart,
+            end: selectionEnd,
+            clockwise: clockwise
+          });
+
+          this.dragEvent = false;
+          this.lastClick = Date.now();
           break;
         }
         case "SEQ": {

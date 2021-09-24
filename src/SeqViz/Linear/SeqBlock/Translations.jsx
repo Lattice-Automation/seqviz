@@ -143,6 +143,10 @@ class TranslationRow extends React.Component {
           let AAStart = (start + i * 3) % fullSeq.length;
           let AAEnd = start + i * 3 + 3;
 
+          // build up a reference to this whole translation for
+          // selection handler (used only for context clicking right now)
+          const AAref = { name: "aminoacid", start: AAStart, end: AAEnd, type: "AMINOACID", element, parent: ref };
+
           if (AAStart > AAEnd && firstBase >= bpsPerBlock) {
             // amino acid has crossed zero index in the last SeqBlock
             AAEnd += fullSeq.length;
@@ -184,7 +188,7 @@ class TranslationRow extends React.Component {
           const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
           return (
-            <g key={aaId} id={aaId} transform={`translate(${x}, 0)`} ref={inputRef(aaId, ref)}>
+            <g key={aaId} id={aaId} transform={`translate(${x}, 0)`} ref={inputRef(aaId, AAref)}>
               <path
                 id={aaId}
                 d={path}
