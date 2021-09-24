@@ -40,7 +40,8 @@ let viewerInput = {
   enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
   style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-  translations: [{ start: 0, end: 9, direction: 1 }]
+  translations: [{ start: 0, end: 9, direction: 1 }],
+  zoom: { circular: 0, linear: 50 }
   // rotateOnScroll: false
 };
 
@@ -63,6 +64,7 @@ viewer.render();
 
 setTimeout(() => {
   viewer.setState({
+    // zoom: { circular: 50 },
     enzymesCustom: {
       TestEnzyme: {
         rseq: "GGT", // recognition sequence
@@ -71,4 +73,4 @@ setTimeout(() => {
       }
     }
   });
-}, 1250);
+}, 2000);
