@@ -37,7 +37,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   linearProps = () => {
     const { seq, size } = this.props;
 
-    let zoom = this.props.zoom.linear || 0;
+    let zoom = this.props.zoom.linear || 50;
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
 
