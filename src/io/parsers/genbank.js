@@ -105,9 +105,6 @@ export default async (fileInput, fileName, colors = []) =>
           .split(/\n/)
           .filter(r => r);
 
-        // Currently interpreting a primer
-        let primerFlag = false;
-
         FEATURES_ROWS.forEach((r, row_i) => {
           // in the example above, the following converts it to ['source', '1..5028']
           const currLine = r.split(/\s{2,}/g).filter(l => l);
@@ -124,27 +121,16 @@ export default async (fileInput, fileName, colors = []) =>
             if (startSearch) {
               // the - 1 is because genbank is 1-based while we're 0
               start = +startSearch[0] - (1 % seq.length);
+              // single bp annotations are a thing in Genbank:
+              // https://github.com/Lattice-Automation/seqviz/issues/117
+              end = (start + 1) % seq.length;
               const endSearch = rangeRegex.exec(rangeString);
               if (endSearch) {
                 end = +endSearch[0] % seq.length;
               }
             }
 
-            // +++++PRIMERS+++++//
-            if (type === "primer_bind") {
-              primerFlag = true;
-              // create a new primer around the properties in this line
-              const forward = direction === 1;
-              primers.push({
-                ...primerFactory(),
-                gc: forward ? calcGC(seq.slice(start, end)) : calcGC(compSeq.slice(start, end)),
-                tm: forward ? calcTm(seq.slice(start, end)) : calcTm(compSeq.slice(start, end)),
-                vector: seq,
-                seq: forward ? seq.slice(start, end).trim() : reverse(compSeq.slice(start, end)).trim()
-              });
-            } else if (type !== "source") {
-              // source would just be an annotation for the entire sequence so remove
-              primerFlag = false;
+            if (type !== "source") {
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
                 ...annotationFactory(row_i),
@@ -168,11 +154,7 @@ export default async (fileInput, fileName, colors = []) =>
               const lastAnn = annotations.length - 1;
               if (tagNameSet.has(tagName.toLowerCase())) {
                 // the key is something we recognize as an annotation name
-                if (primerFlag) {
-                  if (primers[primers.length - 1].name === "") {
-                    primers[primers.length - 1].name = tagValue.trim();
-                  }
-                } else if (lastAnn >= 0 && !annotations[lastAnn].name) {
+                if (lastAnn >= 0 && !annotations[lastAnn].name) {
                   annotations[lastAnn].name = tagValue.trim();
                 }
               } else if (tagColorSet.has(tagName)) {
