@@ -64,4 +64,14 @@ describe("Converts files to parts (IO)", () => {
       throw err;
     }
   });
+
+  // https://github.com/Lattice-Automation/seqviz/issues/117
+  it("handles single bp annotations", async () => {
+    const result = await filesToParts(fs.readFileSync(allFiles["genbank/testGenbankFile.2.gb"], "utf8"));
+
+    expect(result.length).toEqual(1);
+    const annotation = result[0].annotations[1];
+    expect(annotation.start).toEqual(499);
+    expect(annotation.end).toEqual(500);
+  });
 });
