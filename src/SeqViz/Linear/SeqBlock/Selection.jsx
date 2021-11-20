@@ -89,7 +89,6 @@ export class Edges extends React.PureComponent {
   }
 }
 
-// eslint-disable-next-line
 export class Block extends React.PureComponent {
   static contextType = SelectionContext;
 
@@ -111,7 +110,7 @@ export class Block extends React.PureComponent {
 
     let x;
     let width;
-    let secondBlock = null;
+    let secondBlock;
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {

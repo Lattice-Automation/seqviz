@@ -26,7 +26,7 @@ const cdnBuild = {
   },
   mode: "production",
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
   },
   node: {
     fs: "empty",
@@ -35,20 +35,10 @@ const cdnBuild = {
   },
   module: {
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        options: {
-          presets: [["@babel/preset-env", { modules: false }], "@babel/preset-react"],
-          plugins: [
-            "@babel/plugin-proposal-class-properties",
-            "@babel/plugin-proposal-object-rest-spread",
-            "babel-plugin-module-resolver",
-            "babel-plugin-transform-imports"
-          ]
-        }
-      },
+      // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' }, exclude: /node_modules/ },
+      { test: /\.(t|j)sx?$/, use: { loader: "ts-loader" }, exclude: /node_modules/ },
+      // addition - add source-map support
+      { enforce: "pre", test: /\.js$/, exclude: /node_modules/, loader: "source-map-loader" },
       {
         test: /\.(ico|jpg|jpeg|png|gif|webp|svg)(\?.*)?$/,
         exclude: /node_modules/,
