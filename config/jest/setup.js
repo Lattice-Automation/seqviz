@@ -1,5 +1,5 @@
 import Enzyme from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import sizeMe from "react-sizeme";
 // import fetch from "jest-fetch-mock";
 import "core-js/stable";
