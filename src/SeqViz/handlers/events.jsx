@@ -16,7 +16,6 @@ import CentralIndexContext from "./centralIndex";
  */
 const withEventRouter = WrappedComp =>
   class WithEventRouter extends React.PureComponent {
-    // eslint-disable-next-line
     static displayName = `EventRouter`;
 
     static contextType = CentralIndexContext;
