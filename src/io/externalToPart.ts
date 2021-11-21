@@ -1,7 +1,6 @@
 import * as fetch from "node-fetch";
 
-// @ts-ignore
-import fileToParts from "./filesToParts.ts";
+import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
 import { Part } from "../part";
 

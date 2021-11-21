@@ -1,18 +1,15 @@
 import * as React from "react";
 
-// @ts-ignore
-import externalToPart from "../io/externalToPart.ts";
-// @ts-ignore
-import filesToParts from "../io/filesToParts.ts";
+import externalToPart from "../io/externalToPart";
+import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search from "../utils/search";
-// @ts-ignore
-import { annotationFactory, getSeqType } from "../utils/sequence.ts";
+import { annotationFactory, getSeqType } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
-import SeqViewer from "./SeqViewer.jsx";
+import { SelectionContext, defaultSelection } from "./handlers/selection";
+import SeqViewer from "./SeqViewer";
 import { Annotation, Element, Part } from "../part";
 
 import "./style.css";
@@ -200,7 +197,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     this.setState({ search: results });
 
-    // @ts-ignore
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'never[]' is not assignable to pa... Remove this comment to see the full error message
     onSearch(results);
   };
 
@@ -212,6 +209,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     let cutSites: Element[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
+      // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown[]' is not assignable to type 'Elemen... Remove this comment to see the full error message
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }
 
@@ -224,10 +222,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   parseAnnotations = (annotations: Annotation[] | null = null, seq: string = "") =>
     (annotations || []).map((a, i) => ({
-      // @ts-ignore
+      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[] | undefined' is not ass... Remove this comment to see the full error message
       ...annotationFactory(i, this.props.colors),
       ...a,
-      // @ts-ignore
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
       end: a.end % (seq.length + 1)
@@ -269,9 +266,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
-    // @ts-ignore
+    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
     if (getSeqType(seq) === "dna") {
-      // @ts-ignore
       compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
     } else {
       compSeq = "";
@@ -281,7 +277,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
-    // @ts-ignore
+    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (!seq.length) {
       return <div className="la-vz-seqviz" />;
     }

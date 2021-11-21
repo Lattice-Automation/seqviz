@@ -25,9 +25,6 @@ const cdnBuild = {
     publicPath: "/dist/"
   },
   mode: "production",
-  resolve: {
-    extensions: ["", ".ts", ".tsx", ".js", ".jsx"]
-  },
   node: {
     fs: "empty",
     net: "empty",
@@ -57,20 +54,17 @@ const cdnBuild = {
     ]
   },
   resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       react: path.resolve(__dirname, "../node_modules/react"),
       "react-dom": path.resolve(__dirname, "../node_modules/react-dom")
     }
   },
-  plugins: [
-    new UglifyJsPlugin(),
-    new webpack.BannerPlugin(banner)
-    // new BundleAnalyzerPlugin({ defaultSizes: "stat" })
-  ],
+  plugins: [new UglifyJsPlugin(), new webpack.BannerPlugin(banner)],
   optimization: {
     nodeEnv: "production",
-    minimize: true
-    // concatenateModules: true
+    minimize: true,
+    concatenateModules: false
   }
 };
 

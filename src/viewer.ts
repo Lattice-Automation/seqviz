@@ -2,8 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as ReactDOMServer from "react-dom/server";
 
-// @ts-ignore
-import SeqViz from "./SeqViz/SeqViz.tsx";
+import SeqViz from "./SeqViz/SeqViz";
 
 /**
  * Export a React component directly for React-based development
@@ -28,14 +27,15 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
   let domElement: HTMLElement;
   if (typeof element === "string") {
     if (document.getElementById(element)) {
-      domElement = <HTMLElement>document.getElementById(element);
+      // @ts-expect-error ts-migrate(2322) FIXME: Type 'HTMLElement | null' is not assignable to typ... Remove this comment to see the full error message
+      domElement = document.getElementById(element);
     } else {
       throw new Error(`Failed to find an element with ID: ${element}`);
     }
   } else {
     domElement = element;
   }
-  // @ts-ignore
+  // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
   let viewer = React.createElement(SeqViz, options, null);
 
   /**
@@ -69,7 +69,7 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
     });
 
     options = { ...options, ...state };
-    // @ts-ignore
+    // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
     viewer = React.createElement(SeqViz, options, null);
 
     if (rendered) {

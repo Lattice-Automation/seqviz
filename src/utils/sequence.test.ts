@@ -1,5 +1,4 @@
-// @ts-ignore
-import { calcGC, getSeqType } from "./sequence.ts";
+import { calcGC, getSeqType } from "./sequence";
 
 describe("Sequence utilities", () => {
   it("calculates GC%", () => {
