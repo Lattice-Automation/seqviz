@@ -1,7 +1,8 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 
+// @ts-ignore
 import externalToPart from "../io/externalToPart.ts";
+// @ts-ignore
 import filesToParts from "../io/filesToParts.ts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
@@ -11,61 +12,66 @@ import { annotationFactory } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
+import { Annotation, Element, Part } from "../part";
 
 import "./style.css";
+
+export interface SeqVizProps {
+  accession?: string;
+  name?: string;
+  seq?: string;
+  compSeq?: string;
+  annotations?: Annotation[];
+  file?: string | File;
+
+  backbone: string;
+  bpColors: { [key: string]: string };
+  colors?: string[];
+  copyEvent: (event: KeyboardEvent) => void;
+  enzymes: string[];
+  enzymesCustom: {
+    [key: string]: {
+      rseq: string;
+      fcut: number;
+      rcut: number;
+    };
+  };
+  onSearch: (search: { start: number; end: number; direction: number; index: number }) => void;
+  onSelection: (selection: {
+    name: string;
+    type: string;
+    seq: string;
+    gc: string;
+    tm: number;
+    start: number;
+    end: number;
+    length: number;
+    direction: number;
+    clockwise: boolean;
+    color: string;
+  }) => void;
+  rotateOnScroll: boolean;
+  search: {
+    query: string;
+    mismatch: number;
+  };
+  showComplement: boolean;
+  showIndex: boolean;
+  showPrimers: boolean;
+  style: object;
+  translations: Element[];
+  viewer: "linear" | "circular" | "both" | "both_flip";
+  zoom: {
+    circular: number;
+    linear: number;
+  };
+}
 
 /**
  * A container for processing part input and rendering either
  * a linear or circular viewer or both
  */
-export default class SeqViz extends React.Component {
-  static propTypes = {
-    accession: PropTypes.string,
-    annotations: PropTypes.arrayOf(
-      PropTypes.shape({
-        start: PropTypes.number.isRequired,
-        end: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        direction: PropTypes.oneOf([1, 0, -1, "REVERSE", "NONE", "FORWARD"]),
-        color: PropTypes.string,
-        type: PropTypes.string
-      })
-    ),
-    backbone: PropTypes.string.isRequired,
-    bpColors: PropTypes.object.isRequired,
-    colors: PropTypes.arrayOf(PropTypes.string).isRequired,
-    compSeq: PropTypes.string,
-    copyEvent: PropTypes.func.isRequired,
-    enzymes: PropTypes.arrayOf(PropTypes.string),
-    enzymesCustom: PropTypes.object,
-    file: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    name: PropTypes.string,
-    onSearch: PropTypes.func.isRequired,
-    onSelection: PropTypes.func.isRequired,
-    rotateOnScroll: PropTypes.bool,
-    search: PropTypes.shape({
-      query: PropTypes.string,
-      mismatch: PropTypes.number
-    }).isRequired,
-    seq: PropTypes.string,
-    showComplement: PropTypes.bool.isRequired,
-    showIndex: PropTypes.bool.isRequired,
-    showPrimers: PropTypes.bool.isRequired,
-    style: PropTypes.object.isRequired,
-    translations: PropTypes.arrayOf(
-      PropTypes.shape({
-        start: PropTypes.number.isRequired,
-        end: PropTypes.number.isRequired,
-        direction: PropTypes.oneOf([1, -1, "FORWARD", "REVERSE"]).isRequired
-      })
-    ).isRequired,
-    viewer: PropTypes.oneOf(["linear", "circular", "both", "both_flip"]).isRequired,
-    zoom: PropTypes.shape({
-      circular: PropTypes.number,
-      linear: PropTypes.number
-    }).isRequired
-  };
-
+export default class SeqViz extends React.Component<SeqVizProps, any> {
   static defaultProps = {
     accession: "",
     annotations: [],
@@ -76,7 +82,6 @@ export default class SeqViz extends React.Component {
     copyEvent: () => false,
     enzymes: [],
     enzymesCustom: {},
-    file: null,
     name: "",
     onSearch: results => results,
     onSelection: selection => selection,
@@ -92,7 +97,7 @@ export default class SeqViz extends React.Component {
     zoom: { circular: 0, linear: 50 }
   };
 
-  constructor(props) {
+  constructor(props: SeqVizProps) {
     super(props);
 
     this.state = {
@@ -119,7 +124,7 @@ export default class SeqViz extends React.Component {
   };
 
   componentDidUpdate = async (
-    { accession, annotations, backbone, enzymes, enzymesCustom, file, search, seq },
+    { accession = "", annotations, backbone, enzymes, enzymesCustom, file, search }: SeqVizProps,
     { part }
   ) => {
     if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
@@ -157,7 +162,7 @@ export default class SeqViz extends React.Component {
         this.search(part);
         this.cut(part);
       } else if (file) {
-        const parts = await filesToParts([file], this.props);
+        const parts = await filesToParts(file, this.props);
 
         this.setState({
           part: {
@@ -178,7 +183,7 @@ export default class SeqViz extends React.Component {
   /**
    * Search for the query sequence in the part sequence, set in state
    */
-  search = (part = null) => {
+  search = (part: Part | null = null) => {
     const {
       onSearch,
       search: { query, mismatch },
@@ -189,22 +194,24 @@ export default class SeqViz extends React.Component {
       return;
     }
 
-    const results = search(query, mismatch, seq || part.seq);
+    const results = search(query, mismatch, seq || (part && part.seq) || "");
     if (isEqual(results, this.state.search)) {
       return;
     }
 
     this.setState({ search: results });
+
+    // @ts-ignore
     onSearch(results);
   };
 
   /**
    * Find and save enzymes' cutsite locations
    */
-  cut = (part = null) => {
+  cut = (part: { seq: string } | null = null) => {
     const { enzymes, seq, enzymesCustom } = this.props;
 
-    let cutSites = [];
+    let cutSites: Element[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }
@@ -216,10 +223,12 @@ export default class SeqViz extends React.Component {
    * Modify the annotations to add unique ids, fix directionality and
    * modulo the start and end of each to match SeqViz's API
    */
-  parseAnnotations = (annotations, seq) =>
+  parseAnnotations = (annotations: Annotation[] | null = null, seq: string = "") =>
     (annotations || []).map((a, i) => ({
+      // @ts-ignore
       ...annotationFactory(i, this.props.colors),
       ...a,
+      // @ts-ignore
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
       end: a.end % (seq.length + 1)
@@ -261,10 +270,12 @@ export default class SeqViz extends React.Component {
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
+    // @ts-ignore
     compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
+    // @ts-ignore
     if (!seq.length) {
       return <div className="la-vz-seqviz" />;
     }

@@ -2,7 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as ReactDOMServer from "react-dom/server";
 
-import SeqViz from "./SeqViz/SeqViz.jsx";
+// @ts-ignore
+import SeqViz from "./SeqViz/SeqViz.tsx";
 
 /**
  * Export a React component directly for React-based development
@@ -19,17 +20,22 @@ export { default as pUC } from "./parts/pUC";
  *  - `render` to an HTML element
  *  - `setState(options)` to update the viewer's internal state
  *  - `renderToString` to return an HTML representation of the Viewer
- *
- * @param {ViewerOptions} options - The {ViewerOptions} for the viewer
  */
-export const Viewer = (element = "root", options) => {
+export const Viewer = (element: string | HTMLElement = "root", options) => {
   // used to keep track of whether to re-render after a "set" call
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly
-  const domElement =
-    element.constructor.name.startsWith("HTML") && element.constructor.name.endsWith("Element")
-      ? element
-      : document.getElementById(element);
+  let domElement: HTMLElement;
+  if (typeof element === "string") {
+    if (document.getElementById(element)) {
+      domElement = <HTMLElement>document.getElementById(element);
+    } else {
+      throw new Error(`Failed to find an element with ID: ${element}`);
+    }
+  } else {
+    domElement = element;
+  }
+  // @ts-ignore
   let viewer = React.createElement(SeqViz, options, null);
 
   /**
@@ -63,6 +69,7 @@ export const Viewer = (element = "root", options) => {
     });
 
     options = { ...options, ...state };
+    // @ts-ignore
     viewer = React.createElement(SeqViz, options, null);
 
     if (rendered) {
