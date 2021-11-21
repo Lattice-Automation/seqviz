@@ -14,7 +14,7 @@ import { Part } from "../part";
 
 export interface FileOptions {
   fileName?: string;
-  colors: string[];
+  colors?: string[];
   backbone: string | { name: string; backbone: string };
 }
 

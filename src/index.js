@@ -44,8 +44,7 @@ let viewerInput = {
   translations: [
     { start: 0, end: 9, direction: 1 },
     { start: 50, end: 550, direction: 1 }
-  ],
-  zoom: { circular: 0, linear: 50 }
+  ]
   // rotateOnScroll: false
 };
 

@@ -11,7 +11,7 @@ import { translateWildNucleotides } from "./sequence";
  * with the sequence viewer
  *
  * @param  {String} seq            [the input seq to be cut]
- * @param  {[String]} enzymeList   [the list of enzymes to find indexes for]
+ * @param  {String[]} enzymeList   [the list of enzymes to find indexes for]
  * @param  {Number} bpsPerRow      [the length of each row]
  * @return {[{
  *         {String}  name          [the name of the enzyme at this site]

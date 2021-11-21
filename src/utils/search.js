@@ -2,21 +2,13 @@ import { dnaComplement } from "./parser";
 import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
 
 /**
- * @typedef {Object} SearchResult
- * @type {object}
- * @property {number} start the start index of the search result
- * @property {number} end the end index of the search result
- * @property {number} direction -1, 0, or 1 for the direction of the search result
- */
-
-/**
  * Search the seq in the forward and reverse complement strands.
  * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
  *
  * @param {string} query the query string to search with
  * @param {number} mismatch the number of allowable mismatches
  * @param {string} seq the sequence being searched
- * @returns {[SearchResult]} an array of search results
+ * @returns {SearchResult[]} an array of search results
  */
 export default (query, mismatch, seq) => {
   if (!query || !query.length || !seq || !seq.length) {

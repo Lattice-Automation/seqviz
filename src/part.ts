@@ -1,8 +1,11 @@
-export interface Annotation {
+export interface Element {
   start: number;
   end: number;
-  name: string;
   direction: number;
+}
+
+export interface Annotation extends Element {
+  name: string;
   color: string;
   type: string;
 }

@@ -43,6 +43,7 @@
     "README.md"
   ],
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "unpkg": "dist/seqviz.min.js",
   "browserslist": [
     ">0.2%",
@@ -189,7 +190,8 @@
     "terser-webpack-plugin": "2.2.1",
     "ts-loader": "^8.3.0",
     "ts-pnp": "^1.2.0",
-    "typescript": "^4.2.4",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.5.2",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "url-loader": "^2.3.0",
     "webpack": "^4.44.2",
