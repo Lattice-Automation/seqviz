@@ -1,8 +1,8 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 
-import externalToPart from "../io/externalToPart";
-import filesToParts from "../io/filesToParts";
+import externalToPart from "../io/externalToPart.ts";
+import filesToParts from "../io/filesToParts.ts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
