@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { calcGC, calcTm } from "../../utils/sequence";
+// @ts-ignore
+import { calcGC, calcTm } from "../../utils/sequence.ts";
 
 /** Initial/default selection */
 export const defaultSelection = {

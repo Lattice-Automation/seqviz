@@ -7,6 +7,8 @@ import * as React from "react";
 import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
 import SeqViewer from "./SeqViz/SeqViewer";
+import SeqBlock from "./SeqViz/Linear/SeqBlock/SeqBlock";
+import Linear from "./SeqViz/Linear/Linear";
 
 const defaultProps = {
   name: "test_part",
@@ -157,6 +159,24 @@ describe("SeqViz rendering (React)", () => {
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
+  });
+
+  it("renders with an Amino Acid sequence", async () => {
+    const seq =
+      "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK*";
+
+    const wrapper = mount(<SeqViz {...defaultProps} seq={seq} viewer="linear" />);
+    await wrapper.instance().componentDidMount();
+
+    expect(wrapper.find(SeqViewer)).toHaveLength(1);
+    expect(wrapper.find(Linear)).toHaveLength(1);
+    expect(wrapper.find(SeqBlock).length).toBeGreaterThan(3);
+    expect(
+      wrapper
+        .find(SeqBlock)
+        .first()
+        .text()
+    ).toContain(seq.substring(0, 30));
   });
 
   // it("re-renders the viewer with a changed File object", async () => {

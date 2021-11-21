@@ -1,5 +1,6 @@
 import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
-import { calcGC, calcTm, reverse, annotationFactory, primerFactory } from "../../utils/sequence";
+// @ts-ignore
+import { annotationFactory } from "../../utils/sequence.ts";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameSet = new Set(["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host", "locus_tag"]);

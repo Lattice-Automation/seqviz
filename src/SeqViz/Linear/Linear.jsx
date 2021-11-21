@@ -2,7 +2,8 @@ import * as React from "react";
 
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
-import { createLinearTranslations } from "../../utils/sequence";
+// @ts-ignore
+import { createLinearTranslations } from "../../utils/sequence.ts";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import InfiniteScroll from "./InfiniteScroll.jsx";

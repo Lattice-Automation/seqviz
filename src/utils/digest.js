@@ -2,7 +2,8 @@ import enzymes from "./enzymes";
 import isEqual from "./isEqual";
 import { dnaComplement, reverseComplement } from "./parser";
 import randomid from "./randomid";
-import { translateWildNucleotides } from "./sequence";
+// @ts-ignore
+import { translateWildNucleotides } from "./sequence.ts";
 
 /**
  * cutSitesInRows

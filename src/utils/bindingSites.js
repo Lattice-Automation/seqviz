@@ -1,5 +1,6 @@
 import { dnaComplement } from "./parser";
-import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
+// @ts-ignore
+import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence.ts";
 
 /**
  * Gives primers meta information needed by sequence viewers

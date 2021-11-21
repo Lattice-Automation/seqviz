@@ -1,5 +1,5 @@
 import * as React from "react";
-import sizeMe from "react-sizeme";
+import * as sizeMe from "react-sizeme";
 
 import isEqual from "../utils/isEqual";
 import CircularViewer from "./Circular/Circular.jsx";
@@ -160,4 +160,4 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 }
 
-export default sizeMe({ monitorHeight: true })(SeqViewer);
+export default sizeMe.withSize({ monitorHeight: true })(SeqViewer);

@@ -1,7 +1,6 @@
-// @flow
-
 import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+// @ts-ignore
+import { annotationFactory } from "../../utils/sequence.ts";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameList = ["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host"];
