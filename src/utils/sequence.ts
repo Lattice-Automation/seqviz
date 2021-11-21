@@ -2,6 +2,8 @@ import { colorByIndex, chooseRandomColor } from "./colors";
 import { dnaComplement } from "./parser";
 import randomid from "./randomid";
 
+export type SeqType = "dna" | "rna" | "aa" | "unknown";
+
 /**
  * Map of nucleotide bases
  */
@@ -98,17 +100,31 @@ const codon2AA = {
   CCC: "P"
 };
 
+const aminoAcids = Array.from(new Set(Object.values(codon2AA)).values()).join("");
+const aminoAcidRegex = new RegExp(`^[${aminoAcids}]+$`, "i");
+
+/**
+ * Infer type of a sequence
+ */
+export const getSeqType = (seq: string): SeqType => {
+  if (/^[atgc]+$/i.test(seq)) {
+    return "dna";
+  } else if (/^[augc]+$/i.test(seq)) {
+    return "rna";
+  } else if (aminoAcidRegex.test(seq)) {
+    return "aa";
+  }
+  return "unknown";
+};
+
 /**
  * Translate common nucleotide wildcards
  *
  * Search string sequence for nucleotide wildcards
  * and replace with proper regex
- *
- * @param {String} query
- * @return {String} [/regex/]
  */
-export const translateWildNucleotides = nucleotideSequence =>
-  nucleotideSequence
+export const translateWildNucleotides = (seq: string): string =>
+  seq
     .toLowerCase()
     .split("")
     .map(letter => (nucleotideWildCards[letter] ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})` : letter))
@@ -116,11 +132,8 @@ export const translateWildNucleotides = nucleotideSequence =>
 
 /**
  * Find the mismatches
- * @param {string} sequence
- * @param {string} match: match sequence
- * @return {array} mismatches: array of indexes of mismatches
  */
-export const getMismatchIndices = (sequence, match) =>
+export const getMismatchIndices = (sequence: string, match: string): number[] =>
   sequence
     .split("")
     .map((nucleotide, i) => {
@@ -133,13 +146,11 @@ export const getMismatchIndices = (sequence, match) =>
 
 /**
  * Combine sequential indices into ranges
- * @param {array} indices
- * @return {array} array of ranges stored as arrays with start [0] and end [1]
  */
-export const returnRanges = indices => {
+export const returnRanges = (indices: number[]): number[][] => {
   let currStart = indices[0];
   let currCount = indices[0] - 1;
-  const ranges = [];
+  const ranges: number[][] = [];
   indices.forEach((index, i) => {
     if (index > currCount + 1) {
       ranges.push([currStart, indices[i - 1]]);
@@ -156,29 +167,26 @@ export const returnRanges = indices => {
 
 /**
  * Calculate the GC% of a sequence
- * @param {string} sequence
  */
-export const calcGC = sequence => {
-  if (!sequence) {
+export const calcGC = (seq: string): number => {
+  if (!seq) {
     return 0;
   }
-  const gcCount = (sequence.match(/[CG]/gi) || []).length;
-  const gcPerc = (gcCount / sequence.length) * 100;
+  const gcCount = (seq.match(/[CG]/gi) || []).length;
+  const gcPerc = (gcCount / seq.length) * 100;
 
   return parseFloat(gcPerc.toFixed(2));
 };
 
 /**
  * Calculate the melting temp for a given sequence
- * @param {string} sequence
- * @param {string} match: sequence to match against
  */
-export const calcTm = (sequence, match = sequence) => {
-  const numberbps = sequence.length; // number of base pairs
-  const numbergcs = (sequence.match(/[CG]/gi) || []).length; // number of Gs and Cs
-  const numberats = (sequence.match(/[AT]/gi) || []).length; // number of As and Ts
-  const numbermismatches = getMismatchIndices(sequence, match).length; // # of mismatches
-  const gcpercent = calcGC(sequence);
+export const calcTm = (seq: string, match: string = seq): number => {
+  const numberbps = seq.length; // number of base pairs
+  const numbergcs = (seq.match(/[CG]/gi) || []).length; // number of Gs and Cs
+  const numberats = (seq.match(/[AT]/gi) || []).length; // number of As and Ts
+  const numbermismatches = getMismatchIndices(seq, match).length; // # of mismatches
+  const gcpercent = calcGC(seq);
   // https://www.biophp.org/minitools/melting_temperature/demo.php?formula=basic
   // formula valid for bps 0-14
   if (numberbps < 14) {
@@ -186,8 +194,8 @@ export const calcTm = (sequence, match = sequence) => {
   }
 
   // http://depts.washington.edu/bakerpg/primertemp/
-  // formula valid for bps  25-45, gc% > 40 and sequence terminates in one or more G/C
-  if (numberbps > 24 && numberbps < 46 && gcpercent > 40 && sequence.slice(0, 1) in { G: "G", C: "C" }) {
+  // formula valid for bps  25-45, gc% > 40 and seq terminates in one or more G/C
+  if (numberbps > 24 && numberbps < 46 && gcpercent > 40 && seq.slice(0, 1) in { G: "G", C: "C" }) {
     return (100 / numberbps) * (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75);
   }
 
@@ -198,11 +206,8 @@ export const calcTm = (sequence, match = sequence) => {
 
 /**
  * Calculate the length of a sequence
- * @param {number} start: start index of selection
- * @param {number} end: end index of selection
- * @param {number} seqLength: length of sequence
  */
-export const calcLength = (start, end, seqLength) => {
+export const calcLength = (start: number, end: number, seqLength: number): number => {
   if (end > start) return end - start;
   if (end === start) return seqLength;
   return seqLength - start + end;
@@ -210,10 +215,9 @@ export const calcLength = (start, end, seqLength) => {
 
 /**
  * Reverses a string sequence
- * @param {string} sequence
  */
-export const reverse = sequence =>
-  sequence
+export const reverse = (seq: string): string =>
+  seq
     .split("")
     .reverse()
     .join("");
@@ -250,7 +254,7 @@ export const primerFactory = () => ({
  *
  * given a sequence of DNA, translate it into an AMINO ACID sequence
  */
-export const translateDNA = seqInput => {
+export const translateDNA = (seqInput: string): string => {
   const seq = seqInput.toUpperCase();
   const seqLength = seq.length;
   let aaSeq = "";

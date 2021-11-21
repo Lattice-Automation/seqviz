@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import randomid from "../../../utils/randomid";
-import { reverse } from "../../../utils/sequence";
+// @ts-ignore
+import { reverse } from "../../../utils/sequence.ts";
 
 /**
  * a single row of primers. Multiple of these may be in one seqBlock

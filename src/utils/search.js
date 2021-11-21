@@ -1,5 +1,6 @@
 import { dnaComplement } from "./parser";
-import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
+// @ts-ignore
+import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence.ts";
 
 /**
  * Search the seq in the forward and reverse complement strands.

@@ -1,5 +1,6 @@
 import { partFactory, dnaComplement } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+// @ts-ignore
+import { annotationFactory } from "../../utils/sequence.ts";
 import xml2js, { processors } from "xml2js";
 
 /**

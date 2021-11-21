@@ -8,7 +8,8 @@ import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search from "../utils/search";
-import { annotationFactory } from "../utils/sequence";
+// @ts-ignore
+import { annotationFactory, getSeqType } from "../utils/sequence.ts";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection.jsx";
 import SeqViewer from "./SeqViewer.jsx";
@@ -117,10 +118,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
   componentDidMount = async () => {
     await this.setPart();
-
-    if (!this.props.accession && !this.props.file && !this.props.seq) {
-      console.warn("No file, accession, or seq provided to SeqViz... Nothing to render");
-    }
   };
 
   componentDidUpdate = async (
@@ -128,7 +125,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     { part }
   ) => {
     if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
-      await this.setPart(); // new accesion/remote ID
+      await this.setPart(); // new accession/remote ID
     }
     if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
       this.search(part); // new search parameters
@@ -174,6 +171,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         this.cut(parts[0]);
       } else if (seq) {
         this.cut({ seq });
+      } else {
+        console.warn("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
       }
     } catch (err) {
       console.error(err);
@@ -237,7 +236,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   /**
    * Update the central index of the linear or circular viewer
    */
-  setCentralIndex = (type, value) => {
+  setCentralIndex = (type: "linear" | "circular", value: number) => {
     if (type !== "linear" && type !== "circular") {
       throw new Error(`Unknown central index type: ${type}`);
     }
@@ -264,14 +263,21 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
   render() {
     const { style, viewer } = this.props;
-    let { compSeq, name, seq } = this.props;
+    let { compSeq, name, seq, showComplement } = this.props;
     const { centralIndex, cutSites, part, search, selection } = this.state;
     let { annotations } = this.state;
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
     // @ts-ignore
-    compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
+    if (getSeqType(seq) === "dna") {
+      // @ts-ignore
+      compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
+    } else {
+      compSeq = "";
+    }
+    showComplement = !!compSeq && showComplement;
+
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
@@ -289,6 +295,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         setSelection={this.setSelection}
         annotations={annotations}
         compSeq={compSeq}
+        showComplement={showComplement}
         name={name}
         seq={seq}
         cutSites={cutSites}
@@ -304,6 +311,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         setSelection={this.setSelection}
         annotations={annotations}
         compSeq={compSeq}
+        showComplement={showComplement}
         name={name}
         seq={seq}
         cutSites={cutSites}

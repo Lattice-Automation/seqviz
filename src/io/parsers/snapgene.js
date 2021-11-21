@@ -8,7 +8,8 @@ import bufferpack from "bufferpack";
 import xml2js from "xml2js";
 
 import { dnaComplement, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+// @ts-ignore
+import { annotationFactory } from "../../utils/sequence.ts";
 
 export default async (fileArrayBuffer, options) => {
   const { fileName = "" } = options;
