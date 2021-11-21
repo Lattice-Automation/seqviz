@@ -140,5 +140,6 @@ export const partFactory = () => ({
   annotations: [],
   primers: [],
   cutSites: [],
-  note: ""
+  note: "",
+  source: { name: "", file: "" }
 });

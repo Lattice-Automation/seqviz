@@ -2,17 +2,22 @@ import fetch, { Request } from "node-fetch";
 
 import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
+import { Part } from "../part";
 
 /**
  * retrieve a string representation of a part from a remote server and convert it into a part
  */
-export default async (accession, options = { backbone: "", colors: [] }) => {
+export default async (
+  accession: string,
+  options: { backbone: string; colors?: string[] } = { backbone: "", colors: [] }
+): Promise<Part> => {
   let igem = false;
 
   // get from cache
   const key = accession + options.backbone || "";
-  if (accession && key && localStorage.getItem(key)) {
-    return JSON.parse(localStorage.getItem(key));
+  const localStoragePart = localStorage.getItem(key);
+  if (accession && key && localStoragePart) {
+    return JSON.parse(localStoragePart);
   }
 
   const { colors = [], backbone = "" } = options;
