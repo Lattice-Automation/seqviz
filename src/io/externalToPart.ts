@@ -1,6 +1,6 @@
-import fetch, { Request } from "node-fetch";
+import * as fetch from "node-fetch";
 
-import fileToParts from "./filesToParts";
+import fileToParts from "./filesToParts.ts";
 import { fetchBBB } from "./igemBackbones";
 import { Part } from "../part";
 
@@ -33,7 +33,7 @@ export default async (
   }
 
   const response = await fetch(
-    new Request(url, { headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" } })
+    new fetch.Request(url, { headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" } })
   )
     .then(response => response.text())
     .catch(console.error);
