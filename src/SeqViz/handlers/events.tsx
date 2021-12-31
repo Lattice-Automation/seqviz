@@ -24,14 +24,6 @@ const withEventRouter = WrappedComp =>
 
     clickedTwice = null;
 
-    componentDidMount = () => {
-      window.addEventListener("keydown", this.handleKeyPress);
-    };
-
-    componentWillUnmount = () => {
-      window.removeEventListener("keydown", this.handleKeyPress);
-    };
-
     /** set the event router reference on this class */
     setEventRouter = eventRouter => {
       this.eventRouter = eventRouter;
@@ -325,6 +317,8 @@ const withEventRouter = WrappedComp =>
           ref={ref => {
             this.eventRouter = ref;
           }}
+          // Need tabIndex for onKeyDown to work
+          tabIndex={-1}
         >
           <WrappedComp {...rest} mouseEvent={this.handleMouseEvent} />
         </div>
