@@ -92,7 +92,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     style: {},
     translations: [],
     viewer: "both",
-    zoom: { circular: 0, linear: 50 }
+    zoom: { circular: 0, linear: 50 },
   };
 
   constructor(props: SeqVizProps) {
@@ -103,13 +103,13 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       centralIndex: {
         circular: 0,
         linear: 0,
-        setCentralIndex: this.setCentralIndex
+        setCentralIndex: this.setCentralIndex,
       },
       cutSites: [],
       selection: { ...defaultSelection },
       search: [],
       annotations: this.parseAnnotations(props.annotations, props.seq),
-      part: {}
+      part: {},
     };
   }
 
@@ -150,8 +150,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         this.setState({
           part: {
             ...part,
-            annotations: this.parseAnnotations(part.annotations, part.seq)
-          }
+            annotations: this.parseAnnotations(part.annotations, part.seq),
+          },
         });
         this.search(part);
         this.cut(part);
@@ -161,8 +161,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         this.setState({
           part: {
             ...parts[0],
-            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
-          }
+            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq),
+          },
         });
         this.search(parts[0]);
         this.cut(parts[0]);
@@ -183,7 +183,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     const {
       onSearch,
       search: { query, mismatch },
-      seq
+      seq,
     } = this.props;
 
     if (!(seq || (part && part.seq))) {
@@ -197,7 +197,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     this.setState({ search: results });
 
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'never[]' is not assignable to pa... Remove this comment to see the full error message
     onSearch(results);
   };
 
@@ -209,7 +208,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     let cutSites: Element[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown[]' is not assignable to type 'Elemen... Remove this comment to see the full error message
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }
 
@@ -222,12 +220,11 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   parseAnnotations = (annotations: Annotation[] | null = null, seq: string = "") =>
     (annotations || []).map((a, i) => ({
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[] | undefined' is not ass... Remove this comment to see the full error message
       ...annotationFactory(i, this.props.colors),
       ...a,
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
-      end: a.end % (seq.length + 1)
+      end: a.end % (seq.length + 1),
     }));
 
   /**
@@ -243,7 +240,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     }
 
     this.setState({
-      centralIndex: { ...this.state.centralIndex, [type]: value }
+      centralIndex: { ...this.state.centralIndex, [type]: value },
     });
   };
 
@@ -266,7 +263,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     // part is either from a file/accession, or each prop was set
     seq = seq || part.seq || "";
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
     if (getSeqType(seq) === "dna") {
       compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
     } else {
@@ -277,7 +273,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
     if (!seq.length) {
       return <div className="la-vz-seqviz" />;
     }
