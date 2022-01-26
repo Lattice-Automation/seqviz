@@ -77,11 +77,10 @@ class Linear extends React.Component {
       bpsPerBlock,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
       onUnmount,
 
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'search' does not exist on type 'Readonly... Remove this comment to see the full error message
-      search
+      search,
     } = this.props;
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'primers' does not exist on type 'Readonl... Remove this comment to see the full error message

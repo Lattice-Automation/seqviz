@@ -3,44 +3,53 @@ import * as React from "react";
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
 
-export default class TranslationRows extends React.PureComponent {
+interface Translation {
+  id: string;
+  start: number;
+  end: number;
+  AAseq: string;
+  direction: -1 | 1;
+}
+
+interface TranslationRowsProps {
+  translations: Translation[];
+  yDiff: number;
+  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
+  seqBlockRef: unknown;
+  onUnmount: (a: unknown) => void;
+  fullSeq: string;
+  firstBase: number;
+  lastBase: number;
+  bpsPerBlock: number;
+  charWidth: number;
+  findXAndWidth: (n: number) => { x: number; width: number };
+  elementHeight: number;
+}
+export default class TranslationRows extends React.PureComponent<TranslationRowsProps> {
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'translations' does not exist on type 'Re... Remove this comment to see the full error message
       translations,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'yDiff' does not exist on type 'Readonly<... Remove this comment to see the full error message
       yDiff,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlockRef' does not exist on type 'Rea... Remove this comment to see the full error message
       seqBlockRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
       onUnmount,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastBase' does not exist on type 'Readon... Remove this comment to see the full error message
       lastBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       bpsPerBlock,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
       findXAndWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
-      elementHeight
+      elementHeight,
     } = this.props;
 
     return (
       <g className="la-vz-linear-translations">
         {translations.map((t, i) => (
           <TranslationRow
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+            key={`${t.id}-${firstBase}`}
             translation={t}
             y={yDiff + elementHeight * i - 10}
             height={elementHeight}
-            key={`${t.id}-${firstBase}`}
             id={t.id}
             inputRef={inputRef}
             seqBlockRef={seqBlockRef}
@@ -70,7 +79,23 @@ export default class TranslationRows extends React.PureComponent {
  * cut up the sequence into the dna associated with the current row and
  * translate
  */
-class TranslationRow extends React.Component {
+
+interface TranslationRowProps {
+  translation: Translation;
+  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
+  seqBlockRef: unknown;
+  onUnmount: (a: unknown) => void;
+  fullSeq: string;
+  firstBase: number;
+  lastBase: number;
+  bpsPerBlock: number;
+  charWidth: number;
+  findXAndWidth: (n: number) => { x: number; width: number };
+  y: number;
+  height: number;
+  id?: string;
+}
+class TranslationRow extends React.Component<TranslationRowProps> {
   static textProps = {
     dominantBaseline: "middle",
     cursor: "pointer",
@@ -78,8 +103,8 @@ class TranslationRow extends React.Component {
     style: {
       color: "black",
       fontSize: 13,
-      fontWeight: 400
-    }
+      fontWeight: 400,
+    },
   };
 
   static aaProps = {
@@ -87,14 +112,13 @@ class TranslationRow extends React.Component {
     style: {
       cursor: "pointer",
       strokeWidth: 0.8,
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   };
 
-  AAs = [];
+  AAs: unknown[] = [];
 
   componentWillUnmount = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
     const { onUnmount } = this.props;
     this.AAs.forEach(a => {
       onUnmount(a);
@@ -107,8 +131,7 @@ class TranslationRow extends React.Component {
    * c = base pair count
    * m = multiplier (FWD or REV)
    */
-  genPath = (count, multiplier) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'Readonly... Remove this comment to see the full error message
+  genPath = (count: number, multiplier: number) => {
     const { height: h, charWidth } = this.props; // width adjust
     const nW = count * charWidth;
     const wA = multiplier * 3;
@@ -123,28 +146,17 @@ class TranslationRow extends React.Component {
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlockRef' does not exist on type 'Rea... Remove this comment to see the full error message
       seqBlockRef: element,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastBase' does not exist on type 'Readon... Remove this comment to see the full error message
       lastBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'translation' does not exist on type 'Rea... Remove this comment to see the full error message
       translation,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
       findXAndWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'Readonly... Remove this comment to see the full error message
       height: h,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'y' does not exist on type 'Readonly<{}> ... Remove this comment to see the full error message
       y,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
-      bpsPerBlock
+      bpsPerBlock,
     } = this.props;
 
     const { id, start, end, AAseq, direction } = translation;
@@ -162,7 +174,6 @@ class TranslationRow extends React.Component {
         {AAs.map((a, i) => {
           // generate and store an id reference (that's used for selection)
           const aaId = randomid();
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           this.AAs.push(aaId);
 
           // calculate the start and end point of each amino acid

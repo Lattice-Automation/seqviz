@@ -51,7 +51,7 @@ export const chooseRandomColor = (colors?: string[]) => {
 };
 
 /** get an "indexed" color from the colors array */
-export const colorByIndex = (i, colors: string[]) => (colors || COLORS)[i % (colors || COLORS).length];
+export const colorByIndex = (i, colors?: string[]) => (colors || COLORS)[i % (colors || COLORS).length];
 
 /** get an "indexed" color from the colors array */
 export const borderColorByIndex = i => COLOR_BORDER_MAP[COLORS[i % COLORS.length]];
