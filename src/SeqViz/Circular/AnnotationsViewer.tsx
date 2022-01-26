@@ -2,10 +2,38 @@ import * as React from "react";
 
 import CentralIndexContext from "../handlers/centralIndex";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
+import { Coor, SizeType } from "./Circular";
+import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { Annotation, Label } from "../../part";
 
+interface AnnotationsViewerProps {
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: inputRefFuncType;
+  annotations: Annotation[];
+  size: SizeType;
+  rowsToSkip: number;
+  inlinedAnnotations: Label[];
+}
+interface AnnotationsViewerState {}
 /**
  * Used to build up all the path elements. Does not include a display
- * of the annotation name or a line connecting name to annotation
+ * of the annotation name or a line connecting name to annotatino
  *
  * one central consideration here is that annotations might overlap with one another.
  * to avoid having those overalp visually, annotations are first moved into rows,
@@ -14,9 +42,9 @@ import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
  *
  * @type {Function}
  */
-export default class Annotations extends React.PureComponent {
+export default class AnnotationsViewer extends React.PureComponent<AnnotationsViewerProps, AnnotationsViewerState> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
-  hoverAnnotation = (className, opacity) => {
+  hoverAnnotation = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
@@ -25,7 +53,6 @@ export default class Annotations extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
     const { radius, rowsToSkip, lineHeight, annotations } = this.props;
 
     // at least 3 rows inward from default radius (ie index row)
@@ -41,16 +68,16 @@ export default class Annotations extends React.PureComponent {
       shapeRendering: "geometricPrecision",
       cursor: "pointer",
       fillOpacity: 0.7,
-      strokeLinejoin: "round"
+      strokeLinejoin: "round",
     };
     // this is strictly here to create an invisible path that the
     // annotation name can follow
     const transparentPath = {
       stroke: "transparent",
-      fill: "transparent"
+      fill: "transparent",
     };
     const labelStyle = {
-      cursor: "pointer"
+      cursor: "pointer",
     };
 
     return (
@@ -110,7 +137,7 @@ const SingleAnnotation = props => {
     hoverAnnotation,
     annStyle,
     inlinedAnnotations,
-    labelStyle
+    labelStyle,
   } = props;
 
   // if it crosses the zero index, correct for actual length
@@ -137,7 +164,7 @@ const SingleAnnotation = props => {
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
     arrowFWD: a.direction === 1,
-    arrowREV: a.direction === -1
+    arrowREV: a.direction === -1,
   });
   const namePath = generateArc({
     innerRadius: bottomHalf ? currBRadius : currTRadius,
@@ -146,7 +173,7 @@ const SingleAnnotation = props => {
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
     arrowFWD: false,
-    arrowREV: false
+    arrowREV: false,
   });
 
   const circAnnID = `la-vz-${a.id}-circular`;
@@ -163,7 +190,7 @@ const SingleAnnotation = props => {
           start: a.start,
           end: a.end,
           type: "ANNOTATION",
-          direction: a.direction
+          direction: a.direction,
         })}
         fill={a.color}
         stroke={COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color)}

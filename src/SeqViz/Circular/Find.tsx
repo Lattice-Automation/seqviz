@@ -1,13 +1,23 @@
 import * as React from "react";
+import { SearchResult } from "../../utils/search";
+import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
 
-export default class CircularFind extends React.PureComponent {
+interface CircularFindProps {
+  radius: number;
+  lineHeight: number;
+  seqLength: number;
+  getRotation: unknown;
+  generateArc: unknown;
+  inputRef: inputRefFuncType;
+  search: SearchResult;
+}
+interface CircularFindState {}
+
+export default class CircularFind extends React.PureComponent<CircularFindProps, CircularFindState> {
   /**
    * Create an SVG `path` element that highlights the search result
-   *
-   * @param {SearchResult} result a single search result with start, end, direction
    */
-  createHighlight = result => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
+  createHighlight = (result: SearchResult) => {
     const { radius, lineHeight, seqLength, getRotation, generateArc, inputRef } = this.props;
     let { start, end } = result;
     // crosses the zero index
@@ -21,7 +31,7 @@ export default class CircularFind extends React.PureComponent {
       outerRadius: radius + lineHeight / 2,
       length: resultLength,
       largeArc: resultLength > seqLength / 2,
-      sweepFWD: true
+      sweepFWD: true,
     });
 
     const resultStyle = {
@@ -29,7 +39,7 @@ export default class CircularFind extends React.PureComponent {
       strokeWidth: 1,
       fill: "rgba(255, 251, 7, 0.5)",
       shapeRendering: "auto",
-      cursor: "pointer"
+      cursor: "pointer",
     };
 
     const id = `${start}${end}${result.direction}${result.start}`;
@@ -44,7 +54,7 @@ export default class CircularFind extends React.PureComponent {
           ref: id,
           start: result.start,
           end: result.end,
-          type: "FIND"
+          type: "FIND",
         })}
         {...resultStyle}
       />
@@ -52,7 +62,6 @@ export default class CircularFind extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqLength' does not exist on type 'Reado... Remove this comment to see the full error message
     const { seqLength, search } = this.props;
     const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
 

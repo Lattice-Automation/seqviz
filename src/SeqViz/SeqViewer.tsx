@@ -6,12 +6,22 @@ import CircularViewer from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import CentralIndexContext from "./handlers/centralIndex";
 
+interface SeqViewerProps {
+  size: { width: number; height: number };
+  seq: string;
+  zoom: { linear: number; circular: number };
+  Circular: unknown;
+  cutSites: unknown;
+}
+
+interface SeqViewerState {}
+
 /**
  * a parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
  */
-class SeqViewer extends React.Component {
-  constructor(props) {
+class SeqViewer extends React.Component<SeqViewerProps, SeqViewerState> {
+  constructor(props: SeqViewerProps) {
     super(props);
     const { size } = props;
 
@@ -28,17 +38,16 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps, nextState) => !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
+  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: SeqViewerState) =>
+    !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     const { seq, size } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     let zoom = this.props.zoom.linear || 50;
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
@@ -91,13 +100,10 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
    */
   circularProps = () => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       seq: { length: seqLength },
     } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     let zoom = this.props.zoom.circular || 0;
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
@@ -134,7 +140,6 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
     const { Circular: circular, seq, cutSites } = this.props;
 
     return (
@@ -146,7 +151,6 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
-                // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
                 centralIndex={circular}
                 setCentralIndex={setCentralIndex}
                 cutSites={cutSites}

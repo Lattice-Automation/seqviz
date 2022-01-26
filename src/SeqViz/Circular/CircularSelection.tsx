@@ -1,6 +1,34 @@
+import { string } from "prop-types";
 import * as React from "react";
 
 import { SelectionContext } from "../handlers/selection";
+import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { Coor } from "./Circular";
+
+interface CircularSelectionProps {
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: inputRefFuncType;
+  onUnmount: unknown;
+  totalRows: number;
+  seq: string;
+}
+interface CircularSelectionState {}
 
 /**
  * renders the selection range of the plasmid viewer
@@ -10,11 +38,10 @@ import { SelectionContext } from "../handlers/selection";
  * if nothing is selected, it should just be the single cursor
  * without a middle highlighted region
  */
-export default class CircularSelection extends React.PureComponent {
+export default class CircularSelection extends React.PureComponent<CircularSelectionProps, CircularSelectionState> {
   static contextType = SelectionContext;
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     const { seq, radius, lineHeight, seqLength, getRotation, findCoor, generateArc, totalRows } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
@@ -55,7 +82,7 @@ export default class CircularSelection extends React.PureComponent {
 			L ${lineTop.x} ${lineTop.y}`;
 
     // !== false is needed because it can be undefined
-    const sFlagF = clockwise !== false || ref === "ALL" ? 1 : 0; // sweep flag of first arc
+    const sFlagF = clockwise !== false || ref === "ALL" ? true : false; // sweep flag of first arc
 
     let lArc = false;
     if (clockwise !== false && selLength > seqLength / 2) {
@@ -69,7 +96,7 @@ export default class CircularSelection extends React.PureComponent {
       outerRadius: topR,
       length: selLength,
       largeArc: lArc,
-      sweepFWD: sFlagF
+      sweepFWD: sFlagF,
     });
 
     // this should be very thin when the selection range starts and ends at same point
@@ -82,12 +109,12 @@ export default class CircularSelection extends React.PureComponent {
       fill: "transparent",
       stroke: "black",
       strokeWidth: edgeStrokeWidth,
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
     const selectStyle = {
       stroke: "none",
       fill: "#DEF6FF",
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
 
     return (

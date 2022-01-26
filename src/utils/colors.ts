@@ -65,7 +65,6 @@ export const darkerColor = c => {
     return darkerColorCache[c];
   }
 
-  // @ts-expect-error ts-migrate(2554) FIXME: Expected 4 arguments, but got 2.
   const darkerColor = pSBC(-0.5, c);
   darkerColorCache[c] = darkerColor;
   return darkerColor;
@@ -105,13 +104,9 @@ const pSBC = (p, c0, c1, l) => {
 
       if (n < 3 || n > 4) return null;
 
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'r' does not exist on type '{}'.
       x.r = i(r[3] === "a" ? r.slice(5) : r.slice(4));
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'g' does not exist on type '{}'.
       x.g = i(g);
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'b' does not exist on type '{}'.
       x.b = i(b);
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
       x.a = a ? parseFloat(a) : -1;
     } else {
       if (n === 8 || n === 6 || n < 4) return null;
@@ -121,22 +116,14 @@ const pSBC = (p, c0, c1, l) => {
       d = i(d.slice(1), 16);
 
       if (n === 9 || n === 5) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'r' does not exist on type '{}'.
         x.r = (d >> 24) & 255;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'g' does not exist on type '{}'.
         x.g = (d >> 16) & 255;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'b' does not exist on type '{}'.
         x.b = (d >> 8) & 255;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
         x.a = m((d & 255) / 0.255) / 1000;
       } else {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'r' does not exist on type '{}'.
         x.r = d >> 16;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'g' does not exist on type '{}'.
         x.g = (d >> 8) & 255;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'b' does not exist on type '{}'.
         x.b = d & 255;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'a' does not exist on type '{}'.
         x.a = -1;
       }
     }
@@ -165,18 +152,14 @@ const pSBC = (p, c0, c1, l) => {
 
   a = f.a;
   t = t.a;
-  // @ts-expect-error ts-migrate(2365) FIXME: Operator '>=' cannot be applied to types 'boolean'... Remove this comment to see the full error message
   f = a >= 0 || t >= 0;
-  // @ts-expect-error ts-migrate(2365) FIXME: Operator '<' cannot be applied to types 'boolean' ... Remove this comment to see the full error message
   a = f ? (a < 0 ? t : t < 0 ? a : a * P + t * p) : 0;
 
   if (h) {
-    // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     return "rgb" + (f ? "a(" : "(") + r + "," + g + "," + b + (f ? "," + m(a * 1000) / 1000 : "") + ")";
   } else {
     return (
       "#" +
-      // @ts-expect-error ts-migrate(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
       (4294967296 + r * 16777216 + g * 65536 + b * 256 + (f ? m(a * 255) : 0)).toString(16).slice(1, f ? undefined : -2)
     );
   }

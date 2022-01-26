@@ -11,10 +11,12 @@ interface Translation {
   direction: -1 | 1;
 }
 
+export type inputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
+
 interface TranslationRowsProps {
   translations: Translation[];
   yDiff: number;
-  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
+  inputRef: inputRefFuncType;
   seqBlockRef: unknown;
   onUnmount: (a: unknown) => void;
   fullSeq: string;

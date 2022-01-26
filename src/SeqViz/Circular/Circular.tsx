@@ -1,25 +1,85 @@
 import * as React from "react";
+import { Annotation, Label } from "../../part";
 
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
+import { SearchResult } from "../../utils/search";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
-import Annotations from "./Annotations";
-import CutSites from "./CutSites";
+import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import AnnotationsViewer from "./AnnotationsViewer";
+import CutSitesViewer from "./CutSitesViewer";
 import Find from "./Find";
-import Index from "./Index";
-import Labels from "./Labels";
-import Selection from "./Selection";
+import IndexViewer from "./Index";
+import LabelsViewer from "./LabelsViewer";
+import Selection from "./CircularSelection";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
-class Circular extends React.Component {
+export interface Primer {}
+export interface CutSite {
+  fcut: number;
+  rcut: number;
+  start: number;
+  end: number;
+  type: "enzyme" | "annotation";
+  name: string;
+  id: string;
+}
+
+export interface SizeType {
+  height: number;
+  width: number;
+}
+
+interface CircularProps {
+  annotations: Annotation[];
+  seq: string;
+  primers: Primer[];
+  cutSites: CutSite[];
+  radius: number;
+  center: { x: number; y: number };
+  showPrimers: boolean;
+  showIndex: boolean;
+  name: string;
+  inputRef: inputRefFuncType;
+  mouseEvent: React.MouseEventHandler;
+  onUnmount: () => void;
+  yDiff: number;
+  size: SizeType;
+  compSeq: string;
+  search: SearchResult;
+}
+interface CircularState {
+  seqLength: number;
+  lineHeight: number;
+  annotationsInRows: Annotation[];
+  primersInRows: Primer[];
+  inlinedLabels: Label[];
+  outerLabels: Label[];
+}
+
+export interface Coor {
+  x: number;
+  y: number;
+}
+
+class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
 
-  static getDerivedStateFromProps = nextProps => {
+  static getDerivedStateFromProps = (
+    nextProps: CircularProps
+  ): {
+    seqLength: number;
+    lineHeight: number;
+    annotationsInRows: unknown[];
+    primersInRows: unknown[];
+    inlinedLabels: Label[];
+    outerLabels: Label[];
+  } => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
@@ -40,9 +100,9 @@ class Circular extends React.Component {
     const cutSiteLabels = nextProps.cutSites;
     const { radius } = nextProps;
     let innerRadius = radius - 3 * lineHeight;
-    const inlinedLabels = [];
-    const outerLabels = [];
-    annotationsInRows.forEach(r => {
+    const inlinedLabels: Label[] = [];
+    const outerLabels: Label[] = [];
+    annotationsInRows.forEach((r: Annotation[]) => {
       const circumf = innerRadius * Math.PI;
       r.forEach(ann => {
         // how large is the name of the annotation horizontally (with two char padding)
@@ -57,7 +117,6 @@ class Circular extends React.Component {
         } else {
           const { id, name, start, end } = ann;
           const type = "annotation";
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
           outerLabels.push({ id, name, start, end, type });
         }
       });
@@ -67,15 +126,12 @@ class Circular extends React.Component {
     cutSiteLabels.forEach(c =>
       outerLabels.push({
         ...c,
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         start: c.fcut,
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-        type: "enzyme"
+        type: "enzyme",
       })
     );
 
     // sort all the labels so they're in ascending order
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'start' does not exist on type 'never'.
     outerLabels.sort((a, b) => Math.min(a.start, a.end) - Math.min(b.start, b.end));
 
     return {
@@ -84,7 +140,7 @@ class Circular extends React.Component {
       annotationsInRows: annotationsInRows,
       primersInRows: primersInRows,
       inlinedLabels: inlinedLabels,
-      outerLabels: outerLabels
+      outerLabels: outerLabels,
     };
   };
 
@@ -95,13 +151,13 @@ class Circular extends React.Component {
     annotationsInRows: [],
     primersInRows: [],
     inlinedLabels: [],
-    outerLabels: []
+    outerLabels: [],
   };
 
   /**
    * Deep equality comparison
    */
-  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
+  shouldComponentUpdate = (nextProps: CircularProps) => !isEqual(nextProps, this.props);
 
   /**
    * find the rotation transformation needed to put a child element in the
@@ -109,11 +165,8 @@ class Circular extends React.Component {
    *
    * this func makes use of the centralIndex field in parent state
    * to rotate the plasmid viewer
-   *
-   * @return {Coor}
    */
-  getRotation = index => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
+  getRotation = (index: number): string => {
     const { center } = this.props;
     const { seqLength } = this.state;
     const centralIndex = this.context.circular;
@@ -132,12 +185,8 @@ class Circular extends React.Component {
    *
    * in general this is for lines and labels
    *
-   * @param {boolean} rotate	should the central index be taken into account
-   * 							when calculating the current coordinate?
-   * @return {Coor}
    */
-  findCoor = (index, radius, rotate = false) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
+  findCoor = (index: number, radius: number, rotate?: boolean): Coor => {
     const { center } = this.props;
     const { seqLength } = this.state;
     const rotatedIndex = rotate ? index - this.context.circular : index;
@@ -149,7 +198,7 @@ class Circular extends React.Component {
 
     return {
       x: center.x + xAdjust,
-      y: center.y + yAdjust
+      y: center.y + yAdjust,
     };
   };
 
@@ -158,11 +207,8 @@ class Circular extends React.Component {
    * (assuming that the rotation is around the center)
    *
    * in general this is for text and arcs
-   *
-   * @return {Coor}
    */
-  rotateCoor = (coor, degrees) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
+  rotateCoor = (coor: Coor, degrees: number): Coor => {
     const { center } = this.props;
 
     // find coordinate's current angle
@@ -182,7 +228,7 @@ class Circular extends React.Component {
 
     return {
       x: center.x + xAdjust,
-      y: center.y + yAdjust
+      y: center.y + yAdjust,
     };
   };
 
@@ -194,24 +240,25 @@ class Circular extends React.Component {
    *
    * @return {string}
    */
-  generateArc = ({
-    innerRadius,
-    outerRadius,
-    length,
-    largeArc, // see svg.arc large-arc-flag
-    sweepFWD = false,
-    arrowFWD = false,
-    arrowREV = false,
-    offset = 0
-  }) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
+  generateArc = (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }): string => {
+    const { innerRadius, outerRadius, length, largeArc, sweepFWD, arrowFWD, arrowREV, offset } = args;
     const { radius } = this.props;
     const { seqLength, lineHeight } = this.state;
+    const _offset = offset === undefined ? 0 : offset;
     // build up the six default coordinates
-    let leftBottom = this.findCoor(offset, innerRadius);
-    let leftTop = this.findCoor(offset, outerRadius);
-    let rightBottom = this.findCoor(length + offset, innerRadius);
-    let rightTop = this.findCoor(length + offset, outerRadius);
+    let leftBottom = this.findCoor(_offset, innerRadius);
+    let leftTop = this.findCoor(_offset, outerRadius);
+    let rightBottom = this.findCoor(length + _offset, innerRadius);
+    let rightTop = this.findCoor(length + _offset, outerRadius);
     let leftArrow = "";
     let rightArrow = "";
 
@@ -255,35 +302,20 @@ class Circular extends React.Component {
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showPrimers' does not exist on type 'Rea... Remove this comment to see the full error message
       showPrimers,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showIndex' does not exist on type 'Reado... Remove this comment to see the full error message
       showIndex,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'name' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       name,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message
       mouseEvent,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
       onUnmount,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
       center,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
       radius,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'yDiff' does not exist on type 'Readonly<... Remove this comment to see the full error message
       yDiff,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       seq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'compSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       compSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSites' does not exist on type 'Readon... Remove this comment to see the full error message
       cutSites,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'search' does not exist on type 'Readonly... Remove this comment to see the full error message
-      search
+      search,
     } = this.props;
 
     const { seqLength, lineHeight, annotationsInRows, primersInRows, inlinedLabels, outerLabels } = this.state;
@@ -300,11 +332,8 @@ class Circular extends React.Component {
       getRotation,
       generateArc,
       rotateCoor,
-      inputRef
+      inputRef,
     };
-
-    // an inward shift is needed for primers if the annotations are shown
-    let primerRowsToSkip = annotationsInRows.length + 1;
 
     // calculate the selection row height based on number of annotation and primers
     let totalRows = 4 + annotationsInRows.length;
@@ -327,23 +356,18 @@ class Circular extends React.Component {
         {...size}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. // @ts-expect-error */}
           <Selection {...general} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
-          <Annotations
+          <AnnotationsViewer
             {...general}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             annotations={annotationsInRows}
             size={size}
             rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
           />
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. // @ts-expect-error */}
           <Find {...general} search={search} />
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. // @ts-expect-error */}
-          <CutSites {...general} selectionRows={4} cutSites={cutSites} />
-          <Index
+          <CutSitesViewer {...general} selectionRows={4} cutSites={cutSites} />
+          <IndexViewer
             {...general}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             name={name}
             size={size}
             yDiff={yDiff}
@@ -352,8 +376,7 @@ class Circular extends React.Component {
             totalRows={totalRows}
             showIndex={showIndex}
           />
-          {/* @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call. // @ts-expect-error */}
-          <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
+          <LabelsViewer {...general} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>
       </svg>
     );

@@ -1,8 +1,31 @@
 import * as React from "react";
-
-export default class CutSites extends React.PureComponent {
-  calculateLinePath = (index, startRadius, endRadius) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findCoor' does not exist on type 'Readon... Remove this comment to see the full error message
+import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { Coor, CutSite } from "./Circular";
+interface CutSitesViewerProps {
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: inputRefFuncType;
+  selectionRows: number;
+  cutSites: CutSite[];
+}
+interface CutSitesViewerState {}
+export default class CutSitesViewer extends React.PureComponent<CutSitesViewerProps, CutSitesViewerState> {
+  calculateLinePath = (index: number, startRadius: number, endRadius: number) => {
     const { findCoor } = this.props;
     const lineStart = findCoor(index, startRadius);
     const lineEnd = findCoor(index, endRadius);
@@ -11,8 +34,7 @@ export default class CutSites extends React.PureComponent {
     return linePath;
   };
 
-  displayCutSite = cutSite => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
+  displayCutSite = (cutSite: CutSite) => {
     const { radius, lineHeight, seqLength, getRotation, inputRef, generateArc } = this.props;
     const { id, start } = cutSite;
     let { fcut, rcut, end } = cutSite;
@@ -39,7 +61,7 @@ export default class CutSites extends React.PureComponent {
       outerRadius: topR,
       length: cutSiteLength,
       largeArc: cutSiteLength > seqLength / 2,
-      sweepFWD: true
+      sweepFWD: true,
     });
 
     // find start and stop coordinates to cut site line
@@ -52,7 +74,7 @@ export default class CutSites extends React.PureComponent {
       length: Math.abs(fcut - rcut),
       largeArc: Math.abs(fcut - rcut) > seqLength / 2,
       sweepFWD: true,
-      offset: Math.min(fcut, rcut) - start
+      offset: Math.min(fcut, rcut) - start,
     });
 
     // find start and stop coordinates to hang site line
@@ -66,14 +88,14 @@ export default class CutSites extends React.PureComponent {
       fill: fill,
       shapeRendering: "auto",
       cursor: "pointer",
-      fillOpacity: 0
+      fillOpacity: 0,
     };
 
     const lineStyle = {
       fill: "transparent",
       stroke: "black",
       strokeWidth: 1,
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
 
     return (
@@ -89,7 +111,7 @@ export default class CutSites extends React.PureComponent {
             ref: id,
             start: start,
             end: end,
-            type: "ENZYME"
+            type: "ENZYME",
           })}
         />
       </g>
@@ -97,7 +119,6 @@ export default class CutSites extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSites' does not exist on type 'Readon... Remove this comment to see the full error message
     const { cutSites } = this.props;
 
     if (!cutSites.length) {
