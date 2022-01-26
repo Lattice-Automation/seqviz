@@ -1,11 +1,10 @@
 import * as React from "react";
-
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
-import search from "../utils/search";
+import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection";
@@ -13,6 +12,20 @@ import SeqViewer from "./SeqViewer";
 import { Annotation, Element, Part } from "../part";
 
 import "./style.css";
+
+interface SeqVizSelection {
+  name: string;
+  type: string;
+  seq: string;
+  gc: string;
+  tm: number;
+  start: number;
+  end: number;
+  length: number;
+  direction: number;
+  clockwise: boolean;
+  color: string;
+}
 
 export interface SeqVizProps {
   accession?: string;
@@ -34,20 +47,8 @@ export interface SeqVizProps {
       rcut: number;
     };
   };
-  onSearch: (search: { start: number; end: number; direction: number; index: number }) => void;
-  onSelection: (selection: {
-    name: string;
-    type: string;
-    seq: string;
-    gc: string;
-    tm: number;
-    start: number;
-    end: number;
-    length: number;
-    direction: number;
-    clockwise: boolean;
-    color: string;
-  }) => void;
+  onSearch: (search: SearchResult[]) => void;
+  onSelection: (selection: SeqVizSelection) => void;
   rotateOnScroll: boolean;
   search: {
     query: string;
@@ -81,8 +82,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: results => results,
-    onSelection: selection => selection,
+    onSearch: (results: SearchResult[]) => results,
+    onSelection: (selection: SeqVizSelection) => selection,
     rotateOnScroll: true,
     search: { query: "", mismatch: 0 },
     seq: "",
@@ -125,7 +126,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       await this.setPart(); // new accession/remote ID
     }
     if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
-      this.search(part); // new search parameters
+      this._search(part); // new search parameters
     }
     if (!isEqual(enzymes, this.props.enzymes)) {
       this.cut(part); // new set of enzymes for digest
@@ -153,7 +154,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
             annotations: this.parseAnnotations(part.annotations, part.seq),
           },
         });
-        this.search(part);
+        this._search(part);
         this.cut(part);
       } else if (file) {
         const parts = await filesToParts(file, this.props);
@@ -164,7 +165,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
             annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq),
           },
         });
-        this.search(parts[0]);
+        this._search(parts[0]);
         this.cut(parts[0]);
       } else if (seq) {
         this.cut({ seq });
@@ -179,7 +180,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   /**
    * Search for the query sequence in the part sequence, set in state
    */
-  search = (part: Part | null = null) => {
+  _search = (part: Part | null = null) => {
     const {
       onSearch,
       search: { query, mismatch },
@@ -247,7 +248,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   /**
    * Update selection in state. Should only be performed from handlers/selection.jsx
    */
-  setSelection = selection => {
+  setSelection = (selection: SeqVizSelection) => {
     const { onSelection } = this.props;
 
     this.setState({ selection });
@@ -262,9 +263,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     let { annotations } = this.state;
 
     // part is either from a file/accession, or each prop was set
-    seq = seq || part.seq || "";
-    if (getSeqType(seq) === "dna") {
-      compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
+    const _seq: string = seq || part.seq || "";
+    if (getSeqType(_seq) === "dna") {
+      compSeq = compSeq || part.compSeq || dnaComplement(_seq).compSeq;
     } else {
       compSeq = "";
     }
@@ -273,7 +274,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
-    if (!seq.length) {
+    if (!_seq.length) {
       return <div className="la-vz-seqviz" />;
     }
 
@@ -288,7 +289,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         compSeq={compSeq}
         showComplement={showComplement}
         name={name}
-        seq={seq}
+        seq={_seq}
         cutSites={cutSites}
         Circular={false}
       />

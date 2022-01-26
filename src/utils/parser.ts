@@ -54,10 +54,8 @@ const DNAComplement = {
 /**
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
- * @param  {string} origSeq the incoming sequence
- * @return {SeqReturn}         the resulting sequence and complement sequence
  */
-export const dnaComplement = origSeq => {
+export const dnaComplement = (origSeq:string) SeqReturn => {
   if (!origSeq) {
     return { seq: "", compSeq: "" };
   }
