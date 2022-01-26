@@ -15,7 +15,7 @@ import CentralIndexContext from "./centralIndex";
  * @return {React.Component}
  */
 const withEventRouter = WrappedComp =>
-  (class WithEventRouter extends React.PureComponent {
+  class WithEventRouter extends React.PureComponent {
     static displayName = `EventRouter`;
 
     static contextType = CentralIndexContext;
@@ -147,14 +147,14 @@ const withEventRouter = WrappedComp =>
                 start: newPos,
                 end: newPos,
                 clockwise: true,
-                ref: ""
+                ref: "",
               });
             } else if (type.startsWith("Shift")) {
               setSelection({
                 start: start,
                 end: newPos,
                 clockwise: clockwise,
-                ref: ""
+                ref: "",
               });
             }
             break;
@@ -175,7 +175,7 @@ const withEventRouter = WrappedComp =>
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
         seq,
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        selection: { start, end, ref }
+        selection: { start, end, ref },
       } = this.props;
 
       const formerFocus = document.activeElement;
@@ -207,7 +207,7 @@ const withEventRouter = WrappedComp =>
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection,
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        selection: { start }
+        selection: { start },
       } = this.props;
 
       const newSelection = {
@@ -215,7 +215,7 @@ const withEventRouter = WrappedComp =>
         start: start,
         end: start,
         clockwise: true,
-        ref: "ALL" // ref to all means select the whole thing
+        ref: "ALL", // ref to all means select the whole thing
       };
 
       setSelection(newSelection);
@@ -324,6 +324,6 @@ const withEventRouter = WrappedComp =>
         </div>
       );
     }
-  });
+  };
 
 export default WrappedComp => withEventRouter(WrappedComp);

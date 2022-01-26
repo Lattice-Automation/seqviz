@@ -52,6 +52,8 @@ interface CircularProps {
   size: SizeType;
   compSeq: string;
   search: SearchResult;
+  centralIndex: number;
+  setCentralIndex: (update: number) => void;
 }
 interface CircularState {
   seqLength: number;

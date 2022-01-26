@@ -13,7 +13,7 @@ import { Annotation, Element, Part } from "../part";
 
 import "./style.css";
 
-interface SeqVizSelection {
+export interface SeqVizSelection {
   name: string;
   type: string;
   seq: string;
@@ -286,8 +286,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         selection={selection}
         setSelection={this.setSelection}
         annotations={annotations}
-        compSeq={compSeq}
         showComplement={showComplement}
+        compSeq={compSeq}
         name={name}
         seq={_seq}
         cutSites={cutSites}
@@ -305,7 +305,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         compSeq={compSeq}
         showComplement={showComplement}
         name={name}
-        seq={seq}
+        seq={_seq}
         cutSites={cutSites}
         Circular
       />

@@ -2,16 +2,26 @@ import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
 import isEqual from "../utils/isEqual";
-import CircularViewer from "./Circular/Circular";
+import CircularViewer, { CutSite } from "./Circular/Circular";
 import LinearViewer from "./Linear/Linear";
 import CentralIndexContext from "./handlers/centralIndex";
+import { SearchResult } from "../utils/search";
+import { Annotation } from "../part";
+import { SeqVizSelection } from "./SeqViz";
 
 interface SeqViewerProps {
   size: { width: number; height: number };
-  seq: string;
   zoom: { linear: number; circular: number };
-  Circular: unknown;
-  cutSites: unknown;
+  search: SearchResult;
+  selection: SeqVizSelection;
+  setSelection: (update: SeqVizSelection) => void;
+  annotations: Annotation[];
+  compSeq?: string;
+  showComplement: boolean;
+  name?: string;
+  seq: string;
+  cutSites: CutSite[];
+  Circular: boolean;
 }
 
 interface SeqViewerState {}
@@ -151,6 +161,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
+                // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
                 centralIndex={circular}
                 setCentralIndex={setCentralIndex}
                 cutSites={cutSites}
@@ -162,6 +173,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
             {...this.props}
             {...this.state}
             {...this.linearProps()}
+            // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
             seqLength={seq.length}
             cutSites={cutSites}
           />
