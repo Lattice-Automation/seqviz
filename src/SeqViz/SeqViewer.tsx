@@ -21,7 +21,7 @@ interface SeqViewerProps {
   name?: string;
   seq: string;
   cutSites: CutSite[];
-  Circular: boolean;
+  circular: boolean;
 }
 
 interface SeqViewerState {}
@@ -150,7 +150,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    const { Circular: circular, seq, cutSites } = this.props;
+    const { circular: circular, seq, cutSites } = this.props;
 
     return (
       <div className="la-vz-viewer-container">

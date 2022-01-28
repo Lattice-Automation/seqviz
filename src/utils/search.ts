@@ -11,6 +11,7 @@ export interface SearchResult {
   end: number;
   direction: number;
   index: number;
+  length: number;
 }
 export default (query: string, mismatch: number, seq: string): SearchResult[] => {
   if (!query || !query.length || !seq || !seq.length) {

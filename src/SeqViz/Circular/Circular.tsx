@@ -19,7 +19,9 @@ import Selection from "./CircularSelection";
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
-export interface Primer {}
+export interface Primer {
+  direction: 1 | -1;
+}
 export interface CutSite {
   fcut: number;
   rcut: number;

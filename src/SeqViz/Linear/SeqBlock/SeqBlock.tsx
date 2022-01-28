@@ -6,7 +6,51 @@ import IndexRow from "./Index";
 import Find from "./Find";
 import Primers from "./Primers";
 import Selection from "./Selection";
-import TranslationRows from "./Translations";
+import TranslationRows, { inputRefFuncType, Translation } from "./Translations";
+import { CutSite, Primer, SizeType } from "../../Circular/Circular";
+import { Annotation } from "../../../part";
+import { SearchResult } from "../../../utils/search";
+import { SeqVizSelection } from "../../SeqViz";
+import { MouseEventHandler } from "react";
+
+interface SeqBlockPosition {
+  x: number; // [the x positioning, from left...]
+  width: number; // [the width of the passed element]
+  charWidth: number; // [the width of each character in the element]
+}
+
+interface SeqBlockProps {
+  bpColors: string[];
+  showIndex: boolean;
+  showComplement: boolean;
+  showPrimers: boolean;
+  selection: SeqVizSelection;
+  charWidth: number;
+  seqFontSize: number;
+  lineHeight: number;
+  elementHeight: number;
+  inputRef: inputRefFuncType;
+  mouseEvent: MouseEventHandler<SVGSVGElement>;
+  onUnmount: (a: string) => void;
+  key: string;
+  id: string;
+  y: number;
+  seq: string;
+  compSeq: string;
+  blockHeight: number;
+  annotationRows: Annotation[];
+  forwardPrimerRows: Primer[];
+  reversePrimerRows: Primer[];
+  cutSiteRows: CutSite[];
+  searchRows: SearchResult[];
+  translations: Translation[];
+  firstBase: number;
+  fullSeq: string;
+  size: SizeType;
+  zoomed: boolean;
+  bpsPerBlock: number;
+}
+interface SeqBlockState {}
 
 /**
  * SeqBlock
@@ -21,17 +65,16 @@ import TranslationRows from "./Translations";
  * the sequence, and flair around it including the
  * complementary sequence, sequence index, and anotations *
  */
-export default class SeqBlock extends React.PureComponent {
+export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBlockState> {
   static defaultProps = {};
 
   componentWillUnmount = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
     const { onUnmount, id } = this.props;
     onUnmount(id);
   };
 
   /**
-   * @typedef {Object} SeqBlockPosition
+   * @typedef {Object}
    * @property {Number}     x              [the x positioning, from left...]
    * @property {Number}     width          [the width of the passed element]
    * @property {Number}     charWidth      [the width of each character in the element]
@@ -42,20 +85,13 @@ export default class SeqBlock extends React.PureComponent {
    *
    * a helper method that's used in several of the child components to figure
    * out how far from the left the element is and how wide it should be
-   *
-   * @param  {Number} firstIndex [the first index of the annotation/ORF/cutSite etc]
-   * @param  {Number} lastIndex  [last index/basepair of the element]
-   * @return {SeqBlockPosition}  [the position information of the given element]
+
    */
   findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq: { length: seqLength },
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       bpsPerBlock,
     } = this.props;
 
@@ -96,8 +132,7 @@ export default class SeqBlock extends React.PureComponent {
    * We're looking up each bp in the props.bpColors map to see if it should
    * be shadded and, if so, wrapping it in a textSpan
    */
-  seqTextSpan = (bp, i) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'id' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
+  seqTextSpan = (bp: string, i: number) => {
     const { id, charWidth } = this.props;
 
     const color = this.bpColorLookup(bp, i);
@@ -121,8 +156,7 @@ export default class SeqBlock extends React.PureComponent {
    * Lookup a bp in the bpColors prop and return the color
    * associated with the character, if one exists. Store the results
    */
-  bpColorLookup = (bp, i) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpColors' does not exist on type 'Readon... Remove this comment to see the full error message
+  bpColorLookup = (bp: string, i: number) => {
     const { bpColors, firstBase } = this.props;
 
     const color =
@@ -133,59 +167,30 @@ export default class SeqBlock extends React.PureComponent {
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       seq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'compSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       compSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'annotationRows' does not exist on type '... Remove this comment to see the full error message
       annotationRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'forwardPrimerRows' does not exist on typ... Remove this comment to see the full error message
       forwardPrimerRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'reversePrimerRows' does not exist on typ... Remove this comment to see the full error message
       reversePrimerRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSiteRows' does not exist on type 'Rea... Remove this comment to see the full error message
       cutSiteRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'searchRows' does not exist on type 'Read... Remove this comment to see the full error message
       searchRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'translations' does not exist on type 'Re... Remove this comment to see the full error message
       translations,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'blockHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       blockHeight,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showIndex' does not exist on type 'Reado... Remove this comment to see the full error message
       showIndex,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showComplement' does not exist on type '... Remove this comment to see the full error message
       showComplement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showPrimers' does not exist on type 'Rea... Remove this comment to see the full error message
       showPrimers,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
       selection,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqFontSize' does not exist on type 'Rea... Remove this comment to see the full error message
       seqFontSize,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
       lineHeight,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
       elementHeight,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message
       mouseEvent,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'id' does not exist on type 'Readonly<{}>... Remove this comment to see the full error message
       id,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
       onUnmount,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
       zoomed,
     } = this.props;
 
@@ -294,7 +299,6 @@ export default class SeqBlock extends React.PureComponent {
       >
         <g transform="translate(0, 10)">
           <Selection.Block
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             selection={selection}
             selectHeight={selectHeight}
             findXAndWidth={this.findXAndWidth}
@@ -305,7 +309,6 @@ export default class SeqBlock extends React.PureComponent {
             fullSeq={fullSeq}
           />
           <Selection.Edges
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
@@ -326,7 +329,6 @@ export default class SeqBlock extends React.PureComponent {
           />
           <Annotations
             {...this.props}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             findXAndWidth={this.findXAndWidth}
             lastBase={lastBase}
             yDiff={annYDiff}
@@ -336,7 +338,6 @@ export default class SeqBlock extends React.PureComponent {
           {showPrimers && (
             <Primers
               {...this.props}
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               findXAndWidth={this.findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
@@ -352,7 +353,6 @@ export default class SeqBlock extends React.PureComponent {
           {showPrimers && (
             <Primers
               {...this.props}
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               findXAndWidth={this.findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
@@ -368,7 +368,6 @@ export default class SeqBlock extends React.PureComponent {
           {showIndex && (
             <IndexRow
               {...this.props}
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               firstBase={firstBase}
               lastBase={lastBase}
               transform={`translate(0, ${indexRowYDiff})`}

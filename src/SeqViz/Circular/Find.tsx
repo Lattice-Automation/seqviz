@@ -1,15 +1,31 @@
 import * as React from "react";
 import { SearchResult } from "../../utils/search";
 import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { Coor } from "./Circular";
 
 interface CircularFindProps {
+  search: SearchResult;
   radius: number;
+  center: Coor;
   lineHeight: number;
   seqLength: number;
-  getRotation: unknown;
-  generateArc: unknown;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
   inputRef: inputRefFuncType;
-  search: SearchResult;
+  onUnmount: unknown;
+  totalRows: number;
+  seq: string;
 }
 interface CircularFindState {}
 

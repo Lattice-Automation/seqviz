@@ -2,25 +2,34 @@ import * as React from "react";
 
 import { SelectionContext } from "../../handlers/selection";
 import randomid from "../../../utils/randomid";
+import { SeqVizSelection } from "../../SeqViz";
+import { inputRefFuncType } from "./Translations";
 
+interface EdgesProps {
+  findXAndWidth: (startEdge: number | null, endEdge: number | null) => { x: number; width: number };
+  selectEdgeHeight: number;
+  firstBase: number;
+  lastBase: number;
+  fullSeq: string;
+}
+interface EdgesState {}
 /**
  * Edges on the side of selections of the Selection Viewer
  *
  * Only shown at the selection's start and end, not intermediate blocks
  * (if there are intermediate blocks)
  */
-export class Edges extends React.PureComponent {
+export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
   static contextType = SelectionContext;
 
   id = randomid();
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
     const { findXAndWidth, selectEdgeHeight, firstBase, lastBase, fullSeq } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
-    let startEdge = null;
-    let lastEdge = null;
+    let startEdge: number | null = null;
+    let lastEdge: number | null = null;
 
     if (clockwise) {
       // clockwise, ie forward drag event
@@ -74,9 +83,9 @@ export class Edges extends React.PureComponent {
       y: "-10",
       style: {
         fill: "black",
-        width: start === end ? 1 : 2
+        width: start === end ? 1 : 2,
       },
-      shapeRendering: "crispEdges"
+      shapeRendering: "crispEdges",
     };
 
     return (
@@ -89,14 +98,23 @@ export class Edges extends React.PureComponent {
     );
   }
 }
-
-export class Block extends React.PureComponent {
+interface BlockProps {
+  findXAndWidth: (startEdge: number | null, endEdge: number | null) => { x: number; width: number };
+  selectHeight: number;
+  firstBase: number;
+  lastBase: number;
+  fullSeq: string;
+  selection: SeqVizSelection;
+  inputRef: inputRefFuncType;
+  onUnmount: (a: string) => void;
+}
+interface BlockState {}
+export class Block extends React.PureComponent<BlockProps, BlockState> {
   static contextType = SelectionContext;
 
   id = randomid();
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
     const { findXAndWidth, selectHeight, firstBase, lastBase, fullSeq } = this.props;
     const { clockwise, ref } = this.context;
     let { start, end } = this.context;
@@ -110,9 +128,9 @@ export class Block extends React.PureComponent {
       end = 0;
     }
 
-    let x;
-    let width;
-    let secondBlock;
+    let x: number | null = null;
+    let width: number | null = null;
+    let secondBlock: JSX.Element | null = null;
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {
@@ -180,22 +198,23 @@ export class Block extends React.PureComponent {
     }
 
     // nothing was set for this selection block
-    if (!x && !width) return null;
-
-    return (
-      <React.Fragment>
-        <rect
-          className="la-vz-linear-sel-block"
-          x={x}
-          y={-10}
-          height={selectHeight + 5}
-          width={width}
-          shapeRendering="auto"
-        />
-        {secondBlock}
-      </React.Fragment>
-    );
+    if (!x || !width) {
+      return null;
+    } else {
+      return (
+        <React.Fragment>
+          <rect
+            className="la-vz-linear-sel-block"
+            x={x}
+            y={-10}
+            height={selectHeight + 5}
+            width={width}
+            shapeRendering="auto"
+          />
+          {secondBlock}
+        </React.Fragment>
+      );
+    }
   }
 }
-
 export default { Edges, Block };

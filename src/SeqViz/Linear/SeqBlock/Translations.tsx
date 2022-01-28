@@ -3,7 +3,7 @@ import * as React from "react";
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
 
-interface Translation {
+export interface Translation {
   id: string;
   start: number;
   end: number;

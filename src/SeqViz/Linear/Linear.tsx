@@ -1,13 +1,56 @@
 import * as React from "react";
+import { Annotation } from "../../part";
 
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
+import { SearchResult } from "../../utils/search";
 
 import { createLinearTranslations } from "../../utils/sequence";
+import { Coor, CutSite, Primer, SizeType } from "../Circular/Circular";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import InfiniteScroll from "./InfiniteScroll";
 import SeqBlock from "./SeqBlock/SeqBlock";
+import { inputRefFuncType } from "./SeqBlock/Translations";
+
+interface LinearProps {
+  search: SearchResult;
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: inputRefFuncType;
+  onUnmount: unknown;
+  totalRows: number;
+  seq: string;
+  compSeq: string;
+
+  zoom: { linear: number };
+  showIndex: boolean;
+  showComplement: boolean;
+  showPrimers: boolean;
+  cutSites: CutSite[];
+  annotations: Annotation[];
+  translations: Translation[];
+  elementHeight: number;
+  bpsPerBlock: number;
+  size: SizeType;
+  primers: Primer[];
+}
+interface LinearState {}
 
 /**
  * A linear sequence viewer.
@@ -32,11 +75,11 @@ import SeqBlock from "./SeqBlock/SeqBlock";
  * annotations: an array of annotations to show above the seq
  * primers: an array of primers to show above and below the seq
  */
-class Linear extends React.Component {
+class Linear extends React.Component<LinearProps, LinearState> {
   /**
    * Deep equality comparison
    */
-  shouldComponentUpdate = nextProps => !isEqual(nextProps, this.props);
+  shouldComponentUpdate = (nextProps: LinearProps) => !isEqual(nextProps, this.props);
 
   /**
    * given all the information needed to render all the seqblocks (ie, sequence, compSeq
@@ -49,41 +92,23 @@ class Linear extends React.Component {
    */
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       seq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'compSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       compSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       zoom,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showIndex' does not exist on type 'Reado... Remove this comment to see the full error message
       showIndex,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showComplement' does not exist on type '... Remove this comment to see the full error message
       showComplement,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showPrimers' does not exist on type 'Rea... Remove this comment to see the full error message
       showPrimers,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSites' does not exist on type 'Readon... Remove this comment to see the full error message
       cutSites,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'annotations' does not exist on type 'Rea... Remove this comment to see the full error message
       annotations,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'translations' does not exist on type 'Re... Remove this comment to see the full error message
       translations,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
       lineHeight,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
       elementHeight,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       bpsPerBlock,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
       onUnmount,
-
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'search' does not exist on type 'Readonly... Remove this comment to see the full error message
       search,
     } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'primers' does not exist on type 'Readonl... Remove this comment to see the full error message
     let { primers } = this.props;
 
     primers = bindingSites(primers, seq);
@@ -114,7 +139,7 @@ class Linear extends React.Component {
      * @param {*} annotations
      * @return annotations
      */
-    const vetAnnotations = annotations => {
+    const vetAnnotations = (annotations: Annotation[]) => {
       annotations.forEach(ann => {
         if (ann.end === 0 && ann.start > ann.end) ann.end = seqLength;
         if (ann.start === seqLength && ann.end < ann.start) ann.start = 0;
@@ -182,16 +207,14 @@ class Linear extends React.Component {
       blockHeights[i] = blockHeight;
     }
 
-    const seqBlocks = [];
+    const seqBlocks: JSX.Element[] = [];
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'Element' is not assignable to pa... Remove this comment to see the full error message
         <SeqBlock
           {...this.props}
           key={ids[i]}
-          // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
           id={ids[i]}
           y={yDiff}
           seq={seqs[i]}
@@ -217,7 +240,6 @@ class Linear extends React.Component {
       seqBlocks.length && (
         <InfiniteScroll
           {...this.props}
-          // @ts-expect-error ts-migrate(2322) FIXME: Type '{ seqBlocks: never[]; blockHeights: any[]; t... Remove this comment to see the full error message
           seqBlocks={seqBlocks}
           blockHeights={blockHeights}
           totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}

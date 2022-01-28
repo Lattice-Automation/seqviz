@@ -84,31 +84,29 @@ export default class AnnotationsViewer extends React.PureComponent<AnnotationsVi
       <CentralIndexContext.Consumer>
         {({ circular }) => (
           <g className="la-vz-circular-annotations">
-            {annotations.reduce((acc, anns, i) => {
+            {annotations.map((ann: Annotation, i) => {
               if (i) {
                 currBRadius -= lineHeight + 3;
                 currTRadius -= lineHeight + 3;
               } // increment the annRow radii if on every loop after first
 
-              return acc.concat(
-                anns.map(a => (
-                  <SingleAnnotation
-                    {...this.props}
-                    key={`la-vz-${a.id}-annotation-circular-row`}
-                    id={`la-vz-${a.id}-annotation-circular-row`}
-                    annotation={a}
-                    currBRadius={currBRadius}
-                    currTRadius={currTRadius}
-                    transparentPath={transparentPath}
-                    labelStyle={labelStyle}
-                    annStyle={annStyle}
-                    hoverAnnotation={this.hoverAnnotation}
-                    calcBorderColor={darkerColor}
-                    centralIndex={circular}
-                  />
-                ))
+              return (
+                <SingleAnnotation
+                  {...this.props}
+                  key={`la-vz-${ann.id}-annotation-circular-row`}
+                  id={`la-vz-${ann.id}-annotation-circular-row`}
+                  annotation={ann}
+                  currBRadius={currBRadius}
+                  currTRadius={currTRadius}
+                  transparentPath={transparentPath}
+                  labelStyle={labelStyle}
+                  annStyle={annStyle}
+                  hoverAnnotation={this.hoverAnnotation}
+                  calcBorderColor={darkerColor}
+                  centralIndex={circular}
+                />
               );
-            }, [])}
+            })}
           </g>
         )}
       </CentralIndexContext.Consumer>
