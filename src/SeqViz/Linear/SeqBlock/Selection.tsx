@@ -6,7 +6,7 @@ import { SeqVizSelection } from "../../SeqViz";
 import { inputRefFuncType } from "./Translations";
 
 interface EdgesProps {
-  findXAndWidth: (startEdge: number | null, endEdge: number | null) => { x: number; width: number };
+  findXAndWidth: (startEdge?: number, endEdge?: number) => { x: number; width: number };
   selectEdgeHeight: number;
   firstBase: number;
   lastBase: number;
@@ -28,8 +28,8 @@ export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
     const { findXAndWidth, selectEdgeHeight, firstBase, lastBase, fullSeq } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
-    let startEdge: number | null = null;
-    let lastEdge: number | null = null;
+    let startEdge: number | undefined;
+    let lastEdge: number | undefined;
 
     if (clockwise) {
       // clockwise, ie forward drag event
@@ -44,8 +44,8 @@ export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
 
     // for cmd-a case
     if (ref === "ALL" || (start === 0 && end === fullSeq.length - 1)) {
-      startEdge = null;
-      lastEdge = null;
+      startEdge = undefined;
+      lastEdge = undefined;
     }
 
     // the end of the selection edges are not in this SeqBlock and
@@ -55,7 +55,7 @@ export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
     }
     if (startEdge === null) {
       startEdge = lastEdge;
-      lastEdge = null;
+      lastEdge = undefined;
     }
     let { x, width } = findXAndWidth(startEdge, lastEdge);
 
@@ -99,7 +99,7 @@ export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
   }
 }
 interface BlockProps {
-  findXAndWidth: (startEdge: number | null, endEdge: number | null) => { x: number; width: number };
+  findXAndWidth: (startEdge?: number, endEdge?: number) => { x: number; width: number };
   selectHeight: number;
   firstBase: number;
   lastBase: number;

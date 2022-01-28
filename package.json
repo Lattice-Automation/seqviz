@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "format": "npx prettier ./src/**/* --config package.json --write",
+    "format": "npx prettier ./src/**/* --config package.json",
     "markdown": "node ./config/scripts/markdown.js ./README.md",
     "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
     "major": "npm run test:ci && npm version major && npm run update",

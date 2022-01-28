@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Annotations from "./Annotations";
+import Annotations from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
 import IndexRow from "./Index";
 import Find from "./Find";
@@ -313,9 +313,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBloc
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
             fullSeq={fullSeq}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            selection={selection}
             selectEdgeHeight={selectEdgeHeight}
           />
           <Find
