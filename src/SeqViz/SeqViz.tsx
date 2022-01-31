@@ -92,7 +92,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     style: {},
     translations: [],
     viewer: "both",
-    zoom: { circular: 0, linear: 50 }
+    zoom: { circular: 0, linear: 50 },
   };
 
   constructor(props: SeqVizProps) {
@@ -103,13 +103,13 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       centralIndex: {
         circular: 0,
         linear: 0,
-        setCentralIndex: this.setCentralIndex
+        setCentralIndex: this.setCentralIndex,
       },
       cutSites: [],
       selection: { ...defaultSelection },
       search: [],
       annotations: this.parseAnnotations(props.annotations, props.seq),
-      part: {}
+      part: {},
     };
   }
 
@@ -150,8 +150,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         this.setState({
           part: {
             ...part,
-            annotations: this.parseAnnotations(part.annotations, part.seq)
-          }
+            annotations: this.parseAnnotations(part.annotations, part.seq),
+          },
         });
         this.search(part);
         this.cut(part);
@@ -161,8 +161,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         this.setState({
           part: {
             ...parts[0],
-            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq)
-          }
+            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq),
+          },
         });
         this.search(parts[0]);
         this.cut(parts[0]);
@@ -183,7 +183,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     const {
       onSearch,
       search: { query, mismatch },
-      seq
+      seq,
     } = this.props;
 
     if (!(seq || (part && part.seq))) {
@@ -220,14 +220,14 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    * Modify the annotations to add unique ids, fix directionality and
    * modulo the start and end of each to match SeqViz's API
    */
-  parseAnnotations = (annotations: Annotation[] | null = null, seq: string = "") =>
+  parseAnnotations = (annotations: Annotation[] | null = null, seq = "") =>
     (annotations || []).map((a, i) => ({
       // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[] | undefined' is not ass... Remove this comment to see the full error message
       ...annotationFactory(i, this.props.colors),
       ...a,
       direction: directionality(a.direction),
       start: a.start % (seq.length + 1),
-      end: a.end % (seq.length + 1)
+      end: a.end % (seq.length + 1),
     }));
 
   /**
@@ -243,7 +243,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     }
 
     this.setState({
-      centralIndex: { ...this.state.centralIndex, [type]: value }
+      centralIndex: { ...this.state.centralIndex, [type]: value },
     });
   };
 
