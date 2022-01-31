@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ cicd ]
+    branches: [ typescript ]
   pull_request:
     branches: [ master ]
 
