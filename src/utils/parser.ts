@@ -41,7 +41,7 @@ const DNAComplement = {
   X: "X",
   x: "x",
   U: "A",
-  u: "a"
+  u: "a",
 };
 
 /**
@@ -55,7 +55,7 @@ const DNAComplement = {
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
  */
-export const dnaComplement = (origSeq:string) SeqReturn => {
+export const dnaComplement = (origSeq: string): SeqReturn => {
   if (!origSeq) {
     return { seq: "", compSeq: "" };
   }
@@ -80,10 +80,7 @@ export const dnaComplement = (origSeq:string) SeqReturn => {
  */
 export const reverseComplement = inputSeq => {
   const { compSeq } = dnaComplement(inputSeq);
-  return compSeq
-    .split("")
-    .reverse()
-    .join("");
+  return compSeq.split("").reverse().join("");
 };
 
 export const extractDate = data => {
@@ -139,5 +136,5 @@ export const partFactory = () => ({
   primers: [],
   cutSites: [],
   note: "",
-  source: { name: "", file: "" }
+  source: { name: "", file: "" },
 });

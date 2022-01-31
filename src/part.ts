@@ -13,7 +13,7 @@ export interface Label {
 }
 
 export interface Annotation extends Element {
-  id?: string;
+  id: string;
   name: string;
   color: string;
   type: string;

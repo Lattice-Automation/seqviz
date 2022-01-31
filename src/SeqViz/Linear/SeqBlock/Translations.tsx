@@ -14,18 +14,18 @@ export interface Translation {
 export type inputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
 
 interface TranslationRowsProps {
-  translations: Translation[];
-  yDiff: number;
-  inputRef: inputRefFuncType;
-  seqBlockRef: unknown;
-  onUnmount: (a: unknown) => void;
-  fullSeq: string;
-  firstBase: number;
-  lastBase: number;
   bpsPerBlock: number;
   charWidth: number;
-  findXAndWidth: (n: number) => { x: number; width: number };
   elementHeight: number;
+  findXAndWidth: (n: number) => { x: number; width: number };
+  firstBase: number;
+  fullSeq: string;
+  inputRef: inputRefFuncType;
+  lastBase: number;
+  onUnmount: (a: unknown) => void;
+  seqBlockRef: unknown;
+  translations: Translation[];
+  yDiff: number;
 }
 export default class TranslationRows extends React.PureComponent<TranslationRowsProps> {
   render() {

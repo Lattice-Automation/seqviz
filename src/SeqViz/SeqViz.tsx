@@ -291,7 +291,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         name={name}
         seq={_seq}
         cutSites={cutSites}
-        Circular={false}
+        circular={false}
       />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
@@ -307,7 +307,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         name={name}
         seq={_seq}
         cutSites={cutSites}
-        Circular
+        circular={true}
       />
     );
     const bothFlipped = viewer === "both_flip";

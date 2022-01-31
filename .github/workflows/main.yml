@@ -25,6 +25,8 @@ jobs:
       run: npx prettier --check ./src/**
     - name: Run Eslint
       run: npx eslint ./src --quiet
+    - name: Run tsc
+      run: npx tsc ./src/*.tsx
     - name: build Seqviz
       run: npm run build
     - name: Run Unit Tests
