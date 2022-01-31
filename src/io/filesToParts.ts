@@ -122,7 +122,9 @@ const fileToParts = async (
     if (["bases", "annotations", "primers"].every(k => benchlingJSONKeys.includes(k))) {
       isBenchling = true;
     }
-  } catch (_) {}
+  } catch (err) {
+    console.error(err);
+  }
 
   try {
     switch (true) {
@@ -137,7 +139,7 @@ const fileToParts = async (
           const ret = parsedFasta.map(p => ({
             ...partFactory(),
             ...dnaComplement(p.seq),
-            ...p
+            ...p,
           }));
           return ret;
         });
@@ -211,5 +213,5 @@ const fileToParts = async (
 const cleanupPart = (p, source: { name: string; file: string }): Part => ({
   ...p,
   source,
-  annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" }))
+  annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" })),
 });
