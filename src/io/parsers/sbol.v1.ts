@@ -88,7 +88,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
           type: annType[0]._ || "N/A",
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-          name: annName[0]._ || annId[0]._ || "Untitled"
+          name: annName[0]._ || annId[0]._ || "Untitled",
         });
       }
     });
@@ -104,7 +104,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
     compSeq: parsedCompSeq,
     name: parsedName,
     annotations: annotations,
-    circular: circular
+    circular: circular,
   };
 };
 
@@ -186,7 +186,7 @@ export default async (sbol, colors = []) =>
       {
         xmlns: true,
         attrkey: "xml_tag",
-        tagNameProcessors: [xml2js.processors.stripPrefix]
+        tagNameProcessors: [xml2js.processors.stripPrefix],
       },
       (err, parsedSBOL) => {
         if (err) rejectSBOL(err);
@@ -207,7 +207,7 @@ export default async (sbol, colors = []) =>
                   dnaComponentToPart(nestedDnaComponent[0], {
                     strict: false,
                     file: sbol,
-                    colors: colors
+                    colors: colors,
                   })
                 );
               });
@@ -221,7 +221,7 @@ export default async (sbol, colors = []) =>
           const validPart = dnaComponentToPart(DnaComponent[0], {
             strict: false,
             file: sbol,
-            colors: colors
+            colors: colors,
           });
           // it will be null if there isnt' any sequence information beneath it
           if (validPart) resolve([validPart]);
@@ -237,7 +237,7 @@ export default async (sbol, colors = []) =>
             dnaComponentToPart(p, {
               strict: true,
               file: sbol,
-              colors: colors
+              colors: colors,
             })
           )
           .filter(p => p); // invalid parts will be null

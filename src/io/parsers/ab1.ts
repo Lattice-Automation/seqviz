@@ -8,7 +8,7 @@ const tagDict = {
   colorDataA: { tagName: "DATA", tagNum: 10, typeToReturn: "getShort" },
   colorDataT: { tagName: "DATA", tagNum: 11, typeToReturn: "getShort" },
   colorDataG: { tagName: "DATA", tagNum: 9, typeToReturn: "getShort" },
-  colorDataC: { tagName: "DATA", tagNum: 12, typeToReturn: "getShort" }
+  colorDataC: { tagName: "DATA", tagNum: 12, typeToReturn: "getShort" },
 };
 
 const convertAB1 = inputArrayBuffer => {
@@ -43,7 +43,7 @@ const convertAB1 = inputArrayBuffer => {
         retArray.push(inputArrayBuffer.getInt16(inOffset + counter));
       }
       return retArray;
-    }
+    },
   };
 
   const getTagName = inOffset => {
@@ -77,7 +77,7 @@ const convertAB1 = inputArrayBuffer => {
     cTrace: getDataTag(tagDict.colorDataC),
     basePos: getDataTag(tagDict.peakLocations),
     baseCalls: getDataTag(tagDict.baseCalls2),
-    qualNums: getDataTag(tagDict.qualNums)
+    qualNums: getDataTag(tagDict.qualNums),
   };
 };
 
@@ -117,7 +117,7 @@ export default (file, name) => {
     tTrace: basePos.map(p => tTrace[p]),
     gTrace: basePos.map(p => gTrace[p]),
     cTrace: basePos.map(p => cTrace[p]),
-    qualNums: qualNums
+    qualNums: qualNums,
   };
 
   // convert to an aligned part format

@@ -12,14 +12,14 @@ interface EdgesProps {
   lastBase: number;
   fullSeq: string;
 }
-interface EdgesState {}
+
 /**
  * Edges on the side of selections of the Selection Viewer
  *
  * Only shown at the selection's start and end, not intermediate blocks
  * (if there are intermediate blocks)
  */
-export class Edges extends React.PureComponent<EdgesProps, EdgesState> {
+export class Edges extends React.PureComponent<EdgesProps> {
   static contextType = SelectionContext;
 
   id = randomid();
@@ -108,8 +108,8 @@ interface BlockProps {
   inputRef: inputRefFuncType;
   onUnmount: (a: string) => void;
 }
-interface BlockState {}
-export class Block extends React.PureComponent<BlockProps, BlockState> {
+
+export class Block extends React.PureComponent<BlockProps> {
   static contextType = SelectionContext;
 
   id = randomid();

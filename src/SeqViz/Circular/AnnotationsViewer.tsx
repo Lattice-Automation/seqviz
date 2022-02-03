@@ -30,7 +30,7 @@ interface AnnotationsViewerProps {
   rowsToSkip: number;
   inlinedAnnotations: Label[];
 }
-interface AnnotationsViewerState {}
+
 /**
  * Used to build up all the path elements. Does not include a display
  * of the annotation name or a line connecting name to annotatino
@@ -42,7 +42,7 @@ interface AnnotationsViewerState {}
  *
  * @type {Function}
  */
-export default class AnnotationsViewer extends React.PureComponent<AnnotationsViewerProps, AnnotationsViewerState> {
+export default class AnnotationsViewer extends React.PureComponent<AnnotationsViewerProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className);

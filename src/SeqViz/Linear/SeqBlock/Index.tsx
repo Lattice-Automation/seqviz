@@ -1,14 +1,26 @@
 import * as React from "react";
+import { SizeType } from "../../Circular/Circular";
+import { findXandWidthType } from "./Translations";
 
+interface IndexProps {
+  seq: string;
+  zoom: { linear: number };
+  firstBase: number;
+  lineHeight: number;
+  size: SizeType;
+  findXAndWidth: findXandWidthType;
+  transform: string | undefined;
+  showIndex: boolean;
+  lastBase: number;
+}
 /**
  * a basepair indexing row for tracking the location of the current bp of DNA.
  */
-export default class Index extends React.PureComponent {
+export default class Index extends React.PureComponent<IndexProps> {
   // given each basepair in the sequence, go through each and find whether 1) it is divisible
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     const { seq, zoom, firstBase, lineHeight, size, findXAndWidth } = this.props;
     const seqLength = seq.length;
 
@@ -36,9 +48,8 @@ export default class Index extends React.PureComponent {
     }
 
     // create the array that will hold all the indexes in the array
-    const tickIndexes = [];
+    const tickIndexes: number[] = [];
     if (firstBase === 0) {
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       tickIndexes.push(1);
     }
 
@@ -48,7 +59,6 @@ export default class Index extends React.PureComponent {
     }
     while (i < seqLength) {
       if (i + firstBase !== 0) {
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         tickIndexes.push(i + firstBase);
       }
       i += tickInc;
@@ -56,13 +66,13 @@ export default class Index extends React.PureComponent {
 
     const tickStyle = {
       width: 1,
-      height: 8
+      height: 8,
       // shapeRendering: "crispEdges"
     };
 
     const textStyle = {
       fontSize: 11,
-      textRendering: "optimizeLegibility"
+      textRendering: "optimizeLegibility",
     };
 
     return tickIndexes.map(p => {
@@ -95,7 +105,6 @@ export default class Index extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
     const { lineHeight, transform, showIndex, findXAndWidth, firstBase, lastBase } = this.props;
 
     // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
@@ -106,7 +115,7 @@ export default class Index extends React.PureComponent {
     const axisStyle = {
       width: width,
       height: 1,
-      shapeRendering: "crispEdges"
+      shapeRendering: "crispEdges",
     };
 
     return (

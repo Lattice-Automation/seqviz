@@ -24,13 +24,11 @@ interface SeqViewerProps {
   circular: boolean;
 }
 
-interface SeqViewerState {}
-
 /**
  * a parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
  */
-class SeqViewer extends React.Component<SeqViewerProps, SeqViewerState> {
+class SeqViewer extends React.Component<SeqViewerProps> {
   constructor(props: SeqViewerProps) {
     super(props);
     const { size } = props;
@@ -48,7 +46,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: SeqViewerState) =>
+  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: unknown) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**
@@ -95,7 +93,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       charWidth,
       size,
       zoom: { linear: zoom },
-      Linear: true
+      Linear: true,
     };
   };
 
@@ -111,7 +109,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   circularProps = () => {
     const {
       size,
-      seq: { length: seqLength }
+      seq: { length: seqLength },
     } = this.props;
 
     let zoom = this.props.zoom.circular || 0;
@@ -120,7 +118,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
 
     const center = {
       x: size.width / 2,
-      y: size.height / 2
+      y: size.height / 2,
     };
 
     const limitingDim = Math.min(size.height, size.width);
@@ -145,7 +143,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       size,
       zoom: { circular: zoom },
       bpsOnArc,
-      center
+      center,
     };
   };
 

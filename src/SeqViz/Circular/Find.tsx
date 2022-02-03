@@ -4,7 +4,7 @@ import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
 import { Coor } from "./Circular";
 
 interface CircularFindProps {
-  search: SearchResult;
+  search: SearchResult[];
   radius: number;
   center: Coor;
   lineHeight: number;
@@ -27,9 +27,8 @@ interface CircularFindProps {
   totalRows: number;
   seq: string;
 }
-interface CircularFindState {}
 
-export default class CircularFind extends React.PureComponent<CircularFindProps, CircularFindState> {
+export default class CircularFind extends React.PureComponent<CircularFindProps> {
   /**
    * Create an SVG `path` element that highlights the search result
    */

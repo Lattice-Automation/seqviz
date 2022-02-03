@@ -27,9 +27,13 @@ export interface CutSite {
   rcut: number;
   start: number;
   end: number;
-  type: "enzyme" | "annotation";
+
+  type?: "enzyme" | "annotation";
   name: string;
   id: string;
+  recogStart: number;
+  recogEnd: number;
+  recogStrand: unknown;
 }
 
 export interface SizeType {
@@ -53,7 +57,7 @@ interface CircularProps {
   yDiff: number;
   size: SizeType;
   compSeq: string;
-  search: SearchResult;
+  search: SearchResult[];
   centralIndex: number;
   setCentralIndex: (update: number) => void;
 }
@@ -368,7 +372,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
             rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
           />
-          <Find {...general} search={search} />
+          <Find {...general} search={search} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
           <CutSitesViewer {...general} selectionRows={4} cutSites={cutSites} />
           <IndexViewer
             {...general}

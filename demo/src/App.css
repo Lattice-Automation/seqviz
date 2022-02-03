@@ -135,8 +135,7 @@ h1 {
   margin: auto;
   padding: 16px;
   position: relative;
-  box-shadow: 0 3px 6px rgba(124, 124, 124, 0.16),
-    0 3px 6px rgba(124, 124, 124, 0.23);
+  box-shadow: 0 3px 6px rgba(124, 124, 124, 0.16), 0 3px 6px rgba(124, 124, 124, 0.23);
 }
 
 #getting-started-card {
@@ -185,8 +184,7 @@ h1 {
   background: #14b7db;
   border-radius: 0.25rem;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
-    0 1px 2px rgba(124, 124, 124, 0.24);
+  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24);
 }
 
 .option {

@@ -5,6 +5,7 @@ import randomid from "./randomid";
 import { Annotation, Element, Part } from "../part";
 
 import { translateWildNucleotides } from "./sequence";
+import { CutSite } from "../SeqViz/Circular/Circular";
 
 /**
  * cutSitesInRows
@@ -13,13 +14,13 @@ import { translateWildNucleotides } from "./sequence";
  * with the sequence viewer
  *
  */
-export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): Element[] => {
+export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): CutSite[] => {
   const seqToCut = (seq + seq).toUpperCase();
   const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
 
   // find all the cut sites for the given row
-  const cutSites = Array.from(new Set(filteredEnzymes)).reduce((acc, e) => {
-    const cuts = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
+  const cutSites: CutSite[] = Array.from(new Set(filteredEnzymes)).reduce((acc: CutSite[], e) => {
+    const cuts: CutSite[] = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: randomid(),
@@ -30,12 +31,12 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
         rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
         recogStrand: c.recogStrand,
         recogStart: c.recogStart,
-        recogEnd: c.recogEnd % seq.length
+        recogEnd: c.recogEnd % seq.length,
       }));
     return acc.concat(cuts);
   }, []);
 
-  const uniqueCuts = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: CutSite[] = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
   return uniqueCuts;
 };
 
@@ -50,7 +51,7 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
  * @param  {Number}  seqToCutLength [length of the sequence to be cut]
  * @return {[CutSite]} [the list of resulting cut and hang indexes]
  */
-const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) => {
+const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): CutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -78,7 +79,7 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) =>
 
   // this is in the forward direction, ie, when not checking the complement possibility
   // start search for cut sites
-  const cutSiteIndices = [];
+  const cutSiteIndices: any[] = [];
   let result = regTest.exec(seqToSearch); // returns null if nothing found
   // while another match is found and we haven't exceeded input sequence length
   while (result) {
@@ -92,7 +93,7 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) =>
       end: index + recogLength,
       recogStrand: 1,
       recogStart: index + recogStart - shiftRecogStart,
-      recogEnd: index + recogEnd + shiftRecogEnd
+      recogEnd: index + recogEnd + shiftRecogEnd,
     });
     result = regTest.exec(seqToSearch);
   }
@@ -107,32 +108,30 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) =>
     // same above, except correcting for the new reverse complement indexes
     let index = result.index;
     cutSiteIndices.push({
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ start: null[]; end: null[]; } | null' is n... Remove this comment to see the full error message
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       fcut: index + recogLength - rcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       rcut: index + recogLength - fcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       start: index,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+
       end: index + recogLength,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       recogStrand: -1,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       recogStart: index + recogStart - shiftRecogStart,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-      recogEnd: index + recogEnd + shiftRecogEnd
+
+      recogEnd: index + recogEnd + shiftRecogEnd,
     });
     result = reqTestRC.exec(seqToSearch);
   }
 
   // reduce so there's only one enzyme per template cut index
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'fcut' does not exist on type 'never'.
-  const uniqueCuts = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: CutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
 
   // sort with increasing sequence cut index
-  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
   uniqueCuts.sort((a, b) => a.fcut - b.fcut);
 
   return uniqueCuts;
@@ -167,14 +166,14 @@ const digestPart = (enzymeName, part, circularCheck) => {
     annotations = annotations
       .map(a => ({
         ...a,
-        end: a.end < a.start ? a.end + seqToCutLength : a.end
+        end: a.end < a.start ? a.end + seqToCutLength : a.end,
       }))
       .reduce(
         (acc, a) =>
           acc.concat(a, {
             ...a,
             start: a.start + seqToCutLength,
-            end: a.end + seqToCutLength
+            end: a.end + seqToCutLength,
           }),
         []
       );
@@ -220,7 +219,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
       .map(a => ({
         ...a,
         start: a.start - cutSequenceStart,
-        end: a.end - cutSequenceStart
+        end: a.end - cutSequenceStart,
       }))
       .filter(
         a =>
@@ -231,7 +230,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
       .map(a => ({
         ...a,
         start: Math.max(a.start, 0),
-        end: Math.min(a.end, newSeqLength + endDiff)
+        end: Math.min(a.end, newSeqLength + endDiff),
       }));
 
     // push the newly fragmented sequences to the list
@@ -242,23 +241,22 @@ const digestPart = (enzymeName, part, circularCheck) => {
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         compSeq: cutCompSeq,
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-        annotations: adjustedAnnotations
+        annotations: adjustedAnnotations,
       });
     }
   };
 
   const singleCut = cutSiteIndices.length === 1;
   cutSiteIndices.forEach((cutInfo, i) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'fcut' does not exist on type 'unknown'.
     const { fcut: seqCutIdx, rcut: compCutIdx } = cutInfo;
     if (cutSiteIndices[i + 1]) {
       // not final site
       cutSeqsGenerator(
         seqCutIdx, // this site until next cut site
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
         cutSiteIndices[i + 1].fcut,
         compCutIdx,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
         cutSiteIndices[i + 1].rcut
       );
     } else if (circularCheck) {
@@ -267,13 +265,11 @@ const digestPart = (enzymeName, part, circularCheck) => {
         seqCutIdx, // this site until index of first cut site on other side of plasmid
         singleCut
           ? seqCutIdx + seqToCutLength // if it's the only one, add the full length
-          : // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-            cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
+          : cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
         compCutIdx,
         singleCut
           ? compCutIdx + seqToCutLength // if it's the only one, add the full length
-          : // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-            cutSiteIndices[0].rcut + seqToCutLength // else, stop at the first one
+          : cutSiteIndices[0].rcut + seqToCutLength // else, stop at the first one
       );
     } else {
       // final cut site on linear piece of dna
@@ -309,7 +305,7 @@ const annPosToInts = anns =>
   anns.map(a => ({
     ...a,
     start: +a.start,
-    end: +a.end
+    end: +a.end,
   }));
 
 /**
@@ -333,7 +329,7 @@ export const digest = (enzymeNames, part) => {
   // cleaning part (mongo int cast problem)
   const inputPart = {
     ...part,
-    annotations: annPosToInts(part.annotations || [])
+    annotations: annPosToInts(part.annotations || []),
   };
 
   // loop through every enzyme and recut the sequence with that enzyme
@@ -357,6 +353,6 @@ export const digest = (enzymeNames, part) => {
     _id: randomid(),
     name: `${part.name}_${i}`,
     date: new Date(),
-    source: [part._id]
+    source: [part._id],
   }));
 };

@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ typescript ]
+    branches: [typescript]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -13,24 +13,20 @@ jobs:
       matrix:
         node-version: [12.x]
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Set up Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: npm install
-    - name: Run Prettier formatter
-      run: npx prettier --check ./src/**
-    - name: Run Eslint
-      run: npx eslint ./src --quiet
-    - name: Run tsc
-      run: npx tsc ./src/*.tsx
-    - name: build Seqviz
-      run: npm run build
-    - name: Run Unit Tests
-      run: npm run test:ci
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run Prettier formatter
+        run: npx prettier --check ./src/**
+      - name: Run Eslint
+        run: npx eslint ./src --quiet
+      - name: Run Unit Tests and build
+        run: npm run test:ci
     # - name: Run Integration Tests
     #   run: npm run build
     # deploy:

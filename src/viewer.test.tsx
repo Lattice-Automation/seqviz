@@ -17,11 +17,11 @@ const defaultProps = {
     {
       name: "ann_1",
       start: 0,
-      end: 10
-    }
+      end: 10,
+    },
   ],
   style: { height: 200, width: 400 },
-  size: { height: 200, width: 400 }
+  size: { height: 200, width: 400 },
 };
 
 describe("SeqViz rendering (React)", () => {
@@ -75,13 +75,12 @@ describe("SeqViz rendering (React)", () => {
     const file = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
     const fileContents = fs.readFileSync(file, "utf8");
     const parts = await filesToParts([fileContents], {
-      fileName: "pBbE0c-RFP_1.gb"
+      fileName: "pBbE0c-RFP_1.gb",
     }); // expected part
     const part = parts[0];
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: string; name: string; seq: string; a... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={fileContents} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // check that the part state matches the state of the Genbank file
@@ -93,21 +92,20 @@ describe("SeqViz rendering (React)", () => {
     const fileName = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
-      fileName: fileName
+      fileName: fileName,
     });
     const part = parts[0];
     const file = new File([fileContents], fileName, { type: "text/plain" });
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // check that the part state matches the state of the Genbank file
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
       seq: part.seq,
-      compSeq: part.compSeq
+      compSeq: part.compSeq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -117,20 +115,19 @@ describe("SeqViz rendering (React)", () => {
     const fileName = path.join(__dirname, "io", "examples", "fasta", "R0010_AB.gb");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
-      fileName: fileName
+      fileName: fileName,
     });
     const part = parts[0];
     const file = new File([fileContents], fileName, { type: "text/plain" });
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
       seq: part.seq,
-      compSeq: part.compSeq
+      compSeq: part.compSeq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -140,20 +137,19 @@ describe("SeqViz rendering (React)", () => {
     const fileName = path.join(__dirname, "io", "examples", "sbol", "v2", "A1.xml");
     const fileContents = fs.readFileSync(fileName, "utf8");
     const parts = await filesToParts([fileContents], {
-      fileName: fileName
+      fileName: fileName,
     });
     const part = parts[0];
     const file = new File([fileContents], fileName, { type: "text/plain" });
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
       seq: part.seq,
-      compSeq: part.compSeq
+      compSeq: part.compSeq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -168,13 +164,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
       seq: part.seq,
-      compSeq: part.compSeq
+      compSeq: part.compSeq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -186,18 +181,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ seq: string; viewer: "linear"; name: strin... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} seq={seq} viewer="linear" />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     expect(wrapper.find(SeqViewer)).toHaveLength(1);
     expect(wrapper.find(Linear)).toHaveLength(1);
     expect(wrapper.find(SeqBlock).length).toBeGreaterThan(3);
-    expect(
-      wrapper
-        .find(SeqBlock)
-        .first()
-        .text()
-    ).toContain(seq.substring(0, 30));
+    expect(wrapper.find(SeqBlock).first().text()).toContain(seq.substring(0, 30));
   });
 
   // it("re-renders the viewer with a changed File object", async () => {

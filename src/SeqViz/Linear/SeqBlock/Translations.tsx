@@ -13,6 +13,14 @@ export interface Translation {
 
 export type inputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
 
+export type findXandWidthType = (
+  n1: number | undefined,
+  n2?: number
+) => {
+  x: number;
+  width: number;
+};
+
 interface TranslationRowsProps {
   bpsPerBlock: number;
   charWidth: number;
@@ -92,7 +100,7 @@ interface TranslationRowProps {
   lastBase: number;
   bpsPerBlock: number;
   charWidth: number;
-  findXAndWidth: (n: number) => { x: number; width: number };
+  findXAndWidth: findXandWidthType;
   y: number;
   height: number;
   id?: string;

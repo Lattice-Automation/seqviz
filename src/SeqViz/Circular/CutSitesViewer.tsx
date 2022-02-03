@@ -23,8 +23,8 @@ interface CutSitesViewerProps {
   selectionRows: number;
   cutSites: CutSite[];
 }
-interface CutSitesViewerState {}
-export default class CutSitesViewer extends React.PureComponent<CutSitesViewerProps, CutSitesViewerState> {
+
+export default class CutSitesViewer extends React.PureComponent<CutSitesViewerProps> {
   calculateLinePath = (index: number, startRadius: number, endRadius: number) => {
     const { findCoor } = this.props;
     const lineStart = findCoor(index, startRadius);

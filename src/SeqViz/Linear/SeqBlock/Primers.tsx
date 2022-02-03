@@ -3,33 +3,54 @@ import * as React from "react";
 import randomid from "../../../utils/randomid";
 
 import { reverse } from "../../../utils/sequence";
+import { Primer } from "../../Circular/Circular";
+import { inputRefFuncType } from "./Translations";
 
+interface Mismatch {
+  start: number;
+  end: number;
+  name: string;
+}
+
+interface PrimerRowProps {
+  primers: any;
+  y: number;
+  charWidth: number;
+  direction: 1 | -1;
+  elementHeight: number;
+  findXAndWidth: (firstIndex?: number, lastIndex?: number) => { x: number; width: number };
+  firstBase: number;
+  fontSize: number;
+  forwardPrimerRows: unknown;
+  fullSeq: string;
+  height: number;
+  inputRef: inputRefFuncType;
+  lastBase: number;
+  onUnmount: (a: unknown) => void;
+  reversePrimerRows: unknown;
+  seqBlockRef: unknown;
+  showPrimers: boolean;
+  yDiff: number;
+  zoomed: boolean;
+  id: string;
+}
 /**
  * a single row of primers. Multiple of these may be in one seqBlock
  * vertically stacked on top of one another in non-overlapping arrays
  */
-class PrimerRow extends React.PureComponent {
+class PrimerRow extends React.PureComponent<PrimerRowProps> {
   // Handles the rendering of a single Primer within a primer row
-  renderPrimer = singlePrimer => {
+  renderPrimer = (singlePrimer: any) => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
-      inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlockRef' does not exist on type 'Rea... Remove this comment to see the full error message
-      seqBlockRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
-      findXAndWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
-      firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastBase' does not exist on type 'Readon... Remove this comment to see the full error message
-      lastBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
-      fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth: characterWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fontSize' does not exist on type 'Readon... Remove this comment to see the full error message
+      findXAndWidth,
+      firstBase,
       fontSize,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
-      zoomed
+      fullSeq,
+      inputRef,
+      lastBase,
+      seqBlockRef,
+      zoomed,
     } = this.props;
     const primerUUID = randomid();
     const { direction, start = 0, end = 0, sequence, id } = singlePrimer;
@@ -79,12 +100,11 @@ class PrimerRow extends React.PureComponent {
     }
 
     // create padding on either side, vertically, of an primer
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'Readonly... Remove this comment to see the full error message
     let { height } = this.props;
     height *= 0.4;
 
     const rectProps = {
-      shapeRendering: "geometricPrecision"
+      shapeRendering: "geometricPrecision",
     };
 
     const textProps = {
@@ -94,8 +114,8 @@ class PrimerRow extends React.PureComponent {
       textRendering: "optimizeLegibility",
       style: {
         color: "black",
-        fontWeight: 150
-      }
+        fontWeight: 150,
+      },
     };
 
     const cW = 4; // jagged cutoff width
@@ -104,13 +124,13 @@ class PrimerRow extends React.PureComponent {
 
     let { mismatches } = singlePrimer;
 
-    const mismatchPathes = [];
+    const mismatchPathes: string[] = [];
     const forward = direction === 1;
     let name = forward ? sequence : reverse(sequence);
 
     // If there are mismatches, add "." into primer name
     if (mismatches && mismatches.length > 0) {
-      mismatches.forEach(mismatch => {
+      mismatches.forEach((mismatch: Mismatch) => {
         const { start: mismatchStart, end: mismatchEnd } = mismatch;
         const mismatchLength = mismatchEnd - mismatchStart;
         name = forward
@@ -164,9 +184,9 @@ class PrimerRow extends React.PureComponent {
         l 0 ${0 - height}
         `; // reverse arrow
     }
-    const mismatchLength = mismatch => mismatch.end - mismatch.start;
+    const mismatchLength = (mismatch: { end: number; start: number }) => mismatch.end - mismatch.start;
 
-    const mismatchOverflowLeft = mismatch => {
+    const mismatchOverflowLeft = (mismatch: { end: any; start: any }) => {
       if (crossZeroPost) {
         return forward
           ? mismatch.end - (fullSeq.length - start) > firstBase && mismatch.start - (fullSeq.length - start) < firstBase
@@ -178,7 +198,7 @@ class PrimerRow extends React.PureComponent {
         : start + (primerLength - mismatch.end) < firstBase && start + (primerLength - mismatch.start) > firstBase;
     };
 
-    const mismatchOverflowRight = mismatch => {
+    const mismatchOverflowRight = (mismatch: { end: any; start: any }) => {
       if (crossZeroPost) {
         return forward
           ? mismatch.end - (fullSeq.length - start) > lastBase && mismatch.start - (fullSeq.length - start) < lastBase
@@ -190,15 +210,15 @@ class PrimerRow extends React.PureComponent {
         : start + (primerLength - mismatch.end) < lastBase && start + (primerLength - mismatch.start) > lastBase;
     };
 
-    const mismatchOverflow = mismatch => {
+    const mismatchOverflow = (mismatch: { end: any; start: any }) => {
       if (mismatchOverflowLeft(mismatch)) return "LEFT";
       if (mismatchOverflowRight(mismatch)) return "RIGHT";
       return "NONE";
     };
 
-    const charWidth = characters => characters * characterWidth;
+    const charWidth = (characters: number) => characters * characterWidth;
 
-    const drawMismatch = mismatch => {
+    const drawMismatch = (mismatch: Mismatch) => {
       const mStart = mismatch.start; // relative to primer
       const mEnd = mismatch.end; // relative to primer
       let mismatchName = ""; // label for mismatch (base pairs)
@@ -317,11 +337,10 @@ class PrimerRow extends React.PureComponent {
     // Iterate through mismatches
     // generate a path and add to path array
     // generate a name and add to mismatch array
-    const drawMismatches = mismatchRow =>
+    const drawMismatches = (mismatchRow: any[]) =>
       mismatchRow.map(mismatch => {
         const mismatchElement = mismatch;
         const { mismatchName, mismatchPath } = drawMismatch(mismatch);
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         mismatchPathes.push(mismatchPath);
         mismatchElement.name = mismatchName;
         return mismatchElement;
@@ -333,16 +352,18 @@ class PrimerRow extends React.PureComponent {
         name = name.substring(0, lastBase - start);
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
-            ? mismatches.filter(mismatch => mismatch.start - (fullSeq.length - start) < lastBase)
-            : mismatches.filter(mismatch => primerLength - mismatch.end - (fullSeq.length - start) < lastBase);
+            ? mismatches.filter((mismatch: Mismatch) => mismatch.start - (fullSeq.length - start) < lastBase)
+            : mismatches.filter(
+                (mismatch: Mismatch) => primerLength - mismatch.end - (fullSeq.length - start) < lastBase
+              );
           mismatches = drawMismatches(mismatches);
         }
       } else {
         name = name.substring(0, lastBase - start);
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
-            ? mismatches.filter(mismatch => start + mismatch.start < lastBase)
-            : mismatches.filter(mismatch => start + (primerLength - mismatch.end) < lastBase);
+            ? mismatches.filter((mismatch: Mismatch) => start + mismatch.start < lastBase)
+            : mismatches.filter((mismatch: Mismatch) => start + (primerLength - mismatch.end) < lastBase);
           mismatches = drawMismatches(mismatches);
         }
       }
@@ -356,12 +377,12 @@ class PrimerRow extends React.PureComponent {
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
             ? mismatches.filter(
-                mismatch =>
+                (mismatch: Mismatch) =>
                   mismatch.end - (fullSeq.length - start) > firstBase &&
                   mismatch.start - (fullSeq.length - start) < lastBase
               )
             : mismatches.filter(
-                mismatch =>
+                (mismatch: Mismatch) =>
                   primerLength - mismatch.start - (fullSeq.length - start) > firstBase &&
                   primerLength - mismatch.end - (fullSeq.length - start) < lastBase
               );
@@ -370,9 +391,11 @@ class PrimerRow extends React.PureComponent {
         name = name.substring(firstBase - start, firstBase - start + lastBase - firstBase);
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
-            ? mismatches.filter(mismatch => start + mismatch.end > firstBase && start + mismatch.start < lastBase)
+            ? mismatches.filter(
+                (mismatch: Mismatch) => start + mismatch.end > firstBase && start + mismatch.start < lastBase
+              )
             : mismatches.filter(
-                mismatch =>
+                (mismatch: Mismatch) =>
                   start + (primerLength - mismatch.start) > firstBase &&
                   start + (primerLength - mismatch.end) < lastBase
               );
@@ -386,15 +409,17 @@ class PrimerRow extends React.PureComponent {
         name = name.substring(fullSeq.length - start + firstBase);
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
-            ? mismatches.filter(mismatch => mismatch.end - (fullSeq.length - start) > firstBase)
-            : mismatches.filter(mismatch => primerLength - mismatch.start - (fullSeq.length - start) > firstBase);
+            ? mismatches.filter((mismatch: Mismatch) => mismatch.end - (fullSeq.length - start) > firstBase)
+            : mismatches.filter(
+                (mismatch: Mismatch) => primerLength - mismatch.start - (fullSeq.length - start) > firstBase
+              );
         }
       } else {
         name = name.substring(firstBase - start);
         if (mismatches && mismatches.length > 0) {
           mismatches = forward
-            ? mismatches.filter(mismatch => start + mismatch.end > firstBase)
-            : mismatches.filter(mismatch => start + (primerLength - mismatch.start) > firstBase);
+            ? mismatches.filter((mismatch: Mismatch) => start + mismatch.end > firstBase)
+            : mismatches.filter((mismatch: Mismatch) => start + (primerLength - mismatch.start) > firstBase);
         }
       }
 
@@ -404,12 +429,11 @@ class PrimerRow extends React.PureComponent {
     } else {
       mismatches =
         mismatches && mismatches.length > 0
-          ? mismatches.map(mismatch => {
+          ? mismatches.map((mismatch: Mismatch) => {
               const mismatchElement = mismatch;
               mismatchElement.name = sequence.substring(mismatch.start, mismatch.end);
               if (forward) {
                 // forward primers
-                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 mismatchPathes.push(`M 0 0
               m ${charWidth(mismatch.start)} 0
               l 0 ${0 - height}
@@ -418,7 +442,6 @@ class PrimerRow extends React.PureComponent {
               } else if (!forward) {
                 // reverse primers
                 mismatchElement.name = reverse(sequence.substring(mismatch.end, mismatch.start));
-                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 mismatchPathes.push(`M 0 ${height}
               m ${charWidth(name.length - mismatch.start)} 0
               l 0 ${height}
@@ -442,14 +465,14 @@ class PrimerRow extends React.PureComponent {
           start: start,
           end: end,
           type: "PRIMER",
-          element: seqBlockRef
+          element: seqBlockRef,
         })}
         className={id}
         style={{
           fillOpacity: 0.1,
           cursor: "pointer",
           stroke: "#1b1d21",
-          strokeWidth: 0.5
+          strokeWidth: 0.5,
         }}
         {...rectProps}
         d={linePath}
@@ -462,7 +485,7 @@ class PrimerRow extends React.PureComponent {
       />
     );
 
-    const getMismatchX = mismatch => {
+    const getMismatchX = (mismatch: Mismatch) => {
       const overflowL = mismatchOverflowLeft(mismatch);
       const overflowR = mismatchOverflowRight(mismatch);
 
@@ -522,7 +545,7 @@ class PrimerRow extends React.PureComponent {
         </text>
         ,
         {mismatches &&
-          mismatches.map(mismatch => (
+          mismatches.map((mismatch: Mismatch) => (
             <text
               key={`mismatch_text_${id}_${primerUUID}`}
               fontSize={fontSize}
@@ -542,7 +565,6 @@ class PrimerRow extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'y' does not exist on type 'Readonly<{}> ... Remove this comment to see the full error message
     const { y, primers } = this.props;
     const gTranslate = `translate(0, ${y - 5})`;
     return (
@@ -553,41 +575,44 @@ class PrimerRow extends React.PureComponent {
   }
 }
 
-export default class PrimerRows extends React.PureComponent {
+interface PrimerRowsProps {
+  charWidth: number;
+  direction: 1 | -1;
+  findXAndWidth: (firstIndex?: number, lastIndex?: number) => { x: number; width: number };
+  firstBase: number;
+  fontSize: number;
+  forwardPrimerRows: Primer[];
+  fullSeq: string;
+  inputRef: inputRefFuncType;
+  lastBase: number;
+  onUnmount: (a: unknown) => void;
+  reversePrimerRows: Primer[];
+  seqBlockRef: unknown;
+  showPrimers: boolean;
+  yDiff: number;
+  zoomed: boolean;
+  elementHeight: number;
+}
+
+export default class PrimerRows extends React.PureComponent<PrimerRowsProps> {
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'showPrimers' does not exist on type 'Rea... Remove this comment to see the full error message
       showPrimers,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'forwardPrimerRows' does not exist on typ... Remove this comment to see the full error message
       forwardPrimerRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'reversePrimerRows' does not exist on typ... Remove this comment to see the full error message
       reversePrimerRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'direction' does not exist on type 'Reado... Remove this comment to see the full error message
       direction,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'yDiff' does not exist on type 'Readonly<... Remove this comment to see the full error message
       yDiff,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
       findXAndWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlockRef' does not exist on type 'Rea... Remove this comment to see the full error message
       seqBlockRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
       onUnmount,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastBase' does not exist on type 'Readon... Remove this comment to see the full error message
       lastBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
       zoomed,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fontSize' does not exist on type 'Readon... Remove this comment to see the full error message
-      fontSize
+      fontSize,
     } = this.props;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
     let { elementHeight } = this.props;
     elementHeight *= 3;
 
@@ -606,7 +631,11 @@ export default class PrimerRows extends React.PureComponent {
 
           return (
             <PrimerRow
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+              showPrimers={showPrimers}
+              yDiff={yDiff}
+              forwardPrimerRows={forwardPrimerRows}
+              reversePrimerRows={reversePrimerRows}
+              elementHeight={elementHeight}
               id={id}
               primers={primerRow}
               y={rowDiff}

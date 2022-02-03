@@ -11,7 +11,7 @@ import {
   Image,
   Input,
   Menu,
-  Sidebar
+  Sidebar,
 } from "semantic-ui-react";
 import { SeqViz } from "seqviz";
 
@@ -26,7 +26,7 @@ import "./App.css";
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
   { key: "circular", value: "circular", text: "Circular" },
-  { key: "linear", value: "linear", text: "Linear" }
+  { key: "linear", value: "linear", text: "Linear" },
 ];
 
 export class Demo extends Component {
@@ -42,7 +42,7 @@ export class Demo extends Component {
     enzymes: [],
     lzoom: 50,
     selection: {},
-    searchResults: {}
+    searchResults: {},
   };
 
   constructor(props) {
@@ -52,10 +52,7 @@ export class Demo extends Component {
     history.listen(() => {
       const { backbone, biobrick } = urlParams();
 
-      if (
-        backbone !== this.state.backbone ||
-        biobrick !== this.state.biobrick
-      ) {
+      if (backbone !== this.state.backbone || biobrick !== this.state.biobrick) {
         this.setState({ backbone: backbone, part: biobrick });
       }
     });
@@ -115,10 +112,7 @@ class App extends Component {
               <LinearZoomInput setDemoState={setDemoState} />
             </Menu.Item>
             <Menu.Item as="a">
-              <SearchQueryInput
-                setDemoState={setDemoState}
-                searchResults={this.props.searchResults}
-              />
+              <SearchQueryInput setDemoState={setDemoState} searchResults={this.props.searchResults} />
             </Menu.Item>
             {/* <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
@@ -135,18 +129,10 @@ class App extends Component {
               />
             </Menu.Item> */}
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput
-                setDemoState={setDemoState}
-                name="complement"
-                label="Show complement"
-              />
+              <CheckboxInput setDemoState={setDemoState} name="complement" label="Show complement" />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput
-                setDemoState={setDemoState}
-                name="index"
-                label="Show axis"
-              />
+              <CheckboxInput setDemoState={setDemoState} name="index" label="Show axis" />
             </Menu.Item>
             <Menu.Item as="a">
               <EnzymeInput setDemoState={setDemoState} enzymes={enzymes} />
@@ -163,21 +149,13 @@ class App extends Component {
               ) : (
                 <div id="landing-zone">
                   <div id="getting-started-card" className="card">
-                    <Image
-                      id="seqviz-brand-getting-started"
-                      src={SeqvizLogo}
-                      floated="right"
-                    />
+                    <Image id="seqviz-brand-getting-started" src={SeqvizLogo} floated="right" />
                   </div>
                   <div id="landing-card" className="card">
                     <div id="starting-instructions">
                       Type a <strong>BioBrick ID</strong> from <br />
                       iGEM's{" "}
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="http://parts.igem.org/Main_Page"
-                      >
+                      <a target="_blank" rel="noopener noreferrer" href="http://parts.igem.org/Main_Page">
                         Registry of Standard Biological Parts
                       </a>{" "}
                       <br />
@@ -190,11 +168,7 @@ class App extends Component {
                     <div>
                       <p>
                         Created by{" "}
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="https://latticeautomation.com/"
-                        >
+                        <a target="_blank" rel="noopener noreferrer" href="https://latticeautomation.com/">
                           Lattice Automation
                         </a>
                       </p>
@@ -269,7 +243,7 @@ class SearchQueryInput extends Component {
   render() {
     const {
       setDemoState,
-      searchResults: { searchResults = [] }
+      searchResults: { searchResults = [] },
     } = this.props;
 
     return (
@@ -383,11 +357,7 @@ class CheckboxInput extends Component {
 class SequenceViewer extends Component {
   shouldComponentUpdate = nextProps => {
     const { searchResults, selection, ...rest } = this.props;
-    const {
-      searchResults: nextSearchResults,
-      selection: nextSelection,
-      ...nextRest
-    } = nextProps;
+    const { searchResults: nextSearchResults, selection: nextSelection, ...nextRest } = nextProps;
 
     return !isEqual(rest, nextRest);
   };
@@ -404,7 +374,7 @@ class SequenceViewer extends Component {
       query = "",
       enzymes = [],
       lzoom = 50,
-      setDemoState
+      setDemoState,
     } = this.props;
 
     const viewType = view || "both";
@@ -429,7 +399,7 @@ class SequenceViewer extends Component {
           meta: true,
           ctrl: false,
           shift: false,
-          alt: false
+          alt: false,
         }}
         enzymes={enzymes}
         zoom={{ linear: lzoom }}
@@ -468,11 +438,7 @@ const SidebarFooter = () => (
     <p>
       Created by{" "}
       <span>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://latticeautomation.com/"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://latticeautomation.com/">
           Lattice Automation
         </a>
       </span>
@@ -480,11 +446,7 @@ const SidebarFooter = () => (
     <p>
       <Icon name="github" />
       <span>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/Lattice-Automation/seqviz"
-        >
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/Lattice-Automation/seqviz">
           seqviz
         </a>
       </span>
@@ -529,11 +491,7 @@ const StartButton = () => (
     </Button>
     <span>
       to load default part (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="http://parts.igem.org/Part:BBa_K1598008"
-      >
+      <a target="_blank" rel="noopener noreferrer" href="http://parts.igem.org/Part:BBa_K1598008">
         BBa_K1598008
       </a>
       )

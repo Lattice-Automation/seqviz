@@ -6,6 +6,8 @@
  * sense and should be filtered out)
  */
 
+import { SearchResult } from "./search";
+
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const DNAComplement = {
   a: "t",
@@ -45,17 +47,10 @@ const DNAComplement = {
 };
 
 /**
- * @typedef {Object} SeqReturn
- * @type {object}
- * @property {string} seq the template sequence
- * @property {string} compSeq the complement sequence
- */
-
-/**
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
  */
-export const dnaComplement = (origSeq: string): SeqReturn => {
+export const dnaComplement = (origSeq: string): { seq: string; compSeq: string } => {
   if (!origSeq) {
     return { seq: "", compSeq: "" };
   }

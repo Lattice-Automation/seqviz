@@ -61,7 +61,7 @@ const backBoneOptions = [
   { key: "psb1ak3", value: "psb1ak3", text: "pSB1AK3" },
   { key: "psb1at3", value: "psb1at3", text: "pSB1AT3" },
   { key: "psb1k3", value: "psb1k3", text: "pSB1K3" },
-  { key: "psb1t3", value: "psb1t3", text: "pSB1T3" }
+  { key: "psb1t3", value: "psb1t3", text: "pSB1T3" },
 ];
 export class BackBoneInput extends Component {
   state = { value: "" };
@@ -99,7 +99,7 @@ Demonstrates use of backbone with BioBrick parts.
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
   { key: "circular", value: "circular", text: "Circular" },
-  { key: "linear", value: "linear", text: "Linear" }
+  { key: "linear", value: "linear", text: "Linear" },
 ];
 
 export class ViewerTypeInput extends Component {
@@ -172,7 +172,7 @@ export class SearchQueryInput extends Component {
   render() {
     const {
       setDemoState,
-      searchResults: { searchResults = [] }
+      searchResults: { searchResults = [] },
     } = this.props;
     return (
       <div>
@@ -193,10 +193,7 @@ export class SearchQueryInput extends Component {
 ```
 
 ```js
-<SearchQueryInput
-  setDemoState={setDemoState}
-  searchResults={this.props.searchResults}
-/>
+<SearchQueryInput setDemoState={setDemoState} searchResults={this.props.searchResults} />
 ```
 
 Demonstrates searching for a sequence string in the linear viewer.
@@ -208,7 +205,7 @@ export class SearchQueryInput extends Component {
   render() {
     const {
       setDemoState,
-      searchResults: { searchResults = [] }
+      searchResults: { searchResults = [] },
     } = this.props;
     return (
       <div>
@@ -258,11 +255,7 @@ export class CheckboxInput extends Component {
 ```
 
 ```js
-<CheckboxInput
-  setDemoState={setDemoState}
-  name="annotations"
-  label="Show annotations"
-/>
+<CheckboxInput setDemoState={setDemoState} name="annotations" label="Show annotations" />
 ```
 
 Demonstrates turning on and off showing annotations on the viewers. On by default. Turn off if you just want to inspect the sequence base pairs.
@@ -289,11 +282,7 @@ export class CheckboxInput extends Component {
 ```
 
 ```js
-<CheckboxInput
-  setDemoState={setDemoState}
-  name="primers"
-  label="Show primers"
-/>
+<CheckboxInput setDemoState={setDemoState} name="primers" label="Show primers" />
 ```
 
 Demonstrates turning on and off showing primers on the viewers. On by default. Turn off if you just want to inspect the sequence base pairs.
@@ -320,11 +309,7 @@ export class CheckboxInput extends Component {
 ```
 
 ```js
-<CheckboxInput
-  setDemoState={setDemoState}
-  name="complement"
-  label="Show complement"
-/>
+<CheckboxInput setDemoState={setDemoState} name="complement" label="Show complement" />
 ```
 
 Demonstrates turning on and off the complement strand in the viewers. On by default. Turn off if you just want to inspect the sequence strand.
@@ -400,9 +385,7 @@ export class SelectionInfo extends Component {
         <div>
           <div id="selection-name">{feature ? feature.name : ""}</div>
           <div id="selection-meta">
-            {feature && feature.type && (
-              <span id="selection-type">{feature.type}</span>
-            )}
+            {feature && feature.type && <span id="selection-type">{feature.type}</span>}
             <span id="selection-length">{length}bp</span>
             <span id="selection-range">
               ({start} -{end})
@@ -449,7 +432,7 @@ const viewer = seqviz.Viewer("demo-root", {
     setDemoState({ searchResults: results });
   },
   searchQuery: { query: query },
-  enzymes: Object.values(enzymes)
+  enzymes: Object.values(enzymes),
 });
 ```
 

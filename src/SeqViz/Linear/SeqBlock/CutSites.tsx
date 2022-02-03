@@ -34,7 +34,7 @@ const CutSites = props => {
     firstBase,
     lastBase,
     inputRef,
-    yDiff
+    yDiff,
   } = props;
 
   const recogContiguous = (start, end, first, last) => {
@@ -67,7 +67,7 @@ const CutSites = props => {
       cutX,
       hangX,
       highlightX,
-      highlightWidth
+      highlightWidth,
     };
   });
 
@@ -76,14 +76,14 @@ const CutSites = props => {
   const textProps = {
     dominantBaseline: "inherit",
     textAnchor: "start",
-    y: yDiff
+    y: yDiff,
   };
 
   const getConnectorXAndWidth = (c, sequenceCutSite, complementCutSite) => {
     if (sequenceCutSite && complementCutSite) {
       return {
         x: Math.min(c.cutX, c.hangX),
-        width: Math.abs(c.hangX - c.cutX)
+        width: Math.abs(c.hangX - c.cutX),
       };
     }
     if (sequenceCutSite) {
@@ -125,7 +125,7 @@ const CutSites = props => {
                 style={{
                   cursor: "pointer",
                   fill: "rgb(51, 51, 51)",
-                  fillOpacity: 0.8
+                  fillOpacity: 0.8,
                 }}
                 onMouseOver={() => hoverCutSite(c.id, true)}
                 onMouseOut={() => hoverCutSite(c.id, false)}
@@ -146,7 +146,7 @@ const CutSites = props => {
                   stroke: "rgb(150,150,150)",
                   strokeWidth: 1,
                   fill: "rgb(255, 165, 0, 0.3)",
-                  fillOpacity: 0
+                  fillOpacity: 0,
                 }}
                 className={c.id}
                 ref={inputRef(c.id, {
@@ -154,7 +154,7 @@ const CutSites = props => {
                   start: c.start,
                   end: c.end,
                   type: "ENZYME",
-                  element: null
+                  element: null,
                 })}
               />
             )}

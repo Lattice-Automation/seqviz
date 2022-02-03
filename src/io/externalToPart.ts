@@ -51,7 +51,7 @@ export default async (
 
   const parts = await fileToParts(response, {
     colors: colors,
-    backbone: igemBackbone
+    backbone: igemBackbone,
   });
 
   if (parts && parts.length) {

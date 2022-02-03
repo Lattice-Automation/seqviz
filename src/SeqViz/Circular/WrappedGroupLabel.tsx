@@ -22,7 +22,7 @@ export default class WrappedGroupLabel extends React.Component {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
       lineHeight,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-      size: { height, width }
+      size: { height, width },
     } = this.props;
 
     // utility function for calculating the width of the last row before this one

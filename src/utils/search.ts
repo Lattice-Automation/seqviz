@@ -10,8 +10,8 @@ export interface SearchResult {
   start: number;
   end: number;
   direction: number;
-  index: number;
-  length: number;
+  index?: number;
+  length?: number;
 }
 export default (query: string, mismatch: number, seq: string): SearchResult[] => {
   if (!query || !query.length || !seq || !seq.length) {
@@ -26,7 +26,7 @@ export default (query: string, mismatch: number, seq: string): SearchResult[] =>
 
   const { compSeq } = dnaComplement(seq);
 
-  const indices: SeqReturn[] = search(query, seq, mismatch, true);
+  const indices: SearchResult[] = search(query, seq, mismatch, true);
   const compIndices = search(reverse(query), compSeq, mismatch, false);
 
   if (indices.length > 4000 || compIndices.length > 4000) {
@@ -47,12 +47,7 @@ export default (query: string, mismatch: number, seq: string): SearchResult[] =>
  * Otherwise, use the modified hamming search in `searchWithMismatch()`
  */
 
-interface SeqReturn {
-  start: number;
-  end: number;
-  direction: 1 | -1;
-}
-const search = (query: string, subject: string, mismatch: number, fwd: boolean): SeqReturn[] => {
+const search = (query: string, subject: string, mismatch: number, fwd: boolean): SearchResult[] => {
   if (mismatch > 0) {
     return searchWithMismatch(query, subject, mismatch, fwd);
   }
@@ -61,14 +56,14 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean):
   const translatedQuery = translateWildNucleotides(query).trim();
   const regex = new RegExp(translatedQuery, "gi");
   let result = regex.exec(subject);
-  const results: SeqReturn[] = [];
+  const results: SearchResult[] = [];
   while (result) {
     const start = result.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
     results.push({
       start: start,
       end: end,
-      direction: fwd ? 1 : -1
+      direction: fwd ? 1 : -1,
     });
     result = regex.exec(subject);
   }
@@ -79,7 +74,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean):
  * A slightly modified Hamming Distance algorithm for approximate
  * string Matching for patterns
  */
-const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean): SeqReturn[] => {
+const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean): SearchResult[] => {
   const results = [];
   for (let i = 0; i < subject.length - query.length; i += 1) {
     let missed = 0;
@@ -109,7 +104,7 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         end: end,
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-        direction: fwd ? 1 : -1
+        direction: fwd ? 1 : -1,
       });
     }
   }

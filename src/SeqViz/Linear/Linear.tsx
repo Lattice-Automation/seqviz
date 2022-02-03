@@ -1,26 +1,29 @@
 import * as React from "react";
 import { Annotation } from "../../part";
-
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
-
 import { createLinearTranslations } from "../../utils/sequence";
 import { Coor, CutSite, Primer, SizeType } from "../Circular/Circular";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
+import { SeqVizSelection } from "../SeqViz";
 import InfiniteScroll from "./InfiniteScroll";
 import SeqBlock from "./SeqBlock/SeqBlock";
-import { inputRefFuncType } from "./SeqBlock/Translations";
+import { inputRefFuncType, Translation } from "./SeqBlock/Translations";
 
 interface LinearProps {
-  search: SearchResult;
-  radius: number;
+  annotations: Annotation[];
+  bpsPerBlock: number;
+  bpColors: string[];
+  charWidth: number;
+  mouseEvent: React.MouseEventHandler;
+  seqFontSize: number;
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
+  compSeq: string;
+  cutSites: CutSite[];
+  elementHeight: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
     innerRadius: number;
     outerRadius: number;
@@ -31,26 +34,25 @@ interface LinearProps {
     arrowREV?: boolean;
     offset?: number;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  getRotation: (index: number) => string;
   inputRef: inputRefFuncType;
-  onUnmount: unknown;
-  totalRows: number;
-  seq: string;
-  compSeq: string;
-
-  zoom: { linear: number };
-  showIndex: boolean;
-  showComplement: boolean;
-  showPrimers: boolean;
-  cutSites: CutSite[];
-  annotations: Annotation[];
-  translations: Translation[];
-  elementHeight: number;
-  bpsPerBlock: number;
-  size: SizeType;
+  lineHeight: number;
+  onUnmount: (a: unknown) => void;
   primers: Primer[];
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  search: SearchResult;
+  seq: string;
+  seqLength: number;
+  showComplement: boolean;
+  showIndex: boolean;
+  showPrimers: boolean;
+  selection: SeqVizSelection;
+  size: SizeType;
+  totalRows: number;
+  translations: Translation[];
+  zoom: { linear: number };
 }
-interface LinearState {}
 
 /**
  * A linear sequence viewer.
@@ -75,7 +77,7 @@ interface LinearState {}
  * annotations: an array of annotations to show above the seq
  * primers: an array of primers to show above and below the seq
  */
-class Linear extends React.Component<LinearProps, LinearState> {
+class Linear extends React.Component<LinearProps> {
   /**
    * Deep equality comparison
    */
@@ -213,23 +215,35 @@ class Linear extends React.Component<LinearProps, LinearState> {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
         <SeqBlock
-          {...this.props}
-          key={ids[i]}
-          id={ids[i]}
-          y={yDiff}
-          seq={seqs[i]}
-          compSeq={compSeqs[i]}
-          blockHeight={blockHeights[i]}
+          selection={this.props.selection}
+          bpColors={this.props.bpColors}
+          charWidth={this.props.charWidth}
+          mouseEvent={this.props.mouseEvent}
+          seqFontSize={this.props.seqFontSize}
+          inputRef={this.props.inputRef}
+          elementHeight={elementHeight}
           annotationRows={annotationRows[i]}
-          forwardPrimerRows={forwardPrimerRows[i]}
-          reversePrimerRows={reversePrimerRows[i]}
+          blockHeight={blockHeights[i]}
+          bpsPerBlock={bpsPerBlock}
+          compSeq={compSeqs[i]}
           cutSiteRows={cutSiteRows[i]}
-          searchRows={searchRows[i]}
-          translations={translationRows[i]}
           firstBase={firstBase}
-          onUnmount={onUnmount}
+          forwardPrimerRows={forwardPrimerRows[i]}
           fullSeq={seq}
-          size={{ ...size }}
+          id={ids[i]}
+          key={ids[i]}
+          lineHeight={lineHeight}
+          onUnmount={onUnmount}
+          reversePrimerRows={reversePrimerRows[i]}
+          searchRows={searchRows[i]}
+          seq={seqs[i]}
+          showComplement={showComplement}
+          showIndex={showIndex}
+          showPrimers={showPrimers}
+          size={size}
+          translations={translationRows[i]}
+          y={yDiff}
+          zoom={zoom}
           zoomed={zoomed}
         />
       );
@@ -239,7 +253,6 @@ class Linear extends React.Component<LinearProps, LinearState> {
     return (
       seqBlocks.length && (
         <InfiniteScroll
-          {...this.props}
           seqBlocks={seqBlocks}
           blockHeights={blockHeights}
           totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Annotations from "./AnnotationRows";
+import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
 import IndexRow from "./Index";
 import Find from "./Find";
@@ -20,37 +20,37 @@ interface SeqBlockPosition {
 }
 
 interface SeqBlockProps {
+  annotationRows: Annotation[][];
+  blockHeight: number;
   bpColors: string[];
-  showIndex: boolean;
-  showComplement: boolean;
-  showPrimers: boolean;
-  selection: SeqVizSelection;
+  bpsPerBlock: number;
   charWidth: number;
-  seqFontSize: number;
-  lineHeight: number;
+  compSeq: string;
+  cutSiteRows: CutSite[];
   elementHeight: number;
+  firstBase: number;
+  forwardPrimerRows: Primer[];
+  fullSeq: string;
+  id: string;
   inputRef: inputRefFuncType;
+  key: string;
+  lineHeight: number;
   mouseEvent: MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
-  key: string;
-  id: string;
-  y: number;
-  seq: string;
-  compSeq: string;
-  blockHeight: number;
-  annotationRows: Annotation[];
-  forwardPrimerRows: Primer[];
   reversePrimerRows: Primer[];
-  cutSiteRows: CutSite[];
   searchRows: SearchResult[];
-  translations: Translation[];
-  firstBase: number;
-  fullSeq: string;
+  selection: SeqVizSelection;
+  seq: string;
+  seqFontSize: number;
+  showComplement: boolean;
+  showIndex: boolean;
+  showPrimers: boolean;
   size: SizeType;
+  translations: Translation[];
+  y: number;
+  zoom: { linear: number };
   zoomed: boolean;
-  bpsPerBlock: number;
 }
-interface SeqBlockState {}
 
 /**
  * SeqBlock
@@ -65,7 +65,7 @@ interface SeqBlockState {}
  * the sequence, and flair around it including the
  * complementary sequence, sequence index, and anotations *
  */
-export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBlockState> {
+export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   static defaultProps = {};
 
   componentWillUnmount = () => {
@@ -316,7 +316,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBloc
             selectEdgeHeight={selectEdgeHeight}
           />
           <Find
-            {...this.props}
             filteredRows={filteredSearchRows}
             findXAndWidth={this.findXAndWidth}
             indexYDiff={indexYDiff}
@@ -324,8 +323,12 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBloc
             seqBlockRef={this}
             lastBase={lastBase}
           />
-          <Annotations
-            {...this.props}
+          <AnnotationRows
+            bpsPerBlock={this.props.bpsPerBlock}
+            elementHeight={elementHeight}
+            firstBase={firstBase}
+            inputRef={inputRef}
+            annotationRows={annotationRows}
             findXAndWidth={this.findXAndWidth}
             lastBase={lastBase}
             yDiff={annYDiff}
@@ -334,22 +337,32 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBloc
           />
           {showPrimers && (
             <Primers
-              {...this.props}
-              findXAndWidth={this.findXAndWidth}
-              firstBase={firstBase}
-              lastBase={lastBase}
-              yDiff={forwardPrimerYDiff}
-              direction={1}
-              seqBlockRef={this}
-              fullSeq={fullSeq}
+              showPrimers={showPrimers}
+              elementHeight={elementHeight}
+              inputRef={inputRef}
+              onUnmount={onUnmount}
+              forwardPrimerRows={forwardPrimerRows}
+              reversePrimerRows={forwardPrimerRows}
               charWidth={charWidth}
+              direction={1}
               fontSize={seqFontSize}
+              findXAndWidth={this.findXAndWidth}
+              fullSeq={fullSeq}
+              lastBase={lastBase}
+              seqBlockRef={this}
+              yDiff={forwardPrimerYDiff}
               zoomed={zoomed}
+              firstBase={firstBase}
             />
           )}
           {showPrimers && (
             <Primers
-              {...this.props}
+              showPrimers={showPrimers}
+              elementHeight={elementHeight}
+              inputRef={inputRef}
+              onUnmount={onUnmount}
+              forwardPrimerRows={forwardPrimerRows}
+              reversePrimerRows={forwardPrimerRows}
               findXAndWidth={this.findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
@@ -364,7 +377,11 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps, SeqBloc
           )}
           {showIndex && (
             <IndexRow
-              {...this.props}
+              zoom={this.props.zoom}
+              showIndex={showIndex}
+              lineHeight={lineHeight}
+              seq={seq}
+              size={size}
               firstBase={firstBase}
               lastBase={lastBase}
               transform={`translate(0, ${indexRowYDiff})`}

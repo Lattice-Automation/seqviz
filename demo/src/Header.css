@@ -146,8 +146,7 @@ input#part-input {
   background: #f0f0f0;
   border-radius: 0.25rem;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
-    0 1px 2px rgba(124, 124, 124, 0.24);
+  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24);
 }
 #meta-button:hover {
   background: #e0e0e0 !important;
@@ -161,8 +160,7 @@ input#part-input {
   background-color: #14b7db !important;
   color: white !important;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12),
-    0 1px 2px rgba(124, 124, 124, 0.24) !important;
+  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24) !important;
 }
 
 #header-meta {

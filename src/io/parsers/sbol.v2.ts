@@ -37,7 +37,7 @@ export default async (sbol, fileName, colors = []) =>
       {
         xmlns: true,
         attrkey: "xml_tag",
-        tagNameProcessors: [xml2js.processors.stripPrefix]
+        tagNameProcessors: [xml2js.processors.stripPrefix],
       },
       (err, parsedSBOL) => {
         if (err) {
@@ -86,7 +86,7 @@ export default async (sbol, fileName, colors = []) =>
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
               start: first(range.start) - 1,
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-              end: first(range.end) - 1
+              end: first(range.end) - 1,
             });
           });
 
@@ -115,7 +115,7 @@ export default async (sbol, fileName, colors = []) =>
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
               compSeq,
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'never[]' is not assignable to type 'never'.
-              annotations
+              annotations,
             });
           }
         });

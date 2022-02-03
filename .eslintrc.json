@@ -18,6 +18,7 @@
     "@typescript-eslint/no-empty-function": "warn",
     "prefer-const": "warn",
     "prefer-rest-params": "warn",
-    "no-prototype-builtins": "warn"
+    "no-prototype-builtins": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn"
   }
 }

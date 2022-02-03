@@ -2,12 +2,12 @@ import * as React from "react";
 import { Annotation } from "../../../part";
 
 import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
-import { inputRefFuncType } from "./Translations";
+import { findXandWidthType, inputRefFuncType } from "./Translations";
 
 interface AnnotationRowsProps {
   annotationRows: Annotation[][];
   yDiff: number;
-  findXAndWidth: (n: number) => { x: number; width: number };
+  findXAndWidth: findXandWidthType;
   inputRef: inputRefFuncType;
   seqBlockRef: unknown;
   firstBase: number;
@@ -15,11 +15,9 @@ interface AnnotationRowsProps {
   fullSeq: string;
   elementHeight: number;
   bpsPerBlock: number;
-  width: number;
 }
-interface AnnotationRowsState {}
 
-export default class AnnotationRows extends React.PureComponent<AnnotationRowsProps, AnnotationRowsState> {
+export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
   render() {
     const {
       annotationRows,
@@ -32,7 +30,6 @@ export default class AnnotationRows extends React.PureComponent<AnnotationRowsPr
       fullSeq,
       elementHeight,
       bpsPerBlock,
-      width,
     } = this.props;
 
     return (
@@ -45,7 +42,6 @@ export default class AnnotationRows extends React.PureComponent<AnnotationRowsPr
               key={`ann-row-${y}${firstBase}${lastBase}`}
               annotations={a}
               y={y}
-              width={width}
               height={elementHeight}
               inputRef={inputRef}
               seqBlockRef={seqBlockRef}
@@ -76,11 +72,10 @@ interface AnnotationRowProps {
   lastBase: number;
   seqBlockRef: unknown;
   height: number;
-  width: number;
   y: number;
 }
-interface AnnotationRowState {}
-class AnnotationRow extends React.PureComponent<AnnotationRowProps, AnnotationRowState> {
+
+class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
   hoverOtherAnnotationRows = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < elements.length; i += 1) {
@@ -301,6 +296,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps, AnnotationRo
   };
 
   render() {
+    // @ts-ignore
     const { annotations, width, y } = this.props;
 
     const height = this.props.height * 0.8;

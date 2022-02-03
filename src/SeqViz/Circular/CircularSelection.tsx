@@ -28,7 +28,6 @@ interface CircularSelectionProps {
   totalRows: number;
   seq: string;
 }
-interface CircularSelectionState {}
 
 /**
  * renders the selection range of the plasmid viewer
@@ -38,7 +37,7 @@ interface CircularSelectionState {}
  * if nothing is selected, it should just be the single cursor
  * without a middle highlighted region
  */
-export default class CircularSelection extends React.PureComponent<CircularSelectionProps, CircularSelectionState> {
+export default class CircularSelection extends React.PureComponent<CircularSelectionProps> {
   static contextType = SelectionContext;
 
   render() {

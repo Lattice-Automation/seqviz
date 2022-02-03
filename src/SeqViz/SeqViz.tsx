@@ -12,6 +12,7 @@ import SeqViewer from "./SeqViewer";
 import { Annotation, Element, Part } from "../part";
 
 import "./style.css";
+import { CutSite } from "./Circular/Circular";
 
 export interface SeqVizSelection {
   name: string;
@@ -207,7 +208,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   cut = (part: { seq: string } | null = null) => {
     const { enzymes, seq, enzymesCustom } = this.props;
 
-    let cutSites: Element[] = [];
+    let cutSites: CutSite[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }

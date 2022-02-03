@@ -30,7 +30,7 @@ interface IndexViewerProps {
   totalRows: number;
   showIndex: boolean;
 }
-interface IndexViewerState {}
+
 /**
  * this component renders the following:
  * 		1. the name (center or bottom)
@@ -42,7 +42,7 @@ interface IndexViewerState {}
  * part need to be pushed to the bottom of the circular viewer if there
  * are too many elements in the circular viewer and the name won't fit
  */
-export default class IndexViewer extends React.PureComponent<IndexViewerProps, IndexViewerState> {
+export default class IndexViewer extends React.PureComponent<IndexViewerProps> {
   static contextType = CentralIndexContext;
   static context: any;
 

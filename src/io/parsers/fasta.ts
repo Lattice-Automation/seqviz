@@ -18,7 +18,7 @@ export default async (text, fileName) => {
 
         return {
           name,
-          seq
+          seq,
         };
       })
       .filter(p => p.name && p.seq);
@@ -34,8 +34,8 @@ export default async (text, fileName) => {
     return [
       {
         name,
-        seq
-      }
+        seq,
+      },
     ];
   }
   // assume that it's a no name FASTA. Ie it's just a file with dna and no header
@@ -46,7 +46,7 @@ export default async (text, fileName) => {
   return [
     {
       name,
-      seq
-    }
+      seq,
+    },
   ];
 };
