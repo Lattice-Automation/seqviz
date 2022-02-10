@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display minimal",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "format": "npx prettier ./src/**/* --config package.json",
+    "format": "npx prettier ./src/**/* --config package.json --write",
     "markdown": "node ./config/scripts/markdown.js ./README.md",
     "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
     "major": "npm run test:ci && npm version major && npm run update",
@@ -176,7 +176,7 @@
     "postcss-normalize": "^8.0.1",
     "postcss-preset-env": "^6.7.0",
     "postcss-safe-parser": "^4.0.2",
-    "prettier": "2.5.1",
+    "prettier": "^2.5.1",
     "react": "^17.0.0",
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^11.0.0",

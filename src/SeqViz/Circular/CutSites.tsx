@@ -1,7 +1,7 @@
 import * as React from "react";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
-import { Coor, CutSite } from "./Circular";
-interface CutSitesViewerProps {
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
+import { Coor, ICutSite } from "./Circular";
+interface CutSitesProps {
   radius: number;
   center: Coor;
   lineHeight: number;
@@ -19,12 +19,12 @@ interface CutSitesViewerProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   selectionRows: number;
-  cutSites: CutSite[];
+  cutSites: ICutSite[];
 }
 
-export default class CutSitesViewer extends React.PureComponent<CutSitesViewerProps> {
+export default class CutSites extends React.PureComponent<CutSitesProps> {
   calculateLinePath = (index: number, startRadius: number, endRadius: number) => {
     const { findCoor } = this.props;
     const lineStart = findCoor(index, startRadius);
@@ -34,7 +34,7 @@ export default class CutSitesViewer extends React.PureComponent<CutSitesViewerPr
     return linePath;
   };
 
-  displayCutSite = (cutSite: CutSite) => {
+  displayCutSite = (cutSite: ICutSite) => {
     const { radius, lineHeight, seqLength, getRotation, inputRef, generateArc } = this.props;
     const { id, start } = cutSite;
     let { fcut, rcut, end } = cutSite;

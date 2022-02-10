@@ -1,7 +1,7 @@
 import * as React from "react";
-
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
+import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
 
 export interface Translation {
   id: string;
@@ -11,24 +11,14 @@ export interface Translation {
   direction: -1 | 1;
 }
 
-export type inputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
-
-export type findXandWidthType = (
-  n1: number | undefined,
-  n2?: number
-) => {
-  x: number;
-  width: number;
-};
-
 interface TranslationRowsProps {
   bpsPerBlock: number;
   charWidth: number;
   elementHeight: number;
-  findXAndWidth: (n: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   lastBase: number;
   onUnmount: (a: unknown) => void;
   seqBlockRef: unknown;
@@ -100,11 +90,12 @@ interface TranslationRowProps {
   lastBase: number;
   bpsPerBlock: number;
   charWidth: number;
-  findXAndWidth: findXandWidthType;
+  findXAndWidth: FindXAndWidthType;
   y: number;
   height: number;
   id?: string;
 }
+
 class TranslationRow extends React.Component<TranslationRowProps> {
   static textProps = {
     dominantBaseline: "middle",

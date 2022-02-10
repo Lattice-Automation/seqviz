@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SearchResult } from "../../utils/search";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor } from "./Circular";
 
 interface CircularFindProps {
@@ -22,7 +22,7 @@ interface CircularFindProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   onUnmount: unknown;
   totalRows: number;
   seq: string;

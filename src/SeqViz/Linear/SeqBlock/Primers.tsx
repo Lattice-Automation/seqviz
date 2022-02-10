@@ -1,10 +1,8 @@
 import * as React from "react";
-
 import randomid from "../../../utils/randomid";
-
 import { reverse } from "../../../utils/sequence";
 import { Primer } from "../../Circular/Circular";
-import { inputRefFuncType } from "./Translations";
+import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
 
 interface Mismatch {
   start: number;
@@ -18,13 +16,13 @@ interface PrimerRowProps {
   charWidth: number;
   direction: 1 | -1;
   elementHeight: number;
-  findXAndWidth: (firstIndex?: number, lastIndex?: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fontSize: number;
   forwardPrimerRows: unknown;
   fullSeq: string;
   height: number;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   lastBase: number;
   onUnmount: (a: unknown) => void;
   reversePrimerRows: unknown;
@@ -578,12 +576,12 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
 interface PrimerRowsProps {
   charWidth: number;
   direction: 1 | -1;
-  findXAndWidth: (firstIndex?: number, lastIndex?: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fontSize: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   lastBase: number;
   onUnmount: (a: unknown) => void;
   reversePrimerRows: Primer[];

@@ -1,9 +1,7 @@
 import * as React from "react";
-
-import CentralIndexContext from "../handlers/centralIndex";
 import isEqual from "../../utils/isEqual";
 import { SizeType } from "../Circular/Circular";
-import SeqBlock from "./SeqBlock/SeqBlock";
+import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollProps {
   seqBlocks: JSX.Element[];
@@ -12,6 +10,7 @@ interface InfiniteScrollProps {
   size: SizeType;
   bpsPerBlock: number;
 }
+
 interface InfiniteScrollState {
   centralIndex: number;
   visibleBlocks: number[];

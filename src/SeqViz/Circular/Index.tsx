@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import CentralIndexContext from "../handlers/centralIndex";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor, SizeType } from "./Circular";
 interface IndexViewerProps {
   radius: number;
@@ -21,7 +21,7 @@ interface IndexViewerProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   seq: string;
   compSeq: string;
   name: string;

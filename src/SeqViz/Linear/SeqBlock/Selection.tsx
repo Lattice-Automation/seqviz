@@ -1,12 +1,11 @@
 import * as React from "react";
-
-import { SelectionContext } from "../../handlers/selection";
 import randomid from "../../../utils/randomid";
+import { SelectionContext } from "../../handlers/selection";
 import { SeqVizSelection } from "../../SeqViz";
-import { inputRefFuncType } from "./Translations";
+import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
 
 interface EdgesProps {
-  findXAndWidth: (startEdge?: number, endEdge?: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   selectEdgeHeight: number;
   firstBase: number;
   lastBase: number;
@@ -99,13 +98,13 @@ export class Edges extends React.PureComponent<EdgesProps> {
   }
 }
 interface BlockProps {
-  findXAndWidth: (startEdge?: number, endEdge?: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   selectHeight: number;
   firstBase: number;
   lastBase: number;
   fullSeq: string;
   selection: SeqVizSelection;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   onUnmount: (a: string) => void;
 }
 

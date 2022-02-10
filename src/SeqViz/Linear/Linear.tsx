@@ -4,13 +4,13 @@ import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
 import { createLinearTranslations } from "../../utils/sequence";
-import { Coor, CutSite, Primer, SizeType } from "../Circular/Circular";
+import { Coor, ICutSite, Primer, SizeType } from "../Circular/Circular";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import { SeqVizSelection } from "../SeqViz";
 import InfiniteScroll from "./InfiniteScroll";
-import SeqBlock from "./SeqBlock/SeqBlock";
-import { inputRefFuncType, Translation } from "./SeqBlock/Translations";
+import SeqBlock, { InputRefFuncType } from "./SeqBlock/SeqBlock";
+import { Translation } from "./SeqBlock/Translations";
 
 interface LinearProps {
   annotations: Annotation[];
@@ -21,7 +21,7 @@ interface LinearProps {
   seqFontSize: number;
   center: Coor;
   compSeq: string;
-  cutSites: CutSite[];
+  cutSites: ICutSite[];
   elementHeight: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   generateArc: (args: {
@@ -35,7 +35,7 @@ interface LinearProps {
     offset?: number;
   }) => string;
   getRotation: (index: number) => string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   lineHeight: number;
   onUnmount: (a: unknown) => void;
   primers: Primer[];

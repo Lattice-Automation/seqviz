@@ -1,18 +1,17 @@
 import * as React from "react";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
+import { Annotation, Element, Part } from "../part";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
+import { ICutSite } from "./Circular/Circular";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, defaultSelection } from "./handlers/selection";
+import { defaultSelection, SelectionContext } from "./handlers/selection";
 import SeqViewer from "./SeqViewer";
-import { Annotation, Element, Part } from "../part";
-
 import "./style.css";
-import { CutSite } from "./Circular/Circular";
 
 export interface SeqVizSelection {
   name: string;
@@ -208,7 +207,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   cut = (part: { seq: string } | null = null) => {
     const { enzymes, seq, enzymesCustom } = this.props;
 
-    let cutSites: CutSite[] = [];
+    let cutSites: ICutSite[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }

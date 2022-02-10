@@ -1,10 +1,9 @@
 import * as React from "react";
-
-import CentralIndexContext from "../handlers/centralIndex";
-import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
-import { Coor, SizeType } from "./Circular";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
 import { Annotation, Label } from "../../part";
+import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
+import CentralIndexContext from "../handlers/centralIndex";
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
+import { Coor, SizeType } from "./Circular";
 
 interface AnnotationsViewerProps {
   radius: number;
@@ -24,7 +23,7 @@ interface AnnotationsViewerProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   annotations: Annotation[];
   size: SizeType;
   rowsToSkip: number;
@@ -33,7 +32,7 @@ interface AnnotationsViewerProps {
 
 /**
  * Used to build up all the path elements. Does not include a display
- * of the annotation name or a line connecting name to annotatino
+ * of the annotation name or a line connecting name to annotation
  *
  * one central consideration here is that annotations might overlap with one another.
  * to avoid having those overalp visually, annotations are first moved into rows,
@@ -42,7 +41,7 @@ interface AnnotationsViewerProps {
  *
  * @type {Function}
  */
-export default class AnnotationsViewer extends React.PureComponent<AnnotationsViewerProps> {
+export default class Annotations extends React.PureComponent<AnnotationsViewerProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className);

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Label } from "../../part";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
-
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { CHAR_WIDTH, Coor, SizeType } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
@@ -26,7 +25,7 @@ interface LabelsProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
 }
 interface LabelsState {
   hoveredGroup: unknown;
@@ -41,14 +40,14 @@ interface LabelsState {
  * of the viewer, for scaling these names and positioning in the Y-direction
  * to avoid this overlap problem
  */
-export default class LabelsViewer extends React.Component<LabelsProps, LabelsState> {
+export default class Labels extends React.Component<LabelsProps, LabelsState> {
   static getDerivedStateFromProps = (nextProps: LabelsProps, prevState: LabelsState) => {
     // I'm storing the name position groups in state because hovering and
     // leaving a hover both trigger a change in whether to render and show
     // the annotation block, it would be expensive to regroup labels
     // on every hover event
     return {
-      labelGroups: LabelsViewer.groupOverlappingLabels(nextProps),
+      labelGroups: Labels.groupOverlappingLabels(nextProps),
       hoveredGroup: prevState.hoveredGroup,
     };
   };

@@ -2,7 +2,7 @@ import { string } from "prop-types";
 import * as React from "react";
 
 import { SelectionContext } from "../handlers/selection";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor } from "./Circular";
 
 interface CircularSelectionProps {
@@ -23,7 +23,7 @@ interface CircularSelectionProps {
     offset?: number;
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   onUnmount: unknown;
   totalRows: number;
   seq: string;

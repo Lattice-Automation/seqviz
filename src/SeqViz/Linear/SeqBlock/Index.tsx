@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SizeType } from "../../Circular/Circular";
-import { findXandWidthType } from "./Translations";
+import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
   seq: string;
@@ -8,7 +8,7 @@ interface IndexProps {
   firstBase: number;
   lineHeight: number;
   size: SizeType;
-  findXAndWidth: findXandWidthType;
+  findXAndWidth: FindXAndWidthType;
   transform: string | undefined;
   showIndex: boolean;
   lastBase: number;

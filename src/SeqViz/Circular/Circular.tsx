@@ -1,19 +1,18 @@
 import * as React from "react";
 import { Annotation, Label } from "../../part";
-
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
-import { inputRefFuncType } from "../Linear/SeqBlock/Translations";
-import AnnotationsViewer from "./AnnotationsViewer";
-import CutSitesViewer from "./CutSitesViewer";
-import Find from "./Find";
-import IndexViewer from "./Index";
-import LabelsViewer from "./LabelsViewer";
+import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
+import Annotations from "./Annotations";
 import Selection from "./CircularSelection";
+import CutSites from "./CutSites";
+import Find from "./Find";
+import Index from "./Index";
+import Labels from "./Labels";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -22,7 +21,7 @@ export const CHAR_WIDTH = 7.801;
 export interface Primer {
   direction: 1 | -1;
 }
-export interface CutSite {
+export interface ICutSite {
   fcut: number;
   rcut: number;
   start: number;
@@ -45,13 +44,13 @@ interface CircularProps {
   annotations: Annotation[];
   seq: string;
   primers: Primer[];
-  cutSites: CutSite[];
+  cutSites: ICutSite[];
   radius: number;
   center: { x: number; y: number };
   showPrimers: boolean;
   showIndex: boolean;
   name: string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   mouseEvent: React.MouseEventHandler;
   onUnmount: () => void;
   yDiff: number;
@@ -365,7 +364,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...general} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
-          <AnnotationsViewer
+          <Annotations
             {...general}
             annotations={annotationsInRows}
             size={size}
@@ -373,8 +372,8 @@ class Circular extends React.Component<CircularProps, CircularState> {
             inlinedAnnotations={inlinedLabels}
           />
           <Find {...general} search={search} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
-          <CutSitesViewer {...general} selectionRows={4} cutSites={cutSites} />
-          <IndexViewer
+          <CutSites {...general} selectionRows={4} cutSites={cutSites} />
+          <Index
             {...general}
             name={name}
             size={size}
@@ -384,7 +383,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
             totalRows={totalRows}
             showIndex={showIndex}
           />
-          <LabelsViewer {...general} labels={outerLabels} size={size} yDiff={yDiff} />
+          <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>
       </svg>
     );

@@ -1,12 +1,11 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
-
-import isEqual from "../utils/isEqual";
-import CircularViewer, { CutSite } from "./Circular/Circular";
-import LinearViewer from "./Linear/Linear";
-import CentralIndexContext from "./handlers/centralIndex";
-import { SearchResult } from "../utils/search";
 import { Annotation } from "../part";
+import isEqual from "../utils/isEqual";
+import { SearchResult } from "../utils/search";
+import Circular, { ICutSite } from "./Circular/Circular";
+import CentralIndexContext from "./handlers/centralIndex";
+import Linear from "./Linear/Linear";
 import { SeqVizSelection } from "./SeqViz";
 
 interface SeqViewerProps {
@@ -20,7 +19,7 @@ interface SeqViewerProps {
   showComplement: boolean;
   name?: string;
   seq: string;
-  cutSites: CutSite[];
+  cutSites: ICutSite[];
   circular: boolean;
 }
 
@@ -155,7 +154,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
         {circular ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
-              <CircularViewer
+              <Circular
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
@@ -167,7 +166,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          <LinearViewer
+          <Linear
             {...this.props}
             {...this.state}
             {...this.linearProps()}

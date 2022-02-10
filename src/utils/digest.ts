@@ -5,7 +5,7 @@ import randomid from "./randomid";
 import { Annotation, Element, Part } from "../part";
 
 import { translateWildNucleotides } from "./sequence";
-import { CutSite } from "../SeqViz/Circular/Circular";
+import { ICutSite } from "../SeqViz/Circular/Circular";
 
 /**
  * cutSitesInRows
@@ -14,13 +14,13 @@ import { CutSite } from "../SeqViz/Circular/Circular";
  * with the sequence viewer
  *
  */
-export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): CutSite[] => {
+export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): ICutSite[] => {
   const seqToCut = (seq + seq).toUpperCase();
   const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
 
   // find all the cut sites for the given row
-  const cutSites: CutSite[] = Array.from(new Set(filteredEnzymes)).reduce((acc: CutSite[], e) => {
-    const cuts: CutSite[] = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
+  const cutSites: ICutSite[] = Array.from(new Set(filteredEnzymes)).reduce((acc: ICutSite[], e) => {
+    const cuts: ICutSite[] = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: randomid(),
@@ -36,7 +36,7 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
     return acc.concat(cuts);
   }, []);
 
-  const uniqueCuts: CutSite[] = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: ICutSite[] = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
   return uniqueCuts;
 };
 
@@ -51,7 +51,7 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
  * @param  {Number}  seqToCutLength [length of the sequence to be cut]
  * @return {[CutSite]} [the list of resulting cut and hang indexes]
  */
-const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): CutSite[] => {
+const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): ICutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -128,7 +128,7 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): C
   }
 
   // reduce so there's only one enzyme per template cut index
-  const uniqueCuts: CutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: ICutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
 
   // sort with increasing sequence cut index
 

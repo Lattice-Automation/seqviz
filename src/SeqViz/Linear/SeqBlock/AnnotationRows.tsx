@@ -1,14 +1,13 @@
 import * as React from "react";
 import { Annotation } from "../../../part";
-
 import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
-import { findXandWidthType, inputRefFuncType } from "./Translations";
+import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
 
 interface AnnotationRowsProps {
   annotationRows: Annotation[][];
   yDiff: number;
-  findXAndWidth: findXandWidthType;
-  inputRef: inputRefFuncType;
+  findXAndWidth: FindXAndWidthType;
+  inputRef: InputRefFuncType;
   seqBlockRef: unknown;
   firstBase: number;
   lastBase: number;
@@ -65,10 +64,10 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
 interface AnnotationRowProps {
   annotations: Annotation[];
   bpsPerBlock: number;
-  findXAndWidth: (n1?: number, n2?: number) => { x: number; width: number };
+  findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   lastBase: number;
   seqBlockRef: unknown;
   height: number;

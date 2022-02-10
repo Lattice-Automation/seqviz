@@ -1,17 +1,26 @@
 import * as React from "react";
-
-import { AnnotationRows } from "./AnnotationRows";
-import CutSiteRow from "./CutSites";
-import IndexRow from "./Index";
-import Find from "./Find";
-import Primers from "./Primers";
-import Selection from "./Selection";
-import TranslationRows, { inputRefFuncType, Translation } from "./Translations";
-import { CutSite, Primer, SizeType } from "../../Circular/Circular";
+import { MouseEventHandler } from "react";
 import { Annotation } from "../../../part";
 import { SearchResult } from "../../../utils/search";
+import { ICutSite, Primer, SizeType } from "../../Circular/Circular";
 import { SeqVizSelection } from "../../SeqViz";
-import { MouseEventHandler } from "react";
+import { AnnotationRows } from "./AnnotationRows";
+import CutSiteRow from "./CutSites";
+import Find from "./Find";
+import IndexRow from "./Index";
+import Primers from "./Primers";
+import Selection from "./Selection";
+import TranslationRows, { Translation } from "./Translations";
+
+export type InputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
+
+export type FindXAndWidthType = (
+  n1: number | undefined,
+  n2?: number
+) => {
+  x: number;
+  width: number;
+};
 
 interface SeqBlockPosition {
   x: number; // [the x positioning, from left...]
@@ -26,13 +35,13 @@ interface SeqBlockProps {
   bpsPerBlock: number;
   charWidth: number;
   compSeq: string;
-  cutSiteRows: CutSite[];
+  cutSiteRows: ICutSite[];
   elementHeight: number;
   firstBase: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
   id: string;
-  inputRef: inputRefFuncType;
+  inputRef: InputRefFuncType;
   key: string;
   lineHeight: number;
   mouseEvent: MouseEventHandler<SVGSVGElement>;
@@ -81,13 +90,13 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
    */
 
   /**
-   * findXAndWidth
-   *
-   * a helper method that's used in several of the child components to figure
-   * out how far from the left the element is and how wide it should be
+ * findXAndWidth
+ *
+ * a helper method that's used in several of the child components to figure
+ * out how far from the left the element is and how wide it should be
 
-   */
-  findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
+ */
+  findXAndWidth: FindXAndWidthType = (firstIndex = 0, lastIndex = 0) => {
     const {
       fullSeq: { length: seqLength },
       firstBase,
