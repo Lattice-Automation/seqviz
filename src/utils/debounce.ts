@@ -8,10 +8,10 @@
  */
 export default (func, wait, immediate = true) => {
   let timeout;
-  return function () {
+  return function() {
     const args = arguments;
 
-    const later = function () {
+    const later = function() {
       timeout = null;
       if (!immediate) func.apply(this, args);
     };

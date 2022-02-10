@@ -43,7 +43,7 @@ const DNAComplement = {
   X: "X",
   x: "x",
   U: "A",
-  u: "a",
+  u: "a"
 };
 
 /**
@@ -75,7 +75,10 @@ export const dnaComplement = (origSeq: string): { seq: string; compSeq: string }
  */
 export const reverseComplement = inputSeq => {
   const { compSeq } = dnaComplement(inputSeq);
-  return compSeq.split("").reverse().join("");
+  return compSeq
+    .split("")
+    .reverse()
+    .join("");
 };
 
 export const extractDate = data => {
@@ -131,5 +134,5 @@ export const partFactory = () => ({
   primers: [],
   cutSites: [],
   note: "",
-  source: { name: "", file: "" },
+  source: { name: "", file: "" }
 });

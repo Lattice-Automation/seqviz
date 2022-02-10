@@ -92,7 +92,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       charWidth,
       size,
       zoom: { linear: zoom },
-      Linear: true,
+      Linear: true
     };
   };
 
@@ -108,7 +108,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   circularProps = () => {
     const {
       size,
-      seq: { length: seqLength },
+      seq: { length: seqLength }
     } = this.props;
 
     let zoom = this.props.zoom.circular || 0;
@@ -117,7 +117,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
 
     const center = {
       x: size.width / 2,
-      y: size.height / 2,
+      y: size.height / 2
     };
 
     const limitingDim = Math.min(size.height, size.width);
@@ -142,7 +142,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       size,
       zoom: { circular: zoom },
       bpsOnArc,
-      center,
+      center
     };
   };
 

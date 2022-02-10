@@ -12,18 +12,18 @@ describe("DNATools: Digest", () => {
         start: 5,
         end: 15,
         name: "backbone",
-        type: "CDS",
+        type: "CDS"
       },
       {
         start: 15,
         end: 3,
         name: "promoter",
-        type: "Promoter",
-      },
+        type: "Promoter"
+      }
     ],
     translations: [],
     type: "Promoter",
-    circular: false,
+    circular: false
   });
 
   test("should adjust the annotations of a cut part", () => {
@@ -32,7 +32,7 @@ describe("DNATools: Digest", () => {
       start: 0,
       end: 9,
       name: "backbone",
-      type: "CDS",
+      type: "CDS"
     });
   });
 
@@ -40,7 +40,7 @@ describe("DNATools: Digest", () => {
     const { annotations, ...rest } = ecoriTestPart();
     const part = {
       ...partFactory(),
-      ...rest,
+      ...rest
     };
     const cutParts = digest(["EcoRI"], part); // no annotations
     expect(cutParts[0].annotations).toEqual([]);
@@ -57,7 +57,7 @@ describe("DNATools: Digest", () => {
     const { annotations, translations, ...rest } = ecoriTestPart();
     const part = {
       ...partFactory(),
-      ...rest,
+      ...rest
     };
 
     expect(() => {
@@ -73,7 +73,7 @@ describe("DNATools: Digest", () => {
       ...partFactory(),
       seq: "TTAGGTCTCGGGGGAA",
       compSeq: "AATCCAGAGCCCCCTT",
-      circular: false,
+      circular: false
     };
 
     const digestResults = digest(["BsaI"], part);
@@ -82,12 +82,12 @@ describe("DNATools: Digest", () => {
       expect.arrayContaining([
         expect.objectContaining({
           seq: "TTAGGTCTCG****",
-          compSeq: "AATCCAGAGCCCCC",
+          compSeq: "AATCCAGAGCCCCC"
         }),
         expect.objectContaining({
           seq: "GGGGAA",
-          compSeq: "****TT",
-        }),
+          compSeq: "****TT"
+        })
       ])
     );
   });

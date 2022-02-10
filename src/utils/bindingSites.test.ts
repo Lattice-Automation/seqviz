@@ -17,7 +17,7 @@ describe("Primer binding sites", () => {
     seq: "TTTTttttCCCCcccc",
     penalty: 0,
     strict: false,
-    __typename: "Primer",
+    __typename: "Primer"
   };
   const testPrimerTwo = {
     overhang: "",
@@ -34,7 +34,7 @@ describe("Primer binding sites", () => {
     seq: "TTTTTTTccCCCCgggg",
     penalty: 0,
     strict: false,
-    __typename: "Primer",
+    __typename: "Primer"
   };
 
   const testPrimerThree = {
@@ -52,7 +52,7 @@ describe("Primer binding sites", () => {
     seq: "ttaaaaaatttttttt",
     penalty: 0,
     strict: false,
-    __typename: "Primer",
+    __typename: "Primer"
   };
 
   it("finds binding sites", () => {
