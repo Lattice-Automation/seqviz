@@ -24,7 +24,7 @@ jobs:
       - name: Run Prettier formatter
         run: npx prettier --check ./src/**
       - name: Run Eslint
-        run: npx eslint ./src --quiet
+        run: npx eslint --ext .ts,.tsx,.js,.jsx --quiet
       - name: Run Unit Tests and build
         run: npm run test:ci
     # - name: Run Integration Tests
