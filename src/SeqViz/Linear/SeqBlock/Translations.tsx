@@ -29,7 +29,7 @@ export default class TranslationRows extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
       findXAndWidth,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
-      elementHeight
+      elementHeight,
     } = this.props;
 
     return (
@@ -78,8 +78,8 @@ class TranslationRow extends React.Component {
     style: {
       color: "black",
       fontSize: 13,
-      fontWeight: 400
-    }
+      fontWeight: 400,
+    },
   };
 
   static aaProps = {
@@ -87,8 +87,8 @@ class TranslationRow extends React.Component {
     style: {
       cursor: "pointer",
       strokeWidth: 0.8,
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   };
 
   AAs = [];
@@ -144,7 +144,7 @@ class TranslationRow extends React.Component {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
-      bpsPerBlock
+      bpsPerBlock,
     } = this.props;
 
     const { id, start, end, AAseq, direction } = translation;

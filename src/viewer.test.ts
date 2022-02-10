@@ -23,10 +23,10 @@ const defaultOptions = {
       name: "test_annotation",
       start: 0,
       end: 15,
-      direction: "FORWARD" // old prop-type, still supported; now using -1, 0, 1
-    }
+      direction: "FORWARD", // old prop-type, still supported; now using -1, 0, 1
+    },
   ],
-  style: { height: 500, width: 800 }
+  style: { height: 500, width: 800 },
 };
 
 describe("Viewer rendering (JS)", () => {
@@ -42,7 +42,7 @@ describe("Viewer rendering (JS)", () => {
     let viewer = Viewer(div, {
       ...defaultOptions,
       part: "BBa_K1598008",
-      backbone: "pSB1C3"
+      backbone: "pSB1C3",
     });
 
     viewer.render();
@@ -61,7 +61,7 @@ describe("Viewer rendering (JS)", () => {
     const div = document.createElement("div");
     let viewer = Viewer(div, {
       name: "seq_name",
-      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca"
+      seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
     });
 
     viewer.render();
@@ -72,7 +72,7 @@ describe("Viewer rendering (JS)", () => {
     let viewer = Viewer(div, {
       name: "seq_name",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
-      zoom: { linear: -10, circular: 150 }
+      zoom: { linear: -10, circular: 150 },
     });
 
     viewer.render();

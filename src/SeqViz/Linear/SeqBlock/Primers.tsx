@@ -29,7 +29,7 @@ class PrimerRow extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'fontSize' does not exist on type 'Readon... Remove this comment to see the full error message
       fontSize,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
-      zoomed
+      zoomed,
     } = this.props;
     const primerUUID = randomid();
     const { direction, start = 0, end = 0, sequence, id } = singlePrimer;
@@ -84,7 +84,7 @@ class PrimerRow extends React.PureComponent {
     height *= 0.4;
 
     const rectProps = {
-      shapeRendering: "geometricPrecision"
+      shapeRendering: "geometricPrecision",
     };
 
     const textProps = {
@@ -94,8 +94,8 @@ class PrimerRow extends React.PureComponent {
       textRendering: "optimizeLegibility",
       style: {
         color: "black",
-        fontWeight: 150
-      }
+        fontWeight: 150,
+      },
     };
 
     const cW = 4; // jagged cutoff width
@@ -442,14 +442,14 @@ class PrimerRow extends React.PureComponent {
           start: start,
           end: end,
           type: "PRIMER",
-          element: seqBlockRef
+          element: seqBlockRef,
         })}
         className={id}
         style={{
           fillOpacity: 0.1,
           cursor: "pointer",
           stroke: "#1b1d21",
-          strokeWidth: 0.5
+          strokeWidth: 0.5,
         }}
         {...rectProps}
         d={linePath}
@@ -585,7 +585,7 @@ export default class PrimerRows extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
       zoomed,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'fontSize' does not exist on type 'Readon... Remove this comment to see the full error message
-      fontSize
+      fontSize,
     } = this.props;
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
     let { elementHeight } = this.props;

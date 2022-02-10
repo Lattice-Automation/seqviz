@@ -25,8 +25,8 @@ export default async text => {
     annotations: partJSON.annotations.map(a => ({
       ...a,
       id: randomid(),
-      direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE"
-    }))
+      direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE",
+    })),
   };
 
   return [part];

@@ -26,7 +26,7 @@ const defaultProps = {
   zoomed: false,
   size: { height: 600, width: 1200 },
   inputRef: () => {},
-  mouseEvent: () => {}
+  mouseEvent: () => {},
 };
 
 /**
@@ -54,8 +54,8 @@ describe("SeqBlock", () => {
             direction: 1,
             name: "RBS",
             type: "RBS",
-            color: "#80D849"
-          }
+            color: "#80D849",
+          },
         ]}
       />
     );

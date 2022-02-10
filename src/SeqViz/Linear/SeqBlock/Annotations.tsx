@@ -24,7 +24,7 @@ export default class AnnotationRows extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
-      elementHeight
+      elementHeight,
     } = this.props;
 
     return (
@@ -139,7 +139,7 @@ class AnnotationRow extends React.PureComponent {
     const height = this.props.height * 0.8;
 
     const rectProps = {
-      shapeRendering: "geometricPrecision"
+      shapeRendering: "geometricPrecision",
     };
 
     const textProps = {
@@ -151,8 +151,8 @@ class AnnotationRow extends React.PureComponent {
       y: height / 2 + 1.4,
       style: {
         color: "black",
-        fontWeight: 400
-      }
+        fontWeight: 400,
+      },
     };
 
     const cW = 4; // jagged cutoff width
@@ -238,7 +238,7 @@ class AnnotationRow extends React.PureComponent {
           start: start,
           end: end,
           type: "ANNOTATION",
-          element: seqBlockRef
+          element: seqBlockRef,
         })}
         className={a.id}
         style={{
@@ -246,7 +246,7 @@ class AnnotationRow extends React.PureComponent {
           cursor: "pointer",
           fill: color,
           stroke: strokeColor,
-          strokeWidth: a.type === "insert" ? 2.4 : 0.5
+          strokeWidth: a.type === "insert" ? 2.4 : 0.5,
         }}
         {...rectProps}
         d={linePath}

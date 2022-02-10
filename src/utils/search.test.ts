@@ -12,7 +12,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 6,
       end: 10,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -27,7 +27,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 6,
       end: 10,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -43,7 +43,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 6,
       end: 10,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -58,7 +58,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 6,
       end: 10,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -73,7 +73,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 6,
       end: 10,
-      direction: -1
+      direction: -1,
     });
   });
 
@@ -88,7 +88,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -104,7 +104,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -119,7 +119,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -134,7 +134,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
   });
 
@@ -150,7 +150,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -168,7 +168,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -185,7 +185,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -202,7 +202,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 11,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -219,7 +219,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 12,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -237,7 +237,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 12,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -254,7 +254,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 12,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });
@@ -271,7 +271,7 @@ describe("Search", () => {
     expect(results[0]).toMatchObject({
       start: 4,
       end: 12,
-      direction: 1
+      direction: 1,
     });
     expect(resultsNull.length).toEqual(0);
   });

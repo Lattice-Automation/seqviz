@@ -52,7 +52,7 @@ export default class Index extends React.PureComponent {
 
   state = {
     ticks: [],
-    indexInc: 10
+    indexInc: 10,
   };
 
   /**
@@ -115,7 +115,7 @@ export default class Index extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalRows' does not exist on type 'Reado... Remove this comment to see the full error message
       totalRows,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'showIndex' does not exist on type 'Reado... Remove this comment to see the full error message
-      showIndex
+      showIndex,
     } = this.props;
     const { ticks } = this.state;
 
@@ -151,11 +151,11 @@ export default class Index extends React.PureComponent {
       nameCoorRadius > mostInwardElementRadius
         ? {
             x: center.x,
-            y: size.height - nameYAdjust - yDiff
+            y: size.height - nameYAdjust - yDiff,
           }
         : {
             x: center.x,
-            y: center.y - ((nameSpans.length - 1) / 2) * 25 // shift the name up for >1 rows of text
+            y: center.y - ((nameSpans.length - 1) / 2) * 25, // shift the name up for >1 rows of text
           };
 
     // these are just created once, but are rotated to each position along the plasmid
@@ -166,27 +166,27 @@ export default class Index extends React.PureComponent {
     const nameStyle = {
       fontSize: 20,
       textAnchor: "middle",
-      fontWeight: 500
+      fontWeight: 500,
     };
     const subtitleStyle = {
       fontSize: 14,
       textAnchor: "middle",
-      fill: "gray"
+      fill: "gray",
     };
     const indexCircleStyle = {
       fill: "transparent",
       stroke: "#73777D",
-      strokeWidth: 3
+      strokeWidth: 3,
     };
     const tickLineStyle = {
       fill: "transparent",
       stroke: "black",
       strokeWidth: 1,
-      shapeRendering: "geometricPrecision"
+      shapeRendering: "geometricPrecision",
     };
     const tickTextStyle = {
       textAnchor: "middle",
-      fontWeight: 300
+      fontWeight: 300,
     };
 
     // generate the full circle around the edge of the plasmid
@@ -194,7 +194,7 @@ export default class Index extends React.PureComponent {
       innerRadius: radius,
       outerRadius: radius,
       length: seqLength / 2,
-      largeArc: true
+      largeArc: true,
     });
     return (
       <g className="la-vz-circular-index">

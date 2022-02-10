@@ -56,7 +56,7 @@ export default class SeqBlock extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
-      bpsPerBlock
+      bpsPerBlock,
     } = this.props;
 
     const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
@@ -186,7 +186,7 @@ export default class SeqBlock extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'charWidth' does not exist on type 'Reado... Remove this comment to see the full error message
       charWidth,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoomed' does not exist on type 'Readonly... Remove this comment to see the full error message
-      zoomed
+      zoomed,
     } = this.props;
 
     if (!size.width || !size.height) return null;
@@ -194,7 +194,7 @@ export default class SeqBlock extends React.PureComponent {
     const svgProps = {
       display: "block",
       height: blockHeight,
-      width: size.width
+      width: size.width,
     };
     const textProps = {
       dominantBaseline: "middle",
@@ -202,7 +202,7 @@ export default class SeqBlock extends React.PureComponent {
       lengthAdjust: "spacing",
       textAnchor: "start",
       textLength: size.width,
-      textRendering: "optimizeLegibility"
+      textRendering: "optimizeLegibility",
     };
 
     const lastBase = firstBase + seq.length;
@@ -211,7 +211,7 @@ export default class SeqBlock extends React.PureComponent {
       start: firstBase,
       end: lastBase,
       type: "SEQ",
-      element: this
+      element: this,
     };
 
     // height and yDiff of forward primers (above sequence)

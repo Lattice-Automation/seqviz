@@ -24,7 +24,7 @@ export const nucleotideWildCards = {
   h: { a: "a", c: "c", t: "t" },
   b: { c: "c", g: "g", t: "t" },
   x: { a: "a", c: "c", g: "g", t: "t" },
-  n: { a: "a", c: "c", g: "g", t: "t" }
+  n: { a: "a", c: "c", g: "g", t: "t" },
 };
 
 /**
@@ -97,7 +97,7 @@ const codon2AA = {
   CCA: "P",
   CCT: "P",
   CCG: "P",
-  CCC: "P"
+  CCC: "P",
 };
 
 const aminoAcids = Array.from(new Set(Object.values(codon2AA)).values()).join("");
@@ -216,11 +216,7 @@ export const calcLength = (start: number, end: number, seqLength: number): numbe
 /**
  * Reverses a string sequence
  */
-export const reverse = (seq: string): string =>
-  seq
-    .split("")
-    .reverse()
-    .join("");
+export const reverse = (seq: string): string => seq.split("").reverse().join("");
 
 export const annotationFactory = (i = -1, colors = null) => ({
   id: randomid(),
@@ -229,7 +225,7 @@ export const annotationFactory = (i = -1, colors = null) => ({
   type: "",
   start: 0,
   end: 0,
-  direction: "NONE"
+  direction: "NONE",
 });
 
 export const primerFactory = () => ({
@@ -246,7 +242,7 @@ export const primerFactory = () => ({
   penalty: 0,
   vector: "",
   sequence: "",
-  strict: false
+  strict: false,
 });
 
 /**
@@ -293,19 +289,10 @@ export const createLinearTranslations = (translations, dnaSeq) => {
     const subDNASeq =
       direction === 1
         ? dnaDoubled.substring(start, end)
-        : dnaComplement(dnaDoubled.substring(start, end))
-            .compSeq.split("")
-            .reverse()
-            .join(""); // get reverse complement
+        : dnaComplement(dnaDoubled.substring(start, end)).compSeq.split("").reverse().join(""); // get reverse complement
 
     // translate the DNA sub sequence
-    const AAseq =
-      direction === 1
-        ? translateDNA(subDNASeq)
-        : translateDNA(subDNASeq)
-            .split("")
-            .reverse()
-            .join(""); // translate
+    const AAseq = direction === 1 ? translateDNA(subDNASeq) : translateDNA(subDNASeq).split("").reverse().join(""); // translate
 
     // the starting point for the translation, reading left to right (regardless of translation
     // direction). this is later needed to calculate the number of bps needed in the first
@@ -324,7 +311,7 @@ export const createLinearTranslations = (translations, dnaSeq) => {
       ...t,
       start: tStart,
       end: tEnd,
-      AAseq: AAseq
+      AAseq: AAseq,
     };
   });
 };

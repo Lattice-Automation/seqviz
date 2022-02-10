@@ -16,8 +16,7 @@ let viewerInput = {
   //   }
   // },
 
-  seq:
-    "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
+  seq: "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK",
   viewer: "linear",
   annotations: [{ start: 8, end: 9, name: "test" }],
   // accession: "NC_011521",
@@ -35,12 +34,12 @@ let viewerInput = {
   bpColors: {
     10: "green",
     200: "blue",
-    201: "red"
+    201: "red",
   },
   search: { query: "gtacc" },
   enzymes: ["EcoRI"],
   copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
-  style: { height: "calc(100vh - 20px)", width: "calc(100vw)" }
+  style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
   // translations: [
   //   { start: 0, end: 9, direction: 1 },
   //   { start: 50, end: 550, direction: 1 }
@@ -72,8 +71,8 @@ setTimeout(() => {
       TestEnzyme: {
         rseq: "GGT", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
-        rcut: 1 // cut index on REV strand, relative to start of rseq
-      }
-    }
+        rcut: 1, // cut index on REV strand, relative to start of rseq
+      },
+    },
   });
 }, 2000);

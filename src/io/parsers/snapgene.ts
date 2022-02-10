@@ -104,7 +104,7 @@ export default async (fileArrayBuffer, options) => {
         "0": "NONE",
         "1": 1,
         "2": -1,
-        "3": "BIDIRECTIONAL"
+        "3": "BIDIRECTIONAL",
       };
 
       const xml = read(blockSize, "utf8");
@@ -134,7 +134,7 @@ export default async (fileArrayBuffer, options) => {
           type: attrs.type,
           direction: directionalityDict[directionality],
           start: minStart - 1,
-          end: maxEnd - 1
+          end: maxEnd - 1,
         });
       });
     } else {
@@ -148,8 +148,8 @@ export default async (fileArrayBuffer, options) => {
     {
       ...partFactory(),
       ...data,
-      name: fileName.replace(".dna", "")
-    }
+      name: fileName.replace(".dna", ""),
+    },
   ];
 };
 
@@ -171,13 +171,7 @@ const ord = string => {
 
 const dec2bin = dec => (dec >>> 0).toString(2); // eslint-disable-line no-bitwise
 
-const isFirstBitA1 = num =>
-  Number(
-    num
-      .toString()
-      .split("")
-      .pop()
-  ) === 1;
+const isFirstBitA1 = num => Number(num.toString().split("").pop()) === 1;
 
 const editMD = str =>
   new Promise((resolve, reject) => {
