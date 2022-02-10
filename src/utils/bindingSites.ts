@@ -55,7 +55,7 @@ const findMismatches = (sequence, subVector) => {
   // @ts-expect-error ts-migrate(2322) FIXME: Type '{ start: number; end: number; }[]' is not as... Remove this comment to see the full error message
   mismatches = mismatches.map(mismatch => ({
     start: mismatch[0],
-    end: mismatch[1] + 1 // because mismatches return indices of mismatch and we want to bound to end after the last index
+    end: mismatch[1] + 1, // because mismatches return indices of mismatch and we want to bound to end after the last index
   }));
 
   return { mismatches, annealSequence };
@@ -173,7 +173,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
             .map(m => ({
               id: `${m.start}-${m.end}`,
               start: m.start,
-              end: m.end
+              end: m.end,
             }))
             .filter(m => {
               if (uniqMismatch[m.id]) {
@@ -203,7 +203,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
               annealSequence: annealSequence,
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              strict: strict
+              strict: strict,
             });
           }
         }
