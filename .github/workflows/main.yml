@@ -2,9 +2,8 @@ name: CI/CD
 
 on:
   push:
-    branches: [cicd]
   pull_request:
-    branches: [master]
+    branches: [main, dev, staging]
 
 jobs:
   build:
