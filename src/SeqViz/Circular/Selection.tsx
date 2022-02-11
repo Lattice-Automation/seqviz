@@ -69,7 +69,7 @@ export default class CircularSelection extends React.PureComponent {
       outerRadius: topR,
       length: selLength,
       largeArc: lArc,
-      sweepFWD: sFlagF
+      sweepFWD: sFlagF,
     });
 
     // this should be very thin when the selection range starts and ends at same point
@@ -82,12 +82,12 @@ export default class CircularSelection extends React.PureComponent {
       fill: "transparent",
       stroke: "black",
       strokeWidth: edgeStrokeWidth,
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
     const selectStyle = {
       stroke: "none",
       fill: "#DEF6FF",
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
 
     return (

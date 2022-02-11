@@ -70,7 +70,7 @@ export default async (file, options) =>
             start: +startpos[0] || 0,
             end: +endpos[0] || 0,
             name: `${direction[0]}-${startpos[0]}`,
-            type: type[0] || "N/A"
+            type: type[0] || "N/A",
           };
         })
         .filter(a => a);
@@ -80,14 +80,14 @@ export default async (file, options) =>
         ...annotationFactory(annotations.length),
         start: firstElement(seq_data.seq_data).length,
         end: 0,
-        name: backbone.name
+        name: backbone.name,
       });
 
       const newPart = {
         ...partFactory(),
         ...dnaComplement(seq), // seq and compSeq
         name: name,
-        annotations: annotations
+        annotations: annotations,
       };
 
       resolve([newPart]);

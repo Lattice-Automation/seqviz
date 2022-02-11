@@ -22,7 +22,7 @@ export default async (JBEI, colors = []) =>
       {
         xmlns: true,
         attrkey: "xml_tag",
-        tagNameProcessors: [xml2js.processors.stripPrefix]
+        tagNameProcessors: [xml2js.processors.stripPrefix],
       },
       (err, parsedJBEI) => {
         if (err) rejectJBEI(err);
@@ -76,7 +76,7 @@ export default async (JBEI, colors = []) =>
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
                 type: type[0]._ || "N/A",
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-                name: label[0]._ || "Untitled"
+                name: label[0]._ || "Untitled",
               });
             }
           });
@@ -90,8 +90,8 @@ export default async (JBEI, colors = []) =>
             name: parsedName,
             annotations: annotations,
             circular: parsedCircular,
-            source: fileString
-          }
+            source: fileString,
+          },
         ]);
       }
     );

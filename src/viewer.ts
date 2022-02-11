@@ -81,6 +81,6 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
   return {
     render,
     renderToString,
-    setState
+    setState,
   };
 };

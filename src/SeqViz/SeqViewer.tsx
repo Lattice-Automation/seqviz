@@ -76,7 +76,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       charWidth,
       size,
       zoom: { linear: zoom },
-      Linear: true
+      Linear: true,
     };
   };
 
@@ -94,7 +94,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-      seq: { length: seqLength }
+      seq: { length: seqLength },
     } = this.props;
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -104,7 +104,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
 
     const center = {
       x: size.width / 2,
-      y: size.height / 2
+      y: size.height / 2,
     };
 
     const limitingDim = Math.min(size.height, size.width);
@@ -129,7 +129,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       size,
       zoom: { circular: zoom },
       bpsOnArc,
-      center
+      center,
     };
   };
 

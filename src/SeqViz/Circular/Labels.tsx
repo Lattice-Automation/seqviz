@@ -20,7 +20,7 @@ export default class Labels extends React.Component {
     // on every hover event
     return {
       labelGroups: Labels.groupOverlappingLabels(nextProps),
-      hoveredGroup: prevState.hoveredGroup
+      hoveredGroup: prevState.hoveredGroup,
     };
   };
 
@@ -123,7 +123,7 @@ export default class Labels extends React.Component {
         lineCoor: n.lineCoor,
         labels: [n.label],
         grouped: overflow,
-        overflow: overflow
+        overflow: overflow,
       });
     }, []);
 
@@ -163,7 +163,7 @@ export default class Labels extends React.Component {
 
         const newTextCoor = {
           x: g.textCoor.x + xDelta, // try to make the adjustment to the left/right
-          y: g.textCoor.y + yDelta // try ot make the adjustment to the top/bottom
+          y: g.textCoor.y + yDelta, // try ot make the adjustment to the top/bottom
         };
         const overflow = groupOverflows(l, newTextCoor);
 
@@ -173,7 +173,7 @@ export default class Labels extends React.Component {
           grouped: overflow, // only "grouped" (misnomer) if it overlaps
           overflow: overflow,
           labels: [l], // single label now
-          forkCoor: g.textCoor // fork point becomes the old textCoor
+          forkCoor: g.textCoor, // fork point becomes the old textCoor
         };
       });
 
@@ -223,7 +223,7 @@ export default class Labels extends React.Component {
   // empty arrays on first load
   state = {
     labelGroups: [],
-    hoveredGroup: ""
+    hoveredGroup: "",
   };
 
   // set the currently hovered group

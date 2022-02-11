@@ -21,7 +21,7 @@ export default class CircularFind extends React.PureComponent {
       outerRadius: radius + lineHeight / 2,
       length: resultLength,
       largeArc: resultLength > seqLength / 2,
-      sweepFWD: true
+      sweepFWD: true,
     });
 
     const resultStyle = {
@@ -29,7 +29,7 @@ export default class CircularFind extends React.PureComponent {
       strokeWidth: 1,
       fill: "rgba(255, 251, 7, 0.5)",
       shapeRendering: "auto",
-      cursor: "pointer"
+      cursor: "pointer",
     };
 
     const id = `${start}${end}${result.direction}${result.start}`;
@@ -44,7 +44,7 @@ export default class CircularFind extends React.PureComponent {
           ref: id,
           start: result.start,
           end: result.end,
-          type: "FIND"
+          type: "FIND",
         })}
         {...resultStyle}
       />

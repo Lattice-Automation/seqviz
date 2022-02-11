@@ -137,7 +137,7 @@ const fileToParts = async (
           const ret = parsedFasta.map(p => ({
             ...partFactory(),
             ...dnaComplement(p.seq),
-            ...p
+            ...p,
           }));
           return ret;
         });
@@ -211,5 +211,5 @@ const fileToParts = async (
 const cleanupPart = (p, source: { name: string; file: string }): Part => ({
   ...p,
   source,
-  annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" }))
+  annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" })),
 });

@@ -26,7 +26,7 @@ export default class InfiniteScroll extends React.PureComponent {
     this.state = {
       // start off with first 5 blocks shown
       visibleBlocks: new Array(Math.min(5, props.seqBlocks.length)).fill(null).map((_, i) => i),
-      centralIndex: 0
+      centralIndex: 0,
     };
     this.scroller = React.createRef();
     this.insideDOM = React.createRef();
@@ -97,7 +97,7 @@ export default class InfiniteScroll extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       totalHeight,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-      size: { height }
+      size: { height },
     } = this.props;
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;
@@ -141,7 +141,7 @@ export default class InfiniteScroll extends React.PureComponent {
     if (!isEqual(newVisibleBlocks, visibleBlocks)) {
       this.setState({
         visibleBlocks: newVisibleBlocks,
-        centralIndex: centralIndex
+        centralIndex: centralIndex,
       });
     }
   };
@@ -171,7 +171,7 @@ export default class InfiniteScroll extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size: { height },
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
-      totalHeight
+      totalHeight,
     } = this.props;
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;
@@ -266,7 +266,7 @@ export default class InfiniteScroll extends React.PureComponent {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       totalHeight: height,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-      size: { width }
+      size: { width },
     } = this.props;
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;

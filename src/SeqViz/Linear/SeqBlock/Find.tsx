@@ -15,7 +15,7 @@ export default props => {
     inputRef,
     firstBase,
     lastBase,
-    listenerOnly = false
+    listenerOnly = false,
   } = props;
 
   if (!searchRows.length) {
@@ -27,7 +27,7 @@ export default props => {
     stroke: listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
     cursor: "pointer",
     strokeWidth: 1,
-    style: { fill: listenerOnly ? "transparent" : "rgba(255, 251, 7, 0.5)" }
+    style: { fill: listenerOnly ? "transparent" : "rgba(255, 251, 7, 0.5)" },
   };
 
   return searchRows.map(s => {
@@ -45,7 +45,7 @@ export default props => {
       start: s.start,
       end: s.end,
       type: "FIND",
-      element: seqBlockRef
+      element: seqBlockRef,
     };
 
     let y = indexYDiff - findProps.height / 2; // template row result
