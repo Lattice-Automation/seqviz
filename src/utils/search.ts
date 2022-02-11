@@ -70,7 +70,7 @@ const search = (query, subject, mismatch, fwd) => {
       // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
       end: end,
       // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-      direction: fwd ? 1 : -1
+      direction: fwd ? 1 : -1,
     });
     result = regex.exec(subject);
   }
@@ -117,7 +117,7 @@ const searchWithMismatch = (query, subject, mismatch, fwd) => {
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         end: end,
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-        direction: fwd ? 1 : -1
+        direction: fwd ? 1 : -1,
       });
     }
   }

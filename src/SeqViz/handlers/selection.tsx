@@ -13,7 +13,7 @@ export const defaultSelection = {
   start: 0,
   end: 0,
   length: 0,
-  clockwise: true
+  clockwise: true,
 };
 
 /** Default context object */
@@ -29,7 +29,7 @@ SelectionContext.displayName = "SelectionContext";
  * @param  {React.Component} WrappedComp
  */
 const withSelectionHandler = WrappedComp =>
-  (class extends React.Component {
+  class extends React.Component {
     static displayName = `SelectionHandler`;
 
     /** Only state is the selection range */
@@ -148,7 +148,7 @@ const withSelectionHandler = WrappedComp =>
             ...knownRange,
             start: selectionStart,
             end: selectionEnd,
-            clockwise: clockwise
+            clockwise: clockwise,
           });
 
           this.dragEvent = false;
@@ -174,7 +174,7 @@ const withSelectionHandler = WrappedComp =>
             ...knownRange,
             start: selectionStart,
             end: selectionEnd,
-            clockwise: clockwise
+            clockwise: clockwise,
           });
 
           this.dragEvent = false;
@@ -209,7 +209,7 @@ const withSelectionHandler = WrappedComp =>
           ...defaultSelection, // clears other meta
           start: e.shiftKey ? selection.start : currBase,
           end: currBase,
-          clockwise: clockwiseDrag
+          clockwise: clockwiseDrag,
         });
         this.dragEvent = true;
       } else if (this.dragEvent && currBase !== null) {
@@ -218,7 +218,7 @@ const withSelectionHandler = WrappedComp =>
           ...defaultSelection, // clears other meta
           start: selection.start,
           end: currBase,
-          clockwise: clockwiseDrag
+          clockwise: clockwiseDrag,
         });
       }
     };
@@ -248,7 +248,7 @@ const withSelectionHandler = WrappedComp =>
           start: selStart,
           end: currBase,
           ref: "",
-          clockwise: clockwise
+          clockwise: clockwise,
         });
       } else if (e.type === "mousemove" && this.dragEvent && currBase && currBase !== this.previousBase) {
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
@@ -326,7 +326,7 @@ const withSelectionHandler = WrappedComp =>
           start: start,
           end: end,
           ref: ref,
-          clockwise: clockwise
+          clockwise: clockwise,
         });
       }
     };
@@ -415,7 +415,7 @@ const withSelectionHandler = WrappedComp =>
       const { clockwise, start, end, ref, type, element, name }: any = {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         ...this.props.selection,
-        ...newSelection
+        ...newSelection,
       };
 
       const length = this.calcSelectionLength(start, end, clockwise);
@@ -434,7 +434,7 @@ const withSelectionHandler = WrappedComp =>
         end,
         length,
         clockwise,
-        element
+        element,
       };
 
       setSelection(selection);
@@ -492,6 +492,6 @@ const withSelectionHandler = WrappedComp =>
         />
       );
     }
-  });
+  };
 
 export default WrappedComp => withSelectionHandler(WrappedComp);

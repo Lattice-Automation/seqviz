@@ -39,7 +39,7 @@ export default class CutSites extends React.PureComponent {
       outerRadius: topR,
       length: cutSiteLength,
       largeArc: cutSiteLength > seqLength / 2,
-      sweepFWD: true
+      sweepFWD: true,
     });
 
     // find start and stop coordinates to cut site line
@@ -52,7 +52,7 @@ export default class CutSites extends React.PureComponent {
       length: Math.abs(fcut - rcut),
       largeArc: Math.abs(fcut - rcut) > seqLength / 2,
       sweepFWD: true,
-      offset: Math.min(fcut, rcut) - start
+      offset: Math.min(fcut, rcut) - start,
     });
 
     // find start and stop coordinates to hang site line
@@ -66,14 +66,14 @@ export default class CutSites extends React.PureComponent {
       fill: fill,
       shapeRendering: "auto",
       cursor: "pointer",
-      fillOpacity: 0
+      fillOpacity: 0,
     };
 
     const lineStyle = {
       fill: "transparent",
       stroke: "black",
       strokeWidth: 1,
-      shapeRendering: "auto"
+      shapeRendering: "auto",
     };
 
     return (
@@ -89,7 +89,7 @@ export default class CutSites extends React.PureComponent {
             ref: id,
             start: start,
             end: end,
-            type: "ENZYME"
+            type: "ENZYME",
           })}
         />
       </g>

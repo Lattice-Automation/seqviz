@@ -149,7 +149,7 @@ export default async (fileInput, fileName, colors = []) =>
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
               end,
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-              direction
+              direction,
             });
           }
         } else if (currLine.length === 1) {
@@ -201,6 +201,6 @@ export default async (fileInput, fileName, colors = []) =>
       seq: seq,
       compSeq: compSeq,
       annotations: annotations,
-      circular: circular
+      circular: circular,
     };
   });

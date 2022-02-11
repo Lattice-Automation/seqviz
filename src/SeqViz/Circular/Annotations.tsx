@@ -41,16 +41,16 @@ export default class Annotations extends React.PureComponent {
       shapeRendering: "geometricPrecision",
       cursor: "pointer",
       fillOpacity: 0.7,
-      strokeLinejoin: "round"
+      strokeLinejoin: "round",
     };
     // this is strictly here to create an invisible path that the
     // annotation name can follow
     const transparentPath = {
       stroke: "transparent",
-      fill: "transparent"
+      fill: "transparent",
     };
     const labelStyle = {
-      cursor: "pointer"
+      cursor: "pointer",
     };
 
     return (
@@ -110,7 +110,7 @@ const SingleAnnotation = props => {
     hoverAnnotation,
     annStyle,
     inlinedAnnotations,
-    labelStyle
+    labelStyle,
   } = props;
 
   // if it crosses the zero index, correct for actual length
@@ -137,7 +137,7 @@ const SingleAnnotation = props => {
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
     arrowFWD: a.direction === 1,
-    arrowREV: a.direction === -1
+    arrowREV: a.direction === -1,
   });
   const namePath = generateArc({
     innerRadius: bottomHalf ? currBRadius : currTRadius,
@@ -146,7 +146,7 @@ const SingleAnnotation = props => {
     largeArc: annLength > seqLength / 2,
     sweepFWD: true,
     arrowFWD: false,
-    arrowREV: false
+    arrowREV: false,
   });
 
   const circAnnID = `la-vz-${a.id}-circular`;
@@ -163,7 +163,7 @@ const SingleAnnotation = props => {
           start: a.start,
           end: a.end,
           type: "ANNOTATION",
-          direction: a.direction
+          direction: a.direction,
         })}
         fill={a.color}
         stroke={COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color)}

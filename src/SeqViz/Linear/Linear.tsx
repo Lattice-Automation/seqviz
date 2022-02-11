@@ -81,7 +81,7 @@ class Linear extends React.Component {
       onUnmount,
 
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'search' does not exist on type 'Readonly... Remove this comment to see the full error message
-      search
+      search,
     } = this.props;
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'primers' does not exist on type 'Readonl... Remove this comment to see the full error message

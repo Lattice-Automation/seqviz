@@ -56,13 +56,13 @@ export default class Index extends React.PureComponent {
 
     const tickStyle = {
       width: 1,
-      height: 8
+      height: 8,
       // shapeRendering: "crispEdges"
     };
 
     const textStyle = {
       fontSize: 11,
-      textRendering: "optimizeLegibility"
+      textRendering: "optimizeLegibility",
     };
 
     return tickIndexes.map(p => {
@@ -106,7 +106,7 @@ export default class Index extends React.PureComponent {
     const axisStyle = {
       width: width,
       height: 1,
-      shapeRendering: "crispEdges"
+      shapeRendering: "crispEdges",
     };
 
     return (

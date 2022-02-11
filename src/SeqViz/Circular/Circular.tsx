@@ -70,7 +70,7 @@ class Circular extends React.Component {
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         start: c.fcut,
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-        type: "enzyme"
+        type: "enzyme",
       })
     );
 
@@ -84,7 +84,7 @@ class Circular extends React.Component {
       annotationsInRows: annotationsInRows,
       primersInRows: primersInRows,
       inlinedLabels: inlinedLabels,
-      outerLabels: outerLabels
+      outerLabels: outerLabels,
     };
   };
 
@@ -95,7 +95,7 @@ class Circular extends React.Component {
     annotationsInRows: [],
     primersInRows: [],
     inlinedLabels: [],
-    outerLabels: []
+    outerLabels: [],
   };
 
   /**
@@ -149,7 +149,7 @@ class Circular extends React.Component {
 
     return {
       x: center.x + xAdjust,
-      y: center.y + yAdjust
+      y: center.y + yAdjust,
     };
   };
 
@@ -182,7 +182,7 @@ class Circular extends React.Component {
 
     return {
       x: center.x + xAdjust,
-      y: center.y + yAdjust
+      y: center.y + yAdjust,
     };
   };
 
@@ -202,7 +202,7 @@ class Circular extends React.Component {
     sweepFWD = false,
     arrowFWD = false,
     arrowREV = false,
-    offset = 0
+    offset = 0,
   }) => {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
     const { radius } = this.props;
@@ -283,7 +283,7 @@ class Circular extends React.Component {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSites' does not exist on type 'Readon... Remove this comment to see the full error message
       cutSites,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'search' does not exist on type 'Readonly... Remove this comment to see the full error message
-      search
+      search,
     } = this.props;
 
     const { seqLength, lineHeight, annotationsInRows, primersInRows, inlinedLabels, outerLabels } = this.state;
@@ -300,7 +300,7 @@ class Circular extends React.Component {
       getRotation,
       generateArc,
       rotateCoor,
-      inputRef
+      inputRef,
     };
 
     // an inward shift is needed for primers if the annotations are shown
