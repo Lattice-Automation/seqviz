@@ -8,7 +8,7 @@ import CentralIndexContext from "./handlers/centralIndex";
 import Linear from "./Linear/Linear";
 import { SeqVizSelection } from "./SeqViz";
 
-interface SeqViewerProps {
+interface SeqViewerPropsr {
   size: { width: number; height: number };
   zoom: { linear: number; circular: number };
   search: SearchResult;
