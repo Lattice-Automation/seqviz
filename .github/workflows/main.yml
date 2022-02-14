@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run Prettier formatter
-        run: npx prettier --check ./src/**
+        run: npx prettier --config package.json --check ./src/**
       - name: Run Eslint
         run: npx eslint --ext .ts,.tsx,.js,.jsx --quiet
       - name: Run Unit Tests and build

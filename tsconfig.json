@@ -8,8 +8,8 @@
     "target": "es5", // specify ECMAScript target version
     "allowJs": false, // allow a partial TypeScript and JavaScript codebase
     "lib": ["es2015", "dom"], // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
-    "moduleResolution": "node"
-    // "declaration": true
+    "moduleResolution": "node",
+    "declaration": true
   },
   "include": ["./src/"]
 }
