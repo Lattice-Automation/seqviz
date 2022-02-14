@@ -27,7 +27,7 @@ const extractMeta = parts => {
       if (part.type === type) {
         ofType.push({
           title: part.id,
-          description: `(${part.year}) ${part.linear}`
+          description: `(${part.year}) ${part.linear}`,
         });
       }
       return ofType;
@@ -47,15 +47,10 @@ const curateBBInfo = async input => {
   try {
     const file = fs.readFileSync(input, "utf-8");
     const BBInfo = await parseFASTA(file);
-    fs.writeFile(
-      path.join(__dirname, "biobricks", "biobricks.json"),
-      JSON.stringify(BBInfo),
-      "utf8",
-      err => {
-        if (err) throw err;
-        console.log(`${input} file has been saved!`);
-      }
-    );
+    fs.writeFile(path.join(__dirname, "biobricks", "biobricks.json"), JSON.stringify(BBInfo), "utf8", err => {
+      if (err) throw err;
+      console.log(`${input} file has been saved!`);
+    });
   } catch (error) {
     if (error.code === "ENOENT") {
       throw new Error(`${input} file does not exist`);

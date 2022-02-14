@@ -71,9 +71,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -100,7 +102,7 @@ export default () => (
     .Viewer("root", {
       name: "L09136",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
-      style: { height: "100vh", width: "100vw" }
+      style: { height: "100vh", width: "100vw" },
     })
     .render();
 </script>
@@ -175,7 +177,7 @@ An array of `annotation` objects for the viewer. Each `annotation` object requir
 [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
   { start: 23, end: 273, name: "GFP" },
-  { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" }
+  { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" },
 ];
 ```
 
@@ -188,7 +190,7 @@ An array of `translation` objects for rendering ranges of amino acids beneath th
 ```js
 [
   { start: 0, end: 90, direction: 1 }, // [0, 90)
-  { start: 191, end: 522, direction: -1 }
+  { start: 191, end: 522, direction: -1 },
 ];
 ```
 
@@ -239,7 +241,7 @@ An array of color hex codes for annotation coloring. Defaults to:
   "#F099F7", // magenta
   "#C59CFF", // purple
   "#6B81FF", // blue
-  "#85A6FF" // light blue
+  "#85A6FF", // light blue
 ];
 ```
 
@@ -313,14 +315,14 @@ Callback executed after a search event. Called once on initial render. Accepts a
     start: 728,
     end: 733,
     direction: 1,
-    index: 0
+    index: 0,
   },
   {
     start: 1788,
     end: 1793,
     direction: -1,
-    index: 1
-  }
+    index: 1,
+  },
 ];
 ```
 

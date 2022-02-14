@@ -22,13 +22,13 @@ const cdnBuild = {
     library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true,
-    publicPath: "/dist/"
+    publicPath: "/dist/",
   },
   mode: "production",
   node: {
     fs: "empty",
     net: "empty",
-    tls: "empty"
+    tls: "empty",
   },
   module: {
     rules: [
@@ -42,30 +42,30 @@ const cdnBuild = {
         use: [
           "file-loader",
           {
-            loader: "image-webpack-loader"
-          }
-        ]
+            loader: "image-webpack-loader",
+          },
+        ],
       },
       {
         test: /\.(css)$/,
         exclude: /node_modules/,
-        use: ["style-loader", "css-loader"]
-      }
-    ]
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
       react: path.resolve(__dirname, "../node_modules/react"),
-      "react-dom": path.resolve(__dirname, "../node_modules/react-dom")
-    }
+      "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
+    },
   },
   plugins: [new UglifyJsPlugin(), new webpack.BannerPlugin(banner)],
   optimization: {
     nodeEnv: "production",
     minimize: true,
-    concatenateModules: false
-  }
+    concatenateModules: false,
+  },
 };
 
 /**
@@ -79,9 +79,9 @@ const npmBuild = Object.assign({}, cdnBuild, {
     library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true,
-    publicPath: "/dist/"
+    publicPath: "/dist/",
   },
-  externals: [nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })]
+  externals: [nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })],
 });
 
 module.exports = [cdnBuild, npmBuild];
