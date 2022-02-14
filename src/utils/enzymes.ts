@@ -15,10 +15,6 @@
  * 		..CTGCA
  * 		..G****
  *
- * @typedef {Object}  EnzymeInfo
- * @property {String}    rseq   the recognition sequence associated with the enzyme
- * @property {Number}    rcut   the index of the hangSite, relative to the rseq start
- * @property {Number}    fcut   the cut index of the enzyme relative to rseq start
  */
 export default {
   "PI-SceI": {

@@ -126,7 +126,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       await this.setPart(); // new accession/remote ID
     }
     if (search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch) {
-      this._search(part); // new search parameters
+      this.search(part); // new search parameters
     }
     if (!isEqual(enzymes, this.props.enzymes)) {
       this.cut(part); // new set of enzymes for digest
@@ -154,7 +154,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
             annotations: this.parseAnnotations(part.annotations, part.seq),
           },
         });
-        this._search(part);
+        this.search(part);
         this.cut(part);
       } else if (file) {
         const parts = await filesToParts(file, this.props);
@@ -165,7 +165,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
             annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq),
           },
         });
-        this._search(parts[0]);
+        this.search(parts[0]);
         this.cut(parts[0]);
       } else if (seq) {
         this.cut({ seq });
@@ -180,7 +180,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   /**
    * Search for the query sequence in the part sequence, set in state
    */
-  _search = (part: Part | null = null) => {
+  search = (part: Part | null = null) => {
     const {
       onSearch,
       search: { query, mismatch },
@@ -263,9 +263,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     let { annotations } = this.state;
 
     // part is either from a file/accession, or each prop was set
-    const _seq: string = seq || part.seq || "";
-    if (getSeqType(_seq) === "dna") {
-      compSeq = compSeq || part.compSeq || dnaComplement(_seq).compSeq;
+    const localSeq: string = seq || part.seq || "";
+    if (getSeqType(localSeq) === "dna") {
+      compSeq = compSeq || part.compSeq || dnaComplement(localSeq).compSeq;
     } else {
       compSeq = "";
     }
@@ -274,7 +274,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
-    if (!_seq.length) {
+    if (!localSeq.length) {
       return <div className="la-vz-seqviz" />;
     }
 
@@ -289,7 +289,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         showComplement={showComplement}
         compSeq={compSeq}
         name={name}
-        seq={_seq}
+        seq={localSeq}
         cutSites={cutSites}
         circular={false}
       />
@@ -305,7 +305,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         compSeq={compSeq}
         showComplement={showComplement}
         name={name}
-        seq={_seq}
+        seq={localSeq}
         cutSites={cutSites}
         circular={true}
       />

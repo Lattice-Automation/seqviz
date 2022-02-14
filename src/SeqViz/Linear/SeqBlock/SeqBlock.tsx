@@ -83,13 +83,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   };
 
   /**
-   * @typedef {Object}
-   * @property {Number}     x              [the x positioning, from left...]
-   * @property {Number}     width          [the width of the passed element]
-   * @property {Number}     charWidth      [the width of each character in the element]
-   */
-
-  /**
  * findXAndWidth
  *
  * a helper method that's used in several of the child components to figure

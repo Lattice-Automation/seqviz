@@ -1,6 +1,4 @@
-import { string } from "prop-types";
 import * as React from "react";
-
 import { SelectionContext } from "../handlers/selection";
 import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor } from "./Circular";

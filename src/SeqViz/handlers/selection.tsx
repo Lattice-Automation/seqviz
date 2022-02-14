@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { calcGC, calcTm } from "../../utils/sequence";
 
 /** Initial/default selection */
@@ -26,7 +25,6 @@ SelectionContext.displayName = "SelectionContext";
  * since range selection is needed for the eventRouter, this is
  * the higher of the two HOCs
  *
- * @param  {React.Component} WrappedComp
  */
 const withSelectionHandler = WrappedComp =>
   class extends React.Component {
@@ -51,7 +49,6 @@ const withSelectionHandler = WrappedComp =>
 
     /**
      * a map between the id of child elements and their associated SelectRanges
-     * @type {Object.<string, SelectRange>}
      */
     idToRange = new Map();
 

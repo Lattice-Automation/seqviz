@@ -1,8 +1,5 @@
 // @ts-nocheck
 /**
- * @typedef {COLORS}
- * @type {Array<String>}
- *
  * a color pallete of colors (for LinearSeq right now)\
  * generated using:
  * https://material.io/color/#!/?view.left=0&view.right=0&primary.color=FFCC80

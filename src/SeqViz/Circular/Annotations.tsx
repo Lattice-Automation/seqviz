@@ -5,7 +5,7 @@ import CentralIndexContext from "../handlers/centralIndex";
 import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor, SizeType } from "./Circular";
 
-interface AnnotationsViewerProps {
+interface AnnotationsProps {
   radius: number;
   center: Coor;
   lineHeight: number;
@@ -39,9 +39,8 @@ interface AnnotationsViewerProps {
  * which are non-overlapping arrays or annotation arrays, which are then
  * used to create the array of array of annotation paths
  *
- * @type {Function}
  */
-export default class Annotations extends React.PureComponent<AnnotationsViewerProps> {
+export default class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className);

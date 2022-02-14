@@ -1,6 +1,7 @@
 import * as React from "react";
 import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import { Coor, ICutSite } from "./Circular";
+
 interface CutSitesProps {
   radius: number;
   center: Coor;
