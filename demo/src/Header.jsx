@@ -1,13 +1,5 @@
 import * as React from "react";
-import {
-  Button,
-  Dropdown,
-  Icon,
-  Image,
-  Input,
-  Label,
-  Popup
-} from "semantic-ui-react";
+import { Button, Dropdown, Icon, Image, Input, Label, Popup } from "semantic-ui-react";
 
 import SeqvizLogo from "../src/seqviz-brand-small.png";
 import "./Header.css";
@@ -23,28 +15,22 @@ const backboneOptions = [
   { key: "psb1t3", value: "pSB1T3", text: "pSB1T3" },
   { key: "psb1a7", value: "pSB1A7", text: "pSB1A7" },
   { key: "bba_k1362091", value: "BBa_K1362091", text: "BBa_K1362091" },
-  { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" }
+  { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" },
 ];
 
 export class Header extends React.Component {
   state = { active: false };
 
-  handleMetaClick = () =>
-    this.setState(prevState => ({ active: !prevState.active }));
+  handleMetaClick = () => this.setState(prevState => ({ active: !prevState.active }));
 
   render() {
     const { setDemoState, part, toggleSidebar } = this.props;
     // Hack to render a bottom margin for linear map when the meta bar is open
 
-    if (
-      this.state.active &&
-      document.getElementById("la-vz-seqblock-container")
-    ) {
-      document.getElementById("la-vz-seqblock-container").style.marginBottom =
-        "32px";
+    if (this.state.active && document.getElementById("la-vz-seqblock-container")) {
+      document.getElementById("la-vz-seqblock-container").style.marginBottom = "32px";
     } else if (document.getElementById("la-vz-seqblock-container")) {
-      document.getElementById("la-vz-seqblock-container").style.marginBottom =
-        "0";
+      document.getElementById("la-vz-seqblock-container").style.marginBottom = "0";
     }
 
     return (
@@ -67,11 +53,7 @@ export class Header extends React.Component {
           />
           <BackBoneInput setDemoState={setDemoState} />
           <PartInput setDemoState={setDemoState} part={part} />
-          <SelectionInfo
-            {...this.props}
-            active={this.state.active}
-            handleMetaClick={this.handleMetaClick}
-          />
+          <SelectionInfo {...this.props} active={this.state.active} handleMetaClick={this.handleMetaClick} />
           <a
             id="github-link"
             target="_blank"
@@ -107,13 +89,7 @@ export class SelectionInfo extends React.Component {
 
     return (
       <div className="meta-toggle">
-        <Button
-          id="meta-button"
-          toggle
-          active={active}
-          disabled={part ? false : true}
-          onClick={handleMetaClick}
-        >
+        <Button id="meta-button" toggle active={active} disabled={part ? false : true} onClick={handleMetaClick}>
           {active ? "HIDE META" : "SHOW META"}
         </Button>
       </div>

@@ -17,11 +17,7 @@ const DISTBASE = "unpkg.com";
 const replaceXML = (file, cwd) => {
   return xmlComment(file)
     .replace("version", () => VERSION)
-    .replace(
-      "cdn-example",
-      () =>
-        `\n\`\`\`html\n<script src="https://${DISTBASE}/${PKGNAME}"></script>\n\`\`\`\n`
-    )
+    .replace("cdn-example", () => `\n\`\`\`html\n<script src="https://${DISTBASE}/${PKGNAME}"></script>\n\`\`\`\n`)
     .replace("pkg-name", () => PKGNAME)
     .replace("pkg-author", () => PKGAUTHOR.replace(/(.*) \((.*)\)/, "[$1]($2)"))
     .replace("pkg-description", () => PKGDESCR)
@@ -35,7 +31,7 @@ const replaceXML = (file, cwd) => {
         throw new Error("No command defined!");
       }
       const output = execSync(cmd, {
-        cwd
+        cwd,
       }).toString();
       const trimmedOutput = output.trim();
       // Execute optional regexp matcher.
