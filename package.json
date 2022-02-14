@@ -159,6 +159,7 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "enzyme": "^3.11.0",
+    "eslint": "^7.32.0",
     "file-loader": "^4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "^4.5.0",

@@ -1,0 +1,33 @@
+name: CI/CD
+
+on:
+  push:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Run Prettier formatter
+        run: npx prettier --check ./src/**
+      - name: Run Eslint
+        run: npx eslint --ext .ts,.tsx,.js,.jsx --quiet
+      - name: Run Unit Tests and build
+        run: npm run test:ci
+    # - name: Run Integration Tests
+    #   run: npm run build
+    # deploy:
+    # - name: Deploy to Staging
+    #   run: ???
