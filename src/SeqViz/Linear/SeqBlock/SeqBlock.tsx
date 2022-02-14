@@ -1,5 +1,4 @@
 import * as React from "react";
-import { MouseEventHandler } from "react";
 import { Annotation } from "../../../part";
 import { SearchResult } from "../../../utils/search";
 import { ICutSite, Primer, SizeType } from "../../Circular/Circular";
@@ -44,7 +43,7 @@ interface SeqBlockProps {
   inputRef: InputRefFuncType;
   key: string;
   lineHeight: number;
-  mouseEvent: MouseEventHandler<SVGSVGElement>;
+  mouseEvent: React.MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
   reversePrimerRows: Primer[];
   searchRows: SearchResult[];
