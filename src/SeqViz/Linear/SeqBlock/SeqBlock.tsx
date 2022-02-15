@@ -1,8 +1,9 @@
 import * as React from "react";
+
 import { Annotation } from "../../../part";
 import { SearchResult } from "../../../utils/search";
-import { ICutSite, InputRefFuncType, Primer, SizeType } from "../../CommonTypes";
-import { SeqVizSelection } from "../../SeqViz";
+import { ICutSite, ISize, InputRefFuncType, Primer } from "../../common";
+import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
@@ -18,12 +19,6 @@ export type FindXAndWidthType = (
   x: number;
   width: number;
 };
-
-interface SeqBlockPosition {
-  x: number; // [the x positioning, from left...]
-  width: number; // [the width of the passed element]
-  charWidth: number; // [the width of each character in the element]
-}
 
 interface SeqBlockProps {
   annotationRows: Annotation[][];
@@ -51,7 +46,7 @@ interface SeqBlockProps {
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  size: SizeType;
+  size: ISize;
   translations: Translation[];
   y: number;
   zoom: { linear: number };
@@ -80,12 +75,12 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   };
 
   /**
- * findXAndWidth
- *
- * a helper method that's used in several of the child components to figure
- * out how far from the left the element is and how wide it should be
-
- */
+   * findXAndWidth
+   *
+   * a helper method that's used in several of the child components to figure
+   * out how far from the left the element is and how wide it should be
+  
+   */
   findXAndWidth: FindXAndWidthType = (firstIndex = 0, lastIndex = 0) => {
     const {
       fullSeq: { length: seqLength },

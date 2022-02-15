@@ -7,12 +7,12 @@ import SeqViz from "./SeqViz/SeqViz";
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViz };
-
 /**
  * Export a part, pUC, for development
  */
 export { default as pUC } from "./parts/pUC";
+
+export { SeqViz };
 
 /**
  * Return a Viewer object with three properties:
@@ -58,7 +58,7 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
    *
    * Re-renders if render was already called.
    *
-   * @param {Object} state key-value map of ViewerSettings
+   
    */
   const setState = state => {
     Object.keys(state).forEach(key => {

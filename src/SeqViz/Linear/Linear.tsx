@@ -1,14 +1,14 @@
 import * as React from "react";
+
 import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
-
 import { createLinearTranslations } from "../../utils/sequence";
-import { Coor, ICutSite, InputRefFuncType, Primer, SizeType } from "../CommonTypes";
+import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
-import { SeqVizSelection } from "../SeqViz";
+import { SeqVizSelection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
 import SeqBlock from "./SeqBlock/SeqBlock";
 import { Translation } from "./SeqBlock/Translations";
@@ -49,7 +49,7 @@ interface LinearProps {
   showIndex: boolean;
   showPrimers: boolean;
   selection: SeqVizSelection;
-  size: SizeType;
+  size: ISize;
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
@@ -139,8 +139,6 @@ class Linear extends React.Component<LinearProps> {
 
     /**
      * Vet the annotations for starts and ends at zero index
-     * @param {*} annotations
-     * @return annotations
      */
     const vetAnnotations = (annotations: Annotation[]) => {
       annotations.forEach(ann => {

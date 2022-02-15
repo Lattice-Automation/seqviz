@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Annotation, Label } from "../../part";
+
+import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
-import { Coor, ICutSite, InputRefFuncType, Primer, SizeType } from "../CommonTypes";
+import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
@@ -12,7 +13,7 @@ import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
 import Find from "./Find";
 import Index from "./Index";
-import Labels from "./Labels";
+import Labels, { ILabel } from "./Labels";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -32,19 +33,20 @@ interface CircularProps {
   mouseEvent: React.MouseEventHandler;
   onUnmount: () => void;
   yDiff: number;
-  size: SizeType;
+  size: ISize;
   compSeq: string;
   search: SearchResult[];
   centralIndex: number;
   setCentralIndex: (update: number) => void;
 }
+
 interface CircularState {
   seqLength: number;
   lineHeight: number;
   annotationsInRows: Annotation[];
   primersInRows: Primer[];
-  inlinedLabels: Label[];
-  outerLabels: Label[];
+  inlinedLabels: ILabel[];
+  outerLabels: ILabel[];
 }
 
 class Circular extends React.Component<CircularProps, CircularState> {
@@ -57,8 +59,8 @@ class Circular extends React.Component<CircularProps, CircularState> {
     lineHeight: number;
     annotationsInRows: unknown[];
     primersInRows: unknown[];
-    inlinedLabels: Label[];
-    outerLabels: Label[];
+    inlinedLabels: ILabel[];
+    outerLabels: ILabel[];
   } => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
@@ -80,8 +82,8 @@ class Circular extends React.Component<CircularProps, CircularState> {
     const cutSiteLabels = nextProps.cutSites;
     const { radius } = nextProps;
     let innerRadius = radius - 3 * lineHeight;
-    const inlinedLabels: Label[] = [];
-    const outerLabels: Label[] = [];
+    const inlinedLabels: ILabel[] = [];
+    const outerLabels: ILabel[] = [];
     annotationsInRows.forEach((r: Annotation[]) => {
       const circumf = innerRadius * Math.PI;
       r.forEach(ann => {
@@ -218,7 +220,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
    * are needed for selection arcs (where the direction of the arc isn't known beforehand)
    * and arrowFWD and arrowREV are needed for annotations, where there may be directionality
    *
-   * @return {string}
    */
   generateArc = (args: {
     innerRadius: number;
@@ -230,15 +231,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
     arrowREV?: boolean;
     offset?: number;
   }): string => {
-    const { innerRadius, outerRadius, length, largeArc, sweepFWD, arrowFWD, arrowREV, offset } = args;
+    const { innerRadius, outerRadius, length, largeArc, sweepFWD, arrowFWD, arrowREV } = args;
     const { radius } = this.props;
     const { seqLength, lineHeight } = this.state;
-    const _offset = offset === undefined ? 0 : offset;
+    const offset = args.offset === undefined ? 0 : args.offset;
     // build up the six default coordinates
-    let leftBottom = this.findCoor(_offset, innerRadius);
-    let leftTop = this.findCoor(_offset, outerRadius);
-    let rightBottom = this.findCoor(length + _offset, innerRadius);
-    let rightTop = this.findCoor(length + _offset, outerRadius);
+    let leftBottom = this.findCoor(offset, innerRadius);
+    let leftTop = this.findCoor(offset, outerRadius);
+    let rightBottom = this.findCoor(length + offset, innerRadius);
+    let rightTop = this.findCoor(length + offset, outerRadius);
     let leftArrow = "";
     let rightArrow = "";
 

@@ -1,12 +1,37 @@
 import * as React from "react";
-import { Label } from "../../part";
-import { Coor, InputRefFuncType, SizeType } from "../CommonTypes";
+
+import { Coor, ISize, InputRefFuncType } from "../common";
 import { CHAR_WIDTH } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
+export interface ILabel {
+  start: number;
+  end: number;
+  type: "enzyme" | "annotation";
+  name: string;
+  id?: string;
+}
+
+interface LabelWithCoors {
+  label: ILabel;
+  lineCoor: Coor;
+  textCoor: Coor;
+  textAnchor: unknown;
+}
+
+interface GroupedLabelsWithCoors {
+  name: string;
+  textAnchor: unknown;
+  textCoor: Coor;
+  lineCoor: Coor;
+  labels: ILabel[];
+  grouped: unknown;
+  overflow: unknown;
+}
+
 interface LabelsProps {
-  labels: Label[];
-  size: SizeType;
+  labels: ILabel[];
+  size: ISize;
   yDiff: number;
   radius: number;
   center: Coor;
@@ -27,6 +52,7 @@ interface LabelsProps {
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   inputRef: InputRefFuncType;
 }
+
 interface LabelsState {
   hoveredGroup: unknown;
 }
@@ -76,7 +102,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
      * get positioned so it starts at the textCoor or ends at the textCoor?)
      */
     const labelsWithCoordinates: LabelWithCoors[] = labels
-      .reduce((acc: Label[], labelRow) => acc.concat(labelRow), [])
+      .reduce((acc: ILabel[], labelRow) => acc.concat(labelRow), [])
       .map(a => {
         // find the mid-point, vertically, for the label, correcting for entities
         // that cross the zero-index
@@ -104,7 +130,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
       });
 
     // a utility function for checking whether a label and textCoor will overflow
-    const groupOverflows = (label: Label, textCoor: Coor) => {
+    const groupOverflows = (label: ILabel, textCoor: Coor) => {
       const nameLength = (label.name.length + 4) * CHAR_WIDTH; // +4 for ",+#" and padding
       let overflow = false;
 
@@ -278,7 +304,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'forkCoor' does not exist on type 'never'... Remove this comment to see the full error message
           const fC = g.forkCoor || g.textCoor;
           const labelLines = (
-            <React.Fragment>
+            <>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'lineCoor' does not exist on */}
               <path d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`} className="la-vz-label-line" />
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message */}
@@ -286,7 +312,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message
                 <path d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`} className="la-vz-label-line" />
               )}
-            </React.Fragment>
+            </>
           );
 
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'grouped' does not exist on type 'never'.
@@ -346,19 +372,4 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
       </g>
     );
   }
-}
-interface LabelWithCoors {
-  label: Label;
-  lineCoor: Coor;
-  textCoor: Coor;
-  textAnchor: unknown;
-}
-interface GroupedLabelsWithCoors {
-  name: string;
-  textAnchor: unknown;
-  textCoor: Coor;
-  lineCoor: Coor;
-  labels: Label[];
-  grouped: unknown;
-  overflow: unknown;
 }

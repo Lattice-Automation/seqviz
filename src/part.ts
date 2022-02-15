@@ -4,14 +4,6 @@ export interface Element {
   direction: number;
 }
 
-export interface Label {
-  start: number;
-  end: number;
-  type: "enzyme" | "annotation";
-  name: string;
-  id?: string;
-}
-
 export interface Annotation extends Element {
   id: string;
   name: string;

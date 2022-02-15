@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Coor, ICutSite, InputRefFuncType } from "../CommonTypes";
+
+import { Coor, ICutSite, InputRefFuncType } from "../common";
 
 interface CutSitesProps {
   radius: number;

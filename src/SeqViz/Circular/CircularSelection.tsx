@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Coor, InputRefFuncType } from "../CommonTypes";
+
+import { Coor, InputRefFuncType } from "../common";
 import { SelectionContext } from "../handlers/selection";
 
 interface CircularSelectionProps {

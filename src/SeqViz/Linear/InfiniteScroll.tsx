@@ -1,22 +1,22 @@
 import * as React from "react";
+
 import isEqual from "../../utils/isEqual";
-import { SizeType } from "../CommonTypes";
+import { ISize } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollProps {
   seqBlocks: JSX.Element[];
   blockHeights: number[];
   totalHeight: number;
-  size: SizeType;
+  size: ISize;
   bpsPerBlock: number;
 }
-import isEqual from "../../utils/isEqual";
-import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollState {
   centralIndex: number;
   visibleBlocks: number[];
 }
+
 /**
  * A wrapper around the seqBlocks. Renders only the seqBlocks that are
  * within the range of the current dom viewerport
@@ -49,7 +49,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     window.addEventListener("resize", this.handleScrollOrResize);
   };
 
-  componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: any, snapshot: any) => {
+  componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: InfiniteScrollState, snapshot: any) => {
     if (!this.scroller) {
       // scroller not mounted yet
       return;

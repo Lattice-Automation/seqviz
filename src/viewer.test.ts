@@ -2,8 +2,8 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import PUC from "./parts/pUC";
 import { SeqVizProps } from "./SeqViz/SeqViz";
+import PUC from "./parts/pUC";
 import { Viewer } from "./viewer";
 
 const defaultOptions: SeqVizProps = {

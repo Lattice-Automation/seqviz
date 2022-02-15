@@ -1,7 +1,8 @@
 import * as React from "react";
+
 import randomid from "../../../utils/randomid";
 import { reverse } from "../../../utils/sequence";
-import { InputRefFuncType, Primer } from "../../CommonTypes";
+import { InputRefFuncType, Primer } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface Mismatch {
@@ -32,6 +33,7 @@ interface PrimerRowProps {
   zoomed: boolean;
   id: string;
 }
+
 /**
  * a single row of primers. Multiple of these may be in one seqBlock
  * vertically stacked on top of one another in non-overlapping arrays

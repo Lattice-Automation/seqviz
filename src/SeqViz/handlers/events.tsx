@@ -11,8 +11,6 @@ import CentralIndexContext from "./centralIndex";
  * the options available in the context menu are all relevant to whatever has been
  * selected
  *
- * @param  {React.Component} WrappedComp
- * @return {React.Component}
  */
 const withEventRouter = WrappedComp =>
   class WithEventRouter extends React.PureComponent {
@@ -33,7 +31,7 @@ const withEventRouter = WrappedComp =>
      * action handler for a keyboard keypresses.
      * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
      *
-     * @param  {React.SyntheticEvent} e   keypress
+     
      */
     handleKeyPress = e => {
       const keyType = this.keypressMap(e);
@@ -46,8 +44,8 @@ const withEventRouter = WrappedComp =>
     /**
      * maps a keypress to an interaction (String)
      *
-     * @param {React.SyntheticEvent} e   synthetic event input
-     * @return {String} 			     the action performed, one of:
+     
+     
      * ["All", "Copy", "Up", "Right", "Down", "Left"]
      */
     keypressMap = e => {
@@ -75,8 +73,6 @@ const withEventRouter = WrappedComp =>
      * 	All: cmd + A, select all
      * 	Copy: cmd + C, copy
      * 	Up, Right, Down, Left: some directional movement of the cursor
-     *
-     * @param {String} i  		  one of the commands listed above
      */
     handleSeqInteraction = async type => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
@@ -239,7 +235,7 @@ const withEventRouter = WrappedComp =>
      *
      * if it is a regular click, pass on as normal
      *
-     * @param  {React.SyntheticEvent} e   the mouse event
+     
      */
     handleMouseEvent = e => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message

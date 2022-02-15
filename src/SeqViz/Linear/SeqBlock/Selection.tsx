@@ -1,8 +1,8 @@
 import * as React from "react";
+
 import randomid from "../../../utils/randomid";
-import { InputRefFuncType } from "../../CommonTypes";
-import { SelectionContext } from "../../handlers/selection";
-import { SeqVizSelection } from "../../SeqViz";
+import { InputRefFuncType } from "../../common";
+import { SelectionContext, SeqVizSelection } from "../../handlers/selection";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -12,9 +12,6 @@ interface EdgesProps {
   lastBase: number;
   fullSeq: string;
 }
-
-import randomid from "../../../utils/randomid";
-import { SelectionContext } from "../../handlers/selection";
 
 /**
  * Edges on the side of selections of the Selection Viewer
@@ -101,6 +98,7 @@ export class Edges extends React.PureComponent<EdgesProps> {
     );
   }
 }
+
 interface BlockProps {
   findXAndWidth: FindXAndWidthType;
   selectHeight: number;
@@ -201,17 +199,17 @@ export class Block extends React.PureComponent<BlockProps> {
     }
 
     // nothing was set for this selection block
-    if (!x || !width) {
+    if (!x && !width) {
       return null;
     } else {
       return (
         <React.Fragment>
           <rect
             className="la-vz-linear-sel-block"
-            x={x}
+            x={x || undefined}
             y={-10}
             height={selectHeight + 5}
-            width={width}
+            width={width || undefined}
             shapeRendering="auto"
           />
           {secondBlock}
@@ -220,4 +218,5 @@ export class Block extends React.PureComponent<BlockProps> {
     }
   }
 }
+
 export default { Edges, Block };

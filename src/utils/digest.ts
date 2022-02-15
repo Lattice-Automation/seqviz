@@ -1,5 +1,4 @@
-import { Annotation, Part } from "../part";
-import { ICutSite } from "../SeqViz/CommonTypes";
+import { ICutSite } from "../SeqViz/common";
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
 import { reverseComplement } from "./parser";
@@ -45,12 +44,12 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
  * Search through the sequence with the given enzyme and return an array of cut
  * and hang indexes for splitting up the sequence with the passed enzymes
  *
- * @param  {String}  enzyme         [enzyme object, from enzymes.js]
- * @param  {String}  seqToSearch    [string of the sequence to be searched]
- * @param  {Number}  seqToCutLength [length of the sequence to be cut]
- * @return {[CutSite]} [the list of resulting cut and hang indexes]
+ 
+ 
+ 
+ 
  */
-const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): ICutSite[] => {
+const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -142,10 +141,10 @@ const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null): I
  * if the seqToCut or the compSeqToCut are padded with stars, ie they have overhangs, shorten the
  * searchable index range, since those parts of the sequence should not be searchable and re-cut
  *
- * @param  {String} enzymeName [name of the enzyme to cut the sequence]
- * @param  {Part} part [the part to be cut]
- * @param  {Boolean} circularCheck [whether it's a plasmid]
- * @return {[Part]}  [the list of cut parts]
+ 
+ 
+ 
+ 
  */
 const digestPart = (enzymeName, part, circularCheck) => {
   // get the sequence information
@@ -298,7 +297,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
  * needed because Mongo is storing annotation positions as strings,
  * and I need them as ints. This hack could be avoided if everything
  * involving data manipulation is kept client side
- * @param {[Annotation]} anns   the annotations to be casted
+ 
  */
 const annPosToInts = anns =>
   anns.map(a => ({
@@ -313,9 +312,9 @@ const annPosToInts = anns =>
  * Cuts a part with the list of enzymes, and returns a new list of
  * parts after digestion
  *
- * @param  {[String]} enzymeNames [the name of the enzymes to cut with]
- * @param  {Part} part [the part to cut]
- * @return {[Part]}             [the resulting cut parts]
+ 
+ 
+ 
  */
 export const digest = (enzymeNames, part) => {
   const { circular = true } = part;

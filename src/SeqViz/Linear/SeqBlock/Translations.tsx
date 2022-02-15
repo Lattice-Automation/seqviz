@@ -1,7 +1,8 @@
 import * as React from "react";
+
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
-import { InputRefFuncType } from "../../CommonTypes";
+import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 export interface Translation {
@@ -26,6 +27,7 @@ interface TranslationRowsProps {
   translations: Translation[];
   yDiff: number;
 }
+
 export default class TranslationRows extends React.PureComponent<TranslationRowsProps> {
   render() {
     const {

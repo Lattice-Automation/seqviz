@@ -1,5 +1,20 @@
 import * as React from "react";
+
 import { calcGC, calcTm } from "../../utils/sequence";
+
+export interface SeqVizSelection {
+  name: string;
+  type: string;
+  seq: string;
+  gc: string;
+  tm: number;
+  start: number;
+  end: number;
+  length: number;
+  direction: number;
+  clockwise: boolean;
+  color: string;
+}
 
 /** Initial/default selection */
 export const defaultSelection = {
@@ -78,8 +93,8 @@ const withSelectionHandler = WrappedComp =>
     /**
      * a ref callback for mapping the id of child to its SelectRange
      * it stores the id of all elements
-     * @param  {string} ref element's id, as it appears in DOM
-     * @param  {SelectRange} selectRange
+     
+     
      */
     inputRef = (ref, selectRange) => {
       this.idToRange.set(ref, { ref, ...selectRange });
@@ -87,7 +102,7 @@ const withSelectionHandler = WrappedComp =>
 
     /**
      * remove the id of the passed element from the list of tracked refs
-     * @param  {string} ref  if of the element to drop from list
+     
      */
     removeMountedBlock = ref => {
       this.idToRange.delete(ref);
@@ -100,7 +115,7 @@ const withSelectionHandler = WrappedComp =>
      * update its SeqBlock's range (or any others affected) with the newly
      * active range
      *
-     * @param {React.SyntheticEvent} e  		the mouseEvent
+     
      */
     mouseEvent = e => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
@@ -332,9 +347,9 @@ const withSelectionHandler = WrappedComp =>
      * in a linear sequence viewer, given the bounding box of a component, the basepairs
      * by SeqBlock and the position of the mouse event, find the current base
      *
-     * @param {SyntheticMouseEvent} e      the click of onMouseOver event
-     * @param {SelectRange} knownRange     a range of a known element
-     * @return {Number}		   the current base being clicked or hovered
+     
+     
+     
      */
     calculateBaseLinear = (e, knownRange) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -355,8 +370,8 @@ const withSelectionHandler = WrappedComp =>
      * in a circular plasmid viewer, given the center of the viewer, and position of the
      * mouse event, find the currently hovered or clicked basepair
      *
-     * @param {SyntheticMouseEvent} e    the click of onMouseMove event
-     * @return {Number}   				 the current base being clicked or hovered
+     
+     
      */
     calculateBaseCircular = e => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message

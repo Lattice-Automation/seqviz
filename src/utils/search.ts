@@ -1,10 +1,6 @@
 import { dnaComplement } from "./parser";
-import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
+import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
 
-/**
- * Search the seq in the forward and reverse complement strands.
- * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
- */
 export interface SearchResult {
   start: number;
   end: number;
@@ -12,6 +8,11 @@ export interface SearchResult {
   index?: number;
   length?: number;
 }
+
+/**
+ * Search the seq in the forward and reverse complement strands.
+ * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
+ */
 export default (query: string, mismatch: number, seq: string): SearchResult[] => {
   if (!query || !query.length || !seq || !seq.length) {
     return [];
@@ -45,7 +46,6 @@ export default (query: string, mismatch: number, seq: string): SearchResult[] =>
  * If there's no mismatch, just use a RegExp to search over the sequence repeatedly
  * Otherwise, use the modified hamming search in `searchWithMismatch()`
  */
-
 const search = (query: string, subject: string, mismatch: number, fwd: boolean): SearchResult[] => {
   if (mismatch > 0) {
     return searchWithMismatch(query, subject, mismatch, fwd);

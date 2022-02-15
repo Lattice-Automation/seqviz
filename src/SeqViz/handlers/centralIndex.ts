@@ -3,7 +3,7 @@ import * as React from "react";
 const defaultCentralIndex = {
   linear: 0,
   circular: 0,
-  setCentralIndex: (update: number) => {},
+  setCentralIndex: (_: number) => {},
 };
 
 /** Default central index context object */

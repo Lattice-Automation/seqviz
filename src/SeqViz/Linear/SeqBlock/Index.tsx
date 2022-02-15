@@ -1,5 +1,6 @@
 import * as React from "react";
-import { SizeType } from "../../CommonTypes";
+
+import { ISize } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
@@ -7,12 +8,13 @@ interface IndexProps {
   zoom: { linear: number };
   firstBase: number;
   lineHeight: number;
-  size: SizeType;
+  size: ISize;
   findXAndWidth: FindXAndWidthType;
   transform: string | undefined;
   showIndex: boolean;
   lastBase: number;
 }
+
 /**
  * a basepair indexing row for tracking the location of the current bp of DNA.
  */

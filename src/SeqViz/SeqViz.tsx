@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { Annotation, Element, Part } from "../part";
@@ -7,28 +8,11 @@ import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
-import { ICutSite } from "./CommonTypes";
-import CentralIndexContext from "./handlers/centralIndex";
-import { defaultSelection, SelectionContext } from "./handlers/selection";
 import SeqViewer from "./SeqViewer";
+import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, defaultSelection } from "./handlers/selection";
-
+import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
 import "./style.css";
-
-export interface SeqVizSelection {
-  name: string;
-  type: string;
-  seq: string;
-  gc: string;
-  tm: number;
-  start: number;
-  end: number;
-  length: number;
-  direction: number;
-  clockwise: boolean;
-  color: string;
-}
 
 export interface SeqVizProps {
   accession?: string;

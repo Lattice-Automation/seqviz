@@ -6,8 +6,6 @@
  * sense and should be filtered out)
  */
 
-import { SearchResult } from "./search";
-
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const DNAComplement = {
   a: "t",
@@ -69,11 +67,8 @@ export const dnaComplement = (origSeq: string): { seq: string; compSeq: string }
 
 /**
  * Return the reverse complement of a DNA sequence
- *
- * @param {string}  seq the seq that we're interested in finding the reverse complement of
- * @return {string}     the reverse complement of the input
  */
-export const reverseComplement = inputSeq => {
+export const reverseComplement = (inputSeq): string => {
   const { compSeq } = dnaComplement(inputSeq);
   return compSeq.split("").reverse().join("");
 };
@@ -106,7 +101,7 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * directionaltiy("NONSENSE") => 0
  * ```
  *
- * @param {String} direction user defined direction for a SeqViz element
+ 
  */
 export const directionality = direction => {
   if (!direction) {

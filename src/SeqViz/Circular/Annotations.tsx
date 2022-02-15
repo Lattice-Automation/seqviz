@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Annotation, Label } from "../../part";
+
+import { Annotation } from "../../part";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
-import { Coor, InputRefFuncType, SizeType } from "../CommonTypes";
+import { Coor, ISize, InputRefFuncType } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface AnnotationsProps {
@@ -24,9 +25,9 @@ interface AnnotationsProps {
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   inputRef: InputRefFuncType;
   annotations: Annotation[];
-  size: SizeType;
+  size: ISize;
   rowsToSkip: number;
-  inlinedAnnotations: Label[];
+  inlinedAnnotations: string[];
 }
 
 /**
@@ -89,6 +90,12 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
 
               return (
                 <SingleAnnotation
+                  seqLength={this.props.seqLength}
+                  getRotation={this.props.getRotation}
+                  generateArc={this.props.generateArc}
+                  lineHeight={lineHeight}
+                  inputRef={this.props.inputRef}
+                  inlinedAnnotations={this.props.inlinedAnnotations}
                   key={`la-vz-${ann.id}-annotation-circular-row`}
                   id={`la-vz-${ann.id}-annotation-circular-row`}
                   annotation={ann}
@@ -110,12 +117,39 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
   }
 }
 
+interface SingleAnnotationProps {
+  annotation: Annotation;
+  seqLength: number;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  currBRadius: number;
+  currTRadius: number;
+  centralIndex: number;
+  lineHeight: number;
+  transparentPath: { stroke: string; fill: string };
+  inputRef: InputRefFuncType;
+  calcBorderColor: (c: any) => any;
+  hoverAnnotation: (className: string, opacity: number) => void;
+  annStyle: any;
+  inlinedAnnotations: string[];
+  labelStyle: { cursor: string };
+  id: string;
+}
+
 /**
  * A component for a single annotation within the Circular Viewer
  *
- * @param {AnnotationProps} props for a single Annotation
  */
-const SingleAnnotation = props => {
+const SingleAnnotation = (props: SingleAnnotationProps) => {
   const {
     annotation: a,
     seqLength,

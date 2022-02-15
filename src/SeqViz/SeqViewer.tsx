@@ -1,13 +1,14 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
+
 import { Annotation } from "../part";
 import isEqual from "../utils/isEqual";
 import { SearchResult } from "../utils/search";
 import Circular from "./Circular/Circular";
-import { ICutSite } from "./CommonTypes";
-import CentralIndexContext from "./handlers/centralIndex";
 import Linear from "./Linear/Linear";
-import { SeqVizSelection } from "./SeqViz";
+import { ICutSite } from "./common";
+import CentralIndexContext from "./handlers/centralIndex";
+import { SeqVizSelection } from "./handlers/selection";
 
 interface SeqViewerProps {
   size: { width: number; height: number };

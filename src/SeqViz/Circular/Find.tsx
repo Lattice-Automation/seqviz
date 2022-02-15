@@ -1,8 +1,9 @@
 import * as React from "react";
-import { SearchResult } from "../../utils/search";
-import { Coor, InputRefFuncType } from "../CommonTypes";
 
-interface CircularFindProps {
+import { SearchResult } from "../../utils/search";
+import { Coor, InputRefFuncType } from "../common";
+
+interface FindProps {
   search: SearchResult[];
   radius: number;
   center: Coor;
@@ -27,7 +28,7 @@ interface CircularFindProps {
   seq: string;
 }
 
-export default class CircularFind extends React.PureComponent<CircularFindProps> {
+export default class CircularFind extends React.PureComponent<FindProps> {
   /**
    * Create an SVG `path` element that highlights the search result
    */
