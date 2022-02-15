@@ -1,8 +1,8 @@
 import * as React from "react";
 import randomid from "../../../utils/randomid";
 import { reverse } from "../../../utils/sequence";
-import { Primer } from "../../Circular/Circular";
-import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
+import { InputRefFuncType, Primer } from "../../CommonTypes";
+import { FindXAndWidthType } from "./SeqBlock";
 
 interface Mismatch {
   start: number;

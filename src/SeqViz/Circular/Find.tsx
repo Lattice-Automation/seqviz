@@ -1,7 +1,6 @@
 import * as React from "react";
 import { SearchResult } from "../../utils/search";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
-import { Coor } from "./Circular";
+import { Coor, InputRefFuncType } from "../CommonTypes";
 
 interface CircularFindProps {
   search: SearchResult[];

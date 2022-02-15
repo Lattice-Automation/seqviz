@@ -1,7 +1,8 @@
 import * as React from "react";
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
-import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
+import { InputRefFuncType } from "../../CommonTypes";
+import { FindXAndWidthType } from "./SeqBlock";
 
 export interface Translation {
   id: string;

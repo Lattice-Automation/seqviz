@@ -1,6 +1,6 @@
 import * as React from "react";
 import isEqual from "../../utils/isEqual";
-import { SizeType } from "../Circular/Circular";
+import { SizeType } from "../CommonTypes";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollProps {

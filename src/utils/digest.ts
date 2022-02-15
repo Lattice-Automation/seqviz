@@ -1,11 +1,10 @@
+import { Annotation, Part } from "../part";
+import { ICutSite } from "../SeqViz/CommonTypes";
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
-import { dnaComplement, reverseComplement } from "./parser";
+import { reverseComplement } from "./parser";
 import randomid from "./randomid";
-import { Annotation, Element, Part } from "../part";
-
 import { translateWildNucleotides } from "./sequence";
-import { ICutSite } from "../SeqViz/Circular/Circular";
 
 /**
  * cutSitesInRows

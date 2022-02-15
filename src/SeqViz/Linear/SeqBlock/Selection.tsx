@@ -1,8 +1,9 @@
 import * as React from "react";
 import randomid from "../../../utils/randomid";
+import { InputRefFuncType } from "../../CommonTypes";
 import { SelectionContext } from "../../handlers/selection";
 import { SeqVizSelection } from "../../SeqViz";
-import { FindXAndWidthType, InputRefFuncType } from "./SeqBlock";
+import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
   findXAndWidth: FindXAndWidthType;

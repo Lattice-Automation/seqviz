@@ -3,10 +3,10 @@ import { Annotation, Label } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
+import { Coor, ICutSite, InputRefFuncType, Primer, SizeType } from "../CommonTypes";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
 import Annotations from "./Annotations";
 import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
@@ -17,28 +17,6 @@ import Labels from "./Labels";
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
-
-export interface Primer {
-  direction: 1 | -1;
-}
-export interface ICutSite {
-  fcut: number;
-  rcut: number;
-  start: number;
-  end: number;
-
-  type?: "enzyme" | "annotation";
-  name: string;
-  id: string;
-  recogStart: number;
-  recogEnd: number;
-  recogStrand: unknown;
-}
-
-export interface SizeType {
-  height: number;
-  width: number;
-}
 
 interface CircularProps {
   annotations: Annotation[];
@@ -67,11 +45,6 @@ interface CircularState {
   primersInRows: Primer[];
   inlinedLabels: Label[];
   outerLabels: Label[];
-}
-
-export interface Coor {
-  x: number;
-  y: number;
 }
 
 class Circular extends React.Component<CircularProps, CircularState> {

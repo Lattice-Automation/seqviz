@@ -3,12 +3,13 @@ import * as sizeMe from "react-sizeme";
 import { Annotation } from "../part";
 import isEqual from "../utils/isEqual";
 import { SearchResult } from "../utils/search";
-import Circular, { ICutSite } from "./Circular/Circular";
+import Circular from "./Circular/Circular";
+import { ICutSite } from "./CommonTypes";
 import CentralIndexContext from "./handlers/centralIndex";
 import Linear from "./Linear/Linear";
 import { SeqVizSelection } from "./SeqViz";
 
-interface SeqViewerPropsr {
+interface SeqViewerProps {
   size: { width: number; height: number };
   zoom: { linear: number; circular: number };
   search: SearchResult;

@@ -7,7 +7,7 @@ import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
-import { ICutSite } from "./Circular/Circular";
+import { ICutSite } from "./CommonTypes";
 import CentralIndexContext from "./handlers/centralIndex";
 import { defaultSelection, SelectionContext } from "./handlers/selection";
 import SeqViewer from "./SeqViewer";

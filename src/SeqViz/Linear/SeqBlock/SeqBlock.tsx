@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Annotation } from "../../../part";
 import { SearchResult } from "../../../utils/search";
-import { ICutSite, Primer, SizeType } from "../../Circular/Circular";
+import { ICutSite, InputRefFuncType, Primer, SizeType } from "../../CommonTypes";
 import { SeqVizSelection } from "../../SeqViz";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
@@ -10,8 +10,6 @@ import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
-
-export type InputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
 
 export type FindXAndWidthType = (
   n1: number | undefined,

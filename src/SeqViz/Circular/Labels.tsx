@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Label } from "../../part";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
-import { CHAR_WIDTH, Coor, SizeType } from "./Circular";
+import { Coor, InputRefFuncType, SizeType } from "../CommonTypes";
+import { CHAR_WIDTH } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
 interface LabelsProps {

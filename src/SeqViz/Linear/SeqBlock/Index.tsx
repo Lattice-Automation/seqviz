@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SizeType } from "../../Circular/Circular";
+import { SizeType } from "../../CommonTypes";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {

@@ -1,7 +1,6 @@
 import * as React from "react";
+import { Coor, InputRefFuncType } from "../CommonTypes";
 import { SelectionContext } from "../handlers/selection";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
-import { Coor } from "./Circular";
 
 interface CircularSelectionProps {
   radius: number;

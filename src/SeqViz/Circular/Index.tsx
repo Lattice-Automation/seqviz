@@ -1,7 +1,6 @@
 import * as React from "react";
+import { Coor, InputRefFuncType, SizeType } from "../CommonTypes";
 import CentralIndexContext from "../handlers/centralIndex";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
-import { Coor, SizeType } from "./Circular";
 
 interface IndexProps {
   radius: number;
@@ -42,7 +41,7 @@ interface IndexProps {
  * part need to be pushed to the bottom of the circular viewer if there
  * are too many elements in the circular viewer and the name won't fit
  */
-export default class IndexViewer extends React.PureComponent<IndexProps> {
+export default class Index extends React.PureComponent<IndexProps> {
   static contextType = CentralIndexContext;
   static context: any;
 

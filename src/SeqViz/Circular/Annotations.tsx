@@ -1,9 +1,8 @@
 import * as React from "react";
 import { Annotation, Label } from "../../part";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
+import { Coor, InputRefFuncType, SizeType } from "../CommonTypes";
 import CentralIndexContext from "../handlers/centralIndex";
-import { InputRefFuncType } from "../Linear/SeqBlock/SeqBlock";
-import { Coor, SizeType } from "./Circular";
 
 interface AnnotationsProps {
   radius: number;
@@ -90,7 +89,6 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
 
               return (
                 <SingleAnnotation
-                  {...this.props}
                   key={`la-vz-${ann.id}-annotation-circular-row`}
                   id={`la-vz-${ann.id}-annotation-circular-row`}
                   annotation={ann}
