@@ -6,10 +6,16 @@
     "module": "commonjs", // specify module code generation
     "jsx": "react", // use typescript to transpile jsx to js
     "target": "es5", // specify ECMAScript target version
-    "allowJs": false, // allow a partial TypeScript and JavaScript codebase
     "lib": ["es2015", "dom"], // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+
+    "strict": false, // TODO: set to true
+    "allowJs": false, // allow a partial TypeScript and JavaScript codebase
+    "allowUnreachableCode": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictPropertyInitialization": true
   },
   "include": ["./src/"]
 }

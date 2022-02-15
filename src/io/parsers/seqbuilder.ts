@@ -1,5 +1,4 @@
-import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
-
+import { dnaComplement, extractDate, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
@@ -14,7 +13,7 @@ const tagColorList = ["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"];
  * at imports/io/examples/seqbuilder, though there may be variations to the
  * format
  */
-export default async (fileInput, fileName, colors = []) =>
+export default async (fileInput, fileName, _ = []) =>
   fileInput.split(/\/\/\s/g).map(file => {
     // +++++SEQUENCE+++++//
     // the part sequence comes after the line that specifies the seqbuilder version number

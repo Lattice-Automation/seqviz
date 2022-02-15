@@ -3,6 +3,7 @@ import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
+
 import { createLinearTranslations } from "../../utils/sequence";
 import { Coor, ICutSite, InputRefFuncType, Primer, SizeType } from "../CommonTypes";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";

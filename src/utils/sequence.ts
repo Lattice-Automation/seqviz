@@ -1,4 +1,4 @@
-import { colorByIndex, chooseRandomColor } from "./colors";
+import { chooseRandomColor, colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 import randomid from "./randomid";
 

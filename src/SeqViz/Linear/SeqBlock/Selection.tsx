@@ -13,6 +13,9 @@ interface EdgesProps {
   fullSeq: string;
 }
 
+import randomid from "../../../utils/randomid";
+import { SelectionContext } from "../../handlers/selection";
+
 /**
  * Edges on the side of selections of the Selection Viewer
  *

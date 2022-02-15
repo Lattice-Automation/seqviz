@@ -1,14 +1,13 @@
+import { mount } from "enzyme";
 import * as fs from "fs";
 import * as path from "path";
-
-import { mount } from "enzyme";
 import * as React from "react";
 
+import Linear from "./SeqViz/Linear/Linear";
+import SeqBlock from "./SeqViz/Linear/SeqBlock/SeqBlock";
+import SeqViewer from "./SeqViz/SeqViewer";
 import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
-import SeqViewer from "./SeqViz/SeqViewer";
-import SeqBlock from "./SeqViz/Linear/SeqBlock/SeqBlock";
-import Linear from "./SeqViz/Linear/Linear";
 
 const defaultProps = {
   name: "test_part",

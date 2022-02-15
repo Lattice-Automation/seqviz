@@ -11,6 +11,9 @@ import { ICutSite } from "./CommonTypes";
 import CentralIndexContext from "./handlers/centralIndex";
 import { defaultSelection, SelectionContext } from "./handlers/selection";
 import SeqViewer from "./SeqViewer";
+import CentralIndexContext from "./handlers/centralIndex";
+import { SelectionContext, defaultSelection } from "./handlers/selection";
+
 import "./style.css";
 
 export interface SeqVizSelection {
@@ -57,7 +60,7 @@ export interface SeqVizProps {
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  style: object;
+  style: Record<string, unknown>;
   translations: Element[];
   viewer: "linear" | "circular" | "both" | "both_flip";
   zoom: {

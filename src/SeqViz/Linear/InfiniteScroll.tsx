@@ -10,6 +10,8 @@ interface InfiniteScrollProps {
   size: SizeType;
   bpsPerBlock: number;
 }
+import isEqual from "../../utils/isEqual";
+import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollState {
   centralIndex: number;
