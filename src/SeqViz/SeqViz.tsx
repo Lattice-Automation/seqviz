@@ -2,16 +2,15 @@ import * as React from "react";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
+import { Annotation, Element, Part } from "../part";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
+import SeqViewer from "./SeqViewer";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, defaultSelection } from "./handlers/selection";
-import SeqViewer from "./SeqViewer";
-import { Annotation, Element, Part } from "../part";
-
 import "./style.css";
 
 export interface SeqVizProps {
@@ -56,7 +55,7 @@ export interface SeqVizProps {
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  style: object;
+  style: Record<string, unknown>;
   translations: Element[];
   viewer: "linear" | "circular" | "both" | "both_flip";
   zoom: {
@@ -220,7 +219,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    * Modify the annotations to add unique ids, fix directionality and
    * modulo the start and end of each to match SeqViz's API
    */
-  parseAnnotations = (annotations: Annotation[] | null = null, seq: string = "") =>
+  parseAnnotations = (annotations: Annotation[] | null = null, seq = "") =>
     (annotations || []).map((a, i) => ({
       // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[] | undefined' is not ass... Remove this comment to see the full error message
       ...annotationFactory(i, this.props.colors),

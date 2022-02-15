@@ -1,8 +1,7 @@
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
-import { dnaComplement, reverseComplement } from "./parser";
+import { reverseComplement } from "./parser";
 import randomid from "./randomid";
-
 import { translateWildNucleotides } from "./sequence";
 
 /**
@@ -67,7 +66,7 @@ export const cutSitesInRows = (seq, enzymeList, enzymesCustom = {}) => {
  * @param  {Number}  seqToCutLength [length of the sequence to be cut]
  * @return {[CutSite]} [the list of resulting cut and hang indexes]
  */
-const findCutSites = (enzyme, seqToSearch, seqToCutLength, enzymeName = null) => {
+const findCutSites = (enzyme, seqToSearch, _, enzymeName = null) => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {

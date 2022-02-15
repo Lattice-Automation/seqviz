@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import randomid from "../../../utils/randomid";
-
 import { reverse } from "../../../utils/sequence";
 
 /**

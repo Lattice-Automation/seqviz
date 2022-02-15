@@ -14,11 +14,20 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
-    "react/prop-types": "warn",
-    "@typescript-eslint/no-empty-function": "warn",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-prototype-builtins": "warn",
     "prefer-const": "warn",
     "prefer-rest-params": "warn",
-    "no-prototype-builtins": "warn",
-    "@typescript-eslint/ban-ts-comment": "warn"
+    "react/prop-types": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": ["class", "export", "function", "interface", "type"]
+      }
+    ]
   }
 }

@@ -1,4 +1,4 @@
-import { dnaComplement, reverseComplement, directionality } from "./parser";
+import { directionality, dnaComplement, reverseComplement } from "./parser";
 
 describe("Parse part input", () => {
   it("parses DNA seq and compSeq", () => {

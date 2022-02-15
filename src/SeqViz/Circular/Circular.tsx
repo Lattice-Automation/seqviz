@@ -303,9 +303,6 @@ class Circular extends React.Component {
       inputRef,
     };
 
-    // an inward shift is needed for primers if the annotations are shown
-    let primerRowsToSkip = annotationsInRows.length + 1;
-
     // calculate the selection row height based on number of annotation and primers
     let totalRows = 4 + annotationsInRows.length;
 
