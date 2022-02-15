@@ -1,5 +1,6 @@
 import * as path from "path";
 
+import { Part } from "../part";
 import { COLORS } from "../utils/colors";
 import { dnaComplement, partFactory } from "../utils/parser";
 import parseBenchling from "./parsers/benchling";
@@ -8,9 +9,8 @@ import parseFASTA from "./parsers/fasta";
 import parseGenbank from "./parsers/genbank";
 import parseJBEI from "./parsers/jbei";
 import parseSBOL from "./parsers/sbol";
-import parseSnapgene from "./parsers/snapgene";
 import parseSeqBuilder from "./parsers/seqbuilder";
-import { Part } from "../part";
+import parseSnapgene from "./parsers/snapgene";
 
 export interface FileOptions {
   fileName?: string;
@@ -122,7 +122,7 @@ const fileToParts = async (
     if (["bases", "annotations", "primers"].every(k => benchlingJSONKeys.includes(k))) {
       isBenchling = true;
     }
-  } catch (_) {}
+  } catch (ex) {}
 
   try {
     switch (true) {

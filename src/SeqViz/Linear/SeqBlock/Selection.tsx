@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { SelectionContext } from "../../handlers/selection";
 import randomid from "../../../utils/randomid";
+import { SelectionContext } from "../../handlers/selection";
 
 /**
  * Edges on the side of selections of the Selection Viewer
