@@ -2,13 +2,11 @@
  * Source code for this parser comes from:
  * https://github.com/IsaacLuo/SnapGeneFileReader
  */
-
-import { StringDecoder } from "string_decoder";
 import * as bufferpack from "bufferpack";
+import { StringDecoder } from "string_decoder";
 import * as xml2js from "xml2js";
 
 import { dnaComplement, partFactory } from "../../utils/parser";
-
 import { annotationFactory } from "../../utils/sequence";
 
 export default async (fileArrayBuffer, options) => {

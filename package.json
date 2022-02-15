@@ -6,7 +6,9 @@
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "format": "npx prettier ./src/**/* --config package.json --write",
+    "lint": "eslint src --ext ts,tsx --quiet",
+    "format": "prettier ./src/** --config package.json --write",
+    "format:check": "prettier ./src/** --config package.json --check",
     "markdown": "node ./config/scripts/markdown.js ./README.md",
     "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
     "major": "npm run test:ci && npm version major && npm run update",
@@ -14,7 +16,7 @@
     "patch": "npm run test:ci && npm version patch && npm run update",
     "start": "PORT=8000 node ./config/scripts/start.js",
     "test": "node ./config/scripts/test.js",
-    "test:ci": "CI=true npm run test && npm run build"
+    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build"
   },
   "keywords": [
     "seqviz",
@@ -51,6 +53,9 @@
   ],
   "prettier": {
     "arrowParens": "avoid",
+    "importOrder": ["^\\w", "^[./]"],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true,
     "printWidth": 120
   },
   "babel": {
@@ -138,6 +143,7 @@
     "@babel/preset-typescript": "^7.12.1",
     "@babel/types": "^7.16.0",
     "@svgr/webpack": "^4.3.3",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/cheerio": "^0.22.30",
     "@types/enzyme": "^3.10.10",
     "@types/jest": "^26.0.0",

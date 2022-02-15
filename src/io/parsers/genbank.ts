@@ -1,5 +1,4 @@
-import { dnaComplement, partFactory, extractDate } from "../../utils/parser";
-
+import { dnaComplement, extractDate, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name

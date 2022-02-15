@@ -2,8 +2,8 @@ import * as React from "react";
 
 import Annotations from "./Annotations";
 import CutSiteRow from "./CutSites";
-import IndexRow from "./Index";
 import Find from "./Find";
+import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
 import TranslationRows from "./Translations";

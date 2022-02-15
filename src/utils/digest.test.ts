@@ -1,5 +1,5 @@
-import { partFactory } from "./parser";
 import { digest } from "./digest";
+import { partFactory } from "./parser";
 
 describe("DNATools: Digest", () => {
   const ecoriTestPart = () => ({

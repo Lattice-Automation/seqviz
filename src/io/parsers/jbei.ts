@@ -9,7 +9,7 @@ import randomid from "../../utils/randomid";
  * representation of a part(s). an example of this type of file can be
  * found in ../examples/jbei
  */
-export default async (JBEI, colors = []) =>
+export default async (JBEI, _ = []) =>
   new Promise((resolve, reject) => {
     // util reject function that will be triggered if any fields fail
     const rejectJBEI = errType => reject(new Error(`Failed on JBEI file; ${errType}`));

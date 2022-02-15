@@ -1,5 +1,4 @@
 import { dnaComplement } from "./parser";
-
 import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
 
 /**
