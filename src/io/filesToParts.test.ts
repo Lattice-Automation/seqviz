@@ -1,4 +1,5 @@
 import * as fs from "fs";
+
 import filesToParts from "./filesToParts";
 
 /**

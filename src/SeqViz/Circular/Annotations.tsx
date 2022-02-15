@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import CentralIndexContext from "../handlers/centralIndex";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
+import CentralIndexContext from "../handlers/centralIndex";
 
 /**
  * Used to build up all the path elements. Does not include a display

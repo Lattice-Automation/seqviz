@@ -1,4 +1,4 @@
-import { partFactory, dnaComplement } from "../../utils/parser";
+import { dnaComplement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /**
