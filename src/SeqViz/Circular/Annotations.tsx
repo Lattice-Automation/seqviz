@@ -98,7 +98,7 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
                   inlinedAnnotations={this.props.inlinedAnnotations}
                   key={`la-vz-${ann.id}-annotation-circular-row`}
                   id={`la-vz-${ann.id}-annotation-circular-row`}
-                  annotation={ann}
+                  annotation={ann[0]}
                   currBRadius={currBRadius}
                   currTRadius={currTRadius}
                   transparentPath={transparentPath}

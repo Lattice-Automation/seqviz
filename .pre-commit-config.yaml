@@ -3,4 +3,4 @@ repos:
     rev: "v2.5.1" # Use the sha or tag you want to point at
     hooks:
       - id: prettier
-        args: [--write, --config, package.json, ./src/**]
+        args: [--config, package.json, --write, ./src/**]
