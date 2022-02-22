@@ -218,7 +218,7 @@ export const calcLength = (start: number, end: number, seqLength: number): numbe
  */
 export const reverse = (seq: string): string => seq.split("").reverse().join("");
 
-export const annotationFactory = (i = -1, colors = null) => ({
+export const annotationFactory = (i = -1, colors?: string[]) => ({
   id: randomid(),
   color: i >= 0 ? colorByIndex(i, colors) : chooseRandomColor(colors),
   name: "",

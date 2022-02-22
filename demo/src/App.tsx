@@ -14,14 +14,12 @@ import {
   Sidebar,
 } from "semantic-ui-react";
 import { SeqViz } from "seqviz";
-
 import LatticeLogo from "../src/lattice-brand.png";
 import SeqvizLogo from "../src/seqviz-brand-small.png";
 import seqvizGraphic from "../src/seqviz-logo.png";
-import { Header } from "./Header";
-import { history, urlParams, updateUrl } from "./utils";
-
 import "./App.css";
+import { Header } from "./Header";
+import { history, updateUrl, urlParams } from "./utils";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -29,8 +27,25 @@ const viewerTypeOptions = [
   { key: "linear", value: "linear", text: "Linear" },
 ];
 
-export class Demo extends Component {
-  state = {
+interface DemoProps {}
+interface DemoState {
+  biobrick?: any;
+  part: any;
+  backbone: any;
+  viewType: string;
+  annotations: boolean;
+  primers: boolean;
+  complement: boolean;
+  index: boolean;
+  query: string;
+  enzymes: any[];
+  lzoom: number;
+  selection: any;
+  searchResults: any;
+}
+
+export class Demo extends Component<DemoProps, DemoState> {
+  state: DemoState = {
     part: urlParams().biobrick,
     backbone: urlParams().backbone,
     viewType: "",
@@ -45,7 +60,7 @@ export class Demo extends Component {
     searchResults: {},
   };
 
-  constructor(props) {
+  constructor(props: DemoProps) {
     super(props);
 
     // on changes to backbone or part, update that in state
@@ -76,7 +91,7 @@ export class Demo extends Component {
   }
 }
 
-class App extends Component {
+class App extends Component<{ setDemoState: any; part: any; enzymes: any }, { visible: boolean }> {
   state = { visible: false };
 
   toggleSidebar = () => {

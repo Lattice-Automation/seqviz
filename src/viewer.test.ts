@@ -1,10 +1,12 @@
+// @ts-nocheck
 import * as fs from "fs";
 import * as path from "path";
 
+import { SeqVizProps } from "./SeqViz/SeqViz";
 import PUC from "./parts/pUC";
 import { Viewer } from "./viewer";
 
-const defaultOptions = {
+const defaultOptions: SeqVizProps = {
   viewer: "both",
   showAnnotations: true,
   showPrimers: true,

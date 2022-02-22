@@ -4,7 +4,7 @@
   "private": false,
   "description": "A DNA sequence viewer. Supports custom, GenBank, FASTA, or NCBI accession input",
   "scripts": {
-    "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display-error-details --verbose",
+    "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js --display minimal",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
     "lint": "eslint src --ext ts,tsx --quiet",
     "format": "prettier ./src/** --config package.json --write",
@@ -45,7 +45,7 @@
     "README.md"
   ],
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/viewer.d.ts",
   "unpkg": "dist/seqviz.min.js",
   "browserslist": [
     ">0.2%",
@@ -53,7 +53,10 @@
   ],
   "prettier": {
     "arrowParens": "avoid",
-    "importOrder": ["^\\w", "^[./]"],
+    "importOrder": [
+      "^\\w",
+      "^[./]"
+    ],
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
     "printWidth": 120
@@ -148,11 +151,11 @@
     "@types/enzyme": "^3.10.10",
     "@types/jest": "^26.0.0",
     "@types/node-fetch": "^3.0.3",
-    "@types/react": "^17.0.35",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/xml2js": "^0.4.9",
-    "@typescript-eslint/eslint-plugin": "^4.8.1",
-    "@typescript-eslint/parser": "^4.8.1",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "babel-jest": "^26.6.3",
     "babel-plugin-module-resolver": "^3.2.0",
@@ -165,7 +168,8 @@
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "enzyme": "^3.11.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.8.0",
+    "eslint-plugin-react": "^7.28.0",
     "file-loader": "^4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "^4.5.0",

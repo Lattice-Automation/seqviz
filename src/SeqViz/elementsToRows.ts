@@ -17,9 +17,6 @@ const first = arr => arr[0];
  * 		[ ---Ann--- ---Ann3---]
  * 		[		---Ann2---    ]
  *
- * @param {[Element]} elements   all elements in a single row
- * @return {[[Element]]}         elements grouped into a single array if they're
- *                                non-overlapping
  */
 export const stackElements = (elements, seqL) => {
   const sortedElements = [...elements];
@@ -77,8 +74,6 @@ export const stackElements = (elements, seqL) => {
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
  *
- * @param {[Element]}
- * @return {[[Element]]}
  */
 export const createMultiRows = (elements, rowLength, rowCount) => {
   const newArr = new Array(rowCount);
@@ -161,8 +156,6 @@ export const createMultiRows = (elements, rowLength, rowCount) => {
  * annotations/ORFs/etc by finding the appropriate start and end range
  * using Math.floor
  *
- * @param {CreateRowInfo}
- * @return {[[Object]]}       an array of an array of the values that were stored on creation
  */
 export const createSingleRows = (elements, rowLength, rowCount, duplicateIdsAllowed = true) => {
   const newArr = new Array(rowCount);

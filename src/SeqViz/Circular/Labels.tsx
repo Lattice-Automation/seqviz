@@ -1,7 +1,61 @@
 import * as React from "react";
 
+import { Coor, ISize, InputRefFuncType } from "../common";
 import { CHAR_WIDTH } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
+
+export interface ILabel {
+  start: number;
+  end: number;
+  type: "enzyme" | "annotation";
+  name: string;
+  id?: string;
+}
+
+interface LabelWithCoors {
+  label: ILabel;
+  lineCoor: Coor;
+  textCoor: Coor;
+  textAnchor: unknown;
+}
+
+interface GroupedLabelsWithCoors {
+  name: string;
+  textAnchor: unknown;
+  textCoor: Coor;
+  lineCoor: Coor;
+  labels: ILabel[];
+  grouped: unknown;
+  overflow: unknown;
+}
+
+interface LabelsProps {
+  labels: ILabel[];
+  size: ISize;
+  yDiff: number;
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: InputRefFuncType;
+}
+
+interface LabelsState {
+  hoveredGroup: unknown;
+}
 
 /**
  * used to build up all plasmid labels, for annotations, enzymes, etc
@@ -12,8 +66,8 @@ import WrappedGroupLabel from "./WrappedGroupLabel";
  * of the viewer, for scaling these names and positioning in the Y-direction
  * to avoid this overlap problem
  */
-export default class Labels extends React.Component {
-  static getDerivedStateFromProps = (nextProps, prevState) => {
+export default class Labels extends React.Component<LabelsProps, LabelsState> {
+  static getDerivedStateFromProps = (nextProps: LabelsProps, prevState: LabelsState) => {
     // I'm storing the name position groups in state because hovering and
     // leaving a hover both trigger a change in whether to render and show
     // the annotation block, it would be expensive to regroup labels
@@ -34,7 +88,7 @@ export default class Labels extends React.Component {
    * this should return all the informaiton needed to render the
    * name by itself or in a grouping
    */
-  static groupOverlappingLabels = props => {
+  static groupOverlappingLabels = (props: LabelsProps) => {
     const { radius, labels, center, seqLength, findCoor, lineHeight, size, yDiff } = props;
 
     // create a radius outside the plasmid map for placing the names
@@ -47,12 +101,12 @@ export default class Labels extends React.Component {
      * for the line connecting plasmid to name) and the textAnchor (does the name
      * get positioned so it starts at the textCoor or ends at the textCoor?)
      */
-    const labelsWithCoordinates = labels
-      .reduce((acc, labelRow) => acc.concat(labelRow), []) // flatten the rows
+    const labelsWithCoordinates: LabelWithCoors[] = labels
+      .reduce((acc: ILabel[], labelRow) => acc.concat(labelRow), [])
       .map(a => {
         // find the mid-point, vertically, for the label, correcting for entities
         // that cross the zero-index
-        let annCenter;
+        let annCenter: number;
         if (a.type === "enzyme") {
           annCenter = a.start;
         } else if (a.end > a.start) {
@@ -76,7 +130,7 @@ export default class Labels extends React.Component {
       });
 
     // a utility function for checking whether a label and textCoor will overflow
-    const groupOverflows = (label, textCoor) => {
+    const groupOverflows = (label: ILabel, textCoor: Coor) => {
       const nameLength = (label.name.length + 4) * CHAR_WIDTH; // +4 for ",+#" and padding
       let overflow = false;
 
@@ -94,7 +148,7 @@ export default class Labels extends React.Component {
      * will overlap with one another, create an array of them and generate an
      * overview name to show for all of them (ex above)
      */
-    let labelsGrouped = labelsWithCoordinates.reduce((acc, n) => {
+    let labelsGrouped = labelsWithCoordinates.reduce((acc: GroupedLabelsWithCoors[], n) => {
       // search through the other names and check whether any would overlap
       const overlapIndex = acc.findIndex(g => {
         // first check whether the two labels are on the same side of the plasmid
@@ -118,6 +172,7 @@ export default class Labels extends React.Component {
 
       // create a new "group" from this single label
       return acc.concat({
+        name: n.label.name,
         textAnchor: n.textAnchor,
         textCoor: n.textCoor,
         lineCoor: n.lineCoor,
@@ -137,14 +192,14 @@ export default class Labels extends React.Component {
      * labels will connect. That forkCoor, in turn, will be what connects to the edge of
      * the plasmid
      */
-    labelsGrouped = labelsGrouped.reduce((acc, g, i) => {
+    labelsGrouped = labelsGrouped.reduce((acc: GroupedLabelsWithCoors[], g: GroupedLabelsWithCoors, i: number) => {
       // wasn't grouped or overflows the side of viewer or too many labels to try and help
       if (!g.grouped || g.overflow || g.labels.length > 4) return acc.concat(g);
 
       // since the labels are sorted (see circular.filterOutsideLabels), we can just check the
       // coordinate of this group's neighbors to see whether we can spread out
-      let leftNeighbor = acc[acc.length - 1];
-      let rightNeighbor = labelsGrouped[i + 1];
+      let leftNeighbor: GroupedLabelsWithCoors | undefined = acc[acc.length - 1];
+      let rightNeighbor: GroupedLabelsWithCoors | undefined = labelsGrouped[i + 1];
       if (leftNeighbor && leftNeighbor.textAnchor !== g.textAnchor) {
         leftNeighbor = undefined;
       }
@@ -235,12 +290,10 @@ export default class Labels extends React.Component {
 
   render() {
     const { labelGroups, hoveredGroup } = this.state;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     const { size, lineHeight } = this.props;
 
     // find the currently hovered group
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'labels' does not exist on type 'never'.
-    const hovered = labelGroups.find(g => g.labels[0].id === hoveredGroup);
+    const hovered = labelGroups.find((g: GroupedLabelsWithCoors) => g.labels[0].id === hoveredGroup);
 
     return (
       <g className="la-vz-circular-labels" onMouseLeave={() => this.setHoveredGroup("")}>
@@ -251,7 +304,7 @@ export default class Labels extends React.Component {
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'forkCoor' does not exist on type 'never'... Remove this comment to see the full error message
           const fC = g.forkCoor || g.textCoor;
           const labelLines = (
-            <React.Fragment>
+            <>
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'lineCoor' does not exist on */}
               <path d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`} className="la-vz-label-line" />
               {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message */}
@@ -259,7 +312,7 @@ export default class Labels extends React.Component {
                 // @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message
                 <path d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`} className="la-vz-label-line" />
               )}
-            </React.Fragment>
+            </>
           );
 
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'grouped' does not exist on type 'never'.
