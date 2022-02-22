@@ -1,7 +1,17 @@
 import * as React from "react";
 
 import randomid from "../../../utils/randomid";
-import { SelectionContext } from "../../handlers/selection";
+import { InputRefFuncType } from "../../common";
+import { SelectionContext, SeqVizSelection } from "../../handlers/selection";
+import { FindXAndWidthType } from "./SeqBlock";
+
+interface EdgesProps {
+  findXAndWidth: FindXAndWidthType;
+  selectEdgeHeight: number;
+  firstBase: number;
+  lastBase: number;
+  fullSeq: string;
+}
 
 /**
  * Edges on the side of selections of the Selection Viewer
@@ -9,18 +19,17 @@ import { SelectionContext } from "../../handlers/selection";
  * Only shown at the selection's start and end, not intermediate blocks
  * (if there are intermediate blocks)
  */
-export class Edges extends React.PureComponent {
+export class Edges extends React.PureComponent<EdgesProps> {
   static contextType = SelectionContext;
 
   id = randomid();
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
     const { findXAndWidth, selectEdgeHeight, firstBase, lastBase, fullSeq } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
-    let startEdge = null;
-    let lastEdge = null;
+    let startEdge: number | undefined;
+    let lastEdge: number | undefined;
 
     if (clockwise) {
       // clockwise, ie forward drag event
@@ -35,8 +44,8 @@ export class Edges extends React.PureComponent {
 
     // for cmd-a case
     if (ref === "ALL" || (start === 0 && end === fullSeq.length - 1)) {
-      startEdge = null;
-      lastEdge = null;
+      startEdge = undefined;
+      lastEdge = undefined;
     }
 
     // the end of the selection edges are not in this SeqBlock and
@@ -46,7 +55,7 @@ export class Edges extends React.PureComponent {
     }
     if (startEdge === null) {
       startEdge = lastEdge;
-      lastEdge = null;
+      lastEdge = undefined;
     }
     let { x, width } = findXAndWidth(startEdge, lastEdge);
 
@@ -90,13 +99,23 @@ export class Edges extends React.PureComponent {
   }
 }
 
-export class Block extends React.PureComponent {
+interface BlockProps {
+  findXAndWidth: FindXAndWidthType;
+  selectHeight: number;
+  firstBase: number;
+  lastBase: number;
+  fullSeq: string;
+  selection: SeqVizSelection;
+  inputRef: InputRefFuncType;
+  onUnmount: (a: string) => void;
+}
+
+export class Block extends React.PureComponent<BlockProps> {
   static contextType = SelectionContext;
 
   id = randomid();
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
     const { findXAndWidth, selectHeight, firstBase, lastBase, fullSeq } = this.props;
     const { clockwise, ref } = this.context;
     let { start, end } = this.context;
@@ -110,9 +129,9 @@ export class Block extends React.PureComponent {
       end = 0;
     }
 
-    let x;
-    let width;
-    let secondBlock;
+    let x: number | null = null;
+    let width: number | null = null;
+    let secondBlock: JSX.Element | null = null;
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {
@@ -180,21 +199,23 @@ export class Block extends React.PureComponent {
     }
 
     // nothing was set for this selection block
-    if (!x && !width) return null;
-
-    return (
-      <React.Fragment>
-        <rect
-          className="la-vz-linear-sel-block"
-          x={x}
-          y={-10}
-          height={selectHeight + 5}
-          width={width}
-          shapeRendering="auto"
-        />
-        {secondBlock}
-      </React.Fragment>
-    );
+    if (!x && !width) {
+      return null;
+    } else {
+      return (
+        <React.Fragment>
+          <rect
+            className="la-vz-linear-sel-block"
+            x={x || undefined}
+            y={-10}
+            height={selectHeight + 5}
+            width={width || undefined}
+            shapeRendering="auto"
+          />
+          {secondBlock}
+        </React.Fragment>
+      );
+    }
   }
 }
 

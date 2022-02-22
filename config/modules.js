@@ -9,7 +9,6 @@ const resolve = require("resolve");
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
  *
- * @param {Object} options
  */
 function getAdditionalModulePaths(options = {}) {
   const baseUrl = options.baseUrl;
@@ -59,7 +58,6 @@ function getAdditionalModulePaths(options = {}) {
 /**
  * Get webpack aliases based on the baseUrl of a compilerOptions object.
  *
- * @param {*} options
  */
 function getWebpackAliases(options = {}) {
   const baseUrl = options.baseUrl;
@@ -80,7 +78,6 @@ function getWebpackAliases(options = {}) {
 /**
  * Get jest aliases based on the baseUrl of a compilerOptions object.
  *
- * @param {*} options
  */
 function getJestAliases(options = {}) {
   const baseUrl = options.baseUrl;

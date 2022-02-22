@@ -80,7 +80,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: string; name: string; seq: string; a... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={fileContents} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // check that the part state matches the state of the Genbank file
@@ -99,7 +98,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // check that the part state matches the state of the Genbank file
@@ -123,7 +121,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -146,7 +143,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -167,7 +163,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -185,7 +180,6 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ seq: string; viewer: "linear"; name: strin... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} seq={seq} viewer="linear" />);
-    // @ts-expect-error ts-migrate(2722) FIXME: Cannot invoke an object which is possibly 'undefin... Remove this comment to see the full error message
     await wrapper.instance().componentDidMount();
 
     expect(wrapper.find(SeqViewer)).toHaveLength(1);

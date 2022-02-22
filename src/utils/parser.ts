@@ -45,19 +45,10 @@ const DNAComplement = {
 };
 
 /**
- * @typedef {Object} SeqReturn
- * @type {object}
- * @property {string} seq the template sequence
- * @property {string} compSeq the complement sequence
- */
-
-/**
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
- * @param  {string} origSeq the incoming sequence
- * @return {SeqReturn}         the resulting sequence and complement sequence
  */
-export const dnaComplement = origSeq => {
+export const dnaComplement = (origSeq: string): { seq: string; compSeq: string } => {
   if (!origSeq) {
     return { seq: "", compSeq: "" };
   }
@@ -76,11 +67,8 @@ export const dnaComplement = origSeq => {
 
 /**
  * Return the reverse complement of a DNA sequence
- *
- * @param {string}  seq the seq that we're interested in finding the reverse complement of
- * @return {string}     the reverse complement of the input
  */
-export const reverseComplement = inputSeq => {
+export const reverseComplement = (inputSeq): string => {
   const { compSeq } = dnaComplement(inputSeq);
   return compSeq.split("").reverse().join("");
 };
@@ -113,7 +101,7 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * directionaltiy("NONSENSE") => 0
  * ```
  *
- * @param {String} direction user defined direction for a SeqViz element
+ 
  */
 export const directionality = direction => {
   if (!direction) {

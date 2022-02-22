@@ -133,7 +133,6 @@ export default async (fileInput, fileName, colors = []) =>
             if (type !== "source") {
               // create a new annotation around the properties in this line (type and range)
               annotations.push({
-                // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'never[]' is not assignable to pa... Remove this comment to see the full error message
                 ...annotationFactory(row_i, colors),
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
                 type,

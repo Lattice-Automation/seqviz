@@ -1,7 +1,34 @@
 import * as React from "react";
 
+import { Annotation } from "../../part";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
+import { Coor, ISize, InputRefFuncType } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
+
+interface AnnotationsProps {
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: InputRefFuncType;
+  annotations: Annotation[];
+  size: ISize;
+  rowsToSkip: number;
+  inlinedAnnotations: string[];
+}
 
 /**
  * Used to build up all the path elements. Does not include a display
@@ -12,11 +39,10 @@ import CentralIndexContext from "../handlers/centralIndex";
  * which are non-overlapping arrays or annotation arrays, which are then
  * used to create the array of array of annotation paths
  *
- * @type {Function}
  */
-export default class Annotations extends React.PureComponent {
+export default class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
-  hoverAnnotation = (className, opacity) => {
+  hoverAnnotation = (className: string, opacity: number) => {
     const elements = document.getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
@@ -25,7 +51,6 @@ export default class Annotations extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
     const { radius, rowsToSkip, lineHeight, annotations } = this.props;
 
     // at least 3 rows inward from default radius (ie index row)
@@ -57,31 +82,34 @@ export default class Annotations extends React.PureComponent {
       <CentralIndexContext.Consumer>
         {({ circular }) => (
           <g className="la-vz-circular-annotations">
-            {annotations.reduce((acc, anns, i) => {
+            {annotations.map((ann: Annotation, i) => {
               if (i) {
                 currBRadius -= lineHeight + 3;
                 currTRadius -= lineHeight + 3;
               } // increment the annRow radii if on every loop after first
 
-              return acc.concat(
-                anns.map(a => (
-                  <SingleAnnotation
-                    {...this.props}
-                    key={`la-vz-${a.id}-annotation-circular-row`}
-                    id={`la-vz-${a.id}-annotation-circular-row`}
-                    annotation={a}
-                    currBRadius={currBRadius}
-                    currTRadius={currTRadius}
-                    transparentPath={transparentPath}
-                    labelStyle={labelStyle}
-                    annStyle={annStyle}
-                    hoverAnnotation={this.hoverAnnotation}
-                    calcBorderColor={darkerColor}
-                    centralIndex={circular}
-                  />
-                ))
+              return (
+                <SingleAnnotation
+                  seqLength={this.props.seqLength}
+                  getRotation={this.props.getRotation}
+                  generateArc={this.props.generateArc}
+                  lineHeight={lineHeight}
+                  inputRef={this.props.inputRef}
+                  inlinedAnnotations={this.props.inlinedAnnotations}
+                  key={`la-vz-${ann.id}-annotation-circular-row`}
+                  id={`la-vz-${ann.id}-annotation-circular-row`}
+                  annotation={ann[0]}
+                  currBRadius={currBRadius}
+                  currTRadius={currTRadius}
+                  transparentPath={transparentPath}
+                  labelStyle={labelStyle}
+                  annStyle={annStyle}
+                  hoverAnnotation={this.hoverAnnotation}
+                  calcBorderColor={darkerColor}
+                  centralIndex={circular}
+                />
               );
-            }, [])}
+            })}
           </g>
         )}
       </CentralIndexContext.Consumer>
@@ -89,12 +117,39 @@ export default class Annotations extends React.PureComponent {
   }
 }
 
+interface SingleAnnotationProps {
+  annotation: Annotation;
+  seqLength: number;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  currBRadius: number;
+  currTRadius: number;
+  centralIndex: number;
+  lineHeight: number;
+  transparentPath: { stroke: string; fill: string };
+  inputRef: InputRefFuncType;
+  calcBorderColor: (c: any) => any;
+  hoverAnnotation: (className: string, opacity: number) => void;
+  annStyle: any;
+  inlinedAnnotations: string[];
+  labelStyle: { cursor: string };
+  id: string;
+}
+
 /**
  * A component for a single annotation within the Circular Viewer
  *
- * @param {AnnotationProps} props for a single Annotation
  */
-const SingleAnnotation = props => {
+const SingleAnnotation = (props: SingleAnnotationProps) => {
   const {
     annotation: a,
     seqLength,

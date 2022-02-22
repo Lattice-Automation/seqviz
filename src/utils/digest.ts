@@ -1,3 +1,4 @@
+import { ICutSite } from "../SeqViz/common";
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
 import { reverseComplement } from "./parser";
@@ -10,48 +11,30 @@ import { translateWildNucleotides } from "./sequence";
  * for the list of the enzymes, find their cut sites and split them into rows compatible
  * with the sequence viewer
  *
- * @param  {String} seq            [the input seq to be cut]
- * @param  {String[]} enzymeList   [the list of enzymes to find indexes for]
- * @param  {Number} bpsPerRow      [the length of each row]
- * @return {[{
- *         {String}  name          [the name of the enzyme at this site]
- *         {Number}  index         [index of the enzyme cutsite]
- * }]}  [the cutSites in a format compatible with the SeqBlocks/CutSites]
  */
-export const cutSitesInRows = (seq, enzymeList, enzymesCustom = {}) => {
+export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): ICutSite[] => {
   const seqToCut = (seq + seq).toUpperCase();
   const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
 
   // find all the cut sites for the given row
-  const cutSites = Array.from(new Set(filteredEnzymes)).reduce((acc, e) => {
-    // @ts-expect-error ts-migrate(2538) FIXME: Type 'unknown' cannot be used as an index type.
-    const cuts = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
-      // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+  const cutSites: ICutSite[] = Array.from(new Set(filteredEnzymes)).reduce((acc: ICutSite[], e) => {
+    const cuts: ICutSite[] = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
       .filter(c => !(c.fcut === 0 && c.rcut === 0))
       .map(c => ({
         id: randomid(),
         name: e,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         start: c.start % seq.length,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         end: c.end % seq.length,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         recogStrand: c.recogStrand,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         recogStart: c.recogStart,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
         recogEnd: c.recogEnd % seq.length,
       }));
-    // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
     return acc.concat(cuts);
   }, []);
 
-  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-  const uniqueCuts = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: ICutSite[] = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
   return uniqueCuts;
 };
 
@@ -61,12 +44,12 @@ export const cutSitesInRows = (seq, enzymeList, enzymesCustom = {}) => {
  * Search through the sequence with the given enzyme and return an array of cut
  * and hang indexes for splitting up the sequence with the passed enzymes
  *
- * @param  {String}  enzyme         [enzyme object, from enzymes.js]
- * @param  {String}  seqToSearch    [string of the sequence to be searched]
- * @param  {Number}  seqToCutLength [length of the sequence to be cut]
- * @return {[CutSite]} [the list of resulting cut and hang indexes]
+ 
+ 
+ 
+ 
  */
-const findCutSites = (enzyme, seqToSearch, _, enzymeName = null) => {
+const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -94,28 +77,20 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null) => {
 
   // this is in the forward direction, ie, when not checking the complement possibility
   // start search for cut sites
-  const cutSiteIndices = [];
+  const cutSiteIndices: any[] = [];
   let result = regTest.exec(seqToSearch); // returns null if nothing found
   // while another match is found and we haven't exceeded input sequence length
   while (result) {
     // add the cut site index, after correcting for actual cut site index
     let index = result.index;
     cutSiteIndices.push({
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ start: null[]; end: null[]; } | null' is n... Remove this comment to see the full error message
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
       fcut: index + fcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
       rcut: index + rcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
       start: index,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
       end: index + recogLength,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
       recogStrand: 1,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
       recogStart: index + recogStart - shiftRecogStart,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
       recogEnd: index + recogEnd + shiftRecogEnd,
     });
     result = regTest.exec(seqToSearch);
@@ -131,32 +106,30 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null) => {
     // same above, except correcting for the new reverse complement indexes
     let index = result.index;
     cutSiteIndices.push({
-      // @ts-expect-error ts-migrate(2322) FIXME: Type '{ start: null[]; end: null[]; } | null' is n... Remove this comment to see the full error message
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       fcut: index + recogLength - rcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       rcut: index + recogLength - fcut,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       start: index,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+
       end: index + recogLength,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       recogStrand: -1,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+
       recogStart: index + recogStart - shiftRecogStart,
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+
       recogEnd: index + recogEnd + shiftRecogEnd,
     });
     result = reqTestRC.exec(seqToSearch);
   }
 
   // reduce so there's only one enzyme per template cut index
-  // @ts-expect-error ts-migrate(2339) FIXME: Property 'fcut' does not exist on type 'never'.
-  const uniqueCuts = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: ICutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
 
   // sort with increasing sequence cut index
-  // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
   uniqueCuts.sort((a, b) => a.fcut - b.fcut);
 
   return uniqueCuts;
@@ -168,10 +141,10 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null) => {
  * if the seqToCut or the compSeqToCut are padded with stars, ie they have overhangs, shorten the
  * searchable index range, since those parts of the sequence should not be searchable and re-cut
  *
- * @param  {String} enzymeName [name of the enzyme to cut the sequence]
- * @param  {Part} part [the part to be cut]
- * @param  {Boolean} circularCheck [whether it's a plasmid]
- * @return {[Part]}  [the list of cut parts]
+ 
+ 
+ 
+ 
  */
 const digestPart = (enzymeName, part, circularCheck) => {
   // get the sequence information
@@ -273,16 +246,15 @@ const digestPart = (enzymeName, part, circularCheck) => {
 
   const singleCut = cutSiteIndices.length === 1;
   cutSiteIndices.forEach((cutInfo, i) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'fcut' does not exist on type 'unknown'.
     const { fcut: seqCutIdx, rcut: compCutIdx } = cutInfo;
     if (cutSiteIndices[i + 1]) {
       // not final site
       cutSeqsGenerator(
         seqCutIdx, // this site until next cut site
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
         cutSiteIndices[i + 1].fcut,
         compCutIdx,
-        // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
+
         cutSiteIndices[i + 1].rcut
       );
     } else if (circularCheck) {
@@ -291,13 +263,11 @@ const digestPart = (enzymeName, part, circularCheck) => {
         seqCutIdx, // this site until index of first cut site on other side of plasmid
         singleCut
           ? seqCutIdx + seqToCutLength // if it's the only one, add the full length
-          : // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-            cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
+          : cutSiteIndices[0].fcut + seqToCutLength, // else, stop at the first one
         compCutIdx,
         singleCut
           ? compCutIdx + seqToCutLength // if it's the only one, add the full length
-          : // @ts-expect-error ts-migrate(2571) FIXME: Object is of type 'unknown'.
-            cutSiteIndices[0].rcut + seqToCutLength // else, stop at the first one
+          : cutSiteIndices[0].rcut + seqToCutLength // else, stop at the first one
       );
     } else {
       // final cut site on linear piece of dna
@@ -327,7 +297,7 @@ const digestPart = (enzymeName, part, circularCheck) => {
  * needed because Mongo is storing annotation positions as strings,
  * and I need them as ints. This hack could be avoided if everything
  * involving data manipulation is kept client side
- * @param {[Annotation]} anns   the annotations to be casted
+ 
  */
 const annPosToInts = anns =>
   anns.map(a => ({
@@ -342,9 +312,9 @@ const annPosToInts = anns =>
  * Cuts a part with the list of enzymes, and returns a new list of
  * parts after digestion
  *
- * @param  {[String]} enzymeNames [the name of the enzymes to cut with]
- * @param  {Part} part [the part to cut]
- * @return {[Part]}             [the resulting cut parts]
+ 
+ 
+ 
  */
 export const digest = (enzymeNames, part) => {
   const { circular = true } = part;

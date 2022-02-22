@@ -1,17 +1,36 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
+import { Annotation } from "../part";
 import isEqual from "../utils/isEqual";
-import CircularViewer from "./Circular/Circular";
-import LinearViewer from "./Linear/Linear";
+import { SearchResult } from "../utils/search";
+import Circular from "./Circular/Circular";
+import Linear from "./Linear/Linear";
+import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
+import { SeqVizSelection } from "./handlers/selection";
+
+interface SeqViewerProps {
+  size: { width: number; height: number };
+  zoom: { linear: number; circular: number };
+  search: SearchResult;
+  selection: SeqVizSelection;
+  setSelection: (update: SeqVizSelection) => void;
+  annotations: Annotation[];
+  compSeq?: string;
+  showComplement: boolean;
+  name?: string;
+  seq: string;
+  cutSites: ICutSite[];
+  circular: boolean;
+}
 
 /**
  * a parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
  */
-class SeqViewer extends React.Component {
-  constructor(props) {
+class SeqViewer extends React.Component<SeqViewerProps> {
+  constructor(props: SeqViewerProps) {
     super(props);
     const { size } = props;
 
@@ -28,17 +47,16 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps, nextState) => !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
+  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: unknown) =>
+    !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**
    * given the width of the screen, and the current zoom, how many basepairs should be displayed
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
     const { seq, size } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     let zoom = this.props.zoom.linear || 50;
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
@@ -91,13 +109,10 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
    */
   circularProps = () => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       seq: { length: seqLength },
     } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'zoom' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     let zoom = this.props.zoom.circular || 0;
     zoom = Math.max(zoom, 0);
     zoom = Math.min(zoom, 100);
@@ -134,19 +149,18 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
-    const { Circular: circular, seq, cutSites } = this.props;
+    const { circular: circular, seq, cutSites } = this.props;
 
     return (
       <div className="la-vz-viewer-container">
         {circular ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
-              <CircularViewer
+              <Circular
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
-                // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+                // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
                 centralIndex={circular}
                 setCentralIndex={setCentralIndex}
                 cutSites={cutSites}
@@ -154,11 +168,11 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          <LinearViewer
+          <Linear
             {...this.props}
             {...this.state}
             {...this.linearProps()}
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
+            // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
             seqLength={seq.length}
             cutSites={cutSites}
           />

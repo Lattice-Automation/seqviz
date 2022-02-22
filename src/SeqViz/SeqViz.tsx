@@ -6,11 +6,12 @@ import { Annotation, Element, Part } from "../part";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
-import search from "../utils/search";
+import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
+import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, defaultSelection } from "./handlers/selection";
+import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
 import "./style.css";
 
 export interface SeqVizProps {
@@ -33,20 +34,8 @@ export interface SeqVizProps {
       rcut: number;
     };
   };
-  onSearch: (search: { start: number; end: number; direction: number; index: number }) => void;
-  onSelection: (selection: {
-    name: string;
-    type: string;
-    seq: string;
-    gc: string;
-    tm: number;
-    start: number;
-    end: number;
-    length: number;
-    direction: number;
-    clockwise: boolean;
-    color: string;
-  }) => void;
+  onSearch: (search: SearchResult[]) => void;
+  onSelection: (selection: SeqVizSelection) => void;
   rotateOnScroll: boolean;
   search: {
     query: string;
@@ -80,8 +69,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: results => results,
-    onSelection: selection => selection,
+    onSearch: (results: SearchResult[]) => results,
+    onSelection: (selection: SeqVizSelection) => selection,
     rotateOnScroll: true,
     search: { query: "", mismatch: 0 },
     seq: "",
@@ -196,7 +185,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     this.setState({ search: results });
 
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'never[]' is not assignable to pa... Remove this comment to see the full error message
     onSearch(results);
   };
 
@@ -206,9 +194,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   cut = (part: { seq: string } | null = null) => {
     const { enzymes, seq, enzymesCustom } = this.props;
 
-    let cutSites: Element[] = [];
+    let cutSites: ICutSite[] = [];
     if (enzymes.length || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown[]' is not assignable to type 'Elemen... Remove this comment to see the full error message
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes, enzymesCustom);
     }
 
@@ -221,7 +208,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   parseAnnotations = (annotations: Annotation[] | null = null, seq = "") =>
     (annotations || []).map((a, i) => ({
-      // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[] | undefined' is not ass... Remove this comment to see the full error message
       ...annotationFactory(i, this.props.colors),
       ...a,
       direction: directionality(a.direction),
@@ -249,7 +235,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   /**
    * Update selection in state. Should only be performed from handlers/selection.jsx
    */
-  setSelection = selection => {
+  setSelection = (selection: SeqVizSelection) => {
     const { onSelection } = this.props;
 
     this.setState({ selection });
@@ -264,10 +250,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     let { annotations } = this.state;
 
     // part is either from a file/accession, or each prop was set
-    seq = seq || part.seq || "";
-    // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
-    if (getSeqType(seq) === "dna") {
-      compSeq = compSeq || part.compSeq || dnaComplement(seq).compSeq;
+    const localSeq: string = seq || part.seq || "";
+    if (getSeqType(localSeq) === "dna") {
+      compSeq = compSeq || part.compSeq || dnaComplement(localSeq).compSeq;
     } else {
       compSeq = "";
     }
@@ -276,8 +261,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
 
-    // @ts-expect-error ts-migrate(2532) FIXME: Object is possibly 'undefined'.
-    if (!seq.length) {
+    if (!localSeq.length) {
       return <div className="la-vz-seqviz" />;
     }
 
@@ -289,12 +273,12 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         selection={selection}
         setSelection={this.setSelection}
         annotations={annotations}
-        compSeq={compSeq}
         showComplement={showComplement}
+        compSeq={compSeq}
         name={name}
-        seq={seq}
+        seq={localSeq}
         cutSites={cutSites}
-        Circular={false}
+        circular={false}
       />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
@@ -308,9 +292,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         compSeq={compSeq}
         showComplement={showComplement}
         name={name}
-        seq={seq}
+        seq={localSeq}
         cutSites={cutSites}
-        Circular
+        circular={true}
       />
     );
     const bothFlipped = viewer === "both_flip";

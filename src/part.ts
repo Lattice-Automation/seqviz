@@ -5,6 +5,7 @@ export interface Element {
 }
 
 export interface Annotation extends Element {
+  id: string;
   name: string;
   color: string;
   type: string;

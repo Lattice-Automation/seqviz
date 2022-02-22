@@ -1,13 +1,38 @@
 import * as React from "react";
 
-export default class CircularFind extends React.PureComponent {
+import { SearchResult } from "../../utils/search";
+import { Coor, InputRefFuncType } from "../common";
+
+interface FindProps {
+  search: SearchResult[];
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: InputRefFuncType;
+  onUnmount: unknown;
+  totalRows: number;
+  seq: string;
+}
+
+export default class CircularFind extends React.PureComponent<FindProps> {
   /**
    * Create an SVG `path` element that highlights the search result
-   *
-   * @param {SearchResult} result a single search result with start, end, direction
    */
-  createHighlight = result => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
+  createHighlight = (result: SearchResult) => {
     const { radius, lineHeight, seqLength, getRotation, generateArc, inputRef } = this.props;
     let { start, end } = result;
     // crosses the zero index
@@ -52,7 +77,6 @@ export default class CircularFind extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqLength' does not exist on type 'Reado... Remove this comment to see the full error message
     const { seqLength, search } = this.props;
     const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
 

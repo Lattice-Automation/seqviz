@@ -1,8 +1,32 @@
 import * as React from "react";
 
-export default class CutSites extends React.PureComponent {
-  calculateLinePath = (index, startRadius, endRadius) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findCoor' does not exist on type 'Readon... Remove this comment to see the full error message
+import { Coor, ICutSite, InputRefFuncType } from "../common";
+
+interface CutSitesProps {
+  radius: number;
+  center: Coor;
+  lineHeight: number;
+  seqLength: number;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  getRotation: (index: number) => string;
+  generateArc: (args: {
+    innerRadius: number;
+    outerRadius: number;
+    length: number;
+    largeArc: boolean; // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    offset?: number;
+  }) => string;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  inputRef: InputRefFuncType;
+  selectionRows: number;
+  cutSites: ICutSite[];
+}
+
+export default class CutSites extends React.PureComponent<CutSitesProps> {
+  calculateLinePath = (index: number, startRadius: number, endRadius: number) => {
     const { findCoor } = this.props;
     const lineStart = findCoor(index, startRadius);
     const lineEnd = findCoor(index, endRadius);
@@ -11,8 +35,7 @@ export default class CutSites extends React.PureComponent {
     return linePath;
   };
 
-  displayCutSite = cutSite => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'radius' does not exist on type 'Readonly... Remove this comment to see the full error message
+  displayCutSite = (cutSite: ICutSite) => {
     const { radius, lineHeight, seqLength, getRotation, inputRef, generateArc } = this.props;
     const { id, start } = cutSite;
     let { fcut, rcut, end } = cutSite;
@@ -97,7 +120,6 @@ export default class CutSites extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'cutSites' does not exist on type 'Readon... Remove this comment to see the full error message
     const { cutSites } = this.props;
 
     if (!cutSites.length) {

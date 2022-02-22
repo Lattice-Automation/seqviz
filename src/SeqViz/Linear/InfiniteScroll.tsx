@@ -1,7 +1,21 @@
 import * as React from "react";
 
 import isEqual from "../../utils/isEqual";
+import { ISize } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
+
+interface InfiniteScrollProps {
+  seqBlocks: JSX.Element[];
+  blockHeights: number[];
+  totalHeight: number;
+  size: ISize;
+  bpsPerBlock: number;
+}
+
+interface InfiniteScrollState {
+  centralIndex: number;
+  visibleBlocks: number[];
+}
 
 /**
  * A wrapper around the seqBlocks. Renders only the seqBlocks that are
@@ -10,17 +24,15 @@ import CentralIndexContext from "../handlers/centralIndex";
  * This component should sense scroll events and, during one, recheck which
  * seqBlocks should currently be shown
  */
-export default class InfiniteScroll extends React.PureComponent {
+export default class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
   static contextType = CentralIndexContext;
 
   /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
   scroller;
-
   insideDOM;
-
   timeoutID;
 
-  constructor(props) {
+  constructor(props: InfiniteScrollProps) {
     super(props);
 
     this.state = {
@@ -37,15 +49,13 @@ export default class InfiniteScroll extends React.PureComponent {
     window.addEventListener("resize", this.handleScrollOrResize);
   };
 
-  componentDidUpdate = (prevProps, prevState, snapshot) => {
+  componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: InfiniteScrollState, snapshot: any) => {
     if (!this.scroller) {
       // scroller not mounted yet
       return;
     }
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlocks' does not exist on type 'Reado... Remove this comment to see the full error message
     const { seqBlocks, size } = this.props;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'centralIndex' does not exist on type 'Re... Remove this comment to see the full error message
     const { centralIndex, visibleBlocks } = this.state;
 
     if (this.context && centralIndex !== this.context.linear) {
@@ -64,7 +74,7 @@ export default class InfiniteScroll extends React.PureComponent {
   /**
    * more info at: https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate
    */
-  getSnapshotBeforeUpdate = prevProps => {
+  getSnapshotBeforeUpdate = (prevProps: InfiniteScrollProps) => {
     // find the current top block
     let top = this.scroller ? this.scroller.current.scrollTop : 0;
 
@@ -88,18 +98,12 @@ export default class InfiniteScroll extends React.PureComponent {
    */
   scrollToCentralIndex = () => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlocks' does not exist on type 'Reado... Remove this comment to see the full error message
       seqBlocks,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'blockHeights' does not exist on type 'Re... Remove this comment to see the full error message
       blockHeights,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       bpsPerBlock,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       totalHeight,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size: { height },
     } = this.props;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;
     const { clientHeight, scrollHeight } = this.scroller.current;
     const centralIndex = this.context.linear;
@@ -110,7 +114,7 @@ export default class InfiniteScroll extends React.PureComponent {
     );
 
     // build up the list of blocks that are visible just beneath this first block
-    let newVisibleBlocks = [];
+    let newVisibleBlocks: number[] = [];
     if (scrollHeight <= clientHeight) {
       newVisibleBlocks = visibleBlocks;
     } else if (centerBlockIndex > -1) {
@@ -126,7 +130,6 @@ export default class InfiniteScroll extends React.PureComponent {
       }
       blockHeights.reduce((total, h, i) => {
         if (total >= top && total <= bottom) {
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
           newVisibleBlocks.push(i);
         }
         return total + h;
@@ -151,7 +154,6 @@ export default class InfiniteScroll extends React.PureComponent {
    * so that the central index is visible
    */
   restoreSnapshot = snapshot => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'blockHeights' does not exist on type 'Re... Remove this comment to see the full error message
     const { blockHeights } = this.props;
     const { blockIndex, blockY } = snapshot;
 
@@ -166,17 +168,13 @@ export default class InfiniteScroll extends React.PureComponent {
    */
   handleScrollOrResize = () => {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'blockHeights' does not exist on type 'Re... Remove this comment to see the full error message
       blockHeights,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size: { height },
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       totalHeight,
     } = this.props;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;
 
-    const newVisibleBlocks = [];
+    const newVisibleBlocks: number[] = [];
 
     let top = 0;
     if (this.scroller && this.insideDOM) {
@@ -192,7 +190,6 @@ export default class InfiniteScroll extends React.PureComponent {
     top -= 2 * blockHeights[0]; // add two blocks padding on top
     blockHeights.reduce((total, h, i) => {
       if (total >= top && total <= bottom) {
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
         newVisibleBlocks.push(i);
       }
       return total + h;
@@ -259,16 +256,11 @@ export default class InfiniteScroll extends React.PureComponent {
 
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlocks' does not exist on type 'Reado... Remove this comment to see the full error message
       seqBlocks,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'blockHeights' does not exist on type 'Re... Remove this comment to see the full error message
       blockHeights,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'totalHeight' does not exist on type 'Rea... Remove this comment to see the full error message
       totalHeight: height,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size: { width },
     } = this.props;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'visibleBlocks' does not exist on type 'R... Remove this comment to see the full error message
     const { visibleBlocks } = this.state;
 
     // find the height of the empty div needed to correctly position the rest

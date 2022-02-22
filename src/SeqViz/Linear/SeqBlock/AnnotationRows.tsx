@@ -1,51 +1,56 @@
 import * as React from "react";
 
+import { Annotation } from "../../../part";
 import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
+import { InputRefFuncType } from "../../common";
+import { FindXAndWidthType } from "./SeqBlock";
 
-export default class AnnotationRows extends React.PureComponent {
+interface AnnotationRowsProps {
+  annotationRows: Annotation[][];
+  yDiff: number;
+  findXAndWidth: FindXAndWidthType;
+  inputRef: InputRefFuncType;
+  seqBlockRef: unknown;
+  firstBase: number;
+  lastBase: number;
+  fullSeq: string;
+  elementHeight: number;
+  bpsPerBlock: number;
+}
+
+export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
   render() {
     const {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'annotationRows' does not exist on type '... Remove this comment to see the full error message
       annotationRows,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'yDiff' does not exist on type 'Readonly<... Remove this comment to see the full error message
       yDiff,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'R... Remove this comment to see the full error message
       findXAndWidth,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
       inputRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seqBlockRef' does not exist on type 'Rea... Remove this comment to see the full error message
       seqBlockRef,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'onUnmount' does not exist on type 'Reado... Remove this comment to see the full error message
-      onUnmount,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'firstBase' does not exist on type 'Reado... Remove this comment to see the full error message
       firstBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lastBase' does not exist on type 'Readon... Remove this comment to see the full error message
       lastBase,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'fullSeq' does not exist on type 'Readonl... Remove this comment to see the full error message
       fullSeq,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'elementHeight' does not exist on type 'R... Remove this comment to see the full error message
       elementHeight,
+      bpsPerBlock,
     } = this.props;
 
     return (
       <g className="la-vz-linear-annotations">
-        {annotationRows.map((a, i) => {
+        {annotationRows.map((a: Annotation[], i: number) => {
           const y = yDiff + elementHeight * i;
 
           return (
             <AnnotationRow
               key={`ann-row-${y}${firstBase}${lastBase}`}
-              // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
               annotations={a}
               y={y}
               height={elementHeight}
               inputRef={inputRef}
               seqBlockRef={seqBlockRef}
-              onUnmount={onUnmount}
               findXAndWidth={findXAndWidth}
               firstBase={firstBase}
               lastBase={lastBase}
               fullSeq={fullSeq}
+              bpsPerBlock={bpsPerBlock}
             />
           );
         })}
@@ -58,17 +63,28 @@ export default class AnnotationRows extends React.PureComponent {
  * a single row of annotations. Multiple of these may be in one seqBlock
  * vertically stacked on top of one another in non-overlapping arrays
  */
-class AnnotationRow extends React.PureComponent {
-  hoverOtherAnnotationRows = (className, opacity) => {
-    const elements = document.getElementsByClassName(className);
+interface AnnotationRowProps {
+  annotations: Annotation[];
+  bpsPerBlock: number;
+  findXAndWidth: FindXAndWidthType;
+  firstBase: number;
+  fullSeq: string;
+  inputRef: InputRefFuncType;
+  lastBase: number;
+  seqBlockRef: unknown;
+  height: number;
+  y: number;
+}
+
+class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
+  hoverOtherAnnotationRows = (className: string, opacity: number) => {
+    const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < elements.length; i += 1) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
-      elements[i].style.fillOpacity = opacity;
+      elements[i].style.fillOpacity = `${opacity}`;
     }
   };
 
-  renderAnnotation = (a, index) => {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'inputRef' does not exist on type 'Readon... Remove this comment to see the full error message
+  renderAnnotation = (a: Annotation, index: number) => {
     const { inputRef, seqBlockRef, findXAndWidth, firstBase, lastBase, annotations, fullSeq, bpsPerBlock } = this.props;
 
     const { color, name, direction, start, end } = a;
@@ -135,7 +151,6 @@ class AnnotationRow extends React.PureComponent {
     }
 
     // create padding on either side, vertically, of an annotation
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'Readonly... Remove this comment to see the full error message
     const height = this.props.height * 0.8;
 
     const rectProps = {
@@ -165,7 +180,7 @@ class AnnotationRow extends React.PureComponent {
     const topLeft = endREV ? `M ${2 * cW} 0` : "M 0 0";
     const topRight = endFWD ? `L ${width - 2 * cW} 0` : `L ${width} 0`;
 
-    let linePath;
+    let linePath = "";
     if (a.type === "insert") {
       linePath = `${topLeft} ${topRight}`;
     } else {
@@ -222,7 +237,7 @@ class AnnotationRow extends React.PureComponent {
       }
     }
 
-    let strokeColor;
+    let strokeColor = "";
     if (a.type === "insert") {
       strokeColor = color;
     } else {
@@ -282,10 +297,9 @@ class AnnotationRow extends React.PureComponent {
   };
 
   render() {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'annotations' does not exist on type 'Rea... Remove this comment to see the full error message
+    // @ts-ignore
     const { annotations, width, y } = this.props;
 
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'height' does not exist on type 'Readonly... Remove this comment to see the full error message
     const height = this.props.height * 0.8;
     const size = { width, height };
     const gTranslate = `translate(0, ${y - 5})`;

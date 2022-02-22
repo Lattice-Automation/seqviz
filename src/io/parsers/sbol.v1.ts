@@ -24,7 +24,7 @@ import randomid from "../../utils/randomid";
  * at either the root RDF level or from within a Collection/Annotation
  * heirarchy, convert that DnaComponent to a part
  *
- * @param {boolean}  strict  if we're digging through the SBOL, desperate to
+ 
  * 							 find something that looks remotely like a valid part
  * 							 (ie, after we can't make a valid part from root DnaComponent
  * 							 or root Collection), we will only accept parts that have both
@@ -111,7 +111,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
 /**
  * find all nodes that of the type Sequence, and convert those to parts "Sequence" -> Part
  *
- * @param {String}  file    the original file that was used to make the parts
+ 
  * this is not the standard format. see A1.xml
  */
 const sequenceToPart = (Seq, file) => {

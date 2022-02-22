@@ -3,8 +3,8 @@
  *
  * copy-paste from StackOverflow: https://stackoverflow.com/a/25456134
  *
- * @param {object} x left object for comparison
- * @param {object} y right object for comparison
+ 
+ 
  */
 const isEqual = (x, y) => {
   if (x === y) {
