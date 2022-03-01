@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { Annotation, Element, Part } from "../part";
@@ -8,10 +7,10 @@ import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
-import SeqViewer from "./SeqViewer";
 import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
+import { defaultSelection, SelectionContext, SeqVizSelection } from "./handlers/selection";
+import SeqViewer from "./SeqViewer";
 import "./style.css";
 
 export interface SeqVizProps {
@@ -123,6 +122,23 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     }
     if (!isEqual(annotations, this.props.annotations)) {
       this.setState({ annotations: this.parseAnnotations(this.props.annotations, this.props.seq) });
+    }
+    /* TODO: remove, for development only */
+    if (this.state.selection.name !== "DEMO") {
+      this.setState({
+        selection: {
+          name: "DEMO",
+          ref: null,
+          seq: "ATGAATTCGTA",
+          gc: 27.27,
+          tm: 28,
+          type: "",
+          start: 2,
+          end: 13,
+          length: 11,
+          clockwise: true,
+        },
+      });
     }
   };
 
@@ -237,7 +253,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   setSelection = (selection: SeqVizSelection) => {
     const { onSelection } = this.props;
-
+    console.log("SELECTION", selection);
     this.setState({ selection });
 
     onSelection(selection);
