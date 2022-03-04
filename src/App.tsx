@@ -2,12 +2,17 @@
  * This module is only used for developing seqviz
  * See viewer.js for the library's entrypoint
  */
+import React = require("react");
+import { range } from "lodash";
 import { SeqVizSelection } from "./SeqViz/handlers/selection";
 import { SeqVizProps } from "./SeqViz/SeqViz";
+import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
-import React = require("react");
 
 export const App = () => {
+  const [search, setSearch] = React.useState("");
+  const [searchResults, setSearchResults] = React.useState<SearchResult[]>([]);
+
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     translations: [],
     seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
@@ -35,8 +40,8 @@ export const App = () => {
       console.log("SELECTION", selection);
       seqvizProps.bpColors[selection.start] = "green";
     },
-    onSearch: results => {
-      console.log("Your Search Results: ", results);
+    onSearch: (results: SearchResult[]) => {
+      setSearchResults(results);
     },
     bpColors: {
       10: "green",
@@ -50,11 +55,17 @@ export const App = () => {
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
   });
 
-  const [search, setSearch] = React.useState("");
   return (
     <>
       <SearchBox
         search={search}
+        highlightSearch={() => {
+          const newBPColors = { ...seqvizProps.bpColors };
+          searchResults.forEach((res: SearchResult) => {
+            range(res.start, res.end).map((bpIdx: number) => (newBPColors[bpIdx] = "orange"));
+          });
+          setSeqVizProps({ ...seqvizProps, bpColors: newBPColors });
+        }}
         onSearch={(search: string) => {
           setSearch(search);
           setSeqVizProps({ ...seqvizProps, search: { query: search, mismatch: 0 } });
@@ -65,10 +76,11 @@ export const App = () => {
   );
 };
 
-const SearchBox = (props: { search: string; onSearch: (search: string) => void }) => {
+const SearchBox = (props: { search: string; onSearch: (search: string) => void; highlightSearch: () => void }) => {
   return (
     <div>
       <input type="text" value={props.search} onChange={e => props.onSearch(e.target.value)} />
+      <input type="button" value={"Highlight all searches"} onClick={props.highlightSearch} />
     </div>
   );
 };
