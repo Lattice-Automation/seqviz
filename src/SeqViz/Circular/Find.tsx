@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { SearchResult } from "../../utils/search";
 import { Coor, InputRefFuncType } from "../common";
 

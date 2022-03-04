@@ -1,15 +1,15 @@
 import * as fetch from "node-fetch";
-
 import { Part } from "../part";
 import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
+
 
 /**
  * retrieve a string representation of a part from a remote server and convert it into a part
  */
 export default async (
   accession: string,
-  options: { backbone: string; colors?: string[] } = { backbone: "", colors: [] }
+  options: { backbone?: string; colors?: string[] } = { backbone: "", colors: [] }
 ): Promise<Part> => {
   let igem = false;
 

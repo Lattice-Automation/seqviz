@@ -1,8 +1,7 @@
 import * as React from "react";
-
 import { Annotation } from "../../../part";
 import { SearchResult } from "../../../utils/search";
-import { ICutSite, ISize, InputRefFuncType, Primer } from "../../common";
+import { ICutSite, InputRefFuncType, ISize, Primer } from "../../common";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
@@ -310,6 +309,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             selectEdgeHeight={selectEdgeHeight}
           />
           <Find
+            inputRef={inputRef}
+            firstBase={firstBase}
             filteredRows={filteredSearchRows}
             findXAndWidth={this.findXAndWidth}
             indexYDiff={indexYDiff}

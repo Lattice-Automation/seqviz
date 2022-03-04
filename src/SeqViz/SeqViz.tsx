@@ -20,9 +20,8 @@ export interface SeqVizProps {
   compSeq?: string;
   annotations?: Annotation[];
   file?: string | File;
-
-  backbone: string;
-  bpColors: { [key: string]: string };
+  backbone?: string;
+  bpColors: { [key: number]: string };
   colors?: string[];
   copyEvent: (event: KeyboardEvent) => void;
   enzymes: string[];
@@ -41,6 +40,7 @@ export interface SeqVizProps {
     mismatch: number;
   };
   showComplement: boolean;
+  showAnnotations: boolean;
   showIndex: boolean;
   showPrimers: boolean;
   style: Record<string, unknown>;
@@ -122,23 +122,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     }
     if (!isEqual(annotations, this.props.annotations)) {
       this.setState({ annotations: this.parseAnnotations(this.props.annotations, this.props.seq) });
-    }
-    /* TODO: remove, for development only */
-    if (this.state.selection.name !== "DEMO") {
-      this.setState({
-        selection: {
-          name: "DEMO",
-          ref: null,
-          seq: "ATGAATTCGTA",
-          gc: 27.27,
-          tm: 28,
-          type: "",
-          start: 2,
-          end: 13,
-          length: 11,
-          clockwise: true,
-        },
-      });
     }
   };
 
@@ -253,7 +236,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   setSelection = (selection: SeqVizSelection) => {
     const { onSelection } = this.props;
-    console.log("SELECTION", selection);
     this.setState({ selection });
 
     onSelection(selection);
