@@ -1,15 +1,15 @@
 import * as React from "react";
-
 import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
 import { createLinearTranslations } from "../../utils/sequence";
-import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
+import { Coor, ICutSite, InputRefFuncType, ISize, Primer } from "../common";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import { SeqVizSelection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
+import { HighlightRegion } from "./SeqBlock/Find";
 import SeqBlock from "./SeqBlock/SeqBlock";
 import { Translation } from "./SeqBlock/Translations";
 
@@ -53,6 +53,7 @@ interface LinearProps {
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
+  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -165,6 +166,8 @@ class Linear extends React.Component<LinearProps> {
     const searchRows =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
+    const highlightRows = createSingleRows(this.props.highlightedRegions, bpsPerBlock, arrSize);
+
     const translationRows = translations.length
       ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
@@ -220,6 +223,7 @@ class Linear extends React.Component<LinearProps> {
           mouseEvent={this.props.mouseEvent}
           seqFontSize={this.props.seqFontSize}
           inputRef={this.props.inputRef}
+          highlightedRegions={highlightRows[i]}
           elementHeight={elementHeight}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}

@@ -4,6 +4,7 @@
  */
 import React = require("react");
 import { range } from "lodash";
+import { useState } from "react";
 import { SeqVizSelection } from "./SeqViz/handlers/selection";
 import { SeqVizProps } from "./SeqViz/SeqViz";
 import { SearchResult } from "./utils/search";
@@ -53,10 +54,18 @@ export const App = () => {
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
+    highlightedRegions: [],
   });
-
+  const submitIndices = (start: number, end: number) => {
+    const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
+    const newHighlightedRegions = [...oldHighlightedRegions, { start, end }];
+    console.log("submitting", { start, end });
+    setSeqVizProps({ ...seqvizProps, highlightedRegions: newHighlightedRegions });
+  };
   return (
     <>
+      <HighlightBox submitIndices={submitIndices} />
+      <SeqViz {...seqvizProps} />
       <SearchBox
         search={search}
         highlightSearch={() => {
@@ -71,8 +80,31 @@ export const App = () => {
           setSeqVizProps({ ...seqvizProps, search: { query: search, mismatch: 0 } });
         }}
       />
-      <SeqViz {...seqvizProps} />
     </>
+  );
+};
+
+const HighlightBox = (props: { submitIndices: (start: number, end: number) => void }) => {
+  const [start, setStart] = useState<number>(0);
+  const [end, setEnd] = useState<number>(0);
+
+  const onClick = () => {
+    if (start >= 0 && end >= start) {
+      props.submitIndices(start, end);
+    }
+    if (start) {
+      setStart(0);
+    }
+    if (end) {
+      setEnd(0);
+    }
+  };
+  return (
+    <div>
+      <input type="number" value={start} onChange={e => setStart(parseInt(e.target.value))} />
+      <input type="number" value={end} onChange={e => setEnd(parseInt(e.target.value))} />
+      <input type="button" value={"Highlight Range"} onClick={onClick} />
+    </div>
   );
 };
 

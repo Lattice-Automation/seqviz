@@ -10,6 +10,7 @@ import { annotationFactory, getSeqType } from "../utils/sequence";
 import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { defaultSelection, SelectionContext, SeqVizSelection } from "./handlers/selection";
+import { HighlightRegion } from "./Linear/SeqBlock/Find";
 import SeqViewer from "./SeqViewer";
 import "./style.css";
 
@@ -21,8 +22,9 @@ export interface SeqVizProps {
   annotations?: Annotation[];
   file?: string | File;
   backbone?: string;
-  bpColors: { [key: number]: string };
   colors?: string[];
+
+  bpColors: { [key: number]: string };
   copyEvent: (event: KeyboardEvent) => void;
   enzymes: string[];
   enzymesCustom: {
@@ -50,6 +52,7 @@ export interface SeqVizProps {
     circular: number;
     linear: number;
   };
+  highlightedRegions?: HighlightRegion[];
 }
 
 /**
@@ -263,6 +266,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       return <div className="la-vz-seqviz" />;
     }
 
+    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions ? this.props.highlightedRegions : [];
     const linear = (viewer === "linear" || viewer.includes("both")) && (
       <SeqViewer
         key="linear"
@@ -277,6 +281,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         seq={localSeq}
         cutSites={cutSites}
         circular={false}
+        highlightedRegions={highlightedRegions}
       />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
@@ -293,6 +298,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         seq={localSeq}
         cutSites={cutSites}
         circular={true}
+        highlightedRegions={highlightedRegions}
       />
     );
     const bothFlipped = viewer === "both_flip";

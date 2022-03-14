@@ -1,10 +1,10 @@
 import { dnaComplement } from "./parser";
-import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
+import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
 
 export interface SearchResult {
   start: number;
   end: number;
-  direction: number;
+  direction: -1 | 1;
   index?: number;
   length?: number;
 }

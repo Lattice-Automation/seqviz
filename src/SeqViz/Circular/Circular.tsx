@@ -1,17 +1,16 @@
 import * as React from "react";
-
 import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
-import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
+import { Coor, ICutSite, InputRefFuncType, ISize, Primer } from "../common";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
 import Annotations from "./Annotations";
 import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
-import Find from "./Find";
+import { CircularFind } from "./Find";
 import Index from "./Index";
 import Labels, { ILabel } from "./Labels";
 
@@ -345,7 +344,21 @@ class Circular extends React.Component<CircularProps, CircularState> {
             rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
           />
-          <Find {...general} search={search} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
+          <CircularFind
+            seqLength={general.seqLength}
+            radius={general.radius}
+            center={general.center}
+            lineHeight={general.lineHeight}
+            findCoor={general.findCoor}
+            search={search}
+            getRotation={general.getRotation}
+            generateArc={general.generateArc}
+            rotateCoor={general.rotateCoor}
+            inputRef={general.inputRef}
+            onUnmount={onUnmount}
+            totalRows={totalRows}
+            seq={seq}
+          />
           <CutSites {...general} selectionRows={4} cutSites={cutSites} />
           <Index
             {...general}

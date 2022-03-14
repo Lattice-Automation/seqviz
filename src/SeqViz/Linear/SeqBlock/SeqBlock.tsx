@@ -5,7 +5,7 @@ import { ICutSite, InputRefFuncType, ISize, Primer } from "../../common";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
-import Find from "./Find";
+import Find, { HighlightRegion } from "./Find";
 import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
@@ -50,6 +50,7 @@ interface SeqBlockProps {
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
+  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -317,6 +318,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             compYDiff={compYDiff}
             seqBlockRef={this}
             lastBase={lastBase}
+            listenerOnly={false}
+            highlightedRegions={this.props.highlightedRegions}
           />
           <AnnotationRows
             bpsPerBlock={this.props.bpsPerBlock}
@@ -412,7 +415,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             compYDiff={compYDiff}
             seqBlockRef={this}
             lastBase={lastBase}
-            listenerOnly
+            listenerOnly={true}
           />
         </g>
       </svg>
