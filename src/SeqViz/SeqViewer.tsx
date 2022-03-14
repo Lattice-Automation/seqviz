@@ -8,7 +8,7 @@ import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SeqVizSelection } from "./handlers/selection";
 import Linear from "./Linear/Linear";
-import { HighlightRegion } from "./Linear/SeqBlock/Find";
+import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 
 interface SeqViewerProps {
   size: { width: number; height: number };

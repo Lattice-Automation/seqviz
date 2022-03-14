@@ -10,7 +10,7 @@ import { annotationFactory, getSeqType } from "../utils/sequence";
 import { ICutSite } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { defaultSelection, SelectionContext, SeqVizSelection } from "./handlers/selection";
-import { HighlightRegion } from "./Linear/SeqBlock/Find";
+import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 import SeqViewer from "./SeqViewer";
 import "./style.css";
 

@@ -54,7 +54,7 @@ export const App = () => {
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    highlightedRegions: [],
+    highlightedRegions: [{ start: 56, end: 66 }],
   });
   const submitIndices = (start: number, end: number) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
@@ -65,7 +65,7 @@ export const App = () => {
   return (
     <>
       <HighlightBox submitIndices={submitIndices} />
-      <SeqViz {...seqvizProps} />
+
       <SearchBox
         search={search}
         highlightSearch={() => {
@@ -80,6 +80,7 @@ export const App = () => {
           setSeqVizProps({ ...seqvizProps, search: { query: search, mismatch: 0 } });
         }}
       />
+      <SeqViz {...seqvizProps} />
     </>
   );
 };

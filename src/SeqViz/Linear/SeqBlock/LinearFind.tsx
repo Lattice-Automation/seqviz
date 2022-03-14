@@ -25,7 +25,7 @@ interface FindProps {
 /**
  * Render rectangles around Search results.
  */
-export default function Find(props: FindProps) {
+export default function LinearFind(props: FindProps) {
   const {
     filteredRows: searchRows,
     findXAndWidth,
@@ -44,9 +44,8 @@ export default function Find(props: FindProps) {
     searchFindBlocks = (
       <>
         {searchRows.map(s => {
-          console.table(s);
           return (
-            <FindBlock
+            <LinearFindBlock
               key={JSON.stringify(s)}
               inputRef={inputRef}
               findXAndWidth={findXAndWidth}
@@ -71,7 +70,7 @@ export default function Find(props: FindProps) {
     <>
       {highlightedRegions.map(({ start, end }) => {
         return (
-          <FindBlock
+          <LinearFindBlock
             key={`highlight ${start} ${end}`}
             inputRef={inputRef}
             findXAndWidth={findXAndWidth}
@@ -99,7 +98,7 @@ export default function Find(props: FindProps) {
   );
 }
 
-const FindBlock = (props: {
+const LinearFindBlock = (props: {
   inputRef: InputRefFuncType;
   findXAndWidth: FindXAndWidthType;
   indexYDiff: number;
@@ -143,7 +142,6 @@ const FindBlock = (props: {
       end < firstBase ? lastBase : Math.min(lastBase, end)
     ));
   }
-  console.table({ start, end, listenerOnly, width });
   const id = randomid();
 
   const selReference = {

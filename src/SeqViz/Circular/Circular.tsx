@@ -7,10 +7,11 @@ import { Coor, ICutSite, InputRefFuncType, ISize, Primer } from "../common";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
+import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import Annotations from "./Annotations";
+import { CircularFind } from "./CircularFind";
 import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
-import { CircularFind } from "./Find";
 import Index from "./Index";
 import Labels, { ILabel } from "./Labels";
 
@@ -37,6 +38,7 @@ interface CircularProps {
   search: SearchResult[];
   centralIndex: number;
   setCentralIndex: (update: number) => void;
+  highlightedRegions: HighlightRegion[];
 }
 
 interface CircularState {
@@ -358,6 +360,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
             onUnmount={onUnmount}
             totalRows={totalRows}
             seq={seq}
+            highlightedRegions={this.props.highlightedRegions}
           />
           <CutSites {...general} selectionRows={4} cutSites={cutSites} />
           <Index
