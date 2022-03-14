@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import randomid from "../../../utils/randomid";
 import { SearchResult } from "../../../utils/search";
 import { InputRefFuncType } from "../../common";

@@ -1,14 +1,16 @@
+import { range } from "lodash";
+import { useState } from "react";
+
+import { SeqVizProps } from "./SeqViz/SeqViz";
+import { SeqVizSelection } from "./SeqViz/handlers/selection";
+import { SearchResult } from "./utils/search";
+import { SeqViz } from "./viewer";
+
 /**
  * This module is only used for developing seqviz
  * See viewer.js for the library's entrypoint
  */
 import React = require("react");
-import { range } from "lodash";
-import { useState } from "react";
-import { SeqVizSelection } from "./SeqViz/handlers/selection";
-import { SeqVizProps } from "./SeqViz/SeqViz";
-import { SearchResult } from "./utils/search";
-import { SeqViz } from "./viewer";
 
 export const App = () => {
   const [search, setSearch] = React.useState("");

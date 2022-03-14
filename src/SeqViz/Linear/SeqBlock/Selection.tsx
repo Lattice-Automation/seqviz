@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import randomid from "../../../utils/randomid";
 import { InputRefFuncType } from "../../common";
 import { SelectionContext, SeqVizSelection } from "../../handlers/selection";

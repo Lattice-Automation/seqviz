@@ -1,10 +1,11 @@
 import * as React from "react";
+
 import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
 import { createLinearTranslations } from "../../utils/sequence";
-import { Coor, ICutSite, InputRefFuncType, ISize, Primer } from "../common";
+import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import { SeqVizSelection } from "../handlers/selection";

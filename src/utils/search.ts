@@ -1,5 +1,5 @@
 import { dnaComplement } from "./parser";
-import { nucleotides, nucleotideWildCards, reverse, translateWildNucleotides } from "./sequence";
+import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
 
 export interface SearchResult {
   start: number;
