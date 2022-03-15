@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import randomid from "../../../utils/randomid";
 import { SearchResult } from "../../../utils/search";
 import { InputRefFuncType } from "../../common";
@@ -8,6 +7,7 @@ import { FindXAndWidthType } from "./SeqBlock";
 export interface HighlightRegion {
   start: number;
   end: number;
+  color?: string;
 }
 
 interface FindProps {
@@ -69,7 +69,7 @@ export default function LinearFind(props: FindProps) {
 
   const highlightFindBlocks = (
     <>
-      {highlightedRegions.map(({ start, end }) => {
+      {highlightedRegions.map(({ start, end, color }) => {
         return (
           <LinearFindBlock
             key={`highlight ${start} ${end}`}
@@ -84,7 +84,7 @@ export default function LinearFind(props: FindProps) {
             seqBlockRef={seqBlockRef}
             listenerOnly={listenerOnly}
             compYDiff={compYDiff}
-            fillStyle="rgba(0, 251, 7, 0.5)"
+            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
           />
         );
       })}

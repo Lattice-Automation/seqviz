@@ -8,6 +8,12 @@ export interface ISize {
 }
 
 export interface Primer {
+  type: "enzyme" | "insert";
+  start: number;
+  end: number;
+  id: string;
+  name: string;
+  color: string;
   direction: 1 | -1;
 }
 

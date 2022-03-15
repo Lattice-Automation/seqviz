@@ -1,8 +1,7 @@
 import { range } from "lodash";
 import { useState } from "react";
-
-import { SeqVizProps } from "./SeqViz/SeqViz";
 import { SeqVizSelection } from "./SeqViz/handlers/selection";
+import { SeqVizProps } from "./SeqViz/SeqViz";
 import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
 
@@ -20,17 +19,18 @@ export const App = () => {
     translations: [],
     seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
     enzymesCustom: {
-      Cas9: {
-        rseq: "NGG", // recognition sequence
+      ExampleEnzyme: {
+        rseq: "TATGAATTCGTATGC", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
         rcut: 1, // cut index on REV strand, relative to start of rseq
       },
     },
-    enzymes: ["Cas9"],
+    enzymes: ["ExampleEnzyme"],
     rotateOnScroll: true,
     viewer: "both" as const,
     annotations: [
-      { id: "sample annotation", color: "green", type: "unknown", direction: 0, start: 8, end: 9, name: "test" },
+      { id: "recog", color: "#ff4500", type: "insert", direction: 1, start: 3, end: 13, name: "Recog site" },
+      { id: "lowgc", color: "#87ceeb", type: "insert", direction: 1, start: 16, end: 28, name: "low gc content" },
     ],
     backbone: "pSB1C3",
     showAnnotations: true,
@@ -46,28 +46,27 @@ export const App = () => {
     onSearch: (results: SearchResult[]) => {
       setSearchResults(results);
     },
-    bpColors: {
-      10: "green",
-      11: "green",
-      12: "green",
-      200: "blue",
-      201: "red",
-    },
+    bpColors: {},
+    /* bpColors: {
+     *   10: "green",
+     *   11: "green",
+     *   12: "green",
+     *   200: "blue",
+     *   201: "red",
+     * }, */
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    highlightedRegions: [{ start: 56, end: 66 }],
+    /* highlightedRegions: [{ start: 56, end: 66 }], */
   });
-  const submitIndices = (start: number, end: number) => {
+  const submitIndices = (start: number, end: number, color: string) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
-    const newHighlightedRegions = [...oldHighlightedRegions, { start, end }];
-    console.log("submitting", { start, end });
+    const newHighlightedRegions = [...oldHighlightedRegions, { start, end, color }];
     setSeqVizProps({ ...seqvizProps, highlightedRegions: newHighlightedRegions });
   };
   return (
     <>
       <HighlightBox submitIndices={submitIndices} />
-
       <SearchBox
         search={search}
         highlightSearch={() => {
@@ -82,18 +81,20 @@ export const App = () => {
           setSeqVizProps({ ...seqvizProps, search: { query: search, mismatch: 0 } });
         }}
       />
+
       <SeqViz {...seqvizProps} />
     </>
   );
 };
 
-const HighlightBox = (props: { submitIndices: (start: number, end: number) => void }) => {
+const HighlightBox = (props: { submitIndices: (start: number, end: number, color: string) => void }) => {
   const [start, setStart] = useState<number>(0);
   const [end, setEnd] = useState<number>(0);
+  const [color, setColor] = useState("#ff6347");
 
   const onClick = () => {
     if (start >= 0 && end >= start) {
-      props.submitIndices(start, end);
+      props.submitIndices(start, end, color);
     }
     if (start) {
       setStart(0);
@@ -106,6 +107,13 @@ const HighlightBox = (props: { submitIndices: (start: number, end: number) => vo
     <div>
       <input type="number" value={start} onChange={e => setStart(parseInt(e.target.value))} />
       <input type="number" value={end} onChange={e => setEnd(parseInt(e.target.value))} />
+      <select value={color} onChange={e => setColor(e.target.value)}>
+        <option value="#ff6347">Red</option>
+        <option value="#3cb371">Green</option>
+        <option selected value="#87ceeb">
+          Blue
+        </option>
+      </select>
       <input type="button" value={"Highlight Range"} onClick={onClick} />
     </div>
   );

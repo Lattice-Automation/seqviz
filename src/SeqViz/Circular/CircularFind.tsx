@@ -1,8 +1,7 @@
 import * as React from "react";
-
 import { SearchResult } from "../../utils/search";
-import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import { Coor, InputRefFuncType } from "../common";
+import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 
 interface CircularFindProps {
   search: SearchResult[];
@@ -49,7 +48,7 @@ export const CircularFind = (props: CircularFindProps) => {
     />
   ));
 
-  const highlightArcs = highlightedRegions.map(({ start, end }) => (
+  const highlightArcs = highlightedRegions.map(({ start, end, color }) => (
     <CircularFindArc
       radius={radius}
       lineHeight={lineHeight}
@@ -61,7 +60,7 @@ export const CircularFind = (props: CircularFindProps) => {
       start={start}
       end={end}
       direction={1}
-      fillStyle={"rgba(0, 251, 7, 0.5)"}
+      fillStyle={color || "rgba(0, 251, 7, 0.5)"}
     />
   ));
   return (
