@@ -1,7 +1,8 @@
 import * as React from "react";
+
 import { SearchResult } from "../../utils/search";
-import { Coor, InputRefFuncType } from "../common";
 import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
+import { Coor, InputRefFuncType } from "../common";
 
 interface CircularFindProps {
   search: SearchResult[];

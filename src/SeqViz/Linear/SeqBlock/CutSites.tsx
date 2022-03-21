@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { FindXAndWidthType } from "./SeqBlock";
+
 /**
  * on hover, an enzyme recognition site should have an opacity of 0.5. 0 otherwise
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
@@ -25,7 +27,16 @@ const hoverCutSite = (className, on = false) => {
  * a component shown above the sequence viewer that shows the name of the
  * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
  */
-const CutSites = props => {
+const CutSites = (props: {
+  zoom: { linear: any };
+  cutSiteRows: any;
+  findXAndWidth: any;
+  lineHeight: any;
+  firstBase: any;
+  lastBase: any;
+  inputRef: any;
+  yDiff: any;
+}) => {
   const {
     zoom: { linear: zoom },
     cutSiteRows,
@@ -37,7 +48,7 @@ const CutSites = props => {
     yDiff,
   } = props;
 
-  const recogContiguous = (start, end, first, last) => {
+  const recogContiguous = (start: number, end: number, first: number, last: number) => {
     if ((start < first && end < first) || (start > last && end > last)) return true;
     if (end >= start) {
       return end < last && start > first;
@@ -45,7 +56,7 @@ const CutSites = props => {
     return start < last && end > first;
   };
 
-  const sitesWithX = cutSiteRows.map(c => {
+  const sitesWithX = cutSiteRows.map((c: { fcut: any; rcut: any; recogStart: number; recogEnd: number }) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { x: highlightX, width: highlightWidth } = findXAndWidth(c.recogStart, c.recogEnd);
@@ -105,72 +116,124 @@ const CutSites = props => {
 
   return (
     <g className="la-vz-cut-sites">
-      {sitesWithX.map(c => {
-        // prevent double rendering, by placing the indeces only in the seqBlock
-        // that they need to be shown. Important for the zero-index edge case
-        const sequenceCutSite = c.fcut >= firstBase && c.fcut < lastBase;
-        const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
-        const showIndex = sequenceCutSite || complementCutSite;
+      {sitesWithX.map(
+        (c: {
+          fcut: number;
+          rcut: number;
+          id: string | undefined;
+          cutX: number;
+          name: string;
+          highlightWidth: number;
+          highlightX: number;
+          start: number;
+          end: number;
+          hangX: number;
+          d: -1 | 1;
+        }) => {
+          // prevent double rendering, by placing the indeces only in the seqBlock
+          // that they need to be shown. Important for the zero-index edge case
+          const sequenceCutSite = c.fcut >= firstBase && c.fcut < lastBase;
+          const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
+          const showIndex = sequenceCutSite || complementCutSite;
 
-        const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
+          const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
 
-        return (
-          <React.Fragment key={`la-vz-${c.id}-first-base`}>
-            {sequenceCutSite ? (
-              <text
-                {...textProps}
+          return (
+            <React.Fragment key={`la-vz-${c.id}-first-base`}>
+              {sequenceCutSite ? (
+                <text
+                  {...textProps}
+                  id={c.id}
+                  className={`la-vz-cut-site-text ${c.id}-name`}
+                  x={c.cutX}
+                  style={{
+                    cursor: "pointer",
+                    fill: "rgb(51, 51, 51)",
+                    fillOpacity: 0.8,
+                  }}
+                  onMouseOver={() => hoverCutSite(c.id, true)}
+                  onMouseOut={() => hoverCutSite(c.id, false)}
+                  onFocus={() => 0}
+                  onBlur={() => 0}
+                >
+                  {c.name}
+                </text>
+              ) : null}
+              {zoom > 10 && (
+                <rect
+                  width={c.highlightWidth}
+                  height={lineHeight * 2}
+                  x={c.highlightX}
+                  y={yDiff + 6}
+                  strokeDasharray="4,5"
+                  style={{
+                    stroke: "rgb(150,150,150)",
+                    strokeWidth: 1,
+                    fill: "rgb(255, 165, 0, 0.3)",
+                    fillOpacity: 0,
+                  }}
+                  className={c.id}
+                  ref={inputRef(c.id, {
+                    id: c.id,
+                    start: c.start,
+                    end: c.end,
+                    type: "ENZYME",
+                    element: null,
+                  })}
+                />
+              )}
+              {sequenceCutSite ? (
+                <rect width="1px" height={lineHeight} x={c.cutX - 0.5} y={lineHeight / 4 + yDiff} />
+              ) : null}
+              {showIndex && zoom > 10 ? (
+                <rect width={connectorWidth} height="1px" x={connectorX - 0.5} y={lineHeight * 1.25 + yDiff} />
+              ) : null}
+              {complementCutSite && zoom > 10 ? (
+                <rect width="1px" height={lineHeight + 1.5} x={c.hangX - 0.5} y={lineHeight * 1.25 + yDiff} />
+              ) : null}
+              <HighlightBlock
                 id={c.id}
-                className={`la-vz-cut-site-text ${c.id}-name`}
-                x={c.cutX}
-                style={{
-                  cursor: "pointer",
-                  fill: "rgb(51, 51, 51)",
-                  fillOpacity: 0.8,
-                }}
-                onMouseOver={() => hoverCutSite(c.id, true)}
-                onMouseOut={() => hoverCutSite(c.id, false)}
-                onFocus={() => 0}
-                onBlur={() => 0}
-              >
-                {c.name}
-              </text>
-            ) : null}
-            {zoom > 10 && (
-              <rect
-                width={c.highlightWidth}
-                height={lineHeight * 2}
-                x={c.highlightX}
-                y={yDiff + 6}
-                strokeDasharray="4,5"
-                style={{
-                  stroke: "rgb(150,150,150)",
-                  strokeWidth: 1,
-                  fill: "rgb(255, 165, 0, 0.3)",
-                  fillOpacity: 0,
-                }}
-                className={c.id}
-                ref={inputRef(c.id, {
-                  id: c.id,
-                  start: c.start,
-                  end: c.end,
-                  type: "ENZYME",
-                  element: null,
-                })}
+                start={c.start}
+                end={c.end}
+                indexYDiff={yDiff + lineHeight - 5}
+                findXAndWidth={findXAndWidth}
               />
-            )}
-            {sequenceCutSite ? (
-              <rect width="1px" height={lineHeight} x={c.cutX - 0.5} y={lineHeight / 4 + yDiff} />
-            ) : null}
-            {showIndex && zoom > 10 ? (
-              <rect width={connectorWidth} height="1px" x={connectorX - 0.5} y={lineHeight * 1.25 + yDiff} />
-            ) : null}
-            {complementCutSite && zoom > 10 ? (
-              <rect width="1px" height={lineHeight + 1.5} x={c.hangX - 0.5} y={lineHeight * 1.25 + yDiff} />
-            ) : null}
-          </React.Fragment>
-        );
-      })}
+            </React.Fragment>
+          );
+        }
+      )}
     </g>
+  );
+};
+
+const HighlightBlock = (props: {
+  id: string | undefined;
+  start: number;
+  end: number;
+  findXAndWidth: FindXAndWidthType;
+  indexYDiff: number;
+}) => {
+  const HEIGHT = 18;
+  const { id, start, end, findXAndWidth, indexYDiff } = props;
+  const { x, width } = findXAndWidth(start, end);
+
+  const y = indexYDiff - HEIGHT / 2; // template row result
+
+  return (
+    <rect
+      key={id}
+      id={id}
+      x={x - 1}
+      y={y}
+      width={width}
+      style={{
+        height: 18,
+        stroke: "rgba(0, 0, 0, 0.5)",
+        cursor: "pointer",
+        strokeWidth: 1,
+        fill: "rgba(0, 251, 7, 0.5)",
+      }}
+    />
   );
 };
 

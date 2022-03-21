@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import randomid from "../../../utils/randomid";
 import { SearchResult } from "../../../utils/search";
 import { InputRefFuncType } from "../../common";
@@ -99,7 +100,7 @@ export default function LinearFind(props: FindProps) {
   );
 }
 
-const LinearFindBlock = (props: {
+export const LinearFindBlock = (props: {
   inputRef: InputRefFuncType;
   findXAndWidth: FindXAndWidthType;
   indexYDiff: number;

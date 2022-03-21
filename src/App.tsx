@@ -1,7 +1,8 @@
 import { range } from "lodash";
 import { useState } from "react";
-import { SeqVizSelection } from "./SeqViz/handlers/selection";
+
 import { SeqVizProps } from "./SeqViz/SeqViz";
+import { SeqVizSelection } from "./SeqViz/handlers/selection";
 import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
 
@@ -19,18 +20,18 @@ export const App = () => {
     translations: [],
     seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
     enzymesCustom: {
-      ExampleEnzyme: {
-        rseq: "TATGAATTCGTATGC", // recognition sequence
+      Cas9: {
+        rseq: "TTNT", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
         rcut: 1, // cut index on REV strand, relative to start of rseq
+        highlight_recog_site: true,
       },
     },
-    enzymes: ["ExampleEnzyme"],
+    enzymes: ["Cas9"],
     rotateOnScroll: true,
     viewer: "both" as const,
     annotations: [
-      { id: "recog", color: "#ff4500", type: "insert", direction: 1, start: 3, end: 13, name: "Recog site" },
-      { id: "lowgc", color: "#87ceeb", type: "insert", direction: 1, start: 16, end: 28, name: "low gc content" },
+      /* { id: "sample annotation", color: "green", type: "unknown", direction: 0, start: 8, end: 9, name: "test" }, */
     ],
     backbone: "pSB1C3",
     showAnnotations: true,
