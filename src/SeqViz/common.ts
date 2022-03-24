@@ -27,10 +27,18 @@ export interface ICutSite {
   id: string;
   recogStart: number;
   recogEnd: number;
-  recogStrand: unknown;
+  recogStrand: 1 | -1;
+  highlightColor?: string;
 }
 
 export interface Coor {
   x: number;
   y: number;
+}
+
+export interface IEnzyme {
+  rseq: string;
+  fcut: number;
+  rcut: number;
+  highlightColor?: string;
 }

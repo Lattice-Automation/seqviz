@@ -20,14 +20,20 @@ export const App = () => {
     translations: [],
     seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
     enzymesCustom: {
-      Cas9: {
-        rseq: "TTNT", // recognition sequence
+      topStrand: {
+        rseq: "CCTTGG", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
-        rcut: 1, // cut index on REV strand, relative to start of rseq
-        highlight_recog_site: true,
+        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
+        highlightColor: "#E78587" /* pass in color */,
+      },
+      bottomStrand: {
+        rseq: "AGCAG", // recognition sequence
+        fcut: 0, // cut index on FWD strand, relative to start of rseq
+        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
+        highlightColor: "#D7E5F0" /* pass in color */,
       },
     },
-    enzymes: ["Cas9"],
+    enzymes: ["topStrand", "bottomStrand"],
     rotateOnScroll: true,
     viewer: "both" as const,
     annotations: [
@@ -58,7 +64,7 @@ export const App = () => {
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    /* highlightedRegions: [{ start: 56, end: 66 }], */
+    /* highlightedRegions: [{ start: 36, end: 66, color: "magenta" }], */
   });
   const submitIndices = (start: number, end: number, color: string) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
@@ -111,9 +117,7 @@ const HighlightBox = (props: { submitIndices: (start: number, end: number, color
       <select value={color} onChange={e => setColor(e.target.value)}>
         <option value="#ff6347">Red</option>
         <option value="#3cb371">Green</option>
-        <option selected value="#87ceeb">
-          Blue
-        </option>
+        <option value="#87ceeb">Blue</option>
       </select>
       <input type="button" value={"Highlight Range"} onClick={onClick} />
     </div>

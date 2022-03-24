@@ -69,24 +69,42 @@ export default function LinearFind(props: FindProps) {
   }
 
   const highlightFindBlocks = (
+    /* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */
     <>
       {highlightedRegions.map(({ start, end, color }) => {
         return (
-          <LinearFindBlock
-            key={`highlight ${start} ${end}`}
-            inputRef={inputRef}
-            findXAndWidth={findXAndWidth}
-            firstBase={start}
-            lastBase={end}
-            start={start}
-            end={end}
-            indexYDiff={indexYDiff}
-            direction={1}
-            seqBlockRef={seqBlockRef}
-            listenerOnly={listenerOnly}
-            compYDiff={compYDiff}
-            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-          />
+          <>
+            <LinearFindBlock
+              key={`highlight ${start} ${end}`}
+              inputRef={inputRef}
+              findXAndWidth={findXAndWidth}
+              firstBase={start}
+              lastBase={end}
+              start={start}
+              end={end}
+              indexYDiff={indexYDiff}
+              direction={1}
+              seqBlockRef={seqBlockRef}
+              listenerOnly={listenerOnly}
+              compYDiff={compYDiff}
+              fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+            />
+            <LinearFindBlock
+              key={`highlight ${start} ${end}`}
+              inputRef={inputRef}
+              findXAndWidth={findXAndWidth}
+              firstBase={start}
+              lastBase={end}
+              start={start}
+              end={end}
+              indexYDiff={indexYDiff}
+              direction={-1}
+              seqBlockRef={seqBlockRef}
+              listenerOnly={listenerOnly}
+              compYDiff={compYDiff}
+              fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+            />
+          </>
         );
       })}
     </>

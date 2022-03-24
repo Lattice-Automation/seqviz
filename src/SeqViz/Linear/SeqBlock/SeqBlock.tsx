@@ -388,7 +388,16 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             />
           )}
           {zoomed ? (
-            <CutSiteRow {...this.props} findXAndWidth={this.findXAndWidth} lastBase={lastBase} yDiff={cutSiteYDiff} />
+            <CutSiteRow
+              findXAndWidth={this.findXAndWidth}
+              lastBase={lastBase}
+              yDiff={cutSiteYDiff}
+              zoom={this.props.zoom}
+              cutSiteRows={cutSiteRows}
+              lineHeight={lineHeight}
+              firstBase={firstBase}
+              inputRef={inputRef}
+            />
           ) : null}
           {zoomed ? (
             <text {...textProps} y={indexYDiff} id={id}>

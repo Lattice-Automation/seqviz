@@ -10,7 +10,7 @@ import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
 import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 import SeqViewer from "./SeqViewer";
-import { ICutSite } from "./common";
+import { ICutSite, IEnzyme } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
 import "./style.css";
@@ -29,12 +29,7 @@ export interface SeqVizProps {
   copyEvent: (event: KeyboardEvent) => void;
   enzymes: string[];
   enzymesCustom: {
-    [key: string]: {
-      rseq: string;
-      fcut: number;
-      rcut: number;
-      highlight_recog_site?: boolean;
-    };
+    [key: string]: IEnzyme;
   };
   onSearch: (search: SearchResult[]) => void;
   onSelection: (selection: SeqVizSelection) => void;

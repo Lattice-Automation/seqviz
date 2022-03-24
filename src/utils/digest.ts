@@ -1,4 +1,4 @@
-import { ICutSite } from "../SeqViz/common";
+import { ICutSite, IEnzyme } from "../SeqViz/common";
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
 import { reverseComplement } from "./parser";
@@ -12,17 +12,24 @@ import { translateWildNucleotides } from "./sequence";
  * with the sequence viewer
  *
  */
-export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom = {}): ICutSite[] => {
+export const cutSitesInRows = (
+  seq: string,
+  enzymeList: string[],
+  enzymesCustom: { [key: string]: IEnzyme }
+): ICutSite[] => {
   const seqToCut = (seq + seq).toUpperCase();
-  const filteredEnzymes = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
-
+  const filteredEnzymes: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
+  const uniqueFilteredEnzymes = Array.from(new Set(filteredEnzymes));
   // find all the cut sites for the given row
-  const cutSites: ICutSite[] = Array.from(new Set(filteredEnzymes)).reduce((acc: ICutSite[], e) => {
-    const cuts: ICutSite[] = findCutSites(enzymesCustom[e] || enzymes[e], seqToCut, seq.length)
-      .filter(c => !(c.fcut === 0 && c.rcut === 0))
-      .map(c => ({
+  const cutSites: ICutSite[] = [];
+  uniqueFilteredEnzymes.forEach((enzymeName: string) => {
+    const currEnzyme: IEnzyme = enzymesCustom[enzymeName] || enzymes[enzymeName];
+    const sites = findCutSites(currEnzyme, seqToCut, enzymeName);
+    const filteredSites = sites.filter(c => !(c.fcut === 0 && c.rcut === 0));
+    filteredSites.forEach(c =>
+      cutSites.push({
         id: randomid(),
-        name: e,
+        name: enzymeName,
         start: c.start % seq.length,
         end: c.end % seq.length,
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
@@ -30,10 +37,10 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
         recogStrand: c.recogStrand,
         recogStart: c.recogStart,
         recogEnd: c.recogEnd % seq.length,
-      }));
-    return acc.concat(cuts);
-  }, []);
-
+        highlightColor: c.highlightColor,
+      })
+    );
+  });
   const uniqueCuts: ICutSite[] = Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
   return uniqueCuts;
 };
@@ -44,16 +51,12 @@ export const cutSitesInRows = (seq: string, enzymeList: string[], enzymesCustom 
  * Search through the sequence with the given enzyme and return an array of cut
  * and hang indexes for splitting up the sequence with the passed enzymes
  *
- 
- 
- 
- 
  */
-const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => {
+const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string): ICutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
-    ({ fcut, rcut, rseq } = enzymes[enzyme]);
+    ({ fcut, rcut, rseq } = enzymes[enzymeName]);
   }
 
   let recogSeq = rseq.toUpperCase();
@@ -73,7 +76,7 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => 
   const recogLength = recogSeq.length;
   const nucAmbig = new RegExp(/[^ATGC]/, "gi");
   if (nucAmbig.test(rseq)) recogSeq = translateWildNucleotides(recogSeq).toUpperCase();
-  let regTest = new RegExp(recogSeq, "gi");
+  const regTest = new RegExp(recogSeq, "gi");
 
   // this is in the forward direction, ie, when not checking the complement possibility
   // start search for cut sites
@@ -82,7 +85,7 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => 
   // while another match is found and we haven't exceeded input sequence length
   while (result) {
     // add the cut site index, after correcting for actual cut site index
-    let index = result.index;
+    const index = result.index;
     cutSiteIndices.push({
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
       fcut: index + fcut,
@@ -92,6 +95,7 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => 
       recogStrand: 1,
       recogStart: index + recogStart - shiftRecogStart,
       recogEnd: index + recogEnd + shiftRecogEnd,
+      highlightColor: enzyme.highlightColor,
     });
     result = regTest.exec(seqToSearch);
   }
@@ -104,23 +108,17 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => 
   result = reqTestRC.exec(seqToSearch); // returns null if nothing found
   while (result) {
     // same above, except correcting for the new reverse complement indexes
-    let index = result.index;
+    const index = result.index;
     cutSiteIndices.push({
       cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-
       fcut: index + recogLength - rcut,
-
       rcut: index + recogLength - fcut,
-
       start: index,
-
       end: index + recogLength,
-
       recogStrand: -1,
-
       recogStart: index + recogStart - shiftRecogStart,
-
       recogEnd: index + recogEnd + shiftRecogEnd,
+      highlightColor: enzyme.highlightColor,
     });
     result = reqTestRC.exec(seqToSearch);
   }
@@ -131,7 +129,6 @@ const findCutSites = (enzyme, seqToSearch, _, enzymeName = null): ICutSite[] => 
   // sort with increasing sequence cut index
 
   uniqueCuts.sort((a, b) => a.fcut - b.fcut);
-
   return uniqueCuts;
 };
 
