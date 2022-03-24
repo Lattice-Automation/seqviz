@@ -75,7 +75,7 @@ export const CircularFind = (props: CircularFindProps) => {
 /**
  * Create an SVG `path` element that highlights the search result
  */
-const CircularFindArc = (props: {
+export const CircularFindArc = (props: {
   radius: number;
   lineHeight: number;
   seqLength: number;
