@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { calcGC, calcTm } from "../../utils/sequence";
 
 export interface SeqVizSelection {
@@ -412,17 +411,6 @@ const withSelectionHandler = WrappedComp =>
     setSelection = newSelection => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'setSelection' does not exist on type 'Re... Remove this comment to see the full error message
       const { setSelection } = this.props;
-
-      if (
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        newSelection.start === this.props.selection.start &&
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        newSelection.end === this.props.selection.end &&
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        newSelection.ref === this.props.selection.ref
-      ) {
-        return;
-      }
 
       const { clockwise, start, end, ref, type, element, name }: any = {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message

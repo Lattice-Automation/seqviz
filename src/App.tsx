@@ -1,8 +1,7 @@
 import { range } from "lodash";
 import { useState } from "react";
-
-import { SeqVizProps } from "./SeqViz/SeqViz";
 import { SeqVizSelection } from "./SeqViz/handlers/selection";
+import { SeqVizProps } from "./SeqViz/SeqViz";
 import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
 
@@ -37,7 +36,7 @@ export const App = () => {
     rotateOnScroll: true,
     viewer: "both" as const,
     annotations: [
-      /* { id: "sample annotation", color: "green", type: "unknown", direction: 0, start: 8, end: 9, name: "test" }, */
+      { id: "sample annotation", color: "green", type: "enzyme", direction: 1, start: 8, end: 19, name: "test" },
     ],
     backbone: "pSB1C3",
     showAnnotations: true,
