@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { calcGC, calcTm } from "../../utils/sequence";
 
 export interface SeqVizSelection {
@@ -34,7 +35,7 @@ export const defaultSelection = {
 export const SelectionContext = React.createContext(defaultSelection);
 SelectionContext.displayName = "SelectionContext";
 
-interface MouseEventType {
+export interface SeqVizMouseEventType {
   type: string;
   clientX: number;
   clientY: number;
@@ -119,7 +120,6 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
 
     /**
      * remove the id of the passed element from the list of tracked refs
-     
      */
     removeMountedBlock = (ref: unknown) => {
       this.idToRange.delete(ref);
@@ -133,7 +133,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * active range
      *
      */
-    mouseEvent = (e: MouseEventType) => {
+    mouseEvent = (e: SeqVizMouseEventType) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
       const { Circular, Linear } = this.props;
 
@@ -165,7 +165,6 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'setCentralIndex' does not exist on type ... Remove this comment to see the full error message
             this.props.setCentralIndex("linear", start);
           }
-
           // Annotation or find selection range
           const clockwise = direction ? direction === 1 : true;
           const selectionStart = clockwise ? start : end;
@@ -224,7 +223,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     /**
      * Handle a sequence selection on a linear viewer
      */
-    linearSeqEvent = (e: MouseEventType, knownRange: { start: number; end: number }) => {
+    linearSeqEvent = (e: SeqVizMouseEventType, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
       const { selection } = this.props;
 
@@ -254,7 +253,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     /**
      * Handle a sequence selection event on the circular viewer
      */
-    circularSeqEvent = (e: MouseEventType) => {
+    circularSeqEvent = (e: SeqVizMouseEventType) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       const { seq, selection, start, currRef } = this.props;
       let { end, clockwise } = selection;
@@ -366,7 +365,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      
      
      */
-    calculateBaseLinear = (e: MouseEventType, knownRange: { start: number; end: number }) => {
+    calculateBaseLinear = (e: SeqVizMouseEventType, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       const { size, bpsPerBlock } = this.props;
 
@@ -388,7 +387,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
        
        
      */
-    calculateBaseCircular = (e: MouseEventType) => {
+    calculateBaseCircular = (e: SeqVizMouseEventType) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
       const { center, centralIndex, seq, yDiff } = this.props;
 
@@ -427,18 +426,17 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     setSelection = (newSelection: SeqVizSelection) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'setSelection' does not exist on type 'Re... Remove this comment to see the full error message
       const { setSelection } = this.props;
-
       if (
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.start === this.props.selection.start &&
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.end === this.props.selection.end &&
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        newSelection.ref === this.props.selection.ref
+        newSelection.ref === this.props.selection.ref &&
+        newSelection.type !== "ANNOTATION" // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
       ) {
-        debugger;
+        return;
       }
-
       const { clockwise, start, end, ref, type, element, name }: any = {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         ...this.props.selection,

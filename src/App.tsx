@@ -1,7 +1,8 @@
 import { range } from "lodash";
 import { useState } from "react";
-import { SeqVizSelection } from "./SeqViz/handlers/selection";
+
 import { SeqVizProps } from "./SeqViz/SeqViz";
+import { SeqVizSelection } from "./SeqViz/handlers/selection";
 import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
 
