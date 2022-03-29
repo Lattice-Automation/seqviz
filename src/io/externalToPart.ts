@@ -9,7 +9,7 @@ import { fetchBBB } from "./igemBackbones";
  */
 export default async (
   accession: string,
-  options: { backbone: string; colors?: string[] } = { backbone: "", colors: [] }
+  options: { backbone?: string; colors?: string[] } = { backbone: "", colors: [] }
 ): Promise<Part> => {
   let igem = false;
 

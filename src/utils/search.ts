@@ -4,7 +4,7 @@ import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } f
 export interface SearchResult {
   start: number;
   end: number;
-  direction: number;
+  direction: -1 | 1;
   index?: number;
   length?: number;
 }

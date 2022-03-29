@@ -1,17 +1,17 @@
 import { isEqual } from "lodash";
 import React, { Component } from "react";
 import {
-  Button,
-  Checkbox,
-  Container,
-  Divider,
-  Dropdown,
-  Grid,
-  Icon,
-  Image,
-  Input,
-  Menu,
-  Sidebar,
+	Button,
+	Checkbox,
+	Container,
+	Divider,
+	Dropdown,
+	Grid,
+	Icon,
+	Image,
+	Input,
+	Menu,
+	Sidebar
 } from "semantic-ui-react";
 import { SeqViz } from "seqviz";
 import LatticeLogo from "../src/lattice-brand.png";

@@ -10,6 +10,7 @@ import { createMultiRows, createSingleRows, stackElements } from "../elementsToR
 import withViewerHOCs from "../handlers";
 import { SeqVizSelection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
+import { HighlightRegion } from "./SeqBlock/LinearFind";
 import SeqBlock from "./SeqBlock/SeqBlock";
 import { Translation } from "./SeqBlock/Translations";
 
@@ -53,6 +54,7 @@ interface LinearProps {
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
+  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -165,6 +167,8 @@ class Linear extends React.Component<LinearProps> {
     const searchRows =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
+    const highlightRows = createSingleRows(this.props.highlightedRegions, bpsPerBlock, arrSize);
+
     const translationRows = translations.length
       ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
@@ -220,6 +224,7 @@ class Linear extends React.Component<LinearProps> {
           mouseEvent={this.props.mouseEvent}
           seqFontSize={this.props.seqFontSize}
           inputRef={this.props.inputRef}
+          highlightedRegions={highlightRows[i]}
           elementHeight={elementHeight}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}

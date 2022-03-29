@@ -203,7 +203,7 @@ export class Block extends React.PureComponent<BlockProps> {
       return null;
     } else {
       return (
-        <React.Fragment>
+        <>
           <rect
             className="la-vz-linear-sel-block"
             x={x || undefined}
@@ -213,7 +213,7 @@ export class Block extends React.PureComponent<BlockProps> {
             shapeRendering="auto"
           />
           {secondBlock}
-        </React.Fragment>
+        </>
       );
     }
   }

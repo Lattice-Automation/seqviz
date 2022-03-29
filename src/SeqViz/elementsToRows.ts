@@ -1,3 +1,6 @@
+import { Annotation } from "../part";
+import { Primer } from "./common";
+
 // utility funcs for stackElements
 const last = arr => arr[arr.length - 1];
 const first = arr => arr[0];
@@ -18,7 +21,7 @@ const first = arr => arr[0];
  * 		[		---Ann2---    ]
  *
  */
-export const stackElements = (elements, seqL) => {
+export const stackElements = (elements: Annotation[] | Primer[], seqL: number) => {
   const sortedElements = [...elements];
   sortedElements.sort((a, b) => {
     // prioritize insert annotations for tiebreakers so that the insert annotation appears
@@ -51,7 +54,7 @@ export const stackElements = (elements, seqL) => {
       return last(elems).end < a.start && a.end < first(elems).start;
     });
 
-    const newAcc = [...acc];
+    const newAcc: Primer[][] | Annotation[][] = [...acc];
 
     if (insertIndex > -1) {
       // insert in the row where it's the new highest

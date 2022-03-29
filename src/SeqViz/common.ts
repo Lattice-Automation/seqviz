@@ -8,6 +8,12 @@ export interface ISize {
 }
 
 export interface Primer {
+  type: "enzyme" | "insert";
+  start: number;
+  end: number;
+  id: string;
+  name: string;
+  color: string;
   direction: 1 | -1;
 }
 
@@ -21,10 +27,18 @@ export interface ICutSite {
   id: string;
   recogStart: number;
   recogEnd: number;
-  recogStrand: unknown;
+  recogStrand: 1 | -1;
+  highlightColor?: string;
 }
 
 export interface Coor {
   x: number;
   y: number;
+}
+
+export interface IEnzyme {
+  rseq: string;
+  fcut: number;
+  rcut: number;
+  highlightColor?: string;
 }
