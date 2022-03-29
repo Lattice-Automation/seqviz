@@ -1,14 +1,14 @@
 export interface Element {
   start: number;
   end: number;
-  direction: number;
+  direction: -1 | 1;
 }
 
 export interface Annotation extends Element {
   id: string;
   name: string;
   color: string;
-  type: string;
+  type: "enzyme" | "insert";
 }
 
 export interface Part {

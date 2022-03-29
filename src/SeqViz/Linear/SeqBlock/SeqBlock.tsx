@@ -6,8 +6,8 @@ import { ICutSite, ISize, InputRefFuncType, Primer } from "../../common";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
-import Find from "./Find";
 import IndexRow from "./Index";
+import LinearFind, { HighlightRegion } from "./LinearFind";
 import Primers from "./Primers";
 import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
@@ -51,6 +51,7 @@ interface SeqBlockProps {
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
+  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -309,13 +310,17 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             selectEdgeHeight={selectEdgeHeight}
           />
-          <Find
+          <LinearFind
+            inputRef={inputRef}
+            firstBase={firstBase}
             filteredRows={filteredSearchRows}
             findXAndWidth={this.findXAndWidth}
             indexYDiff={indexYDiff}
             compYDiff={compYDiff}
             seqBlockRef={this}
             lastBase={lastBase}
+            listenerOnly={false}
+            highlightedRegions={this.props.highlightedRegions}
           />
           <AnnotationRows
             bpsPerBlock={this.props.bpsPerBlock}
@@ -383,7 +388,16 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             />
           )}
           {zoomed ? (
-            <CutSiteRow {...this.props} findXAndWidth={this.findXAndWidth} lastBase={lastBase} yDiff={cutSiteYDiff} />
+            <CutSiteRow
+              findXAndWidth={this.findXAndWidth}
+              lastBase={lastBase}
+              yDiff={cutSiteYDiff}
+              zoom={this.props.zoom}
+              cutSiteRows={cutSiteRows}
+              lineHeight={lineHeight}
+              firstBase={firstBase}
+              inputRef={inputRef}
+            />
           ) : null}
           {zoomed ? (
             <text {...textProps} y={indexYDiff} id={id}>
@@ -403,7 +417,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             lastBase={lastBase}
             findXAndWidth={this.findXAndWidth}
           />
-          <Find
+          <LinearFind
             {...this.props}
             filteredRows={filteredSearchRows}
             findXAndWidth={this.findXAndWidth}
@@ -411,7 +425,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             compYDiff={compYDiff}
             seqBlockRef={this}
             lastBase={lastBase}
-            listenerOnly
+            listenerOnly={true}
           />
         </g>
       </svg>

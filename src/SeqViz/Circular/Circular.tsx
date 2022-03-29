@@ -4,14 +4,15 @@ import { Annotation } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
+import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
 import Annotations from "./Annotations";
+import { CircularFind } from "./CircularFind";
 import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
-import Find from "./Find";
 import Index from "./Index";
 import Labels, { ILabel } from "./Labels";
 
@@ -38,6 +39,7 @@ interface CircularProps {
   search: SearchResult[];
   centralIndex: number;
   setCentralIndex: (update: number) => void;
+  highlightedRegions: HighlightRegion[];
 }
 
 interface CircularState {
@@ -345,7 +347,22 @@ class Circular extends React.Component<CircularProps, CircularState> {
             rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
           />
-          <Find {...general} search={search} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
+          <CircularFind
+            seqLength={general.seqLength}
+            radius={general.radius}
+            center={general.center}
+            lineHeight={general.lineHeight}
+            findCoor={general.findCoor}
+            search={search}
+            getRotation={general.getRotation}
+            generateArc={general.generateArc}
+            rotateCoor={general.rotateCoor}
+            inputRef={general.inputRef}
+            onUnmount={onUnmount}
+            totalRows={totalRows}
+            seq={seq}
+            highlightedRegions={this.props.highlightedRegions}
+          />
           <CutSites {...general} selectionRows={4} cutSites={cutSites} />
           <Index
             {...general}

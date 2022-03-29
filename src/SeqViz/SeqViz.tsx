@@ -8,8 +8,9 @@ import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
+import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 import SeqViewer from "./SeqViewer";
-import { ICutSite } from "./common";
+import { ICutSite, IEnzyme } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
 import "./style.css";
@@ -21,18 +22,14 @@ export interface SeqVizProps {
   compSeq?: string;
   annotations?: Annotation[];
   file?: string | File;
-
-  backbone: string;
-  bpColors: { [key: string]: string };
+  backbone?: string;
   colors?: string[];
+
+  bpColors: { [key: number]: string };
   copyEvent: (event: KeyboardEvent) => void;
   enzymes: string[];
   enzymesCustom: {
-    [key: string]: {
-      rseq: string;
-      fcut: number;
-      rcut: number;
-    };
+    [key: string]: IEnzyme;
   };
   onSearch: (search: SearchResult[]) => void;
   onSelection: (selection: SeqVizSelection) => void;
@@ -42,6 +39,7 @@ export interface SeqVizProps {
     mismatch: number;
   };
   showComplement: boolean;
+  showAnnotations: boolean;
   showIndex: boolean;
   showPrimers: boolean;
   style: Record<string, unknown>;
@@ -51,6 +49,7 @@ export interface SeqVizProps {
     circular: number;
     linear: number;
   };
+  highlightedRegions?: HighlightRegion[] /* [{start, end, color}] */;
 }
 
 /**
@@ -237,7 +236,6 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    */
   setSelection = (selection: SeqVizSelection) => {
     const { onSelection } = this.props;
-
     this.setState({ selection });
 
     onSelection(selection);
@@ -265,6 +263,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       return <div className="la-vz-seqviz" />;
     }
 
+    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions ? this.props.highlightedRegions : [];
     const linear = (viewer === "linear" || viewer.includes("both")) && (
       <SeqViewer
         key="linear"
@@ -279,6 +278,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         seq={localSeq}
         cutSites={cutSites}
         circular={false}
+        highlightedRegions={highlightedRegions}
       />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
@@ -295,6 +295,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         seq={localSeq}
         cutSites={cutSites}
         circular={true}
+        highlightedRegions={highlightedRegions}
       />
     );
     const bothFlipped = viewer === "both_flip";
