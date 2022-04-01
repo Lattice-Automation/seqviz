@@ -2,11 +2,10 @@ import { mount } from "enzyme";
 import * as fs from "fs";
 import * as path from "path";
 import * as React from "react";
-
+import filesToParts from "./io/filesToParts";
 import Linear from "./SeqViz/Linear/Linear";
 import SeqBlock from "./SeqViz/Linear/SeqBlock/SeqBlock";
 import SeqViewer from "./SeqViz/SeqViewer";
-import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
 
 const defaultProps = {
@@ -80,9 +79,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: string; name: string; seq: string; a... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={fileContents} />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
@@ -103,9 +102,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
@@ -131,9 +130,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
@@ -158,9 +157,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
@@ -183,9 +182,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
@@ -205,9 +204,9 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ seq: string; viewer: "linear"; name: strin... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} seq={seq} viewer="linear" />);
-    const _componentDidMount = wrapper.instance().componentDidMount;
-    if (_componentDidMount) {
-      await _componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
     } else {
       throw new Error("componentDidMount not defined");
     }
