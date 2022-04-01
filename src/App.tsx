@@ -64,7 +64,10 @@ export const App = () => {
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    /* highlightedRegions: [{ start: 36, end: 66, color: "magenta" }], */
+    highlightedRegions: [
+      { start: 36, end: 66, color: "magenta" },
+      { start: 70, end: 80 },
+    ],
   });
   const submitIndices = (start: number, end: number, color: string) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];

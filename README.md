@@ -71,11 +71,9 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
-
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
-
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -200,14 +198,15 @@ An array of restriction enzyme names whose recognition sites should be shown. Ex
 
 #### `options.enzymesCustom (={})`
 
-Unsupported enzymes can also be passed through an object where the keys are the enzymes' names and the values are the enzymes:
+Unsupported enzymes can also be passed through an object where the keys are the enzymes' names and the values are the enzymes. Additionally, if a highlightColor is passed the recognition site will be highlighted with the appropriate color.
 
 ```js
 {
   Cas9: {
     rseq: "NGG", // recognition sequence
     fcut: 0, // cut index on FWD strand, relative to start of rseq
-    rcut: 1 // cut index on REV strand, relative to start of rseq
+    rcut: 1, // cut index on REV strand, relative to start of rseq
+    highlightColor: "#D7E5F0" // highlight recognition site with color
   }
 }
 ```
@@ -345,6 +344,17 @@ By default, the circular viewer rotates when scrolling with a mouse over the vie
 This is a feature specific to [BioBricks](https://parts.igem.org/Plasmid_backbones/Assembly) (`options.accession`). The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, and `pSB1T3`.
 
 Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`).
+
+#### `options.highlightedRegions (=null)`
+
+Passing in a list of HighlightRegions (`{ start: number; end: number; color?: string; }`) will highlight the corresponding region of the sequence with a given color if provided or with the default highlight color otherwise.
+
+```js
+highlightedRegions: [
+	{ start: 36, end: 66, color: "magenta" },
+	{ start: 70, end: 80} // default color
+],
+```
 
 ## Demo
 
