@@ -2,22 +2,25 @@ import * as React from "react";
 
 import { calcGC, calcTm } from "../../utils/sequence";
 
+type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "";
+
 export interface SeqVizSelection {
   name: string;
-  type: string;
+  type: SelectionTypeEnum;
   seq: string;
-  gc: string;
+  gc: number;
   tm: number;
   start: number;
   end: number;
   length: number;
-  direction: number;
   clockwise: boolean;
-  color: string;
+  direction?: number;
+  color?: string;
+  ref: null | string;
 }
 
 /** Initial/default selection */
-export const defaultSelection = {
+export const defaultSelection: SeqVizSelection = {
   ref: null,
   name: "",
   seq: "",
@@ -34,6 +37,10 @@ export const defaultSelection = {
 export const SelectionContext = React.createContext(defaultSelection);
 SelectionContext.displayName = "SelectionContext";
 
+export type SeqVizMouseEvent = React.MouseEvent & {
+  target: { id: string };
+};
+
 /**
  * an HOC dedicated to handling range selection for the viewer
  *
@@ -41,14 +48,14 @@ SelectionContext.displayName = "SelectionContext";
  * the higher of the two HOCs
  *
  */
-const withSelectionHandler = WrappedComp =>
+const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
   class extends React.Component {
     static displayName = `SelectionHandler`;
 
     /** Only state is the selection range */
     state = { ...defaultSelection };
 
-    previousBase = null; // previous base cursor is over, used in circular drag select
+    previousBase: null | number = null; // previous base cursor is over, used in circular drag select
 
     forward = null; // directionality of drag (true if clockwise), used in circular drag select
 
@@ -83,7 +90,7 @@ const withSelectionHandler = WrappedComp =>
     /**
      * Called at start of drag to make sure checkers are reset to default state
      */
-    resetCircleDragVars = start => {
+    resetCircleDragVars = (start: null | number) => {
       this.previousBase = start;
       this.forward = null;
       this.fullSelectionLength = 0;
@@ -93,18 +100,15 @@ const withSelectionHandler = WrappedComp =>
     /**
      * a ref callback for mapping the id of child to its SelectRange
      * it stores the id of all elements
-     
-     
-     */
-    inputRef = (ref, selectRange) => {
+     **/
+    inputRef = (ref: unknown, selectRange: object) => {
       this.idToRange.set(ref, { ref, ...selectRange });
     };
 
     /**
      * remove the id of the passed element from the list of tracked refs
-     
      */
-    removeMountedBlock = ref => {
+    removeMountedBlock = (ref: unknown) => {
       this.idToRange.delete(ref);
     };
 
@@ -115,9 +119,8 @@ const withSelectionHandler = WrappedComp =>
      * update its SeqBlock's range (or any others affected) with the newly
      * active range
      *
-     
      */
-    mouseEvent = e => {
+    mouseEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
       const { Circular, Linear } = this.props;
 
@@ -149,7 +152,6 @@ const withSelectionHandler = WrappedComp =>
             // @ts-expect-error ts-migrate(2339) FIXME: Property 'setCentralIndex' does not exist on type ... Remove this comment to see the full error message
             this.props.setCentralIndex("linear", start);
           }
-
           // Annotation or find selection range
           const clockwise = direction ? direction === 1 : true;
           const selectionStart = clockwise ? start : end;
@@ -208,7 +210,7 @@ const withSelectionHandler = WrappedComp =>
     /**
      * Handle a sequence selection on a linear viewer
      */
-    linearSeqEvent = (e, knownRange) => {
+    linearSeqEvent = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
       const { selection } = this.props;
 
@@ -238,12 +240,12 @@ const withSelectionHandler = WrappedComp =>
     /**
      * Handle a sequence selection event on the circular viewer
      */
-    circularSeqEvent = e => {
+    circularSeqEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-      const { seq, selection } = this.props;
-      let { start, end, clockwise, currRef } = selection;
+      const { seq, selection, start, currRef } = this.props;
+      let { end, clockwise } = selection;
 
-      let currBase = this.calculateBaseCircular(e);
+      const currBase = this.calculateBaseCircular(e);
       let ref = currRef;
       const seqLength = seq.length;
 
@@ -282,7 +284,6 @@ const withSelectionHandler = WrappedComp =>
           this.fullSelectionLength -= lengthChange;
         }
 
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'null'.
         this.previousBase = currBase; // done comparing with previous base, update previous base
         if (this.fullSelectionLength < seqLength * 0.01 && !this.shiftSelection) {
           clockwise = this.forward; // near selection start so selection direction is up for grabs
@@ -347,17 +348,14 @@ const withSelectionHandler = WrappedComp =>
      * in a linear sequence viewer, given the bounding box of a component, the basepairs
      * by SeqBlock and the position of the mouse event, find the current base
      *
-     
-     
-     
      */
-    calculateBaseLinear = (e, knownRange) => {
+    calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       const { size, bpsPerBlock } = this.props;
 
       const adjustedWidth = size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
       const block = e.currentTarget.getBoundingClientRect();
-      const distFromLeft = e.clientX - block.left;
+      const distFromLeft: number = e.clientX - block.left;
       const percFromLeft = distFromLeft / adjustedWidth;
       const bpsFromLeft = Math.round(percFromLeft * bpsPerBlock);
 
@@ -370,10 +368,8 @@ const withSelectionHandler = WrappedComp =>
      * in a circular plasmid viewer, given the center of the viewer, and position of the
      * mouse event, find the currently hovered or clicked basepair
      *
-     
-     
      */
-    calculateBaseCircular = e => {
+    calculateBaseCircular = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
       const { center, centralIndex, seq, yDiff } = this.props;
 
@@ -409,21 +405,21 @@ const withSelectionHandler = WrappedComp =>
      * Update the selection in state. Only update the specified
      * properties of the selection that should be updated.
      */
-    setSelection = newSelection => {
+    setSelection = (newSelection: SeqVizSelection) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'setSelection' does not exist on type 'Re... Remove this comment to see the full error message
       const { setSelection } = this.props;
-
       if (
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.start === this.props.selection.start &&
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.end === this.props.selection.end &&
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        newSelection.ref === this.props.selection.ref
+        newSelection.ref === this.props.selection.ref &&
+        // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
+        ["SEQ", "AMINOACID", ""].includes(newSelection.type)
       ) {
         return;
       }
-
       const { clockwise, start, end, ref, type, element, name }: any = {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         ...this.props.selection,
@@ -455,7 +451,7 @@ const withSelectionHandler = WrappedComp =>
     /**
      * Return the string subsequence from the range' start to end
      */
-    getSelectedSequence = (start, end, clock) => {
+    getSelectedSequence = (start: number, end: number, clock: number) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       const { seq } = this.props;
       if (end < start && !clock) {
@@ -476,7 +472,7 @@ const withSelectionHandler = WrappedComp =>
     /**
      * Check what the length of the selection is in circle drag select
      */
-    calcSelectionLength = (start, base, clock) => {
+    calcSelectionLength = (start: number, base: number, clock: boolean | null) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       const { seq } = this.props;
       if (base < start && !clock) {
@@ -506,4 +502,4 @@ const withSelectionHandler = WrappedComp =>
     }
   };
 
-export default WrappedComp => withSelectionHandler(WrappedComp);
+export default (WrappedComp: React.ComponentType<any>) => withSelectionHandler(WrappedComp);

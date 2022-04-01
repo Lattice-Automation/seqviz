@@ -101,7 +101,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     };
 
     return (
-      <g id={`la-vz-circular-cutsite-${id}`} key={id} transform={getRotation(start)}>
+      <g id={`la-vz-circular-cutsite-${id}`} key={`cutSite: ${id}`} transform={getRotation(start)}>
         {<path d={cutLinePath} {...lineStyle} />}
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
@@ -123,7 +123,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     if (c.highlightColor) {
       return (
         <CircularFindArc
-          key={c.id}
+          key={`findArc: ${c.id}`}
           radius={this.props.radius}
           lineHeight={this.props.lineHeight}
           seqLength={this.props.seqLength}
@@ -149,11 +149,11 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
       <g className="la-vz-circular-cutsites">
         {cutSites.map(c => {
           return (
-            <>
+            <React.Fragment key={JSON.stringify(c)}>
               {this.recogHighlightArc(c)}
 
               {this.displayCutSite(c)}
-            </>
+            </React.Fragment>
           );
         })}
       </g>
