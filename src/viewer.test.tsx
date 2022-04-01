@@ -2,10 +2,11 @@ import { mount } from "enzyme";
 import * as fs from "fs";
 import * as path from "path";
 import * as React from "react";
-import filesToParts from "./io/filesToParts";
+
 import Linear from "./SeqViz/Linear/Linear";
 import SeqBlock from "./SeqViz/Linear/SeqBlock/SeqBlock";
 import SeqViewer from "./SeqViz/SeqViewer";
+import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
 
 const defaultProps = {

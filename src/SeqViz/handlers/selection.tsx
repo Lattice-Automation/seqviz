@@ -1,9 +1,12 @@
 import * as React from "react";
+
 import { calcGC, calcTm } from "../../utils/sequence";
+
+type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "";
 
 export interface SeqVizSelection {
   name: string;
-  type: string;
+  type: SelectionTypeEnum;
   seq: string;
   gc: number;
   tm: number;
@@ -17,7 +20,7 @@ export interface SeqVizSelection {
 }
 
 /** Initial/default selection */
-export const defaultSelection = {
+export const defaultSelection: SeqVizSelection = {
   ref: null,
   name: "",
   seq: "",
@@ -348,9 +351,9 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * in a linear sequence viewer, given the bounding box of a component, the basepairs
      * by SeqBlock and the position of the mouse event, find the current base
      *
-     
-     
-     
+       
+       
+       
      */
     calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -420,7 +423,12 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
         newSelection.end === this.props.selection.end &&
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.ref === this.props.selection.ref &&
-        newSelection.type !== "ANNOTATION" // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
+        // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
+        newSelection.type !== "ANNOTATION" &&
+        newSelection.type !== "PRIMER" &&
+        newSelection.type !== "FIND" &&
+        newSelection.type !== "ENZYME" &&
+        newSelection.type !== "TRANSLATION"
       ) {
         return;
       }
