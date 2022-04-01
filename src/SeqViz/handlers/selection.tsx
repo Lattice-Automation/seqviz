@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { calcGC, calcTm } from "../../utils/sequence";
 
-type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "";
+type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "";
 
 export interface SeqVizSelection {
   name: string;
@@ -38,9 +38,6 @@ export const SelectionContext = React.createContext(defaultSelection);
 SelectionContext.displayName = "SelectionContext";
 
 export type SeqVizMouseEvent = React.MouseEvent & {
-  type: string;
-  clientX: number;
-  clientY: number;
   target: { id: string };
 };
 
@@ -351,9 +348,6 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * in a linear sequence viewer, given the bounding box of a component, the basepairs
      * by SeqBlock and the position of the mouse event, find the current base
      *
-       
-       
-       
      */
     calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -374,8 +368,6 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * in a circular plasmid viewer, given the center of the viewer, and position of the
      * mouse event, find the currently hovered or clicked basepair
      *
-       
-       
      */
     calculateBaseCircular = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
@@ -424,11 +416,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         newSelection.ref === this.props.selection.ref &&
         // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
-        newSelection.type !== "ANNOTATION" &&
-        newSelection.type !== "PRIMER" &&
-        newSelection.type !== "FIND" &&
-        newSelection.type !== "ENZYME" &&
-        newSelection.type !== "TRANSLATION"
+        ["SEQ", "AMINOACID", ""].includes(newSelection.type)
       ) {
         return;
       }
