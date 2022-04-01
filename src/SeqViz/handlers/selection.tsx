@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { calcGC, calcTm } from "../../utils/sequence";
 
 export interface SeqVizSelection {
@@ -35,24 +34,12 @@ export const defaultSelection = {
 export const SelectionContext = React.createContext(defaultSelection);
 SelectionContext.displayName = "SelectionContext";
 
-export interface SeqVizMouseEventType {
+export type SeqVizMouseEvent = React.MouseEvent & {
   type: string;
   clientX: number;
   clientY: number;
-  currentTarget: {
-    id: string;
-    getBoundingClientRect: () => {
-      left: number;
-      top: number;
-      bottom: number;
-      right: number;
-    };
-  };
-  target: {
-    id: string;
-  };
-  shiftKey: unknown;
-}
+  target: { id: string };
+};
 
 /**
  * an HOC dedicated to handling range selection for the viewer
@@ -133,7 +120,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * active range
      *
      */
-    mouseEvent = (e: SeqVizMouseEventType) => {
+    mouseEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
       const { Circular, Linear } = this.props;
 
@@ -223,7 +210,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     /**
      * Handle a sequence selection on a linear viewer
      */
-    linearSeqEvent = (e: SeqVizMouseEventType, knownRange: { start: number; end: number }) => {
+    linearSeqEvent = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
       const { selection } = this.props;
 
@@ -253,7 +240,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     /**
      * Handle a sequence selection event on the circular viewer
      */
-    circularSeqEvent = (e: SeqVizMouseEventType) => {
+    circularSeqEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       const { seq, selection, start, currRef } = this.props;
       let { end, clockwise } = selection;
@@ -365,7 +352,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      
      
      */
-    calculateBaseLinear = (e: SeqVizMouseEventType, knownRange: { start: number; end: number }) => {
+    calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       const { size, bpsPerBlock } = this.props;
 
@@ -387,7 +374,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
        
        
      */
-    calculateBaseCircular = (e: SeqVizMouseEventType) => {
+    calculateBaseCircular = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'center' does not exist on type 'Readonly... Remove this comment to see the full error message
       const { center, centralIndex, seq, yDiff } = this.props;
 
