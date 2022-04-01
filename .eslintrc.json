@@ -18,7 +18,7 @@
     "no-prototype-builtins": "warn",
     "prefer-const": "warn",
     "prefer-rest-params": "warn",
-    "react/prop-types": "warn",
+    "react/prop-types": "off", 	// too many prop types warnings in handlers/selection.tsx. Should revist
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/padding-line-between-statements": [

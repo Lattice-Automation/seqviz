@@ -80,7 +80,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: string; name: string; seq: string; a... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={fileContents} />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     // check that the part state matches the state of the Genbank file
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -98,7 +103,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     // check that the part state matches the state of the Genbank file
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
@@ -121,7 +131,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
@@ -143,7 +158,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
@@ -163,7 +183,12 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ file: File; name: string; seq: string; ann... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
@@ -180,52 +205,16 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2322) FIXME: Type '{ seq: string; viewer: "linear"; name: strin... Remove this comment to see the full error message
     const wrapper = mount(<SeqViz {...defaultProps} seq={seq} viewer="linear" />);
-    await wrapper.instance().componentDidMount();
+    const componentDidMount = wrapper.instance().componentDidMount;
+    if (componentDidMount) {
+      await componentDidMount();
+    } else {
+      throw new Error("componentDidMount not defined");
+    }
 
     expect(wrapper.find(SeqViewer)).toHaveLength(1);
     expect(wrapper.find(Linear)).toHaveLength(1);
     expect(wrapper.find(SeqBlock).length).toBeGreaterThan(3);
     expect(wrapper.find(SeqBlock).first().text()).toContain(seq.substring(0, 30));
   });
-
-  // it("re-renders the viewer with a changed File object", async () => {
-  //   const fileName1 = path.join(
-  //     __dirname,
-  //     "io",
-  //     "examples",
-  //     "snapgene",
-  //     "pBbB8c-GFP.dna"
-  //   );
-  //   const fileName2 = path.join(
-  //     __dirname,
-  //     "io",
-  //     "examples",
-  //     "genbank",
-  //     "NC_011521.gb"
-  //   );
-  //   const fileContents1 = fs.readFileSync(fileName1);
-  //   const file1 = new File([fileContents1], fileName1);
-  //   const fileContents2 = fs.readFileSync(fileName2);
-  //   const file2 = new File([fileContents2], fileName2);
-
-  //   const parts1 = await filesToParts([file1], { fileName: fileName1 });
-  //   const part1 = parts1[0];
-  //   const parts2 = await filesToParts([file2], { fileName: fileName2 });
-  //   const part2 = parts2[0];
-
-  //   const wrapper = mount(<SeqViz {...defaultProps} file={file1} />);
-  //   await wrapper.instance().componentDidMount();
-
-  //   expect(wrapper.state().part).toMatchObject({
-  //     seq: part1.seq,
-  //     compSeq: part1.compSeq
-  //   });
-
-  //   // change the file prop
-  //   await wrapper.setProps({ file: file2 });
-  //   expect(wrapper.state().part).toMatchObject({
-  //     seq: part2.seq,
-  //     compSeq: part2.compSeq
-  //   });
-  // });
 });
