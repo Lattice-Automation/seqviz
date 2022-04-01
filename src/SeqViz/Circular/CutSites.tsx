@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Coor, ICutSite, InputRefFuncType } from "../common";
 import { CircularFindArc } from "./CircularFind";
 
@@ -123,7 +122,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     if (c.highlightColor) {
       return (
         <CircularFindArc
-          key={JSON.stringify(c)}
+          key={c.id + c.recogStrand}
           radius={this.props.radius}
           lineHeight={this.props.lineHeight}
           seqLength={this.props.seqLength}
