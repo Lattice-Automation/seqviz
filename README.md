@@ -87,7 +87,8 @@ export default () => (
   <SeqViz
     name="J23100"
     seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
-    annotations={[{ name: "promoter", start: 0, end: 34, direction: 1, color: "blue" }]}
+    nnotations={[{ id: 'any', type: "insert", name: "promoter", start: 0, end: 34, direction: 1, color: "blue" }]} 
+    showAnnotations={false}
   />
 );
 ```
