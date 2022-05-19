@@ -73,9 +73,8 @@ export default function LinearFind(props: FindProps) {
     <>
       {highlightedRegions.map(({ start, end, color }) => {
         return (
-          <>
+          <React.Fragment key={`highlight ${start} ${end} direction: 1`}>
             <LinearFindBlock
-              key={`highlight ${start} ${end}`}
               inputRef={inputRef}
               findXAndWidth={findXAndWidth}
               firstBase={start}
@@ -90,7 +89,6 @@ export default function LinearFind(props: FindProps) {
               fillStyle={color || "rgba(0, 251, 7, 0.5)"}
             />
             <LinearFindBlock
-              key={`highlight ${start} ${end}`}
               inputRef={inputRef}
               findXAndWidth={findXAndWidth}
               firstBase={start}
@@ -104,7 +102,7 @@ export default function LinearFind(props: FindProps) {
               compYDiff={compYDiff}
               fillStyle={color || "rgba(0, 251, 7, 0.5)"}
             />
-          </>
+          </React.Fragment>
         );
       })}
     </>

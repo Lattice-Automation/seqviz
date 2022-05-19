@@ -18,7 +18,7 @@ export const App = () => {
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     translations: [],
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT",
+    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT".repeat(4),
     enzymesCustom: {
       topStrand: {
         rseq: "CCTTGG", // recognition sequence
@@ -47,7 +47,7 @@ export const App = () => {
     zoom: { linear: 50, circular: 0 },
     colors: ["#8CDEBD"],
     onSelection: (selection: SeqVizSelection) => {
-      console.log("SELECTION", selection);
+      console.error("HERE");
       seqvizProps.bpColors[selection.start] = "green";
     },
     onSearch: (results: SearchResult[]) => {

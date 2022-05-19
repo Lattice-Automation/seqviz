@@ -78,6 +78,11 @@ export class Edges extends React.PureComponent<EdgesProps> {
       return null;
     }
 
+    /* handling case where cursor is rendered on each line */
+    if (!startEdge && !lastEdge) {
+      return null;
+    }
+
     // inlining style in the SVG for speed sake
     const rect = {
       y: "-10",
