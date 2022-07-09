@@ -1,14 +1,11 @@
-import { Annotation } from "../part";
-import { Primer } from "./common";
+import { Element } from "../part";
 
 // utility funcs for stackElements
-const last = arr => arr[arr.length - 1];
-const first = arr => arr[0];
+const last = <T extends Element>(arr: T[]): T => arr[arr.length - 1];
+const first = <T extends Element>(arr: T[]): T => arr[0];
 
 /**
- * stackElements
- *
- * take an array of elements (a one deep array) and create an array of
+ * Take an array of elements (a one deep array) and create an array of
  * array of annotations, where non-overlapping annotations can be in the same
  * row. Example:
  *
@@ -19,21 +16,9 @@ const first = arr => arr[0];
  * output (array of array):
  * 		[ ---Ann--- ---Ann3---]
  * 		[		---Ann2---    ]
- *
  */
-export const stackElements = (elements: Annotation[] | Primer[], seqL: number) => {
+export const stackElements = <T extends Element>(elements: T[], seqL: number): T[][] => {
   const sortedElements = [...elements];
-  sortedElements.sort((a, b) => {
-    // prioritize insert annotations for tiebreakers so that the insert annotation appears
-    // above the annotations spanning the whole insert
-    if (a.type === "insert" && a.start === b.start) {
-      return -1;
-    }
-    if (b.type === "insert" && a.start === b.start) {
-      return 1;
-    }
-    return a.start - b.start;
-  });
 
   return sortedElements.reduce((acc, a) => {
     const insertIndex = acc.findIndex(elems => {
@@ -54,7 +39,7 @@ export const stackElements = (elements: Annotation[] | Primer[], seqL: number) =
       return last(elems).end < a.start && a.end < first(elems).start;
     });
 
-    const newAcc: Primer[][] | Annotation[][] = [...acc];
+    const newAcc: T[][] = [...acc];
 
     if (insertIndex > -1) {
       // insert in the row where it's the new highest
@@ -76,9 +61,8 @@ export const stackElements = (elements: Annotation[] | Primer[], seqL: number) =
  *
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
- *
  */
-export const createMultiRows = (elements, rowLength, rowCount) => {
+export const createMultiRows = <T extends Element>(elements: T[][], rowLength: number, rowCount: number): T[][][] => {
   const newArr = new Array(rowCount);
 
   // initialize the nested rows in each block
@@ -155,12 +139,15 @@ export const createMultiRows = (elements, rowLength, rowCount) => {
 };
 
 /**
- * search thru the map w/ the given interval finding all relevant
- * annotations/ORFs/etc by finding the appropriate start and end range
- * using Math.floor
- *
+ * Search thru the map w/ the given interval finding all relevant elements by finding the appropriate start and end
+ * range using Math.floor
  */
-export const createSingleRows = (elements, rowLength, rowCount, duplicateIdsAllowed = true) => {
+export const createSingleRows = <T extends Element>(
+  elements: any[],
+  rowLength: number,
+  rowCount: number,
+  duplicateIdsAllowed = true
+): T[][] => {
   const newArr = new Array(rowCount);
 
   // initialize the nested rows in each block
