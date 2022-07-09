@@ -223,7 +223,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of forward primers (above sequence)
     const forwardPrimerYDiff = 0;
-    const forwardPrimerHeight = false && forwardPrimerRows.length ? elementHeight * 3 * forwardPrimerRows.length : 0;
+    const forwardPrimerHeight =
+      showPrimers && forwardPrimerRows.length ? elementHeight * 3 * forwardPrimerRows.length : 0;
 
     // height and yDiff of cut sites
     const cutSiteYDiff = zoomed && cutSiteRows.length ? forwardPrimerYDiff + forwardPrimerHeight : forwardPrimerHeight; // spacing for cutSite names
@@ -239,7 +240,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of reverse primers (below sequence)
     const reversePrimerYDiff = compYDiff + compHeight;
-    const reversePrimerHeight = false && reversePrimerRows.length ? elementHeight * 3 * reversePrimerRows.length : 0;
+    const reversePrimerHeight =
+      showPrimers && reversePrimerRows.length ? elementHeight * 3 * reversePrimerRows.length : 0;
 
     // height and yDiff of translations
     let translationYDiff = reversePrimerYDiff + reversePrimerHeight;
