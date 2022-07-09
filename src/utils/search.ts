@@ -1,9 +1,8 @@
+import { Element } from "../part";
 import { dnaComplement } from "./parser";
 import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
 
-export interface SearchResult {
-  start: number;
-  end: number;
+export interface SearchResult extends Element {
   direction: -1 | 1;
   index?: number;
   length?: number;

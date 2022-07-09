@@ -2,7 +2,7 @@ import * as React from "react";
 
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { Annotation, Element, Part } from "../part";
+import { Annotation, AnnotationProp, Element, Part } from "../part";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
@@ -20,7 +20,7 @@ export interface SeqVizProps {
   name?: string;
   seq?: string;
   compSeq?: string;
-  annotations?: Annotation[];
+  annotations?: AnnotationProp[];
   file?: string | File;
   backbone?: string;
   colors?: string[];
@@ -202,10 +202,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   };
 
   /**
-   * Modify the annotations to add unique ids, fix directionality and
-   * modulo the start and end of each to match SeqViz's API
+   * Fix annotations to add unique ids, fix directionality, and modulo the start and end of each.
    */
-  parseAnnotations = (annotations: Annotation[] | null = null, seq = "") =>
+  parseAnnotations = (annotations: AnnotationProp[] | null = null, seq = ""): Annotation[] =>
     (annotations || []).map((a, i) => ({
       ...annotationFactory(i, this.props.colors),
       ...a,
