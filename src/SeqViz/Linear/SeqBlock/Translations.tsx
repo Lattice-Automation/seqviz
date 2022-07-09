@@ -51,8 +51,8 @@ export default class TranslationRows extends React.PureComponent<TranslationRows
           <TranslationRow
             key={`${t.id}-${firstBase}`}
             translation={t}
-            y={yDiff + elementHeight * i - 10}
-            height={elementHeight}
+            y={yDiff + elementHeight * i}
+            height={elementHeight * 0.9}
             id={t.id}
             inputRef={inputRef}
             seqBlockRef={seqBlockRef}

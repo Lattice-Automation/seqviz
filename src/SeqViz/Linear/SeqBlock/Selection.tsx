@@ -84,7 +84,7 @@ class Edges extends React.PureComponent<EdgesProps> {
 
     // inlining style in the SVG for speed sake
     const rect = {
-      y: "-10",
+      y: "-5",
       style: {
         fill: "black",
         width: start === end ? 1 : 2,
@@ -149,13 +149,7 @@ class Block extends React.PureComponent<BlockProps> {
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
           const { x: secBlockX, width: secBlockWidth } = findXAndWidth(start, lastBase);
           secondBlock = (
-            <rect
-              x={secBlockX}
-              y={-10}
-              height={selectHeight + 5}
-              width={secBlockWidth}
-              className="la-vz-linear-sel-block"
-            />
+            <rect x={secBlockX} y={0} height={selectHeight} width={secBlockWidth} className="la-vz-linear-sel-block" />
           );
           ({ x, width } = findXAndWidth(firstBase, end));
         } else {
@@ -181,8 +175,8 @@ class Block extends React.PureComponent<BlockProps> {
           secondBlock = (
             <rect
               x={secBlockX}
-              y={-10}
-              height={selectHeight + 5}
+              y={-5}
+              height={selectHeight}
               width={secBlockWidth}
               className="la-vz-linear-sel-block"
               shapeRendering="auto"
@@ -210,8 +204,8 @@ class Block extends React.PureComponent<BlockProps> {
         <rect
           className="la-vz-linear-sel-block"
           x={x || undefined}
-          y={-10}
-          height={selectHeight + 5}
+          y={-5}
+          height={selectHeight}
           width={width || undefined}
           shapeRendering="auto"
         />

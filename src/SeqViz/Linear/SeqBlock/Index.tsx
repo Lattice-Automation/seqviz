@@ -7,7 +7,6 @@ interface IndexProps {
   seq: string;
   zoom: { linear: number };
   firstBase: number;
-  lineHeight: number;
   size: ISize;
   findXAndWidth: FindXAndWidthType;
   transform: string | undefined;
@@ -23,7 +22,7 @@ export default class Index extends React.PureComponent<IndexProps> {
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    const { seq, zoom, firstBase, lineHeight, size, findXAndWidth } = this.props;
+    const { seq, zoom, firstBase, size, findXAndWidth } = this.props;
     const seqLength = seq.length;
 
     // the tallie distance on the x-axis is zoom dependent:
@@ -72,11 +71,6 @@ export default class Index extends React.PureComponent<IndexProps> {
       // shapeRendering: "crispEdges"
     };
 
-    const textStyle = {
-      fontSize: 11,
-      textRendering: "optimizeLegibility",
-    };
-
     return tickIndexes.map(p => {
       const { x: leftDist } = findXAndWidth(p - 0.5, p - 0.5); // for midpoint
       const tickFromLeft = leftDist;
@@ -92,13 +86,19 @@ export default class Index extends React.PureComponent<IndexProps> {
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
       textFromLeft = Math.min(size.width - textWidth / 2, textFromLeft); // keep off right edge
 
-      const transTick = `translate(${tickFromLeft}, -${0.3 * lineHeight - 1})`;
-      const transText = `translate(${textFromLeft}, ${-0.3 * lineHeight + 22})`;
+      const transTick = `translate(${tickFromLeft}, 1)`;
+      const transText = `translate(${textFromLeft}, 10)`;
       return (
         <React.Fragment key={p}>
           <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />
-          {/* @ts-expect-error ts-migrate(2322) FIXME: Type '{ fontSize: number; textRendering: string; }... Remove this comment to see the full error message */}
-          <text style={textStyle} transform={transText}>
+          <text
+            style={{
+              fontSize: 11,
+              textRendering: "optimizeLegibility",
+              dominantBaseline: "hanging",
+            }}
+            transform={transText}
+          >
             {p}
           </text>
         </React.Fragment>
@@ -107,23 +107,23 @@ export default class Index extends React.PureComponent<IndexProps> {
   };
 
   render() {
-    const { lineHeight, transform, showIndex, findXAndWidth, firstBase, lastBase } = this.props;
+    const { transform, showIndex, findXAndWidth, firstBase, lastBase } = this.props;
+
+    if (!showIndex) return null;
 
     // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const { width } = findXAndWidth(firstBase, lastBase);
 
-    if (!showIndex) return null;
-
-    const axisStyle = {
-      width: width,
-      height: 1,
-      shapeRendering: "crispEdges",
-    };
-
     return (
       <g className="la-vz-linear-index" transform={transform}>
-        {/* @ts-expect-error ts-migrate(2322) FIXME: Type '{ width: any; height: number; shapeRendering... Remove this comment to see the full error message */}
-        <rect style={axisStyle} fill="#B0B9C2" transform={`translate(0, -${0.3 * lineHeight})`} />
+        <rect
+          style={{
+            width: width,
+            height: 1,
+            shapeRendering: "crispEdges",
+          }}
+          fill="#B0B9C2"
+        />
         {this.genTicks()}
       </g>
     );

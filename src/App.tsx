@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { SeqVizProps } from "./SeqViz/SeqViz";
-import { SeqVizSelection } from "./SeqViz/handlers/selection";
 import { SearchResult } from "./utils/search";
 import { SeqViz } from "./viewer";
 
@@ -16,8 +15,8 @@ export const App = () => {
   const [searchResults, setSearchResults] = React.useState<SearchResult[]>([]);
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
-    translations: [],
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGG",
+    translations: [{ start: 0, end: 10, direction: 1 }],
+    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(4),
     enzymesCustom: {
       topStrand: {
         rseq: "CCTTGG", // recognition sequence
@@ -32,7 +31,7 @@ export const App = () => {
         highlightColor: "#D7E5F0" /* pass in color */,
       },
     },
-    enzymes: ["topStrand", "bottomStrand"],
+    enzymes: [],
     rotateOnScroll: true,
     viewer: "both" as const,
     annotations: [
@@ -44,11 +43,8 @@ export const App = () => {
     showPrimers: true,
     showComplement: true,
     showIndex: true,
-    zoom: { linear: 50, circular: 0 },
+    zoom: { linear: 90, circular: 0 },
     colors: ["#8CDEBD"],
-    onSelection: (selection: SeqVizSelection) => {
-      seqvizProps.bpColors[selection.start] = "green";
-    },
     onSearch: (results: SearchResult[]) => {
       setSearchResults(results);
     },
