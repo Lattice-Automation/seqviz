@@ -41,77 +41,58 @@ export default function LinearFind(props: FindProps) {
     highlightedRegions,
   } = props;
 
-  let searchFindBlocks = <></>;
-  if (searchRows.length) {
-    searchFindBlocks = (
-      <>
-        {searchRows.map(s => {
-          return (
-            <LinearFindBlock
-              key={JSON.stringify(s)}
-              inputRef={inputRef}
-              findXAndWidth={findXAndWidth}
-              firstBase={firstBase}
-              lastBase={lastBase}
-              start={s.start}
-              end={s.end}
-              indexYDiff={indexYDiff}
-              direction={s.direction}
-              seqBlockRef={seqBlockRef}
-              listenerOnly={listenerOnly}
-              compYDiff={compYDiff}
-              fillStyle="rgba(255, 251, 7, 0.5)"
-            />
-          );
-        })}
-      </>
-    );
-  }
-
-  const highlightFindBlocks = (
-    /* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */
-    <>
-      {highlightedRegions.map(({ start, end, color }) => {
-        return (
-          <React.Fragment key={`highlight ${start} ${end} direction: 1`}>
-            <LinearFindBlock
-              inputRef={inputRef}
-              findXAndWidth={findXAndWidth}
-              firstBase={start}
-              lastBase={end}
-              start={start}
-              end={end}
-              indexYDiff={indexYDiff}
-              direction={1}
-              seqBlockRef={seqBlockRef}
-              listenerOnly={listenerOnly}
-              compYDiff={compYDiff}
-              fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-            />
-            <LinearFindBlock
-              inputRef={inputRef}
-              findXAndWidth={findXAndWidth}
-              firstBase={start}
-              lastBase={end}
-              start={start}
-              end={end}
-              indexYDiff={indexYDiff}
-              direction={-1}
-              seqBlockRef={seqBlockRef}
-              listenerOnly={listenerOnly}
-              compYDiff={compYDiff}
-              fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-            />
-          </React.Fragment>
-        );
-      })}
-    </>
-  );
-
   return (
     <>
-      {highlightFindBlocks}
-      {searchFindBlocks}
+      {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
+      {highlightedRegions.map(({ start, end, color }) => (
+        <React.Fragment key={`highlight-${start}-${end}-1`}>
+          <LinearFindBlock
+            inputRef={inputRef}
+            findXAndWidth={findXAndWidth}
+            firstBase={start}
+            lastBase={end}
+            start={start}
+            end={end}
+            indexYDiff={indexYDiff}
+            direction={1}
+            seqBlockRef={seqBlockRef}
+            listenerOnly={listenerOnly}
+            compYDiff={compYDiff}
+            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+          />
+          <LinearFindBlock
+            inputRef={inputRef}
+            findXAndWidth={findXAndWidth}
+            firstBase={start}
+            lastBase={end}
+            start={start}
+            end={end}
+            indexYDiff={indexYDiff}
+            direction={-1}
+            seqBlockRef={seqBlockRef}
+            listenerOnly={listenerOnly}
+            compYDiff={compYDiff}
+            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+          />
+        </React.Fragment>
+      ))}
+      {searchRows.map(s => (
+        <LinearFindBlock
+          key={JSON.stringify(s)}
+          inputRef={inputRef}
+          findXAndWidth={findXAndWidth}
+          firstBase={firstBase}
+          lastBase={lastBase}
+          start={s.start}
+          end={s.end}
+          indexYDiff={indexYDiff}
+          direction={s.direction}
+          seqBlockRef={seqBlockRef}
+          listenerOnly={listenerOnly}
+          compYDiff={compYDiff}
+          fillStyle="rgba(255, 251, 7, 0.5)"
+        />
+      ))}
     </>
   );
 }
@@ -170,10 +151,10 @@ export const LinearFindBlock = (props: {
     element: seqBlockRef,
   };
 
-  let y = indexYDiff - findBlockProps.height / 2; // template row result
+  let y = indexYDiff - 2; // template row result
   if (direction < 0) {
-    y = compYDiff - findBlockProps.height / 2; // complement row result
+    y = compYDiff - 2; // complement row result
   }
 
-  return <rect key={id} id={id} x={x - 1} y={y} width={width} ref={inputRef(id, selReference)} {...findBlockProps} />;
+  return <rect key={id} id={id} x={x} y={y} width={width} ref={inputRef(id, selReference)} {...findBlockProps} />;
 };

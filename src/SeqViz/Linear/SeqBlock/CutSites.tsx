@@ -38,6 +38,14 @@ const hoverCutSite = (className: string, on = false) => {
   }
 };
 
+const recogContiguous = (start: number, end: number, first: number, last: number) => {
+  if ((start < first && end < first) || (start > last && end > last)) return true;
+  if (end >= start) {
+    return end < last && start > first;
+  }
+  return start < last && end > first;
+};
+
 /**
  * CutSites
  *
@@ -48,6 +56,7 @@ const CutSites = (props: {
   zoom: { linear: number };
   cutSiteRows: ICutSite[];
   findXAndWidth: FindXAndWidthType;
+  elementHeight: number;
   lineHeight: number;
   firstBase: number;
   lastBase: number;
@@ -63,15 +72,8 @@ const CutSites = (props: {
     lastBase,
     inputRef,
     yDiff,
+    elementHeight,
   } = props;
-
-  const recogContiguous = (start: number, end: number, first: number, last: number) => {
-    if ((start < first && end < first) || (start > last && end > last)) return true;
-    if (end >= start) {
-      return end < last && start > first;
-    }
-    return start < last && end > first;
-  };
 
   const sitesWithX: ConnectorType[] = cutSiteRows.map((c: ICutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
@@ -103,12 +105,6 @@ const CutSites = (props: {
 
   if (!sitesWithX.length) return null;
 
-  const textProps = {
-    dominantBaseline: "inherit",
-    textAnchor: "start",
-    y: yDiff,
-  };
-
   const getConnectorXAndWidth = (c: ConnectorType, sequenceCutSite: boolean, complementCutSite: boolean) => {
     if (sequenceCutSite && complementCutSite) {
       return {
@@ -133,6 +129,9 @@ const CutSites = (props: {
     return { x: 0, width: 0 };
   };
 
+  // the cut site starts lower and on the sequence
+  const lineYDiff = lineHeight - 3;
+
   return (
     <g className="la-vz-cut-sites">
       {sitesWithX.map((c: ConnectorType) => {
@@ -144,12 +143,30 @@ const CutSites = (props: {
 
         const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
         return (
-          <React.Fragment key={`la-vz-${c.id}-first-base`}>
-            {sequenceCutSite ? (
-              <text
-                {...textProps}
+          <React.Fragment key={`la-vz-cut-site-${c.id}`}>
+            {/* custom highlight color block */}
+            {c.highlightColor ? (
+              <HighlightBlock
                 id={c.id}
-                className={`la-vz-cut-site-text ${c.id}-name`}
+                start={c.start}
+                end={c.end}
+                yDiff={elementHeight}
+                findXAndWidth={findXAndWidth}
+                connector={c}
+                color={c.highlightColor}
+                direction={c.recogStrand}
+                lineHeight={lineHeight}
+              />
+            ) : null}
+
+            {/* label above seq */}
+            {sequenceCutSite && (
+              <text
+                dominantBaseline="hanging"
+                textAnchor="start"
+                y={yDiff}
+                id={c.id}
+                className="la-vz-cut-site-text"
                 x={c.cutX}
                 style={{
                   cursor: "pointer",
@@ -163,13 +180,25 @@ const CutSites = (props: {
               >
                 {c.name}
               </text>
+            )}
+
+            {/* lines showing the cut site */}
+            {sequenceCutSite && <rect width="1px" height={lineHeight} x={c.cutX - 1} y={lineYDiff} />}
+            {showIndex && zoom > 10 ? (
+              <rect width={connectorWidth + 1} height="1px" x={connectorX - 1} y={lineHeight + lineYDiff - 1} />
             ) : null}
+            {complementCutSite && zoom > 10 ? (
+              <rect width="1px" height={lineHeight} x={c.hangX - 1} y={lineHeight + lineYDiff} />
+            ) : null}
+
+            {/* dashed outline showing the recog site */}
             {zoom > 10 && (
               <rect
+                className={c.id} // for highlighting
                 width={c.highlightWidth}
                 height={lineHeight * 2}
-                x={c.highlightX}
-                y={yDiff + 6}
+                x={c.cutX - 1}
+                y={lineYDiff}
                 strokeDasharray="4,5"
                 style={{
                   stroke: "rgb(150,150,150)",
@@ -177,7 +206,6 @@ const CutSites = (props: {
                   fill: "rgb(255, 165, 0, 0.3)",
                   fillOpacity: 0,
                 }}
-                className={c.id}
                 ref={inputRef(c.id, {
                   id: c.id,
                   start: c.start,
@@ -186,29 +214,6 @@ const CutSites = (props: {
                   element: null,
                 })}
               />
-            )}
-            {sequenceCutSite ? (
-              <rect width="1px" height={lineHeight} x={c.cutX - 0.5} y={lineHeight / 4 + yDiff} />
-            ) : null}
-            {showIndex && zoom > 10 ? (
-              <rect width={connectorWidth} height="1px" x={connectorX - 0.5} y={lineHeight * 1.25 + yDiff} />
-            ) : null}
-            {complementCutSite && zoom > 10 ? (
-              <rect width="1px" height={lineHeight + 1.5} x={c.hangX - 0.5} y={lineHeight * 1.25 + yDiff} />
-            ) : null}
-            {c.highlightColor && (
-              <>
-                <HighlightBlock
-                  connector={c}
-                  id={c.id}
-                  start={c.start}
-                  end={c.end}
-                  indexYDiff={yDiff + lineHeight - 5}
-                  findXAndWidth={findXAndWidth}
-                  color={c.highlightColor}
-                  direction={c.recogStrand}
-                />
-              </>
             )}
           </React.Fragment>
         );
@@ -219,36 +224,36 @@ const CutSites = (props: {
 
 const HighlightBlock = (props: {
   connector: ConnectorType;
-  id: string | undefined;
+  id: string;
   start: number;
   end: number;
   findXAndWidth: FindXAndWidthType;
-  indexYDiff: number;
+  yDiff: number;
   color: string;
   direction: 1 | -1;
+  lineHeight: number;
 }) => {
-  const HEIGHT = 18;
-  const { id, start, end, findXAndWidth, indexYDiff, color, direction } = props;
+  const { id, start, end, findXAndWidth, yDiff, color, direction, lineHeight } = props;
   const { x, width } = findXAndWidth(start, end);
   /* direction = 1 -> top strand */
-  let y = indexYDiff - HEIGHT / 2; // template row result
-  /* direction = 1 -> bottom strand */
+  let y = yDiff - lineHeight / 2 - 1; // template row result
+  /* direction = -1 -> bottom strand */
   if (direction == -1) {
-    y = indexYDiff + HEIGHT / 2;
+    y = yDiff + lineHeight / 2 - 1;
   }
 
   return (
     <rect
       key={id}
       id={id}
-      x={x - 1}
+      className="la-vz-cut-site-highlight"
+      x={x}
       y={y}
       width={width}
       style={{
-        height: 18,
         stroke: "rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
-        strokeWidth: 1,
+        strokeWidth: 0,
         fill: color,
       }}
     />
