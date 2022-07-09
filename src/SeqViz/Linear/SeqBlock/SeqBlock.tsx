@@ -12,7 +12,10 @@ import Primers from "./Primers";
 import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
 
-export type FindXAndWidthType = (n1?: number, n2?: number) => {
+export type FindXAndWidthType = (
+  n1?: number,
+  n2?: number
+) => {
   x: number;
   width: number;
 };

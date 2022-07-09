@@ -5,6 +5,7 @@
  * seq and compSeq (done because some input base pairs might not make
  * sense and should be filtered out)
  */
+import { DirectionProp, Part } from "../part";
 
 import { DirectionProp, Part } from "../part";
 

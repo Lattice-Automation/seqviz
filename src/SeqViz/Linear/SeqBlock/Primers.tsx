@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Primer } from "../../../part";
 
+import { Primer } from "../../../part";
 import randomid from "../../../utils/randomid";
 import { reverse } from "../../../utils/sequence";
 import { InputRefFuncType } from "../../common";
