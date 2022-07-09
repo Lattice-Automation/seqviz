@@ -1,3 +1,4 @@
+import { Annotation } from "../part";
 import { chooseRandomColor, colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 import randomid from "./randomid";
@@ -218,14 +219,14 @@ export const calcLength = (start: number, end: number, seqLength: number): numbe
  */
 export const reverse = (seq: string): string => seq.split("").reverse().join("");
 
-export const annotationFactory = (i = -1, colors?: string[]) => ({
+export const annotationFactory = (i = -1, colors?: string[]): Annotation => ({
   id: randomid(),
   color: i >= 0 ? colorByIndex(i, colors) : chooseRandomColor(colors),
   name: "",
   type: "",
   start: 0,
   end: 0,
-  direction: "NONE",
+  direction: 0,
 });
 
 export const primerFactory = () => ({

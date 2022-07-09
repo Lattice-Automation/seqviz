@@ -5,6 +5,7 @@
  * seq and compSeq (done because some input base pairs might not make
  * sense and should be filtered out)
  */
+import { DirectionProp, Part } from "../part";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const DNAComplement = {
@@ -101,9 +102,8 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * directionaltiy("NONSENSE") => 0
  * ```
  *
- 
  */
-export const directionality = direction => {
+export const directionality = (direction: DirectionProp | undefined | string): -1 | 0 | 1 => {
   if (!direction) {
     return 0;
   }
@@ -116,12 +116,11 @@ export const directionality = direction => {
   return 0;
 };
 
-export const partFactory = () => ({
+export const partFactory = (): Part => ({
   name: "",
   date: new Date().getTime(),
   seq: "",
   compSeq: "",
-  tags: [],
   annotations: [],
   primers: [],
   cutSites: [],
