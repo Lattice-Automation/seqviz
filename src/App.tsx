@@ -17,7 +17,7 @@ export const App = () => {
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     translations: [],
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGGTTGAGGTTGAGGTTGAGGGAACTGCTGTTCCTGT".repeat(4),
+    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTAATATTGTTCATGTGGGCAGGCTCAGG",
     enzymesCustom: {
       topStrand: {
         rseq: "CCTTGG", // recognition sequence

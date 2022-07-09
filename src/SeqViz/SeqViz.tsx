@@ -257,12 +257,12 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     name = name || part.name || "";
     annotations = annotations && annotations.length ? annotations : part.annotations || [];
+    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions || [];
 
     if (!localSeq.length) {
       return <div className="la-vz-seqviz" />;
     }
 
-    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions ? this.props.highlightedRegions : [];
     const linear = (viewer === "linear" || viewer.includes("both")) && (
       <SeqViewer
         key="linear"
@@ -276,7 +276,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         name={name}
         seq={localSeq}
         cutSites={cutSites}
-        circular={false}
+        Circular={false}
         highlightedRegions={highlightedRegions}
       />
     );
@@ -293,7 +293,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         name={name}
         seq={localSeq}
         cutSites={cutSites}
-        circular={true}
+        Circular={true}
         highlightedRegions={highlightedRegions}
       />
     );
