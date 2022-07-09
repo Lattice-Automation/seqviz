@@ -1,4 +1,3 @@
-import { range } from "lodash";
 import { useState } from "react";
 
 import { SeqVizProps } from "./SeqViz/SeqViz";
@@ -47,7 +46,6 @@ export const App = () => {
     zoom: { linear: 50, circular: 0 },
     colors: ["#8CDEBD"],
     onSelection: (selection: SeqVizSelection) => {
-      console.error("HERE");
       seqvizProps.bpColors[selection.start] = "green";
     },
     onSearch: (results: SearchResult[]) => {
@@ -82,7 +80,9 @@ export const App = () => {
         highlightSearch={() => {
           const newBPColors = { ...seqvizProps.bpColors };
           searchResults.forEach((res: SearchResult) => {
-            range(res.start, res.end).map((bpIdx: number) => (newBPColors[bpIdx] = "orange"));
+            for (let i = res.start; i < res.end; i++) {
+              newBPColors[i] = "orange";
+            }
           });
           setSeqVizProps({ ...seqvizProps, bpColors: newBPColors });
         }}
