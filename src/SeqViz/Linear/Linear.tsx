@@ -184,21 +184,23 @@ class Linear extends React.Component<LinearProps> {
       // store a unique id from the block
       ids[i] = seqs[i] + String(i);
 
-      const spacingHeight = 0.25 * elementHeight;
       // find the line height for the seq block based on how many rows need to be shown
-      let blockHeight = lineHeight * 1.1; // this is for padding between the rows
+      let blockHeight = lineHeight * 1.1; // this is for padding between the SeqBlocks
       if (zoomed) {
-        blockHeight += lineHeight; // is zoomed in enough + 2px margin
+        blockHeight += lineHeight; // is zoomed in enough
         blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
       }
       if (showIndex) {
-        blockHeight += 25; // another for index row (height is fixed right now)
+        blockHeight += lineHeight; // another for index row
+      }
+      if (translationRows[i].length) {
+        blockHeight += translationRows[i].length * elementHeight;
       }
       if (annotationRows[i].length) {
-        blockHeight += annotationRows[i].length * elementHeight + spacingHeight;
+        blockHeight += annotationRows[i].length * elementHeight;
       }
       if (cutSiteRows[i].length) {
-        blockHeight += lineHeight + spacingHeight; // space for cutsite name
+        blockHeight += lineHeight; // space for cutsite name
       }
       if (showPrimers && forwardPrimerRows[i].length) {
         blockHeight += elementHeight * 3 * forwardPrimerRows[i].length;
@@ -206,9 +208,7 @@ class Linear extends React.Component<LinearProps> {
       if (showPrimers && reversePrimerRows[i].length) {
         blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
       }
-      if (translationRows[i].length) {
-        blockHeight += translationRows[i].length * elementHeight + spacingHeight;
-      }
+
       blockHeights[i] = blockHeight;
     }
 

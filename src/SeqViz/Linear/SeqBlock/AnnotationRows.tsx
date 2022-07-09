@@ -42,7 +42,7 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
 
           return (
             <AnnotationRow
-              key={`ann-row-${y}${firstBase}${lastBase}`}
+              key={`ann-row-${y}-${firstBase}-${lastBase}`}
               annotations={a}
               y={y}
               height={elementHeight}
@@ -283,7 +283,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     const nameFits = nameLength < width - 15;
 
     return (
-      <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, 0)`}>
+      <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, ${0.1 * this.props.height})`}>
         {annotationPath}
         {nameFits ? (
           <text
@@ -307,7 +307,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
 
     const height = this.props.height * 0.8;
     const size = { width, height };
-    const gTranslate = `translate(0, ${y - 5})`;
+    const gTranslate = `translate(0, ${y})`;
 
     return (
       <g {...size} transform={gTranslate} className="la-vz-linear-annotation-row">
