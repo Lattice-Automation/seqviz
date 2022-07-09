@@ -13,8 +13,8 @@ import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
 
 export type FindXAndWidthType = (
-  n1?: number,
-  n2?: number
+  n1?: number | null,
+  n2?: number | null
 ) => {
   x: number;
   width: number;
@@ -83,6 +83,13 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   
    */
   findXAndWidth: FindXAndWidthType = (firstIndex = 0, lastIndex = 0) => {
+    if (firstIndex === null) {
+      firstIndex = 0;
+    }
+    if (lastIndex === null) {
+      lastIndex = 0;
+    }
+
     const {
       fullSeq: { length: seqLength },
       firstBase,

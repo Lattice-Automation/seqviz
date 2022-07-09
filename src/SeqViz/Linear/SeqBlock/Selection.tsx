@@ -19,7 +19,7 @@ interface EdgesProps {
  * Only shown at the selection's start and end, not intermediate blocks
  * (if there are intermediate blocks)
  */
-export class Edges extends React.PureComponent<EdgesProps> {
+class Edges extends React.PureComponent<EdgesProps> {
   static contextType = SelectionContext;
 
   id = randomid();
@@ -28,8 +28,8 @@ export class Edges extends React.PureComponent<EdgesProps> {
     const { findXAndWidth, selectEdgeHeight, firstBase, lastBase, fullSeq } = this.props;
     const { ref, start, end, clockwise } = this.context;
 
-    let startEdge: number | undefined;
-    let lastEdge: number | undefined;
+    let startEdge: number | null = null;
+    let lastEdge: number | null = null;
 
     if (clockwise) {
       // clockwise, ie forward drag event
@@ -44,18 +44,17 @@ export class Edges extends React.PureComponent<EdgesProps> {
 
     // for cmd-a case
     if (ref === "ALL" || (start === 0 && end === fullSeq.length - 1)) {
-      startEdge = undefined;
-      lastEdge = undefined;
+      startEdge = null;
+      lastEdge = null;
     }
 
-    // the end of the selection edges are not in this SeqBlock and
-    // do not need to be rendered
+    // the end of the selection edges are not in this SeqBlock and do not need to be rendered
     if (startEdge === null && lastEdge === null) {
       return null;
     }
     if (startEdge === null) {
       startEdge = lastEdge;
-      lastEdge = undefined;
+      lastEdge = null;
     }
     let { x, width } = findXAndWidth(startEdge, lastEdge);
 
@@ -91,14 +90,13 @@ export class Edges extends React.PureComponent<EdgesProps> {
         width: start === end ? 1 : 2,
       },
       shapeRendering: "crispEdges",
+      height: selectEdgeHeight,
     };
 
     return (
       <g className="la-vz-linear-sel-edges">
-        {startEdge !== null && <rect {...rect} x={start === end ? x - 1 : x - 2} height={selectEdgeHeight} />}
-        {lastEdge !== null && (
-          <rect {...rect} x={start === end ? secondEdgeX - 1 : secondEdgeX - 2} height={selectEdgeHeight} />
-        )}
+        {startEdge ? <rect {...rect} x={start === end ? x - 1 : x - 2} /> : null}
+        {lastEdge ? <rect {...rect} x={start === end ? secondEdgeX - 1 : secondEdgeX - 2} /> : null}
       </g>
     );
   }
@@ -115,7 +113,7 @@ interface BlockProps {
   onUnmount: (a: string) => void;
 }
 
-export class Block extends React.PureComponent<BlockProps> {
+class Block extends React.PureComponent<BlockProps> {
   static contextType = SelectionContext;
 
   id = randomid();
@@ -125,8 +123,7 @@ export class Block extends React.PureComponent<BlockProps> {
     const { clockwise, ref } = this.context;
     let { start, end } = this.context;
 
-    // there's no need to render a selection block (rect) if just one point
-    // has been selected
+    // there's no need to render a selection block (rect) if just one point has been selected
     if (start === end && ref !== "ALL") return null;
     if (ref === "ALL" || (start === 0 && end === fullSeq.length)) {
       // it's not "ALL" or some element's id
@@ -206,21 +203,21 @@ export class Block extends React.PureComponent<BlockProps> {
     // nothing was set for this selection block
     if (!x && !width) {
       return null;
-    } else {
-      return (
-        <>
-          <rect
-            className="la-vz-linear-sel-block"
-            x={x || undefined}
-            y={-10}
-            height={selectHeight + 5}
-            width={width || undefined}
-            shapeRendering="auto"
-          />
-          {secondBlock}
-        </>
-      );
     }
+
+    return (
+      <>
+        <rect
+          className="la-vz-linear-sel-block"
+          x={x || undefined}
+          y={-10}
+          height={selectHeight + 5}
+          width={width || undefined}
+          shapeRendering="auto"
+        />
+        {secondBlock}
+      </>
+    );
   }
 }
 
