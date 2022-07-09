@@ -1,6 +1,6 @@
 {
   "name": "seqviz",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "private": false,
   "description": "A DNA sequence viewer. Supports custom, GenBank, FASTA, or NCBI accession input",
   "scripts": {
