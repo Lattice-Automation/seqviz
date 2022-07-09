@@ -1,12 +1,3 @@
-/**
- * returns an object with sequence and complement sequence as strings
- *
- * Takes in a sequence "seqInput" and returns an object with fields
- * seq and compSeq (done because some input base pairs might not make
- * sense and should be filtered out)
- */
-import { DirectionProp, Part } from "../part";
-
 import { DirectionProp, Part } from "../part";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
