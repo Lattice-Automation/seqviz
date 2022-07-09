@@ -340,12 +340,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...general} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
-          <Annotations
+          <Index
             {...general}
-            annotations={annotationsInRows}
+            name={name}
             size={size}
-            rowsToSkip={0}
-            inlinedAnnotations={inlinedLabels}
+            yDiff={yDiff}
+            seq={seq}
+            compSeq={compSeq}
+            totalRows={totalRows}
+            showIndex={showIndex}
           />
           <CircularFind
             seqLength={general.seqLength}
@@ -364,15 +367,12 @@ class Circular extends React.Component<CircularProps, CircularState> {
             highlightedRegions={this.props.highlightedRegions}
           />
           <CutSites {...general} selectionRows={4} cutSites={cutSites} />
-          <Index
+          <Annotations
             {...general}
-            name={name}
+            annotations={annotationsInRows}
             size={size}
-            yDiff={yDiff}
-            seq={seq}
-            compSeq={compSeq}
-            totalRows={totalRows}
-            showIndex={showIndex}
+            rowsToSkip={0}
+            inlinedAnnotations={inlinedLabels}
           />
           <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>

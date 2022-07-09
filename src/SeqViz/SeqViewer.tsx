@@ -21,7 +21,7 @@ interface SeqViewerProps {
   showComplement: boolean;
   seq: string;
   cutSites: ICutSite[];
-  circular: boolean;
+  Circular: boolean;
   highlightedRegions: HighlightRegion[];
   name?: string;
   compSeq?: string;
@@ -97,6 +97,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       size,
       zoom: { linear: zoom },
       Linear: true,
+      Circular: false,
     };
   };
 
@@ -143,6 +144,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
       radius,
       yDiff,
       Linear: false,
+      Circular: true,
       size,
       zoom: { circular: zoom },
       bpsOnArc,
@@ -151,11 +153,11 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    const { circular: circular, seq, cutSites } = this.props;
+    const { Circular: circularViewer, seq, cutSites } = this.props;
 
     return (
       <div className="la-vz-viewer-container">
-        {circular ? (
+        {circularViewer ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
               <Circular

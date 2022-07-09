@@ -242,8 +242,8 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      */
     circularSeqEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-      const { seq, selection, start, currRef } = this.props;
-      let { end, clockwise } = selection;
+      const { seq, selection, currRef } = this.props;
+      let { start, end, clockwise } = selection;
 
       const currBase = this.calculateBaseCircular(e);
       let ref = currRef;
