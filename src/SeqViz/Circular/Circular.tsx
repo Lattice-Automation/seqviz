@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Annotation } from "../../part";
+import { Annotation, Primer } from "../../part";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
 import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
-import { Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../common";
+import { Coor, ICutSite, ISize, InputRefFuncType } from "../common";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
@@ -45,8 +45,8 @@ interface CircularProps {
 interface CircularState {
   seqLength: number;
   lineHeight: number;
-  annotationsInRows: Annotation[];
-  primersInRows: Primer[];
+  annotationsInRows: Annotation[][];
+  primersInRows: Primer[][];
   inlinedLabels: ILabel[];
   outerLabels: ILabel[];
 }
@@ -59,8 +59,8 @@ class Circular extends React.Component<CircularProps, CircularState> {
   ): {
     seqLength: number;
     lineHeight: number;
-    annotationsInRows: unknown[];
-    primersInRows: unknown[];
+    annotationsInRows: Annotation[][];
+    primersInRows: Primer[][];
     inlinedLabels: ILabel[];
     outerLabels: ILabel[];
   } => {

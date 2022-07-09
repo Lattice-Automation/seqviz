@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Annotation } from "../../../part";
+import { Annotation, Primer } from "../../../part";
 import { SearchResult } from "../../../utils/search";
-import { ICutSite, ISize, InputRefFuncType, Primer } from "../../common";
+import { ICutSite, ISize, InputRefFuncType } from "../../common";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
@@ -13,7 +13,7 @@ import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
 
 export type FindXAndWidthType = (
-  n1: number | undefined,
+  n1?: number,
   n2?: number
 ) => {
   x: number;
@@ -333,6 +333,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             yDiff={annYDiff}
             seqBlockRef={this}
             fullSeq={fullSeq}
+            width={size.width}
           />
           {showPrimers && (
             <Primers

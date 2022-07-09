@@ -16,6 +16,7 @@ interface AnnotationRowsProps {
   fullSeq: string;
   elementHeight: number;
   bpsPerBlock: number;
+  width: number;
 }
 
 export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
@@ -31,6 +32,7 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
       fullSeq,
       elementHeight,
       bpsPerBlock,
+      width,
     } = this.props;
 
     return (
@@ -51,6 +53,7 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
               lastBase={lastBase}
               fullSeq={fullSeq}
               bpsPerBlock={bpsPerBlock}
+              width={width}
             />
           );
         })}
@@ -73,6 +76,7 @@ interface AnnotationRowProps {
   lastBase: number;
   seqBlockRef: unknown;
   height: number;
+  width: number;
   y: number;
 }
 
@@ -238,10 +242,12 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     }
 
     let strokeColor = "";
-    if (a.type === "insert") {
+    if (a.type === "insert" && color) {
       strokeColor = color;
-    } else {
+    } else if (color) {
       strokeColor = COLOR_BORDER_MAP[color] || darkerColor(color);
+    } else {
+      strokeColor = "gray";
     }
 
     const annotationPath = (
@@ -278,7 +284,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
 
     return (
       <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, 0)`}>
-        {annotationPath},
+        {annotationPath}
         {nameFits ? (
           <text
             fontSize={11}
@@ -297,7 +303,6 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
   };
 
   render() {
-    // @ts-ignore
     const { annotations, width, y } = this.props;
 
     const height = this.props.height * 0.8;

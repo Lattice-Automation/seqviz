@@ -24,7 +24,7 @@ interface AnnotationsProps {
   }) => string;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   inputRef: InputRefFuncType;
-  annotations: Annotation[];
+  annotations: Annotation[][];
   size: ISize;
   rowsToSkip: number;
   inlinedAnnotations: string[];
@@ -34,11 +34,8 @@ interface AnnotationsProps {
  * Used to build up all the path elements. Does not include a display
  * of the annotation name or a line connecting name to annotation
  *
- * one central consideration here is that annotations might overlap with one another.
- * to avoid having those overalp visually, annotations are first moved into rows,
- * which are non-overlapping arrays or annotation arrays, which are then
- * used to create the array of array of annotation paths
- *
+ * Annotations might overlap with one another. To avoid that, annotations are first moved into rows -- non-overlapping
+ * arrays or annotation arrays -- and then used to create the array of array of annotation paths.
  */
 export default class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
@@ -57,59 +54,39 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
     const rowShiftHeight = lineHeight * rowsToSkip;
     const radiusAdjust = lineHeight * 3;
     let currBRadius = radius - radiusAdjust - rowShiftHeight;
-
     let currTRadius = currBRadius - lineHeight; // top radius
-
-    // shared style object for inlining
-    const annStyle = {
-      strokeWidth: 0.5,
-      shapeRendering: "geometricPrecision",
-      cursor: "pointer",
-      fillOpacity: 0.7,
-      strokeLinejoin: "round",
-    };
-    // this is strictly here to create an invisible path that the
-    // annotation name can follow
-    const transparentPath = {
-      stroke: "transparent",
-      fill: "transparent",
-    };
-    const labelStyle = {
-      cursor: "pointer",
-    };
 
     return (
       <CentralIndexContext.Consumer>
         {({ circular }) => (
           <g className="la-vz-circular-annotations">
-            {annotations.map((ann: Annotation, i) => {
+            {annotations.reduce((acc: any[], anns: Annotation[], i) => {
               if (i) {
                 currBRadius -= lineHeight + 3;
                 currTRadius -= lineHeight + 3;
               } // increment the annRow radii if on every loop after first
 
-              return (
-                <SingleAnnotation
-                  seqLength={this.props.seqLength}
-                  getRotation={this.props.getRotation}
-                  generateArc={this.props.generateArc}
-                  lineHeight={lineHeight}
-                  inputRef={this.props.inputRef}
-                  inlinedAnnotations={this.props.inlinedAnnotations}
-                  key={`la-vz-${ann.id}-annotation-circular-row`}
-                  id={`la-vz-${ann.id}-annotation-circular-row`}
-                  annotation={ann[0]}
-                  currBRadius={currBRadius}
-                  currTRadius={currTRadius}
-                  transparentPath={transparentPath}
-                  labelStyle={labelStyle}
-                  annStyle={annStyle}
-                  hoverAnnotation={this.hoverAnnotation}
-                  calcBorderColor={darkerColor}
-                  centralIndex={circular}
-                />
+              return acc.concat(
+                anns.map(ann => (
+                  <SingleAnnotation
+                    seqLength={this.props.seqLength}
+                    getRotation={this.props.getRotation}
+                    generateArc={this.props.generateArc}
+                    lineHeight={lineHeight}
+                    inputRef={this.props.inputRef}
+                    inlinedAnnotations={this.props.inlinedAnnotations}
+                    key={`la-vz-${ann.id}-annotation-circular-row`}
+                    id={`la-vz-${ann.id}-annotation-circular-row`}
+                    annotation={ann}
+                    currBRadius={currBRadius}
+                    currTRadius={currTRadius}
+                    hoverAnnotation={this.hoverAnnotation}
+                    calcBorderColor={darkerColor}
+                    centralIndex={circular}
+                  />
+                ))
               );
-            })}
+            }, [])}
           </g>
         )}
       </CentralIndexContext.Consumer>
@@ -135,13 +112,10 @@ interface SingleAnnotationProps {
   currTRadius: number;
   centralIndex: number;
   lineHeight: number;
-  transparentPath: { stroke: string; fill: string };
   inputRef: InputRefFuncType;
   calcBorderColor: (c: any) => any;
   hoverAnnotation: (className: string, opacity: number) => void;
-  annStyle: any;
   inlinedAnnotations: string[];
-  labelStyle: { cursor: string };
   id: string;
 }
 
@@ -159,13 +133,10 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
     currTRadius,
     centralIndex,
     lineHeight,
-    transparentPath,
     inputRef,
     calcBorderColor,
     hoverAnnotation,
-    annStyle,
     inlinedAnnotations,
-    labelStyle,
   } = props;
 
   // if it crosses the zero index, correct for actual length
@@ -207,7 +178,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
   const circAnnID = `la-vz-${a.id}-circular`;
   return (
     <g id={`la-vz-${a.id}-annotation-circular`} transform={rotation}>
-      <path id={circAnnID} d={namePath} {...transparentPath} />
+      <path id={circAnnID} d={namePath} stroke="transparent" fill="transparent" />
       <path
         d={path}
         id={a.id}
@@ -220,13 +191,19 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           type: "ANNOTATION",
           direction: a.direction,
         })}
-        fill={a.color}
-        stroke={COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color)}
+        style={{
+          shapeRendering: "geometricPrecision",
+          cursor: "pointer",
+          fillOpacity: 0.7,
+          strokeLinejoin: "round",
+          fill: a.color,
+          stroke: a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray",
+          strokeWidth: a.type === "insert" ? 2.4 : 0.5,
+        }}
         onMouseOver={() => hoverAnnotation(a.id, 1.0)}
         onMouseOut={() => hoverAnnotation(a.id, 0.7)}
         onFocus={() => {}}
         onBlur={() => {}}
-        {...annStyle}
       />
       {inlinedAnnotations.includes(a.id) && (
         <text
@@ -243,7 +220,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
             startOffset={bottomHalf ? "25%" : "75%"}
             dominantBaseline="middle"
             xlinkHref={`#${circAnnID}`}
-            {...labelStyle}
+            cursor="pointer"
           >
             {a.name}
           </textPath>

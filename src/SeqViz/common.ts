@@ -7,16 +7,6 @@ export interface ISize {
   width: number;
 }
 
-export interface Primer {
-  type: "enzyme" | "insert";
-  start: number;
-  end: number;
-  id: string;
-  name: string;
-  color: string;
-  direction: 1 | -1;
-}
-
 export interface ICutSite {
   fcut: number;
   rcut: number;
