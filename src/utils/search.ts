@@ -1,4 +1,4 @@
-import { Element } from "../part";
+import { Element } from "../elements";
 import { dnaComplement } from "./parser";
 import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
 

@@ -1,4 +1,4 @@
-import { DirectionProp, Part } from "../part";
+import { DirectionProp, Part } from "../elements";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const DNAComplement = {

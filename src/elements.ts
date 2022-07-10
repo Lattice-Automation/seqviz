@@ -1,3 +1,4 @@
+/* Element is a single element with a range in the viewer */
 export interface Element {
   direction: -1 | 0 | 1;
   end: number;
@@ -44,4 +45,37 @@ export interface Part {
   primers: Primer[];
   seq: string;
   source: { file: string; name: string };
+}
+
+export type InputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
+
+export interface ISize {
+  height: number;
+  width: number;
+}
+
+export interface ICutSite {
+  end: number;
+  fcut: number;
+  highlightColor?: string;
+  id: string;
+  name: string;
+  rcut: number;
+  recogEnd: number;
+  recogStart: number;
+  recogStrand: 1 | -1;
+  start: number;
+  type?: "enzyme" | "annotation";
+}
+
+export interface Coor {
+  x: number;
+  y: number;
+}
+
+export interface IEnzyme {
+  fcut: number;
+  highlightColor?: string;
+  rcut: number;
+  rseq: string;
 }

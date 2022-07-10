@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { Annotation } from "../../part";
+import { Annotation, Coor, ISize, InputRefFuncType } from "../../elements";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
-import { Coor, ISize, InputRefFuncType } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface AnnotationsProps {

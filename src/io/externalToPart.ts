@@ -1,6 +1,6 @@
 import * as fetch from "node-fetch";
 
-import { Part } from "../part";
+import { Part } from "../elements";
 import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
 

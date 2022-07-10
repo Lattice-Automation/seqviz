@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { Annotation } from "../../../part";
+import { Annotation, InputRefFuncType } from "../../../elements";
 import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
-import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface AnnotationRowsProps {

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, ICutSite, InputRefFuncType } from "../common";
+import { Coor, ICutSite, InputRefFuncType } from "../../elements";
 import { CircularFindArc } from "./CircularFind";
 
 interface CutSitesProps {

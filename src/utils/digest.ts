@@ -1,4 +1,4 @@
-import { ICutSite, IEnzyme } from "../SeqViz/common";
+import { ICutSite, IEnzyme } from "../elements";
 import enzymes from "./enzymes";
 import isEqual from "./isEqual";
 import { reverseComplement } from "./parser";
@@ -140,10 +140,6 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
  * if the seqToCut or the compSeqToCut are padded with stars, ie they have overhangs, shorten the
  * searchable index range, since those parts of the sequence should not be searchable and re-cut
  *
- 
- 
- 
- 
  */
 const digestPart = (enzymeName, part, circularCheck) => {
   // get the sequence information
