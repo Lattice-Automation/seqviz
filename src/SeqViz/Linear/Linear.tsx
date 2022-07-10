@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../../elements";
+import { Annotation, ICutSite, ISize, InputRefFuncType, Primer } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
@@ -13,36 +13,20 @@ import { HighlightRegion } from "./SeqBlock/LinearFind";
 import SeqBlock from "./SeqBlock/SeqBlock";
 import { Translation } from "./SeqBlock/Translations";
 
-interface LinearProps {
+export interface LinearProps {
   annotations: Annotation[];
-  bpColors: string[];
+  bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
-  center: Coor;
   charWidth: number;
   compSeq: string;
   cutSites: ICutSite[];
   elementHeight: number;
-  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  generateArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
-  getRotation: (index: number) => string;
   highlightedRegions: HighlightRegion[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
-  onUnmount: (a: unknown) => void;
+  onUnmount: (id: string) => void;
   primers: Primer[];
-  radius: number;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
   search: SearchResult[];
   selection: SeqVizSelection;
   seq: string;
@@ -55,30 +39,25 @@ interface LinearProps {
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
+  Circular: boolean;
+  Linear: boolean;
+  name: string;
+  setSelection: (selection: SeqVizSelection) => void;
+  setCentralIndex: (viewer: "linear" | "circular", index: number) => void;
+  centralIndex: number;
 }
 
 /**
  * A linear sequence viewer.
  *
  * Comprised of SeqBlock(s), which are themselves comprised of:
- * 	SeqBlock:
- * 		SeqRow
- * 		IndexRow (axis)
- * 		Annotations
- *    Primers
- *    Finds
- *    Translations
- *    Selections
- *
- * the width, sequence of each seqBlock, annotations,
- * indexRow, is passed in the child component
- *
- * seq: a string of the DNA/RNA to be displayed/manipulated
- * zoom: a number (1-100) for the sizing of the sequence
- * comp: whether or not to show complement
- * compSeq: the complement sequence to the orig sequence
- * annotations: an array of annotations to show above the seq
- * primers: an array of primers to show above and below the seq
+ * 	text (seq)
+ * 	Index (axis)
+ * 	Annotations
+ *  Primers
+ *  Finds
+ *  Translations
+ *  Selections
  */
 class Linear extends React.Component<LinearProps> {
   /**

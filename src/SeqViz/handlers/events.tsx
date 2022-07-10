@@ -2,36 +2,53 @@ import * as React from "react";
 
 import debounce from "../../utils/debounce";
 import CentralIndexContext from "./centralIndex";
+import { SeqVizSelection } from "./selection";
+
+/* WithEventsProps are those the HOC injects into the wrapper component. */
+export interface WithEventsProps {
+  mouseEvent: (e: any) => void;
+}
+
+/* EventHandlerProps are those needed by the WithEventsHandler HOC */
+export interface EventsHandlerProps extends WithEventsProps {
+  size: {
+    height: number;
+    width: number;
+  };
+  Circular: boolean;
+  name: string;
+  Linear: boolean;
+  bpsPerBlock?: number;
+  seq: string;
+  selection: SeqVizSelection;
+  centralIndex?: number;
+  setSelection: (selection: SeqVizSelection) => void;
+  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
+  copyEvent?: (e: React.KeyboardEvent<HTMLElement>) => boolean;
+  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
+  mouseEvent: (e: any) => void;
+  onUnmount: (id: string) => void;
+}
 
 /**
- * an HOC used one level above the Sequence viewer. It handles the routing of all
+ * WithEventsHandler is an HOC that wraps the SeqViewers and handles the routing of all
  * events, including keypresses, mouse clicks, etc.
- *
- * its other main function is to build the context menu at all times, so that
- * the options available in the context menu are all relevant to whatever has been
- * selected
  */
-const withEventRouter = WrappedComp =>
-  class WithEventRouter extends React.PureComponent {
-    static displayName = `EventRouter`;
+export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType<T>) =>
+  class extends React.PureComponent<T & EventsHandlerProps> {
+    static displayName = "EventHandler";
 
     static contextType = CentralIndexContext;
 
-    clickedOnce = null;
-
-    clickedTwice = null;
-
-    /** set the event router reference on this class */
-    setEventRouter = eventRouter => {
-      this.eventRouter = eventRouter;
-    };
+    clickedOnce: EventTarget | null = null;
+    clickedTwice: EventTarget | null = null;
 
     /**
      * action handler for a keyboard keypresses.
      * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
      *
      */
-    handleKeyPress = e => {
+    handleKeyPress = (e: React.KeyboardEvent<HTMLElement>) => {
       const keyType = this.keypressMap(e);
       if (!keyType) {
         return; // not recognized key
@@ -44,11 +61,10 @@ const withEventRouter = WrappedComp =>
      *
      * ["All", "Copy", "Up", "Right", "Down", "Left"]
      */
-    keypressMap = e => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'copyEvent' does not exist on type 'Reado... Remove this comment to see the full error message
+    keypressMap = (e: React.KeyboardEvent<HTMLElement>) => {
       const { copyEvent } = this.props;
 
-      if (copyEvent(e)) {
+      if (copyEvent && copyEvent(e)) {
         return "Copy";
       }
 
@@ -71,10 +87,8 @@ const withEventRouter = WrappedComp =>
      * 	Up, Right, Down, Left: some directional movement of the cursor
      */
     handleSeqInteraction = async type => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
       const { Linear, seq } = this.props;
       const seqLength = seq.length;
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       const { bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1) } = this.props;
 
       switch (type) {
@@ -94,7 +108,6 @@ const withEventRouter = WrappedComp =>
         case "ShiftArrowRight":
         case "ShiftArrowDown":
         case "ShiftArrowLeft": {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
           const { selection, setSelection } = this.props;
           const { end, start } = selection;
           if (Linear) {
@@ -164,9 +177,7 @@ const withEventRouter = WrappedComp =>
      */
     handleCopy = () => {
       const {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
         selection: { end, ref, start },
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         seq,
       } = this.props;
 
@@ -194,11 +205,8 @@ const withEventRouter = WrappedComp =>
      */
     selectAllHotkey = () => {
       const {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'setSelection' does not exist on type 'Re... Remove this comment to see the full error message
         selection,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection: { start },
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         setSelection,
       } = this.props;
 
@@ -231,8 +239,7 @@ const withEventRouter = WrappedComp =>
      *
      * if it is a regular click, pass on as normal
      */
-    handleMouseEvent = e => {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message
+    handleMouseEvent = (e: React.MouseEvent) => {
       const { mouseEvent } = this.props;
 
       if (e.type === "mouseup") {
@@ -288,13 +295,13 @@ const withEventRouter = WrappedComp =>
     eventRouter;
 
     render() {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message
       const { centralIndex, mouseEvent, selection, setCentralIndex, setSelection, ...rest } = this.props;
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
       const { Circular, name } = this.props;
 
       const type = Circular ? "circular" : "linear";
       const id = `la-vz-${type}-${name.replace(/\s/g, "")}-event-router`;
+
+      const newProps = { ...rest, mouseEvent: this.handleMouseEvent };
 
       return (
         <div
@@ -307,13 +314,11 @@ const withEventRouter = WrappedComp =>
           tabIndex={-1}
           onKeyDown={this.handleKeyPress}
           onMouseMove={mouseEvent}
-          // Need tabIndex for onKeyDown to work
           onWheel={this.handleScrollEvent}
         >
-          <WrappedComp {...rest} mouseEvent={this.handleMouseEvent} />
+          {/* @ts-expect-error */}
+          <WrappedComponent {...(newProps as WithEventsProps)} />
         </div>
       );
     }
   };
-
-export default WrappedComp => withEventRouter(WrappedComp);

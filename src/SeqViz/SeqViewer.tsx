@@ -24,6 +24,7 @@ interface SeqViewerProps {
   showComplement: boolean;
   size: { height: number; width: number };
   zoom: { circular: number; linear: number };
+  bpColors?: { [key: number | string]: string };
 }
 
 /**
@@ -152,7 +153,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    const { Circular: circularViewer, cutSites, seq } = this.props;
+    const { Circular: circularViewer, seq, cutSites } = this.props;
 
     return (
       <div className="la-vz-viewer-container">
@@ -163,22 +164,16 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
-                // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
                 centralIndex={circular}
+                // @ts-expect-error
                 cutSites={cutSites}
                 setCentralIndex={setCentralIndex}
               />
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          <Linear
-            {...this.props}
-            {...this.state}
-            {...this.linearProps()}
-            // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
-            cutSites={cutSites}
-            seqLength={seq.length}
-          />
+          // @ts-expect-error
+          <Linear {...this.props} {...this.state} {...this.linearProps()} seqLength={seq.length} />
         )}
       </div>
     );

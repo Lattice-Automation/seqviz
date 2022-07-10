@@ -1,10 +1,11 @@
-import withEventHandler from "./events";
-import withSelectionHandler from "./selection";
+import * as React from "react";
+
+import withEventHandler, { WithEventsProps } from "./events";
+import withSelectionHandler, { WithSelectionProps } from "./selection";
 
 /**
- * sequentially apply all the Sequence Viewer HOCs
- *
- * this is just merging the HOCs into a single function to simplfy appling
- * them to the Circular and Linear viewers (one function rather than 4 (or however many there are))
+ * Wrap the viewer with higher order components for sequence selection and event handling.
  */
-export default WrappedViewer => withSelectionHandler(withEventHandler(WrappedViewer));
+export default <T extends WithEventsProps & WithSelectionProps>(
+  WrappedViewer: React.ComponentType<Omit<T, keyof WithEventsProps & WithSelectionProps>>
+) => withSelectionHandler(withEventHandler(WrappedViewer));

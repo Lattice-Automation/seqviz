@@ -8,6 +8,7 @@ import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
+import { SeqVizSelection } from "../handlers/selection";
 import Annotations from "./Annotations";
 import { CircularFind } from "./CircularFind";
 import Selection from "./CircularSelection";
@@ -19,7 +20,7 @@ import Labels, { ILabel } from "./Labels";
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
-interface CircularProps {
+export interface CircularProps {
   annotations: Annotation[];
   center: { x: number; y: number };
   centralIndex: number;
@@ -27,18 +28,22 @@ interface CircularProps {
   cutSites: ICutSite[];
   highlightedRegions: HighlightRegion[];
   inputRef: InputRefFuncType;
-  mouseEvent: React.MouseEventHandler;
+  mouseEvent: (e: any) => void;
   name: string;
-  onUnmount: () => void;
+  onUnmount: (id: string) => void;
   primers: Primer[];
   radius: number;
   search: SearchResult[];
   seq: string;
-  setCentralIndex: (update: number) => void;
+  setCentralIndex: (type: "linear" | "circular", update: number) => void;
   showIndex: boolean;
   showPrimers: boolean;
   size: ISize;
   yDiff: number;
+  Circular: boolean;
+  Linear: boolean;
+  setSelection: (selection: SeqVizSelection) => void;
+  selection: SeqVizSelection;
 }
 
 interface CircularState {
@@ -167,7 +172,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
    * will be used in many of the child components
    *
    * in general this is for lines and labels
-   *
    */
   findCoor = (index: number, radius: number, rotate?: boolean): Coor => {
     const { center } = this.props;
