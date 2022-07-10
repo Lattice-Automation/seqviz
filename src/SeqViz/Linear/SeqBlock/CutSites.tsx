@@ -60,30 +60,30 @@ const CutSites = (props: {
   zoom: { linear: number };
 }) => {
   const {
-    zoom: { linear: zoom },
     cutSiteRows,
     findXAndWidth,
-    lineHeight,
     firstBase,
-    lastBase,
     inputRef,
+    lastBase,
+    lineHeight,
     yDiff,
+    zoom: { linear: zoom },
   } = props;
 
   // Add x and width to each cut site.
   const sitesWithX: ConnectorType[] = cutSiteRows.map((c: ICutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
-    let { x: highlightX, width: highlightWidth } = findXAndWidth(c.recogStart, c.recogEnd);
+    let { width: highlightWidth, x: highlightX } = findXAndWidth(c.recogStart, c.recogEnd);
 
     if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
       if (c.recogStart > c.recogEnd) {
-        ({ x: highlightX, width: highlightWidth } = findXAndWidth(
+        ({ width: highlightWidth, x: highlightX } = findXAndWidth(
           c.recogEnd < firstBase ? lastBase : Math.min(lastBase, c.recogEnd),
           c.recogStart > lastBase ? firstBase : Math.max(firstBase, c.recogStart)
         ));
       } else if (c.recogEnd > c.recogStart) {
-        ({ x: highlightX, width: highlightWidth } = findXAndWidth(
+        ({ width: highlightWidth, x: highlightX } = findXAndWidth(
           c.recogStart < firstBase ? lastBase : Math.min(lastBase, c.recogStart),
           c.recogEnd > lastBase ? firstBase : Math.max(firstBase, c.recogEnd)
         ));
@@ -140,7 +140,7 @@ const CutSites = (props: {
         const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
         const showIndex = sequenceCutSite || complementCutSite;
 
-        const { x: connectorX, width: connectorWidth } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
+        const { width: connectorWidth, x: connectorX } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
         return (
           <React.Fragment key={`la-vz-cut-site-${c.id}`}>
             {/* custom highlight color block */}
@@ -230,8 +230,8 @@ const HighlightBlock = (props: {
   start: number;
   yDiff: number;
 }) => {
-  const { id, start, end, findXAndWidth, yDiff, color, lineHeight } = props;
-  const { x, width } = findXAndWidth(start, end);
+  const { color, end, findXAndWidth, id, lineHeight, start, yDiff } = props;
+  const { width, x } = findXAndWidth(start, end);
 
   return (
     <rect

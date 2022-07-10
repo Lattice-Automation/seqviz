@@ -90,7 +90,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
    * name by itself or in a grouping
    */
   static groupOverlappingLabels = (props: LabelsProps) => {
-    const { radius, labels, center, seqLength, findCoor, lineHeight, size, yDiff } = props;
+    const { center, findCoor, labels, lineHeight, radius, seqLength, size, yDiff } = props;
 
     // create a radius outside the plasmid map for placing the names
     const textRadiusAdjust = seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
@@ -296,8 +296,8 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
   };
 
   render() {
-    const { labelGroups, hoveredGroup } = this.state;
-    const { size, lineHeight } = this.props;
+    const { hoveredGroup, labelGroups } = this.state;
+    const { lineHeight, size } = this.props;
 
     // find the currently hovered group
     const hovered = labelGroups.find((g: GroupedLabelsWithCoors) => g.labels[0].id === hoveredGroup);

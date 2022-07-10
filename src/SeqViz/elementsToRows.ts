@@ -157,7 +157,7 @@ export const createSingleRows = <T extends Element>(
 
   // assign each annotation to its respective array
   for (let i = 0; i < elements.length; i += 1) {
-    let { start, end } = elements[i];
+    let { end, start } = elements[i];
 
     // special case for enzymes that have cutsites away from recog (BsaI)
     if (elements[i].fcut !== undefined) {

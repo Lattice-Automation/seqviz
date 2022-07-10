@@ -32,9 +32,9 @@ import randomid from "../../utils/randomid";
  * 							 desperate and wind up with some oddly malformed parts
  */
 const dnaComponentToPart = (DnaComponent, options) => {
-  const { strict = false, file } = options;
+  const { file, strict = false } = options;
   // destructure the paramaeters from DnaComponent
-  const { name, displayId, dnaSequence, annotation } = DnaComponent;
+  const { annotation, displayId, dnaSequence, name } = DnaComponent;
 
   // attempt to get the name out of the SBOL
   let parsedName = "Unnamed";
@@ -61,7 +61,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
       seq = DnaSequence[0].nucleotides[0]._;
     }
   }
-  const { seq: parsedSeq, compSeq: parsedCompSeq } = dnaComplement(seq); // seq and compSeq
+  const { compSeq: parsedCompSeq, seq: parsedSeq } = dnaComplement(seq); // seq and compSeq
   if (!parsedSeq) return null;
 
   // attempt to parse the SBOL annotations into our version of annotations
@@ -129,7 +129,7 @@ const sequenceToPart = (Seq, file) => {
   // get the sequence
   const seqOrig = (Seq.elements[0] && Seq.elements[0]._) || "";
 
-  const { seq, compSeq } = dnaComplement(seqOrig);
+  const { compSeq, seq } = dnaComplement(seqOrig);
 
   // guess whether it's circular or not based on the presence of a word like vector.
   // very ad hoc

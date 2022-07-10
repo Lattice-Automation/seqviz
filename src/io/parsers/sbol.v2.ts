@@ -69,7 +69,7 @@ export default async (sbol, fileName, _ = []) =>
             return;
           }
 
-          const { displayId, description, sequence, sequenceAnnotation } = c;
+          const { description, displayId, sequence, sequenceAnnotation } = c;
           const name = first(displayId) || `${fileName}_${i + 1}`;
           const note = first(description) || "";
 
@@ -107,7 +107,7 @@ export default async (sbol, fileName, _ = []) =>
 
           if (partSeq && partSeq.elements) {
             const seqInput = first(partSeq.elements) || "";
-            const { seq, compSeq } = dnaComplement(seqInput);
+            const { compSeq, seq } = dnaComplement(seqInput);
             partList.push({
               ...partFactory(),
 

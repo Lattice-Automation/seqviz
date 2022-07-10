@@ -85,7 +85,7 @@ export default class Index extends React.PureComponent<IndexProps> {
    * return a react element for the basepairs along the surface of the plasmid viewer
    */
   renderBasepairs = () => {
-    const { seq, compSeq, seqLength, lineHeight, radius, findCoor, getRotation } = this.props;
+    const { compSeq, findCoor, getRotation, lineHeight, radius, seq, seqLength } = this.props;
     const { indexInc } = this.state;
     const centralIndex = this.context.circular;
 
@@ -114,19 +114,19 @@ export default class Index extends React.PureComponent<IndexProps> {
 
   render() {
     const {
-      seq,
+      center,
+      findCoor,
+      generateArc,
+      getRotation,
+      lineHeight,
       name,
       radius,
-      center,
-      size,
-      yDiff,
+      seq,
       seqLength,
-      lineHeight,
-      getRotation,
-      generateArc,
-      findCoor,
-      totalRows,
       showIndex,
+      size,
+      totalRows,
+      yDiff,
     } = this.props;
     const { ticks } = this.state;
 

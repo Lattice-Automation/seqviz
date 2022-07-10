@@ -195,7 +195,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
    * Find and save enzymes' cutsite locations
    */
   cut = (part: { seq: string } | null = null) => {
-    const { enzymes, seq, enzymesCustom } = this.props;
+    const { enzymes, enzymesCustom, seq } = this.props;
 
     let cutSites: ICutSite[] = [];
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {

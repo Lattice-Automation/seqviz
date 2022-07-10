@@ -22,7 +22,7 @@ export default class Index extends React.PureComponent<IndexProps> {
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    const { seq, zoom, firstBase, size, findXAndWidth } = this.props;
+    const { findXAndWidth, firstBase, seq, size, zoom } = this.props;
     const seqLength = seq.length;
 
     // the tallie distance on the x-axis is zoom dependent:
@@ -107,7 +107,7 @@ export default class Index extends React.PureComponent<IndexProps> {
   };
 
   render() {
-    const { transform, showIndex, findXAndWidth, firstBase, lastBase } = this.props;
+    const { findXAndWidth, firstBase, lastBase, showIndex, transform } = this.props;
 
     if (!showIndex) return null;
 

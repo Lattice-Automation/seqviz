@@ -107,7 +107,7 @@ export default (file, name) => {
 
   // make a DataView for the ArrayBuffer
   const view = new DataView(AB);
-  const { baseCalls, basePos, qualNums, aTrace, tTrace, gTrace, cTrace } = convertAB1(view); // parse the buffer
+  const { aTrace, baseCalls, basePos, cTrace, gTrace, qualNums, tTrace } = convertAB1(view); // parse the buffer
 
   // there are more trace data points and quality number than guessed basepairs
   // we take the basePos array and get the trace/qual numbers out of the arrays based

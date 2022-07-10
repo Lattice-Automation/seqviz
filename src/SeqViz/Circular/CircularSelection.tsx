@@ -40,8 +40,8 @@ export default class CircularSelection extends React.PureComponent<CircularSelec
   static contextType = SelectionContext;
 
   render() {
-    const { seq, radius, lineHeight, seqLength, getRotation, findCoor, generateArc, totalRows } = this.props;
-    const { ref, start, end, clockwise } = this.context;
+    const { findCoor, generateArc, getRotation, lineHeight, radius, seq, seqLength, totalRows } = this.props;
+    const { clockwise, end, ref, start } = this.context;
 
     // calculate the length of the current selection region
     let selLength = 0;

@@ -27,7 +27,7 @@ describe("Import parts from external repositories", () => {
   // check if name, annotation cound and sequence length are correct
   Object.keys(knownGenbanks).forEach(file => {
     it(`imports ${file}`, async () => {
-      const { name, annotationCount, seqLength } = knownGenbanks[file];
+      const { annotationCount, name, seqLength } = knownGenbanks[file];
 
       let result;
       if (file.startsWith("BBa_")) {

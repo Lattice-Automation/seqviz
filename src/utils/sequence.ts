@@ -282,7 +282,7 @@ export const createLinearTranslations = (translations, dnaSeq) => {
   // elongate the original sequence to account for translations that cross the zero index
   const dnaDoubled = dnaSeq + dnaSeq;
   return translations.map(t => {
-    const { start, direction } = t;
+    const { direction, start } = t;
     let { end } = t;
     if (start > end) end += dnaSeq.length;
 

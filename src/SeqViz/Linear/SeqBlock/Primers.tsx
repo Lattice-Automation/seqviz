@@ -54,11 +54,11 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
       zoomed,
     } = this.props;
     const primerUUID = randomid();
-    const { direction, start = 0, end = 0, sequence, id } = singlePrimer;
+    const { direction, end = 0, id, sequence, start = 0 } = singlePrimer;
 
     const primerLength = end < start ? fullSeq.length - start + end : end - start;
 
-    let { x: origX, width } = findXAndWidth(start, end);
+    let { width, x: origX } = findXAndWidth(start, end);
 
     // does the primer begin or end within this seqBlock with a directionality?
     const endFWD = direction === 1 && end > firstBase && end <= lastBase;
@@ -80,7 +80,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
     const crossZeroPost = crossZero && lastBase < start;
 
     if (crossZero) {
-      ({ x: origX, width } = findXAndWidth(
+      ({ width, x: origX } = findXAndWidth(
         start > lastBase ? firstBase : Math.max(firstBase, start),
         end < firstBase ? lastBase : Math.min(lastBase, end)
       ));
@@ -97,7 +97,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
     } else if (start === end) {
       // the primer circles the entire plasmid and we aren't currently in a SeqBlock
       // where the primer starts or ends
-      ({ x: origX, width } = findXAndWidth(start, end + fullSeq.length));
+      ({ width, x: origX } = findXAndWidth(start, end + fullSeq.length));
     }
 
     // create padding on either side, vertically, of an primer
@@ -132,7 +132,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
     // If there are mismatches, add "." into primer name
     if (mismatches && mismatches.length > 0) {
       mismatches.forEach((mismatch: Mismatch) => {
-        const { start: mismatchStart, end: mismatchEnd } = mismatch;
+        const { end: mismatchEnd, start: mismatchStart } = mismatch;
         const mismatchLength = mismatchEnd - mismatchStart;
         name = forward
           ? name.substring(0, mismatch.start) + " ".repeat(mismatchLength) + name.substring(mismatch.end)
@@ -566,7 +566,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
   };
 
   render() {
-    const { y, primers } = this.props;
+    const { primers, y } = this.props;
     const gTranslate = `translate(0, ${y - 5})`;
     return (
       <g className="linear-primer-row" transform={gTranslate}>
@@ -598,21 +598,21 @@ interface PrimerRowsProps {
 export default class PrimerRows extends React.PureComponent<PrimerRowsProps> {
   render() {
     const {
-      showPrimers,
-      forwardPrimerRows,
-      reversePrimerRows,
-      direction,
-      yDiff,
-      findXAndWidth,
-      inputRef,
-      seqBlockRef,
-      onUnmount,
-      firstBase,
-      lastBase,
-      fullSeq,
       charWidth,
-      zoomed,
+      direction,
+      findXAndWidth,
+      firstBase,
       fontSize,
+      forwardPrimerRows,
+      fullSeq,
+      inputRef,
+      lastBase,
+      onUnmount,
+      reversePrimerRows,
+      seqBlockRef,
+      showPrimers,
+      yDiff,
+      zoomed,
     } = this.props;
     let { elementHeight } = this.props;
     elementHeight *= 3;

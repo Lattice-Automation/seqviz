@@ -29,7 +29,7 @@ export default async (JBEI, _ = []) =>
 
         // destructure the paramaeters from JBEI
         const { seq } = parsedJBEI;
-        const { name, sequence, features, circular } = seq;
+        const { circular, features, name, sequence } = seq;
 
         // attempt to get the name out of the JBEI
         let parsedName = "Unnamed";
@@ -42,7 +42,7 @@ export default async (JBEI, _ = []) =>
         if (sequence && sequence[0] && sequence[0]._) {
           parsedSeq = sequence[0]._;
         }
-        const { seq: parsedSeq2, compSeq: parsedCompSeq } = dnaComplement(parsedSeq); // seq and compSeq
+        const { compSeq: parsedCompSeq, seq: parsedSeq2 } = dnaComplement(parsedSeq); // seq and compSeq
         if (!parsedSeq2) return null;
 
         // attempt to figure out whether it's circular or linear. if circular

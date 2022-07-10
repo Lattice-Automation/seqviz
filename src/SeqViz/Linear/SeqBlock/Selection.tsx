@@ -25,8 +25,8 @@ class Edges extends React.PureComponent<EdgesProps> {
   id = randomid();
 
   render() {
-    const { findXAndWidth, selectEdgeHeight, firstBase, lastBase, fullSeq } = this.props;
-    const { ref, start, end, clockwise } = this.context;
+    const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
+    const { clockwise, end, ref, start } = this.context;
 
     let startEdge: number | null = null;
     let lastEdge: number | null = null;
@@ -56,12 +56,12 @@ class Edges extends React.PureComponent<EdgesProps> {
       startEdge = lastEdge;
       lastEdge = null;
     }
-    let { x, width } = findXAndWidth(startEdge, lastEdge);
+    let { width, x } = findXAndWidth(startEdge, lastEdge);
 
     // if drag event in counter clockwise direction and both of the edges are
     // within this range (if reverse but not both in one range, it'll be fine)
     if (clockwise === false && startEdge !== null && lastEdge !== null) {
-      ({ x, width } = findXAndWidth(lastEdge, startEdge));
+      ({ width, x } = findXAndWidth(lastEdge, startEdge));
     }
 
     // the x position of the second edge
@@ -119,9 +119,9 @@ class Block extends React.PureComponent<BlockProps> {
   id = randomid();
 
   render() {
-    const { findXAndWidth, selectHeight, firstBase, lastBase, fullSeq } = this.props;
+    const { findXAndWidth, firstBase, fullSeq, lastBase, selectHeight } = this.props;
     const { clockwise, ref } = this.context;
-    let { start, end } = this.context;
+    let { end, start } = this.context;
 
     // there's no need to render a selection block (rect) if just one point has been selected
     if (start === end && ref !== "ALL") return null;
@@ -137,7 +137,7 @@ class Block extends React.PureComponent<BlockProps> {
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {
-        ({ x, width } = findXAndWidth(Math.max(firstBase, start), Math.min(lastBase, end)));
+        ({ width, x } = findXAndWidth(Math.max(firstBase, start), Math.min(lastBase, end)));
       }
     } else if (clockwise && start > end) {
       // crosses the zero index in FWD direction
@@ -147,13 +147,13 @@ class Block extends React.PureComponent<BlockProps> {
           // the selection range both starts and ends in this seqblock, but wraps
           // all the way around the rest of the plasmid
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
-          const { x: secBlockX, width: secBlockWidth } = findXAndWidth(start, lastBase);
+          const { width: secBlockWidth, x: secBlockX } = findXAndWidth(start, lastBase);
           secondBlock = (
             <rect className="la-vz-linear-sel-block" height={selectHeight} width={secBlockWidth} x={secBlockX} y={0} />
           );
-          ({ x, width } = findXAndWidth(firstBase, end));
+          ({ width, x } = findXAndWidth(firstBase, end));
         } else {
-          ({ x, width } = findXAndWidth(
+          ({ width, x } = findXAndWidth(
             start > lastBase ? firstBase : Math.max(firstBase, start),
             end < firstBase ? lastBase : Math.min(lastBase, end)
           ));
@@ -162,7 +162,7 @@ class Block extends React.PureComponent<BlockProps> {
     } else if (!clockwise && start > end) {
       // does not cross zero index but is in reverse direction
       if (end <= lastBase && start >= firstBase) {
-        ({ x, width } = findXAndWidth(Math.max(firstBase, end), Math.min(lastBase, start)));
+        ({ width, x } = findXAndWidth(Math.max(firstBase, end), Math.min(lastBase, start)));
       }
     } else if (!clockwise && end > start) {
       // crosses zero index and is in reverse direction
@@ -171,7 +171,7 @@ class Block extends React.PureComponent<BlockProps> {
           // the selection range both starts and ends in this seqblock, but wraps
           // all the way around the rest of the plasmid
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
-          const { x: secBlockX, width: secBlockWidth } = findXAndWidth(end, lastBase);
+          const { width: secBlockWidth, x: secBlockX } = findXAndWidth(end, lastBase);
           secondBlock = (
             <rect
               className="la-vz-linear-sel-block"
@@ -182,16 +182,16 @@ class Block extends React.PureComponent<BlockProps> {
               y={-5}
             />
           );
-          ({ x, width } = findXAndWidth(firstBase, start));
+          ({ width, x } = findXAndWidth(firstBase, start));
         } else {
-          ({ x, width } = findXAndWidth(start < firstBase ? end : firstBase, end > lastBase ? start : lastBase));
+          ({ width, x } = findXAndWidth(start < firstBase ? end : firstBase, end > lastBase ? start : lastBase));
         }
       }
     }
 
     // sreflect
     if (ref === "ALL" || start === end) {
-      ({ x, width } = findXAndWidth(Math.max(firstBase, 0), Math.min(lastBase, fullSeq.length + 1)));
+      ({ width, x } = findXAndWidth(Math.max(firstBase, 0), Math.min(lastBase, fullSeq.length + 1)));
     }
 
     // nothing was set for this selection block

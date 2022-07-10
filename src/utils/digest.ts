@@ -147,7 +147,7 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
  */
 const digestPart = (enzymeName, part, circularCheck) => {
   // get the sequence information
-  let { seq, compSeq, annotations } = part;
+  let { annotations, compSeq, seq } = part;
 
   let seqToSearch = seq.toUpperCase();
   const seqToCutLength = seq.length;

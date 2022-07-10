@@ -27,7 +27,7 @@ export default async (fileInput, fileName, _ = []) =>
 
     let seq = SEQ_ROWS;
     let compSeq = "";
-    ({ seq, compSeq } = dnaComplement(seq)); // seq and compSeq
+    ({ compSeq, seq } = dnaComplement(seq)); // seq and compSeq
     // there may be a genbank-like header row after the sequence
     // LOCUS       SCU49845     5028 bp    DNA             PLN       21-JUN-1999
     let parsedName = fileName.length > 0 ? fileName : "Unnamed";

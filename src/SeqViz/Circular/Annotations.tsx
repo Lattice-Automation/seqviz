@@ -49,7 +49,7 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
   };
 
   render() {
-    const { radius, rowsToSkip, lineHeight, annotations } = this.props;
+    const { annotations, lineHeight, radius, rowsToSkip } = this.props;
 
     // at least 3 rows inward from default radius (ie index row)
     const rowShiftHeight = lineHeight * rowsToSkip;

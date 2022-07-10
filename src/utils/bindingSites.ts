@@ -8,7 +8,7 @@ import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
  
  */
 export default (primers, vector) => {
-  const { seq: vectorSeq, compSeq: vectorComp } = dnaComplement(vector);
+  const { compSeq: vectorComp, seq: vectorSeq } = dnaComplement(vector);
   return findBindingSites(primers, vectorSeq, 1).concat(findBindingSites(primers, vectorComp, -1));
 };
 
@@ -93,7 +93,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
 
     let annealSequence = seq;
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'mismatches' does not exist on type 'neve... Remove this comment to see the full error message
-    let { mismatches, matchSeq } = [];
+    let { matchSeq, mismatches } = [];
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'substring' does not exist on type 'never... Remove this comment to see the full error message
     matchSeq = sequenceLength < matchLength ? seq : seq.substring(sequenceLength - matchLength, sequenceLength);
