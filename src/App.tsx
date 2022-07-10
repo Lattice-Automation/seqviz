@@ -18,14 +18,14 @@ export const App = () => {
     translations: [{ start: 0, end: 10, direction: 1 }],
     seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(1),
     enzymesCustom: {
-      // topStrand: {
-      //   rseq: "CCTTGG", // recognition sequence
-      //   fcut: 0, // cut index on FWD strand, relative to start of rseq
-      //   rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
-      //   highlightColor: "#E78587" /* pass in color */,
-      // },
+      topStrand: {
+        rseq: "CCTTGG", // recognition sequence
+        fcut: 0, // cut index on FWD strand, relative to start of rseq
+        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
+        // highlightColor: "red" /* pass in color */,
+      },
       bottomStrand: {
-        rseq: "AGCAG", // recognition sequence
+        rseq: "GTAC", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
         rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
         highlightColor: "#D7E5F0" /* pass in color */,
@@ -43,7 +43,7 @@ export const App = () => {
     showPrimers: true,
     showComplement: true,
     showIndex: true,
-    zoom: { linear: 40, circular: 0 },
+    zoom: { linear: 90, circular: 0 },
     colors: ["#8CDEBD"],
     onSearch: (results: SearchResult[]) => {
       setSearchResults(results);

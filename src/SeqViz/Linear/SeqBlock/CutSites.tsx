@@ -68,7 +68,6 @@ const CutSites = (props: {
     lastBase,
     inputRef,
     yDiff,
-    elementHeight,
   } = props;
 
   // Add x and width to each cut site.
@@ -137,8 +136,9 @@ const CutSites = (props: {
     return { x: 0, width: 0 };
   };
 
-  // the cut site starts lower and on the sequence
-  const lineYDiff = lineHeight - 5;
+  // This would normally be 1xlineHeight (one row after the label row), but the text starts right at the top of the
+  // sequence row, so we need to adjust upward for that.
+  const lineYDiff = 0.8 * lineHeight;
 
   return (
     <g className="la-vz-cut-sites">
@@ -158,11 +158,10 @@ const CutSites = (props: {
                 id={c.id}
                 start={c.start}
                 end={c.end}
-                yDiff={elementHeight}
+                yDiff={c.recogStrand > 0 ? lineYDiff : lineYDiff + lineHeight}
                 findXAndWidth={findXAndWidth}
                 connector={c}
                 color={c.highlightColor}
-                direction={c.recogStrand}
                 lineHeight={lineHeight}
               />
             ) : null}
@@ -170,12 +169,12 @@ const CutSites = (props: {
             {/* label above seq */}
             {sequenceCutSite && (
               <text
-                dominantBaseline="hanging"
-                textAnchor="start"
-                y={yDiff}
                 id={c.id}
                 className="la-vz-cut-site-text"
+                dominantBaseline="hanging"
+                textAnchor="start"
                 x={c.cutX}
+                y={yDiff}
                 style={{
                   cursor: "pointer",
                   fill: "rgb(51, 51, 51)",
@@ -238,17 +237,10 @@ const HighlightBlock = (props: {
   findXAndWidth: FindXAndWidthType;
   yDiff: number;
   color: string;
-  direction: 1 | -1;
   lineHeight: number;
 }) => {
-  const { id, start, end, findXAndWidth, yDiff, color, direction, lineHeight } = props;
+  const { id, start, end, findXAndWidth, yDiff, color, lineHeight } = props;
   const { x, width } = findXAndWidth(start, end);
-  /* direction = 1 -> top strand */
-  let y = yDiff - lineHeight / 2 - 1; // template row result
-  /* direction = -1 -> bottom strand */
-  if (direction == -1) {
-    y = yDiff + lineHeight / 2 - 1;
-  }
 
   return (
     <rect
@@ -256,7 +248,8 @@ const HighlightBlock = (props: {
       id={id}
       className="la-vz-cut-site-highlight"
       x={x}
-      y={y}
+      y={yDiff}
+      height={lineHeight}
       width={width}
       style={{
         stroke: "rgba(0, 0, 0, 0.5)",
