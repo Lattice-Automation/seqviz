@@ -21,18 +21,40 @@ export const COLORS = [
 ];
 
 export const COLOR_BORDER_MAP = {
-  "#9DEAED": "#5EB5B8", // cyan
-  "#8FDE8C": "#5CA35A", // green
-  "#CFF283": "#8DB041", // light green
-  "#8CDEBD": "#4CA17F", // teal
-  "#F0A3CE": "#BD6295", // pink
-  "#F7C672": "#BD872B", // orange
-  "#F07F7F": "#AD4040", // red
-  "#FAA887": "#B36446", // red-orange
-  "#F099F7": "#AB63B0", // magenta
-  "#C59CFF": "#8A60C4", // purple
-  "#6B81FF": "#2E3B85", // blue
-  "#85A6FF": "#4C66AD", // light blue
+  // purple
+  "#6B81FF": "#2E3B85",
+
+  // blue
+  "#85A6FF": "#4C66AD",
+
+  // light green
+  "#8CDEBD": "#4CA17F",
+
+  // cyan
+  "#8FDE8C": "#5CA35A",
+
+  "#9DEAED": "#5EB5B8",
+
+  // magenta
+  "#C59CFF": "#8A60C4",
+
+  // green
+  "#CFF283": "#8DB041",
+
+  // orange
+  "#F07F7F": "#AD4040",
+
+  // red-orange
+  "#F099F7": "#AB63B0",
+
+  // teal
+  "#F0A3CE": "#BD6295",
+
+  // pink
+  "#F7C672": "#BD872B",
+
+  // red
+  "#FAA887": "#B36446", // light blue
 };
 
 export const INSERT_COLORS = [

@@ -7,14 +7,12 @@ import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface Mismatch {
-  start: number;
   end: number;
   name: string;
+  start: number;
 }
 
 interface PrimerRowProps {
-  primers: any;
-  y: number;
   charWidth: number;
   direction: 1 | -1;
   elementHeight: number;
@@ -24,15 +22,17 @@ interface PrimerRowProps {
   forwardPrimerRows: unknown;
   fullSeq: string;
   height: number;
+  id: string;
   inputRef: InputRefFuncType;
   lastBase: number;
   onUnmount: (a: unknown) => void;
+  primers: any;
   reversePrimerRows: unknown;
   seqBlockRef: unknown;
   showPrimers: boolean;
+  y: number;
   yDiff: number;
   zoomed: boolean;
-  id: string;
 }
 
 /**
@@ -109,14 +109,14 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
     };
 
     const textProps = {
-      dominantBaseline: "middle",
       cursor: "pointer",
+      dominantBaseline: "middle",
       lengthAdjust: "spacing",
-      textRendering: "optimizeLegibility",
       style: {
         color: "black",
         fontWeight: 150,
       },
+      textRendering: "optimizeLegibility",
     };
 
     const cW = 4; // jagged cutoff width
@@ -460,29 +460,29 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
 
     const primerPath = (
       <path
-        id={id}
         ref={inputRef(`${id}`, {
+          element: seqBlockRef,
+          end: end,
           ref: `${id}`,
           start: start,
-          end: end,
           type: "PRIMER",
-          element: seqBlockRef,
         })}
         className={id}
+        id={id}
         style={{
-          fillOpacity: 0.1,
           cursor: "pointer",
+          fillOpacity: 0.1,
           stroke: "#1b1d21",
           strokeWidth: 0.5,
         }}
         {...rectProps}
         d={linePath}
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
-        onMouseOver={() => this.hoverOtherPrimerRows(`${id}`, 0.2)}
+        onBlur={() => 0}
+        onFocus={() => 0}
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
         onMouseOut={() => this.hoverOtherPrimerRows(`${id}`, 0.1)}
-        onFocus={() => 0}
-        onBlur={() => 0}
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
+        onMouseOver={() => this.hoverOtherPrimerRows(`${id}`, 0.2)}
       />
     );
 
@@ -529,18 +529,18 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
         <text
           key={`${id}_${primerUUID}-primer`}
           fontSize={fontSize}
+          textAnchor="middle"
           x={width / 2}
           y={height / 2 + 1.4}
-          textAnchor="middle"
           {...textProps}
-          textLength={width}
           id={id}
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
-          onMouseOver={() => this.hoverOtherPrimerRows(id, 0.2)}
+          textLength={width}
+          onBlur={() => {}}
+          onFocus={() => {}}
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
           onMouseOut={() => this.hoverOtherPrimerRows(id, 0.1)}
-          onFocus={() => {}}
-          onBlur={() => {}}
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'hoverOtherPrimerRows' does not exist on ... Remove this comment to see the full error message
+          onMouseOver={() => this.hoverOtherPrimerRows(id, 0.2)}
         >
           {zoomed ? `${name}` : ""}
         </text>
@@ -550,12 +550,12 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
             <text
               key={`mismatch_text_${id}_${primerUUID}`}
               fontSize={fontSize}
+              textAnchor="left"
               x={getMismatchX(mismatch)}
               y={forward ? 0 - height / 2 : (height * 3) / 2 + 1.4}
-              textAnchor="left"
               {...textProps}
-              textLength={charWidth(mismatch.name.length)}
               id={id}
+              textLength={charWidth(mismatch.name.length)}
             >
               {zoomed ? `${mismatch.name}` : ""}
             </text>
@@ -569,7 +569,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
     const { y, primers } = this.props;
     const gTranslate = `translate(0, ${y - 5})`;
     return (
-      <g transform={gTranslate} className="linear-primer-row">
+      <g className="linear-primer-row" transform={gTranslate}>
         {primers.map(this.renderPrimer)}
       </g>
     );
@@ -579,6 +579,7 @@ class PrimerRow extends React.PureComponent<PrimerRowProps> {
 interface PrimerRowsProps {
   charWidth: number;
   direction: 1 | -1;
+  elementHeight: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fontSize: number;
@@ -592,7 +593,6 @@ interface PrimerRowsProps {
   showPrimers: boolean;
   yDiff: number;
   zoomed: boolean;
-  elementHeight: number;
 }
 
 export default class PrimerRows extends React.PureComponent<PrimerRowsProps> {
@@ -632,27 +632,27 @@ export default class PrimerRows extends React.PureComponent<PrimerRowsProps> {
 
           return (
             <PrimerRow
-              showPrimers={showPrimers}
-              yDiff={yDiff}
-              forwardPrimerRows={forwardPrimerRows}
-              reversePrimerRows={reversePrimerRows}
-              elementHeight={elementHeight}
-              id={id}
-              primers={primerRow}
-              y={rowDiff}
-              height={elementHeight}
               key={`${id}-primer-linear-row`}
-              inputRef={inputRef}
-              seqBlockRef={seqBlockRef}
-              onUnmount={onUnmount}
+              charWidth={charWidth}
+              direction={direction}
+              elementHeight={elementHeight}
               findXAndWidth={findXAndWidth}
               firstBase={firstBase}
-              lastBase={lastBase}
-              fullSeq={fullSeq}
-              direction={direction}
-              charWidth={charWidth}
               fontSize={fontSize}
+              forwardPrimerRows={forwardPrimerRows}
+              fullSeq={fullSeq}
+              height={elementHeight}
+              id={id}
+              inputRef={inputRef}
+              lastBase={lastBase}
+              primers={primerRow}
+              reversePrimerRows={reversePrimerRows}
+              seqBlockRef={seqBlockRef}
+              showPrimers={showPrimers}
+              y={rowDiff}
+              yDiff={yDiff}
               zoomed={zoomed}
+              onUnmount={onUnmount}
             />
           );
         })}

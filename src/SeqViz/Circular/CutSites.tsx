@@ -4,26 +4,27 @@ import { Coor, ICutSite, InputRefFuncType } from "../common";
 import { CircularFindArc } from "./CircularFind";
 
 interface CutSitesProps {
-  radius: number;
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
+  cutSites: ICutSite[];
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
+  lineHeight: number;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
   selectionRows: number;
-  cutSites: ICutSite[];
+  seqLength: number;
 }
 
 export default class CutSites extends React.PureComponent<CutSitesProps> {
@@ -60,9 +61,9 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     // find start and stop coordinates of recog area
     const recogAreaPath = generateArc({
       innerRadius: radius,
-      outerRadius: topR,
-      length: cutSiteLength,
       largeArc: cutSiteLength > seqLength / 2,
+      length: cutSiteLength,
+      outerRadius: topR,
       sweepFWD: true,
     });
 
@@ -72,11 +73,11 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     // find start and stop coordinates of connector line
     const connectorLinePath = generateArc({
       innerRadius: radius + lineHeight * 1.5,
-      outerRadius: radius + lineHeight * 1.5,
-      length: Math.abs(fcut - rcut),
       largeArc: Math.abs(fcut - rcut) > seqLength / 2,
-      sweepFWD: true,
+      length: Math.abs(fcut - rcut),
       offset: Math.min(fcut, rcut) - start,
+      outerRadius: radius + lineHeight * 1.5,
+      sweepFWD: true,
     });
 
     // find start and stop coordinates to hang site line
@@ -85,36 +86,36 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     const fill = "rgba(255, 165, 0, 0.2)";
 
     const cutSiteStyle = {
+      cursor: "pointer",
+      fill: fill,
+      fillOpacity: 0,
+      shapeRendering: "auto",
       stroke: "black",
       strokeWidth: 1,
-      fill: fill,
-      shapeRendering: "auto",
-      cursor: "pointer",
-      fillOpacity: 0,
     };
 
     const lineStyle = {
       fill: "transparent",
+      shapeRendering: "auto",
       stroke: "black",
       strokeWidth: 1,
-      shapeRendering: "auto",
     };
 
     return (
-      <g id={`la-vz-circular-cutsite-${id}`} key={`cutSite: ${id}`} transform={getRotation(start)}>
+      <g key={`cutSite: ${id}`} id={`la-vz-circular-cutsite-${id}`} transform={getRotation(start)}>
         {<path d={cutLinePath} {...lineStyle} />}
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
         <path
           {...cutSiteStyle}
-          d={recogAreaPath}
-          className={id}
           ref={inputRef(id, {
+            end: end,
             ref: id,
             start: start,
-            end: end,
             type: "ENZYME",
           })}
+          className={id}
+          d={recogAreaPath}
         />
       </g>
     );
@@ -124,16 +125,16 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
       return (
         <CircularFindArc
           key={`findArc: ${c.id}`}
-          radius={this.props.radius}
+          direction={1}
+          end={c.end}
+          fillStyle={c.highlightColor}
+          generateArc={this.props.generateArc}
+          getRotation={this.props.getRotation}
+          inputRef={this.props.inputRef}
           lineHeight={this.props.lineHeight}
+          radius={this.props.radius}
           seqLength={this.props.seqLength}
           start={c.start}
-          end={c.end}
-          getRotation={this.props.getRotation}
-          generateArc={this.props.generateArc}
-          inputRef={this.props.inputRef}
-          direction={1}
-          fillStyle={c.highlightColor}
         />
       );
     }

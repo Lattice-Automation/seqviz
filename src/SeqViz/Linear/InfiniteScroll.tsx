@@ -5,11 +5,11 @@ import { ISize } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollProps {
-  seqBlocks: JSX.Element[];
   blockHeights: number[];
-  totalHeight: number;
-  size: ISize;
   bpsPerBlock: number;
+  seqBlocks: JSX.Element[];
+  size: ISize;
+  totalHeight: number;
 }
 
 interface InfiniteScrollState {
@@ -36,9 +36,9 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     super(props);
 
     this.state = {
+      centralIndex: 0,
       // start off with first 5 blocks shown
       visibleBlocks: new Array(Math.min(5, props.seqBlocks.length)).fill(null).map((_, i) => i),
-      centralIndex: 0,
     };
     this.scroller = React.createRef();
     this.insideDOM = React.createRef();
@@ -76,7 +76,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
    */
   getSnapshotBeforeUpdate = (prevProps: InfiniteScrollProps) => {
     // find the current top block
-    let top = this.scroller ? this.scroller.current.scrollTop : 0;
+    const top = this.scroller ? this.scroller.current.scrollTop : 0;
 
     // find out 1) which block this is at the edge of the top
     // and 2) how far from the top of that block we are right now
@@ -89,7 +89,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     } while (accumulatedY + blockHeights[blockIndex] < top && blockIndex < blockHeights.length);
 
     const blockY = top - accumulatedY; // last extra distance
-    return { blockY, blockIndex };
+    return { blockIndex, blockY };
   };
 
   /**
@@ -143,8 +143,8 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
     if (!isEqual(newVisibleBlocks, visibleBlocks)) {
       this.setState({
-        visibleBlocks: newVisibleBlocks,
         centralIndex: centralIndex,
+        visibleBlocks: newVisibleBlocks,
       });
     }
   };
@@ -269,14 +269,14 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
     return (
       <div
-        className="la-vz-linear-scroller"
         ref={this.scroller}
-        onScroll={this.handleScrollOrResize}
-        onMouseOver={this.handleMouseOver}
+        className="la-vz-linear-scroller"
         onFocus={() => {}}
+        onMouseOver={this.handleMouseOver}
+        onScroll={this.handleScrollOrResize}
       >
-        <div className="la-vz-seqblock-container" style={{ height }} ref={this.insideDOM}>
-          <div style={{ width: width || 0, height: spaceAbove }} />
+        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height }}>
+          <div style={{ height: spaceAbove, width: width || 0 }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
       </div>

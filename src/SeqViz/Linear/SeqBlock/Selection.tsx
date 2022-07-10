@@ -7,10 +7,10 @@ import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
   findXAndWidth: FindXAndWidthType;
-  selectEdgeHeight: number;
   firstBase: number;
-  lastBase: number;
   fullSeq: string;
+  lastBase: number;
+  selectEdgeHeight: number;
 }
 
 /**
@@ -84,13 +84,13 @@ class Edges extends React.PureComponent<EdgesProps> {
 
     // inlining style in the SVG for speed sake
     const rect = {
-      y: "-5",
+      height: selectEdgeHeight,
+      shapeRendering: "crispEdges",
       style: {
         fill: "black",
         width: start === end ? 1 : 2,
       },
-      shapeRendering: "crispEdges",
-      height: selectEdgeHeight,
+      y: "-5",
     };
 
     return (
@@ -104,13 +104,13 @@ class Edges extends React.PureComponent<EdgesProps> {
 
 interface BlockProps {
   findXAndWidth: FindXAndWidthType;
-  selectHeight: number;
   firstBase: number;
-  lastBase: number;
   fullSeq: string;
-  selection: SeqVizSelection;
   inputRef: InputRefFuncType;
+  lastBase: number;
   onUnmount: (a: string) => void;
+  selectHeight: number;
+  selection: SeqVizSelection;
 }
 
 class Block extends React.PureComponent<BlockProps> {
@@ -149,7 +149,7 @@ class Block extends React.PureComponent<BlockProps> {
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
           const { x: secBlockX, width: secBlockWidth } = findXAndWidth(start, lastBase);
           secondBlock = (
-            <rect x={secBlockX} y={0} height={selectHeight} width={secBlockWidth} className="la-vz-linear-sel-block" />
+            <rect className="la-vz-linear-sel-block" height={selectHeight} width={secBlockWidth} x={secBlockX} y={0} />
           );
           ({ x, width } = findXAndWidth(firstBase, end));
         } else {
@@ -174,12 +174,12 @@ class Block extends React.PureComponent<BlockProps> {
           const { x: secBlockX, width: secBlockWidth } = findXAndWidth(end, lastBase);
           secondBlock = (
             <rect
+              className="la-vz-linear-sel-block"
+              height={selectHeight}
+              shapeRendering="auto"
+              width={secBlockWidth}
               x={secBlockX}
               y={-5}
-              height={selectHeight}
-              width={secBlockWidth}
-              className="la-vz-linear-sel-block"
-              shapeRendering="auto"
             />
           );
           ({ x, width } = findXAndWidth(firstBase, start));
@@ -203,11 +203,11 @@ class Block extends React.PureComponent<BlockProps> {
       <>
         <rect
           className="la-vz-linear-sel-block"
+          height={selectHeight}
+          shapeRendering="auto"
+          width={width || undefined}
           x={x || undefined}
           y={-5}
-          height={selectHeight}
-          width={width || undefined}
-          shapeRendering="auto"
         />
         {secondBlock}
       </>
@@ -215,4 +215,4 @@ class Block extends React.PureComponent<BlockProps> {
   }
 }
 
-export default { Edges, Block };
+export default { Block, Edges };

@@ -17,28 +17,29 @@ import "./style.css";
 
 export interface SeqVizProps {
   accession?: string;
-  name?: string;
-  seq?: string;
-  compSeq?: string;
   annotations?: AnnotationProp[];
-  file?: string | File;
   backbone?: string;
-  colors?: string[];
   bpColors?: { [key: number]: string };
+  colors?: string[];
+  compSeq?: string;
   copyEvent?: (event: KeyboardEvent) => void;
   enzymes?: string[];
   enzymesCustom?: {
     [key: string]: IEnzyme;
   };
+  file?: string | File;
+  highlightedRegions?: HighlightRegion[] /* [{start, end, color}] */;
+  name?: string;
   onSearch?: (search: SearchResult[]) => void;
   onSelection?: (selection: SeqVizSelection) => void;
   rotateOnScroll?: boolean;
   search?: {
-    query: string;
     mismatch: number;
+    query: string;
   };
-  showComplement?: boolean;
+  seq?: string;
   showAnnotations?: boolean;
+  showComplement?: boolean;
   showIndex?: boolean;
   showPrimers?: boolean;
   style?: Record<string, unknown>;
@@ -48,7 +49,6 @@ export interface SeqVizProps {
     circular: number;
     linear: number;
   };
-  highlightedRegions?: HighlightRegion[] /* [{start, end, color}] */;
 }
 
 /**
@@ -70,7 +70,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     onSearch: (results: SearchResult[]) => results,
     onSelection: (selection: SeqVizSelection) => selection,
     rotateOnScroll: true,
-    search: { query: "", mismatch: 0 },
+    search: { mismatch: 0, query: "" },
     seq: "",
     showComplement: true,
     showIndex: true,
@@ -86,16 +86,16 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     this.state = {
       accession: "",
+      annotations: this.parseAnnotations(props.annotations, props.seq),
       centralIndex: {
         circular: 0,
         linear: 0,
         setCentralIndex: this.setCentralIndex,
       },
       cutSites: [],
-      selection: { ...defaultSelection },
-      search: [],
-      annotations: this.parseAnnotations(props.annotations, props.seq),
       part: {},
+      search: [],
+      selection: { ...defaultSelection },
     };
   }
 
@@ -213,8 +213,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       ...annotationFactory(i, this.props.colors),
       ...a,
       direction: directionality(a.direction),
-      start: a.start % (seq.length + 1),
       end: a.end % (seq.length + 1),
+      start: a.start % (seq.length + 1),
     }));
 
   /**
@@ -266,8 +266,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
     if (typeof zoom === "undefined") {
       zoom = {
-        linear: 50,
         circular: 0,
+        linear: 50,
       };
     }
 
@@ -286,36 +286,36 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       <SeqViewer
         key="linear"
         {...this.props}
-        zoom={zoom}
+        Circular={false}
+        annotations={annotations}
+        compSeq={compSeq}
+        cutSites={cutSites}
+        highlightedRegions={highlightedRegions}
+        name={name}
         search={search}
         selection={selection}
-        setSelection={this.setSelection}
-        annotations={annotations}
-        showComplement={showComplement}
-        compSeq={compSeq}
-        name={name}
         seq={localSeq}
-        cutSites={cutSites}
-        Circular={false}
-        highlightedRegions={highlightedRegions}
+        setSelection={this.setSelection}
+        showComplement={showComplement}
+        zoom={zoom}
       />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
       <SeqViewer
         key="circular"
         {...this.props}
-        zoom={zoom}
-        search={search}
-        selection={selection}
-        setSelection={this.setSelection}
+        Circular={true}
         annotations={annotations}
         compSeq={compSeq}
-        showComplement={showComplement}
-        name={name}
-        seq={localSeq}
         cutSites={cutSites}
-        Circular={true}
         highlightedRegions={highlightedRegions}
+        name={name}
+        search={search}
+        selection={selection}
+        seq={localSeq}
+        setSelection={this.setSelection}
+        showComplement={showComplement}
+        zoom={zoom}
       />
     );
     const bothFlipped = viewer === "both_flip";

@@ -4,29 +4,29 @@ import * as React from "react";
 import SeqBlock from "./SeqBlock";
 
 const defaultProps = {
-  name: "",
-  bpsPerBlock: 100,
-  lineHeight: 14,
-  elementHeight: 16,
-  charWidth: 12,
-  seqFontSize: 12,
-  zoom: { linear: 50 },
-  translations: [],
-  primers: [],
-  id: "",
-  y: 0,
-  blockHeight: 40,
-  searchRows: [],
-  cutSiteRows: [],
   annotationRows: [],
-  forwardPrimerRows: [],
-  reversePrimerRows: [],
+  blockHeight: 40,
+  bpsPerBlock: 100,
+  charWidth: 12,
+  cutSiteRows: [],
+  elementHeight: 16,
   firstBase: 0,
-  onUnmount: () => {},
-  zoomed: false,
-  size: { height: 600, width: 1200 },
+  forwardPrimerRows: [],
+  id: "",
   inputRef: () => {},
+  lineHeight: 14,
   mouseEvent: () => {},
+  name: "",
+  onUnmount: () => {},
+  primers: [],
+  reversePrimerRows: [],
+  searchRows: [],
+  seqFontSize: 12,
+  size: { height: 600, width: 1200 },
+  translations: [],
+  y: 0,
+  zoom: { linear: 50 },
+  zoomed: false,
 };
 
 /**
@@ -43,20 +43,20 @@ describe("SeqBlock", () => {
       <SeqBlock
         {...defaultProps}
         // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        name="BCDRBS_alt1_BD14"
-        seq={seq}
-        compSeq="cgctttttagttattcctccgttgttctacacgctttttgtagaattagtacgccacctcccaaagattac"
-        fullSeq={seq}
         annotations={[
           {
-            start: 0,
-            end: 71,
-            direction: 1,
-            name: "RBS",
-            type: "RBS",
             color: "#80D849",
+            direction: 1,
+            end: 71,
+            name: "RBS",
+            start: 0,
+            type: "RBS",
           },
         ]}
+        compSeq="cgctttttagttattcctccgttgttctacacgctttttgtagaattagtacgccacctcccaaagattac"
+        fullSeq={seq}
+        name="BCDRBS_alt1_BD14"
+        seq={seq}
       />
     );
 

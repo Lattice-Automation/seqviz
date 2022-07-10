@@ -6,28 +6,29 @@ import { Coor, ISize, InputRefFuncType } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface AnnotationsProps {
-  radius: number;
+  annotations: Annotation[][];
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: InputRefFuncType;
-  annotations: Annotation[][];
-  size: ISize;
-  rowsToSkip: number;
+  getRotation: (index: number) => string;
   inlinedAnnotations: string[];
+  inputRef: InputRefFuncType;
+  lineHeight: number;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  rowsToSkip: number;
+  seqLength: number;
+  size: ISize;
 }
 
 /**
@@ -69,20 +70,20 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
               return acc.concat(
                 anns.map(ann => (
                   <SingleAnnotation
-                    seqLength={this.props.seqLength}
-                    getRotation={this.props.getRotation}
-                    generateArc={this.props.generateArc}
-                    lineHeight={lineHeight}
-                    inputRef={this.props.inputRef}
-                    inlinedAnnotations={this.props.inlinedAnnotations}
                     key={`la-vz-${ann.id}-annotation-circular-row`}
-                    id={`la-vz-${ann.id}-annotation-circular-row`}
                     annotation={ann}
-                    currBRadius={currBRadius}
-                    currTRadius={currTRadius}
-                    hoverAnnotation={this.hoverAnnotation}
                     calcBorderColor={darkerColor}
                     centralIndex={circular}
+                    currBRadius={currBRadius}
+                    currTRadius={currTRadius}
+                    generateArc={this.props.generateArc}
+                    getRotation={this.props.getRotation}
+                    hoverAnnotation={this.hoverAnnotation}
+                    id={`la-vz-${ann.id}-annotation-circular-row`}
+                    inlinedAnnotations={this.props.inlinedAnnotations}
+                    inputRef={this.props.inputRef}
+                    lineHeight={lineHeight}
+                    seqLength={this.props.seqLength}
                   />
                 ))
               );
@@ -96,27 +97,28 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
 
 interface SingleAnnotationProps {
   annotation: Annotation;
-  seqLength: number;
-  getRotation: (index: number) => string;
-  generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    offset?: number;
-  }) => string;
+  calcBorderColor: (c: any) => any;
+  centralIndex: number;
   currBRadius: number;
   currTRadius: number;
-  centralIndex: number;
-  lineHeight: number;
-  inputRef: InputRefFuncType;
-  calcBorderColor: (c: any) => any;
+  generateArc: (args: {
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
+    offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+  }) => string;
+  getRotation: (index: number) => string;
   hoverAnnotation: (className: string, opacity: number) => void;
-  inlinedAnnotations: string[];
   id: string;
+  inlinedAnnotations: string[];
+  inputRef: InputRefFuncType;
+  lineHeight: number;
+  seqLength: number;
 }
 
 /**
@@ -126,17 +128,17 @@ interface SingleAnnotationProps {
 const SingleAnnotation = (props: SingleAnnotationProps) => {
   const {
     annotation: a,
-    seqLength,
-    getRotation,
-    generateArc,
+    calcBorderColor,
+    centralIndex,
     currBRadius,
     currTRadius,
-    centralIndex,
-    lineHeight,
-    inputRef,
-    calcBorderColor,
+    generateArc,
+    getRotation,
     hoverAnnotation,
     inlinedAnnotations,
+    inputRef,
+    lineHeight,
+    seqLength,
   } = props;
 
   // if it crosses the zero index, correct for actual length
@@ -157,70 +159,70 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
   const bottomHalf = mid > seqLength * 0.25 && mid < seqLength * 0.75;
 
   const path = generateArc({
-    innerRadius: currBRadius,
-    outerRadius: currTRadius,
-    length: annLength,
-    largeArc: annLength > seqLength / 2,
-    sweepFWD: true,
     arrowFWD: a.direction === 1,
     arrowREV: a.direction === -1,
+    innerRadius: currBRadius,
+    largeArc: annLength > seqLength / 2,
+    length: annLength,
+    outerRadius: currTRadius,
+    sweepFWD: true,
   });
   const namePath = generateArc({
-    innerRadius: bottomHalf ? currBRadius : currTRadius,
-    outerRadius: bottomHalf ? currBRadius : currTRadius,
-    length: annLength,
-    largeArc: annLength > seqLength / 2,
-    sweepFWD: true,
     arrowFWD: false,
     arrowREV: false,
+    innerRadius: bottomHalf ? currBRadius : currTRadius,
+    largeArc: annLength > seqLength / 2,
+    length: annLength,
+    outerRadius: bottomHalf ? currBRadius : currTRadius,
+    sweepFWD: true,
   });
 
   const circAnnID = `la-vz-${a.id}-circular`;
   return (
     <g id={`la-vz-${a.id}-annotation-circular`} transform={rotation}>
-      <path id={circAnnID} d={namePath} stroke="transparent" fill="transparent" />
+      <path d={namePath} fill="transparent" id={circAnnID} stroke="transparent" />
       <path
+        ref={inputRef(a.id, {
+          direction: a.direction,
+          end: a.end,
+          name: a.name,
+          ref: a.id,
+          start: a.start,
+          type: "ANNOTATION",
+        })}
+        className={a.id}
         d={path}
         id={a.id}
-        className={a.id}
-        ref={inputRef(a.id, {
-          ref: a.id,
-          name: a.name,
-          start: a.start,
-          end: a.end,
-          type: "ANNOTATION",
-          direction: a.direction,
-        })}
         style={{
-          shapeRendering: "geometricPrecision",
           cursor: "pointer",
-          fillOpacity: 0.7,
-          strokeLinejoin: "round",
           fill: a.color,
+          fillOpacity: 0.7,
+          shapeRendering: "geometricPrecision",
           stroke: a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray",
+          strokeLinejoin: "round",
           strokeWidth: a.type === "insert" ? 2.4 : 0.5,
         }}
-        onMouseOver={() => hoverAnnotation(a.id, 1.0)}
-        onMouseOut={() => hoverAnnotation(a.id, 0.7)}
-        onFocus={() => {}}
         onBlur={() => {}}
+        onFocus={() => {}}
+        onMouseOut={() => hoverAnnotation(a.id, 0.7)}
+        onMouseOver={() => hoverAnnotation(a.id, 1.0)}
       />
       {inlinedAnnotations.includes(a.id) && (
         <text
-          id={a.id}
           dy={-0.4 * lineHeight}
-          onMouseOver={() => hoverAnnotation(a.id, 1.0)}
-          onMouseOut={() => hoverAnnotation(a.id, 0.7)}
-          onFocus={() => {}}
+          id={a.id}
           onBlur={() => {}}
+          onFocus={() => {}}
+          onMouseOut={() => hoverAnnotation(a.id, 0.7)}
+          onMouseOver={() => hoverAnnotation(a.id, 1.0)}
         >
           <textPath
-            id={a.id}
-            textAnchor="middle"
-            startOffset={bottomHalf ? "25%" : "75%"}
-            dominantBaseline="middle"
-            xlinkHref={`#${circAnnID}`}
             cursor="pointer"
+            dominantBaseline="middle"
+            id={a.id}
+            startOffset={bottomHalf ? "25%" : "75%"}
+            textAnchor="middle"
+            xlinkHref={`#${circAnnID}`}
           >
             {a.name}
           </textPath>

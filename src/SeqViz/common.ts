@@ -8,17 +8,17 @@ export interface ISize {
 }
 
 export interface ICutSite {
-  fcut: number;
-  rcut: number;
-  start: number;
   end: number;
-  type?: "enzyme" | "annotation";
-  name: string;
-  id: string;
-  recogStart: number;
-  recogEnd: number;
-  recogStrand: 1 | -1;
+  fcut: number;
   highlightColor?: string;
+  id: string;
+  name: string;
+  rcut: number;
+  recogEnd: number;
+  recogStart: number;
+  recogStrand: 1 | -1;
+  start: number;
+  type?: "enzyme" | "annotation";
 }
 
 export interface Coor {
@@ -27,8 +27,8 @@ export interface Coor {
 }
 
 export interface IEnzyme {
-  rseq: string;
   fcut: number;
-  rcut: number;
   highlightColor?: string;
+  rcut: number;
+  rseq: string;
 }

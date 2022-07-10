@@ -140,17 +140,17 @@ const withEventRouter = WrappedComp =>
                 : clockwise;
             if (newPos !== start && !type.startsWith("Shift")) {
               setSelection({
-                start: newPos,
-                end: newPos,
                 clockwise: true,
+                end: newPos,
                 ref: "",
+                start: newPos,
               });
             } else if (type.startsWith("Shift")) {
               setSelection({
-                start: start,
-                end: newPos,
                 clockwise: clockwise,
+                end: newPos,
                 ref: "",
+                start: start,
               });
             }
             break;
@@ -208,10 +208,10 @@ const withEventRouter = WrappedComp =>
 
       const newSelection = {
         ...selection,
-        start: start,
-        end: start,
         clockwise: true,
-        ref: "ALL", // ref to all means select the whole thing
+        end: start,
+        ref: "ALL",
+        start: start, // ref to all means select the whole thing
       };
 
       setSelection(newSelection);
@@ -304,17 +304,17 @@ const withEventRouter = WrappedComp =>
 
       return (
         <div
-          id={id}
-          className="la-vz-viewer-event-router"
-          onKeyDown={this.handleKeyPress}
-          onMouseMove={mouseEvent}
-          onWheel={this.handleScrollEvent}
-          role="presentation"
           ref={ref => {
             this.eventRouter = ref;
           }}
-          // Need tabIndex for onKeyDown to work
+          className="la-vz-viewer-event-router"
+          id={id}
+          role="presentation"
           tabIndex={-1}
+          onKeyDown={this.handleKeyPress}
+          onMouseMove={mouseEvent}
+          // Need tabIndex for onKeyDown to work
+          onWheel={this.handleScrollEvent}
         >
           <WrappedComp {...rest} mouseEvent={this.handleMouseEvent} />
         </div>

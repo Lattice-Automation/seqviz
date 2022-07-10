@@ -96,8 +96,8 @@ export default class WrappedGroupLabel extends React.Component {
 
     return (
       <g key={key} onMouseLeave={() => setHoveredGroup("")}>
-        <path d={linePath} className="la-vz-label-line" />
-        <rect fill="white" stroke="none" height={rectHeight} width={rectWidth} {...rectCoor} />
+        <path className="la-vz-label-line" d={linePath} />
+        <rect fill="white" height={rectHeight} stroke="none" width={rectWidth} {...rectCoor} />
         <text {...groupCoor}>
           {labelRows.map((r, i) => (
             // turn each group of label rows into a text span
@@ -105,9 +105,9 @@ export default class WrappedGroupLabel extends React.Component {
             // add a comma to all but the last label
             <tspan
               key={`${key}_${i}`}
-              y={groupCoor.y + (i + 0.5) * lineHeight}
-              x={groupCoor.x}
               dominantBaseline="middle"
+              x={groupCoor.x}
+              y={groupCoor.y + (i + 0.5) * lineHeight}
             >
               {r.map((l, i2) => (
                 // every label should have its own id (used by selection
@@ -115,11 +115,11 @@ export default class WrappedGroupLabel extends React.Component {
                 // if it's an enzyme
                 <React.Fragment key={l.id}>
                   <tspan
-                    id={l.id}
                     className="la-vz-circular-label"
-                    y={groupCoor.y + (i + 0.5) * lineHeight}
                     dominantBaseline="middle"
+                    id={l.id}
                     tabIndex={-1}
+                    y={groupCoor.y + (i + 0.5) * lineHeight}
                   >
                     {l.name}
                   </tspan>
@@ -129,7 +129,7 @@ export default class WrappedGroupLabel extends React.Component {
             </tspan>
           ))}
         </text>
-        <rect fill="none" stroke="black" strokeWidth={1.5} height={rectHeight} width={rectWidth} {...rectCoor} />
+        <rect fill="none" height={rectHeight} stroke="black" strokeWidth={1.5} width={rectWidth} {...rectCoor} />
       </g>
     );
   }

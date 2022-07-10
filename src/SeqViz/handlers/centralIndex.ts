@@ -1,8 +1,8 @@
 import * as React from "react";
 
 const defaultCentralIndex = {
-  linear: 0,
   circular: 0,
+  linear: 0,
   setCentralIndex: (_: number) => {},
 };
 

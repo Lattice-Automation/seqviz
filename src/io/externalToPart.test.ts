@@ -7,20 +7,20 @@ describe("Import parts from external repositories", () => {
   // etc to test that it's parsing correctly
   // just check that the name, annotation count and sequence length are correct
   const knownGenbanks = {
-    NC_011521: {
-      name: "NC_011521",
-      annotationCount: 22,
-      seqLength: 6062,
+    BBa_J23100: {
+      annotationCount: 1,
+      name: "BBa_J23100", // one annotation for pSB1C3
+      seqLength: 35 + 2070, // J23100 + pSB1C3
     },
     FJ172221: {
-      name: "FJ172221",
       annotationCount: 5,
+      name: "FJ172221",
       seqLength: 6062,
     },
-    BBa_J23100: {
-      name: "BBa_J23100",
-      annotationCount: 1, // one annotation for pSB1C3
-      seqLength: 35 + 2070, // J23100 + pSB1C3
+    NC_011521: {
+      annotationCount: 22,
+      name: "NC_011521",
+      seqLength: 6062,
     },
   };
 

@@ -59,9 +59,9 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean):
     const start = result.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
     results.push({
-      start: start,
-      end: end,
       direction: fwd ? 1 : -1,
+      end: end,
+      start: start,
     });
     result = regex.exec(subject);
   }
@@ -98,11 +98,13 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
       const end = (i + query.length) % subject.length || subject.length;
       results.push({
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-        start: i,
+        direction: fwd ? 1 : -1,
+
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         end: end,
+
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-        direction: fwd ? 1 : -1,
+        start: i,
       });
     }
   }

@@ -4,27 +4,28 @@ import { Coor, InputRefFuncType } from "../common";
 import { SelectionContext } from "../handlers/selection";
 
 interface CircularSelectionProps {
-  radius: number;
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
+  lineHeight: number;
   onUnmount: unknown;
-  totalRows: number;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
   seq: string;
+  seqLength: number;
+  totalRows: number;
 }
 
 /**
@@ -90,9 +91,9 @@ export default class CircularSelection extends React.PureComponent<CircularSelec
 
     const selectPath = generateArc({
       innerRadius: bottomR,
-      outerRadius: topR,
-      length: selLength,
       largeArc: lArc,
+      length: selLength,
+      outerRadius: topR,
       sweepFWD: sFlagF,
     });
 
@@ -104,14 +105,14 @@ export default class CircularSelection extends React.PureComponent<CircularSelec
 
     const edgeStyle = {
       fill: "transparent",
+      shapeRendering: "auto",
       stroke: "black",
       strokeWidth: edgeStrokeWidth,
-      shapeRendering: "auto",
     };
     const selectStyle = {
-      stroke: "none",
       fill: "#DEF6FF",
       shapeRendering: "auto",
+      stroke: "none",
     };
 
     return (

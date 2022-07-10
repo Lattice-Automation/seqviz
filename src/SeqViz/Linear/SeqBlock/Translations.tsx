@@ -6,11 +6,11 @@ import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 export interface Translation {
-  id: string;
-  start: number;
-  end: number;
   AAseq: string;
   direction: -1 | 1;
+  end: number;
+  id: string;
+  start: number;
 }
 
 interface TranslationRowsProps {
@@ -50,19 +50,19 @@ export default class TranslationRows extends React.PureComponent<TranslationRows
         {translations.map((t, i) => (
           <TranslationRow
             key={`${t.id}-${firstBase}`}
-            translation={t}
-            y={yDiff + elementHeight * i}
+            bpsPerBlock={bpsPerBlock}
+            charWidth={charWidth}
+            findXAndWidth={findXAndWidth}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
             height={elementHeight * 0.9}
             id={t.id}
             inputRef={inputRef}
-            seqBlockRef={seqBlockRef}
-            onUnmount={onUnmount}
-            fullSeq={fullSeq}
-            firstBase={firstBase}
             lastBase={lastBase}
-            charWidth={charWidth}
-            bpsPerBlock={bpsPerBlock}
-            findXAndWidth={findXAndWidth}
+            seqBlockRef={seqBlockRef}
+            translation={t}
+            y={yDiff + elementHeight * i}
+            onUnmount={onUnmount}
           />
         ))}
       </g>
@@ -84,39 +84,39 @@ export default class TranslationRows extends React.PureComponent<TranslationRows
  */
 
 interface TranslationRowProps {
-  translation: Translation;
-  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
-  seqBlockRef: unknown;
-  onUnmount: (a: unknown) => void;
-  fullSeq: string;
-  firstBase: number;
-  lastBase: number;
   bpsPerBlock: number;
   charWidth: number;
   findXAndWidth: FindXAndWidthType;
-  y: number;
+  firstBase: number;
+  fullSeq: string;
   height: number;
   id?: string;
+  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
+  lastBase: number;
+  onUnmount: (a: unknown) => void;
+  seqBlockRef: unknown;
+  translation: Translation;
+  y: number;
 }
 
 class TranslationRow extends React.Component<TranslationRowProps> {
   static textProps = {
-    dominantBaseline: "middle",
     cursor: "pointer",
-    textAnchor: "middle",
+    dominantBaseline: "middle",
     style: {
       color: "black",
       fontSize: 13,
       fontWeight: 400,
     },
+    textAnchor: "middle",
   };
 
   static aaProps = {
     shapeRendering: "geometricPrecision",
     style: {
       cursor: "pointer",
-      strokeWidth: 0.8,
       opacity: 0.7,
+      strokeWidth: 0.8,
     },
   };
 
@@ -168,13 +168,13 @@ class TranslationRow extends React.Component<TranslationRowProps> {
     // build up a reference to this whole translation for
     // selection handler (used only for context clicking right now)
     const type = "TRANSLATION";
-    const ref = { name: "translation", start, end, type, element };
+    const ref = { element, end, name: "translation", start, type };
 
     // substring and split only the amino acids that are relevant to this
     // particular sequence block
     const AAs = AAseq.split("");
     return (
-      <g transform={`translate(0, ${y})`} ref={inputRef(id, ref)} id={id}>
+      <g ref={inputRef(id, ref)} id={id} transform={`translate(0, ${y})`}>
         {AAs.map((a, i) => {
           // generate and store an id reference (that's used for selection)
           const aaId = randomid();
@@ -187,7 +187,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
           // build up a reference to this whole translation for
           // selection handler (used only for context clicking right now)
-          const AAref = { name: "aminoacid", start: AAStart, end: AAEnd, type: "AMINOACID", element, parent: ref };
+          const AAref = { element, end: AAEnd, name: "aminoacid", parent: ref, start: AAStart, type: "AMINOACID" };
 
           if (AAStart > AAEnd && firstBase >= bpsPerBlock) {
             // amino acid has crossed zero index in the last SeqBlock
@@ -230,10 +230,10 @@ class TranslationRow extends React.Component<TranslationRowProps> {
           const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
           return (
-            <g key={aaId} id={aaId} transform={`translate(${x}, 0)`} ref={inputRef(aaId, AAref)}>
+            <g key={aaId} ref={inputRef(aaId, AAref)} id={aaId} transform={`translate(${x}, 0)`}>
               <path
-                id={aaId}
                 d={path}
+                id={aaId}
                 {...TranslationRow.aaProps}
                 fill={colorByIndex(a.charCodeAt(0))}
                 stroke={borderColorByIndex(a.charCodeAt(0))}

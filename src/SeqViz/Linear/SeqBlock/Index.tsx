@@ -4,14 +4,14 @@ import { ISize } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
-  seq: string;
-  zoom: { linear: number };
-  firstBase: number;
-  size: ISize;
   findXAndWidth: FindXAndWidthType;
-  transform: string | undefined;
-  showIndex: boolean;
+  firstBase: number;
   lastBase: number;
+  seq: string;
+  showIndex: boolean;
+  size: ISize;
+  transform: string | undefined;
+  zoom: { linear: number };
 }
 
 /**
@@ -66,8 +66,8 @@ export default class Index extends React.PureComponent<IndexProps> {
     }
 
     const tickStyle = {
-      width: 1,
       height: 8,
+      width: 1,
       // shapeRendering: "crispEdges"
     };
 
@@ -90,12 +90,12 @@ export default class Index extends React.PureComponent<IndexProps> {
       const transText = `translate(${textFromLeft}, 10)`;
       return (
         <React.Fragment key={p}>
-          <rect style={tickStyle} fill="#A3A3A3" transform={transTick} />
+          <rect fill="#A3A3A3" style={tickStyle} transform={transTick} />
           <text
             style={{
+              dominantBaseline: "hanging",
               fontSize: 11,
               textRendering: "optimizeLegibility",
-              dominantBaseline: "hanging",
             }}
             transform={transText}
           >
@@ -117,12 +117,12 @@ export default class Index extends React.PureComponent<IndexProps> {
     return (
       <g className="la-vz-linear-index" transform={transform}>
         <rect
+          fill="#B0B9C2"
           style={{
-            width: width,
             height: 1,
             shapeRendering: "crispEdges",
+            width: width,
           }}
-          fill="#B0B9C2"
         />
         {this.genTicks()}
       </g>

@@ -18,15 +18,15 @@ export default async text => {
 
   const part = {
     ...partFactory(),
-    name: partJSON.name || partJSON._id,
-    date: new Date(partJSON.modifiedAt).getTime(),
-    seq: seq,
-    compSeq: compSeq,
     annotations: partJSON.annotations.map(a => ({
       ...a,
-      id: randomid(),
       direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE",
+      id: randomid(),
     })),
+    compSeq: compSeq,
+    date: new Date(partJSON.modifiedAt).getTime(),
+    name: partJSON.name || partJSON._id,
+    seq: seq,
   };
 
   return [part];

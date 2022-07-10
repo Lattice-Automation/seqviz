@@ -13,9 +13,9 @@ import parseSeqBuilder from "./parsers/seqbuilder";
 import parseSnapgene from "./parsers/snapgene";
 
 export interface FileOptions {
-  fileName?: string;
+  backbone?: string | { backbone: string; name: string };
   colors?: string[];
-  backbone?: string | { name: string; backbone: string };
+  fileName?: string;
 }
 
 /**
@@ -24,14 +24,14 @@ export interface FileOptions {
  */
 export default async (
   files: string | string[] | File | File[],
-  options: FileOptions = { fileName: "", colors: COLORS, backbone: "" }
+  options: FileOptions = { backbone: "", colors: COLORS, fileName: "" }
 ): Promise<Part[]> => {
   const partLists: Promise<Part[]>[] = [];
   const { fileName = "", colors = [], backbone = "" } = options;
 
   // if it's just a single file string
   if (typeof files === "string") {
-    partLists.push(fileToParts(files, { fileName, colors, backbone }));
+    partLists.push(fileToParts(files, { backbone, colors, fileName }));
   } else {
     if (!Array.isArray(files)) {
       files = [files];
@@ -80,11 +80,11 @@ export default async (
  */
 const fileToParts = async (
   file: string | ArrayBuffer,
-  options: FileOptions = { fileName: "", colors: [], backbone: "" }
+  options: FileOptions = { backbone: "", colors: [], fileName: "" }
 ): Promise<Part[]> => {
   const { fileName = "", colors = [], backbone = "" } = options;
   const sourceName = fileName.split(path.sep).pop() || fileName;
-  const source = { name: sourceName, file: file instanceof ArrayBuffer ? "" : file };
+  const source = { file: file instanceof ArrayBuffer ? "" : file, name: sourceName };
 
   if (!file) {
     throw Error("cannot parse null or empty string");
@@ -95,7 +95,7 @@ const fileToParts = async (
     if (fileName.endsWith(".dna")) {
       // SnapGene; first because it's a buffer, not string
       // it will fail for some string methods below
-      return (await parseSnapgene(file, { fileName, colors })).map(p => cleanupPart(p, source));
+      return (await parseSnapgene(file, { colors, fileName })).map(p => cleanupPart(p, source));
     } else {
       throw Error("Unrecognized file type, ArrayBuffer but not a Snapgene file (.dna)");
     }
@@ -164,7 +164,7 @@ const fileToParts = async (
       case fileString.includes("Parts from the iGEM"):
       case fileString.includes("<part_list>"):
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'Part[]'.
-        parts = await parseBioBrick(fileString, { colors, backbone });
+        parts = await parseBioBrick(fileString, { backbone, colors });
         break;
 
       // Benchling JSON
@@ -208,8 +208,8 @@ const fileToParts = async (
 /**
  * Add source to the part and add a default annotation names.
  */
-const cleanupPart = (p, source: { name: string; file: string }): Part => ({
+const cleanupPart = (p, source: { file: string; name: string }): Part => ({
   ...p,
-  source,
   annotations: p.annotations.map(a => ({ ...a, name: a.name || "Untitled" })),
+  source,
 });

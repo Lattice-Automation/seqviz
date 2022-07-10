@@ -16,45 +16,46 @@ import { Translation } from "./SeqBlock/Translations";
 
 interface LinearProps {
   annotations: Annotation[];
-  bpsPerBlock: number;
   bpColors: string[];
-  charWidth: number;
-  mouseEvent: React.MouseEventHandler;
-  seqFontSize: number;
+  bpsPerBlock: number;
   center: Coor;
+  charWidth: number;
   compSeq: string;
   cutSites: ICutSite[];
   elementHeight: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
   getRotation: (index: number) => string;
+  highlightedRegions: HighlightRegion[];
   inputRef: InputRefFuncType;
   lineHeight: number;
+  mouseEvent: React.MouseEventHandler;
   onUnmount: (a: unknown) => void;
   primers: Primer[];
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   search: SearchResult[];
+  selection: SeqVizSelection;
   seq: string;
+  seqFontSize: number;
   seqLength: number;
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  selection: SeqVizSelection;
   size: ISize;
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
-  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -218,29 +219,28 @@ class Linear extends React.Component<LinearProps> {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
         <SeqBlock
-          selection={this.props.selection}
-          bpColors={this.props.bpColors}
-          charWidth={this.props.charWidth}
-          mouseEvent={this.props.mouseEvent}
-          seqFontSize={this.props.seqFontSize}
-          inputRef={this.props.inputRef}
-          highlightedRegions={highlightRows[i]}
-          elementHeight={elementHeight}
+          key={ids[i]}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
+          bpColors={this.props.bpColors}
           bpsPerBlock={bpsPerBlock}
+          charWidth={this.props.charWidth}
           compSeq={compSeqs[i]}
           cutSiteRows={cutSiteRows[i]}
+          elementHeight={elementHeight}
           firstBase={firstBase}
           forwardPrimerRows={forwardPrimerRows[i]}
           fullSeq={seq}
+          highlightedRegions={highlightRows[i]}
           id={ids[i]}
-          key={ids[i]}
+          inputRef={this.props.inputRef}
           lineHeight={lineHeight}
-          onUnmount={onUnmount}
+          mouseEvent={this.props.mouseEvent}
           reversePrimerRows={reversePrimerRows[i]}
           searchRows={searchRows[i]}
+          selection={this.props.selection}
           seq={seqs[i]}
+          seqFontSize={this.props.seqFontSize}
           showComplement={showComplement}
           showIndex={showIndex}
           showPrimers={showPrimers}
@@ -249,6 +249,7 @@ class Linear extends React.Component<LinearProps> {
           y={yDiff}
           zoom={zoom}
           zoomed={zoomed}
+          onUnmount={onUnmount}
         />
       );
       yDiff += blockHeights[i];
@@ -257,11 +258,11 @@ class Linear extends React.Component<LinearProps> {
     return (
       seqBlocks.length && (
         <InfiniteScroll
-          seqBlocks={seqBlocks}
           blockHeights={blockHeights}
-          totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}
-          size={size}
           bpsPerBlock={bpsPerBlock}
+          seqBlocks={seqBlocks}
+          size={size}
+          totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}
         />
       )
     );

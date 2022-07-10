@@ -5,32 +5,32 @@ import { calcGC, calcTm } from "../../utils/sequence";
 type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "";
 
 export interface SeqVizSelection {
-  name: string;
-  type: SelectionTypeEnum;
-  seq: string;
-  gc: number;
-  tm: number;
-  start: number;
-  end: number;
-  length: number;
   clockwise: boolean;
-  direction?: number;
   color?: string;
+  direction?: number;
+  end: number;
+  gc: number;
+  length: number;
+  name: string;
   ref: null | string;
+  seq: string;
+  start: number;
+  tm: number;
+  type: SelectionTypeEnum;
 }
 
 /** Initial/default selection */
 export const defaultSelection: SeqVizSelection = {
-  ref: null,
-  name: "",
-  seq: "",
+  clockwise: true,
+  end: 0,
   gc: 0,
+  length: 0,
+  name: "",
+  ref: null,
+  seq: "",
+  start: 0,
   tm: 0,
   type: "",
-  start: 0,
-  end: 0,
-  length: 0,
-  clockwise: true,
 };
 
 /** Default context object */
@@ -160,9 +160,9 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
           this.setSelection({
             ...element,
             ...knownRange,
-            start: selectionStart,
-            end: selectionEnd,
             clockwise: clockwise,
+            end: selectionEnd,
+            start: selectionStart,
           });
 
           this.dragEvent = false;
@@ -186,9 +186,9 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
           this.setSelection({
             ...element,
             ...knownRange,
-            start: selectionStart,
-            end: selectionEnd,
             clockwise: clockwise,
+            end: selectionEnd,
+            start: selectionStart,
           });
 
           this.dragEvent = false;
@@ -210,7 +210,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
     /**
      * Handle a sequence selection on a linear viewer
      */
-    linearSeqEvent = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
+    linearSeqEvent = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
       const { selection } = this.props;
 
@@ -220,19 +220,23 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
       if (e.type === "mousedown" && currBase !== null) {
         // this is the start of a drag event
         this.setSelection({
-          ...defaultSelection, // clears other meta
-          start: e.shiftKey ? selection.start : currBase,
-          end: currBase,
+          ...defaultSelection,
           clockwise: clockwiseDrag,
+
+          end: currBase,
+          // clears other meta
+          start: e.shiftKey ? selection.start : currBase,
         });
         this.dragEvent = true;
       } else if (this.dragEvent && currBase !== null) {
         // continue a drag event that's currently happening
         this.setSelection({
-          ...defaultSelection, // clears other meta
-          start: selection.start,
-          end: currBase,
+          ...defaultSelection,
           clockwise: clockwiseDrag,
+
+          end: currBase,
+          // clears other meta
+          start: selection.start,
         });
       }
     };
@@ -259,10 +263,10 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
 
         this.setSelection({
           ...defaultSelection,
-          start: selStart,
+          clockwise: clockwise,
           end: currBase,
           ref: "",
-          clockwise: clockwise,
+          start: selStart,
         });
       } else if (e.type === "mousemove" && this.dragEvent && currBase && currBase !== this.previousBase) {
         // @ts-expect-error ts-migrate(2531) FIXME: Object is possibly 'null'.
@@ -336,10 +340,10 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
 
         this.setSelection({
           ...defaultSelection,
-          start: start,
+          clockwise: clockwise,
           end: end,
           ref: ref,
-          clockwise: clockwise,
+          start: start,
         });
       }
     };
@@ -349,7 +353,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      * by SeqBlock and the position of the mouse event, find the current base
      *
      */
-    calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { start: number; end: number }) => {
+    calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       const { size, bpsPerBlock } = this.props;
 
@@ -432,17 +436,17 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
       const tm = calcTm(seq);
 
       const selection = {
+        clockwise,
+        element,
+        end,
+        gc,
+        length,
         name,
         ref,
         seq,
-        gc,
+        start,
         tm,
         type,
-        start,
-        end,
-        length,
-        clockwise,
-        element,
       };
 
       setSelection(selection);

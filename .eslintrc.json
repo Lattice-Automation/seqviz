@@ -12,13 +12,8 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys"],
   "rules": {
-    "no-empty": ["error", { "allowEmptyCatch": true }],
-    "no-prototype-builtins": "warn",
-    "prefer-const": "warn",
-    "prefer-rest-params": "warn",
-    "react/prop-types": "off", 	// too many prop types warnings in handlers/selection.tsx. Should revist
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "@typescript-eslint/padding-line-between-statements": [
@@ -28,6 +23,20 @@
         "prev": "*",
         "next": ["class", "export", "function", "interface", "type"]
       }
-    ]
+    ],
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-prototype-builtins": "warn",
+    "prefer-const": "warn",
+    "prefer-rest-params": "warn",
+    "react/jsx-sort-props": [2, { "reservedFirst": true, "callbacksLast": true }],
+    "react/prop-types": "off", // too many prop types warnings in handlers/selection.tsx. Should revist
+    "sort-keys-fix/sort-keys-fix": "error",
+    "typescript-sort-keys/interface": "error",
+    "typescript-sort-keys/string-enum": "error"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

@@ -53,11 +53,11 @@ const findMismatches = (sequence, subVector) => {
   }
   // @ts-expect-error ts-migrate(2322) FIXME: Type '{ start: number; end: number; }[]' is not as... Remove this comment to see the full error message
   mismatches = mismatches.map(mismatch => ({
-    start: mismatch[0],
-    end: mismatch[1] + 1, // because mismatches return indices of mismatch and we want to bound to end after the last index
+    end: mismatch[1] + 1,
+    start: mismatch[0], // because mismatches return indices of mismatch and we want to bound to end after the last index
   }));
 
-  return { mismatches, annealSequence };
+  return { annealSequence, mismatches };
 };
 
 /**
@@ -159,7 +159,7 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
               mismatches[0].start = 0;
             } else {
               // @ts-expect-error ts-migrate(2339) FIXME: Property 'length' does not exist on type 'never'.
-              mismatches.push({ start: 0, end: overhang.length });
+              mismatches.push({ end: overhang.length, start: 0 });
             }
           } else {
             // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
@@ -170,9 +170,9 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
           mismatches = mismatches
             .sort((a, b) => a.start < b.start)
             .map(m => ({
+              end: m.end,
               id: `${m.start}-${m.end}`,
               start: m.start,
-              end: m.end,
             }))
             .filter(m => {
               if (uniqMismatch[m.id]) {
@@ -181,26 +181,33 @@ const findBindingSites = (primers = [], vectorSeq, direction) => {
               uniqMismatch[m.id] = true;
               return true;
             })
-            .map(m => ({ start: m.start, end: m.end }));
+            .map(m => ({ end: m.end, start: m.start }));
 
           if ((strict && mismatches.length < 1) || !strict) {
             primerBindingSites.push({
               // @ts-expect-error ts-migrate(2698) FIXME: Spread types may only be created from object types... Remove this comment to see the full error message
               ...primer,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-              id: `${primer.id}-${startIndex}`,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-              seq: combinedSequence,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              start: startIndex,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              end: endIndex,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              direction: direction,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              mismatches: mismatches,
+
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
               annealSequence: annealSequence,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              direction: direction,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              end: endIndex,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+              id: `${primer.id}-${startIndex}`,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              mismatches: mismatches,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+              seq: combinedSequence,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              start: startIndex,
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
               strict: strict,
             });
