@@ -151,21 +151,18 @@ const fileToParts = async (
       case fileName.endsWith(".gbk"):
       case fileName.endsWith(".genbank"):
       case fileName.endsWith(".ape"):
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
         parts = await parseGenbank(fileString, fileName, colors);
         break;
 
       // SeqBuilder
       case fileString.includes("Written by SeqBuilder"):
       case fileName.endsWith(".sbd"):
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
         parts = await parseSeqBuilder(fileString, fileName, colors);
         break;
 
       // BioBrick XML
       case fileString.includes("Parts from the iGEM"):
       case fileString.includes("<part_list>"):
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'Part[]'.
         parts = await parseBioBrick(fileString, { backbone, colors });
         break;
 
@@ -176,14 +173,12 @@ const fileToParts = async (
 
       // SBOL
       case fileString.includes("RDF"):
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'Part[]'.
         parts = await parseSBOL(fileString, fileName, colors);
         break;
 
       // jbei
       case fileString.includes(':seq="http://jbei.org/sequence"'):
       case fileString.startsWith("<seq:seq"):
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'unknown' is not assignable to type 'Part[]'.
         parts = await parseJBEI(fileString, colors);
         break;
 

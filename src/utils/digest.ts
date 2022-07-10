@@ -10,7 +10,6 @@ import { translateWildNucleotides } from "./sequence";
  *
  * for the list of the enzymes, find their cut sites and split them into rows compatible
  * with the sequence viewer
- *
  */
 export const cutSitesInRows = (
   seq: string,
@@ -139,7 +138,6 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
  *
  * if the seqToCut or the compSeqToCut are padded with stars, ie they have overhangs, shorten the
  * searchable index range, since those parts of the sequence should not be searchable and re-cut
- *
  */
 const digestPart = (enzymeName, part, circularCheck) => {
   // get the sequence information
@@ -294,7 +292,6 @@ const digestPart = (enzymeName, part, circularCheck) => {
  * needed because Mongo is storing annotation positions as strings,
  * and I need them as ints. This hack could be avoided if everything
  * involving data manipulation is kept client side
- 
  */
 const annPosToInts = anns =>
   anns.map(a => ({
@@ -309,9 +306,6 @@ const annPosToInts = anns =>
  * Cuts a part with the list of enzymes, and returns a new list of
  * parts after digestion
  *
- 
- 
- 
  */
 export const digest = (enzymeNames, part) => {
   const { circular = true } = part;

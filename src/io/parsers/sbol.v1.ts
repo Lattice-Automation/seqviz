@@ -1,5 +1,6 @@
 import * as xml2js from "xml2js";
 
+import { Part } from "../../elements";
 import { colorByIndex } from "../../utils/colors";
 import { dnaComplement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
@@ -144,7 +145,7 @@ const sequenceToPart = (Seq, file) => {
  * this is a last-resort scrapper that tries to find valid parts that aren't within a root
  * DnaComponent document or within a root Collection array
  */
-const findDnaComponentNodes = (acc, doc) => {
+const findDnaComponentNodes = (acc: Part[], doc: any) => {
   Object.keys(doc).forEach(k => {
     if (k === "DnaComponent" && doc[k].length) acc.push(...doc[k]);
     if (Array.isArray(doc[k])) {
@@ -176,7 +177,7 @@ const findSequenceNodes = (acc, doc) => {
  * representation of a part(s). an example of this type of file can be
  * found in ../examples/j5.SBOL.xml
  */
-export default async (sbol, colors = []) =>
+export default async (sbol, colors: string[] = []): Promise<Part[]> =>
   new Promise((resolve, reject) => {
     // it shouldn't take longer than this to parse the SBOL file
     setTimeout(() => {
@@ -249,6 +250,7 @@ export default async (sbol, colors = []) =>
             })
           )
           .filter(p => p); // invalid parts will be null
+        // @ts-expect-error FIXME
         if (attemptedParts.length) resolve(attemptedParts);
 
         // go on another fishing expidition, but for Sequence nodes

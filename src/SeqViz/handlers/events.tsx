@@ -10,7 +10,6 @@ import CentralIndexContext from "./centralIndex";
  * its other main function is to build the context menu at all times, so that
  * the options available in the context menu are all relevant to whatever has been
  * selected
- *
  */
 const withEventRouter = WrappedComp =>
   class WithEventRouter extends React.PureComponent {
@@ -31,7 +30,6 @@ const withEventRouter = WrappedComp =>
      * action handler for a keyboard keypresses.
      * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
      *
-     
      */
     handleKeyPress = e => {
       const keyType = this.keypressMap(e);
@@ -44,8 +42,6 @@ const withEventRouter = WrappedComp =>
     /**
      * maps a keypress to an interaction (String)
      *
-     
-     
      * ["All", "Copy", "Up", "Right", "Down", "Left"]
      */
     keypressMap = e => {
@@ -234,8 +230,6 @@ const withEventRouter = WrappedComp =>
      * and pass on the click. Otherwise, do nothing
      *
      * if it is a regular click, pass on as normal
-     *
-     
      */
     handleMouseEvent = e => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message

@@ -1,5 +1,6 @@
 import * as xml2js from "xml2js";
 
+import { Part } from "../../elements";
 import { dnaComplement, firstElement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
@@ -11,7 +12,7 @@ import { annotationFactory } from "../../utils/sequence";
  *
  * an exmaple of the XML file that's parsed is in ./examples/biobrick
  */
-export default async (file, options) =>
+export default async (file, options): Promise<Part[]> =>
   new Promise((resolve, reject) => {
     const { backbone = "" } = options;
     // util reject function that will be triggered if any fields fail
