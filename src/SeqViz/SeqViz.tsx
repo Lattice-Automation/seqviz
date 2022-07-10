@@ -246,9 +246,11 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
 
   render() {
     const { seq, style } = this.props;
-    let { compSeq, name, showComplement, viewer, zoom } = this.props;
+    let { compSeq, name, showComplement, showIndex, viewer, zoom } = this.props;
     const { centralIndex, cutSites, part, search, selection } = this.state;
     let { annotations } = this.state;
+
+    showIndex = !!showIndex;
 
     // part is either from a file/accession, or each prop was set
     const localSeq: string = seq || part.seq || "";
@@ -287,15 +289,17 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         {...this.props}
         Circular={false}
         annotations={annotations}
-        compSeq={compSeq}
+        compSeq={compSeq || ""}
         cutSites={cutSites}
         highlightedRegions={highlightedRegions}
-        name={name}
+        name={name || ""}
         search={search}
         selection={selection}
         seq={localSeq}
         setSelection={this.setSelection}
         showComplement={showComplement}
+        showIndex={showIndex}
+        translations={this.props.translations || []}
         zoom={zoom}
       />
     );
@@ -305,15 +309,17 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         {...this.props}
         Circular={true}
         annotations={annotations}
-        compSeq={compSeq}
+        compSeq={compSeq || ""}
         cutSites={cutSites}
         highlightedRegions={highlightedRegions}
-        name={name}
+        name={name || ""}
         search={search}
         selection={selection}
         seq={localSeq}
         setSelection={this.setSelection}
         showComplement={showComplement}
+        showIndex={showIndex}
+        translations={this.props.translations || []}
         zoom={zoom}
       />
     );

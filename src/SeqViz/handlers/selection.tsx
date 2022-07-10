@@ -62,7 +62,7 @@ export interface WithSelectionProps extends WithEventsProps {
   setSelection: (selection: SeqVizSelection) => void;
 }
 
-/* SelectionHandlerProps are those required by the HOC */
+/* SelectionHandlerProps are those required by the WithSelectionHandler HOC. */
 export interface SelectionHandlerProps {
   Circular: boolean;
   Linear: boolean;
@@ -87,7 +87,7 @@ export interface SelectionHandlerProps {
  */
 export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T>) =>
   class extends React.Component<T & SelectionHandlerProps> {
-    static displayName = "SelectionHandler";
+    static displayName = "WithSelectionHandler";
 
     /** Only state is the selection range */
     state = { ...defaultSelection };
@@ -518,7 +518,6 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         onUnmount: this.removeMountedBlock,
       };
 
-      // @ts-expect-error
-      return <WrappedComp {...(newProps as WithSelectionProps)} />;
+      return <WrappedComp {...newProps} />;
     }
   };

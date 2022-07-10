@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
-import { Annotation, ICutSite } from "../elements";
+import { Annotation, Element, ICutSite } from "../elements";
 import isEqual from "../utils/isEqual";
 import { SearchResult } from "../utils/search";
 import Circular from "./Circular/Circular";
@@ -14,16 +14,18 @@ interface SeqViewerProps {
   Circular: boolean;
   annotations: Annotation[];
   bpColors?: { [key: number | string]: string };
-  compSeq?: string;
+  compSeq: string;
   cutSites: ICutSite[];
   highlightedRegions: HighlightRegion[];
-  name?: string;
-  search: SearchResult;
+  name: string;
+  search: SearchResult[];
   selection: SeqVizSelection;
   seq: string;
   setSelection: (update: SeqVizSelection) => void;
   showComplement: boolean;
+  showIndex: boolean;
   size: { height: number; width: number };
+  translations: Element[];
   zoom: { circular: number; linear: number };
 }
 
@@ -165,15 +167,22 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
                 {...this.state}
                 {...this.circularProps()}
                 centralIndex={circular}
-                // @ts-expect-error
                 cutSites={cutSites}
+                primers={[]}
                 setCentralIndex={setCentralIndex}
+                showPrimers={false}
               />
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          // @ts-expect-error
-          <Linear {...this.props} {...this.state} {...this.linearProps()} seqLength={seq.length} />
+          <Linear
+            {...this.props}
+            {...this.state}
+            {...this.linearProps()}
+            primers={[]}
+            seqLength={seq.length}
+            showPrimers={false}
+          />
         )}
       </div>
     );
