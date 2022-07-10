@@ -18,16 +18,16 @@ export interface SeqVizProps {
   accession?: string;
   annotations?: AnnotationProp[];
   backbone?: string;
-  bpColors?: { [key: number]: string };
+  bpColors?: { [key: number | string]: string };
   colors?: string[];
   compSeq?: string;
-  copyEvent?: (event: KeyboardEvent) => void;
+  copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   enzymes?: string[];
   enzymesCustom?: {
     [key: string]: IEnzyme;
   };
   file?: string | File;
-  highlightedRegions?: HighlightRegion[] /* [{start, end, color}] */;
+  highlightedRegions?: HighlightRegion[];
   name?: string;
   onSearch?: (search: SearchResult[]) => void;
   onSelection?: (selection: SeqVizSelection) => void;

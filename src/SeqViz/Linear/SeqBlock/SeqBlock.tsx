@@ -22,7 +22,7 @@ export type FindXAndWidthType = (
 interface SeqBlockProps {
   annotationRows: Annotation[][];
   blockHeight: number;
-  bpColors: string[];
+  bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
   charWidth: number;
   compSeq: string;
@@ -157,6 +157,10 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
    */
   bpColorLookup = (bp: string, i: number) => {
     const { bpColors, firstBase } = this.props;
+
+    if (!bpColors) {
+      return;
+    }
 
     const color =
       bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || bpColors[i + firstBase] || null;
