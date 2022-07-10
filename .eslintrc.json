@@ -24,10 +24,6 @@
         "next": ["class", "export", "function", "interface", "type"]
       }
     ],
-    "no-empty": ["error", { "allowEmptyCatch": true }],
-    "no-prototype-builtins": "warn",
-    "prefer-const": "warn",
-    "prefer-rest-params": "warn",
     "react/jsx-sort-props": [2, { "reservedFirst": true, "callbacksLast": true }],
     "react/prop-types": "off", // too many prop types warnings in handlers/selection.tsx. Should revist
     "sort-destructure-keys/sort-destructure-keys": 2,

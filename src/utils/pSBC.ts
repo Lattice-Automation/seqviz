@@ -2,6 +2,8 @@
 // Version 4.0
 // from: https://github.com/PimpTrizkit/PJs/wiki/12.-Shade,-Blend-and-Convert-a-Web-Color-(pSBC.js)
 export const pSBC = (p, c0, c1?, l?) => {
+  const i = parseInt;
+  const m = Math.round;
   let r,
     g,
     b,
@@ -9,8 +11,6 @@ export const pSBC = (p, c0, c1?, l?) => {
     f,
     t,
     h,
-    i = parseInt,
-    m = Math.round,
     a = typeof c1 == "string";
 
   if (
