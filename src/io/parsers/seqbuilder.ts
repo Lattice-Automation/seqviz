@@ -13,7 +13,7 @@ const tagColorList = ["ApEinfo_fwdcolor", "ApEinfo_revcolor", "loom_color"];
  * at imports/io/examples/seqbuilder, though there may be variations to the
  * format
  */
-export default async (fileInput, fileName, _ = []) =>
+export default async (fileInput, fileName, _: string[] = []) =>
   fileInput.split(/\/\/\s/g).map(file => {
     // +++++SEQUENCE+++++//
     // the part sequence comes after the line that specifies the seqbuilder version number

@@ -5,13 +5,13 @@ import * as ReactDOMServer from "react-dom/server";
 import SeqViz from "./SeqViz/SeqViz";
 
 /**
- * Export a React component directly for React-based development
- */
-/**
  * Export a part, pUC, for development
  */
 export { default as pUC } from "./parts/pUC";
 
+/**
+ * Export a React component directly for React-based development
+ */
 export { SeqViz };
 
 /**

@@ -1,5 +1,6 @@
 import * as xml2js from "xml2js";
 
+import { Part } from "../../elements";
 import { dnaComplement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
@@ -25,7 +26,7 @@ const first = elArr => {
  * representation of a part(s). an example of this type of file can be
  * found in ../examples/j5.SBOL.xml
  */
-export default async (sbol, fileName, _ = []) =>
+export default async (sbol, fileName, _: string[] = []): Promise<Part[]> =>
   new Promise((resolve, reject) => {
     // util reject function that will be triggered if any fields fail
     const rejectSBOL = errType => reject(new Error(`Failed on SBOLv2 file: ${errType}`));
