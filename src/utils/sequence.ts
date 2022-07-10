@@ -1,4 +1,4 @@
-import { Annotation } from "../part";
+import { Annotation } from "../elements";
 import { chooseRandomColor, colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 import randomid from "./randomid";

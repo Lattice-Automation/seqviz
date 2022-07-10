@@ -1,7 +1,7 @@
 import * as React from "react";
 
+import { ISize } from "../../elements";
 import isEqual from "../../utils/isEqual";
-import { ISize } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface InfiniteScrollProps {

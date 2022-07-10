@@ -1,4 +1,4 @@
-import { Element } from "../part";
+import { Element } from "../elements";
 
 // utility funcs for stackElements
 const last = <T extends Element>(arr: T[]): T => arr[arr.length - 1];

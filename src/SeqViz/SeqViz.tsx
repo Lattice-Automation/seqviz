@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { Annotation, AnnotationProp, Element, ICutSite, IEnzyme, Part } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { Annotation, AnnotationProp, Element, Part } from "../part";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
@@ -10,7 +10,6 @@ import search, { SearchResult } from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
 import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 import SeqViewer from "./SeqViewer";
-import { ICutSite, IEnzyme } from "./common";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
 import "./style.css";

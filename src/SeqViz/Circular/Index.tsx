@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, ISize, InputRefFuncType } from "../common";
+import { Coor, ISize, InputRefFuncType } from "../../elements";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface IndexProps {

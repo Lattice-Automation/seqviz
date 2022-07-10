@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ICutSite, InputRefFuncType } from "../../common";
+import { ICutSite, InputRefFuncType } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface ConnectorType {

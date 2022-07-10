@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ISize } from "../../common";
+import { ISize } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {

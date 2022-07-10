@@ -1,6 +1,6 @@
 import * as path from "path";
 
-import { Part } from "../part";
+import { Part } from "../elements";
 import { COLORS } from "../utils/colors";
 import { dnaComplement, partFactory } from "../utils/parser";
 import parseBenchling from "./parsers/benchling";

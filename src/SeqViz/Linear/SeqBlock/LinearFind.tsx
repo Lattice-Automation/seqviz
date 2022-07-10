@@ -1,8 +1,8 @@
 import * as React from "react";
 
+import { InputRefFuncType } from "../../../elements";
 import randomid from "../../../utils/randomid";
 import { SearchResult } from "../../../utils/search";
-import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 export interface HighlightRegion {

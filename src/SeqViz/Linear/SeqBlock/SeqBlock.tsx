@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { Annotation, Primer } from "../../../part";
+import { Annotation, ICutSite, ISize, InputRefFuncType, Primer } from "../../../elements";
 import { SearchResult } from "../../../utils/search";
-import { ICutSite, ISize, InputRefFuncType } from "../../common";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
