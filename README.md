@@ -57,9 +57,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -116,9 +118,7 @@ A [File](https://developer.mozilla.org/en-US/docs/Web/API/File), [Blob](https://
 
 #### `viewer (='both')`
 
-One of _\["linear", "circular", "both", "both_flip"\]_) the type of viewer to show. "both" by default. "both" means the
-circular viewer fills the left side of SeqViz and the linear viewer fills the right. "both_flip" is the opposite: the
-linear viewer is on the left and the circular viewer is on the right.
+One of `"linear" | "circular" | "both" | "both_flip"`. The type and orientation of the sequence viewers. `both` means the circular viewer fills the left side of SeqViz and the linear viewer fills the right. `both_flip` is the opposite: the linear viewer is on the left and the circular viewer is on the right.
 
 #### `name (='')`
 
@@ -190,17 +190,9 @@ enzymes. Additionally, if a highlightColor is passed the recognition site will b
 
 How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`viewer`).
 
-#### `bpColors (={})`
-
-An object mapping bp to color where bp is a nucleotide or 0-based index. Example:
-
-```js
-{ "A": "#FF0000", "T": "blue", 12: "#00FFFF" }
-```
-
 #### `colors (=[])`
 
-An array of color hex codes for annotation coloring. Defaults to:
+An array of colors to use for annotations, translations, and highlights. Defaults to:
 
 ```js
 [
@@ -219,13 +211,20 @@ An array of color hex codes for annotation coloring. Defaults to:
 ];
 ```
 
-#### `style (={})`
+#### `bpColors (={})`
 
-Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if
-the element around `seqviz` lacks a defined height and/or width. For example:
+An object that maps basepairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
 
 ```js
-{ height: "100vh", width: "100vw" }
+{ "A": "#FF0000", "T": "blue", 12: "#00FFFF" }
+```
+
+#### `style (={})`
+
+Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if the element around `seqviz` lacks a defined height and/or width. For example:
+
+```js
+style: { height: "100vh", width: "100vw" }
 ```
 
 #### `onSelection (=null)`
@@ -285,8 +284,7 @@ sequence (see: [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance
 
 #### `onSearch (=null)`
 
-Callback executed after a search event. Called once on initial render. Accepts a single `searchResults` argument:
-`(searchResults) => {}`. An example of a `searchResults` array is below.
+Callback executed after a search event with a `searchResults` object. Called once on initial render. An example of `searchResults` is below:
 
 ```js
 [
@@ -312,7 +310,7 @@ A functions that returns whether to copy the selected range on the viewer(s) to 
 An example of an `copyEvent` function for copying after `ctrl+c` or `meta+c` events:
 
 ```js
-event => event.key === "c" && (event.metaKey || event.ctrlKey);
+copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey);
 ```
 
 #### `rotateOnScroll (=true)`
@@ -327,14 +325,13 @@ Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`
 
 #### `highlightedRegions (=null)`
 
-Passing in a list of HighlightRegions (`{ start: number; end: number; color?: string; }`) will highlight those regions.
-A default color from `colors` is used if none is provided.
+Passing in a list of ranges will highlight those regions on top of the sequence. A default color from `colors` is used if none is provided.
 
 ```js
 highlightedRegions: [
-	{ start: 36, end: 66, color: "magenta" },
-	{ start: 70, end: 80} // default color
-],
+  { start: 36, end: 66, color: "magenta" },
+  { start: 70, end: 80 },
+];
 ```
 
 ### Viewer without React
@@ -345,13 +342,13 @@ For usability in non-React apps, we provide a thin wrapper around the React comp
 - `props`: props as documented [above](#optionsprops)
 
 ```js
-var viewer = seqviz.Viewer(element, props)
+var viewer = seqviz.Viewer(element, props);
 // Render the viewer to the DOM at the node passed in `${element}`.
-viewer.render()
+viewer.render();
 // Update the viewer's configuration and re-renders.
-viewer.setState(props)
+viewer.setState(props);
 // Render the viewer and returns it as an HTML string.
-viewer.renderToString()
+viewer.renderToString();
 ```
 
 ## Demo
@@ -366,4 +363,4 @@ You can also check out an example of using SeqViz to view NCBI GenBank entries i
 
 This library is maintained by <!-- pkg-author(cmd:) -->[Lattice Automation](https://latticeautomation.com/)<!-- /pkg-author -->.
 
-You can report bugs or request features at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url --> or contact us directly at <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
+You can report bugs and request features at <!-- pkg-bug-url(cmd:) -->[Issues](https://github.com/Lattice-Automation/seqviz/issues)<!-- /pkg-bug-url -->, or contact us directly at <!-- pkg-bug-email(cmd:) -->[contact@latticeautomation.com](contact@latticeautomation.com)<!-- /pkg-bug-email -->
