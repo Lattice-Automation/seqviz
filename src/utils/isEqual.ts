@@ -3,8 +3,6 @@
  *
  * copy-paste from StackOverflow: https://stackoverflow.com/a/25456134
  *
- 
- 
  */
 const isEqual = (x, y) => {
   if (x === y) {
@@ -13,7 +11,7 @@ const isEqual = (x, y) => {
     if (Object.keys(x).length !== Object.keys(y).length) return false;
 
     for (const prop in x) {
-      if (y.hasOwnProperty(prop)) {
+      if (Object.prototype.hasOwnProperty.call(y, prop)) {
         if (!isEqual(x[prop], y[prop])) return false;
       } else return false;
     }

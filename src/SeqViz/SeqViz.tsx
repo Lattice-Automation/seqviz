@@ -246,8 +246,8 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   };
 
   render() {
-    const { style } = this.props;
-    let { compSeq, name, seq, showComplement, viewer, zoom } = this.props;
+    const { seq, style } = this.props;
+    let { compSeq, name, showComplement, viewer, zoom } = this.props;
     const { centralIndex, cutSites, part, search, selection } = this.state;
     let { annotations } = this.state;
 

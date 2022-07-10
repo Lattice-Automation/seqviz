@@ -122,7 +122,9 @@ const fileToParts = async (
     if (["bases", "annotations", "primers"].every(k => benchlingJSONKeys.includes(k))) {
       isBenchling = true;
     }
-  } catch (ex) {}
+  } catch (ex) {
+    console.warn("Could not parse file as JSON", ex);
+  }
 
   try {
     switch (true) {
