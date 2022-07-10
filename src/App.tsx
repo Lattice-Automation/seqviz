@@ -16,14 +16,14 @@ export const App = () => {
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     translations: [{ start: 0, end: 10, direction: 1 }],
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(4),
+    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(1),
     enzymesCustom: {
-      topStrand: {
-        rseq: "CCTTGG", // recognition sequence
-        fcut: 0, // cut index on FWD strand, relative to start of rseq
-        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
-        highlightColor: "#E78587" /* pass in color */,
-      },
+      // topStrand: {
+      //   rseq: "CCTTGG", // recognition sequence
+      //   fcut: 0, // cut index on FWD strand, relative to start of rseq
+      //   rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
+      //   highlightColor: "#E78587" /* pass in color */,
+      // },
       bottomStrand: {
         rseq: "AGCAG", // recognition sequence
         fcut: 0, // cut index on FWD strand, relative to start of rseq
@@ -43,7 +43,7 @@ export const App = () => {
     showPrimers: true,
     showComplement: true,
     showIndex: true,
-    zoom: { linear: 90, circular: 0 },
+    zoom: { linear: 40, circular: 0 },
     colors: ["#8CDEBD"],
     onSearch: (results: SearchResult[]) => {
       setSearchResults(results);
@@ -59,10 +59,10 @@ export const App = () => {
     search: { query: "gtacc", mismatch: 0 },
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    highlightedRegions: [
-      { start: 36, end: 66, color: "magenta" },
-      { start: 70, end: 80 },
-    ],
+    // highlightedRegions: [
+    //   { start: 36, end: 66, color: "magenta" },
+    //   { start: 70, end: 80 },
+    // ],
   });
   const submitIndices = (start: number, end: number, color: string) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];

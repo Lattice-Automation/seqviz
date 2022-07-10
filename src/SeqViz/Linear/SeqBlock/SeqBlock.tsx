@@ -129,10 +129,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   };
 
   /**
-   * Given a bp, return either the bp as was, or a text span if it should have a color
-   *
-   * We're looking up each bp in the props.bpColors map to see if it should
-   * be shadded and, if so, wrapping it in a textSpan
+   * Given a bp, return either the bp as was or a text span if it should have a color.
+   * We're looking up each bp in the props.bpColors map to see if it should be shaded and, if so, wrapping it in a textSpan
    */
   seqTextSpan = (bp: string, i: number) => {
     const { id, charWidth } = this.props;
