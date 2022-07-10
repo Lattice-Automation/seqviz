@@ -14,9 +14,12 @@ import SeqBlock from "./SeqBlock/SeqBlock";
 import { Translation } from "./SeqBlock/Translations";
 
 export interface LinearProps {
+  Circular: boolean;
+  Linear: boolean;
   annotations: Annotation[];
   bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
+  centralIndex: number;
   charWidth: number;
   compSeq: string;
   cutSites: ICutSite[];
@@ -25,6 +28,7 @@ export interface LinearProps {
   inputRef: InputRefFuncType;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
+  name: string;
   onUnmount: (id: string) => void;
   primers: Primer[];
   search: SearchResult[];
@@ -32,6 +36,8 @@ export interface LinearProps {
   seq: string;
   seqFontSize: number;
   seqLength: number;
+  setCentralIndex: (viewer: "linear" | "circular", index: number) => void;
+  setSelection: (selection: SeqVizSelection) => void;
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
@@ -39,12 +45,6 @@ export interface LinearProps {
   totalRows: number;
   translations: Translation[];
   zoom: { linear: number };
-  Circular: boolean;
-  Linear: boolean;
-  name: string;
-  setSelection: (selection: SeqVizSelection) => void;
-  setCentralIndex: (viewer: "linear" | "circular", index: number) => void;
-  centralIndex: number;
 }
 
 /**

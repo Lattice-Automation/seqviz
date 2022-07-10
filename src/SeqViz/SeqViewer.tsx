@@ -13,6 +13,7 @@ import { SeqVizSelection } from "./handlers/selection";
 interface SeqViewerProps {
   Circular: boolean;
   annotations: Annotation[];
+  bpColors?: { [key: number | string]: string };
   compSeq?: string;
   cutSites: ICutSite[];
   highlightedRegions: HighlightRegion[];
@@ -24,7 +25,6 @@ interface SeqViewerProps {
   showComplement: boolean;
   size: { height: number; width: number };
   zoom: { circular: number; linear: number };
-  bpColors?: { [key: number | string]: string };
 }
 
 /**
@@ -153,7 +153,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    const { Circular: circularViewer, seq, cutSites } = this.props;
+    const { Circular: circularViewer, cutSites, seq } = this.props;
 
     return (
       <div className="la-vz-viewer-container">

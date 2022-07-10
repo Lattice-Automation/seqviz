@@ -11,23 +11,23 @@ export interface WithEventsProps {
 
 /* EventHandlerProps are those needed by the WithEventsHandler HOC */
 export interface EventsHandlerProps extends WithEventsProps {
+  Circular: boolean;
+  Linear: boolean;
+  bpsPerBlock?: number;
+  centralIndex?: number;
+  copyEvent?: (e: React.KeyboardEvent<HTMLElement>) => boolean;
+  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
+  mouseEvent: (e: any) => void;
+  name: string;
+  onUnmount: (id: string) => void;
+  selection: SeqVizSelection;
+  seq: string;
+  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
+  setSelection: (selection: SeqVizSelection) => void;
   size: {
     height: number;
     width: number;
   };
-  Circular: boolean;
-  name: string;
-  Linear: boolean;
-  bpsPerBlock?: number;
-  seq: string;
-  selection: SeqVizSelection;
-  centralIndex?: number;
-  setSelection: (selection: SeqVizSelection) => void;
-  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
-  copyEvent?: (e: React.KeyboardEvent<HTMLElement>) => boolean;
-  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
-  mouseEvent: (e: any) => void;
-  onUnmount: (id: string) => void;
 }
 
 /**

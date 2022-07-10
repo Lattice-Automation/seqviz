@@ -11,17 +11,17 @@ export interface SeqVizSelection {
   clockwise: boolean;
   color?: string;
   direction?: number;
+  element?: Element;
   end: number;
   gc?: number;
   length?: number;
   name?: string;
+  parent?: SeqVizSelection;
   ref?: null | string;
   seq?: string;
   start: number;
   tm?: number;
   type?: SelectionTypeEnum;
-  element?: Element;
-  parent?: SeqVizSelection;
 }
 
 /** Initial/default selection */
@@ -48,37 +48,37 @@ export type SeqVizMouseEvent = React.MouseEvent & {
 
 /* WithSelectionProps are those that the HOC injects into the wrapped component */
 export interface WithSelectionProps extends WithEventsProps {
-  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
-  mouseEvent: (e: any) => void;
-  onUnmount: (id: string) => void;
   Circular: boolean;
   Linear: boolean;
-  seq: string;
   bpsPerBlock?: number;
-  name: string;
-  selection: SeqVizSelection;
-  setSelection: (selection: SeqVizSelection) => void;
-  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
   centralIndex?: number;
+  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
+  mouseEvent: (e: any) => void;
+  name: string;
+  onUnmount: (id: string) => void;
+  selection: SeqVizSelection;
+  seq: string;
+  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
+  setSelection: (selection: SeqVizSelection) => void;
 }
 
 /* SelectionHandlerProps are those required by the HOC */
 export interface SelectionHandlerProps {
+  Circular: boolean;
+  Linear: boolean;
+  bpsPerBlock?: number;
+  center?: { x: number; y: number };
+  centralIndex?: number;
+  name: string;
+  selection: SeqVizSelection;
+  seq: string;
+  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
+  setSelection: (selection: SeqVizSelection) => void;
   size: {
     height: number;
     width: number;
   };
-  Circular: boolean;
-  Linear: boolean;
-  seq: string;
-  selection: SeqVizSelection;
-  setSelection: (selection: SeqVizSelection) => void;
-  setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
-  centralIndex?: number;
-  center?: { x: number; y: number };
   yDiff?: number;
-  bpsPerBlock?: number;
-  name: string;
 }
 
 /**
@@ -380,7 +380,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      *
      */
     calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
-      const { size, bpsPerBlock } = this.props;
+      const { bpsPerBlock, size } = this.props;
 
       const adjustedWidth = size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
       const block = e.currentTarget.getBoundingClientRect();
