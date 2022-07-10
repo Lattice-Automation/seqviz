@@ -6,27 +6,27 @@
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "lint": "eslint src --ext ts,tsx --quiet",
     "format": "prettier ./src/** --config package.json --write && eslint src --ext ts,tsx --fix",
     "format:check": "prettier ./src/** --config package.json --check",
-    "markdown": "node ./config/scripts/markdown.js ./README.md",
-    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish",
+    "lint": "eslint src --ext ts,tsx --quiet",
     "major": "npm run test:ci && npm version major && npm run update",
+    "markdown": "node ./config/scripts/markdown.js ./README.md",
     "minor": "npm run test:ci && npm version minor && npm run update",
     "patch": "npm run test:ci && npm version patch && npm run update",
     "start": "PORT=8000 node ./config/scripts/start.js",
     "test": "node ./config/scripts/test.js",
-    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build"
+    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build",
+    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish"
   },
   "keywords": [
-    "seqviz",
+    "AA",
     "DNA",
-    "viewer",
-    "sequence viewer",
-    "vector viewer",
-    "sequence visualizer",
+    "RNA",
     "plasmid",
-    "plasmid viewer"
+    "sequence",
+    "seqviz",
+    "vector",
+    "viewer"
   ],
   "homepage": "https://github.com/Lattice-Automation/seqviz",
   "bugs": {
