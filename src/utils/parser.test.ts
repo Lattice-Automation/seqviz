@@ -5,7 +5,7 @@ describe("Parse part input", () => {
     const inSeq =
       "acacgattgcccgacggattcatgagatgtcaggccgcaaagggcgcctggtggcGATGAATTGCGCGGCCATTCCGGAGTCCCTCGccgagagcgagttattcggcgtggtcagcggtgcctacaccggcgctgatcgctccagagtcg";
 
-    const { seq, compSeq } = dnaComplement(inSeq);
+    const { compSeq, seq } = dnaComplement(inSeq);
 
     expect(seq).toEqual(inSeq);
     expect(compSeq).toEqual(

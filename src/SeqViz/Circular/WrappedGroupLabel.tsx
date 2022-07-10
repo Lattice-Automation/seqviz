@@ -18,9 +18,9 @@ export default class WrappedGroupLabel extends React.Component {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'group' does not exist on type 'Readonly<... Remove this comment to see the full error message
       group,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'setHoveredGroup' does not exist on type ... Remove this comment to see the full error message
-      setHoveredGroup,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
       lineHeight,
+      // @ts-expect-error ts-migrate(2339) FIXME: Property 'lineHeight' does not exist on type 'Read... Remove this comment to see the full error message
+      setHoveredGroup,
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
       size: { height, width },
     } = this.props;

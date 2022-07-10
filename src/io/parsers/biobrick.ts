@@ -31,7 +31,7 @@ export default async (file, options) =>
       if (!part) rejectBioBrick("getting first part");
 
       // extract the userful fields
-      const { sequences, part_name, features: featureArray } = part;
+      const { features: featureArray, part_name, sequences } = part;
 
       // go another level...
       const seq_data = firstElement(sequences);
@@ -62,7 +62,7 @@ export default async (file, options) =>
         .map((f, i) => {
           if (!f) return null;
 
-          const { direction, startpos, endpos, type } = f;
+          const { direction, endpos, startpos, type } = f;
 
           return {
             ...annotationFactory(i),

@@ -139,7 +139,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
         return; // there isn't a known range with the id of the element
       }
 
-      const { start, end, direction, element } = knownRange;
+      const { direction, element, end, start } = knownRange;
       switch (knownRange.type) {
         case "ANNOTATION":
         case "PRIMER":
@@ -246,8 +246,8 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      */
     circularSeqEvent = (e: SeqVizMouseEvent) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-      const { seq, selection, currRef } = this.props;
-      let { start, end, clockwise } = selection;
+      const { currRef, selection, seq } = this.props;
+      let { clockwise, end, start } = selection;
 
       const currBase = this.calculateBaseCircular(e);
       let ref = currRef;
@@ -355,7 +355,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
      */
     calculateBaseLinear = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'size' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-      const { size, bpsPerBlock } = this.props;
+      const { bpsPerBlock, size } = this.props;
 
       const adjustedWidth = size.width; // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
       const block = e.currentTarget.getBoundingClientRect();
@@ -424,7 +424,7 @@ const withSelectionHandler = (WrappedComp: React.ComponentType<any>) =>
       ) {
         return;
       }
-      const { clockwise, start, end, ref, type, element, name }: any = {
+      const { clockwise, element, end, name, ref, start, type }: any = {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         ...this.props.selection,
         ...newSelection,

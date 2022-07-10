@@ -12,7 +12,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "sort-keys-fix", "typescript-sort-keys"],
+  "plugins": ["react", "@typescript-eslint", "sort-destructure-keys", "sort-keys-fix", "typescript-sort-keys"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-empty-function": "warn",
@@ -30,6 +30,7 @@
     "prefer-rest-params": "warn",
     "react/jsx-sort-props": [2, { "reservedFirst": true, "callbacksLast": true }],
     "react/prop-types": "off", // too many prop types warnings in handlers/selection.tsx. Should revist
+    "sort-destructure-keys/sort-destructure-keys": 2,
     "sort-keys-fix/sort-keys-fix": "error",
     "typescript-sort-keys/interface": "error",
     "typescript-sort-keys/string-enum": "error"

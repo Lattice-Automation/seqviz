@@ -98,21 +98,21 @@ class Linear extends React.Component<LinearProps> {
    */
   render() {
     const {
-      seq,
-      compSeq,
-      zoom,
-      showIndex,
-      showComplement,
-      showPrimers,
-      cutSites,
       annotations,
-      translations,
-      lineHeight,
-      elementHeight,
       bpsPerBlock,
-      size,
+      compSeq,
+      cutSites,
+      elementHeight,
+      lineHeight,
       onUnmount,
       search,
+      seq,
+      showComplement,
+      showIndex,
+      showPrimers,
+      size,
+      translations,
+      zoom,
     } = this.props;
 
     let { primers } = this.props;

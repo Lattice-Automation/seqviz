@@ -38,9 +38,9 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
   };
 
   displayCutSite = (cutSite: ICutSite) => {
-    const { radius, lineHeight, seqLength, getRotation, inputRef, generateArc } = this.props;
+    const { generateArc, getRotation, inputRef, lineHeight, radius, seqLength } = this.props;
     const { id, start } = cutSite;
-    let { fcut, rcut, end } = cutSite;
+    let { end, fcut, rcut } = cutSite;
 
     // crosses the zero index
     if (start + fcut > end + rcut) {

@@ -23,16 +23,16 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
   render() {
     const {
       annotationRows,
-      yDiff,
-      findXAndWidth,
-      inputRef,
-      seqBlockRef,
-      firstBase,
-      lastBase,
-      fullSeq,
-      elementHeight,
       bpsPerBlock,
+      elementHeight,
+      findXAndWidth,
+      firstBase,
+      fullSeq,
+      inputRef,
+      lastBase,
+      seqBlockRef,
       width,
+      yDiff,
     } = this.props;
 
     return (
@@ -89,12 +89,12 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
   };
 
   renderAnnotation = (a: Annotation, index: number) => {
-    const { inputRef, seqBlockRef, findXAndWidth, firstBase, lastBase, annotations, fullSeq, bpsPerBlock } = this.props;
+    const { annotations, bpsPerBlock, findXAndWidth, firstBase, fullSeq, inputRef, lastBase, seqBlockRef } = this.props;
 
-    const { color, name, direction, start, end } = a;
+    const { color, direction, end, name, start } = a;
     const forward = direction === 1;
     const reverse = direction === -1;
-    let { x: origX, width } = findXAndWidth(start, end);
+    let { width, x: origX } = findXAndWidth(start, end);
     const crossZero = start > end && end < firstBase;
 
     // does the annotation begin or end within this seqBlock with a directionality?
@@ -120,19 +120,19 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     if (splitAnnotation) {
       if (annotations.findIndex(ann => ann.id === a.id) === index) {
         // we're in the first half of the split annotation
-        ({ x: origX, width } = findXAndWidth(firstBase, end));
+        ({ width, x: origX } = findXAndWidth(firstBase, end));
         overflowLeft = true;
         overflowRight = false;
       } else {
         // we're in the second half of the split annotation
-        ({ x: origX, width } = findXAndWidth(start, lastBase));
+        ({ width, x: origX } = findXAndWidth(start, lastBase));
         overflowLeft = false;
         overflowRight = true;
       }
     } else if (start > end) {
       // the annotation crosses over the zero index and this needs to be accounted for
       // this is very similar to the Block rendering logic in ../Selection/Selection.jsx
-      ({ x: origX, width } = findXAndWidth(
+      ({ width, x: origX } = findXAndWidth(
         start > lastBase ? firstBase : Math.max(firstBase, start),
         end < firstBase ? lastBase : Math.min(lastBase, end)
       ));
@@ -151,7 +151,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     } else if (start === end) {
       // the annotation circles the entire plasmid and we aren't currently in a SeqBlock
       // where the annotation starts or ends
-      ({ x: origX, width } = findXAndWidth(start, end + fullSeq.length));
+      ({ width, x: origX } = findXAndWidth(start, end + fullSeq.length));
     }
 
     // create padding on either side, vertically, of an annotation

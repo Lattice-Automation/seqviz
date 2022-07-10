@@ -98,11 +98,11 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
    */
   scrollToCentralIndex = () => {
     const {
-      seqBlocks,
       blockHeights,
       bpsPerBlock,
-      totalHeight,
+      seqBlocks,
       size: { height },
+      totalHeight,
     } = this.props;
     const { visibleBlocks } = this.state;
     const { clientHeight, scrollHeight } = this.scroller.current;
@@ -256,10 +256,10 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
   render() {
     const {
-      seqBlocks,
       blockHeights,
-      totalHeight: height,
+      seqBlocks,
       size: { width },
+      totalHeight: height,
     } = this.props;
     const { visibleBlocks } = this.state;
 

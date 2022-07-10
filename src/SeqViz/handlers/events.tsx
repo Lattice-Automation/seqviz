@@ -76,7 +76,7 @@ const withEventRouter = WrappedComp =>
      */
     handleSeqInteraction = async type => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-      const { seq, Linear } = this.props;
+      const { Linear, seq } = this.props;
       const seqLength = seq.length;
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'bpsPerBlock' does not exist on type 'Rea... Remove this comment to see the full error message
       const { bpsPerBlock = Math.max(Math.floor(seqLength / 20), 1) } = this.props;
@@ -100,7 +100,7 @@ const withEventRouter = WrappedComp =>
         case "ShiftArrowLeft": {
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
           const { selection, setSelection } = this.props;
-          const { start, end } = selection;
+          const { end, start } = selection;
           if (Linear) {
             let { clockwise } = selection;
             let newPos = end;
@@ -169,9 +169,9 @@ const withEventRouter = WrappedComp =>
     handleCopy = () => {
       const {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type 'Readonly<{}... Remove this comment to see the full error message
-        seq,
+        selection: { end, ref, start },
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
-        selection: { start, end, ref },
+        seq,
       } = this.props;
 
       const formerFocus = document.activeElement;
@@ -199,11 +199,11 @@ const withEventRouter = WrappedComp =>
     selectAllHotkey = () => {
       const {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'setSelection' does not exist on type 'Re... Remove this comment to see the full error message
-        setSelection,
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection,
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
         selection: { start },
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'selection' does not exist on type 'Reado... Remove this comment to see the full error message
+        setSelection,
       } = this.props;
 
       const newSelection = {
@@ -255,7 +255,7 @@ const withEventRouter = WrappedComp =>
           this.resetClicked();
         }
       }
-      const { type, button, ctrlKey } = e;
+      const { button, ctrlKey, type } = e;
       const ctxMenuClick = type === "mousedown" && button === 0 && ctrlKey;
 
       if (e.button === 0 && !ctxMenuClick) {
@@ -295,7 +295,7 @@ const withEventRouter = WrappedComp =>
 
     render() {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'mouseEvent' does not exist on type 'Read... Remove this comment to see the full error message
-      const { mouseEvent, selection, setSelection, centralIndex, setCentralIndex, ...rest } = this.props;
+      const { centralIndex, mouseEvent, selection, setCentralIndex, setSelection, ...rest } = this.props;
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'Circular' does not exist on type 'Readon... Remove this comment to see the full error message
       const { Circular, name } = this.props;
 

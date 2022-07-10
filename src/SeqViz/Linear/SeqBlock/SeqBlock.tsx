@@ -71,7 +71,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   static defaultProps = {};
 
   componentWillUnmount = () => {
-    const { onUnmount, id } = this.props;
+    const { id, onUnmount } = this.props;
     onUnmount(id);
   };
 
@@ -91,10 +91,10 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     }
 
     const {
-      fullSeq: { length: seqLength },
-      firstBase,
-      size,
       bpsPerBlock,
+      firstBase,
+      fullSeq: { length: seqLength },
+      size,
     } = this.props;
 
     const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
@@ -133,7 +133,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * We're looking up each bp in the props.bpColors map to see if it should be shaded and, if so, wrapping it in a textSpan
    */
   seqTextSpan = (bp: string, i: number) => {
-    const { id, charWidth } = this.props;
+    const { charWidth, id } = this.props;
 
     const color = this.bpColorLookup(bp, i);
 
@@ -167,30 +167,30 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
   render() {
     const {
-      seq,
-      compSeq,
-      fullSeq,
       annotationRows,
-      forwardPrimerRows,
-      reversePrimerRows,
-      cutSiteRows,
-      searchRows,
-      translations,
       blockHeight,
-      showIndex,
-      showComplement,
-      showPrimers,
-      selection,
-      seqFontSize,
-      firstBase,
-      size,
-      lineHeight,
-      elementHeight,
-      mouseEvent,
-      inputRef,
-      id,
-      onUnmount,
       charWidth,
+      compSeq,
+      cutSiteRows,
+      elementHeight,
+      firstBase,
+      forwardPrimerRows,
+      fullSeq,
+      id,
+      inputRef,
+      lineHeight,
+      mouseEvent,
+      onUnmount,
+      reversePrimerRows,
+      searchRows,
+      selection,
+      seq,
+      seqFontSize,
+      showComplement,
+      showIndex,
+      showPrimers,
+      size,
+      translations,
       zoomed,
     } = this.props;
 

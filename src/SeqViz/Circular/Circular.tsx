@@ -99,7 +99,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
           // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
           inlinedLabels.push(ann.id);
         } else {
-          const { id, name, start, end } = ann;
+          const { end, id, name, start } = ann;
           const type = "annotation";
           outerLabels.push({ end, id, name, start, type });
         }
@@ -234,9 +234,9 @@ class Circular extends React.Component<CircularProps, CircularState> {
     // see svg.arc large-arc-flag
     sweepFWD?: boolean;
   }): string => {
-    const { innerRadius, outerRadius, length, largeArc, sweepFWD, arrowFWD, arrowREV } = args;
+    const { arrowFWD, arrowREV, innerRadius, largeArc, length, outerRadius, sweepFWD } = args;
     const { radius } = this.props;
-    const { seqLength, lineHeight } = this.state;
+    const { lineHeight, seqLength } = this.state;
     const offset = args.offset === undefined ? 0 : args.offset;
     // build up the six default coordinates
     let leftBottom = this.findCoor(offset, innerRadius);
@@ -302,9 +302,9 @@ class Circular extends React.Component<CircularProps, CircularState> {
       yDiff,
     } = this.props;
 
-    const { seqLength, lineHeight, annotationsInRows, primersInRows, inlinedLabels, outerLabels } = this.state;
+    const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, primersInRows, seqLength } = this.state;
 
-    const { getRotation, generateArc, findCoor, rotateCoor } = this;
+    const { findCoor, generateArc, getRotation, rotateCoor } = this;
 
     // general values/functions used in many/all children
     const general = {

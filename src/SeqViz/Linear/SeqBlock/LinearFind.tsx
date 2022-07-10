@@ -29,22 +29,22 @@ interface FindProps {
  */
 export default function LinearFind(props: FindProps) {
   const {
+    compYDiff,
     filteredRows: searchRows,
     findXAndWidth,
-    inputRef,
     firstBase,
-    lastBase,
-    indexYDiff,
-    compYDiff,
-    seqBlockRef,
-    listenerOnly,
     highlightedRegions,
+    indexYDiff,
+    inputRef,
+    lastBase,
+    listenerOnly,
+    seqBlockRef,
   } = props;
 
   return (
     <>
       {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
-      {highlightedRegions.map(({ start, end, color }) => (
+      {highlightedRegions.map(({ color, end, start }) => (
         <React.Fragment key={`highlight-${start}-${end}-1`}>
           <LinearFindBlock
             compYDiff={compYDiff}
@@ -112,18 +112,18 @@ export const LinearFindBlock = (props: {
   start: number;
 }) => {
   const {
-    inputRef,
+    compYDiff,
+    direction,
+    end,
+    fillStyle,
     findXAndWidth,
     firstBase,
-    lastBase,
-    start,
-    end,
-    seqBlockRef,
-    listenerOnly,
     indexYDiff,
-    direction,
-    compYDiff,
-    fillStyle,
+    inputRef,
+    lastBase,
+    listenerOnly,
+    seqBlockRef,
+    start,
   } = props;
 
   const findBlockProps = {
@@ -134,9 +134,9 @@ export const LinearFindBlock = (props: {
     style: { fill: listenerOnly ? "transparent" : fillStyle },
   };
 
-  let { x, width } = findXAndWidth(start, end);
+  let { width, x } = findXAndWidth(start, end);
   if (start > end) {
-    ({ x, width } = findXAndWidth(
+    ({ width, x } = findXAndWidth(
       start > lastBase ? firstBase : Math.max(firstBase, start),
       end < firstBase ? lastBase : Math.min(lastBase, end)
     ));

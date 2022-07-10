@@ -112,8 +112,8 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
    */
   circularProps = () => {
     const {
-      size,
       seq: { length: seqLength },
+      size,
     } = this.props;
 
     let zoom = this.props.zoom.circular || 0;
@@ -153,7 +153,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   };
 
   render() {
-    const { Circular: circularViewer, seq, cutSites } = this.props;
+    const { Circular: circularViewer, cutSites, seq } = this.props;
 
     return (
       <div className="la-vz-viewer-container">

@@ -31,18 +31,18 @@ interface TranslationRowsProps {
 export default class TranslationRows extends React.PureComponent<TranslationRowsProps> {
   render() {
     const {
-      translations,
-      yDiff,
-      inputRef,
-      seqBlockRef,
-      onUnmount,
-      fullSeq,
-      firstBase,
-      lastBase,
       bpsPerBlock,
       charWidth,
-      findXAndWidth,
       elementHeight,
+      findXAndWidth,
+      firstBase,
+      fullSeq,
+      inputRef,
+      lastBase,
+      onUnmount,
+      seqBlockRef,
+      translations,
+      yDiff,
     } = this.props;
 
     return (
@@ -136,7 +136,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
    * m = multiplier (FWD or REV)
    */
   genPath = (count: number, multiplier: number) => {
-    const { height: h, charWidth } = this.props; // width adjust
+    const { charWidth, height: h } = this.props; // width adjust
     const nW = count * charWidth;
     const wA = multiplier * 3;
     return `M 0 0
@@ -150,20 +150,20 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
   render() {
     const {
-      inputRef,
-      seqBlockRef: element,
-      firstBase,
-      lastBase,
-      translation,
-      fullSeq,
-      findXAndWidth,
-      height: h,
-      y,
-      charWidth,
       bpsPerBlock,
+      charWidth,
+      findXAndWidth,
+      firstBase,
+      fullSeq,
+      height: h,
+      inputRef,
+      lastBase,
+      seqBlockRef: element,
+      translation,
+      y,
     } = this.props;
 
-    const { id, start, end, AAseq, direction } = translation;
+    const { AAseq, direction, end, id, start } = translation;
 
     // build up a reference to this whole translation for
     // selection handler (used only for context clicking right now)

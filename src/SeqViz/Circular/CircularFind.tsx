@@ -32,7 +32,7 @@ interface CircularFindProps {
 }
 
 export const CircularFind = (props: CircularFindProps) => {
-  const { seqLength, search, radius, lineHeight, getRotation, generateArc, inputRef, highlightedRegions } = props;
+  const { generateArc, getRotation, highlightedRegions, inputRef, lineHeight, radius, search, seqLength } = props;
   const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
   const searchArcs = search.map(s => (
     <CircularFindArc
@@ -50,7 +50,7 @@ export const CircularFind = (props: CircularFindProps) => {
     />
   ));
 
-  const highlightArcs = highlightedRegions.map(({ start, end, color }) => (
+  const highlightArcs = highlightedRegions.map(({ color, end, start }) => (
     <CircularFindArc
       key={JSON.stringify({ end, start })}
       direction={1}
@@ -98,7 +98,7 @@ export const CircularFindArc = (props: {
   seqLength: number;
   start: number;
 }) => {
-  const { radius, lineHeight, seqLength, getRotation, generateArc, inputRef, start, direction, fillStyle } = props;
+  const { direction, fillStyle, generateArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
 
   let { end } = props;
   // crosses the zero index

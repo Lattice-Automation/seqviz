@@ -73,7 +73,7 @@ export default async (fileInput, fileName, colors = []) =>
       const SEQ_ROWS = file.substring(file.lastIndexOf("ORIGIN") + "ORIGIN".length, file.length);
       let seq = SEQ_ROWS.replace(/[^gatc]/gi, "");
       let compSeq = "";
-      ({ seq, compSeq } = dnaComplement(seq)); // seq and compSeq
+      ({ compSeq, seq } = dnaComplement(seq)); // seq and compSeq
 
       // +++++ANNOTATIONS+++++//
       // the features are translated into annotations
