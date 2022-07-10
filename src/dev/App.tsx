@@ -1,14 +1,12 @@
-import { useState } from "react";
-
-import { SeqVizProps } from "./SeqViz/SeqViz";
-import { SearchResult } from "./utils/search";
-import { SeqViz } from "./viewer";
-
 /**
  * This module is only used for developing seqviz
  * See viewer.js for the library's entrypoint
  */
-import React = require("react");
+import * as React from "react";
+
+import { SeqVizProps } from "../SeqViz/SeqViz";
+import { SearchResult } from "../utils/search";
+import { SeqViz } from "../viewer";
 
 export const App = () => {
   const [search, setSearch] = React.useState("");
@@ -110,9 +108,9 @@ export const App = () => {
 };
 
 const HighlightBox = (props: { submitIndices: (start: number, end: number, color: string) => void }) => {
-  const [start, setStart] = useState<number>(0);
-  const [end, setEnd] = useState<number>(0);
-  const [color, setColor] = useState("#ff6347");
+  const [start, setStart] = React.useState<number>(0);
+  const [end, setEnd] = React.useState<number>(0);
+  const [color, setColor] = React.useState("#ff6347");
 
   const onClick = () => {
     if (start >= 0 && end >= start) {
