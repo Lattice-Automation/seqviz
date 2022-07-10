@@ -98,11 +98,11 @@ export default async (fileArrayBuffer, options) => {
     } else if (ordOfNB === 10) {
       //  # READ THE FEATURES
       const directionalityDict = {
-        undefined: "NONE",
         "0": "NONE",
         "1": 1,
         "2": -1,
         "3": "BIDIRECTIONAL",
+        undefined: "NONE",
       };
 
       const xml = read(blockSize, "utf8");
@@ -128,11 +128,11 @@ export default async (fileArrayBuffer, options) => {
         // @ts-expect-error ts-migrate(2339) FIXME: Property 'annotations' does not exist on type '{}'... Remove this comment to see the full error message
         data.annotations.push({
           ...annotationFactory(),
-          name: attrs.name,
-          type: attrs.type,
           direction: directionalityDict[directionality],
-          start: minStart - 1,
           end: maxEnd - 1,
+          name: attrs.name,
+          start: minStart - 1,
+          type: attrs.type,
         });
       });
     } else {

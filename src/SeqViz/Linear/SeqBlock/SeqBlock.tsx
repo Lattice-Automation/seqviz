@@ -16,8 +16,8 @@ export type FindXAndWidthType = (
   n1?: number | null,
   n2?: number | null
 ) => {
-  x: number;
   width: number;
+  x: number;
 };
 
 interface SeqBlockProps {
@@ -32,6 +32,7 @@ interface SeqBlockProps {
   firstBase: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
+  highlightedRegions: HighlightRegion[];
   id: string;
   inputRef: InputRefFuncType;
   key: string;
@@ -51,7 +52,6 @@ interface SeqBlockProps {
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
-  highlightedRegions: HighlightRegion[];
 }
 
 /**
@@ -125,7 +125,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       width = size.width * ((seqLength % bpsPerBlock) / bpsPerBlock);
     }
 
-    return { x, width };
+    return { width, x };
   };
 
   /**
@@ -212,11 +212,11 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     const lastBase = firstBase + seq.length;
     const seqRange = {
+      element: this,
+      end: lastBase,
       ref: id,
       start: firstBase,
-      end: lastBase,
       type: "SEQ",
-      element: this,
     };
 
     // height and yDiff of forward primers (above sequence)
@@ -242,7 +242,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       showPrimers && reversePrimerRows.length ? elementHeight * 3 * reversePrimerRows.length : 0;
 
     // height and yDiff of translations
-    let translationYDiff = reversePrimerYDiff + reversePrimerHeight;
+    const translationYDiff = reversePrimerYDiff + reversePrimerHeight;
     const translationHeight = elementHeight * translations.length;
 
     // height and yDiff of annotations
@@ -276,149 +276,149 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     return (
       <svg
         {...svgProps}
-        className="la-vz-seqblock"
-        id={id}
         ref={inputRef(id, seqRange)}
-        onMouseDown={mouseEvent}
-        onMouseUp={mouseEvent}
-        onMouseMove={mouseEvent}
+        className="la-vz-seqblock"
         cursor="text"
+        id={id}
+        onMouseDown={mouseEvent}
+        onMouseMove={mouseEvent}
+        onMouseUp={mouseEvent}
       >
         <Selection.Block
-          selection={selection}
-          selectHeight={selectHeight}
           findXAndWidth={this.findXAndWidth}
-          inputRef={inputRef}
-          onUnmount={onUnmount}
           firstBase={firstBase}
-          lastBase={lastBase}
           fullSeq={fullSeq}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          selectHeight={selectHeight}
+          selection={selection}
+          onUnmount={onUnmount}
         />
         <Selection.Edges
-          lastBase={lastBase}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
           fullSeq={fullSeq}
+          lastBase={lastBase}
           selectEdgeHeight={selectEdgeHeight}
         />
         <LinearFind
-          inputRef={inputRef}
-          firstBase={firstBase}
+          compYDiff={compYDiff}
           filteredRows={filteredSearchRows}
           findXAndWidth={this.findXAndWidth}
+          firstBase={firstBase}
+          highlightedRegions={this.props.highlightedRegions}
           indexYDiff={indexYDiff}
-          compYDiff={compYDiff}
-          seqBlockRef={this}
+          inputRef={inputRef}
           lastBase={lastBase}
           listenerOnly={false}
-          highlightedRegions={this.props.highlightedRegions}
+          seqBlockRef={this}
         />
         <TranslationRows
           {...this.props}
-          yDiff={translationYDiff}
-          seqBlockRef={this}
+          findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
           lastBase={lastBase}
-          findXAndWidth={this.findXAndWidth}
+          seqBlockRef={this}
+          yDiff={translationYDiff}
         />
         <AnnotationRows
+          annotationRows={annotationRows}
           bpsPerBlock={this.props.bpsPerBlock}
           elementHeight={elementHeight}
-          firstBase={firstBase}
-          inputRef={inputRef}
-          annotationRows={annotationRows}
           findXAndWidth={this.findXAndWidth}
-          lastBase={lastBase}
-          yDiff={annYDiff}
-          seqBlockRef={this}
+          firstBase={firstBase}
           fullSeq={fullSeq}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          seqBlockRef={this}
           width={size.width}
+          yDiff={annYDiff}
         />
         {showPrimers && (
           <Primers
-            showPrimers={showPrimers}
-            elementHeight={elementHeight}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            forwardPrimerRows={forwardPrimerRows}
-            reversePrimerRows={forwardPrimerRows}
             charWidth={charWidth}
             direction={1}
-            fontSize={seqFontSize}
+            elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            fontSize={seqFontSize}
+            forwardPrimerRows={forwardPrimerRows}
             fullSeq={fullSeq}
+            inputRef={inputRef}
             lastBase={lastBase}
+            reversePrimerRows={forwardPrimerRows}
             seqBlockRef={this}
+            showPrimers={showPrimers}
             yDiff={forwardPrimerYDiff}
             zoomed={zoomed}
-            firstBase={firstBase}
+            onUnmount={onUnmount}
           />
         )}
         {showPrimers && (
           <Primers
-            showPrimers={showPrimers}
+            charWidth={charWidth}
+            direction={-1}
             elementHeight={elementHeight}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            forwardPrimerRows={forwardPrimerRows}
-            reversePrimerRows={forwardPrimerRows}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
-            lastBase={lastBase}
-            yDiff={reversePrimerYDiff}
-            direction={-1}
-            seqBlockRef={this}
-            fullSeq={fullSeq}
-            charWidth={charWidth}
             fontSize={seqFontSize}
+            forwardPrimerRows={forwardPrimerRows}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            lastBase={lastBase}
+            reversePrimerRows={forwardPrimerRows}
+            seqBlockRef={this}
+            showPrimers={showPrimers}
+            yDiff={reversePrimerYDiff}
             zoomed={zoomed}
+            onUnmount={onUnmount}
           />
         )}
         {showIndex && (
           <IndexRow
-            zoom={this.props.zoom}
-            showIndex={showIndex}
-            seq={seq}
-            size={size}
+            findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
             lastBase={lastBase}
+            seq={seq}
+            showIndex={showIndex}
+            size={size}
             transform={`translate(0, ${indexRowYDiff})`}
-            findXAndWidth={this.findXAndWidth}
+            zoom={this.props.zoom}
           />
         )}
         {zoomed ? (
           <CutSiteRow
-            findXAndWidth={this.findXAndWidth}
-            lastBase={lastBase}
-            yDiff={cutSiteYDiff}
-            zoom={this.props.zoom}
             cutSiteRows={cutSiteRows}
             elementHeight={elementHeight}
-            lineHeight={lineHeight}
+            findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
             inputRef={inputRef}
+            lastBase={lastBase}
+            lineHeight={lineHeight}
+            yDiff={cutSiteYDiff}
+            zoom={this.props.zoom}
           />
         ) : null}
         {zoomed ? (
-          <text {...textProps} y={indexYDiff} id={id}>
+          <text {...textProps} id={id} y={indexYDiff}>
             {seq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
           </text>
         ) : null}
         {compSeq && zoomed && showComplement ? (
-          <text {...textProps} y={compYDiff} id={id}>
+          <text {...textProps} id={id} y={compYDiff}>
             {compSeq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
           </text>
         ) : null}
 
         <LinearFind
           {...this.props}
+          compYDiff={compYDiff}
           filteredRows={filteredSearchRows}
           findXAndWidth={this.findXAndWidth}
           indexYDiff={indexYDiff}
-          compYDiff={compYDiff}
-          seqBlockRef={this}
           lastBase={lastBase}
           listenerOnly={true}
+          seqBlockRef={this}
         />
       </svg>
     );

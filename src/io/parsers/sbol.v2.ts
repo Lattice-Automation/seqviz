@@ -36,9 +36,9 @@ export default async (sbol, fileName, _ = []) =>
     xml2js.parseString(
       fileString,
       {
-        xmlns: true,
         attrkey: "xml_tag",
         tagNameProcessors: [xml2js.processors.stripPrefix],
+        xmlns: true,
       },
       (err, parsedSBOL) => {
         if (err) {
@@ -82,12 +82,15 @@ export default async (sbol, fileName, _ = []) =>
             const range = Range[0];
             annotations.push({
               ...annotationFactory(annId),
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              name: annId,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-              start: first(range.start) - 1,
+
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
               end: first(range.end) - 1,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              name: annId,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+              start: first(range.start) - 1,
             });
           });
 
@@ -107,16 +110,21 @@ export default async (sbol, fileName, _ = []) =>
             const { seq, compSeq } = dnaComplement(seqInput);
             partList.push({
               ...partFactory(),
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              name,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              note,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-              seq,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-              compSeq,
+
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'never[]' is not assignable to type 'never'.
               annotations,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+              compSeq,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              name,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              note,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+              seq,
             });
           }
         });

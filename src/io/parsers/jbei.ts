@@ -20,9 +20,9 @@ export default async (JBEI, _ = []) =>
     xml2js.parseString(
       fileString,
       {
-        xmlns: true,
         attrkey: "xml_tag",
         tagNameProcessors: [xml2js.processors.stripPrefix],
+        xmlns: true,
       },
       (err, parsedJBEI) => {
         if (err) rejectJBEI(err);
@@ -64,19 +64,26 @@ export default async (JBEI, _ = []) =>
             if (location && location[0] && location[0].genbankStart && location[0].end) {
               annotations.push({
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-                id: randomid(),
-                // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
                 color: colorByIndex(i),
-                // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-                start: +location[0].genbankStart[0]._ - 1 || 0, // JBEI is 1-based
-                // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-                end: +location[0].end[0]._ || 0,
+
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
                 direction: complement[0]._ === "true" ? -1 : 1,
-                // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-                type: type[0]._ || "N/A",
+
+                // JBEI is 1-based
+                // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+                end: +location[0].end[0]._ || 0,
+
+                // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+                id: randomid(),
+
                 // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
                 name: label[0]._ || "Untitled",
+
+                // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+                start: +location[0].genbankStart[0]._ - 1 || 0,
+
+                // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+                type: type[0]._ || "N/A",
               });
             }
           });
@@ -85,11 +92,11 @@ export default async (JBEI, _ = []) =>
         resolve([
           {
             ...partFactory(),
-            seq: parsedSeq2,
-            compSeq: parsedCompSeq,
-            name: parsedName,
             annotations: annotations,
             circular: parsedCircular,
+            compSeq: parsedCompSeq,
+            name: parsedName,
+            seq: parsedSeq2,
             source: fileString,
           },
         ]);

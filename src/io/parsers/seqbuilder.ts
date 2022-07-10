@@ -141,14 +141,18 @@ export default async (fileInput, fileName, _ = []) =>
             // create a new annotation around the properties in this line (type and range)
             annotations.push({
               ...annotationFactory(),
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-              type,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-              start,
-              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-              end,
+
               // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
               direction,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+              end,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+              start,
+
+              // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+              type,
             });
           }
         } else if (currLine.length === 1) {
@@ -195,11 +199,11 @@ export default async (fileInput, fileName, _ = []) =>
 
     return {
       ...partFactory(),
-      name: parsedName.trim() || fileName,
-      date: date,
-      seq: seq,
-      compSeq: compSeq,
       annotations: annotations,
       circular: circular,
+      compSeq: compSeq,
+      date: date,
+      name: parsedName.trim() || fileName,
+      seq: seq,
     };
   });

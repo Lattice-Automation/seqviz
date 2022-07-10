@@ -2,49 +2,49 @@ import { DirectionProp, Part } from "../part";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const DNAComplement = {
-  a: "t",
-  t: "a",
-  c: "g",
-  g: "c",
   A: "T",
-  T: "A",
-  C: "G",
-  G: "C",
-  r: "y",
-  R: "Y",
-  y: "r",
-  Y: "R",
-  S: "S",
-  s: "s",
-  W: "W",
-  w: "w",
-  d: "h",
-  D: "H",
-  h: "d",
-  H: "D",
-  k: "m",
-  K: "M",
-  m: "k",
-  M: "K",
-  v: "b",
-  V: "B",
-  b: "v",
   B: "V",
+  C: "G",
+  D: "H",
+  G: "C",
+  H: "D",
+  K: "M",
+  M: "K",
   N: "N",
-  n: "n",
-  X: "X",
-  x: "x",
+  R: "Y",
+  S: "S",
+  T: "A",
   U: "A",
+  V: "B",
+  W: "W",
+  X: "X",
+  Y: "R",
+  a: "t",
+  b: "v",
+  c: "g",
+  d: "h",
+  g: "c",
+  h: "d",
+  k: "m",
+  m: "k",
+  n: "n",
+  r: "y",
+  s: "s",
+  t: "a",
   u: "a",
+  v: "b",
+  w: "w",
+  x: "x",
+  y: "r",
 };
 
 /**
  * return the filtered sequence and its complement
  * if its an empty string, return the same for both
  */
-export const dnaComplement = (origSeq: string): { seq: string; compSeq: string } => {
+export const dnaComplement = (origSeq: string): { compSeq: string; seq: string } => {
   if (!origSeq) {
-    return { seq: "", compSeq: "" };
+    return { compSeq: "", seq: "" };
   }
 
   // filter out unrecognized basepairs and build up the complement
@@ -56,7 +56,7 @@ export const dnaComplement = (origSeq: string): { seq: string; compSeq: string }
       compSeq += DNAComplement[origSeq[i]];
     }
   }
-  return { seq, compSeq };
+  return { compSeq, seq };
 };
 
 /**
@@ -110,13 +110,13 @@ export const directionality = (direction: DirectionProp | undefined | string): -
 };
 
 export const partFactory = (): Part => ({
-  name: "",
-  date: new Date().getTime(),
-  seq: "",
-  compSeq: "",
   annotations: [],
-  primers: [],
+  compSeq: "",
   cutSites: [],
+  date: new Date().getTime(),
+  name: "",
   note: "",
-  source: { name: "", file: "" },
+  primers: [],
+  seq: "",
+  source: { file: "", name: "" },
 });

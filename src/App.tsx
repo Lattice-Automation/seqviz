@@ -15,40 +15,40 @@ export const App = () => {
   const [searchResults, setSearchResults] = React.useState<SearchResult[]>([]);
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
-    translations: [{ start: 0, end: 10, direction: 1 }],
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(1),
-    enzymesCustom: {
-      topStrand: {
-        rseq: "CCTTGG", // recognition sequence
-        fcut: 0, // cut index on FWD strand, relative to start of rseq
-        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
-        // highlightColor: "red" /* pass in color */,
-      },
-      bottomStrand: {
-        rseq: "GTAC", // recognition sequence
-        fcut: 0, // cut index on FWD strand, relative to start of rseq
-        rcut: 1, // cut index on REV strand, relative to start of rseq - pass in negative offset
-        highlightColor: "#D7E5F0" /* pass in color */,
-      },
-    },
-    enzymes: [],
-    rotateOnScroll: true,
-    viewer: "both" as const,
     annotations: [
-      { color: "green", direction: 1, start: 8, end: 19, name: "test" },
-      { direction: 1, start: 8, end: 19, name: "test" },
+      { color: "green", direction: 1, end: 19, name: "test", start: 8 },
+      { direction: 1, end: 19, name: "test", start: 8 },
     ],
     backbone: "pSB1C3",
-    showAnnotations: true,
-    showPrimers: true,
-    showComplement: true,
-    showIndex: true,
-    zoom: { linear: 90, circular: 0 },
+    bpColors: {},
     colors: ["#8CDEBD"],
+    copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
+    enzymes: [],
+    enzymesCustom: {
+      bottomStrand: {
+        // recognition sequence
+        fcut: 0,
+        // cut index on REV strand, relative to start of rseq - pass in negative offset
+        highlightColor: "#D7E5F0",
+
+        // cut index on FWD strand, relative to start of rseq
+        rcut: 1,
+
+        rseq: "GTAC" /* pass in color */,
+      },
+      topStrand: {
+        // recognition sequence
+        fcut: 0,
+        // cut index on FWD strand, relative to start of rseq
+        rcut: 1,
+        rseq: "CCTTGG", // cut index on REV strand, relative to start of rseq - pass in negative offset
+        // highlightColor: "red" /* pass in color */,
+      },
+    },
     onSearch: (results: SearchResult[]) => {
       setSearchResults(results);
     },
-    bpColors: {},
+    rotateOnScroll: true,
     /* bpColors: {
      *   10: "green",
      *   11: "green",
@@ -56,9 +56,24 @@ export const App = () => {
      *   200: "blue",
      *   201: "red",
      * }, */
-    search: { query: "gtacc", mismatch: 0 },
-    copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
+    search: { mismatch: 0, query: "gtacc" },
+
+    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(1),
+
+    showAnnotations: true,
+
+    showComplement: true,
+
+    showIndex: true,
+
+    showPrimers: true,
+
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
+
+    translations: [{ direction: 1, end: 10, start: 0 }],
+
+    viewer: "both" as const,
+    zoom: { circular: 0, linear: 90 },
     // highlightedRegions: [
     //   { start: 36, end: 66, color: "magenta" },
     //   { start: 70, end: 80 },
@@ -66,14 +81,13 @@ export const App = () => {
   });
   const submitIndices = (start: number, end: number, color: string) => {
     const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
-    const newHighlightedRegions = [...oldHighlightedRegions, { start, end, color }];
+    const newHighlightedRegions = [...oldHighlightedRegions, { color, end, start }];
     setSeqVizProps({ ...seqvizProps, highlightedRegions: newHighlightedRegions });
   };
   return (
     <>
       <HighlightBox submitIndices={submitIndices} />
       <SearchBox
-        search={search}
         highlightSearch={() => {
           const newBPColors = { ...seqvizProps.bpColors };
           searchResults.forEach((res: SearchResult) => {
@@ -83,9 +97,10 @@ export const App = () => {
           });
           setSeqVizProps({ ...seqvizProps, bpColors: newBPColors });
         }}
+        search={search}
         onSearch={(search: string) => {
           setSearch(search);
-          setSeqVizProps({ ...seqvizProps, search: { query: search, mismatch: 0 } });
+          setSeqVizProps({ ...seqvizProps, search: { mismatch: 0, query: search } });
         }}
       />
 
@@ -124,7 +139,7 @@ const HighlightBox = (props: { submitIndices: (start: number, end: number, color
   );
 };
 
-const SearchBox = (props: { search: string; onSearch: (search: string) => void; highlightSearch: () => void }) => {
+const SearchBox = (props: { highlightSearch: () => void; onSearch: (search: string) => void; search: string }) => {
   return (
     <div>
       <input type="text" value={props.search} onChange={e => props.onSearch(e.target.value)} />

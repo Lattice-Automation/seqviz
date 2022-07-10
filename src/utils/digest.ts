@@ -28,16 +28,16 @@ export const cutSitesInRows = (
     const filteredSites = sites.filter(c => !(c.fcut === 0 && c.rcut === 0));
     filteredSites.forEach(c =>
       cutSites.push({
-        id: randomid(),
-        name: enzymeName,
-        start: c.start % seq.length,
         end: c.end % seq.length,
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
-        rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
-        recogStrand: c.recogStrand,
-        recogStart: c.recogStart,
-        recogEnd: c.recogEnd % seq.length,
         highlightColor: c.highlightColor,
+        id: randomid(),
+        name: enzymeName,
+        rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
+        recogEnd: c.recogEnd % seq.length,
+        recogStart: c.recogStart,
+        recogStrand: c.recogStrand,
+        start: c.start % seq.length,
       })
     );
   });
@@ -87,15 +87,16 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
     // add the cut site index, after correcting for actual cut site index
     const index = result.index;
     cutSiteIndices.push({
-      cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      fcut: index + fcut,
-      rcut: index + rcut,
-      start: index,
+      cutEnzymes: enzymeName ? { end: [enzymeName], start: [enzymeName] } : null,
       end: index + recogLength,
-      recogStrand: 1,
-      recogStart: index + recogStart - shiftRecogStart,
-      recogEnd: index + recogEnd + shiftRecogEnd,
+      // enzymes that contributed to this cut site
+      fcut: index + fcut,
       highlightColor: enzyme.highlightColor,
+      rcut: index + rcut,
+      recogEnd: index + recogEnd + shiftRecogEnd,
+      recogStart: index + recogStart - shiftRecogStart,
+      recogStrand: 1,
+      start: index,
     });
     result = regTest.exec(seqToSearch);
   }
@@ -110,15 +111,16 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
     // same above, except correcting for the new reverse complement indexes
     const index = result.index;
     cutSiteIndices.push({
-      cutEnzymes: enzymeName ? { start: [enzymeName], end: [enzymeName] } : null, // enzymes that contributed to this cut site
-      fcut: index + recogLength - rcut,
-      rcut: index + recogLength - fcut,
-      start: index,
+      cutEnzymes: enzymeName ? { end: [enzymeName], start: [enzymeName] } : null,
       end: index + recogLength,
-      recogStrand: -1,
-      recogStart: index + recogStart - shiftRecogStart,
-      recogEnd: index + recogEnd + shiftRecogEnd,
+      // enzymes that contributed to this cut site
+      fcut: index + recogLength - rcut,
       highlightColor: enzyme.highlightColor,
+      rcut: index + recogLength - fcut,
+      recogEnd: index + recogEnd + shiftRecogEnd,
+      recogStart: index + recogStart - shiftRecogStart,
+      recogStrand: -1,
+      start: index,
     });
     result = reqTestRC.exec(seqToSearch);
   }
@@ -167,8 +169,8 @@ const digestPart = (enzymeName, part, circularCheck) => {
         (acc, a) =>
           acc.concat(a, {
             ...a,
-            start: a.start + seqToCutLength,
             end: a.end + seqToCutLength,
+            start: a.start + seqToCutLength,
           }),
         []
       );
@@ -213,8 +215,8 @@ const digestPart = (enzymeName, part, circularCheck) => {
     const adjustedAnnotations = annotations
       .map(a => ({
         ...a,
-        start: a.start - cutSequenceStart,
         end: a.end - cutSequenceStart,
+        start: a.start - cutSequenceStart,
       }))
       .filter(
         a =>
@@ -224,19 +226,21 @@ const digestPart = (enzymeName, part, circularCheck) => {
       )
       .map(a => ({
         ...a,
-        start: Math.max(a.start, 0),
         end: Math.min(a.end, newSeqLength + endDiff),
+        start: Math.max(a.start, 0),
       }));
 
     // push the newly fragmented sequences to the list
     if (!(cutSeq.startsWith("*") && cutCompSeq.startsWith("*"))) {
       fragmentedSequences.push({
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-        seq: cutSeq,
+        annotations: adjustedAnnotations,
+
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         compSeq: cutCompSeq,
+
         // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-        annotations: adjustedAnnotations,
+        seq: cutSeq,
       });
     }
   };
@@ -299,8 +303,8 @@ const digestPart = (enzymeName, part, circularCheck) => {
 const annPosToInts = anns =>
   anns.map(a => ({
     ...a,
-    start: +a.start,
     end: +a.end,
+    start: +a.start,
   }));
 
 /**
@@ -346,8 +350,8 @@ export const digest = (enzymeNames, part) => {
   return newParts.map((p, i) => ({
     ...p,
     _id: randomid(),
-    name: `${part.name}_${i}`,
     date: new Date(),
+    name: `${part.name}_${i}`,
     source: [part._id],
   }));
 };

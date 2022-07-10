@@ -17,1209 +17,1209 @@
  *
  */
 export default {
-  "PI-SceI": {
-    rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
-    rcut: 11,
-    fcut: 15,
-  },
-  "PI-PspI": {
-    rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
-    rcut: 13,
-    fcut: 17,
-  },
-  "I-CeuI": {
-    rseq: "TAACTATAACGGTCCTAAGGTAGCGAA",
-    rcut: 14,
-    fcut: 18,
-  },
-  "I-SceI": {
-    rseq: "TAGGGATAACAGGGTAAT",
-    rcut: 5,
-    fcut: 9,
-  },
-  AscI: {
-    rseq: "GGCGCGCC",
-    rcut: 6,
-    fcut: 2,
-  },
-  AsiSI: {
-    rseq: "GCGATCGC",
-    rcut: 3,
-    fcut: 5,
-  },
-  FseI: {
-    rseq: "GGCCGGCC",
-    rcut: 2,
-    fcut: 6,
-  },
-  NotI: {
-    rseq: "GCGGCCGC",
-    rcut: 6,
-    fcut: 2,
-  },
-  PacI: {
-    rseq: "TTAATTAA",
-    rcut: 3,
-    fcut: 5,
-  },
-  PmeI: {
-    rseq: "GTTTAAAC",
-    rcut: 4,
-    fcut: 4,
-  },
-  PspXI: {
-    rseq: "VCTCGAGB",
-    rcut: 6,
-    fcut: 2,
-  },
-  SbfI: {
-    rseq: "CCTGCAGG",
-    rcut: 2,
-    fcut: 6,
-  },
-  SfiI: {
-    rseq: "GGCCNNNNNGGCC",
-    rcut: 5,
-    fcut: 8,
-  },
-  SgrAI: {
-    rseq: "CRCCGGYG",
-    rcut: 6,
-    fcut: 2,
-  },
-  SrfI: {
-    rseq: "GCCCGGGC",
-    rcut: 4,
-    fcut: 4,
-  },
-  SwaI: {
-    rseq: "ATTTAAAT",
-    rcut: 4,
-    fcut: 4,
-  },
-  BaeI: {
-    rseq: "NNNNNNNNNNNNNNNACNNNNGTAYCNNNNNNNNNNNN",
-    rcut: 33,
-    fcut: 38,
-  },
-  BbvCI: {
-    rseq: "CCTCAGC",
-    rcut: 5,
-    fcut: 2,
-  },
-  BspQI: {
-    rseq: "GCTCTTCNNNN",
-    rcut: 11,
-    fcut: 8,
-  },
-  CspCI: {
-    rseq: "NNNNNNNNNNNNNCAANNNNNGTGGNNNNNNNNNNNN",
-    rcut: 35,
-    fcut: 37,
-  },
-  PpuMI: {
-    rseq: "RGGWCCY",
-    rcut: 5,
-    fcut: 2,
-  },
-  RsrII: {
-    rseq: "CGGWCCG",
-    rcut: 5,
-    fcut: 2,
-  },
-  SapI: {
-    rseq: "GCTCTTCNNNN",
-    rcut: 11,
-    fcut: 8,
-  },
-  SexAI: {
-    rseq: "ACCWGGT",
-    rcut: 6,
-    fcut: 1,
-  },
   AatII: {
+    fcut: 5,
+    rcut: 1,
     rseq: "GACGTC",
-    rcut: 1,
-    fcut: 5,
-  },
-  Acc65I: {
-    rseq: "GGTACC",
-    rcut: 5,
-    fcut: 1,
-  },
-  AccI: {
-    rseq: "GTMKAC",
-    rcut: 4,
-    fcut: 2,
-  },
-  AclI: {
-    rseq: "AACGTT",
-    rcut: 4,
-    fcut: 2,
-  },
-  AcuI: {
-    rseq: "CTGAAGNNNNNNNNNNNNNNNN",
-    rcut: 20,
-    fcut: 22,
-  },
-  AfeI: {
-    rseq: "AGCGCT",
-    rcut: 3,
-    fcut: 3,
-  },
-  AflII: {
-    rseq: "CTTAAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  AflIII: {
-    rseq: "ACRYGT",
-    rcut: 5,
-    fcut: 1,
-  },
-  AgeI: {
-    rseq: "ACCGGT",
-    rcut: 5,
-    fcut: 1,
-  },
-  AhdI: {
-    rseq: "GACNNNNNGTC",
-    rcut: 5,
-    fcut: 6,
-  },
-  AleI: {
-    rseq: "CACNNNNGTG",
-    rcut: 5,
-    fcut: 5,
-  },
-  AlwNI: {
-    rseq: "CAGNNNCTG",
-    rcut: 3,
-    fcut: 6,
-  },
-  ApaI: {
-    rseq: "GGGCCC",
-    rcut: 1,
-    fcut: 5,
-  },
-  ApaLI: {
-    rseq: "GTGCAC",
-    rcut: 5,
-    fcut: 1,
-  },
-  ApoI: {
-    rseq: "RAATTY",
-    rcut: 5,
-    fcut: 1,
-  },
-  AseI: {
-    rseq: "ATTAAT",
-    rcut: 4,
-    fcut: 2,
-  },
-  AvaI: {
-    rseq: "CYCGRG",
-    rcut: 5,
-    fcut: 1,
-  },
-  AvrII: {
-    rseq: "CCTAGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  BaeGI: {
-    rseq: "GKGCMC",
-    rcut: 1,
-    fcut: 5,
-  },
-  BamHI: {
-    rseq: "GGATCC",
-    rcut: 5,
-    fcut: 1,
-  },
-  BanI: {
-    rseq: "GGYRCC",
-    rcut: 5,
-    fcut: 1,
-  },
-  BanII: {
-    rseq: "GRGCYC",
-    rcut: 1,
-    fcut: 5,
-  },
-  BbsI: {
-    rseq: "GAAGACNNNNNN",
-    rcut: 12,
-    fcut: 8,
-  },
-  BcgI: {
-    rseq: "NNNNNNNNNNNNCGANNNNNNTGCNNNNNNNNNNNN",
-    rcut: 34,
-    fcut: 36,
-  },
-  BciVI: {
-    rseq: "GTATCCNNNNNN",
-    rcut: 11,
-    fcut: 12,
-  },
-  BclI: {
-    rseq: "TGATCA",
-    rcut: 5,
-    fcut: 1,
-  },
-  BfuAI: {
-    rseq: "ACCTGCNNNNNNNN",
-    rcut: 14,
-    fcut: 10,
-  },
-  BglI: {
-    rseq: "GCCNNNNNGGC",
-    rcut: 4,
-    fcut: 7,
-  },
-  BglII: {
-    rseq: "AGATCT",
-    rcut: 5,
-    fcut: 1,
-  },
-  BlpI: {
-    rseq: "GCTNAGC",
-    rcut: 5,
-    fcut: 2,
-  },
-  BmgBI: {
-    rseq: "CACGTC",
-    rcut: 3,
-    fcut: 3,
-  },
-  BmrI: {
-    rseq: "ACTGGGNNNNN",
-    rcut: 10,
-    fcut: 11,
-  },
-  BmtI: {
-    rseq: "GCTAGC",
-    rcut: 1,
-    fcut: 5,
-  },
-  BpmI: {
-    rseq: "CTGGAGNNNNNNNNNNNNNNNN",
-    rcut: 20,
-    fcut: 22,
-  },
-  Bpu10I: {
-    rseq: "CCTNAGC",
-    rcut: 5,
-    fcut: 2,
-  },
-  BpuEI: {
-    rseq: "CTTGAGNNNNNNNNNNNNNNNN",
-    rcut: 20,
-    fcut: 22,
-  },
-  BsaAI: {
-    rseq: "YACGTR",
-    rcut: 3,
-    fcut: 3,
-  },
-  BsaBI: {
-    rseq: "GATNNNNATC",
-    rcut: 5,
-    fcut: 5,
-  },
-  BsaHI: {
-    rseq: "GRCGYC",
-    rcut: 4,
-    fcut: 2,
-  },
-  BsaI: {
-    rseq: "GGTCTCNNNNN",
-    rcut: 11,
-    fcut: 7,
-  },
-  BsaWI: {
-    rseq: "WCCGGW",
-    rcut: 5,
-    fcut: 1,
-  },
-  BsaXI: {
-    rseq: "NNNNNNNNNNNNACNNNNNCTCCNNNNNNNNNN",
-    rcut: 30,
-    fcut: 33,
-  },
-  BseRI: {
-    rseq: "GAGGAGNNNNNNNNNN",
-    rcut: 14,
-    fcut: 16,
-  },
-  BseYI: {
-    rseq: "CCCAGC",
-    rcut: 5,
-    fcut: 1,
-  },
-  BsgI: {
-    rseq: "GTGCAGNNNNNNNNNNNNNNNN",
-    rcut: 20,
-    fcut: 22,
-  },
-  BsiEI: {
-    rseq: "CGRYCG",
-    rcut: 2,
-    fcut: 4,
-  },
-  BsiHKAI: {
-    rseq: "GWGCWC",
-    rcut: 1,
-    fcut: 5,
-  },
-  BsiWI: {
-    rseq: "CGTACG",
-    rcut: 5,
-    fcut: 1,
-  },
-  BsmBI: {
-    rseq: "CGTCTCNNNNN",
-    rcut: 11,
-    fcut: 7,
-  },
-  BsmI: {
-    rseq: "GAATGCN",
-    rcut: 5,
-    fcut: 7,
-  },
-  BsoBI: {
-    rseq: "CYCGRG",
-    rcut: 5,
-    fcut: 1,
-  },
-  Bsp1286I: {
-    rseq: "GDGCHC",
-    rcut: 1,
-    fcut: 5,
-  },
-  BspDI: {
-    rseq: "ATCGAT",
-    rcut: 4,
-    fcut: 2,
-  },
-  BspEI: {
-    rseq: "TCCGGA",
-    rcut: 5,
-    fcut: 1,
-  },
-  BspHI: {
-    rseq: "TCATGA",
-    rcut: 5,
-    fcut: 1,
-  },
-  BspMI: {
-    rseq: "ACCTGCNNNNNNNN",
-    rcut: 14,
-    fcut: 10,
-  },
-  BsrBI: {
-    rseq: "CCGCTC",
-    rcut: 3,
-    fcut: 3,
-  },
-  BsrDI: {
-    rseq: "GCAATGNN",
-    rcut: 6,
-    fcut: 8,
-  },
-  BsrFI: {
-    rseq: "RCCGGY",
-    rcut: 5,
-    fcut: 1,
-  },
-  BsrGI: {
-    rseq: "TGTACA",
-    rcut: 5,
-    fcut: 1,
-  },
-  BssHII: {
-    rseq: "GCGCGC",
-    rcut: 5,
-    fcut: 1,
-  },
-  BssSI: {
-    rseq: "CACGAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  BstAPI: {
-    rseq: "GCANNNNNTGC",
-    rcut: 4,
-    fcut: 7,
-  },
-  BstBI: {
-    rseq: "TTCGAA",
-    rcut: 4,
-    fcut: 2,
-  },
-  BstEII: {
-    rseq: "GGTNACC",
-    rcut: 6,
-    fcut: 1,
-  },
-  BstXI: {
-    rseq: "CCANNNNNNTGG",
-    rcut: 4,
-    fcut: 8,
-  },
-  BstYI: {
-    rseq: "RGATCY",
-    rcut: 5,
-    fcut: 1,
-  },
-  BstZ17I: {
-    rseq: "GTATAC",
-    rcut: 3,
-    fcut: 3,
-  },
-  Bsu36I: {
-    rseq: "CCTNAGG",
-    rcut: 5,
-    fcut: 2,
-  },
-  BtgI: {
-    rseq: "CCRYGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  BtgZI: {
-    rseq: "GCGATGNNNNNNNNNNNNNN",
-    rcut: 20,
-    fcut: 16,
-  },
-  BtsI: {
-    rseq: "GCAGTGNN",
-    rcut: 6,
-    fcut: 8,
-  },
-  ClaI: {
-    rseq: "ATCGAT",
-    rcut: 4,
-    fcut: 2,
-  },
-  DraI: {
-    rseq: "TTTAAA",
-    rcut: 3,
-    fcut: 3,
-  },
-  DraIII: {
-    rseq: "CACNNNGTG",
-    rcut: 3,
-    fcut: 6,
-  },
-  DrdI: {
-    rseq: "GACNNNNNNGTC",
-    rcut: 5,
-    fcut: 7,
-  },
-  EaeI: {
-    rseq: "YGGCCR",
-    rcut: 5,
-    fcut: 1,
-  },
-  EagI: {
-    rseq: "CGGCCG",
-    rcut: 5,
-    fcut: 1,
-  },
-  EarI: {
-    rseq: "CTCTTCNNNN",
-    rcut: 10,
-    fcut: 7,
-  },
-  EciI: {
-    rseq: "GGCGGANNNNNNNNNNN",
-    rcut: 15,
-    fcut: 17,
-  },
-  Eco53kI: {
-    rseq: "GAGCTC",
-    rcut: 3,
-    fcut: 3,
-  },
-  EcoNI: {
-    rseq: "CCTNNNNNAGG",
-    rcut: 6,
-    fcut: 5,
-  },
-  EcoO109I: {
-    rseq: "RGGNCCY",
-    rcut: 5,
-    fcut: 2,
-  },
-  EcoRI: {
-    rseq: "GAATTC",
-    rcut: 5,
-    fcut: 1,
-  },
-  EcoRV: {
-    rseq: "GATATC",
-    rcut: 3,
-    fcut: 3,
-  },
-  Esp3I: {
-    rseq: "CGTCTCNNNNN",
-    rcut: 11,
-    fcut: 7,
-  },
-  FspI: {
-    rseq: "TGCGCA",
-    rcut: 3,
-    fcut: 3,
-  },
-  HaeII: {
-    rseq: "RGCGCY",
-    rcut: 1,
-    fcut: 5,
-  },
-  HincII: {
-    rseq: "GTYRAC",
-    rcut: 3,
-    fcut: 3,
-  },
-  HindIII: {
-    rseq: "AAGCTT",
-    rcut: 5,
-    fcut: 1,
-  },
-  HpaI: {
-    rseq: "GTTAAC",
-    rcut: 3,
-    fcut: 3,
-  },
-  KasI: {
-    rseq: "GGCGCC",
-    rcut: 5,
-    fcut: 1,
-  },
-  KpnI: {
-    rseq: "GGTACC",
-    rcut: 1,
-    fcut: 5,
-  },
-  MfeI: {
-    rseq: "CAATTG",
-    rcut: 5,
-    fcut: 1,
-  },
-  MluI: {
-    rseq: "ACGCGT",
-    rcut: 5,
-    fcut: 1,
-  },
-  MmeI: {
-    rseq: "TCCRACNNNNNNNNNNNNNNNNNNNN",
-    rcut: 24,
-    fcut: 26,
-  },
-  MscI: {
-    rseq: "TGGCCA",
-    rcut: 3,
-    fcut: 3,
-  },
-  MslI: {
-    rseq: "CAYNNNNRTG",
-    rcut: 5,
-    fcut: 5,
-  },
-  MspA1I: {
-    rseq: "CMGCKG",
-    rcut: 3,
-    fcut: 3,
-  },
-  NaeI: {
-    rseq: "GCCGGC",
-    rcut: 3,
-    fcut: 3,
-  },
-  NarI: {
-    rseq: "GGCGCC",
-    rcut: 4,
-    fcut: 2,
-  },
-  NcoI: {
-    rseq: "CCATGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  NdeI: {
-    rseq: "CATATG",
-    rcut: 4,
-    fcut: 2,
-  },
-  NgoMIV: {
-    rseq: "GCCGGC",
-    rcut: 5,
-    fcut: 1,
-  },
-  NheI: {
-    rseq: "GCTAGC",
-    rcut: 5,
-    fcut: 1,
-  },
-  NmeAIII: {
-    rseq: "GCCGAGNNNNNNNNNNNNNNNNNNNN",
-    rcut: 25,
-    fcut: 26,
-  },
-  NruI: {
-    rseq: "TCGCGA",
-    rcut: 3,
-    fcut: 3,
-  },
-  NsiI: {
-    rseq: "ATGCAT",
-    rcut: 1,
-    fcut: 5,
-  },
-  NspI: {
-    rseq: "RCATGY",
-    rcut: 1,
-    fcut: 5,
-  },
-  PaeR7I: {
-    rseq: "CTCGAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  PciI: {
-    rseq: "ACATGT",
-    rcut: 5,
-    fcut: 1,
-  },
-  PflFI: {
-    rseq: "GACNNNGTC",
-    rcut: 5,
-    fcut: 4,
-  },
-  PflMI: {
-    rseq: "CCANNNNNTGG",
-    rcut: 4,
-    fcut: 7,
-  },
-  PluTI: {
-    rseq: "GGCGCC",
-    rcut: 1,
-    fcut: 5,
-  },
-  PmlI: {
-    rseq: "CACGTG",
-    rcut: 3,
-    fcut: 3,
-  },
-  PshAI: {
-    rseq: "GACNNNNGTC",
-    rcut: 5,
-    fcut: 5,
-  },
-  PsiI: {
-    rseq: "TTATAA",
-    rcut: 3,
-    fcut: 3,
-  },
-  PspOMI: {
-    rseq: "GGGCCC",
-    rcut: 5,
-    fcut: 1,
-  },
-  PstI: {
-    rseq: "CTGCAG",
-    rcut: 1,
-    fcut: 5,
-  },
-  PvuI: {
-    rseq: "CGATCG",
-    rcut: 2,
-    fcut: 4,
-  },
-  PvuII: {
-    rseq: "CAGCTG",
-    rcut: 3,
-    fcut: 3,
-  },
-  SacI: {
-    rseq: "GAGCTC",
-    rcut: 1,
-    fcut: 5,
-  },
-  SacII: {
-    rseq: "CCGCGG",
-    rcut: 2,
-    fcut: 4,
-  },
-  SalI: {
-    rseq: "GTCGAC",
-    rcut: 5,
-    fcut: 1,
-  },
-  ScaI: {
-    rseq: "AGTACT",
-    rcut: 3,
-    fcut: 3,
-  },
-  SfcI: {
-    rseq: "CTRYAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  SfoI: {
-    rseq: "GGCGCC",
-    rcut: 3,
-    fcut: 3,
-  },
-  SmaI: {
-    rseq: "CCCGGG",
-    rcut: 3,
-    fcut: 3,
-  },
-  SmlI: {
-    rseq: "CTYRAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  SnaBI: {
-    rseq: "TACGTA",
-    rcut: 3,
-    fcut: 3,
-  },
-  SpeI: {
-    rseq: "ACTAGT",
-    rcut: 5,
-    fcut: 1,
-  },
-  SphI: {
-    rseq: "GCATGC",
-    rcut: 1,
-    fcut: 5,
-  },
-  SspI: {
-    rseq: "AATATT",
-    rcut: 3,
-    fcut: 3,
-  },
-  StuI: {
-    rseq: "AGGCCT",
-    rcut: 3,
-    fcut: 3,
-  },
-  StyI: {
-    rseq: "CCWWGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  TspMI: {
-    rseq: "CCCGGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  Tth111I: {
-    rseq: "GACNNNGTC",
-    rcut: 5,
-    fcut: 4,
-  },
-  XbaI: {
-    rseq: "TCTAGA",
-    rcut: 5,
-    fcut: 1,
-  },
-  XcmI: {
-    rseq: "CCANNNNNNNNNTGG",
-    rcut: 7,
-    fcut: 8,
-  },
-  XhoI: {
-    rseq: "CTCGAG",
-    rcut: 5,
-    fcut: 1,
-  },
-  XmaI: {
-    rseq: "CCCGGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  XmnI: {
-    rseq: "GAANNNNTTC",
-    rcut: 5,
-    fcut: 5,
-  },
-  ZraI: {
-    rseq: "GACGTC",
-    rcut: 3,
-    fcut: 3,
-  },
-  AlwI: {
-    rseq: "GGATCNNNNN",
-    rcut: 10,
-    fcut: 9,
-  },
-  ApeKI: {
-    rseq: "GCWGC",
-    rcut: 4,
-    fcut: 1,
-  },
-  AvaII: {
-    rseq: "GGWCC",
-    rcut: 4,
-    fcut: 1,
-  },
-  BbvI: {
-    rseq: "GCAGCNNNNNNNNNNNN",
-    rcut: 17,
-    fcut: 13,
-  },
-  BccI: {
-    rseq: "CCATCNNNNN",
-    rcut: 10,
-    fcut: 9,
-  },
-  BceAI: {
-    rseq: "ACGGCNNNNNNNNNNNNNN",
-    rcut: 19,
-    fcut: 17,
-  },
-  BcoDI: {
-    rseq: "GTCTCNNNNN",
-    rcut: 10,
-    fcut: 6,
-  },
-  BsmAI: {
-    rseq: "GTCTCNNNNN",
-    rcut: 10,
-    fcut: 6,
-  },
-  BsmFI: {
-    rseq: "GGGACNNNNNNNNNNNNNN",
-    rcut: 19,
-    fcut: 15,
-  },
-  BspCNI: {
-    rseq: "CTCAGNNNNNNNNN",
-    rcut: 12,
-    fcut: 14,
-  },
-  BsrI: {
-    rseq: "ACTGGN",
-    rcut: 4,
-    fcut: 6,
-  },
-  BstNI: {
-    rseq: "CCWGG",
-    rcut: 3,
-    fcut: 2,
-  },
-  BtsCI: {
-    rseq: "GGATGNN",
-    rcut: 5,
-    fcut: 7,
-  },
-  BtsIMutI: {
-    rseq: "CAGTGNN",
-    rcut: 5,
-    fcut: 7,
-  },
-  DpnI: {
-    rseq: "GmATC",
-    rcut: 3,
-    fcut: 3,
-  },
-  FauI: {
-    rseq: "CCCGCNNNNNN",
-    rcut: 11,
-    fcut: 9,
-  },
-  FokI: {
-    rseq: "GGATGNNNNNNNNNNNNN",
-    rcut: 18,
-    fcut: 14,
-  },
-  HgaI: {
-    rseq: "GACGCNNNNNNNNNN",
-    rcut: 15,
-    fcut: 10,
-  },
-  HphI: {
-    rseq: "GGTGANNNNNNNN",
-    rcut: 12,
-    fcut: 13,
-  },
-  Hpy99I: {
-    rseq: "CGWCG",
-    rcut: 0,
-    fcut: 5,
-  },
-  HpyAV: {
-    rseq: "CCTTCNNNNNN",
-    rcut: 10,
-    fcut: 11,
-  },
-  LpnPI: {
-    rseq: "CmCDGNNNNNNNNNNNNNN",
-    rcut: 19,
-    fcut: 15,
-  },
-  MboII: {
-    rseq: "GAAGANNNNNNNN",
-    rcut: 12,
-    fcut: 13,
-  },
-  MlyI: {
-    rseq: "GAGTCNNNNN",
-    rcut: 10,
-    fcut: 10,
-  },
-  NciI: {
-    rseq: "CCSGG",
-    rcut: 3,
-    fcut: 2,
-  },
-  PleI: {
-    rseq: "GAGTCNNNNN",
-    rcut: 10,
-    fcut: 9,
-  },
-  PspGI: {
-    rseq: "CCWGG",
-    rcut: 5,
-    fcut: 0,
-  },
-  SfaNI: {
-    rseq: "GCATCNNNNNNNNN",
-    rcut: 14,
-    fcut: 10,
-  },
-  TfiI: {
-    rseq: "GAWTC",
-    rcut: 4,
-    fcut: 1,
-  },
-  TseI: {
-    rseq: "GCWGC",
-    rcut: 4,
-    fcut: 1,
-  },
-  Tsp45I: {
-    rseq: "GTSAC",
-    rcut: 5,
-    fcut: 0,
-  },
-  TspRI: {
-    rseq: "NNCASTGNN",
-    rcut: 0,
-    fcut: 9,
-  },
-  AciI: {
-    rseq: "CCGC",
-    rcut: 3,
-    fcut: 1,
-  },
-  AluI: {
-    rseq: "AGCT",
-    rcut: 2,
-    fcut: 2,
-  },
-  BfaI: {
-    rseq: "CTAG",
-    rcut: 3,
-    fcut: 1,
-  },
-  BsaJI: {
-    rseq: "CCNNGG",
-    rcut: 5,
-    fcut: 1,
-  },
-  BslI: {
-    rseq: "CCNNNNNNNGG",
-    rcut: 4,
-    fcut: 7,
-  },
-  BstUI: {
-    rseq: "CGCG",
-    rcut: 2,
-    fcut: 2,
-  },
-  Cac8I: {
-    rseq: "GCNNGC",
-    rcut: 3,
-    fcut: 3,
-  },
-  CviAII: {
-    rseq: "CATG",
-    rcut: 3,
-    fcut: 1,
-  },
-  "CviKI-1": {
-    rseq: "RGCY",
-    rcut: 2,
-    fcut: 2,
-  },
-  CviQI: {
-    rseq: "GTAC",
-    rcut: 3,
-    fcut: 1,
-  },
-  DdeI: {
-    rseq: "CTNAG",
-    rcut: 4,
-    fcut: 1,
-  },
-  DpnII: {
-    rseq: "GATC",
-    rcut: 4,
-    fcut: 0,
-  },
-  FatI: {
-    rseq: "CATG",
-    rcut: 4,
-    fcut: 0,
-  },
-  Fnu4HI: {
-    rseq: "GCNGC",
-    rcut: 3,
-    fcut: 2,
-  },
-  HaeIII: {
-    rseq: "GGCC",
-    rcut: 2,
-    fcut: 2,
-  },
-  HhaI: {
-    rseq: "GCGC",
-    rcut: 1,
-    fcut: 3,
-  },
-  HinP1I: {
-    rseq: "GCGC",
-    rcut: 3,
-    fcut: 1,
-  },
-  HinfI: {
-    rseq: "GANTC",
-    rcut: 4,
-    fcut: 1,
-  },
-  HpaII: {
-    rseq: "CCGG",
-    rcut: 3,
-    fcut: 1,
-  },
-  Hpy166II: {
-    rseq: "GTNNAC",
-    rcut: 3,
-    fcut: 3,
-  },
-  Hpy188I: {
-    rseq: "TCNGA",
-    rcut: 2,
-    fcut: 3,
-  },
-  Hpy188III: {
-    rseq: "TCNNGA",
-    rcut: 4,
-    fcut: 2,
-  },
-  HpyCH4III: {
-    rseq: "ACNGT",
-    rcut: 2,
-    fcut: 3,
-  },
-  HpyCH4IV: {
-    seq: "ACGT",
-    rcut: 3,
-    fcut: 1,
-  },
-  HpyCH4V: {
-    rseq: "TGCA",
-    rcut: 2,
-    fcut: 2,
-  },
-  MboI: {
-    rseq: "GATC",
-    rcut: 4,
-    fcut: 0,
-  },
-  MluCI: {
-    rseq: "AATT",
-    rcut: 4,
-    fcut: 0,
-  },
-  MnlI: {
-    rseq: "CCTCNNNNNNN",
-    rcut: 10,
-    fcut: 11,
-  },
-  MseI: {
-    rseq: "TTAA",
-    rcut: 3,
-    fcut: 1,
-  },
-  MspI: {
-    rseq: "CCGG",
-    rcut: 3,
-    fcut: 1,
-  },
-  MwoI: {
-    rseq: "GCNNNNNNNGC",
-    rcut: 4,
-    fcut: 7,
-  },
-  NlaIII: {
-    rseq: "CATG",
-    rcut: 0,
-    fcut: 4,
-  },
-  NlaIV: {
-    rseq: "GGNNCC",
-    rcut: 3,
-    fcut: 3,
-  },
-  RsaI: {
-    rseq: "GTAC",
-    rcut: 2,
-    fcut: 2,
-  },
-  Sau3AI: {
-    rseq: "GATC",
-    rcut: 4,
-    fcut: 0,
-  },
-  Sau96I: {
-    rseq: "GGNCC",
-    rcut: 4,
-    fcut: 1,
-  },
-  ScrFI: {
-    rseq: "CCNGG",
-    rcut: 3,
-    fcut: 2,
-  },
-  StyD4I: {
-    rseq: "CCNGG",
-    rcut: 5,
-    fcut: 0,
-  },
-  TaqI: {
-    rseq: "TCGA",
-    rcut: 3,
-    fcut: 1,
   },
   AbaSI: {
-    rseq: "hmCNNNNNNNNNNN",
-    rcut: 12,
     fcut: 14,
+    rcut: 12,
+    rseq: "hmCNNNNNNNNNNN",
+  },
+  Acc65I: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GGTACC",
+  },
+  AccI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "GTMKAC",
+  },
+  AciI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "CCGC",
+  },
+  AclI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "AACGTT",
+  },
+  AcuI: {
+    fcut: 22,
+    rcut: 20,
+    rseq: "CTGAAGNNNNNNNNNNNNNNNN",
+  },
+  AfeI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "AGCGCT",
+  },
+  AflII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CTTAAG",
+  },
+  AflIII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "ACRYGT",
+  },
+  AgeI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "ACCGGT",
+  },
+  AhdI: {
+    fcut: 6,
+    rcut: 5,
+    rseq: "GACNNNNNGTC",
+  },
+  AleI: {
+    fcut: 5,
+    rcut: 5,
+    rseq: "CACNNNNGTG",
+  },
+  AluI: {
+    fcut: 2,
+    rcut: 2,
+    rseq: "AGCT",
+  },
+  AlwI: {
+    fcut: 9,
+    rcut: 10,
+    rseq: "GGATCNNNNN",
+  },
+  AlwNI: {
+    fcut: 6,
+    rcut: 3,
+    rseq: "CAGNNNCTG",
+  },
+  ApaI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GGGCCC",
+  },
+  ApaLI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GTGCAC",
+  },
+  ApeKI: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GCWGC",
+  },
+  ApoI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "RAATTY",
+  },
+  AscI: {
+    fcut: 2,
+    rcut: 6,
+    rseq: "GGCGCGCC",
+  },
+  AseI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "ATTAAT",
+  },
+  AsiSI: {
+    fcut: 5,
+    rcut: 3,
+    rseq: "GCGATCGC",
+  },
+  AvaI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CYCGRG",
+  },
+  AvaII: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GGWCC",
+  },
+  AvrII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCTAGG",
+  },
+  BaeGI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GKGCMC",
+  },
+  BaeI: {
+    fcut: 38,
+    rcut: 33,
+    rseq: "NNNNNNNNNNNNNNNACNNNNGTAYCNNNNNNNNNNNN",
+  },
+  BamHI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GGATCC",
+  },
+  BanI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GGYRCC",
+  },
+  BanII: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GRGCYC",
+  },
+  BbsI: {
+    fcut: 8,
+    rcut: 12,
+    rseq: "GAAGACNNNNNN",
+  },
+  BbvCI: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "CCTCAGC",
+  },
+  BbvI: {
+    fcut: 13,
+    rcut: 17,
+    rseq: "GCAGCNNNNNNNNNNNN",
+  },
+  BccI: {
+    fcut: 9,
+    rcut: 10,
+    rseq: "CCATCNNNNN",
+  },
+  BceAI: {
+    fcut: 17,
+    rcut: 19,
+    rseq: "ACGGCNNNNNNNNNNNNNN",
+  },
+  BcgI: {
+    fcut: 36,
+    rcut: 34,
+    rseq: "NNNNNNNNNNNNCGANNNNNNTGCNNNNNNNNNNNN",
+  },
+  BciVI: {
+    fcut: 12,
+    rcut: 11,
+    rseq: "GTATCCNNNNNN",
+  },
+  BclI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "TGATCA",
+  },
+  BcoDI: {
+    fcut: 6,
+    rcut: 10,
+    rseq: "GTCTCNNNNN",
+  },
+  BfaI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "CTAG",
+  },
+  BfuAI: {
+    fcut: 10,
+    rcut: 14,
+    rseq: "ACCTGCNNNNNNNN",
+  },
+  BglI: {
+    fcut: 7,
+    rcut: 4,
+    rseq: "GCCNNNNNGGC",
+  },
+  BglII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "AGATCT",
+  },
+  BlpI: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "GCTNAGC",
+  },
+  BmgBI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CACGTC",
+  },
+  BmrI: {
+    fcut: 11,
+    rcut: 10,
+    rseq: "ACTGGGNNNNN",
+  },
+  BmtI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GCTAGC",
+  },
+  BpmI: {
+    fcut: 22,
+    rcut: 20,
+    rseq: "CTGGAGNNNNNNNNNNNNNNNN",
+  },
+  Bpu10I: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "CCTNAGC",
+  },
+  BpuEI: {
+    fcut: 22,
+    rcut: 20,
+    rseq: "CTTGAGNNNNNNNNNNNNNNNN",
+  },
+  BsaAI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "YACGTR",
+  },
+  BsaBI: {
+    fcut: 5,
+    rcut: 5,
+    rseq: "GATNNNNATC",
+  },
+  BsaHI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "GRCGYC",
+  },
+  BsaI: {
+    fcut: 7,
+    rcut: 11,
+    rseq: "GGTCTCNNNNN",
+  },
+  BsaJI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCNNGG",
+  },
+  BsaWI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "WCCGGW",
+  },
+  BsaXI: {
+    fcut: 33,
+    rcut: 30,
+    rseq: "NNNNNNNNNNNNACNNNNNCTCCNNNNNNNNNN",
+  },
+  BseRI: {
+    fcut: 16,
+    rcut: 14,
+    rseq: "GAGGAGNNNNNNNNNN",
+  },
+  BseYI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCCAGC",
+  },
+  BsgI: {
+    fcut: 22,
+    rcut: 20,
+    rseq: "GTGCAGNNNNNNNNNNNNNNNN",
+  },
+  BsiEI: {
+    fcut: 4,
+    rcut: 2,
+    rseq: "CGRYCG",
+  },
+  BsiHKAI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GWGCWC",
+  },
+  BsiWI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CGTACG",
+  },
+  BslI: {
+    fcut: 7,
+    rcut: 4,
+    rseq: "CCNNNNNNNGG",
+  },
+  BsmAI: {
+    fcut: 6,
+    rcut: 10,
+    rseq: "GTCTCNNNNN",
+  },
+  BsmBI: {
+    fcut: 7,
+    rcut: 11,
+    rseq: "CGTCTCNNNNN",
+  },
+  BsmFI: {
+    fcut: 15,
+    rcut: 19,
+    rseq: "GGGACNNNNNNNNNNNNNN",
+  },
+  BsmI: {
+    fcut: 7,
+    rcut: 5,
+    rseq: "GAATGCN",
+  },
+  BsoBI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CYCGRG",
+  },
+  Bsp1286I: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GDGCHC",
+  },
+  BspCNI: {
+    fcut: 14,
+    rcut: 12,
+    rseq: "CTCAGNNNNNNNNN",
+  },
+  BspDI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "ATCGAT",
+  },
+  BspEI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "TCCGGA",
+  },
+  BspHI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "TCATGA",
+  },
+  BspMI: {
+    fcut: 10,
+    rcut: 14,
+    rseq: "ACCTGCNNNNNNNN",
+  },
+  BspQI: {
+    fcut: 8,
+    rcut: 11,
+    rseq: "GCTCTTCNNNN",
+  },
+  BsrBI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CCGCTC",
+  },
+  BsrDI: {
+    fcut: 8,
+    rcut: 6,
+    rseq: "GCAATGNN",
+  },
+  BsrFI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "RCCGGY",
+  },
+  BsrGI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "TGTACA",
+  },
+  BsrI: {
+    fcut: 6,
+    rcut: 4,
+    rseq: "ACTGGN",
+  },
+  BssHII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GCGCGC",
+  },
+  BssSI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CACGAG",
+  },
+  BstAPI: {
+    fcut: 7,
+    rcut: 4,
+    rseq: "GCANNNNNTGC",
+  },
+  BstBI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "TTCGAA",
+  },
+  BstEII: {
+    fcut: 1,
+    rcut: 6,
+    rseq: "GGTNACC",
+  },
+  BstNI: {
+    fcut: 2,
+    rcut: 3,
+    rseq: "CCWGG",
+  },
+  BstUI: {
+    fcut: 2,
+    rcut: 2,
+    rseq: "CGCG",
+  },
+  BstXI: {
+    fcut: 8,
+    rcut: 4,
+    rseq: "CCANNNNNNTGG",
+  },
+  BstYI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "RGATCY",
+  },
+  BstZ17I: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GTATAC",
+  },
+  Bsu36I: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "CCTNAGG",
+  },
+  BtgI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCRYGG",
+  },
+  BtgZI: {
+    fcut: 16,
+    rcut: 20,
+    rseq: "GCGATGNNNNNNNNNNNNNN",
+  },
+  BtsCI: {
+    fcut: 7,
+    rcut: 5,
+    rseq: "GGATGNN",
+  },
+  BtsI: {
+    fcut: 8,
+    rcut: 6,
+    rseq: "GCAGTGNN",
+  },
+  BtsIMutI: {
+    fcut: 7,
+    rcut: 5,
+    rseq: "CAGTGNN",
+  },
+  Cac8I: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GCNNGC",
+  },
+  ClaI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "ATCGAT",
+  },
+  CspCI: {
+    fcut: 37,
+    rcut: 35,
+    rseq: "NNNNNNNNNNNNNCAANNNNNGTGGNNNNNNNNNNNN",
+  },
+  CviAII: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "CATG",
+  },
+  "CviKI-1": {
+    fcut: 2,
+    rcut: 2,
+    rseq: "RGCY",
+  },
+  CviQI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "GTAC",
+  },
+  DdeI: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "CTNAG",
+  },
+  DpnI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GmATC",
+  },
+  DpnII: {
+    fcut: 0,
+    rcut: 4,
+    rseq: "GATC",
+  },
+  DraI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TTTAAA",
+  },
+  DraIII: {
+    fcut: 6,
+    rcut: 3,
+    rseq: "CACNNNGTG",
+  },
+  DrdI: {
+    fcut: 7,
+    rcut: 5,
+    rseq: "GACNNNNNNGTC",
+  },
+  EaeI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "YGGCCR",
+  },
+  EagI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CGGCCG",
+  },
+  EarI: {
+    fcut: 7,
+    rcut: 10,
+    rseq: "CTCTTCNNNN",
+  },
+  EciI: {
+    fcut: 17,
+    rcut: 15,
+    rseq: "GGCGGANNNNNNNNNNN",
+  },
+  Eco53kI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GAGCTC",
+  },
+  EcoNI: {
+    fcut: 5,
+    rcut: 6,
+    rseq: "CCTNNNNNAGG",
+  },
+  EcoO109I: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "RGGNCCY",
+  },
+  EcoRI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GAATTC",
+  },
+  EcoRV: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GATATC",
+  },
+  Esp3I: {
+    fcut: 7,
+    rcut: 11,
+    rseq: "CGTCTCNNNNN",
+  },
+  FatI: {
+    fcut: 0,
+    rcut: 4,
+    rseq: "CATG",
+  },
+  FauI: {
+    fcut: 9,
+    rcut: 11,
+    rseq: "CCCGCNNNNNN",
+  },
+  Fnu4HI: {
+    fcut: 2,
+    rcut: 3,
+    rseq: "GCNGC",
+  },
+  FokI: {
+    fcut: 14,
+    rcut: 18,
+    rseq: "GGATGNNNNNNNNNNNNN",
+  },
+  FseI: {
+    fcut: 6,
+    rcut: 2,
+    rseq: "GGCCGGCC",
   },
   FspEI: {
-    rseq: "CmCNNNNNNNNNNNNNNNN",
-    rcut: 19,
     fcut: 15,
+    rcut: 19,
+    rseq: "CmCNNNNNNNNNNNNNNNN",
+  },
+  FspI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TGCGCA",
+  },
+  HaeII: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "RGCGCY",
+  },
+  HaeIII: {
+    fcut: 2,
+    rcut: 2,
+    rseq: "GGCC",
+  },
+  HgaI: {
+    fcut: 10,
+    rcut: 15,
+    rseq: "GACGCNNNNNNNNNN",
+  },
+  HhaI: {
+    fcut: 3,
+    rcut: 1,
+    rseq: "GCGC",
+  },
+  HinP1I: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "GCGC",
+  },
+  HincII: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GTYRAC",
+  },
+  HindIII: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "AAGCTT",
+  },
+  HinfI: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GANTC",
+  },
+  HpaI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GTTAAC",
+  },
+  HpaII: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "CCGG",
+  },
+  HphI: {
+    fcut: 13,
+    rcut: 12,
+    rseq: "GGTGANNNNNNNN",
+  },
+  Hpy166II: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GTNNAC",
+  },
+  Hpy188I: {
+    fcut: 3,
+    rcut: 2,
+    rseq: "TCNGA",
+  },
+  Hpy188III: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "TCNNGA",
+  },
+  Hpy99I: {
+    fcut: 5,
+    rcut: 0,
+    rseq: "CGWCG",
+  },
+  HpyAV: {
+    fcut: 11,
+    rcut: 10,
+    rseq: "CCTTCNNNNNN",
+  },
+  HpyCH4III: {
+    fcut: 3,
+    rcut: 2,
+    rseq: "ACNGT",
+  },
+  HpyCH4IV: {
+    fcut: 1,
+    rcut: 3,
+    seq: "ACGT",
+  },
+  HpyCH4V: {
+    fcut: 2,
+    rcut: 2,
+    rseq: "TGCA",
+  },
+  "I-CeuI": {
+    fcut: 18,
+    rcut: 14,
+    rseq: "TAACTATAACGGTCCTAAGGTAGCGAA",
+  },
+  "I-SceI": {
+    fcut: 9,
+    rcut: 5,
+    rseq: "TAGGGATAACAGGGTAAT",
+  },
+  KasI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GGCGCC",
+  },
+  KpnI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GGTACC",
+  },
+  LpnPI: {
+    fcut: 15,
+    rcut: 19,
+    rseq: "CmCDGNNNNNNNNNNNNNN",
+  },
+  MboI: {
+    fcut: 0,
+    rcut: 4,
+    rseq: "GATC",
+  },
+  MboII: {
+    fcut: 13,
+    rcut: 12,
+    rseq: "GAAGANNNNNNNN",
+  },
+  MfeI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CAATTG",
+  },
+  MluCI: {
+    fcut: 0,
+    rcut: 4,
+    rseq: "AATT",
+  },
+  MluI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "ACGCGT",
+  },
+  MlyI: {
+    fcut: 10,
+    rcut: 10,
+    rseq: "GAGTCNNNNN",
+  },
+  MmeI: {
+    fcut: 26,
+    rcut: 24,
+    rseq: "TCCRACNNNNNNNNNNNNNNNNNNNN",
+  },
+  MnlI: {
+    fcut: 11,
+    rcut: 10,
+    rseq: "CCTCNNNNNNN",
+  },
+  MscI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TGGCCA",
+  },
+  MseI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "TTAA",
+  },
+  MslI: {
+    fcut: 5,
+    rcut: 5,
+    rseq: "CAYNNNNRTG",
+  },
+  MspA1I: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CMGCKG",
+  },
+  MspI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "CCGG",
   },
   MspJI: {
-    rseq: "mCNNRNNNNNNNNNNNNN",
-    rcut: 18,
     fcut: 14,
+    rcut: 18,
+    rseq: "mCNNRNNNNNNNNNNNNN",
+  },
+  MwoI: {
+    fcut: 7,
+    rcut: 4,
+    rseq: "GCNNNNNNNGC",
+  },
+  NaeI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GCCGGC",
+  },
+  NarI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "GGCGCC",
+  },
+  NciI: {
+    fcut: 2,
+    rcut: 3,
+    rseq: "CCSGG",
+  },
+  NcoI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCATGG",
+  },
+  NdeI: {
+    fcut: 2,
+    rcut: 4,
+    rseq: "CATATG",
+  },
+  NgoMIV: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GCCGGC",
+  },
+  NheI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GCTAGC",
+  },
+  NlaIII: {
+    fcut: 4,
+    rcut: 0,
+    rseq: "CATG",
+  },
+  NlaIV: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GGNNCC",
+  },
+  NmeAIII: {
+    fcut: 26,
+    rcut: 25,
+    rseq: "GCCGAGNNNNNNNNNNNNNNNNNNNN",
+  },
+  NotI: {
+    fcut: 2,
+    rcut: 6,
+    rseq: "GCGGCCGC",
+  },
+  NruI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TCGCGA",
+  },
+  NsiI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "ATGCAT",
+  },
+  NspI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "RCATGY",
+  },
+  "PI-PspI": {
+    fcut: 17,
+    rcut: 13,
+    rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
+  },
+  "PI-SceI": {
+    fcut: 15,
+    rcut: 11,
+    rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
+  },
+  PacI: {
+    fcut: 5,
+    rcut: 3,
+    rseq: "TTAATTAA",
+  },
+  PaeR7I: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CTCGAG",
+  },
+  PciI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "ACATGT",
+  },
+  PflFI: {
+    fcut: 4,
+    rcut: 5,
+    rseq: "GACNNNGTC",
+  },
+  PflMI: {
+    fcut: 7,
+    rcut: 4,
+    rseq: "CCANNNNNTGG",
+  },
+  PleI: {
+    fcut: 9,
+    rcut: 10,
+    rseq: "GAGTCNNNNN",
+  },
+  PluTI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GGCGCC",
+  },
+  PmeI: {
+    fcut: 4,
+    rcut: 4,
+    rseq: "GTTTAAAC",
+  },
+  PmlI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CACGTG",
+  },
+  PpuMI: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "RGGWCCY",
+  },
+  PshAI: {
+    fcut: 5,
+    rcut: 5,
+    rseq: "GACNNNNGTC",
+  },
+  PsiI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TTATAA",
+  },
+  PspGI: {
+    fcut: 0,
+    rcut: 5,
+    rseq: "CCWGG",
+  },
+  PspOMI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GGGCCC",
+  },
+  PspXI: {
+    fcut: 2,
+    rcut: 6,
+    rseq: "VCTCGAGB",
+  },
+  PstI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "CTGCAG",
+  },
+  PvuI: {
+    fcut: 4,
+    rcut: 2,
+    rseq: "CGATCG",
+  },
+  PvuII: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CAGCTG",
+  },
+  RsaI: {
+    fcut: 2,
+    rcut: 2,
+    rseq: "GTAC",
+  },
+  RsrII: {
+    fcut: 2,
+    rcut: 5,
+    rseq: "CGGWCCG",
+  },
+  SacI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GAGCTC",
+  },
+  SacII: {
+    fcut: 4,
+    rcut: 2,
+    rseq: "CCGCGG",
+  },
+  SalI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "GTCGAC",
+  },
+  SapI: {
+    fcut: 8,
+    rcut: 11,
+    rseq: "GCTCTTCNNNN",
+  },
+  Sau3AI: {
+    fcut: 0,
+    rcut: 4,
+    rseq: "GATC",
+  },
+  Sau96I: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GGNCC",
+  },
+  SbfI: {
+    fcut: 6,
+    rcut: 2,
+    rseq: "CCTGCAGG",
+  },
+  ScaI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "AGTACT",
+  },
+  ScrFI: {
+    fcut: 2,
+    rcut: 3,
+    rseq: "CCNGG",
+  },
+  SexAI: {
+    fcut: 1,
+    rcut: 6,
+    rseq: "ACCWGGT",
+  },
+  SfaNI: {
+    fcut: 10,
+    rcut: 14,
+    rseq: "GCATCNNNNNNNNN",
+  },
+  SfcI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CTRYAG",
+  },
+  SfiI: {
+    fcut: 8,
+    rcut: 5,
+    rseq: "GGCCNNNNNGGCC",
+  },
+  SfoI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GGCGCC",
+  },
+  SgrAI: {
+    fcut: 2,
+    rcut: 6,
+    rseq: "CRCCGGYG",
+  },
+  SmaI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "CCCGGG",
+  },
+  SmlI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CTYRAG",
+  },
+  SnaBI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "TACGTA",
+  },
+  SpeI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "ACTAGT",
+  },
+  SphI: {
+    fcut: 5,
+    rcut: 1,
+    rseq: "GCATGC",
+  },
+  SrfI: {
+    fcut: 4,
+    rcut: 4,
+    rseq: "GCCCGGGC",
+  },
+  SspI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "AATATT",
+  },
+  StuI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "AGGCCT",
+  },
+  StyD4I: {
+    fcut: 0,
+    rcut: 5,
+    rseq: "CCNGG",
+  },
+  StyI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCWWGG",
+  },
+  SwaI: {
+    fcut: 4,
+    rcut: 4,
+    rseq: "ATTTAAAT",
+  },
+  TaqI: {
+    fcut: 1,
+    rcut: 3,
+    rseq: "TCGA",
+  },
+  TfiI: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GAWTC",
+  },
+  TseI: {
+    fcut: 1,
+    rcut: 4,
+    rseq: "GCWGC",
+  },
+  Tsp45I: {
+    fcut: 0,
+    rcut: 5,
+    rseq: "GTSAC",
+  },
+  TspMI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCCGGG",
+  },
+  TspRI: {
+    fcut: 9,
+    rcut: 0,
+    rseq: "NNCASTGNN",
+  },
+  Tth111I: {
+    fcut: 4,
+    rcut: 5,
+    rseq: "GACNNNGTC",
+  },
+  XbaI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "TCTAGA",
+  },
+  XcmI: {
+    fcut: 8,
+    rcut: 7,
+    rseq: "CCANNNNNNNNNTGG",
+  },
+  XhoI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CTCGAG",
+  },
+  XmaI: {
+    fcut: 1,
+    rcut: 5,
+    rseq: "CCCGGG",
+  },
+  XmnI: {
+    fcut: 5,
+    rcut: 5,
+    rseq: "GAANNNNTTC",
+  },
+  ZraI: {
+    fcut: 3,
+    rcut: 3,
+    rseq: "GACGTC",
   },
 };

@@ -5,29 +5,30 @@ import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import { Coor, InputRefFuncType } from "../common";
 
 interface CircularFindProps {
-  search: SearchResult[];
-  radius: number;
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
-  inputRef: InputRefFuncType;
-  onUnmount: unknown;
-  totalRows: number;
-  seq: string;
+  getRotation: (index: number) => string;
   highlightedRegions: HighlightRegion[];
+  inputRef: InputRefFuncType;
+  lineHeight: number;
+  onUnmount: unknown;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  search: SearchResult[];
+  seq: string;
+  seqLength: number;
+  totalRows: number;
 }
 
 export const CircularFind = (props: CircularFindProps) => {
@@ -35,33 +36,33 @@ export const CircularFind = (props: CircularFindProps) => {
   const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
   const searchArcs = search.map(s => (
     <CircularFindArc
-      radius={radius}
-      lineHeight={lineHeight}
-      seqLength={seqLength}
-      getRotation={getRotation}
-      generateArc={generateArc}
-      inputRef={inputRef}
       key={JSON.stringify(s)}
-      start={s.start}
-      end={s.end}
       direction={s.direction}
+      end={s.end}
       fillStyle={"rgba(255, 251, 7, 0.5)"}
+      generateArc={generateArc}
+      getRotation={getRotation}
+      inputRef={inputRef}
+      lineHeight={lineHeight}
+      radius={radius}
+      seqLength={seqLength}
+      start={s.start}
     />
   ));
 
   const highlightArcs = highlightedRegions.map(({ start, end, color }) => (
     <CircularFindArc
-      radius={radius}
-      lineHeight={lineHeight}
-      seqLength={seqLength}
-      getRotation={getRotation}
-      generateArc={generateArc}
-      inputRef={inputRef}
-      key={JSON.stringify({ start, end })}
-      start={start}
-      end={end}
+      key={JSON.stringify({ end, start })}
       direction={1}
+      end={end}
       fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+      generateArc={generateArc}
+      getRotation={getRotation}
+      inputRef={inputRef}
+      lineHeight={lineHeight}
+      radius={radius}
+      seqLength={seqLength}
+      start={start}
     />
   ));
   return (
@@ -76,25 +77,26 @@ export const CircularFind = (props: CircularFindProps) => {
  * Create an SVG `path` element that highlights the search result
  */
 export const CircularFindArc = (props: {
-  radius: number;
-  lineHeight: number;
-  seqLength: number;
-  start: number;
+  direction: -1 | 1;
   end: number;
-  getRotation: (index: number) => string;
+  fillStyle: string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
+  getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
-  direction: -1 | 1;
-  fillStyle: string;
+  lineHeight: number;
+  radius: number;
+  seqLength: number;
+  start: number;
 }) => {
   const { radius, lineHeight, seqLength, getRotation, generateArc, inputRef, start, direction, fillStyle } = props;
 
@@ -107,18 +109,18 @@ export const CircularFindArc = (props: {
   const resultLength = Math.abs(end - start);
   const findPath = generateArc({
     innerRadius: radius - lineHeight / 2,
-    outerRadius: radius + lineHeight / 2,
-    length: resultLength,
     largeArc: resultLength > seqLength / 2,
+    length: resultLength,
+    outerRadius: radius + lineHeight / 2,
     sweepFWD: true,
   });
 
   const resultStyle = {
-    stroke: "rgba(0, 0, 0, 0.5)",
-    strokeWidth: 1,
+    cursor: "pointer",
     fill: fillStyle,
     shapeRendering: "auto",
-    cursor: "pointer",
+    stroke: "rgba(0, 0, 0, 0.5)",
+    strokeWidth: 1,
   };
 
   const id = `${start}${end}${direction}${start}`;
@@ -126,15 +128,15 @@ export const CircularFindArc = (props: {
   return (
     <path
       key={id}
-      id={id}
-      d={findPath}
-      transform={getRotation(start)}
       ref={inputRef(id, {
+        end: end,
         ref: id,
         start: start,
-        end: end,
         type: "FIND",
       })}
+      d={findPath}
+      id={id}
+      transform={getRotation(start)}
       {...resultStyle}
     />
   );

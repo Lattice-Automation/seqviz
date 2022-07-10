@@ -67,9 +67,9 @@ export default async (file, options) =>
           return {
             ...annotationFactory(i),
             direction: direction[0] === "forward" ? 1 : -1,
-            start: +startpos[0] || 0,
             end: +endpos[0] || 0,
             name: `${direction[0]}-${startpos[0]}`,
+            start: +startpos[0] || 0,
             type: type[0] || "N/A",
           };
         })
@@ -78,16 +78,17 @@ export default async (file, options) =>
       // add another annotation for the backbone
       annotations.push({
         ...annotationFactory(annotations.length),
-        start: firstElement(seq_data.seq_data).length,
         end: 0,
         name: backbone.name,
+        start: firstElement(seq_data.seq_data).length,
       });
 
       const newPart = {
         ...partFactory(),
-        ...dnaComplement(seq), // seq and compSeq
-        name: name,
+        ...dnaComplement(seq),
         annotations: annotations,
+        // seq and compSeq
+        name: name,
       };
 
       resolve([newPart]);

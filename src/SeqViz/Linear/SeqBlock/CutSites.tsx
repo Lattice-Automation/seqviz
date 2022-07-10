@@ -4,19 +4,19 @@ import { ICutSite, InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface ConnectorType {
-  fcut: number;
-  rcut: number;
-  id: string;
   cutX: number;
-  start: number;
-  end: number;
-  hangX: number;
-  recogStrand: 1 | -1;
   d?: 1 | -1;
-  name?: string;
+  end: number;
+  fcut: number;
+  hangX: number;
+  highlightColor?: string;
   highlightWidth?: number;
   highlightX?: number;
-  highlightColor?: string;
+  id: string;
+  name?: string;
+  rcut: number;
+  recogStrand: 1 | -1;
+  start: number;
 }
 
 /**
@@ -49,15 +49,15 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
  * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
 const CutSites = (props: {
-  zoom: { linear: number };
   cutSiteRows: ICutSite[];
-  findXAndWidth: FindXAndWidthType;
   elementHeight: number;
-  lineHeight: number;
+  findXAndWidth: FindXAndWidthType;
   firstBase: number;
-  lastBase: number;
   inputRef: InputRefFuncType;
+  lastBase: number;
+  lineHeight: number;
   yDiff: number;
+  zoom: { linear: number };
 }) => {
   const {
     zoom: { linear: zoom },
@@ -75,15 +75,6 @@ const CutSites = (props: {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { x: highlightX, width: highlightWidth } = findXAndWidth(c.recogStart, c.recogEnd);
-
-    console.log(
-      c,
-      cutX,
-      hangX,
-      highlightX,
-      highlightWidth,
-      recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)
-    );
 
     if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
       if (c.recogStart > c.recogEnd) {
@@ -103,10 +94,10 @@ const CutSites = (props: {
       ...c,
       cutX,
       hangX,
-      highlightX,
-      highlightWidth,
-      recogStrand: c.recogStrand,
       highlightColor: c.highlightColor,
+      highlightWidth,
+      highlightX,
+      recogStrand: c.recogStrand,
     };
   });
 
@@ -115,8 +106,8 @@ const CutSites = (props: {
   const getConnectorXAndWidth = (c: ConnectorType, sequenceCutSite: boolean, complementCutSite: boolean) => {
     if (sequenceCutSite && complementCutSite) {
       return {
-        x: Math.min(c.cutX, c.hangX),
         width: Math.abs(c.hangX - c.cutX),
+        x: Math.min(c.cutX, c.hangX),
       };
     }
     if (sequenceCutSite) {
@@ -133,7 +124,7 @@ const CutSites = (props: {
       if (c.fcut > c.rcut) return findXAndWidth(c.rcut, lastBase);
       return findXAndWidth(firstBase, c.rcut);
     }
-    return { x: 0, width: 0 };
+    return { width: 0, x: 0 };
   };
 
   // This would normally be 1xlineHeight (one row after the label row), but the text starts right at the top of the
@@ -155,71 +146,71 @@ const CutSites = (props: {
             {/* custom highlight color block */}
             {c.highlightColor ? (
               <HighlightBlock
-                id={c.id}
-                start={c.start}
-                end={c.end}
-                yDiff={c.recogStrand > 0 ? lineYDiff : lineYDiff + lineHeight}
-                findXAndWidth={findXAndWidth}
-                connector={c}
                 color={c.highlightColor}
+                connector={c}
+                end={c.end}
+                findXAndWidth={findXAndWidth}
+                id={c.id}
                 lineHeight={lineHeight}
+                start={c.start}
+                yDiff={c.recogStrand > 0 ? lineYDiff : lineYDiff + lineHeight}
               />
             ) : null}
 
             {/* label above seq */}
             {sequenceCutSite && (
               <text
-                id={c.id}
                 className="la-vz-cut-site-text"
                 dominantBaseline="hanging"
-                textAnchor="start"
-                x={c.cutX}
-                y={yDiff}
+                id={c.id}
                 style={{
                   cursor: "pointer",
                   fill: "rgb(51, 51, 51)",
                   fillOpacity: 0.8,
                 }}
-                onMouseOver={() => hoverCutSite(c.id, true)}
-                onMouseOut={() => hoverCutSite(c.id, false)}
-                onFocus={() => 0}
+                textAnchor="start"
+                x={c.cutX}
+                y={yDiff}
                 onBlur={() => 0}
+                onFocus={() => 0}
+                onMouseOut={() => hoverCutSite(c.id, false)}
+                onMouseOver={() => hoverCutSite(c.id, true)}
               >
                 {c.name}
               </text>
             )}
 
             {/* lines showing the cut site */}
-            {sequenceCutSite && <rect width="1px" height={lineHeight} x={c.cutX - 1} y={lineYDiff} />}
+            {sequenceCutSite && <rect height={lineHeight} width="1px" x={c.cutX - 1} y={lineYDiff} />}
             {showIndex && zoom > 10 ? (
-              <rect width={connectorWidth + 1} height="1px" x={connectorX - 1} y={lineHeight + lineYDiff} />
+              <rect height="1px" width={connectorWidth + 1} x={connectorX - 1} y={lineHeight + lineYDiff} />
             ) : null}
             {complementCutSite && zoom > 10 ? (
-              <rect width="1px" height={lineHeight} x={c.hangX - 1} y={lineHeight + lineYDiff} />
+              <rect height={lineHeight} width="1px" x={c.hangX - 1} y={lineHeight + lineYDiff} />
             ) : null}
 
             {/* dashed outline showing the recog site */}
             {zoom > 10 && (
               <rect
-                className={c.id} // for highlighting
-                width={c.highlightWidth}
-                height={lineHeight * 2}
-                x={c.highlightX}
-                y={lineYDiff}
-                strokeDasharray="4,5"
-                style={{
-                  stroke: "rgb(150,150,150)",
-                  strokeWidth: 1,
-                  fill: "rgb(255, 165, 0, 0.3)",
-                  fillOpacity: 0,
-                }}
                 ref={inputRef(c.id, {
+                  element: null,
+                  end: c.end,
                   id: c.id,
                   start: c.start,
-                  end: c.end,
                   type: "ENZYME",
-                  element: null,
-                })}
+                })} // for highlighting
+                className={c.id}
+                height={lineHeight * 2}
+                strokeDasharray="4,5"
+                style={{
+                  fill: "rgb(255, 165, 0, 0.3)",
+                  fillOpacity: 0,
+                  stroke: "rgb(150,150,150)",
+                  strokeWidth: 1,
+                }}
+                width={c.highlightWidth}
+                x={c.highlightX}
+                y={lineYDiff}
               />
             )}
           </React.Fragment>
@@ -230,14 +221,14 @@ const CutSites = (props: {
 };
 
 const HighlightBlock = (props: {
+  color: string;
   connector: ConnectorType;
-  id: string;
-  start: number;
   end: number;
   findXAndWidth: FindXAndWidthType;
-  yDiff: number;
-  color: string;
+  id: string;
   lineHeight: number;
+  start: number;
+  yDiff: number;
 }) => {
   const { id, start, end, findXAndWidth, yDiff, color, lineHeight } = props;
   const { x, width } = findXAndWidth(start, end);
@@ -245,18 +236,18 @@ const HighlightBlock = (props: {
   return (
     <rect
       key={id}
-      id={id}
       className="la-vz-cut-site-highlight"
+      height={lineHeight}
+      id={id}
+      style={{
+        cursor: "pointer",
+        fill: color,
+        stroke: "rgba(0, 0, 0, 0.5)",
+        strokeWidth: 0,
+      }}
+      width={width}
       x={x}
       y={yDiff}
-      height={lineHeight}
-      width={width}
-      style={{
-        stroke: "rgba(0, 0, 0, 0.5)",
-        cursor: "pointer",
-        strokeWidth: 0,
-        fill: color,
-      }}
     />
   );
 };

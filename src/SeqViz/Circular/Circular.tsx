@@ -22,33 +22,33 @@ export const CHAR_WIDTH = 7.801;
 
 interface CircularProps {
   annotations: Annotation[];
-  seq: string;
-  primers: Primer[];
-  cutSites: ICutSite[];
-  radius: number;
   center: { x: number; y: number };
-  showPrimers: boolean;
-  showIndex: boolean;
-  name: string;
+  centralIndex: number;
+  compSeq: string;
+  cutSites: ICutSite[];
+  highlightedRegions: HighlightRegion[];
   inputRef: InputRefFuncType;
   mouseEvent: React.MouseEventHandler;
+  name: string;
   onUnmount: () => void;
-  yDiff: number;
-  size: ISize;
-  compSeq: string;
+  primers: Primer[];
+  radius: number;
   search: SearchResult[];
-  centralIndex: number;
+  seq: string;
   setCentralIndex: (update: number) => void;
-  highlightedRegions: HighlightRegion[];
+  showIndex: boolean;
+  showPrimers: boolean;
+  size: ISize;
+  yDiff: number;
 }
 
 interface CircularState {
-  seqLength: number;
-  lineHeight: number;
   annotationsInRows: Annotation[][];
-  primersInRows: Primer[][];
   inlinedLabels: ILabel[];
+  lineHeight: number;
   outerLabels: ILabel[];
+  primersInRows: Primer[][];
+  seqLength: number;
 }
 
 class Circular extends React.Component<CircularProps, CircularState> {
@@ -57,12 +57,12 @@ class Circular extends React.Component<CircularProps, CircularState> {
   static getDerivedStateFromProps = (
     nextProps: CircularProps
   ): {
-    seqLength: number;
-    lineHeight: number;
     annotationsInRows: Annotation[][];
-    primersInRows: Primer[][];
     inlinedLabels: ILabel[];
+    lineHeight: number;
     outerLabels: ILabel[];
+    primersInRows: Primer[][];
+    seqLength: number;
   } => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
@@ -101,7 +101,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
         } else {
           const { id, name, start, end } = ann;
           const type = "annotation";
-          outerLabels.push({ id, name, start, end, type });
+          outerLabels.push({ end, id, name, start, type });
         }
       });
       innerRadius -= lineHeight;
@@ -119,23 +119,23 @@ class Circular extends React.Component<CircularProps, CircularState> {
     outerLabels.sort((a, b) => Math.min(a.start, a.end) - Math.min(b.start, b.end));
 
     return {
-      seqLength: nextProps.seq.length,
-      lineHeight: lineHeight,
       annotationsInRows: annotationsInRows,
-      primersInRows: primersInRows,
       inlinedLabels: inlinedLabels,
+      lineHeight: lineHeight,
       outerLabels: outerLabels,
+      primersInRows: primersInRows,
+      seqLength: nextProps.seq.length,
     };
   };
 
   // null arrays on initial load
   state = {
-    seqLength: 0,
-    lineHeight: 0,
     annotationsInRows: [],
-    primersInRows: [],
     inlinedLabels: [],
+    lineHeight: 0,
     outerLabels: [],
+    primersInRows: [],
+    seqLength: 0,
   };
 
   /**
@@ -224,14 +224,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
    *
    */
   generateArc = (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }): string => {
     const { innerRadius, outerRadius, length, largeArc, sweepFWD, arrowFWD, arrowREV } = args;
     const { radius } = this.props;
@@ -285,20 +286,20 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
   render() {
     const {
-      showPrimers,
-      showIndex,
-      name,
-      inputRef,
-      mouseEvent,
-      onUnmount,
       center,
-      radius,
-      yDiff,
-      size,
-      seq,
       compSeq,
       cutSites,
+      inputRef,
+      mouseEvent,
+      name,
+      onUnmount,
+      radius,
       search,
+      seq,
+      showIndex,
+      showPrimers,
+      size,
+      yDiff,
     } = this.props;
 
     const { seqLength, lineHeight, annotationsInRows, primersInRows, inlinedLabels, outerLabels } = this.state;
@@ -307,15 +308,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
     // general values/functions used in many/all children
     const general = {
-      radius,
       center,
-      lineHeight,
-      seqLength,
       findCoor,
-      getRotation,
       generateArc,
-      rotateCoor,
+      getRotation,
       inputRef,
+      lineHeight,
+      radius,
+      rotateCoor,
+      seqLength,
     };
 
     // calculate the selection row height based on number of annotation and primers
@@ -330,49 +331,49 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
     return (
       <svg
-        id={plasmidId}
-        className="la-vz-circular-viewer"
-        onMouseDown={mouseEvent}
-        onMouseUp={mouseEvent}
-        onMouseMove={mouseEvent}
         ref={inputRef(plasmidId, { type: "SEQ" })}
+        className="la-vz-circular-viewer"
+        id={plasmidId}
+        onMouseDown={mouseEvent}
+        onMouseMove={mouseEvent}
+        onMouseUp={mouseEvent}
         {...size}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
-          <Selection {...general} onUnmount={onUnmount} totalRows={totalRows} seq={seq} />
+          <Selection {...general} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />
           <Index
             {...general}
-            name={name}
-            size={size}
-            yDiff={yDiff}
-            seq={seq}
             compSeq={compSeq}
-            totalRows={totalRows}
+            name={name}
+            seq={seq}
             showIndex={showIndex}
+            size={size}
+            totalRows={totalRows}
+            yDiff={yDiff}
           />
           <CircularFind
-            seqLength={general.seqLength}
-            radius={general.radius}
             center={general.center}
-            lineHeight={general.lineHeight}
             findCoor={general.findCoor}
-            search={search}
-            getRotation={general.getRotation}
             generateArc={general.generateArc}
-            rotateCoor={general.rotateCoor}
-            inputRef={general.inputRef}
-            onUnmount={onUnmount}
-            totalRows={totalRows}
-            seq={seq}
+            getRotation={general.getRotation}
             highlightedRegions={this.props.highlightedRegions}
+            inputRef={general.inputRef}
+            lineHeight={general.lineHeight}
+            radius={general.radius}
+            rotateCoor={general.rotateCoor}
+            search={search}
+            seq={seq}
+            seqLength={general.seqLength}
+            totalRows={totalRows}
+            onUnmount={onUnmount}
           />
-          <CutSites {...general} selectionRows={4} cutSites={cutSites} />
+          <CutSites {...general} cutSites={cutSites} selectionRows={4} />
           <Annotations
             {...general}
             annotations={annotationsInRows}
-            size={size}
-            rowsToSkip={0}
             inlinedAnnotations={inlinedLabels}
+            rowsToSkip={0}
+            size={size}
           />
           <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>

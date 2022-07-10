@@ -6,22 +6,22 @@ import { InputRefFuncType } from "../../common";
 import { FindXAndWidthType } from "./SeqBlock";
 
 export interface HighlightRegion {
-  start: number;
-  end: number;
   color?: string;
+  end: number;
+  start: number;
 }
 
 interface FindProps {
-  filteredRows: SearchResult[];
-  indexYDiff: number;
   compYDiff: number;
-  seqBlockRef: unknown;
-  inputRef: InputRefFuncType;
+  filteredRows: SearchResult[];
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
+  highlightedRegions: HighlightRegion[];
+  indexYDiff: number;
+  inputRef: InputRefFuncType;
   lastBase: number;
   listenerOnly: boolean;
-  highlightedRegions: HighlightRegion[];
+  seqBlockRef: unknown;
 }
 
 /**
@@ -47,50 +47,50 @@ export default function LinearFind(props: FindProps) {
       {highlightedRegions.map(({ start, end, color }) => (
         <React.Fragment key={`highlight-${start}-${end}-1`}>
           <LinearFindBlock
-            inputRef={inputRef}
+            compYDiff={compYDiff}
+            direction={1}
+            end={end}
+            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
             findXAndWidth={findXAndWidth}
             firstBase={start}
-            lastBase={end}
-            start={start}
-            end={end}
             indexYDiff={indexYDiff}
-            direction={1}
-            seqBlockRef={seqBlockRef}
+            inputRef={inputRef}
+            lastBase={end}
             listenerOnly={listenerOnly}
-            compYDiff={compYDiff}
-            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+            seqBlockRef={seqBlockRef}
+            start={start}
           />
           <LinearFindBlock
-            inputRef={inputRef}
+            compYDiff={compYDiff}
+            direction={-1}
+            end={end}
+            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
             findXAndWidth={findXAndWidth}
             firstBase={start}
-            lastBase={end}
-            start={start}
-            end={end}
             indexYDiff={indexYDiff}
-            direction={-1}
-            seqBlockRef={seqBlockRef}
+            inputRef={inputRef}
+            lastBase={end}
             listenerOnly={listenerOnly}
-            compYDiff={compYDiff}
-            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+            seqBlockRef={seqBlockRef}
+            start={start}
           />
         </React.Fragment>
       ))}
       {searchRows.map(s => (
         <LinearFindBlock
           key={JSON.stringify(s)}
-          inputRef={inputRef}
+          compYDiff={compYDiff}
+          direction={s.direction}
+          end={s.end}
+          fillStyle="rgba(255, 251, 7, 0.5)"
           findXAndWidth={findXAndWidth}
           firstBase={firstBase}
-          lastBase={lastBase}
-          start={s.start}
-          end={s.end}
           indexYDiff={indexYDiff}
-          direction={s.direction}
-          seqBlockRef={seqBlockRef}
+          inputRef={inputRef}
+          lastBase={lastBase}
           listenerOnly={listenerOnly}
-          compYDiff={compYDiff}
-          fillStyle="rgba(255, 251, 7, 0.5)"
+          seqBlockRef={seqBlockRef}
+          start={s.start}
         />
       ))}
     </>
@@ -98,18 +98,18 @@ export default function LinearFind(props: FindProps) {
 }
 
 export const LinearFindBlock = (props: {
-  inputRef: InputRefFuncType;
-  findXAndWidth: FindXAndWidthType;
-  indexYDiff: number;
-  firstBase: number;
-  lastBase: number;
-  start: number;
-  end: number;
-  seqBlockRef: unknown;
-  listenerOnly: boolean;
-  direction: -1 | 1;
   compYDiff: number;
+  direction: -1 | 1;
+  end: number;
   fillStyle: string;
+  findXAndWidth: FindXAndWidthType;
+  firstBase: number;
+  indexYDiff: number;
+  inputRef: InputRefFuncType;
+  lastBase: number;
+  listenerOnly: boolean;
+  seqBlockRef: unknown;
+  start: number;
 }) => {
   const {
     inputRef,
@@ -127,9 +127,9 @@ export const LinearFindBlock = (props: {
   } = props;
 
   const findBlockProps = {
+    cursor: "pointer",
     height: 18,
     stroke: listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    cursor: "pointer",
     strokeWidth: 1,
     style: { fill: listenerOnly ? "transparent" : fillStyle },
   };
@@ -144,11 +144,11 @@ export const LinearFindBlock = (props: {
   const id = randomid();
 
   const selReference = {
+    element: seqBlockRef,
+    end: end,
     id: id,
     start: start,
-    end: end,
     type: "FIND",
-    element: seqBlockRef,
   };
 
   let y = indexYDiff - 1; // template row result
@@ -156,5 +156,5 @@ export const LinearFindBlock = (props: {
     y = compYDiff - 1; // complement row result
   }
 
-  return <rect key={id} id={id} x={x} y={y} width={width} ref={inputRef(id, selReference)} {...findBlockProps} />;
+  return <rect key={id} ref={inputRef(id, selReference)} id={id} width={width} x={x} y={y} {...findBlockProps} />;
 };

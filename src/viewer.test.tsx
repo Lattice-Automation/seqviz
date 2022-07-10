@@ -10,17 +10,17 @@ import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
 
 const defaultProps = {
-  name: "test_part",
-  seq: "ATGGTAGTTAGATAGGGATACCGAT",
   annotations: [
     {
+      end: 10,
       name: "ann_1",
       start: 0,
-      end: 10,
     },
   ],
-  style: { height: 200, width: 400 },
+  name: "test_part",
+  seq: "ATGGTAGTTAGATAGGGATACCGAT",
   size: { height: 200, width: 400 },
+  style: { height: 200, width: 400 },
 };
 
 describe("SeqViz rendering (React)", () => {
@@ -113,8 +113,8 @@ describe("SeqViz rendering (React)", () => {
     // check that the part state matches the state of the Genbank file
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
-      seq: part.seq,
       compSeq: part.compSeq,
+      seq: part.seq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -140,8 +140,8 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
-      seq: part.seq,
       compSeq: part.compSeq,
+      seq: part.seq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -167,8 +167,8 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
-      seq: part.seq,
       compSeq: part.compSeq,
+      seq: part.seq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);
@@ -192,8 +192,8 @@ describe("SeqViz rendering (React)", () => {
 
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part).toMatchObject({
-      seq: part.seq,
       compSeq: part.compSeq,
+      seq: part.seq,
     });
     expect(part.name).toMatch(/.{2,}/);
     expect(part.seq).toMatch(/.{2,}/);

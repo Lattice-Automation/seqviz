@@ -76,19 +76,27 @@ const dnaComponentToPart = (DnaComponent, options) => {
 
         annotations.push({
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
-          id: randomid(),
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
           color: colorByIndex(i),
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
-          start: bioStart[0]._ - 1 || 0, // sbol is 1-based
-          // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-          end: bioEnd[0]._ || 0, // we're 0-based
+
+          // we're 0-based
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
           direction: strand[0]._ === "+" ? 1 : -1,
+
+          // sbol is 1-based
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
-          type: annType[0]._ || "N/A",
+          end: bioEnd[0]._ || 0,
+
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'string' is not assignable to type 'never'.
+          id: randomid(),
+
           // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
           name: annName[0]._ || annId[0]._ || "Untitled",
+
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
+          start: bioStart[0]._ - 1 || 0,
+
+          // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
+          type: annType[0]._ || "N/A",
         });
       }
     });
@@ -100,11 +108,11 @@ const dnaComponentToPart = (DnaComponent, options) => {
 
   return {
     ...partFactory(),
-    seq: parsedSeq,
-    compSeq: parsedCompSeq,
-    name: parsedName,
     annotations: annotations,
     circular: circular,
+    compSeq: parsedCompSeq,
+    name: parsedName,
+    seq: parsedSeq,
   };
 };
 
@@ -127,7 +135,7 @@ const sequenceToPart = (Seq, file) => {
   // very ad hoc
   const circular = file.search(/plasmid/i) > 0;
 
-  return { ...partFactory(), name, seq, compSeq, circular };
+  return { ...partFactory(), circular, compSeq, name, seq };
 };
 
 /**
@@ -184,9 +192,9 @@ export default async (sbol, colors = []) =>
     xml2js.parseString(
       fileString,
       {
-        xmlns: true,
         attrkey: "xml_tag",
         tagNameProcessors: [xml2js.processors.stripPrefix],
+        xmlns: true,
       },
       (err, parsedSBOL) => {
         if (err) rejectSBOL(err);
@@ -205,9 +213,9 @@ export default async (sbol, colors = []) =>
                 partList.push(
                   // @ts-expect-error ts-migrate(2345) FIXME: Argument of type '{ seq: string; compSeq: string; ... Remove this comment to see the full error message
                   dnaComponentToPart(nestedDnaComponent[0], {
-                    strict: false,
-                    file: sbol,
                     colors: colors,
+                    file: sbol,
+                    strict: false,
                   })
                 );
               });
@@ -219,9 +227,9 @@ export default async (sbol, colors = []) =>
         } else if (DnaComponent && DnaComponent.length) {
           // create a single part from the single one passed
           const validPart = dnaComponentToPart(DnaComponent[0], {
-            strict: false,
-            file: sbol,
             colors: colors,
+            file: sbol,
+            strict: false,
           });
           // it will be null if there isnt' any sequence information beneath it
           if (validPart) resolve([validPart]);
@@ -235,9 +243,9 @@ export default async (sbol, colors = []) =>
         const attemptedParts = dnaComponentAccumulator
           .map(p =>
             dnaComponentToPart(p, {
-              strict: true,
-              file: sbol,
               colors: colors,
+              file: sbol,
+              strict: true,
             })
           )
           .filter(p => p); // invalid parts will be null

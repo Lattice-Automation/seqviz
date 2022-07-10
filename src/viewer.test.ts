@@ -7,44 +7,44 @@ import PUC from "./parts/pUC";
 import { Viewer } from "./viewer";
 
 const defaultOptions: SeqVizProps = {
-  viewer: "both",
-  showAnnotations: true,
-  showPrimers: true,
-  showComplement: true,
-  showIndex: true,
-  zoom: { linear: 50 },
-  bpColors: { A: "#FFF" },
-  colors: [],
-  onSelection: () => {},
-  onSearch: () => {},
-  search: { query: "GCGG" },
-  backbone: "",
-  enzymes: [],
   annotations: [
     {
-      name: "test_annotation",
-      start: 0,
+      direction: "FORWARD",
       end: 15,
-      direction: "FORWARD", // old prop-type, still supported; now using -1, 0, 1
+      name: "test_annotation",
+      start: 0, // old prop-type, still supported; now using -1, 0, 1
     },
   ],
+  backbone: "",
+  bpColors: { A: "#FFF" },
+  colors: [],
+  enzymes: [],
+  onSearch: () => {},
+  onSelection: () => {},
+  search: { query: "GCGG" },
+  showAnnotations: true,
+  showComplement: true,
+  showIndex: true,
+  showPrimers: true,
   style: { height: 500, width: 800 },
+  viewer: "both",
+  zoom: { linear: 50 },
 };
 
 describe("Viewer rendering (JS)", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    let viewer = Viewer(div, { ...defaultOptions, ...PUC });
+    const viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
     viewer.render();
   });
 
   it("renders while querying an iGEM part", () => {
     const div = document.createElement("div");
-    let viewer = Viewer(div, {
+    const viewer = Viewer(div, {
       ...defaultOptions,
-      part: "BBa_K1598008",
       backbone: "pSB1C3",
+      part: "BBa_K1598008",
     });
 
     viewer.render();
@@ -52,7 +52,7 @@ describe("Viewer rendering (JS)", () => {
 
   it("updates props with setState", () => {
     const div = document.createElement("div");
-    let viewer = Viewer(div, { ...defaultOptions, ...PUC });
+    const viewer = Viewer(div, { ...defaultOptions, ...PUC });
 
     viewer.render();
 
@@ -61,7 +61,7 @@ describe("Viewer rendering (JS)", () => {
 
   it("renders with just a sequence and name", () => {
     const div = document.createElement("div");
-    let viewer = Viewer(div, {
+    const viewer = Viewer(div, {
       name: "seq_name",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
     });
@@ -71,10 +71,10 @@ describe("Viewer rendering (JS)", () => {
 
   it("renders with zoom outside 0-100", () => {
     const div = document.createElement("div");
-    let viewer = Viewer(div, {
+    const viewer = Viewer(div, {
       name: "seq_name",
       seq: "tcgcgcgtttcggtgatgacggtgaaaacctctgacacatgca",
-      zoom: { linear: -10, circular: 150 },
+      zoom: { circular: 150, linear: -10 },
     });
 
     viewer.render();
@@ -84,7 +84,7 @@ describe("Viewer rendering (JS)", () => {
     const div = document.createElement("div");
     const gbContents = fs.readFileSync(path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb"), "utf8");
 
-    let viewer = Viewer(div, { file: gbContents });
+    const viewer = Viewer(div, { file: gbContents });
 
     viewer.render();
   });

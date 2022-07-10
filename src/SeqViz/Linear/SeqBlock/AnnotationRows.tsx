@@ -7,16 +7,16 @@ import { FindXAndWidthType } from "./SeqBlock";
 
 interface AnnotationRowsProps {
   annotationRows: Annotation[][];
-  yDiff: number;
-  findXAndWidth: FindXAndWidthType;
-  inputRef: InputRefFuncType;
-  seqBlockRef: unknown;
-  firstBase: number;
-  lastBase: number;
-  fullSeq: string;
-  elementHeight: number;
   bpsPerBlock: number;
+  elementHeight: number;
+  findXAndWidth: FindXAndWidthType;
+  firstBase: number;
+  fullSeq: string;
+  inputRef: InputRefFuncType;
+  lastBase: number;
+  seqBlockRef: unknown;
   width: number;
+  yDiff: number;
 }
 
 export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
@@ -44,16 +44,16 @@ export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
             <AnnotationRow
               key={`ann-row-${y}-${firstBase}-${lastBase}`}
               annotations={a}
-              y={y}
-              height={elementHeight}
-              inputRef={inputRef}
-              seqBlockRef={seqBlockRef}
+              bpsPerBlock={bpsPerBlock}
               findXAndWidth={findXAndWidth}
               firstBase={firstBase}
-              lastBase={lastBase}
               fullSeq={fullSeq}
-              bpsPerBlock={bpsPerBlock}
+              height={elementHeight}
+              inputRef={inputRef}
+              lastBase={lastBase}
+              seqBlockRef={seqBlockRef}
               width={width}
+              y={y}
             />
           );
         })}
@@ -72,10 +72,10 @@ interface AnnotationRowProps {
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
+  height: number;
   inputRef: InputRefFuncType;
   lastBase: number;
   seqBlockRef: unknown;
-  height: number;
   width: number;
   y: number;
 }
@@ -162,16 +162,16 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     };
 
     const textProps = {
-      dominantBaseline: "middle",
       cursor: "pointer",
-      textAnchor: "middle",
-      textRendering: "optimizeLegibility",
-      x: width / 2,
-      y: height / 2 + 1.4,
+      dominantBaseline: "middle",
       style: {
         color: "black",
         fontWeight: 400,
       },
+      textAnchor: "middle",
+      textRendering: "optimizeLegibility",
+      x: width / 2,
+      y: height / 2 + 1.4,
     };
 
     const cW = 4; // jagged cutoff width
@@ -252,29 +252,29 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
 
     const annotationPath = (
       <path
-        id={a.id}
         ref={inputRef(a.id, {
-          ref: a.id,
-          name: a.name,
-          start: start,
-          end: end,
-          type: "ANNOTATION",
           element: seqBlockRef,
+          end: end,
+          name: a.name,
+          ref: a.id,
+          start: start,
+          type: "ANNOTATION",
         })}
         className={a.id}
+        id={a.id}
         style={{
-          fillOpacity: 0.7,
           cursor: "pointer",
           fill: color,
+          fillOpacity: 0.7,
           stroke: strokeColor,
           strokeWidth: a.type === "insert" ? 2.4 : 0.5,
         }}
         {...rectProps}
         d={linePath}
-        onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
-        onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
-        onFocus={() => 0}
         onBlur={() => 0}
+        onFocus={() => 0}
+        onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
+        onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
       />
     );
 
@@ -290,10 +290,10 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
             fontSize={11}
             {...textProps}
             id={a.id}
-            onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
-            onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
-            onFocus={() => {}}
             onBlur={() => {}}
+            onFocus={() => {}}
+            onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
+            onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
           >
             {name}
           </text>
@@ -306,11 +306,11 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     const { annotations, width, y } = this.props;
 
     const height = this.props.height * 0.8;
-    const size = { width, height };
+    const size = { height, width };
     const gTranslate = `translate(0, ${y})`;
 
     return (
-      <g {...size} transform={gTranslate} className="la-vz-linear-annotation-row">
+      <g {...size} className="la-vz-linear-annotation-row" transform={gTranslate}>
         {annotations.map(this.renderAnnotation)}
       </g>
     );

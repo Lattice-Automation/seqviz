@@ -12,19 +12,19 @@ import CentralIndexContext from "./handlers/centralIndex";
 import { SeqVizSelection } from "./handlers/selection";
 
 interface SeqViewerProps {
-  size: { width: number; height: number };
-  zoom: { linear: number; circular: number };
-  search: SearchResult;
-  selection: SeqVizSelection;
-  setSelection: (update: SeqVizSelection) => void;
-  annotations: Annotation[];
-  showComplement: boolean;
-  seq: string;
-  cutSites: ICutSite[];
   Circular: boolean;
+  annotations: Annotation[];
+  compSeq?: string;
+  cutSites: ICutSite[];
   highlightedRegions: HighlightRegion[];
   name?: string;
-  compSeq?: string;
+  search: SearchResult;
+  selection: SeqVizSelection;
+  seq: string;
+  setSelection: (update: SeqVizSelection) => void;
+  showComplement: boolean;
+  size: { height: number; width: number };
+  zoom: { circular: number; linear: number };
 }
 
 /**
@@ -89,15 +89,15 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
     const elementHeight = 16; // the height, in pixels, of annotations, ORFs, etc
 
     return {
-      seqFontSize,
-      lineHeight,
-      elementHeight,
+      Circular: false,
+      Linear: true,
       bpsPerBlock,
       charWidth,
+      elementHeight,
+      lineHeight,
+      seqFontSize,
       size,
       zoom: { linear: zoom },
-      Linear: true,
-      Circular: false,
     };
   };
 
@@ -141,14 +141,14 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
     radius = radius === 0 ? 1 : radius;
     const yDiff = 0;
     return {
-      radius,
-      yDiff,
-      Linear: false,
       Circular: true,
-      size,
-      zoom: { circular: zoom },
+      Linear: false,
       bpsOnArc,
       center,
+      radius,
+      size,
+      yDiff,
+      zoom: { circular: zoom },
     };
   };
 
@@ -166,8 +166,8 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
                 {...this.circularProps()}
                 // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
                 centralIndex={circular}
-                setCentralIndex={setCentralIndex}
                 cutSites={cutSites}
+                setCentralIndex={setCentralIndex}
               />
             )}
           </CentralIndexContext.Consumer>
@@ -177,8 +177,8 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
             {...this.state}
             {...this.linearProps()}
             // @ts-expect-error(2769) I think we need to rewrite withEventRouter and other wrappers to use generics for state and props
-            seqLength={seq.length}
             cutSites={cutSites}
+            seqLength={seq.length}
           />
         )}
       </div>

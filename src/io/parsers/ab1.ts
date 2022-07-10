@@ -3,12 +3,12 @@ import randomid from "../../utils/randomid";
 
 const tagDict = {
   baseCalls2: { tagName: "PBAS", tagNum: 2, typeToReturn: "getChar" },
-  qualNums: { tagName: "PCON", tagNum: 2, typeToReturn: "getNumber" },
-  peakLocations: { tagName: "PLOC", tagNum: 2, typeToReturn: "getShort" },
   colorDataA: { tagName: "DATA", tagNum: 10, typeToReturn: "getShort" },
-  colorDataT: { tagName: "DATA", tagNum: 11, typeToReturn: "getShort" },
-  colorDataG: { tagName: "DATA", tagNum: 9, typeToReturn: "getShort" },
   colorDataC: { tagName: "DATA", tagNum: 12, typeToReturn: "getShort" },
+  colorDataG: { tagName: "DATA", tagNum: 9, typeToReturn: "getShort" },
+  colorDataT: { tagName: "DATA", tagNum: 11, typeToReturn: "getShort" },
+  peakLocations: { tagName: "PLOC", tagNum: 2, typeToReturn: "getShort" },
+  qualNums: { tagName: "PCON", tagNum: 2, typeToReturn: "getNumber" },
 };
 
 const convertAB1 = inputArrayBuffer => {
@@ -20,19 +20,19 @@ const convertAB1 = inputArrayBuffer => {
    * a map of the method to get the data to the type of function used to get it
    */
   const extractionFunctions = {
-    getNumber: (inOffset, numEntries) => {
-      const retArray = [];
-      for (let counter = 0; counter < numEntries; counter += 1) {
-        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
-        retArray.push(inputArrayBuffer.getInt8(inOffset + counter));
-      }
-      return retArray;
-    },
     getChar: (inOffset, numEntries) => {
       const retArray = [];
       for (let counter = 0; counter < numEntries; counter += 1) {
         // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         retArray.push(String.fromCharCode(inputArrayBuffer.getInt8(inOffset + counter)));
+      }
+      return retArray;
+    },
+    getNumber: (inOffset, numEntries) => {
+      const retArray = [];
+      for (let counter = 0; counter < numEntries; counter += 1) {
+        // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
+        retArray.push(inputArrayBuffer.getInt8(inOffset + counter));
       }
       return retArray;
     },
@@ -72,12 +72,12 @@ const convertAB1 = inputArrayBuffer => {
 
   return {
     aTrace: getDataTag(tagDict.colorDataA),
-    tTrace: getDataTag(tagDict.colorDataT),
-    gTrace: getDataTag(tagDict.colorDataG),
-    cTrace: getDataTag(tagDict.colorDataC),
-    basePos: getDataTag(tagDict.peakLocations),
     baseCalls: getDataTag(tagDict.baseCalls2),
+    basePos: getDataTag(tagDict.peakLocations),
+    cTrace: getDataTag(tagDict.colorDataC),
+    gTrace: getDataTag(tagDict.colorDataG),
     qualNums: getDataTag(tagDict.qualNums),
+    tTrace: getDataTag(tagDict.colorDataT),
   };
 };
 
@@ -114,10 +114,10 @@ export default (file, name) => {
   // on their location
   const traces = {
     aTrace: basePos.map(p => aTrace[p]),
-    tTrace: basePos.map(p => tTrace[p]),
-    gTrace: basePos.map(p => gTrace[p]),
     cTrace: basePos.map(p => cTrace[p]),
+    gTrace: basePos.map(p => gTrace[p]),
     qualNums: qualNums,
+    tTrace: basePos.map(p => tTrace[p]),
   };
 
   // convert to an aligned part format

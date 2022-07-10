@@ -4,31 +4,32 @@ import { Coor, ISize, InputRefFuncType } from "../common";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface IndexProps {
-  radius: number;
   center: Coor;
-  lineHeight: number;
-  seqLength: number;
+  compSeq: string;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  getRotation: (index: number) => string;
   generateArc: (args: {
-    innerRadius: number;
-    outerRadius: number;
-    length: number;
-    largeArc: boolean; // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
     arrowFWD?: boolean;
     arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
     offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
   }) => string;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
-  seq: string;
-  compSeq: string;
+  lineHeight: number;
   name: string;
-  size: ISize;
-  yDiff: number;
-  totalRows: number;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  seq: string;
+  seqLength: number;
   showIndex: boolean;
+  size: ISize;
+  totalRows: number;
+  yDiff: number;
 }
 
 /**
@@ -72,12 +73,12 @@ export default class Index extends React.PureComponent<IndexProps> {
         Math.abs(centralIndex + seqLength - t) < tickTolerance ||
         Math.abs(centralIndex - seqLength - t) < tickTolerance
     );
-    return { ticks, indexInc };
+    return { indexInc, ticks };
   };
 
   state = {
-    ticks: [],
     indexInc: 10,
+    ticks: [],
   };
 
   /**
@@ -173,13 +174,13 @@ export default class Index extends React.PureComponent<IndexProps> {
     // create tick and text style
     const nameStyle = {
       fontSize: 20,
-      textAnchor: "middle",
       fontWeight: 500,
+      textAnchor: "middle",
     };
     const subtitleStyle = {
+      fill: "gray",
       fontSize: 14,
       textAnchor: "middle",
-      fill: "gray",
     };
     const indexCircleStyle = {
       fill: "transparent",
@@ -188,21 +189,21 @@ export default class Index extends React.PureComponent<IndexProps> {
     };
     const tickLineStyle = {
       fill: "transparent",
+      shapeRendering: "geometricPrecision",
       stroke: "black",
       strokeWidth: 1,
-      shapeRendering: "geometricPrecision",
     };
     const tickTextStyle = {
-      textAnchor: "middle",
       fontWeight: 300,
+      textAnchor: "middle",
     };
 
     // generate the full circle around the edge of the plasmid
     const indexCurve = generateArc({
       innerRadius: radius,
-      outerRadius: radius,
-      length: seqLength / 2,
       largeArc: true,
+      length: seqLength / 2,
+      outerRadius: radius,
     });
     return (
       <g className="la-vz-circular-index">

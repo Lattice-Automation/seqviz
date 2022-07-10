@@ -43,15 +43,15 @@ export default async (
   }
 
   // convert to a part
-  const igemBackbone = igem && backbone.length ? { name: backbone, backbone: fetchBBB(backbone) } : "";
+  const igemBackbone = igem && backbone.length ? { backbone: fetchBBB(backbone), name: backbone } : "";
 
   if (igem && igemBackbone === "") {
     console.error("iGEM BioBrick ID used, but no backbone ID specified.");
   }
 
   const parts = await fileToParts(response, {
-    colors: colors,
     backbone: igemBackbone,
+    colors: colors,
   });
 
   if (parts && parts.length) {

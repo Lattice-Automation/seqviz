@@ -9,9 +9,9 @@ describe("Colors", () => {
 
   it("darkens colors", () => {
     const hexMap = {
+      "#9DEAED": "#6fa5a8",
       "#F07": "#b40054",
       "#F7C672": "#af8c51",
-      "#9DEAED": "#6fa5a8",
       "rgb(157, 234, 237)": "rgb(111,165,168)",
       "rgba(157, 234, 237, 0.3)": "rgba(111,165,168,0.3)",
     };
