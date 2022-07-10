@@ -151,9 +151,9 @@ export const LinearFindBlock = (props: {
     element: seqBlockRef,
   };
 
-  let y = indexYDiff - 2; // template row result
+  let y = indexYDiff - 1; // template row result
   if (direction < 0) {
-    y = compYDiff - 2; // complement row result
+    y = compYDiff - 1; // complement row result
   }
 
   return <rect key={id} id={id} x={x} y={y} width={width} ref={inputRef(id, selReference)} {...findBlockProps} />;

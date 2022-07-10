@@ -22,8 +22,6 @@ interface ConnectorType {
 /**
  * on hover, an enzyme recognition site should have an opacity of 0.5. 0 otherwise
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
- *
- * first set the names to 1.0 and then the cut site regions (without the name) to 0.5
  */
 const hoverCutSite = (className: string, on = false) => {
   let elements = document.getElementsByClassName(`${className}-name`);
@@ -38,19 +36,17 @@ const hoverCutSite = (className: string, on = false) => {
   }
 };
 
-const recogContiguous = (start: number, end: number, first: number, last: number) => {
-  if ((start < first && end < first) || (start > last && end > last)) return true;
+// is this recognition site entirely within this SeqBlock?
+const recogContiguous = (start: number, end: number, firstBase: number, lastBase: number) => {
+  if ((start < firstBase && end < firstBase) || (start > lastBase && end > lastBase)) return true;
   if (end >= start) {
-    return end < last && start > first;
+    return end < lastBase && start > firstBase;
   }
-  return start < last && end > first;
+  return start < lastBase && end > firstBase;
 };
 
 /**
- * CutSites
- *
- * a component shown above the sequence viewer that shows the name of the
- * enzyme that has a cut-site within the sequence and a line for the resulting cutsite
+ * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
 const CutSites = (props: {
   zoom: { linear: number };
@@ -75,10 +71,21 @@ const CutSites = (props: {
     elementHeight,
   } = props;
 
+  // Add x and width to each cut site.
   const sitesWithX: ConnectorType[] = cutSiteRows.map((c: ICutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { x: highlightX, width: highlightWidth } = findXAndWidth(c.recogStart, c.recogEnd);
+
+    console.log(
+      c,
+      cutX,
+      hangX,
+      highlightX,
+      highlightWidth,
+      recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)
+    );
+
     if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
       if (c.recogStart > c.recogEnd) {
         ({ x: highlightX, width: highlightWidth } = findXAndWidth(
@@ -92,6 +99,7 @@ const CutSites = (props: {
         ));
       }
     }
+
     return {
       ...c,
       cutX,
@@ -130,7 +138,7 @@ const CutSites = (props: {
   };
 
   // the cut site starts lower and on the sequence
-  const lineYDiff = lineHeight - 3;
+  const lineYDiff = lineHeight - 5;
 
   return (
     <g className="la-vz-cut-sites">
@@ -185,7 +193,7 @@ const CutSites = (props: {
             {/* lines showing the cut site */}
             {sequenceCutSite && <rect width="1px" height={lineHeight} x={c.cutX - 1} y={lineYDiff} />}
             {showIndex && zoom > 10 ? (
-              <rect width={connectorWidth + 1} height="1px" x={connectorX - 1} y={lineHeight + lineYDiff - 1} />
+              <rect width={connectorWidth + 1} height="1px" x={connectorX - 1} y={lineHeight + lineYDiff} />
             ) : null}
             {complementCutSite && zoom > 10 ? (
               <rect width="1px" height={lineHeight} x={c.hangX - 1} y={lineHeight + lineYDiff} />
@@ -197,7 +205,7 @@ const CutSites = (props: {
                 className={c.id} // for highlighting
                 width={c.highlightWidth}
                 height={lineHeight * 2}
-                x={c.cutX - 1}
+                x={c.highlightX}
                 y={lineYDiff}
                 strokeDasharray="4,5"
                 style={{
