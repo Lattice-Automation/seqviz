@@ -21,6 +21,8 @@ import Labels, { ILabel } from "./Labels";
 export const CHAR_WIDTH = 7.801;
 
 export interface CircularProps {
+  Circular: boolean;
+  Linear: boolean;
   annotations: Annotation[];
   center: { x: number; y: number };
   centralIndex: number;
@@ -34,16 +36,14 @@ export interface CircularProps {
   primers: Primer[];
   radius: number;
   search: SearchResult[];
+  selection: SeqVizSelection;
   seq: string;
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
+  setSelection: (selection: SeqVizSelection) => void;
   showIndex: boolean;
   showPrimers: boolean;
   size: ISize;
   yDiff: number;
-  Circular: boolean;
-  Linear: boolean;
-  setSelection: (selection: SeqVizSelection) => void;
-  selection: SeqVizSelection;
 }
 
 interface CircularState {
