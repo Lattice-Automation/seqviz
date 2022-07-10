@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, ICutSite, ISize, InputRefFuncType, Primer } from "../../elements";
+import { Annotation, Element, ICutSite, ISize, InputRefFuncType, Primer } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { SearchResult } from "../../utils/search";
@@ -11,7 +11,6 @@ import { SeqVizSelection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
 import { HighlightRegion } from "./SeqBlock/LinearFind";
 import SeqBlock from "./SeqBlock/SeqBlock";
-import { Translation } from "./SeqBlock/Translations";
 
 export interface LinearProps {
   Circular: boolean;
@@ -19,7 +18,6 @@ export interface LinearProps {
   annotations: Annotation[];
   bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
-  centralIndex: number;
   charWidth: number;
   compSeq: string;
   cutSites: ICutSite[];
@@ -36,14 +34,12 @@ export interface LinearProps {
   seq: string;
   seqFontSize: number;
   seqLength: number;
-  setCentralIndex: (viewer: "linear" | "circular", index: number) => void;
   setSelection: (selection: SeqVizSelection) => void;
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
   size: ISize;
-  totalRows: number;
-  translations: Translation[];
+  translations: Element[];
   zoom: { linear: number };
 }
 

@@ -1,4 +1,4 @@
-import { Annotation } from "../elements";
+import { Annotation, Element } from "../elements";
 import { chooseRandomColor, colorByIndex } from "./colors";
 import { dnaComplement } from "./parser";
 import randomid from "./randomid";
@@ -278,7 +278,7 @@ export const translateDNA = (seqInput: string): string => {
  * actual translation. For example, if the user selects 5 bps and makes a translation,
  * only the first 3 will be used. so the actual start is 1 and the actual end is 3 (inclusive)
  */
-export const createLinearTranslations = (translations, dnaSeq) => {
+export const createLinearTranslations = (translations: Element[], dnaSeq: string) => {
   // elongate the original sequence to account for translations that cross the zero index
   const dnaDoubled = dnaSeq + dnaSeq;
   return translations.map(t => {

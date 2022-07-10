@@ -36,7 +36,7 @@ export interface EventsHandlerProps extends WithEventsProps {
  */
 export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType<T>) =>
   class extends React.PureComponent<T & EventsHandlerProps> {
-    static displayName = "EventHandler";
+    static displayName = "WithEventsProps";
 
     static contextType = CentralIndexContext;
 
@@ -45,8 +45,6 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
 
     /**
      * action handler for a keyboard keypresses.
-     * Mapping logic has been abstracted to keypressMap in ./api/keypressMap.js
-     *
      */
     handleKeyPress = (e: React.KeyboardEvent<HTMLElement>) => {
       const keyType = this.keypressMap(e);
@@ -317,7 +315,7 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
           onWheel={this.handleScrollEvent}
         >
           {/* @ts-expect-error */}
-          <WrappedComponent {...(newProps as WithEventsProps)} />
+          <WrappedComponent {...newProps} />
         </div>
       );
     }
