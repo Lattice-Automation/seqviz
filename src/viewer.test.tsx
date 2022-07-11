@@ -34,8 +34,8 @@ describe("SeqViz rendering (React)", () => {
     const firstViewer = wrapper.find(SeqViewer).first();
     expect(firstViewer.find(".la-vz-linear-scroller").length).toBeFalsy();
     expect(firstViewer.find(".la-vz-circular-viewer").length).toBeTruthy();
-    // renders bp for the sequence (only works for smaller seqs
-    // where the infinite scroll doesn't truncate)
+
+    // renders bp for the sequence (only works for smaller seqs where the infinite scroll doesn't truncate)
     expect(wrapper.find("text").length).toBeGreaterThanOrEqual(defaultProps.seq.length * 2);
   });
 

@@ -1,18 +1,22 @@
-// @ts-nocheck
 import * as fs from "fs";
 import * as path from "path";
 
 import { SeqVizProps } from "./SeqViz/SeqViz";
-import PUC from "./parts/pUC";
 import { Viewer } from "./viewer";
 
 const defaultOptions: SeqVizProps = {
   annotations: [
     {
+      direction: 1,
+      end: 50,
+      name: "test",
+      start: 0,
+    },
+    {
       direction: "FORWARD",
       end: 15,
       name: "test_annotation",
-      start: 0, // old prop-type, still supported; now using -1, 0, 1
+      start: 0,
     },
   ],
   backbone: "",
@@ -34,7 +38,7 @@ const defaultOptions: SeqVizProps = {
 describe("Viewer rendering (JS)", () => {
   it("renders without crashing", () => {
     const div = document.createElement("div");
-    const viewer = Viewer(div, { ...defaultOptions, ...PUC });
+    const viewer = Viewer(div, defaultOptions);
 
     viewer.render();
   });
@@ -43,8 +47,8 @@ describe("Viewer rendering (JS)", () => {
     const div = document.createElement("div");
     const viewer = Viewer(div, {
       ...defaultOptions,
+      accession: "BBa_K1598008",
       backbone: "pSB1C3",
-      part: "BBa_K1598008",
     });
 
     viewer.render();
@@ -52,7 +56,7 @@ describe("Viewer rendering (JS)", () => {
 
   it("updates props with setState", () => {
     const div = document.createElement("div");
-    const viewer = Viewer(div, { ...defaultOptions, ...PUC });
+    const viewer = Viewer(div, defaultOptions);
 
     viewer.render();
 

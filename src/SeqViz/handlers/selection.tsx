@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Element } from "../../elements";
+import { Ranged } from "../../elements";
 import { calcGC, calcTm } from "../../utils/sequence";
 import { WithEventsProps } from "./events";
 
@@ -11,7 +11,7 @@ export interface SeqVizSelection {
   clockwise: boolean;
   color?: string;
   direction?: number;
-  element?: Element;
+  element?: Ranged;
   end: number;
   gc?: number;
   length?: number;

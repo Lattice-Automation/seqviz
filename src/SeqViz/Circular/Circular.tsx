@@ -1,9 +1,8 @@
 import * as React from "react";
 
-import { Annotation, Coor, ICutSite, ISize, InputRefFuncType, Primer } from "../../elements";
+import { Annotation, Coor, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
-import { SearchResult } from "../../utils/search";
 import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
@@ -35,7 +34,7 @@ export interface CircularProps {
   onUnmount: (id: string) => void;
   primers: Primer[];
   radius: number;
-  search: SearchResult[];
+  search: Ranged[];
   selection: SeqVizSelection;
   seq: string;
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
@@ -57,6 +56,7 @@ interface CircularState {
 
 class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
+  declare context: React.ContextType<typeof CentralIndexContext>;
 
   static getDerivedStateFromProps = (
     nextProps: CircularProps
@@ -336,11 +336,12 @@ class Circular extends React.Component<CircularProps, CircularState> {
       <svg
         ref={inputRef(plasmidId, { type: "SEQ" })}
         className="la-vz-circular-viewer"
+        height={size.height}
         id={plasmidId}
+        width={size.width}
         onMouseDown={mouseEvent}
         onMouseMove={mouseEvent}
         onMouseUp={mouseEvent}
-        {...size}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...general} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />

@@ -38,6 +38,7 @@ interface CircularSelectionProps {
  */
 export default class CircularSelection extends React.PureComponent<CircularSelectionProps> {
   static contextType = SelectionContext;
+  declare context: React.ContextType<typeof SelectionContext>;
 
   render() {
     const { findCoor, generateArc, getRotation, lineHeight, radius, seq, seqLength, totalRows } = this.props;

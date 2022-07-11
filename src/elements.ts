@@ -1,8 +1,14 @@
-/* Element is a single element with a range in the viewer */
-export interface Element {
+/* Ranged is a single element with a range and direction in the viewer */
+export interface Ranged {
   direction: -1 | 0 | 1;
   end: number;
   start: number;
+}
+
+/* NamedRanged elements have been parsed to include an id and name */
+export interface NamedRanged extends Ranged {
+  id: string;
+  name: string;
 }
 
 /* DirectionProp is any of the directions for an element that we accept from a user */
@@ -17,34 +23,25 @@ export interface AnnotationProp {
   start: number;
 }
 
-/* Annotation is an annotation after parsing by SeqViz. */
-export interface Annotation extends Element {
+/* Annotation is an annotation after parsing. */
+export interface Annotation extends NamedRanged {
   color: string;
-  id: string;
-  name: string;
   type?: "enzyme" | "insert" | "";
 }
 
 /* Primer is a single primer for PCR. Not visualized right now. */
-export interface Primer {
+export interface Primer extends NamedRanged {
   color: string;
   direction: 1 | -1;
-  end: number;
-  id: string;
-  name: string;
-  start: number;
 }
 
 export interface Part {
   annotations: Annotation[];
   compSeq: string;
-  cutSites: Element[];
-  date: number;
+  cutSites: ICutSite[];
   name: string;
-  note: string;
   primers: Primer[];
   seq: string;
-  source: { file: string; name: string };
 }
 
 export type InputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
@@ -54,17 +51,14 @@ export interface ISize {
   width: number;
 }
 
-export interface ICutSite {
+export interface ICutSite extends NamedRanged {
+  direction: 1 | -1;
   end: number;
   fcut: number;
   highlightColor?: string;
-  id: string;
-  name: string;
   rcut: number;
   recogEnd: number;
   recogStart: number;
-  recogStrand: 1 | -1;
-  start: number;
   type?: "enzyme" | "annotation";
 }
 

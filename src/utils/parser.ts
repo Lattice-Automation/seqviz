@@ -113,10 +113,7 @@ export const partFactory = (): Part => ({
   annotations: [],
   compSeq: "",
   cutSites: [],
-  date: new Date().getTime(),
   name: "",
-  note: "",
   primers: [],
   seq: "",
-  source: { file: "", name: "" },
 });

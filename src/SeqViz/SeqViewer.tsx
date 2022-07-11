@@ -1,9 +1,8 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
-import { Annotation, Element, ICutSite } from "../elements";
+import { Annotation, ICutSite, Ranged } from "../elements";
 import isEqual from "../utils/isEqual";
-import { SearchResult } from "../utils/search";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
 import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
@@ -13,19 +12,19 @@ import { SeqVizSelection } from "./handlers/selection";
 interface SeqViewerProps {
   Circular: boolean;
   annotations: Annotation[];
-  bpColors?: { [key: number | string]: string };
+  bpColors: { [key: number | string]: string };
   compSeq: string;
   cutSites: ICutSite[];
   highlightedRegions: HighlightRegion[];
   name: string;
-  search: SearchResult[];
+  search: Ranged[];
   selection: SeqVizSelection;
   seq: string;
   setSelection: (update: SeqVizSelection) => void;
   showComplement: boolean;
   showIndex: boolean;
   size: { height: number; width: number };
-  translations: Element[];
+  translations: Ranged[];
   zoom: { circular: number; linear: number };
 }
 
@@ -51,7 +50,7 @@ See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: unknown) =>
+  shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: any) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**

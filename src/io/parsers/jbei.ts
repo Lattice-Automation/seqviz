@@ -6,11 +6,10 @@ import { dnaComplement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /**
- * takes an JBEI file, as a string, and converts it into our DB
- * representation of a part(s). an example of this type of file can be
- * found in ../examples/jbei
+ * takes a JBEI file, as a string, and converts it to a Part.
+ * An example of this type of file can be found in ../examples/jbei
  */
-export default async (JBEI, _: string[] = []): Promise<Part[]> =>
+export default async (JBEI: string, _: string[] = []): Promise<Part[]> =>
   new Promise((resolve, reject) => {
     // util reject function that will be triggered if any fields fail
     const rejectJBEI = errType => reject(new Error(`Failed on JBEI file; ${errType}`));
@@ -88,7 +87,6 @@ export default async (JBEI, _: string[] = []): Promise<Part[]> =>
             compSeq: parsedCompSeq,
             name: parsedName,
             seq: parsedSeq2,
-            source: fileString,
           },
         ]);
       }

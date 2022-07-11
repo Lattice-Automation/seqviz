@@ -26,6 +26,7 @@ interface InfiniteScrollState {
  */
 export default class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
   static contextType = CentralIndexContext;
+  declare context: React.ContextType<typeof CentralIndexContext>;
 
   /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
   scroller;
