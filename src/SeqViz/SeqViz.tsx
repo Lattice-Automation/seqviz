@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { Annotation, AnnotationProp, Element, ICutSite, IEnzyme, Part } from "../elements";
+import { Annotation, AnnotationProp, ICutSite, IEnzyme, Part, Ranged } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
-import search, { SearchResult } from "../utils/search";
+import search from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
 import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
 import SeqViewer from "./SeqViewer";
@@ -29,11 +29,11 @@ export interface SeqVizProps {
   file?: string | File;
   highlightedRegions?: HighlightRegion[];
   name?: string;
-  onSearch?: (search: SearchResult[]) => void;
+  onSearch?: (search: Ranged[]) => void;
   onSelection?: (selection: SeqVizSelection) => void;
   rotateOnScroll?: boolean;
   search?: {
-    mismatch: number;
+    mismatch?: number;
     query: string;
   };
   seq?: string;
@@ -42,20 +42,33 @@ export interface SeqVizProps {
   showIndex?: boolean;
   showPrimers?: boolean;
   style?: Record<string, unknown>;
-  translations?: Element[];
+  translations?: Ranged[];
   viewer?: "linear" | "circular" | "both" | "both_flip";
   zoom?: {
-    circular: number;
-    linear: number;
+    circular?: number;
+    linear?: number;
   };
 }
 
+export interface SeqVizState {
+  accession: string;
+  annotations: Annotation[];
+  centralIndex: {
+    circular: number;
+    linear: number;
+    setCentralIndex: (type: "linear" | "circular", value: number) => void;
+  };
+  cutSites: ICutSite[];
+  part: null | Part;
+  search: Ranged[];
+  selection: SeqVizSelection;
+}
+
 /**
- * A container for processing part input and rendering either
- * a linear or circular viewer or both
+ * SeqViz is a viewer for rendering sequences in a linear and/or circular viewer.
  */
-export default class SeqViz extends React.Component<SeqVizProps, any> {
-  static defaultProps = {
+export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
+  static defaultProps: SeqVizProps = {
     accession: "",
     annotations: [],
     backbone: "",
@@ -66,7 +79,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: (results: SearchResult[]) => results,
+    onSearch: (results: Ranged[]) => results,
     onSelection: (selection: SeqVizSelection) => selection,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
@@ -92,7 +105,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         setCentralIndex: this.setCentralIndex,
       },
       cutSites: [],
-      part: {},
+      part: null,
       search: [],
       selection: { ...defaultSelection },
     };
@@ -102,6 +115,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     await this.setPart();
   };
 
+  /*
+   * Re-parse props to state if the seq/accession/file changed, the enzymes/enzymesCustom changed, or annotations changed
+   */
   componentDidUpdate = async (
     { accession = "", annotations, backbone, enzymes, enzymesCustom, file, search }: SeqVizProps,
     { part }
@@ -160,12 +176,12 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         console.warn("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
       }
     } catch (err) {
-      console.error(err);
+      console.warn(err);
     }
   };
 
   /**
-   * Search for the query sequence in the part sequence, set in state
+   * Search for the query sequence in the part sequence, set in state.
    */
   search = (part: Part | null = null) => {
     const { onSearch, search: searchProp, seq } = this.props;
@@ -191,7 +207,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   };
 
   /**
-   * Find and save enzymes' cutsite locations
+   * Find and save enzymes' cutsite locations.
    */
   cut = (part: { seq: string } | null = null) => {
     const { enzymes, enzymesCustom, seq } = this.props;
@@ -201,7 +217,9 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes || [], enzymesCustom || {});
     }
 
-    this.setState({ cutSites });
+    if (!isEqual(cutSites, this.state.cutSites)) {
+      this.setState({ cutSites });
+    }
   };
 
   /**
@@ -217,7 +235,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     }));
 
   /**
-   * Update the central index of the linear or circular viewer
+   * Update the central index of the linear or circular viewer.
    */
   setCentralIndex = (type: "linear" | "circular", value: number) => {
     if (type !== "linear" && type !== "circular") {
@@ -245,40 +263,39 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
   };
 
   render() {
-    const { seq, style } = this.props;
-    let { compSeq, name, showComplement, showIndex, viewer, zoom } = this.props;
+    const { style } = this.props;
+    let { compSeq, name, seq, showComplement, showIndex, viewer } = this.props;
     const { centralIndex, cutSites, part, search, selection } = this.state;
     let { annotations } = this.state;
 
     showIndex = !!showIndex;
 
-    // part is either from a file/accession, or each prop was set
-    const localSeq: string = seq || part.seq || "";
-    if (getSeqType(localSeq) === "dna") {
-      compSeq = compSeq || part.compSeq || dnaComplement(localSeq).compSeq;
-    } else {
-      compSeq = "";
+    // Since all props are optional, we need to parse those to defaults.
+    seq = seq || part?.seq || "";
+    if (getSeqType(seq) === "dna") {
+      compSeq = compSeq || part?.compSeq || dnaComplement(seq).compSeq || "";
     }
-
     if (typeof showComplement === "undefined") {
       showComplement = true;
     }
     showComplement = !!compSeq && showComplement;
 
-    if (typeof zoom === "undefined") {
-      zoom = {
-        circular: 0,
-        linear: 50,
-      };
-    }
-
-    name = name || part.name || "";
-    annotations = annotations && annotations.length ? annotations : part.annotations || [];
-    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions || [];
-
-    if (!localSeq.length) {
+    if (!seq) {
       return <div className="la-vz-seqviz" />;
     }
+
+    const zoom = {
+      circular: 0,
+      linear: 50,
+      ...(this.props.zoom || {
+        circular: 0,
+        linear: 50,
+      }),
+    };
+
+    name = name || part?.name || "";
+    annotations = annotations && annotations.length ? annotations : part?.annotations || [];
+    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions || [];
 
     if (!viewer) {
       viewer = "both";
@@ -289,13 +306,14 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         {...this.props}
         Circular={false}
         annotations={annotations}
+        bpColors={this.props.bpColors || {}}
         compSeq={compSeq || ""}
         cutSites={cutSites}
         highlightedRegions={highlightedRegions}
         name={name || ""}
         search={search}
         selection={selection}
-        seq={localSeq}
+        seq={seq}
         setSelection={this.setSelection}
         showComplement={showComplement}
         showIndex={showIndex}
@@ -309,13 +327,14 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
         {...this.props}
         Circular={true}
         annotations={annotations}
+        bpColors={this.props.bpColors || {}}
         compSeq={compSeq || ""}
         cutSites={cutSites}
         highlightedRegions={highlightedRegions}
         name={name || ""}
         search={search}
         selection={selection}
-        seq={localSeq}
+        seq={seq}
         setSelection={this.setSelection}
         showComplement={showComplement}
         showIndex={showIndex}
@@ -329,7 +348,7 @@ export default class SeqViz extends React.Component<SeqVizProps, any> {
     return (
       <div className="la-vz-seqviz" style={style}>
         <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={selection}>{viewers.filter(v => v).map(v => v)}</SelectionContext.Provider>
+          <SelectionContext.Provider value={selection}>{viewers.filter(v => v)}</SelectionContext.Provider>
         </CentralIndexContext.Provider>
       </div>
     );

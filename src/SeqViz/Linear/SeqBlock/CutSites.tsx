@@ -97,7 +97,7 @@ const CutSites = (props: {
       highlightColor: c.highlightColor,
       highlightWidth,
       highlightX,
-      recogStrand: c.recogStrand,
+      recogStrand: c.direction,
     };
   });
 

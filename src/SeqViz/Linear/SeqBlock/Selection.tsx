@@ -16,11 +16,11 @@ interface EdgesProps {
 /**
  * Edges on the side of selections of the Selection Viewer
  *
- * Only shown at the selection's start and end, not intermediate blocks
- * (if there are intermediate blocks)
+ * Only shown at the selection's start and end, not intermediate blocks (if there are intermediate blocks)
  */
 class Edges extends React.PureComponent<EdgesProps> {
   static contextType = SelectionContext;
+  declare context: React.ContextType<typeof SelectionContext>;
 
   id = randomid();
 
@@ -113,6 +113,9 @@ interface BlockProps {
   selection: SeqVizSelection;
 }
 
+/**
+ * A Block is a single range of selected bases. Usually shown as a light blue box. Can span a single or multiple blocks.
+ */
 class Block extends React.PureComponent<BlockProps> {
   static contextType = SelectionContext;
 

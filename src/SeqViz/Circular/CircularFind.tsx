@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { Coor, InputRefFuncType } from "../../elements";
-import { SearchResult } from "../../utils/search";
+import { Coor, InputRefFuncType, Ranged } from "../../elements";
 import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
 
 interface CircularFindProps {
@@ -25,7 +24,7 @@ interface CircularFindProps {
   onUnmount: unknown;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  search: SearchResult[];
+  search: Ranged[];
   seq: string;
   seqLength: number;
   totalRows: number;
@@ -37,7 +36,7 @@ export const CircularFind = (props: CircularFindProps) => {
   const searchArcs = search.map(s => (
     <CircularFindArc
       key={JSON.stringify(s)}
-      direction={s.direction}
+      direction={s.direction || 1}
       end={s.end}
       fillStyle={"rgba(255, 251, 7, 0.5)"}
       generateArc={generateArc}

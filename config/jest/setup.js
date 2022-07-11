@@ -8,6 +8,4 @@ Enzyme.configure({ adapter: new Adapter() });
 
 sizeMe.noPlaceholders = true;
 
-localStorage.clear();
-
-jest.setTimeout(30000);
+jest.setTimeout(5000);

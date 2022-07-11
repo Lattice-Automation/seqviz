@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { InputRefFuncType } from "../../../elements";
+import { InputRefFuncType, Ranged } from "../../../elements";
 import randomid from "../../../utils/randomid";
-import { SearchResult } from "../../../utils/search";
 import { FindXAndWidthType } from "./SeqBlock";
 
 export interface HighlightRegion {
@@ -13,7 +12,7 @@ export interface HighlightRegion {
 
 interface FindProps {
   compYDiff: number;
-  filteredRows: SearchResult[];
+  filteredRows: Ranged[];
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   highlightedRegions: HighlightRegion[];
@@ -80,7 +79,7 @@ export default function LinearFind(props: FindProps) {
         <LinearFindBlock
           key={JSON.stringify(s)}
           compYDiff={compYDiff}
-          direction={s.direction}
+          direction={s.direction || 1}
           end={s.end}
           fillStyle="rgba(255, 251, 7, 0.5)"
           findXAndWidth={findXAndWidth}

@@ -1,18 +1,12 @@
-import { Element } from "../elements";
+import { Ranged } from "../elements";
 import { dnaComplement } from "./parser";
 import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
-
-export interface SearchResult extends Element {
-  direction: -1 | 1;
-  index?: number;
-  length?: number;
-}
 
 /**
  * Search the seq in the forward and reverse complement strands.
  * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
  */
-export default (query: string, mismatch: number, seq: string): SearchResult[] => {
+export default (query: string, mismatch = 0, seq = ""): Ranged[] => {
   if (!query || !query.length || !seq || !seq.length) {
     return [];
   }
@@ -25,18 +19,16 @@ export default (query: string, mismatch: number, seq: string): SearchResult[] =>
 
   const { compSeq } = dnaComplement(seq);
 
-  const indices: SearchResult[] = search(query, seq, mismatch, true);
+  const indices = search(query, seq, mismatch, true);
   const compIndices = search(reverse(query), compSeq, mismatch, false);
 
   if (indices.length > 4000 || compIndices.length > 4000) {
-    // failing out here because rendering will be too expensive
+    // Fail out with warning. Rendering would be too expensive.
     console.error(`Search too broad, ${indices.length + compIndices.length} matches. Please narrow parameters.`);
     return [];
   }
 
-  const searchResults = indices.concat(compIndices).sort((a, b) => a.start - b.start);
-
-  return searchResults;
+  return indices.concat(compIndices).sort((a, b) => a.start - b.start);
 };
 
 /**
@@ -45,7 +37,7 @@ export default (query: string, mismatch: number, seq: string): SearchResult[] =>
  * If there's no mismatch, just use a RegExp to search over the sequence repeatedly
  * Otherwise, use the modified hamming search in `searchWithMismatch()`
  */
-const search = (query: string, subject: string, mismatch: number, fwd: boolean): SearchResult[] => {
+const search = (query: string, subject: string, mismatch: number, fwd: boolean) => {
   if (mismatch > 0) {
     return searchWithMismatch(query, subject, mismatch, fwd);
   }
@@ -54,7 +46,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean):
   const translatedQuery = translateWildNucleotides(query).trim();
   const regex = new RegExp(translatedQuery, "gi");
   let result = regex.exec(subject);
-  const results: SearchResult[] = [];
+  const results: Ranged[] = [];
   while (result) {
     const start = result.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
@@ -72,8 +64,8 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean):
  * A slightly modified Hamming Distance algorithm for approximate
  * string Matching for patterns
  */
-const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean): SearchResult[] => {
-  const results = [];
+const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean) => {
+  const results: Ranged[] = [];
   for (let i = 0; i < subject.length - query.length; i += 1) {
     let missed = 0;
 
@@ -97,13 +89,8 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
     if (missed <= mismatch) {
       const end = (i + query.length) % subject.length || subject.length;
       results.push({
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
         direction: fwd ? 1 : -1,
-
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'any' is not assignable to type 'never'.
         end: end,
-
-        // @ts-expect-error ts-migrate(2322) FIXME: Type 'number' is not assignable to type 'never'.
         start: i,
       });
     }

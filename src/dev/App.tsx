@@ -5,12 +5,12 @@
 import * as React from "react";
 
 import { SeqVizProps } from "../SeqViz/SeqViz";
-import { SearchResult } from "../utils/search";
+import { Ranged } from "../elements";
 import { SeqViz } from "../viewer";
 
 export const App = () => {
   const [search, setSearch] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState<SearchResult[]>([]);
+  const [searchResults, setSearchResults] = React.useState<Ranged[]>([]);
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     annotations: [
@@ -43,7 +43,7 @@ export const App = () => {
         // highlightColor: "red" /* pass in color */,
       },
     },
-    onSearch: (results: SearchResult[]) => {
+    onSearch: (results: Ranged[]) => {
       setSearchResults(results);
     },
     rotateOnScroll: true,
@@ -88,7 +88,7 @@ export const App = () => {
       <SearchBox
         highlightSearch={() => {
           const newBPColors = { ...seqvizProps.bpColors };
-          searchResults.forEach((res: SearchResult) => {
+          searchResults.forEach((res: Ranged) => {
             for (let i = res.start; i < res.end; i++) {
               newBPColors[i] = "orange";
             }

@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import { Annotation, ICutSite, ISize, InputRefFuncType, Primer } from "../../../elements";
-import { SearchResult } from "../../../utils/search";
+import { Annotation, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../../elements";
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
@@ -39,7 +38,7 @@ interface SeqBlockProps {
   mouseEvent: React.MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
   reversePrimerRows: Primer[];
-  searchRows: SearchResult[];
+  searchRows: Ranged[];
   selection: SeqVizSelection;
   seq: string;
   seqFontSize: number;

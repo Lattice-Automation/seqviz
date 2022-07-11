@@ -1,8 +1,8 @@
-import { Element } from "../elements";
+import { Ranged } from "../elements";
 
 // utility funcs for stackElements
-const last = <T extends Element>(arr: T[]): T => arr[arr.length - 1];
-const first = <T extends Element>(arr: T[]): T => arr[0];
+const last = <T extends Ranged>(arr: T[]): T => arr[arr.length - 1];
+const first = <T extends Ranged>(arr: T[]): T => arr[0];
 
 /**
  * Take an array of elements (a one deep array) and create an array of
@@ -17,7 +17,7 @@ const first = <T extends Element>(arr: T[]): T => arr[0];
  * 		[ ---Ann--- ---Ann3---]
  * 		[		---Ann2---    ]
  */
-export const stackElements = <T extends Element>(elements: T[], seqL: number): T[][] => {
+export const stackElements = <T extends Ranged>(elements: T[], seqL: number): T[][] => {
   const sortedElements = [...elements];
 
   return sortedElements.reduce((acc, a) => {
@@ -62,7 +62,7 @@ export const stackElements = <T extends Element>(elements: T[], seqL: number): T
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
  */
-export const createMultiRows = <T extends Element>(elements: T[][], rowLength: number, rowCount: number): T[][][] => {
+export const createMultiRows = <T extends Ranged>(elements: T[][], rowLength: number, rowCount: number): T[][][] => {
   const newArr = new Array(rowCount);
 
   // initialize the nested rows in each block
@@ -142,7 +142,7 @@ export const createMultiRows = <T extends Element>(elements: T[][], rowLength: n
  * Search thru the map w/ the given interval finding all relevant elements by finding the appropriate start and end
  * range using Math.floor
  */
-export const createSingleRows = <T extends Element>(
+export const createSingleRows = <T extends Ranged>(
   elements: any[],
   rowLength: number,
   rowCount: number,

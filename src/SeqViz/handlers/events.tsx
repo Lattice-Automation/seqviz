@@ -39,6 +39,7 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
     static displayName = "WithEventsProps";
 
     static contextType = CentralIndexContext;
+    declare context: React.ContextType<typeof CentralIndexContext>;
 
     clickedOnce: EventTarget | null = null;
     clickedTwice: EventTarget | null = null;

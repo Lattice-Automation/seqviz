@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as ReactDOMServer from "react-dom/server";
 
-import SeqViz from "./SeqViz/SeqViz";
+import SeqViz, { SeqVizProps } from "./SeqViz/SeqViz";
 
 /**
  * Export a part, pUC, for development
@@ -20,7 +20,7 @@ export { SeqViz };
  *  - `setState(options)` to update the viewer's internal state
  *  - `renderToString` to return an HTML representation of the Viewer
  */
-export const Viewer = (element: string | HTMLElement = "root", options) => {
+export const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) => {
   // used to keep track of whether to re-render after a "set" call
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly
@@ -34,7 +34,6 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
   } else {
     domElement = element;
   }
-  // @ts-ignore
   let viewer = React.createElement(SeqViz, options, null);
 
   /**
@@ -54,21 +53,10 @@ export const Viewer = (element: string | HTMLElement = "root", options) => {
   };
 
   /**
-   * Update the viewer with new settings.
-   *
-   * Re-renders if render was already called.
-   *
-   
+   * Update the viewer with new settings. Re-renders if render was already called.
    */
-  const setState = state => {
-    Object.keys(state).forEach(key => {
-      if (!Object.keys(SeqViz.defaultProps).includes(key)) {
-        console.error(`Unrecognized viewer setting: ${key}`);
-      }
-    });
-
+  const setState = (state: SeqVizProps) => {
     options = { ...options, ...state };
-    // @ts-ignore
     viewer = React.createElement(SeqViz, options, null);
 
     if (rendered) {
