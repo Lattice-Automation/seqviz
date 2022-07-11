@@ -8,7 +8,7 @@ import isEqual from "../utils/isEqual";
 import { directionality, dnaComplement } from "../utils/parser";
 import search from "../utils/search";
 import { annotationFactory, getSeqType } from "../utils/sequence";
-import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
+import { HighlightRegion } from "./Linear/SeqBlock/Find";
 import SeqViewer from "./SeqViewer";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";

@@ -3,17 +3,17 @@ import * as React from "react";
 import { Annotation, Coor, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
-import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
+import { HighlightRegion } from "../Linear/SeqBlock/Find";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
 import { SeqVizSelection } from "../handlers/selection";
 import Annotations from "./Annotations";
-import { CircularFind } from "./CircularFind";
-import Selection from "./CircularSelection";
 import CutSites from "./CutSites";
+import { Find } from "./Find";
 import Index from "./Index";
 import Labels, { ILabel } from "./Labels";
+import Selection from "./Selection";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
@@ -355,7 +355,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
             totalRows={totalRows}
             yDiff={yDiff}
           />
-          <CircularFind
+          <Find
             center={general.center}
             findCoor={general.findCoor}
             generateArc={general.generateArc}

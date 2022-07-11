@@ -1,9 +1,9 @@
 import * as React from "react";
 
 import { Coor, InputRefFuncType, Ranged } from "../../elements";
-import { HighlightRegion } from "../Linear/SeqBlock/LinearFind";
+import { HighlightRegion } from "../Linear/SeqBlock/Find";
 
-interface CircularFindProps {
+interface FindProps {
   center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   generateArc: (args: {
@@ -30,11 +30,11 @@ interface CircularFindProps {
   totalRows: number;
 }
 
-export const CircularFind = (props: CircularFindProps) => {
+export const Find = (props: FindProps) => {
   const { generateArc, getRotation, highlightedRegions, inputRef, lineHeight, radius, search, seqLength } = props;
   const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
   const searchArcs = search.map(s => (
-    <CircularFindArc
+    <FindArc
       key={JSON.stringify(s)}
       direction={s.direction || 1}
       end={s.end}
@@ -50,7 +50,7 @@ export const CircularFind = (props: CircularFindProps) => {
   ));
 
   const highlightArcs = highlightedRegions.map(({ color, end, start }) => (
-    <CircularFindArc
+    <FindArc
       key={JSON.stringify({ end, start })}
       direction={1}
       end={end}
@@ -75,7 +75,7 @@ export const CircularFind = (props: CircularFindProps) => {
 /**
  * Create an SVG `path` element that highlights the search result
  */
-export const CircularFindArc = (props: {
+export const FindArc = (props: {
   direction: -1 | 1;
   end: number;
   fillStyle: string;

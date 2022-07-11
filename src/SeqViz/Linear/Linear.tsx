@@ -8,7 +8,7 @@ import { createMultiRows, createSingleRows, stackElements } from "../elementsToR
 import withViewerHOCs from "../handlers";
 import { SeqVizSelection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
-import { HighlightRegion } from "./SeqBlock/LinearFind";
+import { HighlightRegion } from "./SeqBlock/Find";
 import SeqBlock from "./SeqBlock/SeqBlock";
 
 export interface LinearProps {
