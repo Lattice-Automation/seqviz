@@ -71,10 +71,16 @@
           }
         }
       ],
-      "@babel/preset-react",
-      "@babel/preset-typescript"
+      "@babel/preset-typescript",
+      "@babel/preset-react"
     ],
     "plugins": [
+      [
+        "@babel/plugin-transform-typescript",
+        {
+          "allowDeclareFields": true
+        }
+      ],
       "@babel/plugin-proposal-class-properties",
       "@babel/plugin-proposal-object-rest-spread",
       "babel-plugin-module-resolver",
@@ -139,6 +145,7 @@
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
     "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/plugin-transform-typescript": "^7.18.8",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.12.1",
