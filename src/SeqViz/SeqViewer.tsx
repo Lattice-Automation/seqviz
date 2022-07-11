@@ -5,7 +5,7 @@ import { Annotation, ICutSite, Ranged } from "../elements";
 import isEqual from "../utils/isEqual";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
-import { HighlightRegion } from "./Linear/SeqBlock/LinearFind";
+import { HighlightRegion } from "./Linear/SeqBlock/Find";
 import CentralIndexContext from "./handlers/centralIndex";
 import { SeqVizSelection } from "./handlers/selection";
 

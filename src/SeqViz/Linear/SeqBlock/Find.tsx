@@ -26,7 +26,7 @@ interface FindProps {
 /**
  * Render rectangles around Search results.
  */
-export default function LinearFind(props: FindProps) {
+export default function Find(props: FindProps) {
   const {
     compYDiff,
     filteredRows: searchRows,
@@ -45,7 +45,7 @@ export default function LinearFind(props: FindProps) {
       {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
       {highlightedRegions.map(({ color, end, start }) => (
         <React.Fragment key={`highlight-${start}-${end}-1`}>
-          <LinearFindBlock
+          <FindBlock
             compYDiff={compYDiff}
             direction={1}
             end={end}
@@ -59,7 +59,7 @@ export default function LinearFind(props: FindProps) {
             seqBlockRef={seqBlockRef}
             start={start}
           />
-          <LinearFindBlock
+          <FindBlock
             compYDiff={compYDiff}
             direction={-1}
             end={end}
@@ -76,7 +76,7 @@ export default function LinearFind(props: FindProps) {
         </React.Fragment>
       ))}
       {searchRows.map(s => (
-        <LinearFindBlock
+        <FindBlock
           key={JSON.stringify(s)}
           compYDiff={compYDiff}
           direction={s.direction || 1}
@@ -96,7 +96,7 @@ export default function LinearFind(props: FindProps) {
   );
 }
 
-export const LinearFindBlock = (props: {
+export const FindBlock = (props: {
   compYDiff: number;
   direction: -1 | 1;
   end: number;

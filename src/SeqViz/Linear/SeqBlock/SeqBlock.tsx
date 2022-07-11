@@ -4,8 +4,8 @@ import { Annotation, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from ".
 import { SeqVizSelection } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
+import Find, { HighlightRegion } from "./Find";
 import IndexRow from "./Index";
-import LinearFind, { HighlightRegion } from "./LinearFind";
 import Primers from "./Primers";
 import Selection from "./Selection";
 import TranslationRows, { Translation } from "./Translations";
@@ -303,7 +303,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           lastBase={lastBase}
           selectEdgeHeight={selectEdgeHeight}
         />
-        <LinearFind
+        <Find
           compYDiff={compYDiff}
           filteredRows={filteredSearchRows}
           findXAndWidth={this.findXAndWidth}
@@ -412,7 +412,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           </text>
         ) : null}
 
-        <LinearFind
+        <Find
           {...this.props}
           compYDiff={compYDiff}
           filteredRows={filteredSearchRows}

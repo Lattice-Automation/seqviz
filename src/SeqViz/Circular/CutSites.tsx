@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Coor, ICutSite, InputRefFuncType } from "../../elements";
-import { CircularFindArc } from "./CircularFind";
+import { FindArc } from "./Find";
 
 interface CutSitesProps {
   center: Coor;
@@ -123,7 +123,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
   recogHighlightArc = (c: ICutSite) => {
     if (c.highlightColor) {
       return (
-        <CircularFindArc
+        <FindArc
           key={`findArc: ${c.id}`}
           direction={1}
           end={c.end}
