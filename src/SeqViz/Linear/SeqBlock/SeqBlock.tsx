@@ -80,10 +80,12 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * A helper used in child components to position elements on rows. Given first and last base, how far from the left
    * and how wide should it be?
    */
-  findXAndWidth: FindXAndWidthType = (firstIndex = 0, lastIndex = 0) => {
+  findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
+    firstIndex |= 0;
+    lastIndex |= 0;
+
     const {
       bpsPerBlock,
-      // charWidth,
       firstBase,
       fullSeq: { length: seqLength },
       size,
