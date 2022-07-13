@@ -14,6 +14,7 @@ node ./config/scripts/markdown.js ./README.md
 git add .
 git commit --amend -C HEAD
 npm publish
+git push
 
-version="$(npm pkg get version)"
+version="$(jq -r '.version' < 'package.json')"
 gh release create "$version" --title "$version" --generate-notes --target develop
