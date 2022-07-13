@@ -10,7 +10,7 @@ fi
 npm run test:ci
 npm version "$1" --git-tag-version
 npm run build
-node ./markdown.js ../../README.md
+node ./config/scripts/markdown.js ../../README.md
 git add .
 git commit --amend -C HEAD
 npm publish
