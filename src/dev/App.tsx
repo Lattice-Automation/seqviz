@@ -70,8 +70,8 @@ export const App = () => {
 
     translations: [{ direction: 1, end: 10, start: 0 }],
 
-    viewer: "both" as const,
-    zoom: { circular: 0, linear: 90 },
+    viewer: "linear",
+    zoom: { circular: 0, linear: 80 },
     // highlightedRegions: [
     //   { start: 36, end: 66, color: "magenta" },
     //   { start: 70, end: 80 },

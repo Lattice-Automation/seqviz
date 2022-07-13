@@ -57,9 +57,12 @@ interface SeqBlockProps {
  *
  * Comprised of:
  * 	   IndexRow (the x axis basepair index)
- * 	   AnnotationRow (annotations)
+ * 	   AnnotationRows (annotations)
  * 	   Selection (cursor selection range)
  * 	   Find (regions that match the users current find search)
+ *     CutSites (cut sites)
+ *     Primers
+ *     Translations
  *
  * a single block of linear sequence. Essentially a row that holds
  * the sequence, and flair around it including the
@@ -74,22 +77,13 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   };
 
   /**
-   * findXAndWidth
-   *
-   * a helper method that's used in several of the child components to figure
-   * out how far from the left the element is and how wide it should be
-  
+   * A helper used in child components to position elements on rows. Given first and last base, how far from the left
+   * and how wide should it be?
    */
   findXAndWidth: FindXAndWidthType = (firstIndex = 0, lastIndex = 0) => {
-    if (firstIndex === null) {
-      firstIndex = 0;
-    }
-    if (lastIndex === null) {
-      lastIndex = 0;
-    }
-
     const {
       bpsPerBlock,
+      // charWidth,
       firstBase,
       fullSeq: { length: seqLength },
       size,
@@ -98,8 +92,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
     const multiBlock = seqLength >= bpsPerBlock;
 
-    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
-    // find the distance from the left to start
     let x = 0;
     if (firstIndex >= firstBase) {
       x = ((firstIndex - firstBase) / bpsPerBlock) * size.width;
@@ -134,17 +126,18 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const { charWidth, id } = this.props;
 
     const color = this.bpColorLookup(bp, i);
-
     if (color) {
       return (
-        <tspan key={i + bp + id} fill={color} x={charWidth * i}>
+        <tspan key={i + bp + id} fill={color} x={charWidth * i + charWidth * 0.1}>
           {bp}
         </tspan>
       );
     }
 
     return (
-      <tspan key={i + bp + id} x={charWidth * i}>
+      // the +0.1 here and above is to offset the characters they're not right on the left edge. When they are,
+      // other elements look like they're shifted too far to the right.
+      <tspan key={i + bp + id} x={charWidth * i + charWidth * 0.1}>
         {bp}
       </tspan>
     );
@@ -193,6 +186,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       showPrimers,
       size,
       translations,
+      zoom,
       zoomed,
     } = this.props;
 
@@ -302,6 +296,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           fullSeq={fullSeq}
           lastBase={lastBase}
           selectEdgeHeight={selectEdgeHeight}
+          zoom={zoom.linear}
         />
         <Find
           compYDiff={compYDiff}
@@ -390,6 +385,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         )}
         {zoomed ? (
           <CutSiteRow
+            charWidth={charWidth}
             cutSiteRows={cutSiteRows}
             elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
