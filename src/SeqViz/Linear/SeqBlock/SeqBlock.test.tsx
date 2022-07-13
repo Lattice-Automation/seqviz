@@ -12,8 +12,10 @@ const defaultProps = {
   elementHeight: 16,
   firstBase: 0,
   forwardPrimerRows: [],
+  highlightedRegions: [],
   id: "",
   inputRef: (_: string, __: any) => React.createRef(),
+  key: "",
   lineHeight: 14,
   mouseEvent: () => {},
   name: "",
@@ -21,18 +23,16 @@ const defaultProps = {
   primers: [],
   reversePrimerRows: [],
   searchRows: [],
+  selection: {},
   seqFontSize: 12,
+  showComplement: false,
+  showIndex: false,
+  showPrimers: false,
   size: { height: 600, width: 1200 },
   translations: [],
   y: 0,
   zoom: { linear: 50 },
   zoomed: false,
-  key: "",
-  selection: {},
-  showIndex: false,
-  showPrimers: false,
-  showComplement: false,
-  highlightedRegions: [],
 };
 
 /**
@@ -52,10 +52,10 @@ describe("SeqBlock", () => {
         annotationRows={[
           [
             {
-              id: "test",
               color: "#80D849",
               direction: 1,
               end: 71,
+              id: "test",
               name: "RBS",
               start: 0,
             },

@@ -12,6 +12,7 @@ export interface LabelWithCoors {
 }
 
 export interface GroupedLabelsWithCoors {
+  forkCoor: null | Coor;
   grouped: boolean;
   labels: ILabel[];
   lineCoor: Coor;
@@ -19,7 +20,6 @@ export interface GroupedLabelsWithCoors {
   overflow: unknown;
   textAnchor: "start" | "end";
   textCoor: Coor;
-  forkCoor: null | Coor;
 }
 
 interface LabelsProps {
@@ -176,6 +176,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
 
       // create a new "group" from this single label
       return acc.concat({
+        forkCoor: null,
         grouped: overflow,
         labels: [n.label],
         lineCoor: n.lineCoor,
@@ -183,7 +184,6 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
         overflow: overflow,
         textAnchor: n.textAnchor,
         textCoor: n.textCoor,
-        forkCoor: null,
       });
     }, []);
 

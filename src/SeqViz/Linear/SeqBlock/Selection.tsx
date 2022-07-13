@@ -11,6 +11,7 @@ interface EdgesProps {
   fullSeq: string;
   lastBase: number;
   selectEdgeHeight: number;
+  zoom: number;
 }
 
 /**
@@ -25,7 +26,7 @@ class Edges extends React.PureComponent<EdgesProps> {
   id = randomid();
 
   render() {
-    const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
+    const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight, zoom } = this.props;
     const { clockwise, end, ref, start } = this.context;
 
     let startEdge: number | null = null;
@@ -88,7 +89,8 @@ class Edges extends React.PureComponent<EdgesProps> {
       shapeRendering: "crispEdges",
       style: {
         fill: "black",
-        width: start === end ? 1 : 2,
+        // below 40 zoom the chars are so small we may as well not widen the selection edges.
+        width: start === end || zoom < 40 ? 1 : 2,
       },
       y: "-5",
     };
@@ -96,7 +98,7 @@ class Edges extends React.PureComponent<EdgesProps> {
     return (
       <g className="la-vz-linear-sel-edges">
         {startEdge ? <rect {...rect} x={start === end ? x - 1 : x - 2} /> : null}
-        {lastEdge ? <rect {...rect} x={start === end ? secondEdgeX - 1 : secondEdgeX - 2} /> : null}
+        {lastEdge ? <rect {...rect} x={start === end ? secondEdgeX - 1 : secondEdgeX - 1} /> : null}
       </g>
     );
   }

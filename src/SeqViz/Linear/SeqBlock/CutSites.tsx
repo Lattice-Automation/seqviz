@@ -49,6 +49,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
  * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
 const CutSites = (props: {
+  charWidth: number;
   cutSiteRows: ICutSite[];
   elementHeight: number;
   findXAndWidth: FindXAndWidthType;
