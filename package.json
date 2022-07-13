@@ -7,14 +7,13 @@
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
     "format": "prettier ./src/** --config package.json --write && eslint src --ext ts,tsx --fix",
-    "format:check": "prettier ./src/** --config package.json --check",
-    "lint": "eslint src --ext ts,tsx --quiet",
+    "lint": "prettier ./src/** --config package.json --check && eslint src --ext ts,tsx --quiet",
     "major": "./config/scripts/release.sh major",
     "minor": "./config/scripts/release.sh minor",
     "patch": "./config/scripts/release.sh patch",
     "start": "PORT=8000 node ./config/scripts/start.js",
     "test": "node ./config/scripts/test.js",
-    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build"
+    "test:ci": "npm run lint && CI=true npm run test && npm run build"
   },
   "keywords": [
     "AA",

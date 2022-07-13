@@ -20,9 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
-      - name: Run Prettier formatter
-        run: npm run format:check
-      - name: Run Eslint
+      - name: Run Prettier and ESLint
         run: npm run lint
       - name: Run Unit Tests and build
         run: npm run test:ci
