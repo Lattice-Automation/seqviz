@@ -1,6 +1,6 @@
 {
   "name": "seqviz",
-  "version": "3.3.9",
+  "version": "3.3.10",
   "private": false,
   "description": "DNA sequence viewer. Supports custom, GenBank, FASTA, or NCBI accession input",
   "scripts": {
@@ -9,14 +9,12 @@
     "format": "prettier ./src/** --config package.json --write && eslint src --ext ts,tsx --fix",
     "format:check": "prettier ./src/** --config package.json --check",
     "lint": "eslint src --ext ts,tsx --quiet",
-    "major": "npm run test:ci && npm version major --git-tag-version && npm run update",
-    "markdown": "node ./config/scripts/markdown.js ./README.md",
-    "minor": "npm run test:ci && npm version minor --git-tag-version && npm run update",
-    "patch": "npm run test:ci && npm version patch --git-tag-version && npm run update",
+    "major": "./config/scripts/release.sh major",
+    "minor": "./config/scripts/release.sh minor",
+    "patch": "./config/scripts/release.sh patch",
     "start": "PORT=8000 node ./config/scripts/start.js",
     "test": "node ./config/scripts/test.js",
-    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build",
-    "update": "npm run build && npm run markdown && git add . && git commit --amend -C HEAD && npm publish"
+    "test:ci": "npm run format:check && npm run lint && CI=true npm run test && npm run build"
   },
   "keywords": [
     "AA",
