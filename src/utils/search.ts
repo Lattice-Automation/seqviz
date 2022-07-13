@@ -32,8 +32,6 @@ export default (query: string, mismatch = 0, seq = ""): Ranged[] => {
 };
 
 /**
- * Search the sequence
- *
  * If there's no mismatch, just use a RegExp to search over the sequence repeatedly
  * Otherwise, use the modified hamming search in `searchWithMismatch()`
  */
@@ -61,8 +59,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean) 
 };
 
 /**
- * A slightly modified Hamming Distance algorithm for approximate
- * string Matching for patterns
+ * A slightly modified Hamming Distance algorithm for approximate string Matching for patterns
  */
 const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean) => {
   const results: Ranged[] = [];
