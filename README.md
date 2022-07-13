@@ -37,8 +37,7 @@
 - Annotations with names and colors
 - Amino acid translations
 - Enzyme cut sites
-- Sequence basepair indexing
-- Sequence searching and highlighting
+- Searching and highlighting
 
 #### Sequence and element selection
 
@@ -57,9 +56,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation

@@ -64,7 +64,7 @@ export const App = () => {
     translations: [{ direction: 1, end: 70, start: 0 }],
 
     viewer: "both_flip",
-    zoom: { circular: 0, linear: 80 },
+    zoom: { circular: 0, linear: 50 },
     // highlightedRegions: [
     //   { start: 36, end: 66, color: "magenta" },
     //   { start: 70, end: 80 },
