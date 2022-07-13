@@ -122,21 +122,25 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     { accession = "", annotations, backbone, enzymes, enzymesCustom, file, search }: SeqVizProps,
     { part }
   ) => {
+    // New access or part provided, do a lookup.
     if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
       await this.setPart(); // new accession/remote ID
     }
+
+    // New search parameters provided.
     if (
       search &&
       (!this.props.search || search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch)
     ) {
       this.search(part); // new search parameters
     }
-    if (!isEqual(enzymes, this.props.enzymes)) {
-      this.cut(part); // new set of enzymes for digest
-    }
-    if (!isEqual(enzymesCustom, this.props.enzymesCustom)) {
+
+    // New digest parameters.
+    if (!isEqual(enzymes, this.props.enzymes) || !isEqual(enzymesCustom, this.props.enzymesCustom)) {
       this.cut(part);
     }
+
+    // New annotations provided.
     if (!isEqual(annotations, this.props.annotations)) {
       this.setState({ annotations: this.parseAnnotations(this.props.annotations, this.props.seq) });
     }
@@ -161,7 +165,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         this.cut(part);
       } else if (file) {
         const parts = await filesToParts(file, this.props);
-
         this.setState({
           part: {
             ...parts[0],
@@ -263,84 +266,45 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   render() {
-    const { style } = this.props;
-    let { compSeq, name, seq, showComplement, showIndex, viewer } = this.props;
-    const { centralIndex, cutSites, part, search, selection } = this.state;
-    let { annotations } = this.state;
+    const { name, showComplement, showIndex, style, zoom } = this.props;
+    let { compSeq, seq, viewer } = this.props;
+    const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
-    showIndex = !!showIndex;
-
-    // Since all props are optional, we need to parse those to defaults.
+    // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
     seq = seq || part?.seq || "";
     if (getSeqType(seq) === "dna") {
       compSeq = compSeq || part?.compSeq || dnaComplement(seq).compSeq || "";
     }
-    if (typeof showComplement === "undefined") {
-      showComplement = true;
-    }
-    showComplement = !!compSeq && showComplement;
+    if (!seq) return <div className="la-vz-seqviz" />;
 
-    if (!seq) {
-      return <div className="la-vz-seqviz" />;
-    }
-
-    const zoom = {
-      circular: 0,
-      linear: 50,
-      ...(this.props.zoom || {
-        circular: 0,
-        linear: 50,
-      }),
+    // Since all the props are optional, we need to parse them to defaults.
+    const props = {
+      annotations: annotations && annotations.length ? annotations : part?.annotations || [],
+      bpColors: this.props.bpColors || {},
+      compSeq: compSeq || "",
+      cutSites: cutSites,
+      highlightedRegions: this.props.highlightedRegions || [],
+      name: name || part?.name || "",
+      search: search,
+      selection: selection,
+      seq: seq,
+      setSelection: this.setSelection,
+      showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || true,
+      showIndex: !!showIndex,
+      translations: this.props.translations || [],
+      zoom: {
+        circular: zoom?.circular || 0,
+        linear: zoom?.linear || 50,
+      },
     };
 
-    name = name || part?.name || "";
-    annotations = annotations && annotations.length ? annotations : part?.annotations || [];
-    const highlightedRegions: HighlightRegion[] = this.props.highlightedRegions || [];
-
-    if (!viewer) {
-      viewer = "both";
-    }
+    // Arrange the viewers based on the viewer prop.
+    viewer = viewer || "both";
     const linear = (viewer === "linear" || viewer.includes("both")) && (
-      <SeqViewer
-        key="linear"
-        {...this.props}
-        Circular={false}
-        annotations={annotations}
-        bpColors={this.props.bpColors || {}}
-        compSeq={compSeq || ""}
-        cutSites={cutSites}
-        highlightedRegions={highlightedRegions}
-        name={name || ""}
-        search={search}
-        selection={selection}
-        seq={seq}
-        setSelection={this.setSelection}
-        showComplement={showComplement}
-        showIndex={showIndex}
-        translations={this.props.translations || []}
-        zoom={zoom}
-      />
+      <SeqViewer key="linear" Circular={false} {...props} />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
-      <SeqViewer
-        key="circular"
-        {...this.props}
-        Circular={true}
-        annotations={annotations}
-        bpColors={this.props.bpColors || {}}
-        compSeq={compSeq || ""}
-        cutSites={cutSites}
-        highlightedRegions={highlightedRegions}
-        name={name || ""}
-        search={search}
-        selection={selection}
-        seq={seq}
-        setSelection={this.setSelection}
-        showComplement={showComplement}
-        showIndex={showIndex}
-        translations={this.props.translations || []}
-        zoom={zoom}
-      />
+      <SeqViewer key="circular" Circular {...props} />
     );
     const bothFlipped = viewer === "both_flip";
     const viewers = bothFlipped ? [linear, circular] : [circular, linear];
