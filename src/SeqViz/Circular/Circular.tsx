@@ -12,12 +12,20 @@ import Annotations from "./Annotations";
 import CutSites from "./CutSites";
 import { Find } from "./Find";
 import Index from "./Index";
-import Labels, { ILabel } from "./Labels";
+import Labels from "./Labels";
 import Selection from "./Selection";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
+
+export interface ILabel {
+  end: number;
+  id?: string;
+  name: string;
+  start: number;
+  type: "enzyme" | "annotation";
+}
 
 export interface CircularProps {
   Circular: boolean;
@@ -47,7 +55,7 @@ export interface CircularProps {
 
 interface CircularState {
   annotationsInRows: Annotation[][];
-  inlinedLabels: ILabel[];
+  inlinedLabels: string[];
   lineHeight: number;
   outerLabels: ILabel[];
   primersInRows: Primer[][];
@@ -58,16 +66,20 @@ class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
   declare context: React.ContextType<typeof CentralIndexContext>;
 
-  static getDerivedStateFromProps = (
-    nextProps: CircularProps
-  ): {
-    annotationsInRows: Annotation[][];
-    inlinedLabels: ILabel[];
-    lineHeight: number;
-    outerLabels: ILabel[];
-    primersInRows: Primer[][];
-    seqLength: number;
-  } => {
+  constructor(props: CircularProps) {
+    super(props);
+
+    this.state = {
+      annotationsInRows: [],
+      inlinedLabels: [],
+      lineHeight: 0,
+      outerLabels: [],
+      primersInRows: [],
+      seqLength: 0,
+    };
+  }
+
+  static getDerivedStateFromProps = (nextProps: CircularProps): CircularState => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(
       nextProps.annotations.filter(ann => ann.type !== "insert"),
@@ -88,7 +100,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
     const cutSiteLabels = nextProps.cutSites;
     const { radius } = nextProps;
     let innerRadius = radius - 3 * lineHeight;
-    const inlinedLabels: ILabel[] = [];
+    const inlinedLabels: string[] = [];
     const outerLabels: ILabel[] = [];
     annotationsInRows.forEach((r: Annotation[]) => {
       const circumf = innerRadius * Math.PI;
@@ -100,7 +112,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
         if (ann.start >= ann.end) annLengthBases += seqLength; // crosses zero-index
         const annLengthPixels = 2 * circumf * (annLengthBases / seqLength);
         if (annNameLengthPixels < annLengthPixels) {
-          // @ts-expect-error ts-migrate(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
           inlinedLabels.push(ann.id);
         } else {
           const { end, id, name, start } = ann;
@@ -130,16 +141,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
       primersInRows: primersInRows,
       seqLength: nextProps.seq.length,
     };
-  };
-
-  // null arrays on initial load
-  state = {
-    annotationsInRows: [],
-    inlinedLabels: [],
-    lineHeight: 0,
-    outerLabels: [],
-    primersInRows: [],
-    seqLength: 0,
   };
 
   /**

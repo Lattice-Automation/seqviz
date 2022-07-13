@@ -13,7 +13,7 @@ const defaultProps = {
   firstBase: 0,
   forwardPrimerRows: [],
   id: "",
-  inputRef: () => {},
+  inputRef: (_: string, __: any) => React.createRef(),
   lineHeight: 14,
   mouseEvent: () => {},
   name: "",
@@ -27,6 +27,12 @@ const defaultProps = {
   y: 0,
   zoom: { linear: 50 },
   zoomed: false,
+  key: "",
+  selection: {},
+  showIndex: false,
+  showPrimers: false,
+  showComplement: false,
+  highlightedRegions: [],
 };
 
 /**
@@ -40,22 +46,23 @@ describe("SeqBlock", () => {
   it("renders with a single block", () => {
     const seq = "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
     const wrapper = shallow(
+      // @ts-expect-error on input ref func
       <SeqBlock
         {...defaultProps}
-        // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
-        annotations={[
-          {
-            color: "#80D849",
-            direction: 1,
-            end: 71,
-            name: "RBS",
-            start: 0,
-            type: "RBS",
-          },
+        annotationRows={[
+          [
+            {
+              id: "test",
+              color: "#80D849",
+              direction: 1,
+              end: 71,
+              name: "RBS",
+              start: 0,
+            },
+          ],
         ]}
         compSeq="cgctttttagttattcctccgttgttctacacgctttttgtagaattagtacgccacctcccaaagattac"
         fullSeq={seq}
-        name="BCDRBS_alt1_BD14"
         seq={seq}
       />
     );

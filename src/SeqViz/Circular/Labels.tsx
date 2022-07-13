@@ -1,32 +1,25 @@
 import * as React from "react";
 
 import { Coor, ISize, InputRefFuncType } from "../../elements";
-import { CHAR_WIDTH } from "./Circular";
+import { CHAR_WIDTH, ILabel } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
-export interface ILabel {
-  end: number;
-  id?: string;
-  name: string;
-  start: number;
-  type: "enzyme" | "annotation";
-}
-
-interface LabelWithCoors {
+export interface LabelWithCoors {
   label: ILabel;
   lineCoor: Coor;
-  textAnchor: unknown;
+  textAnchor: "start" | "end";
   textCoor: Coor;
 }
 
-interface GroupedLabelsWithCoors {
-  grouped: unknown;
+export interface GroupedLabelsWithCoors {
+  grouped: boolean;
   labels: ILabel[];
   lineCoor: Coor;
   name: string;
   overflow: unknown;
-  textAnchor: unknown;
+  textAnchor: "start" | "end";
   textCoor: Coor;
+  forkCoor: null | Coor;
 }
 
 interface LabelsProps {
@@ -55,7 +48,8 @@ interface LabelsProps {
 }
 
 interface LabelsState {
-  hoveredGroup: unknown;
+  hoveredGroup: string;
+  labelGroups: GroupedLabelsWithCoors[];
 }
 
 /**
@@ -68,6 +62,15 @@ interface LabelsState {
  * to avoid this overlap problem
  */
 export default class Labels extends React.Component<LabelsProps, LabelsState> {
+  constructor(props: LabelsProps) {
+    super(props);
+
+    this.state = {
+      hoveredGroup: "",
+      labelGroups: [],
+    };
+  }
+
   static getDerivedStateFromProps = (nextProps: LabelsProps, prevState: LabelsState) => {
     // I'm storing the name position groups in state because hovering and
     // leaving a hover both trigger a change in whether to render and show
@@ -180,6 +183,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
         overflow: overflow,
         textAnchor: n.textAnchor,
         textCoor: n.textCoor,
+        forkCoor: null,
       });
     }, []);
 
@@ -225,17 +229,11 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
 
         return {
           ...g,
-          // single label now
           forkCoor: g.textCoor,
-
           grouped: overflow,
-
           labels: [l],
-
-          // only "grouped" (misnomer) if it overlaps
           overflow: overflow,
-
-          textCoor: newTextCoor, // fork point becomes the old textCoor
+          textCoor: newTextCoor,
         };
       });
 
@@ -282,14 +280,8 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
     });
   };
 
-  // empty arrays on first load
-  state = {
-    hoveredGroup: "",
-    labelGroups: [],
-  };
-
   // set the currently hovered group
-  setHoveredGroup = hoveredGroup => {
+  setHoveredGroup = (hoveredGroup: string) => {
     if (hoveredGroup !== this.state.hoveredGroup) {
       this.setState({ hoveredGroup });
     }
@@ -305,24 +297,18 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
     return (
       <g className="la-vz-circular-labels" onMouseLeave={() => this.setHoveredGroup("")}>
         {labelGroups.map(g => {
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'labels' does not exist on type 'never'.
           const [first] = g.labels;
           // generate the line between the name and plasmid surface
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'forkCoor' does not exist on type 'never'... Remove this comment to see the full error message
           const fC = g.forkCoor || g.textCoor;
           const labelLines = (
             <>
-              {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'lineCoor' does not exist on */}
               <path className="la-vz-label-line" d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`} />
-              {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message */}
               {g.forkCoor && (
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message
                 <path className="la-vz-label-line" d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`} />
               )}
             </>
           );
 
-          // @ts-expect-error ts-migrate(2339) FIXME: Property 'grouped' does not exist on type 'never'.
           if (!g.grouped) {
             // just a single name in this position
             return (
@@ -331,20 +317,16 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
                 <text
                   className="la-vz-circular-label"
                   id={first.id}
-                  // @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message
                   {...g.textCoor}
                   dominantBaseline="middle"
-                  // @ts-expect-error ts-migrate(2339) FIXME: Property 'textAnchor' does not exist on type 'neve... Remove this comment to see the full error message
                   textAnchor={g.textAnchor}
                 >
-                  {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message */}
                   {g.name}
                 </text>
               </g>
             );
           } else if (first.id === hoveredGroup) {
-            // return nothing, this group block needs to be rendered last to be
-            // on top of the other elements in the SVG
+            // return nothing, this group block needs to be rendered last to be on top of the other elements in the SVG
             return null;
           }
           // a group of names which should render an overlap block
@@ -355,13 +337,10 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
                 className="la-vz-circular-label"
                 dominantBaseline="middle"
                 id={first.id}
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'textAnchor' does not exist on type 'neve... Remove this comment to see the full error message
                 textAnchor={g.textAnchor}
-                onMouseEnter={() => this.setHoveredGroup(first.id)}
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'textCoor' does not exist on type 'never'... Remove this comment to see the full error message
+                onMouseEnter={() => this.setHoveredGroup(first.id || "")}
                 {...g.textCoor}
               >
-                {/* @ts-expect-error ts-migrate(2339) FIXME: Property 'name' does not exist on type 'never'. */}
                 {g.name}
               </text>
             </g>
@@ -369,7 +348,6 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
         })}
         {hovered && (
           <WrappedGroupLabel
-            // @ts-expect-error ts-migrate(2769) FIXME: No overload matches this call.
             group={hovered}
             lineHeight={lineHeight}
             setHoveredGroup={this.setHoveredGroup}
