@@ -279,6 +279,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
+      ...this.props,
       annotations: annotations && annotations.length ? annotations : part?.annotations || [],
       bpColors: this.props.bpColors || {},
       compSeq: compSeq || "",

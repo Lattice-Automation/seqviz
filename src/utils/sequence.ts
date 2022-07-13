@@ -121,8 +121,7 @@ export const getSeqType = (seq: string): SeqType => {
 /**
  * Translate common nucleotide wildcards
  *
- * Search string sequence for nucleotide wildcards
- * and replace with proper regex
+ * Search string sequence for nucleotide wildcards and replace with proper regex
  */
 export const translateWildNucleotides = (seq: string): string =>
   seq
