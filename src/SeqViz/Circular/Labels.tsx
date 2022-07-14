@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, ISize, InputRefFuncType } from "../../elements";
+import { Coor, InputRefFuncType, Size } from "../../elements";
 import { CHAR_WIDTH, ILabel } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
@@ -43,7 +43,7 @@ interface LabelsProps {
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   seqLength: number;
-  size: ISize;
+  size: Size;
   yDiff: number;
 }
 

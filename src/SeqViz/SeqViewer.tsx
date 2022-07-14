@@ -1,26 +1,25 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
-import { Annotation, ICutSite, Ranged } from "../elements";
+import { Annotation, ColorRange, CutSite, Ranged } from "../elements";
 import isEqual from "../utils/isEqual";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
-import { HighlightRegion } from "./Linear/SeqBlock/Find";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SeqVizSelection } from "./handlers/selection";
+import { Selection } from "./handlers/selection";
 
 interface SeqViewerProps {
   Circular: boolean;
   annotations: Annotation[];
   bpColors: { [key: number | string]: string };
   compSeq: string;
-  cutSites: ICutSite[];
-  highlightedRegions: HighlightRegion[];
+  cutSites: CutSite[];
+  highlightedRegions: ColorRange[];
   name: string;
   search: Ranged[];
-  selection: SeqVizSelection;
+  selection: Selection;
   seq: string;
-  setSelection: (update: SeqVizSelection) => void;
+  setSelection: (update: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
   size: { height: number; width: number };

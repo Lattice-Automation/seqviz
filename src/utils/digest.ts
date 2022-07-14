@@ -1,7 +1,7 @@
-import { ICutSite, IEnzyme } from "../elements";
+import { CutSite, Enzyme } from "../elements";
 import enzymes from "./enzymes";
 import { reverseComplement } from "./parser";
-import { translateWildNucleotides } from "./sequence";
+import { createRegex } from "./search";
 
 /**
  * Digest a sequence with the given enzymes and return an array of cut sites along the sequence.
@@ -11,15 +11,17 @@ import { translateWildNucleotides } from "./sequence";
 export const cutSitesInRows = (
   seq: string,
   enzymeList: string[] = [],
-  enzymesCustom: { [key: string]: IEnzyme } = {}
-): ICutSite[] => {
+  enzymesCustom: { [key: string]: Enzyme } = {}
+): CutSite[] => {
   const seqToCut = (seq + seq).toUpperCase();
-  const filteredEnzymes: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
-  const uniqueFilteredEnzymes = Array.from(new Set(filteredEnzymes));
+
+  const enzymeNames: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
+  const filteredEnzymes = Array.from(new Set(enzymeNames));
+
   // find all the cut sites for the given row
-  const cutSites: ICutSite[] = [];
-  uniqueFilteredEnzymes.forEach((enzymeName: string) => {
-    const currEnzyme: IEnzyme = enzymesCustom[enzymeName] || enzymes[enzymeName];
+  const cutSites: CutSite[] = [];
+  filteredEnzymes.forEach((enzymeName: string) => {
+    const currEnzyme: Enzyme = enzymesCustom[enzymeName] || enzymes[enzymeName];
     const sites = findCutSites(currEnzyme, seqToCut, enzymeName);
     const filteredSites = sites.filter(c => !(c.fcut === 0 && c.rcut === 0));
     filteredSites.forEach(c =>
@@ -44,7 +46,7 @@ export const cutSitesInRows = (
  * Search through the sequence with the given enzyme and return an array of cut
  * and hang indexes for splitting up the sequence with the passed enzymes
  */
-const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string): ICutSite[] => {
+const findCutSites = (enzyme: Enzyme, seqToSearch: string, enzymeName: string): CutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
@@ -67,7 +69,7 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
 
   const recogLength = recogSeq.length;
   const nucAmbig = new RegExp(/[^ATGC]/, "gi");
-  if (nucAmbig.test(rseq)) recogSeq = translateWildNucleotides(recogSeq).toUpperCase();
+  if (nucAmbig.test(rseq)) recogSeq = recogSeq.toUpperCase();
   const regTest = new RegExp(recogSeq, "gi");
 
   // this is in the forward direction, ie, when not checking the complement possibility
@@ -95,7 +97,7 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
 
   let inverComp = reverseComplement(rseq);
   if (new RegExp(/[^ATGC]/, "gi").test(inverComp.toUpperCase())) {
-    inverComp = translateWildNucleotides(inverComp).toUpperCase();
+    inverComp = createRegex(inverComp, "dna").toUpperCase();
   }
   const reqTestRC = new RegExp(inverComp, "gi");
   result = reqTestRC.exec(seqToSearch); // returns null if nothing found
@@ -118,7 +120,7 @@ const findCutSites = (enzyme: IEnzyme, seqToSearch: string, enzymeName: string):
   }
 
   // reduce so there's only one enzyme per template cut index
-  const uniqueCuts: ICutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+  const uniqueCuts: CutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
 
   // sort with increasing sequence cut index
 

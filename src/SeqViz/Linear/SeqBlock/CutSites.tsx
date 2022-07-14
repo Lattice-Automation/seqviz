@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ICutSite, InputRefFuncType } from "../../../elements";
+import { CutSite, InputRefFuncType } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface ConnectorType {
@@ -50,7 +50,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
  */
 const CutSites = (props: {
   charWidth: number;
-  cutSiteRows: ICutSite[];
+  cutSiteRows: CutSite[];
   elementHeight: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
@@ -72,7 +72,7 @@ const CutSites = (props: {
   } = props;
 
   // Add x and width to each cut site.
-  const sitesWithX: ConnectorType[] = cutSiteRows.map((c: ICutSite) => {
+  const sitesWithX: ConnectorType[] = cutSiteRows.map((c: CutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { width: highlightWidth, x: highlightX } = findXAndWidth(c.recogStart, c.recogEnd);

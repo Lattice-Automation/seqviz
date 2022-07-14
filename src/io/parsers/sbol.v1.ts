@@ -2,7 +2,7 @@ import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
 import { colorByIndex } from "../../utils/colors";
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { complement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /*
@@ -62,7 +62,7 @@ const dnaComponentToPart = (DnaComponent, options) => {
       seq = DnaSequence[0].nucleotides[0]._;
     }
   }
-  const { compSeq: parsedCompSeq, seq: parsedSeq } = dnaComplement(seq); // seq and compSeq
+  const { compSeq: parsedCompSeq, seq: parsedSeq } = complement(seq); // seq and compSeq
   if (!parsedSeq) return null;
 
   // attempt to parse the SBOL annotations into our version of annotations
@@ -130,7 +130,7 @@ const sequenceToPart = (Seq, file) => {
   // get the sequence
   const seqOrig = (Seq.elements[0] && Seq.elements[0]._) || "";
 
-  const { compSeq, seq } = dnaComplement(seqOrig);
+  const { compSeq, seq } = complement(seqOrig);
 
   // guess whether it's circular or not based on the presence of a word like vector.
   // very ad hoc

@@ -1,4 +1,4 @@
-import { dnaComplement } from "./parser";
+import { complement } from "./parser";
 import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
 
 /**
@@ -8,7 +8,7 @@ import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
  
  */
 export default (primers, vector) => {
-  const { compSeq: vectorComp, seq: vectorSeq } = dnaComplement(vector);
+  const { compSeq: vectorComp, seq: vectorSeq } = complement(vector);
   return findBindingSites(primers, vectorSeq, 1).concat(findBindingSites(primers, vectorComp, -1));
 };
 

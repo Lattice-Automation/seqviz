@@ -1,14 +1,13 @@
 import * as React from "react";
 
-import { Annotation, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../elements";
+import { Annotation, ColorRange, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { createLinearTranslations } from "../../utils/sequence";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
-import { SeqVizSelection } from "../handlers/selection";
+import { Selection } from "../handlers/selection";
 import InfiniteScroll from "./InfiniteScroll";
-import { HighlightRegion } from "./SeqBlock/Find";
 import SeqBlock from "./SeqBlock/SeqBlock";
 
 export interface LinearProps {
@@ -19,9 +18,9 @@ export interface LinearProps {
   bpsPerBlock: number;
   charWidth: number;
   compSeq: string;
-  cutSites: ICutSite[];
+  cutSites: CutSite[];
   elementHeight: number;
-  highlightedRegions: HighlightRegion[];
+  highlightedRegions: ColorRange[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
@@ -29,15 +28,15 @@ export interface LinearProps {
   onUnmount: (id: string) => void;
   primers: Primer[];
   search: Ranged[];
-  selection: SeqVizSelection;
+  selection: Selection;
   seq: string;
   seqFontSize: number;
   seqLength: number;
-  setSelection: (selection: SeqVizSelection) => void;
+  setSelection: (selection: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  size: ISize;
+  size: Size;
   translations: Ranged[];
   zoom: { linear: number };
 }

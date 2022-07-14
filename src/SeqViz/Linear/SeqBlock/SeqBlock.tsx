@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Annotation, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../../elements";
-import { SeqVizSelection } from "../../handlers/selection";
+import { Annotation, ColorRange, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../../elements";
+import { Selection as SelectionType } from "../../handlers/selection";
 import { AnnotationRows } from "./AnnotationRows";
 import CutSiteRow from "./CutSites";
-import Find, { HighlightRegion } from "./Find";
+import Find from "./Find";
 import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
@@ -25,12 +25,12 @@ interface SeqBlockProps {
   bpsPerBlock: number;
   charWidth: number;
   compSeq: string;
-  cutSiteRows: ICutSite[];
+  cutSiteRows: CutSite[];
   elementHeight: number;
   firstBase: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
-  highlightedRegions: HighlightRegion[];
+  highlightedRegions: ColorRange[];
   id: string;
   inputRef: InputRefFuncType;
   key: string;
@@ -39,13 +39,13 @@ interface SeqBlockProps {
   onUnmount: (a: string) => void;
   reversePrimerRows: Primer[];
   searchRows: Ranged[];
-  selection: SeqVizSelection;
+  selection: SelectionType;
   seq: string;
   seqFontSize: number;
   showComplement: boolean;
   showIndex: boolean;
   showPrimers: boolean;
-  size: ISize;
+  size: Size;
   translations: Translation[];
   y: number;
   zoom: { linear: number };

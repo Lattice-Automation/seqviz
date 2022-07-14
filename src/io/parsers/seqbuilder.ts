@@ -1,4 +1,4 @@
-import { dnaComplement, extractDate, partFactory } from "../../utils/parser";
+import { complement, extractDate, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
@@ -27,7 +27,7 @@ export default async (fileInput, fileName, _: string[] = []) =>
 
     let seq = SEQ_ROWS;
     let compSeq = "";
-    ({ compSeq, seq } = dnaComplement(seq)); // seq and compSeq
+    ({ compSeq, seq } = complement(seq)); // seq and compSeq
     // there may be a genbank-like header row after the sequence
     // LOCUS       SCU49845     5028 bp    DNA             PLN       21-JUN-1999
     let parsedName = fileName.length > 0 ? fileName : "Unnamed";
@@ -118,7 +118,6 @@ export default async (fileInput, fileName, _: string[] = []) =>
         if (currLine.length > 1) {
           // it's the beginning of a new feature/annotation
           const [type, rangeString] = currLine;
-          // console.log(currLine);
           const rangeRegex = /\d+/g;
           const direction = r.includes("complement") ? -1 : 1;
 
@@ -130,7 +129,6 @@ export default async (fileInput, fileName, _: string[] = []) =>
             // the - 1 is because genbank is 1-based while we're 0
             start = +startSearch[0] - (1 % seq.length);
             const endSearch = rangeRegex.exec(rangeString);
-            // console.log(endSearch);
             if (endSearch) {
               end = +endSearch[0] % seq.length;
             }

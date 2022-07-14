@@ -1,7 +1,7 @@
 import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
-import { dnaComplement, firstElement, partFactory } from "../../utils/parser";
+import { complement, firstElement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 /**
@@ -86,7 +86,7 @@ export default async (file, options): Promise<Part[]> =>
 
       const newPart = {
         ...partFactory(),
-        ...dnaComplement(seq),
+        ...complement(seq),
         annotations: annotations,
         // seq and compSeq
         name: name,

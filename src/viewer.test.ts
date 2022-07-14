@@ -29,7 +29,6 @@ const defaultOptions: SeqVizProps = {
   showAnnotations: true,
   showComplement: true,
   showIndex: true,
-  showPrimers: true,
   style: { height: 500, width: 800 },
   viewer: "both",
   zoom: { linear: 50 },

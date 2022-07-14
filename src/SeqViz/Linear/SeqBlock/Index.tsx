@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ISize } from "../../../elements";
+import { Size } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
@@ -9,7 +9,7 @@ interface IndexProps {
   lastBase: number;
   seq: string;
   showIndex: boolean;
-  size: ISize;
+  size: Size;
   transform: string | undefined;
   zoom: { linear: number };
 }
