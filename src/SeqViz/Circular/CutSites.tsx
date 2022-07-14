@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { Coor, ICutSite, InputRefFuncType } from "../../elements";
+import { Coor, CutSite, InputRefFuncType } from "../../elements";
 import { FindArc } from "./Find";
 
 interface CutSitesProps {
   center: Coor;
-  cutSites: ICutSite[];
+  cutSites: CutSite[];
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   generateArc: (args: {
     arrowFWD?: boolean;
@@ -37,7 +37,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
     return linePath;
   };
 
-  displayCutSite = (cutSite: ICutSite) => {
+  displayCutSite = (cutSite: CutSite) => {
     const { generateArc, getRotation, inputRef, lineHeight, radius, seqLength } = this.props;
     const { id, start } = cutSite;
     let { end, fcut, rcut } = cutSite;
@@ -120,7 +120,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
       </g>
     );
   };
-  recogHighlightArc = (c: ICutSite) => {
+  recogHighlightArc = (c: CutSite) => {
     if (c.highlightColor) {
       return (
         <FindArc

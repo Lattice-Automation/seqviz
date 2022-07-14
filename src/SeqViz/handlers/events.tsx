@@ -2,7 +2,7 @@ import * as React from "react";
 
 import debounce from "../../utils/debounce";
 import CentralIndexContext from "./centralIndex";
-import { SeqVizSelection } from "./selection";
+import { Selection } from "./selection";
 
 /* WithEventsProps are those the HOC injects into the wrapper component. */
 export interface WithEventsProps {
@@ -16,14 +16,14 @@ export interface EventsHandlerProps extends WithEventsProps {
   bpsPerBlock?: number;
   centralIndex?: number;
   copyEvent?: (e: React.KeyboardEvent<HTMLElement>) => boolean;
-  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
+  inputRef: (ref: string, selectRange: Selection) => void;
   mouseEvent: (e: any) => void;
   name: string;
   onUnmount: (id: string) => void;
-  selection: SeqVizSelection;
+  selection: Selection;
   seq: string;
   setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
-  setSelection: (selection: SeqVizSelection) => void;
+  setSelection: (selection: Selection) => void;
   size: {
     height: number;
     width: number;

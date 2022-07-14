@@ -1,7 +1,7 @@
 import { DirectionProp, Part } from "../elements";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
-const DNAComplement = {
+const comp = {
   A: "T",
   B: "V",
   C: "G",
@@ -39,10 +39,9 @@ const DNAComplement = {
 };
 
 /**
- * return the filtered sequence and its complement
- * if its an empty string, return the same for both
+ * Return the filtered sequence and its complement if its an empty string, return the same for both.
  */
-export const dnaComplement = (origSeq: string): { compSeq: string; seq: string } => {
+export const complement = (origSeq: string): { compSeq: string; seq: string } => {
   if (!origSeq) {
     return { compSeq: "", seq: "" };
   }
@@ -51,9 +50,9 @@ export const dnaComplement = (origSeq: string): { compSeq: string; seq: string }
   let seq = "";
   let compSeq = "";
   for (let i = 0, origLength = origSeq.length; i < origLength; i += 1) {
-    if (DNAComplement[origSeq[i]]) {
+    if (comp[origSeq[i]]) {
       seq += origSeq[i];
-      compSeq += DNAComplement[origSeq[i]];
+      compSeq += comp[origSeq[i]];
     }
   }
   return { compSeq, seq };
@@ -62,8 +61,8 @@ export const dnaComplement = (origSeq: string): { compSeq: string; seq: string }
 /**
  * Return the reverse complement of a DNA sequence
  */
-export const reverseComplement = (inputSeq): string => {
-  const { compSeq } = dnaComplement(inputSeq);
+export const reverseComplement = (inputSeq: string): string => {
+  const { compSeq } = complement(inputSeq);
   return compSeq.split("").reverse().join("");
 };
 
@@ -94,7 +93,6 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * directionality("FORWARD") => 1
  * directionaltiy("NONSENSE") => 0
  * ```
- *
  */
 export const directionality = (direction: DirectionProp | undefined | string): -1 | 0 | 1 => {
   if (!direction) {

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, Coor, ISize, InputRefFuncType } from "../../elements";
+import { Annotation, Coor, InputRefFuncType, Size } from "../../elements";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
 import CentralIndexContext from "../handlers/centralIndex";
 
@@ -27,7 +27,7 @@ interface AnnotationsProps {
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   rowsToSkip: number;
   seqLength: number;
-  size: ISize;
+  size: Size;
 }
 
 /**

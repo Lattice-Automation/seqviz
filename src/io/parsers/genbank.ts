@@ -1,4 +1,4 @@
-import { dnaComplement, extractDate, partFactory } from "../../utils/parser";
+import { complement, extractDate, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 // a list of recognized types that would constitute an annotation name
@@ -73,7 +73,7 @@ export default async (fileInput, fileName, colors: string[] = []) =>
       const SEQ_ROWS = file.substring(file.lastIndexOf("ORIGIN") + "ORIGIN".length, file.length);
       let seq = SEQ_ROWS.replace(/[^gatc]/gi, "");
       let compSeq = "";
-      ({ compSeq, seq } = dnaComplement(seq)); // seq and compSeq
+      ({ compSeq, seq } = complement(seq)); // seq and compSeq
 
       // +++++ANNOTATIONS+++++//
       // the features are translated into annotations

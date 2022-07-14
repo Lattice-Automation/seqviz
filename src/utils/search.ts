@@ -1,59 +1,64 @@
-import { Ranged } from "../elements";
-import { dnaComplement } from "./parser";
-import { nucleotideWildCards, nucleotides, reverse, translateWildNucleotides } from "./sequence";
+import { Ranged, SeqType } from "../elements";
+import { complement } from "./parser";
+import { getAlphabet, nucleotides, reverse } from "./sequence";
 
 /**
  * Search the seq in the forward and reverse complement strands.
  * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
  */
-export default (query: string, mismatch = 0, seq = ""): Ranged[] => {
+export default (query: string, mismatch = 0, seq = "", seqType: SeqType): Ranged[] => {
   if (!query || !query.length || !seq || !seq.length) {
     return [];
   }
 
   // Only start searching after query is at least 3 letters, lowest meaningful length
   if (query.length - mismatch < 3) {
-    console.error("search too broad, please narrow parameters.");
+    console.warn(
+      "Search too broad, please narrow parameters. Less than 3 symbols to match: %d",
+      query.length - mismatch
+    );
     return [];
   }
 
-  const { compSeq } = dnaComplement(seq);
+  const indices = search(query, seq, mismatch, true, seqType);
+  if (["dna", "rna"].includes(seqType)) {
+    const { compSeq } = complement(seq);
+    const compIndices = search(reverse(query), compSeq, mismatch, false, seqType);
+    indices.push(...compIndices);
+  }
 
-  const indices = search(query, seq, mismatch, true);
-  const compIndices = search(reverse(query), compSeq, mismatch, false);
-
-  if (indices.length > 4000 || compIndices.length > 4000) {
+  if (indices.length > 4000) {
     // Fail out with warning. Rendering would be too expensive.
-    console.error(`Search too broad, ${indices.length + compIndices.length} matches. Please narrow parameters.`);
+    console.error("Search too broad, %d matches. Please narrow parameters.", indices.length);
     return [];
   }
 
-  return indices.concat(compIndices).sort((a, b) => a.start - b.start);
+  return indices.sort((a, b) => a.start - b.start);
 };
 
 /**
  * If there's no mismatch, just use a RegExp to search over the sequence repeatedly
  * Otherwise, use the modified hamming search in `searchWithMismatch()`
  */
-const search = (query: string, subject: string, mismatch: number, fwd: boolean) => {
+const search = (query: string, subject: string, mismatch: number, fwd: boolean, seqType: SeqType) => {
   if (mismatch > 0) {
-    return searchWithMismatch(query, subject, mismatch, fwd);
+    return searchWithMismatch(query, subject, mismatch, fwd, seqType);
   }
 
   const seqLength = subject.length;
-  const translatedQuery = translateWildNucleotides(query).trim();
-  const regex = new RegExp(translatedQuery, "gi");
-  let result = regex.exec(subject);
+  const regex = new RegExp(createRegex(query, seqType).trim(), "gi");
+
+  let match = regex.exec(subject);
   const results: Ranged[] = [];
-  while (result) {
-    const start = result.index % seqLength;
+  while (match) {
+    const start = match.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
     results.push({
       direction: fwd ? 1 : -1,
       end: end,
       start: start,
     });
-    result = regex.exec(subject);
+    match = regex.exec(subject);
   }
   return results;
 };
@@ -61,7 +66,9 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean) 
 /**
  * A slightly modified Hamming Distance algorithm for approximate string Matching for patterns
  */
-const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean) => {
+const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean, seqType: SeqType) => {
+  const alphabet = getAlphabet(seqType);
+
   const results: Ranged[] = [];
   for (let i = 0; i < subject.length - query.length; i += 1) {
     let missed = 0;
@@ -73,8 +80,8 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
         if (targetChar !== queryChar) {
           missed += 1;
         }
-      } else if (nucleotideWildCards[queryChar]) {
-        if (!nucleotideWildCards[queryChar][targetChar]) {
+      } else if (alphabet[queryChar]) {
+        if (!alphabet[queryChar][targetChar]) {
           missed += 1;
         }
       }
@@ -94,4 +101,17 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
   }
 
   return results;
+};
+
+/**
+ * Translate common symbols to their wildcards to build up a regex.
+ */
+export const createRegex = (query: string, seqType: SeqType): string => {
+  const alphabet = getAlphabet(seqType);
+
+  return query
+    .toLowerCase()
+    .split("")
+    .map(symbol => (alphabet[symbol] ? `(${Object.keys(alphabet[symbol]).join("|")})` : symbol))
+    .join("");
 };

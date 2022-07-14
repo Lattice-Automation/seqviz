@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ISize } from "../../elements";
+import { Size } from "../../elements";
 import isEqual from "../../utils/isEqual";
 import CentralIndexContext from "../handlers/centralIndex";
 
@@ -8,7 +8,7 @@ interface InfiniteScrollProps {
   blockHeights: number[];
   bpsPerBlock: number;
   seqBlocks: JSX.Element[];
-  size: ISize;
+  size: Size;
   totalHeight: number;
 }
 

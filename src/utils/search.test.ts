@@ -6,7 +6,7 @@ describe("Search", () => {
     const subject = "gcgagttattcggcgtgg";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -21,7 +21,7 @@ describe("Search", () => {
     const subject = "gcgagttattcggcgtgg";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -37,7 +37,7 @@ describe("Search", () => {
     const subject = "GCGAGTTATTCGGCGTGG";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -52,7 +52,7 @@ describe("Search", () => {
     const subject = "GCGAGTTATTCGGCGTGG";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -67,7 +67,7 @@ describe("Search", () => {
     const subject = "gcgagttattcggcgtgg";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -82,7 +82,7 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -98,7 +98,7 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -113,7 +113,22 @@ describe("Search", () => {
     const subject = "GATTGCCCGACGGATTC";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
+
+    expect(results.length).toEqual(1);
+    expect(results[0]).toMatchObject({
+      direction: 1,
+      end: 11,
+      start: 4,
+    });
+  });
+
+  it("finds subsequence with ambiguity, uppercase subject, wildcard", () => {
+    const query = "gcccg.."; // N character
+    const subject = "GATTGCCCGACGGATTC";
+    const mismatch = 0;
+
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -128,7 +143,7 @@ describe("Search", () => {
     const subject = "GATTGCCCGACGGATTC";
     const mismatch = 0;
 
-    const results = search(query, mismatch, subject);
+    const results = search(query, mismatch, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -143,8 +158,8 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -161,8 +176,8 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -178,8 +193,8 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -195,8 +210,8 @@ describe("Search", () => {
     const subject = "gattgcccgacggattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -212,8 +227,8 @@ describe("Search", () => {
     const subject = "gattgcccgacacattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -230,8 +245,8 @@ describe("Search", () => {
     const subject = "gattgcccgacacattc";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -247,8 +262,8 @@ describe("Search", () => {
     const subject = "GATTGCCCGACACATTC";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({
@@ -264,8 +279,8 @@ describe("Search", () => {
     const subject = "GATTGCCCGACACATTC";
     const mismatch = 1;
 
-    const results = search(query, mismatch, subject);
-    const resultsNull = search(query, 0, subject);
+    const results = search(query, mismatch, subject, "dna");
+    const resultsNull = search(query, 0, subject, "dna");
 
     expect(results.length).toEqual(1);
     expect(results[0]).toMatchObject({

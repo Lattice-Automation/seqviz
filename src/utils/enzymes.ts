@@ -1,3 +1,5 @@
+import { Enzyme } from "../elements";
+
 /**
  * NEB Restriction Enzymes
  *
@@ -6,17 +8,22 @@
  * start of the recognition site as "fcut", and the start of the resulting overhang
  * from the recognition site as "rcut"
  *
- * eg: PstI with recognition site "CTGCAG" cuts so that the break is
- * at (cutSite = 5):
+ * eg: PstI with recognition site "CTGCAG" cuts so that the break is at (cutSite = 5):
+ *
+ * ```
  * 		..C TGCA|G..
  * 		..G|ACGT C..
  *
+ * ```
+ *
  * and the resulting fragment looks like (rcut = 1):
+ *
+ * ```
  * 		..CTGCA
  * 		..G****
- *
+ * ```
  */
-export default {
+const enzymes: { [key: string]: Enzyme } = {
   AatII: {
     fcut: 5,
     rcut: 1,
@@ -740,7 +747,7 @@ export default {
   HpyCH4IV: {
     fcut: 1,
     rcut: 3,
-    seq: "ACGT",
+    rseq: "ACGT",
   },
   HpyCH4V: {
     fcut: 2,
@@ -1223,3 +1230,5 @@ export default {
     rseq: "GACGTC",
   },
 };
+
+export default enzymes;

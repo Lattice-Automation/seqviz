@@ -1,7 +1,7 @@
 import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { complement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 /**
@@ -108,7 +108,7 @@ export default async (sbol, fileName, _: string[] = []): Promise<Part[]> =>
 
           if (partSeq && partSeq.elements) {
             const seqInput = first(partSeq.elements) || "";
-            const { compSeq, seq } = dnaComplement(seqInput);
+            const { compSeq, seq } = complement(seqInput);
             partList.push({
               ...partFactory(),
 

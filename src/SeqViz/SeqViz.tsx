@@ -1,49 +1,98 @@
 import * as React from "react";
 
-import { Annotation, AnnotationProp, ICutSite, IEnzyme, Part, Ranged } from "../elements";
+import { Annotation, AnnotationProp, ColorRange, CutSite, Enzyme, Part, Ranged } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
 import { cutSitesInRows } from "../utils/digest";
 import isEqual from "../utils/isEqual";
-import { directionality, dnaComplement } from "../utils/parser";
+import { complement, directionality } from "../utils/parser";
 import search from "../utils/search";
-import { annotationFactory, getSeqType } from "../utils/sequence";
-import { HighlightRegion } from "./Linear/SeqBlock/Find";
+import { annotationFactory, guessType } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
 import CentralIndexContext from "./handlers/centralIndex";
-import { SelectionContext, SeqVizSelection, defaultSelection } from "./handlers/selection";
+import { Selection, SelectionContext, defaultSelection } from "./handlers/selection";
 import "./style.css";
 
+/** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
+  /** an NCBI or iGEM accession to retrieve a sequence using */
   accession?: string;
+
+  /** a list of annotations to render to the viewer */
   annotations?: AnnotationProp[];
+
+  /** an iGEM backbone to render within the viewer */
   backbone?: string;
+
+  /** nucleotides keyed by symbol or index and the color to apply to it */
   bpColors?: { [key: number | string]: string };
+
+  /** a list of colors to populate un-colored annotations with. HEX, RGB, names are supported */
   colors?: string[];
+
+  /** the complementary sequence to `seq`. Ignored if `seqType: "aa"` */
   compSeq?: string;
+
+  /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the currently selected seq is copied */
   copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
+
+  /** a list of enzymes or enzyme names to digest the sequence with. see seqviz.Enzymes */
   enzymes?: string[];
+
+  /** a map from enzyme name to definition for custom enzymes not already supported */
   enzymesCustom?: {
-    [key: string]: IEnzyme;
+    [key: string]: Enzyme;
   };
+
+  /** a file to parse and render. Genbank, FASTA, SnapGene, JBEI, SBOLv1/2, ab1, and SeqBuilder formats are supported */
   file?: string | File;
-  highlightedRegions?: HighlightRegion[];
+
+  /** ranges of the viewer to highlight. */
+  highlightedRegions?: ColorRange[];
+
+  /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
+
+  /** a callback that's executed on each change to the search parameters or sequence */
   onSearch?: (search: Ranged[]) => void;
-  onSelection?: (selection: SeqVizSelection) => void;
+
+  /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
+  onSelection?: (selection: Selection) => void;
+
+  /** whether the circular viewer should rotate when the mouse scrolls over the plasmid */
   rotateOnScroll?: boolean;
+
+  /** search parameters. Matched sequences on the viewer are highlighted and selectable. */
   search?: {
     mismatch?: number;
     query: string;
   };
+
+  /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
+
+  /** the type of the sequence. Without passing this, the type is guessed after ambiguous symbols (eg 'N') */
+  seqType?: "dna" | "rna" | "aa";
+
+  /** whether to render the annotation rows */
   showAnnotations?: boolean;
+
+  /** whether to render the complement sequence */
   showComplement?: boolean;
+
+  /** whether to show the index row that  */
   showIndex?: boolean;
-  showPrimers?: boolean;
+
+  /** extra syle props to apply to the outermost div of SeqViz */
   style?: Record<string, unknown>;
+
+  /** ranges of sequence that should have amino acid translations shown */
   translations?: Ranged[];
+
+  /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
+
+  /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {
     circular?: number;
     linear?: number;
@@ -58,10 +107,10 @@ export interface SeqVizState {
     linear: number;
     setCentralIndex: (type: "linear" | "circular", value: number) => void;
   };
-  cutSites: ICutSite[];
+  cutSites: CutSite[];
   part: null | Part;
   search: Ranged[];
-  selection: SeqVizSelection;
+  selection: Selection;
 }
 
 /**
@@ -79,14 +128,13 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: (results: Ranged[]) => results,
-    onSelection: (selection: SeqVizSelection) => selection,
+    onSearch: (_: Ranged[]) => null,
+    onSelection: (_: Selection) => null,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
     seq: "",
     showComplement: true,
     showIndex: true,
-    showPrimers: true,
     style: {},
     translations: [],
     viewer: "both",
@@ -179,34 +227,34 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         console.warn("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
       }
     } catch (err) {
-      console.warn(err);
+      console.warn(
+        "Failed to parse input props %s, create an issue if this is bug: Create an issue if this is a bug: https://github.com/Lattice-Automation/seqviz/issues",
+        err
+      );
     }
   };
 
   /**
    * Search for the query sequence in the part sequence, set in state.
    */
-  search = (part: Part | null = null) => {
-    const { onSearch, search: searchProp, seq } = this.props;
+  search = (part: Part | null) => {
+    const { onSearch, search: searchProp, seqType } = this.props;
+    const seq = this.props.seq || (part && part.seq) || "";
 
-    if (!searchProp) {
+    if (!searchProp || !seq) {
       return;
     }
 
-    if (!(seq || (part && part.seq))) {
-      return;
-    }
+    const results = search(searchProp.query, searchProp.mismatch, seq, seqType || guessType(seq));
 
-    const results = search(searchProp.query, searchProp.mismatch, seq || (part && part.seq) || "");
+    // We should be able to call search on every significant prop change to seq/file/accession/search.
+    // Instead, we run into infinite recursion. TODO: what's triggering repeated rerenders if we remove below.
     if (isEqual(results, this.state.search)) {
       return;
     }
 
     this.setState({ search: results });
-
-    if (onSearch) {
-      onSearch(results);
-    }
+    if (onSearch) onSearch(results);
   };
 
   /**
@@ -215,7 +263,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   cut = (part: { seq: string } | null = null) => {
     const { enzymes, enzymesCustom, seq } = this.props;
 
-    let cutSites: ICutSite[] = [];
+    let cutSites: CutSite[] = [];
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
       cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes || [], enzymesCustom || {});
     }
@@ -257,7 +305,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   /**
    * Update selection in state. Should only be performed from handlers/selection.jsx
    */
-  setSelection = (selection: SeqVizSelection) => {
+  setSelection = (selection: Selection) => {
     const { onSelection } = this.props;
     this.setState({ selection });
     if (onSelection) {
@@ -267,15 +315,24 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
   render() {
     const { name, showComplement, showIndex, style, zoom } = this.props;
-    let { compSeq, seq, viewer } = this.props;
+    let { compSeq, seq, translations, viewer } = this.props;
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
     seq = seq || part?.seq || "";
-    if (getSeqType(seq) === "dna") {
-      compSeq = compSeq || part?.compSeq || dnaComplement(seq).compSeq || "";
-    }
+    const seqType = this.props.seqType || guessType(seq);
     if (!seq) return <div className="la-vz-seqviz" />;
+    if (seqType === "dna") {
+      compSeq = compSeq || part?.compSeq || complement(seq).compSeq || "";
+    }
+    if (seqType !== "dna" && translations && translations.length) {
+      // TODO: this really shouldn't in render
+      translations = [];
+      console.warn(
+        "Not rendering translations because seqType: %s. Create an issue if this is a bug: https://github.com/Lattice-Automation/seqviz/issues",
+        seqType
+      );
+    }
 
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
@@ -290,9 +347,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       selection: selection,
       seq: seq,
       setSelection: this.setSelection,
-      showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || true,
+      showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
-      translations: this.props.translations || [],
+      translations: translations || [],
       zoom: {
         circular: zoom?.circular || 0,
         linear: zoom?.linear || 50,

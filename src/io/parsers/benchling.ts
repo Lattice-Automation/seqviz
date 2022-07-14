@@ -1,4 +1,4 @@
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { complement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /**
@@ -9,7 +9,7 @@ export default async text => {
   // we've already checked, outside this file, that's it's JSON parseable
   const partJSON = JSON.parse(text);
 
-  const { compSeq, seq } = dnaComplement(partJSON.bases);
+  const { compSeq, seq } = complement(partJSON.bases);
 
   // throw an error if the sequence is empty
   if (seq.length < 1) {

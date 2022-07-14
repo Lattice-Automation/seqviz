@@ -1,11 +1,11 @@
-import { directionality, dnaComplement, reverseComplement } from "./parser";
+import { complement, directionality, reverseComplement } from "./parser";
 
 describe("Parse part input", () => {
   it("parses DNA seq and compSeq", () => {
     const inSeq =
       "acacgattgcccgacggattcatgagatgtcaggccgcaaagggcgcctggtggcGATGAATTGCGCGGCCATTCCGGAGTCCCTCGccgagagcgagttattcggcgtggtcagcggtgcctacaccggcgctgatcgctccagagtcg";
 
-    const { compSeq, seq } = dnaComplement(inSeq);
+    const { compSeq, seq } = complement(inSeq);
 
     expect(seq).toEqual(inSeq);
     expect(compSeq).toEqual(

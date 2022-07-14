@@ -7,7 +7,7 @@ import { WithEventsProps } from "./events";
 type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "";
 
 /* SeqVizSelection is a selection holding all meta about the viewer(s) active selection. */
-export interface SeqVizSelection {
+export interface Selection {
   clockwise: boolean;
   color?: string;
   direction?: number;
@@ -16,7 +16,7 @@ export interface SeqVizSelection {
   gc?: number;
   length?: number;
   name?: string;
-  parent?: SeqVizSelection;
+  parent?: Selection;
   ref?: null | string;
   seq?: string;
   start: number;
@@ -25,7 +25,7 @@ export interface SeqVizSelection {
 }
 
 /** Initial/default selection */
-export const defaultSelection: SeqVizSelection = {
+export const defaultSelection: Selection = {
   clockwise: true,
   end: 0,
   gc: 0,
@@ -52,14 +52,14 @@ export interface WithSelectionProps extends WithEventsProps {
   Linear: boolean;
   bpsPerBlock?: number;
   centralIndex?: number;
-  inputRef: (ref: string, selectRange: SeqVizSelection) => void;
+  inputRef: (ref: string, selectRange: Selection) => void;
   mouseEvent: (e: any) => void;
   name: string;
   onUnmount: (id: string) => void;
-  selection: SeqVizSelection;
+  selection: Selection;
   seq: string;
   setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
-  setSelection: (selection: SeqVizSelection) => void;
+  setSelection: (selection: Selection) => void;
 }
 
 /* SelectionHandlerProps are those required by the WithSelectionHandler HOC. */
@@ -70,10 +70,10 @@ export interface SelectionHandlerProps {
   center?: { x: number; y: number };
   centralIndex?: number;
   name: string;
-  selection: SeqVizSelection;
+  selection: Selection;
   seq: string;
   setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
-  setSelection: (selection: SeqVizSelection) => void;
+  setSelection: (selection: Selection) => void;
   size: {
     height: number;
     width: number;
@@ -109,7 +109,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
     /**
      * a map between the id of child elements and their associated SelectRanges
      */
-    idToRange = new Map<string, SeqVizSelection>();
+    idToRange = new Map<string, Selection>();
 
     componentDidMount = () => {
       document.addEventListener("mouseup", this.stopDrag);
@@ -138,7 +138,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      * a ref callback for mapping the id of child to its SelectRange
      * it stores the id of all elements
      **/
-    inputRef = (ref: string, selectRange: SeqVizSelection) => {
+    inputRef = (ref: string, selectRange: Selection) => {
       this.idToRange.set(ref, { ref, ...selectRange });
     };
 
@@ -432,7 +432,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      * Update the selection in state. Only update the specified
      * properties of the selection that should be updated.
      */
-    setSelection = (newSelection: SeqVizSelection) => {
+    setSelection = (newSelection: Selection) => {
       const { setSelection } = this.props;
       if (
         newSelection.start === this.props.selection.start &&

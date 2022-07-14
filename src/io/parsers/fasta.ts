@@ -7,7 +7,7 @@ export default async (text, fileName) => {
       .map(t => {
         // this starts at the end of the first line, grabs all other characters,
         // and removes any newlines (leaving only the original sequence)
-        // sequence "cleaning" happens in dnaComplement (we don't support bps other than
+        // sequence "cleaning" happens in complement (we don't support bps other than
         // the most common right now)
         const seq = t.substr(t.indexOf("\n"), t.length).replace(/\s/g, "");
 

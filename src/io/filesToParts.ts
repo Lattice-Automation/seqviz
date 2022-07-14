@@ -2,7 +2,7 @@ import * as path from "path";
 
 import { Part } from "../elements";
 import { COLORS } from "../utils/colors";
-import { dnaComplement, partFactory } from "../utils/parser";
+import { complement, partFactory } from "../utils/parser";
 import parseBenchling from "./parsers/benchling";
 import parseBioBrick from "./parsers/biobrick";
 import parseFASTA from "./parsers/fasta";
@@ -136,7 +136,7 @@ const fileToParts = async (
         parts = await parseFASTA(fileString, fileName).then(parsedFasta => {
           const ret = parsedFasta.map(p => ({
             ...partFactory(),
-            ...dnaComplement(p.seq),
+            ...complement(p.seq),
             ...p,
           }));
           return ret;
@@ -182,7 +182,7 @@ const fileToParts = async (
 
       // a DNA text fileString without an official formatting
       case dnaOnlyFile:
-        parts = [{ ...partFactory(), ...dnaComplement(fileString), name }];
+        parts = [{ ...partFactory(), ...complement(fileString), name }];
         break;
 
       default:

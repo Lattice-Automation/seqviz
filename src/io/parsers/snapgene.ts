@@ -6,7 +6,7 @@ import * as bufferpack from "bufferpack";
 import { StringDecoder } from "string_decoder";
 import * as xml2js from "xml2js";
 
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { complement, partFactory } from "../../utils/parser";
 import { annotationFactory } from "../../utils/sequence";
 
 export default async (fileArrayBuffer, options) => {
@@ -88,7 +88,7 @@ export default async (fileArrayBuffer, options) => {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'seq' does not exist on type '{}'.
       data.seq = read(size, "ascii");
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'compSeq' does not exist on type '{}'.
-      data.compSeq = dnaComplement(data.seq).compSeq;
+      data.compSeq = complement(data.seq).compSeq;
     } else if (ordOfNB === 6) {
       //  # READ THE NOTES
       const blockContent = read(blockSize, "utf8");

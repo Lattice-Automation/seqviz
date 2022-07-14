@@ -1,4 +1,4 @@
-import { calcGC, getSeqType } from "./sequence";
+import { calcGC, guessType } from "./sequence";
 
 describe("Sequence utilities", () => {
   it("calculates GC%", () => {
@@ -13,10 +13,17 @@ describe("Sequence utilities", () => {
   });
 
   it("detects type", () => {
-    expect(getSeqType("atgagcAGTA")).toEqual("dna");
-    expect(getSeqType("augagcAGUAa")).toEqual("rna");
-    expect(getSeqType("kInm*")).toEqual("aa");
-    expect(getSeqType("_fajsi")).toEqual("unknown");
-    expect(getSeqType("atugc")).toEqual("unknown");
+    const types = {
+      KNTRSPRFLE: "aa",
+      _fajsi: "unknown",
+      atgagcAGTA: "dna",
+      atugc: "unknown",
+      augagcAGUAa: "rna",
+      "kInm*": "aa",
+    };
+
+    Object.keys(types).forEach(k => {
+      expect(guessType(k)).toEqual(types[k]);
+    });
   });
 });

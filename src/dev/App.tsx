@@ -55,11 +55,10 @@ export const App = () => {
      *   201: "red",
      * }, */
     search: { mismatch: 0, query: "gtacc" },
-    seq: "TTATGAATTCGTATGCGTTGTCCTTGGAGTATTACTGCTATATTGTTCAGCAGATGTGGGCAGGCTCAGACCAGAGATAGAGG".repeat(30),
+    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(30),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,
-    showPrimers: true,
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
     translations: [{ direction: 1, end: 70, start: 0 }],
 

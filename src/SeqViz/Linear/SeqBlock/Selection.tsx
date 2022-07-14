@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFuncType } from "../../../elements";
 import randomid from "../../../utils/randomid";
-import { SelectionContext, SeqVizSelection } from "../../handlers/selection";
+import { Selection, SelectionContext } from "../../handlers/selection";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -112,7 +112,7 @@ interface BlockProps {
   lastBase: number;
   onUnmount: (a: string) => void;
   selectHeight: number;
-  selection: SeqVizSelection;
+  selection: Selection;
 }
 
 /**

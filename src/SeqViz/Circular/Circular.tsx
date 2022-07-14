@@ -1,13 +1,12 @@
 import * as React from "react";
 
-import { Annotation, Coor, ICutSite, ISize, InputRefFuncType, Primer, Ranged } from "../../elements";
+import { Annotation, ColorRange, Coor, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
-import { HighlightRegion } from "../Linear/SeqBlock/Find";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
-import { SeqVizSelection } from "../handlers/selection";
+import { Selection as SelectionType } from "../handlers/selection";
 import Annotations from "./Annotations";
 import CutSites from "./CutSites";
 import { Find } from "./Find";
@@ -34,8 +33,8 @@ export interface CircularProps {
   center: { x: number; y: number };
   centralIndex: number;
   compSeq: string;
-  cutSites: ICutSite[];
-  highlightedRegions: HighlightRegion[];
+  cutSites: CutSite[];
+  highlightedRegions: ColorRange[];
   inputRef: InputRefFuncType;
   mouseEvent: (e: any) => void;
   name: string;
@@ -43,13 +42,13 @@ export interface CircularProps {
   primers: Primer[];
   radius: number;
   search: Ranged[];
-  selection: SeqVizSelection;
+  selection: SelectionType;
   seq: string;
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
-  setSelection: (selection: SeqVizSelection) => void;
+  setSelection: (selection: SelectionType) => void;
   showIndex: boolean;
   showPrimers: boolean;
-  size: ISize;
+  size: Size;
   yDiff: number;
 }
 
@@ -225,7 +224,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
    * path for an arc that circles the plasmid. the optional paramters sweepFWD and sweepREV
    * are needed for selection arcs (where the direction of the arc isn't known beforehand)
    * and arrowFWD and arrowREV are needed for annotations, where there may be directionality
-   *
    */
   generateArc = (args: {
     arrowFWD?: boolean;

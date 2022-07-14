@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, ISize, InputRefFuncType } from "../../elements";
+import { Coor, InputRefFuncType, Size } from "../../elements";
 import CentralIndexContext from "../handlers/centralIndex";
 
 interface IndexProps {
@@ -27,7 +27,7 @@ interface IndexProps {
   seq: string;
   seqLength: number;
   showIndex: boolean;
-  size: ISize;
+  size: Size;
   totalRows: number;
   yDiff: number;
 }

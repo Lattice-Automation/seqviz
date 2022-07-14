@@ -2,7 +2,7 @@ import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
 import { colorByIndex } from "../../utils/colors";
-import { dnaComplement, partFactory } from "../../utils/parser";
+import { complement, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /**
@@ -42,7 +42,7 @@ export default async (JBEI: string, _: string[] = []): Promise<Part[]> =>
         if (sequence && sequence[0] && sequence[0]._) {
           parsedSeq = sequence[0]._;
         }
-        const { compSeq: parsedCompSeq, seq: parsedSeq2 } = dnaComplement(parsedSeq); // seq and compSeq
+        const { compSeq: parsedCompSeq, seq: parsedSeq2 } = complement(parsedSeq); // seq and compSeq
         if (!parsedSeq2) return null;
 
         // attempt to parse the JBEI annotations into our version of annotations

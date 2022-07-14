@@ -1,9 +1,7 @@
-import { Annotation, Ranged } from "../elements";
+import { Annotation, Ranged, SeqType } from "../elements";
 import { chooseRandomColor, colorByIndex } from "./colors";
-import { dnaComplement } from "./parser";
+import { complement } from "./parser";
 import randomid from "./randomid";
-
-export type SeqType = "dna" | "rna" | "aa" | "unknown";
 
 /**
  * Map of nucleotide bases
@@ -11,9 +9,12 @@ export type SeqType = "dna" | "rna" | "aa" | "unknown";
 export const nucleotides = { a: "a", c: "c", g: "g", t: "t", u: "u" };
 
 /**
- * Map of common nucleotide wildcards to their translations
+ * Map of DNA basepairs to all the bases encoded by that character in the DNA alphabet.
+ *
+ * https://meme-suite.org/meme/doc/alphabets.html
  */
-export const nucleotideWildCards = {
+const dnaAlphabet = {
+  // ".": { a: "a", c: "c", g: "g", t: "t" },
   b: { c: "c", g: "g", t: "t" },
   d: { a: "a", g: "g", t: "t" },
   h: { a: "a", c: "c", t: "t" },
@@ -26,6 +27,27 @@ export const nucleotideWildCards = {
   w: { a: "a", t: "t" },
   x: { a: "a", c: "c", g: "g", t: "t" },
   y: { c: "c", t: "t" },
+};
+
+/**
+ * Map of RNA basepairs to all the bases encoded by that character in the RNA alphabet.
+ *
+ * https://meme-suite.org/meme/doc/alphabets.html
+ */
+const rnaAlphabet = {
+  // ".": { c: "c", g: "g", u: "u" },
+  b: { c: "c", g: "g", u: "u" },
+  d: { a: "a", g: "g", u: "u" },
+  h: { a: "a", c: "c", u: "u" },
+  k: { g: "g", u: "u" },
+  m: { a: "a", c: "c" },
+  n: { a: "a", c: "c", g: "g", u: "u" },
+  r: { a: "a", g: "g" },
+  s: { c: "c", g: "g" },
+  v: { a: "a", c: "c", g: "g" },
+  w: { a: "a", u: "u" },
+  x: { a: "a", c: "c", g: "g", u: "u" },
+  y: { c: "c", u: "u" },
 };
 
 /**
@@ -103,11 +125,41 @@ const codon2AA = {
 
 const aminoAcids = Array.from(new Set(Object.values(codon2AA)).values()).join("");
 const aminoAcidRegex = new RegExp(`^[${aminoAcids}]+$`, "i");
+const aminoAcidsMap = aminoAcids
+  .toLowerCase()
+  .split("")
+  .filter(aa => aa !== "*") // TODO
+  .reduce((acc, aa) => ({ ...acc, [aa]: aa }), {});
 
 /**
- * Infer type of a sequence
+ * Map of amino acids alphabet characters to what each matches.
+ *
+ * https://meme-suite.org/meme/doc/alphabets.html
  */
-export const getSeqType = (seq: string): SeqType => {
+const aaAlphabet = {
+  b: { d: "d", n: "n" },
+
+  j: { i: "i", l: "l" },
+  // ".": aminoAcidsMap, TODO: debug
+  // "*": aminoAcidsMap,
+  x: aminoAcidsMap,
+  z: { e: "e", q: "q" },
+};
+
+/** Given a seq type, return the associated symbol alphabet */
+export const getAlphabet = (seqType: SeqType) => {
+  return {
+    aa: aaAlphabet,
+    dna: dnaAlphabet,
+    rna: rnaAlphabet,
+    unknown: dnaAlphabet,
+  }[seqType];
+};
+
+/**
+ * Infer the type of a sequence. This is *without* any ambiguous symbols, so maybe wrong by being overly strict.
+ */
+export const guessType = (seq: string): "dna" | "rna" | "aa" | "unknown" => {
   if (/^[atgc]+$/i.test(seq)) {
     return "dna";
   } else if (/^[augc]+$/i.test(seq)) {
@@ -117,18 +169,6 @@ export const getSeqType = (seq: string): SeqType => {
   }
   return "unknown";
 };
-
-/**
- * Translate common nucleotide wildcards
- *
- * Search string sequence for nucleotide wildcards and replace with proper regex
- */
-export const translateWildNucleotides = (seq: string): string =>
-  seq
-    .toLowerCase()
-    .split("")
-    .map(letter => (nucleotideWildCards[letter] ? `(${Object.keys(nucleotideWildCards[letter]).join("|")})` : letter))
-    .join("");
 
 /**
  * Find the mismatches
@@ -246,9 +286,7 @@ export const primerFactory = () => ({
 });
 
 /**
- * translateDNA
- *
- * given a sequence of DNA, translate it into an AMINO ACID sequence
+ * Given a sequence of DNA, translate it into an AMINO ACID sequence
  */
 export const translateDNA = (seqInput: string): string => {
   const seq = seqInput.toUpperCase();
@@ -289,7 +327,7 @@ export const createLinearTranslations = (translations: Ranged[], dnaSeq: string)
     const subDNASeq =
       direction === 1
         ? dnaDoubled.substring(start, end)
-        : dnaComplement(dnaDoubled.substring(start, end)).compSeq.split("").reverse().join(""); // get reverse complement
+        : complement(dnaDoubled.substring(start, end)).compSeq.split("").reverse().join(""); // get reverse complement
 
     // translate the DNA sub sequence
     const AAseq = direction === 1 ? translateDNA(subDNASeq) : translateDNA(subDNASeq).split("").reverse().join(""); // translate

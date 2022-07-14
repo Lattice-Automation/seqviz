@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom";
 import * as ReactDOMServer from "react-dom/server";
 
 import SeqViz, { SeqVizProps } from "./SeqViz/SeqViz";
+import enzymes from "./utils/enzymes";
 
 /**
  * Export a part, pUC, for development
@@ -12,7 +13,7 @@ export { default as pUC } from "./parts/pUC";
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViz };
+export { SeqViz, enzymes as Enzymes };
 
 /**
  * Return a Viewer object with three properties:
