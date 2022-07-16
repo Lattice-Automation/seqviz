@@ -17,4 +17,5 @@ npm publish
 git push
 
 version="$(jq -r '.version' < 'package.json')"
-gh release create "$version" --title "$version" --generate-notes --target develop
+release="$(gh release create "$version" --title "$version" --generate-notes --target develop)"
+open "$release"
