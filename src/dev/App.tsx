@@ -24,23 +24,17 @@ export const App = () => {
     enzymes: [],
     enzymesCustom: {
       bottomStrand: {
-        // recognition sequence
         fcut: 0,
-        // cut index on REV strand, relative to start of rseq - pass in negative offset
-        highlightColor: "#D7E5F0",
-
-        // cut index on FWD strand, relative to start of rseq
+        color: "#D7E5F0",
         rcut: 1,
 
-        rseq: "GTAC" /* pass in color */,
+        rseq: "gctag" /* pass in color */,
       },
       topStrand: {
-        // recognition sequence
         fcut: 0,
-        // cut index on FWD strand, relative to start of rseq
         rcut: 1,
-        rseq: "CCTTGG", // cut index on REV strand, relative to start of rseq - pass in negative offset
-        // highlightColor: "red" /* pass in color */,
+        rseq: "gatac", // cut index on REV strand, relative to start of rseq - pass in negative offset
+        color: "red" /* pass in color */,
       },
     },
     onSearch: (results: Ranged[]) => {

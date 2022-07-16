@@ -3,7 +3,7 @@ import * as React from "react";
 import { Annotation, AnnotationProp, ColorRange, CutSite, Enzyme, Part, Ranged } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { cutSitesInRows } from "../utils/digest";
+import digest from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { complement, directionality } from "../utils/parser";
 import search from "../utils/search";
@@ -265,7 +265,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     let cutSites: CutSite[] = [];
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      cutSites = cutSitesInRows(seq || (part && part.seq) || "", enzymes || [], enzymesCustom || {});
+      cutSites = digest(seq || (part && part.seq) || "", enzymes || [], enzymesCustom || {});
     }
 
     if (!isEqual(cutSites, this.state.cutSites)) {

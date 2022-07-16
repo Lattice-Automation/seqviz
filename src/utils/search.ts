@@ -46,7 +46,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean, 
   }
 
   const seqLength = subject.length;
-  const regex = new RegExp(createRegex(query, seqType).trim(), "gi");
+  const regex = createRegex(query, seqType);
 
   let match = regex.exec(subject);
   const results: Ranged[] = [];
@@ -104,14 +104,18 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
 };
 
 /**
- * Translate common symbols to their wildcards to build up a regex.
+ * Translate common symbols to their wildcards to build up a regex. The regex is case insensitive.
+ *
+ * Eg "N" matches [ATGCU]. So a query of "ANN" maps to "A(A|T|G|C|U)(A|T|G|C|U)"
  */
-export const createRegex = (query: string, seqType: SeqType): string => {
+export const createRegex = (query: string, seqType: SeqType): RegExp => {
   const alphabet = getAlphabet(seqType);
 
-  return query
+  const pattern = query
     .toLowerCase()
     .split("")
     .map(symbol => (alphabet[symbol] ? `(${Object.keys(alphabet[symbol]).join("|")})` : symbol))
     .join("");
+
+  return new RegExp(pattern.trim(), "gi");
 };

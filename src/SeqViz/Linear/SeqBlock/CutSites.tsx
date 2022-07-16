@@ -3,19 +3,20 @@ import * as React from "react";
 import { CutSite, InputRefFuncType } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
-interface ConnectorType {
+interface HighlightedCutSite {
   cutX: number;
-  d?: 1 | -1;
   end: number;
   fcut: number;
   hangX: number;
-  highlightColor?: string;
-  highlightWidth?: number;
-  highlightX?: number;
+  highlight: {
+    color?: string;
+    width: number;
+    x: number;
+  };
   id: string;
-  name?: string;
+  name: string;
   rcut: number;
-  recogStrand: 1 | -1;
+  direction: 1 | -1;
   start: number;
 }
 
@@ -72,7 +73,7 @@ const CutSites = (props: {
   } = props;
 
   // Add x and width to each cut site.
-  const sitesWithX: ConnectorType[] = cutSiteRows.map((c: CutSite) => {
+  const sitesWithX: HighlightedCutSite[] = cutSiteRows.map((c: CutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { width: highlightWidth, x: highlightX } = findXAndWidth(c.recogStart, c.recogEnd);
@@ -83,7 +84,7 @@ const CutSites = (props: {
           c.recogEnd < firstBase ? lastBase : Math.min(lastBase, c.recogEnd),
           c.recogStart > lastBase ? firstBase : Math.max(firstBase, c.recogStart)
         ));
-      } else if (c.recogEnd > c.recogStart) {
+      } else {
         ({ width: highlightWidth, x: highlightX } = findXAndWidth(
           c.recogStart < firstBase ? lastBase : Math.min(lastBase, c.recogStart),
           c.recogEnd > lastBase ? firstBase : Math.max(firstBase, c.recogEnd)
@@ -95,16 +96,18 @@ const CutSites = (props: {
       ...c,
       cutX,
       hangX,
-      highlightColor: c.highlightColor,
-      highlightWidth,
-      highlightX,
+      highlight: {
+        color: c.color,
+        x: highlightX,
+        width: highlightWidth - 1,
+      },
       recogStrand: c.direction,
     };
   });
 
   if (!sitesWithX.length) return null;
 
-  const getConnectorXAndWidth = (c: ConnectorType, sequenceCutSite: boolean, complementCutSite: boolean) => {
+  const getConnectorXAndWidth = (c: HighlightedCutSite, sequenceCutSite: boolean, complementCutSite: boolean) => {
     if (sequenceCutSite && complementCutSite) {
       return {
         width: Math.abs(c.hangX - c.cutX),
@@ -134,7 +137,7 @@ const CutSites = (props: {
 
   return (
     <g className="la-vz-cut-sites">
-      {sitesWithX.map((c: ConnectorType) => {
+      {sitesWithX.map((c: HighlightedCutSite) => {
         // prevent double rendering, by placing the indeces only in the seqBlock
         // that they need to be shown. Important for the zero-index edge case
         const sequenceCutSite = c.fcut >= firstBase && c.fcut < lastBase;
@@ -145,18 +148,18 @@ const CutSites = (props: {
         return (
           <React.Fragment key={`la-vz-cut-site-${c.id}`}>
             {/* custom highlight color block */}
-            {c.highlightColor ? (
+            {c.highlight.color && (
               <HighlightBlock
-                color={c.highlightColor}
+                color={c.highlight.color}
                 connector={c}
                 end={c.end}
                 findXAndWidth={findXAndWidth}
                 id={c.id}
                 lineHeight={lineHeight}
                 start={c.start}
-                yDiff={c.recogStrand > 0 ? lineYDiff : lineYDiff + lineHeight}
+                yDiff={c.direction > 0 ? lineYDiff : lineYDiff + lineHeight}
               />
-            ) : null}
+            )}
 
             {/* label above seq */}
             {sequenceCutSite && (
@@ -182,12 +185,12 @@ const CutSites = (props: {
             )}
 
             {/* lines showing the cut site */}
-            {sequenceCutSite && <rect height={lineHeight} width="1px" x={c.cutX - 1} y={lineYDiff} />}
+            {sequenceCutSite && <rect height={lineHeight} width="1px" x={c.cutX} y={lineYDiff} />}
             {showIndex && zoom > 10 ? (
-              <rect height="1px" width={connectorWidth + 1} x={connectorX - 1} y={lineHeight + lineYDiff} />
+              <rect height="1px" width={connectorWidth} x={connectorX} y={lineHeight + lineYDiff} />
             ) : null}
             {complementCutSite && zoom > 10 ? (
-              <rect height={lineHeight} width="1px" x={c.hangX - 1} y={lineHeight + lineYDiff} />
+              <rect height={lineHeight} width="1px" x={c.hangX} y={lineHeight + lineYDiff} />
             ) : null}
 
             {/* dashed outline showing the recog site */}
@@ -209,8 +212,8 @@ const CutSites = (props: {
                   stroke: "rgb(150,150,150)",
                   strokeWidth: 1,
                 }}
-                width={c.highlightWidth}
-                x={c.highlightX}
+                width={c.highlight.width}
+                x={c.highlight.x}
                 y={lineYDiff}
               />
             )}
@@ -223,7 +226,7 @@ const CutSites = (props: {
 
 const HighlightBlock = (props: {
   color: string;
-  connector: ConnectorType;
+  connector: HighlightedCutSite;
   end: number;
   findXAndWidth: FindXAndWidthType;
   id: string;
