@@ -86,6 +86,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     const {
       bpsPerBlock,
+      charWidth,
       firstBase,
       fullSeq: { length: seqLength },
       size,
@@ -96,7 +97,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     let x = 0;
     if (firstIndex >= firstBase) {
-      x = ((firstIndex - firstBase) / bpsPerBlock) * size.width;
+      // is the +1 weird? yes. does it slightly improve alignments? also yes.
+      x = (firstIndex - firstBase) * charWidth + 1;
       x = Math.max(x, 0) || 0;
     }
 
@@ -130,16 +132,16 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const color = this.bpColorLookup(bp, i);
     if (color) {
       return (
-        <tspan key={i + bp + id} fill={color} x={charWidth * i + charWidth * 0.1}>
+        <tspan key={i + bp + id} fill={color} x={charWidth * i + charWidth * 0.2}>
           {bp}
         </tspan>
       );
     }
 
     return (
-      // the +0.1 here and above is to offset the characters they're not right on the left edge. When they are,
+      // the +0.2 here and above is to offset the characters they're not right on the left edge. When they are,
       // other elements look like they're shifted too far to the right.
-      <tspan key={i + bp + id} x={charWidth * i + charWidth * 0.1}>
+      <tspan key={i + bp + id} x={charWidth * i + charWidth * 0.2}>
         {bp}
       </tspan>
     );
@@ -248,7 +250,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const annHeight = elementHeight * annotationRows.length;
 
     // height and ydiff of the index row.
-    const indexRowYDiff = annYDiff + annHeight;
+    const elementGap = annotationRows.length + translations.length + reversePrimerRows.length ? 3 : 0;
+    const indexRowYDiff = annYDiff + annHeight + elementGap;
     // const indexRowHeight = showIndex ? elementHeight : 0;
 
     // calc the height necessary for the sequence selection
@@ -260,8 +263,9 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       reversePrimerHeight +
       translationHeight +
       annHeight +
+      elementGap +
       5; // it starts 5 above the top of the SeqBlock
-    let selectEdgeHeight = selectHeight + elementHeight;
+    let selectEdgeHeight = selectHeight + 9; // +9 is the height of a tick + index row
 
     // needed because otherwise the selection height is very small
     if (!zoomed && selectHeight <= elementHeight) {
@@ -375,6 +379,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         )}
         {showIndex && (
           <IndexRow
+            charWidth={charWidth}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
             lastBase={lastBase}

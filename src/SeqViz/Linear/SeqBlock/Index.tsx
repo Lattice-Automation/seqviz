@@ -4,6 +4,7 @@ import { Size } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
+  charWidth: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   lastBase: number;
@@ -22,10 +23,10 @@ export default class Index extends React.PureComponent<IndexProps> {
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    const { findXAndWidth, firstBase, seq, size, zoom } = this.props;
+    const { charWidth, findXAndWidth, firstBase, seq, size, zoom } = this.props;
     const seqLength = seq.length;
 
-    // the tallie distance on the x-axis is zoom dependent:
+    // the tally's distance on the x-axis is zoom dependent:
     // (0, 10]: every 50
     // (10, 40]: every 20
     // (40, 70]: every 10
@@ -72,22 +73,24 @@ export default class Index extends React.PureComponent<IndexProps> {
     };
 
     return tickIndexes.map(p => {
-      const { x: leftDist } = findXAndWidth(p - 0.5, p - 0.5); // for midpoint
-      const tickFromLeft = leftDist;
-      let textFromLeft = leftDist; // 0.05 * 11
+      let { x: tickFromLeft } = findXAndWidth(p - 1, p - 1); // for midpoint
+      tickFromLeft += charWidth / 2;
 
       let digits = Math.ceil(Math.log10(p + 1)); // digits in num
-      // 0.91 is the aspect ratio of roboto mono, 11 is the font width. 0.91 * 11 = 10
-      const textWidth = digits * 10;
-      digits -= 1; // don't shift if there's just one digit
-      digits /= 2; // shift by half the number's width
+      digits -= 1; // don't shift for the middle digit
 
-      textFromLeft -= digits * 10; // 10 = 0.91 x 11
+      const indexCharWidth = 7.7; // this is pretty stable, can calculate w/ a long number's width / char count
+      const textWidth = digits * indexCharWidth;
+
+      let { x: textFromLeft } = findXAndWidth(p - 1, p - 1);
+      textFromLeft += charWidth / 2;
+      textFromLeft -= textWidth / 2 + 2; // this +2 I cannot explain
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
       textFromLeft = Math.min(size.width - textWidth / 2, textFromLeft); // keep off right edge
 
       const transTick = `translate(${tickFromLeft}, 1)`;
       const transText = `translate(${textFromLeft}, 10)`;
+
       return (
         <React.Fragment key={p}>
           <rect fill="#A3A3A3" style={tickStyle} transform={transTick} />

@@ -14,8 +14,8 @@ export const App = () => {
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     annotations: [
-      { color: "green", direction: 1, end: 19, name: "test", start: 8 },
-      { direction: 1, end: 19, name: "test", start: 8 },
+      { direction: 1, end: 60, name: "test", start: 8 },
+      { direction: -1, end: 70, name: "test", start: 270 },
     ],
     backbone: "pSB1C3",
     bpColors: {},
@@ -63,7 +63,7 @@ export const App = () => {
     translations: [{ direction: 1, end: 70, start: 0 }],
 
     viewer: "both_flip",
-    zoom: { circular: 0, linear: 50 },
+    zoom: { circular: 0, linear: 100 },
     // highlightedRegions: [
     //   { start: 36, end: 66, color: "magenta" },
     //   { start: 70, end: 80 },

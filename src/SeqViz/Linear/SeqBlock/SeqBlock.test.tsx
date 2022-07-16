@@ -71,7 +71,7 @@ describe("SeqBlock", () => {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'C... Remove this comment to see the full error message
     const { width, x } = seqBlock.findXAndWidth(0, seq.length);
 
-    expect(x).toEqual(0);
+    expect(x).toEqual(1);
     expect(width).toBeGreaterThan(defaultProps.charWidth * seq.length - 5);
     expect(width).toBeLessThan(defaultProps.charWidth * seq.length + 5);
   });

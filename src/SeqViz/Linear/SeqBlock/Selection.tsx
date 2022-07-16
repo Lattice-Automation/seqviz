@@ -84,21 +84,22 @@ class Edges extends React.PureComponent<EdgesProps> {
     }
 
     // inlining style in the SVG for speed sake
+    const wide = start !== end && zoom > 60;
     const rect = {
       height: selectEdgeHeight,
       shapeRendering: "crispEdges",
       style: {
         fill: "black",
         // below 40 zoom the chars are so small we may as well not widen the selection edges.
-        width: start === end || zoom < 40 ? 1 : 2,
+        width: wide ? 2 : 1,
       },
       y: "-5",
     };
 
     return (
       <g className="la-vz-linear-sel-edges">
-        {startEdge ? <rect {...rect} x={start === end ? x - 1 : x - 2} /> : null}
-        {lastEdge ? <rect {...rect} x={start === end ? secondEdgeX - 1 : secondEdgeX - 1} /> : null}
+        {startEdge ? <rect {...rect} x={wide ? x - 1 : x} /> : null}
+        {lastEdge ? <rect {...rect} x={wide ? secondEdgeX - 1 : secondEdgeX} /> : null}
       </g>
     );
   }
@@ -210,7 +211,7 @@ class Block extends React.PureComponent<BlockProps> {
           className="la-vz-linear-sel-block"
           height={selectHeight}
           shapeRendering="auto"
-          width={width || undefined}
+          width={width ? width + 1 : undefined}
           x={x || undefined}
           y={-5}
         />
