@@ -27,87 +27,129 @@ interface CutSitesProps {
   seqLength: number;
 }
 
-export default class CutSites extends React.PureComponent<CutSitesProps> {
-  calculateLinePath = (index: number, startRadius: number, endRadius: number) => {
-    const { findCoor } = this.props;
+export default (props: CutSitesProps) => {
+  const { cutSites } = props;
+  if (!cutSites.length) return null;
+
+  const calculateLinePath = (index: number, startRadius: number, endRadius: number): string => {
+    const { findCoor } = props;
     const lineStart = findCoor(index, startRadius);
     const lineEnd = findCoor(index, endRadius);
-    const linePath = `M ${lineEnd.x} ${lineEnd.y}
-            L ${lineStart.x} ${lineStart.y}`;
-    return linePath;
+    return `M ${lineEnd.x} ${lineEnd.y} L ${lineStart.x} ${lineStart.y}`;
   };
 
-  displayCutSite = (cutSite: CutSite) => {
-    const { generateArc, getRotation, inputRef, lineHeight, radius, seqLength } = this.props;
-    const { id, start } = cutSite;
-    let { end, fcut, rcut } = cutSite;
+  return (
+    <g className="la-vz-circular-cutsites">
+      {cutSites.map(c => (
+        <SingleCutSite key={`circular-cut-site-${c.id}`} {...props} calculateLinePath={calculateLinePath} cutSite={c} />
+      ))}
+    </g>
+  );
+};
 
-    // crosses the zero index
-    if (start + fcut > end + rcut) {
-      end = start > end ? end + seqLength : end;
-      if (fcut > rcut) rcut += seqLength;
-      else fcut += seqLength;
-    }
+const SingleCutSite = (props: {
+  center: Coor;
+  cutSite: CutSite;
+  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
+  calculateLinePath: (index: number, startRadius: number, endRadius: number) => string;
+  generateArc: (args: {
+    arrowFWD?: boolean;
+    arrowREV?: boolean;
+    innerRadius: number;
+    largeArc: boolean;
+    length: number;
+    offset?: number;
+    outerRadius: number;
+    // see svg.arc large-arc-flag
+    sweepFWD?: boolean;
+  }) => string;
+  getRotation: (index: number) => string;
+  inputRef: InputRefFuncType;
+  lineHeight: number;
+  radius: number;
+  rotateCoor: (coor: Coor, degrees: number) => Coor;
+  selectionRows: number;
+  seqLength: number;
+}) => {
+  const { calculateLinePath, cutSite, generateArc, getRotation, inputRef, lineHeight, radius, seqLength } = props;
+  const { id, start } = cutSite;
+  let { end, fcut, rcut } = cutSite;
 
-    // length for highlighted recog area
-    const cutSiteLength = Math.abs(end - start);
+  // crosses the zero index
+  if (start + fcut > end + rcut) {
+    end = start > end ? end + seqLength : end;
+    if (fcut > rcut) rcut += seqLength;
+    else fcut += seqLength;
+  }
 
-    // const calc the size of the recog area radii
-    let topR = radius + lineHeight; // outer radius
-    if (seqLength < 200) {
-      topR += 2 * lineHeight;
-    }
+  // length for highlighted recog area
+  const cutSiteLength = Math.abs(end - start);
 
-    // find start and stop coordinates of recog area
-    const recogAreaPath = generateArc({
-      innerRadius: radius,
-      largeArc: cutSiteLength > seqLength / 2,
-      length: cutSiteLength,
-      outerRadius: topR,
-      sweepFWD: true,
-    });
+  // const calc the size of the recog area radii
+  let topR = radius + lineHeight; // outer radius
+  if (seqLength < 200) {
+    topR += 2 * lineHeight;
+  }
 
-    // find start and stop coordinates to cut site line
-    const cutLinePath = this.calculateLinePath(fcut - start, radius + lineHeight * 2, radius + lineHeight * 1.5);
+  // find start and stop coordinates of recog area
+  const recogAreaPath = generateArc({
+    innerRadius: radius,
+    largeArc: cutSiteLength > seqLength / 2,
+    length: cutSiteLength,
+    outerRadius: topR,
+    sweepFWD: true,
+  });
 
-    // find start and stop coordinates of connector line
-    const connectorLinePath = generateArc({
-      innerRadius: radius + lineHeight * 1.5,
-      largeArc: Math.abs(fcut - rcut) > seqLength / 2,
-      length: Math.abs(fcut - rcut),
-      offset: Math.min(fcut, rcut) - start,
-      outerRadius: radius + lineHeight * 1.5,
-      sweepFWD: true,
-    });
+  // find start and stop coordinates to cut site line
+  const cutLinePath = calculateLinePath(fcut - start, radius + lineHeight * 2, radius + lineHeight * 1.5);
 
-    // find start and stop coordinates to hang site line
-    const hangLinePath = this.calculateLinePath(rcut - start, radius + lineHeight * 1.5, radius + lineHeight / 1.2);
+  // find start and stop coordinates of connector line
+  const connectorLinePath = generateArc({
+    innerRadius: radius + lineHeight * 1.5,
+    largeArc: Math.abs(fcut - rcut) > seqLength / 2,
+    length: Math.abs(fcut - rcut),
+    offset: Math.min(fcut, rcut) - start,
+    outerRadius: radius + lineHeight * 1.5,
+    sweepFWD: true,
+  });
 
-    const fill = "rgba(255, 165, 0, 0.2)";
+  // find start and stop coordinates to hang site line
+  const hangLinePath = calculateLinePath(rcut - start, radius + lineHeight * 1.5, radius + lineHeight / 1.2);
 
-    const cutSiteStyle = {
-      cursor: "pointer",
-      fill: fill,
-      fillOpacity: 0,
-      shapeRendering: "auto",
-      stroke: "black",
-      strokeWidth: 1,
-    };
+  const lineStyle = {
+    fill: "transparent",
+    shapeRendering: "auto",
+    stroke: "black",
+    strokeWidth: 1,
+  };
 
-    const lineStyle = {
-      fill: "transparent",
-      shapeRendering: "auto",
-      stroke: "black",
-      strokeWidth: 1,
-    };
-
-    return (
+  return (
+    <React.Fragment>
+      {cutSite.color && (
+        <FindArc
+          direction={1}
+          end={cutSite.end}
+          fillStyle={cutSite.color}
+          generateArc={generateArc}
+          getRotation={getRotation}
+          inputRef={inputRef}
+          lineHeight={lineHeight}
+          radius={radius}
+          seqLength={seqLength}
+          start={cutSite.start}
+        />
+      )}
       <g key={`cutSite: ${id}`} id={`la-vz-circular-cutsite-${id}`} transform={getRotation(start)}>
         {<path d={cutLinePath} {...lineStyle} />}
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
         <path
-          {...cutSiteStyle}
+          cursor="pointer"
+          fill="rgba(255, 165, 0, 0.2)"
+          fillOpacity={0}
+          shapeRendering="auto"
+          stroke="black"
+          strokeWidth={1}
           ref={inputRef(id, {
             end: end,
             ref: id,
@@ -117,47 +159,7 @@ export default class CutSites extends React.PureComponent<CutSitesProps> {
           className={id}
           d={recogAreaPath}
         />
-      </g>
-    );
-  };
-  recogHighlightArc = (c: CutSite) => {
-    if (c.highlightColor) {
-      return (
-        <FindArc
-          key={`findArc: ${c.id}`}
-          direction={1}
-          end={c.end}
-          fillStyle={c.highlightColor}
-          generateArc={this.props.generateArc}
-          getRotation={this.props.getRotation}
-          inputRef={this.props.inputRef}
-          lineHeight={this.props.lineHeight}
-          radius={this.props.radius}
-          seqLength={this.props.seqLength}
-          start={c.start}
-        />
-      );
-    }
-  };
-  render() {
-    const { cutSites } = this.props;
-
-    if (!cutSites.length) {
-      return null;
-    }
-
-    return (
-      <g className="la-vz-circular-cutsites">
-        {cutSites.map(c => {
-          return (
-            <React.Fragment key={JSON.stringify(c)}>
-              {this.recogHighlightArc(c)}
-
-              {this.displayCutSite(c)}
-            </React.Fragment>
-          );
-        })}
-      </g>
-    );
-  }
-}
+      </g>{" "}
+    </React.Fragment>
+  );
+};

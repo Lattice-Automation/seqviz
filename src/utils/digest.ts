@@ -4,126 +4,114 @@ import { reverseComplement } from "./parser";
 import { createRegex } from "./search";
 
 /**
- * Digest a sequence with the given enzymes and return an array of cut sites along the sequence.
+ * Digest a sequence with the enzymes and return an array of cut-site.
  *
- * This slows rendering quite a bit, so the results are memoized.
+ * This is slow enough to impact rendering so shouldn't be ran on each prop change.
  */
-export const cutSitesInRows = (
-  seq: string,
-  enzymeList: string[] = [],
-  enzymesCustom: { [key: string]: Enzyme } = {}
-): CutSite[] => {
-  const seqToCut = (seq + seq).toUpperCase();
+export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: string]: Enzyme } = {}): CutSite[] => {
+  const seqToCut = seq + seq;
 
-  const enzymeNames: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
-  const filteredEnzymes = Array.from(new Set(enzymeNames));
+  let enzymeNames: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
+  enzymeNames = Array.from(new Set(enzymeNames));
 
   // find all the cut sites for the given row
-  const cutSites: CutSite[] = [];
-  filteredEnzymes.forEach((enzymeName: string) => {
+  const cutSites = enzymeNames.reduce((acc: { [key: string]: CutSite }, enzymeName: string) => {
+    // TODO: if name were on the enzyme this wouldn't be necessary
     const currEnzyme: Enzyme = enzymesCustom[enzymeName] || enzymes[enzymeName];
-    const sites = findCutSites(currEnzyme, seqToCut, enzymeName);
-    const filteredSites = sites.filter(c => !(c.fcut === 0 && c.rcut === 0));
-    filteredSites.forEach(c =>
-      cutSites.push({
-        direction: c.direction,
+
+    // search for cut sites for this enzyme
+    findCutSites(currEnzyme, seqToCut, enzymeName)
+      // filter out cut sites that that only start/end at 0-index. I no longer remember what this was for.
+      .filter(c => !(c.fcut === 0 && c.rcut === 0))
+      // modulo the start/end and add an id to each cut-site
+      .map(c => ({
+        ...c,
+        id: `${enzymeName}-${currEnzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
         end: c.end % seq.length,
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
-        highlightColor: c.highlightColor,
-        id: `${enzymeName}-${c.direction}-${c.start}`,
-        name: enzymeName,
         rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
         recogEnd: c.recogEnd % seq.length,
-        recogStart: c.recogStart,
         start: c.start % seq.length,
-      })
-    );
-  });
-  return Object.values(cutSites.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
+      }))
+      .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
+
+    return acc;
+  }, {});
+
+  return Object.values(cutSites);
 };
 
 /**
- * Search through the sequence with the given enzyme and return an array of cut
- * and hang indexes for splitting up the sequence with the passed enzymes
+ * Search through the sequence with the enzyme and return an array of cut and hang indexes.
+ *
+ * Exported for testing.
  */
-const findCutSites = (enzyme: Enzyme, seqToSearch: string, enzymeName: string): CutSite[] => {
+export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): CutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
   if (!rseq) {
     ({ fcut, rcut, rseq } = enzymes[enzymeName]);
   }
 
-  let recogSeq = rseq.toUpperCase();
+  let recogSeq = rseq.toLowerCase();
   let shiftRecogStart = 0;
   let shiftRecogEnd = 0;
   let recogStart = 0;
   let recogEnd = recogSeq.length;
-  while (recogSeq[recogStart] === "N") {
+  while (recogSeq[recogStart] === "n") {
     shiftRecogStart += 1;
     recogStart += 1;
   }
-  while (recogSeq[recogEnd - 1] === "N") {
+  while (recogSeq[recogEnd - 1] === "n") {
     shiftRecogEnd += 1;
     recogEnd -= 1;
   }
 
-  const recogLength = recogSeq.length;
-  const nucAmbig = new RegExp(/[^ATGC]/, "gi");
-  if (nucAmbig.test(rseq)) recogSeq = recogSeq.toUpperCase();
-  const regTest = new RegExp(recogSeq, "gi");
+  const rlen = recogSeq.length;
+  const cutSiteIndices: CutSite[] = [];
 
-  // this is in the forward direction, ie, when not checking the complement possibility
-  // start search for cut sites
-  const cutSiteIndices: any[] = [];
-  let result = regTest.exec(seqToSearch); // returns null if nothing found
-  // while another match is found and we haven't exceeded input sequence length
+  // Find matches on the top/forward sequence.
+  const matcher = createRegex(rseq, "dna");
+  let result = matcher.exec(seq);
   while (result) {
     // add the cut site index, after correcting for actual cut site index
     const index = result.index;
     cutSiteIndices.push({
-      cutEnzymes: enzymeName ? { end: [enzymeName], start: [enzymeName] } : null,
-      end: index + recogLength,
-      // enzymes that contributed to this cut site
+      color: enzyme.color || "",
+      direction: 1,
+      end: index + rlen,
       fcut: index + fcut,
-      highlightColor: enzyme.highlightColor,
+      id: "",
+      name: enzymeName,
       rcut: index + rcut,
       recogEnd: index + recogEnd + shiftRecogEnd,
       recogStart: index + recogStart - shiftRecogStart,
-      recogStrand: 1,
       start: index,
     });
-    result = regTest.exec(seqToSearch);
+    result = matcher.exec(seq);
   }
 
-  let inverComp = reverseComplement(rseq);
-  if (new RegExp(/[^ATGC]/, "gi").test(inverComp.toUpperCase())) {
-    inverComp = createRegex(inverComp, "dna").toUpperCase();
-  }
-  const reqTestRC = new RegExp(inverComp, "gi");
-  result = reqTestRC.exec(seqToSearch); // returns null if nothing found
+  // Now matches in the reverse complement direction.
+  const rcMatcher = createRegex(reverseComplement(rseq), "dna");
+  result = rcMatcher.exec(seq);
   while (result) {
-    // same above, except correcting for the new reverse complement indexes
+    // same as above but correcting for the new reverse complement indexes
     const index = result.index;
     cutSiteIndices.push({
-      cutEnzymes: enzymeName ? { end: [enzymeName], start: [enzymeName] } : null,
-      end: index + recogLength,
-      // enzymes that contributed to this cut site
-      fcut: index + recogLength - rcut,
-      highlightColor: enzyme.highlightColor,
-      rcut: index + recogLength - fcut,
+      color: enzyme.color || "",
+      direction: -1,
+      end: index + rlen,
+      fcut: index + rlen - rcut,
+      id: "",
+      name: enzymeName,
+      rcut: index + rlen - fcut,
       recogEnd: index + recogEnd + shiftRecogEnd,
       recogStart: index + recogStart - shiftRecogStart,
-      recogStrand: -1,
       start: index,
     });
-    result = reqTestRC.exec(seqToSearch);
+    result = rcMatcher.exec(seq);
   }
 
   // reduce so there's only one enzyme per template cut index
-  const uniqueCuts: CutSite[] = Object.values(cutSiteIndices.reduce((acc, c) => ({ [c.fcut]: c, ...acc }), {}));
-
-  // sort with increasing sequence cut index
-
-  uniqueCuts.sort((a, b) => a.fcut - b.fcut);
-  return uniqueCuts;
+  return cutSiteIndices.sort((a, b) => a.fcut - b.fcut);
 };

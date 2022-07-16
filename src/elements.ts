@@ -66,17 +66,22 @@ export interface Coor {
 /** a single enzyme to use to digest the sequence with */
 export interface Enzyme {
   fcut: number;
-  highlightColor?: string;
+  color?: string;
   rcut: number;
   rseq: string;
 }
 
 /** a single recognition site on the sequence. */
 export interface CutSite extends NamedRanged {
+  /** `1` if top strand (`seq`), `-1` if bottom strand (`compSeq`) */
   direction: 1 | -1;
-  end: number;
+  /** name is the name of the enzyme that created this cut site */
+  name: string;
+  /** index relative to start index of the cut on the top strand */
   fcut: number;
-  highlightColor: string;
+  /** color to highlight the cutsite with. Empty string if it shouldn't be colored */
+  color: string;
+  /** index relative to start index of the cut on the bottom strand */
   rcut: number;
   recogEnd: number;
   recogStart: number;
