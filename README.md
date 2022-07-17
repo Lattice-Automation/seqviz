@@ -56,9 +56,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -135,9 +137,7 @@ Whether to show the index line and ticks below the sequence.
 
 #### `annotations (=[])`
 
-An array of `annotation` objects for the viewer. Each `annotation` requires 0-based start (inclusive) and end
-(exclusive) indexes. For forward arrows, set the annotation's direction to `1` and `-1` for reverse arrows. A direction
-of `0` or no direction produces annotations without arrows. Names (optional) are rendered on top the annotation.
+An array of `annotations` to show. Each `Annotation` requires 0-based start (inclusive) and end (exclusive) indexes. For arrows, set the annotation's direction to `1` for forward arrows and `-1` for reverse arrows. Names are rendered on top of the annotation.
 
 ```js
 annotations = [
@@ -151,8 +151,7 @@ In the example above, the "Strong promoter" would span the first to twenty-secon
 
 #### `translations (=[])`
 
-An array of `translation` objects for rendering ranges of amino acids beneath the DNA sequence. Like `annotation`'s,
-`translation` objects requires 0-based start (inclusive) and end (exclusive) indexes relative the DNA sequence. A
+An array of `translations` showing amino acids beneath the DNA sequence. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A
 direction is required: 1 (FWD) or -1 (REV).
 
 ```js
@@ -164,7 +163,7 @@ translations = [
 
 #### `enzymes (=[])`
 
-An array of restriction enzymes whose recognition sites should be shown. A list of pre-defined enzymes in [src/utils/enzymes.js](src/utils/enzymes.js) can be referenced by name. Example:
+An array of restriction `enzymes` to show the recognition sites for. A list of pre-defined enzymes in [src/utils/enzymes.ts](src/utils/enzymes.ts) can be referenced by name. Example:
 
 ```js
 enzymes = [
@@ -190,8 +189,8 @@ enzymes = [
     fcut: 0, // cut index on FWD strand, relative to start of rseq
     rcut: 1, // cut index on REV strand, relative to start of rseq
     color: "#D7E5F0", // color to highlight recognition site with
+    // only show recognition sites between 100th and 250th index [100,250]
     range: {
-      // only show recognition sites between 100th and 250th index [100,250]
       start: 100,
       end: 250,
     },
@@ -201,7 +200,7 @@ enzymes = [
 
 #### `zoom (={ linear: 50, circular: 0 })`
 
-How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`viewer`).
+How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type (`viewer`).
 
 #### `colors (=[])`
 
