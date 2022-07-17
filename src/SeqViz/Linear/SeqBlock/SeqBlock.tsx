@@ -1,15 +1,6 @@
 import * as React from "react";
 
-import {
-  Annotation,
-  CutSite,
-  HighlightProp,
-  InputRefFuncType,
-  Primer,
-  Range,
-  Size,
-  Translation,
-} from "../../../elements";
+import { Annotation, CutSite, Highlight, InputRefFuncType, Primer, Range, Size, Translation } from "../../../elements";
 import { Selection as SelectionType } from "../../handlers/selection";
 import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
@@ -39,7 +30,7 @@ interface SeqBlockProps {
   firstBase: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
-  highlightedRegions: HighlightProp[];
+  highlights: Highlight[];
   id: string;
   inputRef: InputRefFuncType;
   key: string;
@@ -326,7 +317,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           filteredRows={filteredSearchRows}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          highlightedRegions={this.props.highlightedRegions}
+          highlights={this.props.highlights}
           indexYDiff={indexYDiff}
           inputRef={inputRef}
           lastBase={lastBase}

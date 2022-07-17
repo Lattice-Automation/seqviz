@@ -198,6 +198,17 @@ enzymes = [
 ];
 ```
 
+#### `highlights (=[])`
+
+Ranges of the sequence to highlight. A default color from `colors` is used if none is provided.
+
+```js
+highlightedRegions: [
+  { start: 36, end: 66, color: "magenta" },
+  { start: 70, end: 80 },
+];
+```
+
 #### `zoom (={ linear: 50, circular: 0 })`
 
 How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type (`viewer`).
@@ -334,17 +345,6 @@ By default, the circular viewer rotates when scrolling over the viewer. That can
 This is a feature specific to [BioBricks](https://parts.igem.org/Plasmid_backbones/Assembly) (`accession`). The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, and `pSB1T3`.
 
 Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`).
-
-#### `highlightedRegions (=null)`
-
-Passing in a list of ranges will highlight those regions on top of the sequence. A default color from `colors` is used if none is provided.
-
-```js
-highlightedRegions: [
-  { start: 36, end: 66, color: "magenta" },
-  { start: 70, end: 80 },
-];
-```
 
 ### Viewer without React
 

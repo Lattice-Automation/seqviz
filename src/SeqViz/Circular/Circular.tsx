@@ -34,7 +34,7 @@ export interface CircularProps {
   centralIndex: number;
   compSeq: string;
   cutSites: CutSite[];
-  highlightedRegions: Highlight[];
+  highlights: Highlight[];
   inputRef: InputRefFuncType;
   mouseEvent: (e: any) => void;
   name: string;
@@ -360,7 +360,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
             findCoor={general.findCoor}
             generateArc={general.generateArc}
             getRotation={general.getRotation}
-            highlightedRegions={this.props.highlightedRegions}
+            highlights={this.props.highlights}
             inputRef={general.inputRef}
             lineHeight={general.lineHeight}
             radius={general.radius}

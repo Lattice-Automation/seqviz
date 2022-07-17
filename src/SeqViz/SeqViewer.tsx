@@ -14,7 +14,7 @@ interface SeqViewerProps {
   bpColors: { [key: number | string]: string };
   compSeq: string;
   cutSites: CutSite[];
-  highlightedRegions: Highlight[];
+  highlights: Highlight[];
   name: string;
   search: NameRange[];
   selection: Selection;

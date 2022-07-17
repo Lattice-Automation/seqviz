@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { HighlightProp, InputRefFuncType, Range } from "../../../elements";
+import { Highlight, InputRefFuncType, Range } from "../../../elements";
 import randomid from "../../../utils/randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -9,7 +9,7 @@ interface FindProps {
   filteredRows: Range[];
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
-  highlightedRegions: HighlightProp[];
+  highlights: Highlight[];
   indexYDiff: number;
   inputRef: InputRefFuncType;
   lastBase: number;
@@ -26,7 +26,7 @@ export default function Find(props: FindProps) {
     filteredRows: searchRows,
     findXAndWidth,
     firstBase,
-    highlightedRegions,
+    highlights,
     indexYDiff,
     inputRef,
     lastBase,
@@ -37,8 +37,8 @@ export default function Find(props: FindProps) {
   return (
     <>
       {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
-      {highlightedRegions.map(({ color, end, start }) => (
-        <React.Fragment key={`highlight-${start}-${end}-1`}>
+      {highlights.map(({ color, end, id, start }) => (
+        <React.Fragment key={`la-vz-highlight-${id}`}>
           <FindBlock
             compYDiff={compYDiff}
             direction={1}

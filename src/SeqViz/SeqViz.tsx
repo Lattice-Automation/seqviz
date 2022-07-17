@@ -63,8 +63,15 @@ export interface SeqVizProps {
   /** a file to parse and render. Genbank, FASTA, SnapGene, JBEI, SBOLv1/2, ab1, and SeqBuilder formats are supported */
   file?: string | File;
 
-  /** ranges of the viewer to highlight. */
+  /**
+   * ranges of the viewer to highlight.
+   *
+   * @deprecated use `highlights`
+   */
   highlightedRegions?: HighlightProp[];
+
+  /** ranges of sequence to highlight on the viewer */
+  highlights?: HighlightProp[];
 
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
@@ -333,7 +340,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   render() {
-    const { highlightedRegions, name, showComplement, showIndex, style, zoom } = this.props;
+    const { highlightedRegions, highlights, name, showComplement, showIndex, style, zoom } = this.props;
     let { compSeq, seq, translations, viewer } = this.props;
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
@@ -349,6 +356,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       translations = [];
     }
 
+    // process highlights, adding color + id (+ combining deprecated highlightedRegions)
+    const highlightsProcessed = (highlights || [])
+      .concat(highlightedRegions || [])
+      .map((h): Highlight => ({ ...h, color: h.color || chooseRandomColor(), direction: 1, id: randomid(), name: "" }));
+
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
       ...this.props,
@@ -356,10 +368,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       bpColors: this.props.bpColors || {},
       compSeq: compSeq || "",
       cutSites: cutSites,
-      highlightedRegions:
-        highlightedRegions?.map(
-          (h): Highlight => ({ ...h, color: h.color || chooseRandomColor(), direction: 1, id: randomid(), name: "" })
-        ) || [],
+      highlights: highlightsProcessed,
       name: name || part?.name || "",
       search: search,
       selection: selection,
