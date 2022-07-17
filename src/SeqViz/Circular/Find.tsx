@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, HighlightProp, InputRefFuncType, Ranged } from "../../elements";
+import { Coor, HighlightProp, InputRefFuncType, Range } from "../../elements";
 
 interface FindProps {
   center: Coor;
@@ -23,7 +23,7 @@ interface FindProps {
   onUnmount: unknown;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
-  search: Ranged[];
+  search: Range[];
   seq: string;
   seqLength: number;
   totalRows: number;

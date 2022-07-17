@@ -1,12 +1,12 @@
-/** Ranged is a single element with a range and direction in the viewer */
-export interface Ranged {
+/** Range is a single element with a range and direction in the viewer */
+export interface Range {
   direction: -1 | 0 | 1;
   end: number;
   start: number;
 }
 
-/** NamedRanged elements have been parsed to include an id and name */
-export interface NamedRanged extends Ranged {
+/** NameRange elements have been parsed to include an id and name */
+export interface NameRange extends Range {
   id: string;
   name: string;
 }
@@ -24,19 +24,19 @@ export interface AnnotationProp {
 }
 
 /** Annotation is an annotation after parsing. */
-export interface Annotation extends NamedRanged {
+export interface Annotation extends NameRange {
   color: string;
   type?: "enzyme" | "insert" | "";
 }
 
 /** Translation is a single translated CDS. */
-export interface Translation extends NamedRanged {
+export interface Translation extends NameRange {
   AAseq: string;
   direction: -1 | 1;
 }
 
 /** Primer is a single primer for PCR. Not visualized right now. */
-export interface Primer extends NamedRanged {
+export interface Primer extends NameRange {
   color: string;
   direction: 1 | -1;
 }
@@ -79,22 +79,39 @@ export interface Coor {
 
 /** a single enzyme to use to digest the sequence with */
 export interface Enzyme {
+  /** an optional color to highlight the recognition site with */
   color?: string;
+
+  /** the index of the cut-site on the forward strand relative to the start of the recognition site */
   fcut: number;
+
+  /** name is the name of the enzyme. Used in the label above a cut-site */
+  name: string;
+
+  /** the index of the cut-site on the reverse strand relative to the start of the recognition site */
   rcut: number;
+
+  /** the recognition sequence */
   rseq: string;
+
+  /** an optional range over which this enzyme's cut-sites should be limited */
+  range?: Range;
 }
 
 /** a single recognition site on the sequence. */
-export interface CutSite extends NamedRanged {
+export interface CutSite extends NameRange {
   /** color to highlight the cutsite with. Empty string if it shouldn't be colored */
   color: string;
+
   /** `1` if top strand (`seq`), `-1` if bottom strand (`compSeq`) */
   direction: 1 | -1;
+
   /** index relative to start index of the cut on the top strand */
   fcut: number;
+
   /** name is the name of the enzyme that created this cut site */
   name: string;
+
   /** index relative to start index of the cut on the bottom strand */
   rcut: number;
 }

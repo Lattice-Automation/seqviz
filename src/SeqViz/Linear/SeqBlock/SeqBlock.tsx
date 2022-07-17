@@ -6,7 +6,7 @@ import {
   HighlightProp,
   InputRefFuncType,
   Primer,
-  Ranged,
+  Range,
   Size,
   Translation,
 } from "../../../elements";
@@ -47,7 +47,7 @@ interface SeqBlockProps {
   mouseEvent: React.MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
   reversePrimerRows: Primer[];
-  searchRows: Ranged[];
+  searchRows: Range[];
   selection: SelectionType;
   seq: string;
   seqFontSize: number;

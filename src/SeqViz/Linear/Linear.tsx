@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, CutSite, Highlight, InputRefFuncType, NamedRanged, Primer, Ranged, Size } from "../../elements";
+import { Annotation, CutSite, Highlight, InputRefFuncType, NameRange, Primer, Range, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { createLinearTranslations } from "../../utils/sequence";
@@ -27,7 +27,7 @@ export interface LinearProps {
   name: string;
   onUnmount: (id: string) => void;
   primers: Primer[];
-  search: NamedRanged[];
+  search: NameRange[];
   selection: Selection;
   seq: string;
   seqFontSize: number;
@@ -37,7 +37,7 @@ export interface LinearProps {
   showIndex: boolean;
   showPrimers: boolean;
   size: Size;
-  translations: Ranged[];
+  translations: Range[];
   zoom: { linear: number };
 }
 
@@ -138,7 +138,7 @@ class Linear extends React.Component<LinearProps> {
       ? createMultiRows(stackElements(reversePrimers, seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
-    const searchRows: NamedRanged[][] =
+    const searchRows: NameRange[][] =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
     const highlightRows = createSingleRows(highlightedRegions, bpsPerBlock, arrSize);

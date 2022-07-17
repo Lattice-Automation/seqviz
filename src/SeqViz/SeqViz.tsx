@@ -7,9 +7,9 @@ import {
   Enzyme,
   Highlight,
   HighlightProp,
-  NamedRanged,
+  NameRange,
   Part,
-  Ranged,
+  Range,
 } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
@@ -49,9 +49,13 @@ export interface SeqVizProps {
   copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
 
   /** a list of enzymes or enzyme names to digest the sequence with. see seqviz.Enzymes */
-  enzymes?: string[];
+  enzymes?: (Enzyme | string)[];
 
-  /** a map from enzyme name to definition for custom enzymes not already supported */
+  /**
+   * a map from enzyme name to definition for custom enzymes not already supported
+   *
+   * @deprecated use `enzymes` for custom enzymes
+   */
   enzymesCustom?: {
     [key: string]: Enzyme;
   };
@@ -66,7 +70,7 @@ export interface SeqVizProps {
   name?: string;
 
   /** a callback that's executed on each change to the search parameters or sequence */
-  onSearch?: (search: Ranged[]) => void;
+  onSearch?: (search: Range[]) => void;
 
   /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
   onSelection?: (selection: Selection) => void;
@@ -99,14 +103,17 @@ export interface SeqVizProps {
   style?: Record<string, unknown>;
 
   /** ranges of sequence that should have amino acid translations shown */
-  translations?: Ranged[];
+  translations?: Range[];
 
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
 
   /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {
+    /** how zoomed to make the circular viewer. default: 0 */
     circular?: number;
+
+    /** how zoomed to make the linear viewer. default: 50 */
     linear?: number;
   };
 }
@@ -121,7 +128,7 @@ export interface SeqVizState {
   };
   cutSites: CutSite[];
   part: null | Part;
-  search: NamedRanged[];
+  search: NameRange[];
   selection: Selection;
 }
 
@@ -140,7 +147,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: (_: Ranged[]) => null,
+    onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },

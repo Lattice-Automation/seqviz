@@ -56,9 +56,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -140,7 +142,7 @@ An array of `annotation` objects for the viewer. Each `annotation` requires 0-ba
 of `0` or no direction produces annotations without arrows. Names (optional) are rendered on top the annotation.
 
 ```js
-[
+annotations = [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
   { start: 23, end: 273, name: "GFP" },
   { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" },
@@ -156,7 +158,7 @@ An array of `translation` objects for rendering ranges of amino acids beneath th
 direction is required: 1 (FWD) or -1 (REV).
 
 ```js
-[
+translations = [
   { start: 0, end: 90, direction: 1 }, // [0, 90)
   { start: 191, end: 522, direction: -1 },
 ];
@@ -164,23 +166,20 @@ direction is required: 1 (FWD) or -1 (REV).
 
 #### `enzymes (=[])`
 
-An array of restriction enzyme names whose recognition sites should be shown. Example: `["PstI", "EcoRI"]`. This is
-case-insensitive. The list of supported enzymes is in [src/utils/enzymes.js](src/utils/enzymes.js).
-
-#### `enzymesCustom (={})`
-
-Unsupported enzymes can also be passed through an object where the keys are the enzymes' names and the values are the
-enzymes. Additionally, if a highlightColor is passed the recognition site will be highlighted with the appropriate color.
+An array of restriction enzymes whose recognition sites should be shown. A list of pre-defined enzymes in [src/utils/enzymes.js](src/utils/enzymes.js) can be referenced by name. Example:
 
 ```js
-{
-  Cas9: {
+enzymes = [
+  "EcoRI",
+  "PstI",
+  {
+    name: "Cas9",
     rseq: "NGG", // recognition sequence
     fcut: 0, // cut index on FWD strand, relative to start of rseq
     rcut: 1, // cut index on REV strand, relative to start of rseq
-    highlightColor: "#D7E5F0" // highlight recognition site with color
-  }
-}
+    color: "#D7E5F0", // color to highlight recognition site with
+  },
+];
 ```
 
 #### `zoom (={ linear: 50, circular: 0 })`
@@ -192,7 +191,7 @@ How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`viewer`).
 An array of colors to use for annotations, translations, and highlights. Defaults to:
 
 ```js
-[
+colors = [
   "#9DEAED", // cyan
   "#8FDE8C", // green
   "#CFF283", // light green

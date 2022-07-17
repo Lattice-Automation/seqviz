@@ -1,5 +1,5 @@
 import { CutSite, Enzyme } from "../elements";
-import enzymes from "./enzymes";
+import presetEnzymes from "./enzymes";
 import { reverseComplement } from "./parser";
 import { createRegex } from "./search";
 
@@ -8,35 +8,41 @@ import { createRegex } from "./search";
  *
  * This is slow enough to impact rendering so shouldn't be ran on each prop change.
  */
-export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: string]: Enzyme } = {}): CutSite[] => {
+export default (
+  seq: string,
+  enzymes: (Enzyme | string)[] = [],
+  enzymesCustom: { [key: string]: Enzyme } = {}
+): CutSite[] => {
   const seqToCut = seq + seq;
 
-  let enzymeNames: string[] = enzymeList.filter(e => !!enzymes[e]).concat(Object.keys(enzymesCustom));
-  enzymeNames = Array.from(new Set(enzymeNames));
+  // find all the cut sites, deduplicate by index+direction of each cut-site
+  const cutSites = enzymes
+    // if it's a string, assume it's an enzyme name in the pre-defined enzyme list
+    .map(e => (typeof e === "string" ? presetEnzymes[e.toLowerCase()] : e))
+    // filter out enzyme names that were wrong
+    .filter(e => e)
+    // add in custom enzymes
+    .concat(Object.values(enzymesCustom))
+    // build up cut-sites
+    .reduce((acc: { [key: string]: CutSite }, enzyme: Enzyme) => {
+      // search for cut sites for this enzyme
+      findCutSites(enzyme, seqToCut)
+        // filter out cut sites that that only start/end at 0-index. I no longer remember what this was for.
+        .filter(c => !(c.fcut === 0 && c.rcut === 0))
+        // modulo the start/end and add an id to each cut-site. this could/should be in `findCutSites`
+        .map(c => ({
+          ...c,
+          end: c.end % seq.length,
+          fcut: c.fcut % seq.length,
+          id: `${enzyme.name}-${enzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
+          rcut: c.rcut % seq.length,
+          start: c.start % seq.length,
+        }))
+        // deduplicate so there's only one enzyme per index
+        .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
 
-  // find all the cut sites for the given row
-  const cutSites = enzymeNames.reduce((acc: { [key: string]: CutSite }, enzymeName: string) => {
-    // TODO: if name were on the enzyme this wouldn't be necessary
-    const currEnzyme: Enzyme = enzymesCustom[enzymeName] || enzymes[enzymeName];
-
-    // search for cut sites for this enzyme
-    findCutSites(currEnzyme, seqToCut, enzymeName)
-      // filter out cut sites that that only start/end at 0-index. I no longer remember what this was for.
-      .filter(c => !(c.fcut === 0 && c.rcut === 0))
-      // modulo the start/end and add an id to each cut-site
-      .map(c => ({
-        ...c,
-        end: c.end % seq.length,
-        fcut: c.fcut % seq.length,
-        id: `${enzymeName}-${currEnzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
-        rcut: c.rcut % seq.length,
-        start: c.start % seq.length,
-      }))
-      // deduplicate so there's only one enzyme per index
-      .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
-
-    return acc;
-  }, {});
+      return acc;
+    }, {});
 
   return Object.values(cutSites);
 };
@@ -46,14 +52,10 @@ export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: s
  *
  * Exported for testing.
  */
-export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): CutSite[] => {
+export const findCutSites = (enzyme: Enzyme, seq: string): CutSite[] => {
   // get the recognitionSite, fcut, and rcut
   let { fcut, rcut, rseq } = enzyme;
-  if (!rseq) {
-    ({ fcut, rcut, rseq } = enzymes[enzymeName]);
-  }
-
-  const cutSiteIndices: CutSite[] = [];
+  const cutSites: CutSite[] = [];
 
   // Find matches on the top/forward sequence.
   const matcher = createRegex(rseq, "dna");
@@ -61,13 +63,13 @@ export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): C
   while (result) {
     // add the cut site index, after correcting for actual cut site index
     const index = result.index;
-    cutSiteIndices.push({
+    cutSites.push({
       color: enzyme.color || "",
       direction: 1,
       end: index + rseq.length,
       fcut: index + fcut,
       id: "",
-      name: enzymeName,
+      name: enzyme.name,
       rcut: index + rcut,
       start: index,
     });
@@ -80,13 +82,13 @@ export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): C
   while (result) {
     // same as above but correcting for the new reverse complement indexes
     const index = result.index;
-    cutSiteIndices.push({
+    cutSites.push({
       color: enzyme.color || "",
       direction: -1,
       end: index + rseq.length,
       fcut: index + rseq.length - rcut,
       id: "",
-      name: enzymeName,
+      name: enzyme.name,
       rcut: index + rseq.length - fcut,
       start: index,
     });

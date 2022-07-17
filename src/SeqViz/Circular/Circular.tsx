@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, Coor, CutSite, Highlight, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
+import { Annotation, Coor, CutSite, Highlight, InputRefFuncType, Primer, Range, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { stackElements } from "../elementsToRows";
@@ -41,7 +41,7 @@ export interface CircularProps {
   onUnmount: (id: string) => void;
   primers: Primer[];
   radius: number;
-  search: Ranged[];
+  search: Range[];
   selection: SelectionType;
   seq: string;
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
