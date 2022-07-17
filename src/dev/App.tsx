@@ -23,18 +23,20 @@ export const App = () => {
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [],
     enzymesCustom: {
-      bottomStrand: {
+      test: {
         fcut: 0,
-        color: "#D7E5F0",
-        rcut: 1,
-
-        rseq: "gctag" /* pass in color */,
+        rcut: 0,
+        rseq: "agat" /* pass in color */,
       },
-      topStrand: {
-        fcut: 0,
-        rcut: 1,
-        rseq: "gatac", // cut index on REV strand, relative to start of rseq - pass in negative offset
-        color: "red" /* pass in color */,
+      test2: {
+        fcut: 3,
+        rcut: 3,
+        rseq: "catc", // cut index on REV strand, relative to start of rseq - pass in negative offset
+      },
+      test3: {
+        fcut: 2,
+        rcut: 3,
+        rseq: "ctat", // cut index on REV strand, relative to start of rseq - pass in negative offset
       },
     },
     onSearch: (results: Ranged[]) => {

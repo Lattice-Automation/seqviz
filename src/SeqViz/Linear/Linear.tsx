@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, ColorRange, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
+import { Annotation, CutSite, Highlight, InputRefFuncType, NamedRanged, Primer, Ranged, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { createLinearTranslations } from "../../utils/sequence";
@@ -20,14 +20,14 @@ export interface LinearProps {
   compSeq: string;
   cutSites: CutSite[];
   elementHeight: number;
-  highlightedRegions: ColorRange[];
+  highlightedRegions: Highlight[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
   name: string;
   onUnmount: (id: string) => void;
   primers: Primer[];
-  search: Ranged[];
+  search: NamedRanged[];
   selection: Selection;
   seq: string;
   seqFontSize: number;
@@ -76,6 +76,7 @@ class Linear extends React.Component<LinearProps> {
       cutSites,
       elementHeight,
       lineHeight,
+      highlightedRegions,
       onUnmount,
       search,
       seq,
@@ -137,10 +138,10 @@ class Linear extends React.Component<LinearProps> {
       ? createMultiRows(stackElements(reversePrimers, seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
-    const searchRows: Ranged[][] =
+    const searchRows: NamedRanged[][] =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
-    const highlightRows = createSingleRows(this.props.highlightedRegions, bpsPerBlock, arrSize);
+    const highlightRows = createSingleRows(highlightedRegions, bpsPerBlock, arrSize);
 
     const translationRows = translations.length
       ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ColorRange, InputRefFuncType, Ranged } from "../../../elements";
+import { HighlightProp, InputRefFuncType, Ranged } from "../../../elements";
 import randomid from "../../../utils/randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -9,7 +9,7 @@ interface FindProps {
   filteredRows: Ranged[];
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
-  highlightedRegions: ColorRange[];
+  highlightedRegions: HighlightProp[];
   indexYDiff: number;
   inputRef: InputRefFuncType;
   lastBase: number;

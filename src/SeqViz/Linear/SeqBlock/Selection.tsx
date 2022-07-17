@@ -53,6 +53,7 @@ class Edges extends React.PureComponent<EdgesProps> {
     if (startEdge === null && lastEdge === null) {
       return null;
     }
+
     if (startEdge === null) {
       startEdge = lastEdge;
       lastEdge = null;
@@ -68,9 +69,10 @@ class Edges extends React.PureComponent<EdgesProps> {
     // the x position of the second edge
     let secondEdgeX = x + width;
     if (startEdge !== null && lastEdge !== null) {
+      // in this scenario, the ending edge of the selection range is before the start
       if ((start > end && clockwise === true) || (end > start && clockwise === false)) {
         secondEdgeX = x - width;
-      } // in this scenario, the ending edge of the selection range is before the start
+      }
     }
 
     // for when it starts on the first bp of the next SeqBlock
@@ -79,7 +81,7 @@ class Edges extends React.PureComponent<EdgesProps> {
     }
 
     /* handling case where cursor is rendered on each line */
-    if (!startEdge && !lastEdge) {
+    if (startEdge === null && lastEdge === null) {
       return null;
     }
 
@@ -98,8 +100,8 @@ class Edges extends React.PureComponent<EdgesProps> {
 
     return (
       <g className="la-vz-linear-sel-edges">
-        {startEdge ? <rect {...rect} x={wide ? x - 1 : x} /> : null}
-        {lastEdge ? <rect {...rect} x={wide ? secondEdgeX - 1 : secondEdgeX} /> : null}
+        {startEdge !== null && <rect {...rect} x={wide ? x - 1 : x} />}
+        {lastEdge !== null && <rect {...rect} x={wide ? secondEdgeX - 1 : secondEdgeX} />}
       </g>
     );
   }

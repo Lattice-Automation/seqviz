@@ -30,6 +30,7 @@ export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: s
         end: c.end % seq.length,
         fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
         rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
+        recogStart: c.recogStart % seq.length,
         recogEnd: c.recogEnd % seq.length,
         start: c.start % seq.length,
       }))

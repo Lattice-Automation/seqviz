@@ -1,14 +1,23 @@
 import * as React from "react";
 
-import { Annotation, ColorRange, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../../elements";
+import {
+  Annotation,
+  CutSite,
+  HighlightProp,
+  InputRefFuncType,
+  Primer,
+  Ranged,
+  Size,
+  Translation,
+} from "../../../elements";
 import { Selection as SelectionType } from "../../handlers/selection";
-import { AnnotationRows } from "./AnnotationRows";
+import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
 import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
-import TranslationRows, { Translation } from "./Translations";
+import TranslationRows from "./Translations";
 
 export type FindXAndWidthType = (
   n1?: number | null,
@@ -30,7 +39,7 @@ interface SeqBlockProps {
   firstBase: number;
   forwardPrimerRows: Primer[];
   fullSeq: string;
-  highlightedRegions: ColorRange[];
+  highlightedRegions: HighlightProp[];
   id: string;
   inputRef: InputRefFuncType;
   key: string;
@@ -154,14 +163,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   bpColorLookup = (bp: string, i: number) => {
     const { bpColors, firstBase } = this.props;
 
-    if (!bpColors) {
-      return;
-    }
-
-    const color =
-      bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || bpColors[i + firstBase] || null;
-
-    return color;
+    if (!bpColors) return;
+    return bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || bpColors[i + firstBase] || null;
   };
 
   render() {
@@ -286,6 +289,19 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         onMouseMove={mouseEvent}
         onMouseUp={mouseEvent}
       >
+        {showIndex && (
+          <IndexRow
+            charWidth={charWidth}
+            findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            lastBase={lastBase}
+            seq={seq}
+            showIndex={showIndex}
+            size={size}
+            transform={`translate(0, ${indexRowYDiff})`}
+            zoom={this.props.zoom}
+          />
+        )}
         <Selection.Block
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
@@ -304,6 +320,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           selectEdgeHeight={selectEdgeHeight}
           zoom={zoom.linear}
         />
+
         <Find
           compYDiff={compYDiff}
           filteredRows={filteredSearchRows}
@@ -377,20 +394,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             onUnmount={onUnmount}
           />
         )}
-        {showIndex && (
-          <IndexRow
-            charWidth={charWidth}
-            findXAndWidth={this.findXAndWidth}
-            firstBase={firstBase}
-            lastBase={lastBase}
-            seq={seq}
-            showIndex={showIndex}
-            size={size}
-            transform={`translate(0, ${indexRowYDiff})`}
-            zoom={this.props.zoom}
-          />
-        )}
-        {zoomed ? (
+        {zoomed && (
           <CutSiteRow
             charWidth={charWidth}
             cutSiteRows={cutSiteRows}
@@ -403,7 +407,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             yDiff={cutSiteYDiff}
             zoom={this.props.zoom}
           />
-        ) : null}
+        )}
         {zoomed ? (
           <text {...textProps} id={id} y={indexYDiff}>
             {seq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
@@ -414,7 +418,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             {compSeq.split("").map((bp, i) => this.seqTextSpan(bp, i))}
           </text>
         ) : null}
-
         <Find
           {...this.props}
           compYDiff={compYDiff}

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { ColorRange, Coor, InputRefFuncType, Ranged } from "../../elements";
+import { Coor, HighlightProp, InputRefFuncType, Ranged } from "../../elements";
 
 interface FindProps {
   center: Coor;
@@ -17,7 +17,7 @@ interface FindProps {
     sweepFWD?: boolean;
   }) => string;
   getRotation: (index: number) => string;
-  highlightedRegions: ColorRange[];
+  highlightedRegions: HighlightProp[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   onUnmount: unknown;
