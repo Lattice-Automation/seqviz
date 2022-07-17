@@ -1,4 +1,4 @@
-import { NamedRanged, SeqType } from "../elements";
+import { NameRange, SeqType } from "../elements";
 import { complement } from "./parser";
 import { getAlphabet, nucleotides, reverse } from "./sequence";
 
@@ -6,7 +6,7 @@ import { getAlphabet, nucleotides, reverse } from "./sequence";
  * Search the seq in the forward and reverse complement strands.
  * Return all matched regions. Accounts for abiguous BP encodings and allows for mismatches
  */
-export default (query: string, mismatch = 0, seq = "", seqType: SeqType): NamedRanged[] => {
+export default (query: string, mismatch = 0, seq = "", seqType: SeqType): NameRange[] => {
   if (!query || !query.length || !seq || !seq.length) {
     return [];
   }
@@ -49,7 +49,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean, 
   const regex = createRegex(query, seqType);
 
   let match = regex.exec(subject);
-  const results: NamedRanged[] = [];
+  const results: NameRange[] = [];
   while (match) {
     const start = match.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
@@ -71,7 +71,7 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean, 
 const searchWithMismatch = (query: string, subject: string, mismatch: number, fwd: boolean, seqType: SeqType) => {
   const alphabet = getAlphabet(seqType);
 
-  const results: NamedRanged[] = [];
+  const results: NameRange[] = [];
   for (let i = 0; i < subject.length - query.length; i += 1) {
     let missed = 0;
 

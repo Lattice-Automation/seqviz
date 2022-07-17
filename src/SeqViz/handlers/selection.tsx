@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Ranged } from "../../elements";
+import { Range } from "../../elements";
 import { calcGC, calcTm } from "../../utils/sequence";
 import { WithEventsProps } from "./events";
 
@@ -11,7 +11,7 @@ export interface Selection {
   clockwise: boolean;
   color?: string;
   direction?: number;
-  element?: Ranged;
+  element?: Range;
   end: number;
   gc?: number;
   length?: number;

@@ -4,7 +4,7 @@ import digest, { findCutSites } from "./digest";
 describe("Digest", () => {
   interface test {
     args: {
-      enzymeList?: string[];
+      enzymes?: (Enzyme | string)[];
       enzymesCustom?: { [key: string]: Enzyme };
       seq: string;
     };
@@ -15,7 +15,7 @@ describe("Digest", () => {
   const tests: test[] = [
     {
       args: {
-        enzymeList: ["AatII"],
+        enzymes: ["AatII"],
         seq: "....GACGTC....",
       },
       cutSites: [
@@ -46,6 +46,7 @@ describe("Digest", () => {
       args: {
         enzymesCustom: {
           custom: {
+            name: "custom",
             fcut: 5,
             rcut: 1,
             rseq: "GACGTC",
@@ -87,10 +88,10 @@ describe("Digest", () => {
     {
       args: {
         // AatII is the same enzyme as "custom"
-        enzymeList: ["AatII", "AatII"],
-
+        enzymes: ["AatII", "AatII"],
         enzymesCustom: {
           custom: {
+            name: "custom",
             fcut: 5,
             rcut: 1,
             rseq: "GACGTC",
@@ -122,11 +123,47 @@ describe("Digest", () => {
       ],
       name: "dedupe enzymes",
     },
+    {
+      args: {
+        enzymes: [
+          {
+            name: "custom",
+            fcut: 5,
+            rcut: 1,
+            rseq: "GACGTC",
+          },
+        ],
+        seq: "....GACGTC....",
+      },
+      cutSites: [
+        {
+          color: "",
+          direction: 1,
+          end: 10,
+          fcut: 9,
+          id: "custom-GACGTC-23-fwd",
+          name: "custom",
+          rcut: 5,
+          start: 4,
+        },
+        {
+          color: "",
+          direction: -1,
+          end: 10,
+          fcut: 9,
+          id: "custom-GACGTC-23-rev",
+          name: "custom",
+          rcut: 5,
+          start: 4,
+        },
+      ],
+      name: "cuts with custom enzyme object",
+    },
   ];
 
   tests.forEach(t => {
     it(t.name, () => {
-      const cutSites = digest(t.args.seq, t.args.enzymeList, t.args.enzymesCustom);
+      const cutSites = digest(t.args.seq, t.args.enzymes, t.args.enzymesCustom);
       expect(cutSites).toMatchObject(t.cutSites);
     });
   });
@@ -136,7 +173,6 @@ describe("FindCutSites", () => {
   interface test {
     args: {
       enzyme: Enzyme;
-      enzymeName: string;
       seq: string;
     };
     cutSites: CutSite[];
@@ -147,12 +183,12 @@ describe("FindCutSites", () => {
     {
       args: {
         enzyme: {
+          name: "eco",
           color: "gray",
           fcut: 1,
           rcut: 2,
           rseq: "atgc",
         },
-        enzymeName: "eco",
         seq: "....atgc....",
       },
       cutSites: [
@@ -173,11 +209,11 @@ describe("FindCutSites", () => {
       args: {
         enzyme: {
           color: "gray",
+          name: "eco",
           fcut: 1,
           rcut: 2,
           rseq: "atgc",
         },
-        enzymeName: "eco",
         seq: "....gcatdf....",
       },
       cutSites: [
@@ -197,11 +233,11 @@ describe("FindCutSites", () => {
     {
       args: {
         enzyme: {
+          name: "BsaI",
           fcut: 7,
           rcut: 11,
           rseq: "GGTCTCNNNNN",
         },
-        enzymeName: "BsaI",
         seq: "AAAAAGGTCTCAAAAAAAAAAAAAAAAA",
       },
       cutSites: [
@@ -222,7 +258,7 @@ describe("FindCutSites", () => {
 
   tests.forEach(t => {
     it(t.name, () => {
-      expect(findCutSites(t.args.enzyme, t.args.seq, t.args.enzymeName)).toEqual(t.cutSites);
+      expect(findCutSites(t.args.enzyme, t.args.seq)).toEqual(t.cutSites);
     });
   });
 });

@@ -24,1208 +24,1449 @@ import { Enzyme } from "../elements";
  * ```
  */
 const enzymes: { [key: string]: Enzyme } = {
-  AatII: {
+  aatii: {
     fcut: 5,
+    name: "AatII",
     rcut: 1,
     rseq: "GACGTC",
   },
-  AbaSI: {
+  abasi: {
     fcut: 14,
+    name: "AbaSI",
     rcut: 12,
     rseq: "hmCNNNNNNNNNNN",
   },
-  Acc65I: {
+  acc65i: {
     fcut: 1,
+    name: "Acc65I",
     rcut: 5,
     rseq: "GGTACC",
   },
-  AccI: {
+  acci: {
     fcut: 2,
+    name: "AccI",
     rcut: 4,
     rseq: "GTMKAC",
   },
-  AciI: {
+  acii: {
     fcut: 1,
+    name: "AciI",
     rcut: 3,
     rseq: "CCGC",
   },
-  AclI: {
+  acli: {
     fcut: 2,
+    name: "AclI",
     rcut: 4,
     rseq: "AACGTT",
   },
-  AcuI: {
+  acui: {
     fcut: 22,
+    name: "AcuI",
     rcut: 20,
     rseq: "CTGAAGNNNNNNNNNNNNNNNN",
   },
-  AfeI: {
+  afei: {
     fcut: 3,
+    name: "AfeI",
     rcut: 3,
     rseq: "AGCGCT",
   },
-  AflII: {
+  aflii: {
     fcut: 1,
+    name: "AflII",
     rcut: 5,
     rseq: "CTTAAG",
   },
-  AflIII: {
+  afliii: {
     fcut: 1,
+    name: "AflIII",
     rcut: 5,
     rseq: "ACRYGT",
   },
-  AgeI: {
+  agei: {
     fcut: 1,
+    name: "AgeI",
     rcut: 5,
     rseq: "ACCGGT",
   },
-  AhdI: {
+  ahdi: {
     fcut: 6,
+    name: "AhdI",
     rcut: 5,
     rseq: "GACNNNNNGTC",
   },
-  AleI: {
+  alei: {
     fcut: 5,
+    name: "AleI",
     rcut: 5,
     rseq: "CACNNNNGTG",
   },
-  AluI: {
+  alui: {
     fcut: 2,
+    name: "AluI",
     rcut: 2,
     rseq: "AGCT",
   },
-  AlwI: {
+  alwi: {
     fcut: 9,
+    name: "AlwI",
     rcut: 10,
     rseq: "GGATCNNNNN",
   },
-  AlwNI: {
+  alwni: {
     fcut: 6,
+    name: "AlwNI",
     rcut: 3,
     rseq: "CAGNNNCTG",
   },
-  ApaI: {
+  apai: {
     fcut: 5,
+    name: "ApaI",
     rcut: 1,
     rseq: "GGGCCC",
   },
-  ApaLI: {
+  apali: {
     fcut: 1,
+    name: "ApaLI",
     rcut: 5,
     rseq: "GTGCAC",
   },
-  ApeKI: {
+  apeki: {
     fcut: 1,
+    name: "ApeKI",
     rcut: 4,
     rseq: "GCWGC",
   },
-  ApoI: {
+  apoi: {
     fcut: 1,
+    name: "ApoI",
     rcut: 5,
     rseq: "RAATTY",
   },
-  AscI: {
+  asci: {
     fcut: 2,
+    name: "AscI",
     rcut: 6,
     rseq: "GGCGCGCC",
   },
-  AseI: {
+  asei: {
     fcut: 2,
+    name: "AseI",
     rcut: 4,
     rseq: "ATTAAT",
   },
-  AsiSI: {
+  asisi: {
     fcut: 5,
+    name: "AsiSI",
     rcut: 3,
     rseq: "GCGATCGC",
   },
-  AvaI: {
+  avai: {
     fcut: 1,
+    name: "AvaI",
     rcut: 5,
     rseq: "CYCGRG",
   },
-  AvaII: {
+  avaii: {
     fcut: 1,
+    name: "AvaII",
     rcut: 4,
     rseq: "GGWCC",
   },
-  AvrII: {
+  avrii: {
     fcut: 1,
+    name: "AvrII",
     rcut: 5,
     rseq: "CCTAGG",
   },
-  BaeGI: {
+  baegi: {
     fcut: 5,
+    name: "BaeGI",
     rcut: 1,
     rseq: "GKGCMC",
   },
-  BaeI: {
+  baei: {
     fcut: 38,
+    name: "BaeI",
     rcut: 33,
     rseq: "NNNNNNNNNNNNNNNACNNNNGTAYCNNNNNNNNNNNN",
   },
-  BamHI: {
+  bamhi: {
     fcut: 1,
+    name: "BamHI",
     rcut: 5,
     rseq: "GGATCC",
   },
-  BanI: {
+  bani: {
     fcut: 1,
+    name: "BanI",
     rcut: 5,
     rseq: "GGYRCC",
   },
-  BanII: {
+  banii: {
     fcut: 5,
+    name: "BanII",
     rcut: 1,
     rseq: "GRGCYC",
   },
-  BbsI: {
+  bbsi: {
     fcut: 8,
+    name: "BbsI",
     rcut: 12,
     rseq: "GAAGACNNNNNN",
   },
-  BbvCI: {
+  bbvci: {
     fcut: 2,
+    name: "BbvCI",
     rcut: 5,
     rseq: "CCTCAGC",
   },
-  BbvI: {
+  bbvi: {
     fcut: 13,
+    name: "BbvI",
     rcut: 17,
     rseq: "GCAGCNNNNNNNNNNNN",
   },
-  BccI: {
+  bcci: {
     fcut: 9,
+    name: "BccI",
     rcut: 10,
     rseq: "CCATCNNNNN",
   },
-  BceAI: {
+  bceai: {
     fcut: 17,
+    name: "BceAI",
     rcut: 19,
     rseq: "ACGGCNNNNNNNNNNNNNN",
   },
-  BcgI: {
+  bcgi: {
     fcut: 36,
+    name: "BcgI",
     rcut: 34,
     rseq: "NNNNNNNNNNNNCGANNNNNNTGCNNNNNNNNNNNN",
   },
-  BciVI: {
+  bcivi: {
     fcut: 12,
+    name: "BciVI",
     rcut: 11,
     rseq: "GTATCCNNNNNN",
   },
-  BclI: {
+  bcli: {
     fcut: 1,
+    name: "BclI",
     rcut: 5,
     rseq: "TGATCA",
   },
-  BcoDI: {
+  bcodi: {
     fcut: 6,
+    name: "BcoDI",
     rcut: 10,
     rseq: "GTCTCNNNNN",
   },
-  BfaI: {
+  bfai: {
     fcut: 1,
+    name: "BfaI",
     rcut: 3,
     rseq: "CTAG",
   },
-  BfuAI: {
+  bfuai: {
     fcut: 10,
+    name: "BfuAI",
     rcut: 14,
     rseq: "ACCTGCNNNNNNNN",
   },
-  BglI: {
+  bgli: {
     fcut: 7,
+    name: "BglI",
     rcut: 4,
     rseq: "GCCNNNNNGGC",
   },
-  BglII: {
+  bglii: {
     fcut: 1,
+    name: "BglII",
     rcut: 5,
     rseq: "AGATCT",
   },
-  BlpI: {
+  blpi: {
     fcut: 2,
+    name: "BlpI",
     rcut: 5,
     rseq: "GCTNAGC",
   },
-  BmgBI: {
+  bmgbi: {
     fcut: 3,
+    name: "BmgBI",
     rcut: 3,
     rseq: "CACGTC",
   },
-  BmrI: {
+  bmri: {
     fcut: 11,
+    name: "BmrI",
     rcut: 10,
     rseq: "ACTGGGNNNNN",
   },
-  BmtI: {
+  bmti: {
     fcut: 5,
+    name: "BmtI",
     rcut: 1,
     rseq: "GCTAGC",
   },
-  BpmI: {
+  bpmi: {
     fcut: 22,
+    name: "BpmI",
     rcut: 20,
     rseq: "CTGGAGNNNNNNNNNNNNNNNN",
   },
-  Bpu10I: {
+  bpu10i: {
     fcut: 2,
+    name: "Bpu10I",
     rcut: 5,
     rseq: "CCTNAGC",
   },
-  BpuEI: {
+  bpuei: {
     fcut: 22,
+    name: "BpuEI",
     rcut: 20,
     rseq: "CTTGAGNNNNNNNNNNNNNNNN",
   },
-  BsaAI: {
+  bsaai: {
     fcut: 3,
+    name: "BsaAI",
     rcut: 3,
     rseq: "YACGTR",
   },
-  BsaBI: {
+  bsabi: {
     fcut: 5,
+    name: "BsaBI",
     rcut: 5,
     rseq: "GATNNNNATC",
   },
-  BsaHI: {
+  bsahi: {
     fcut: 2,
+    name: "BsaHI",
     rcut: 4,
     rseq: "GRCGYC",
   },
-  BsaI: {
+  bsai: {
     fcut: 7,
+    name: "BsaI",
     rcut: 11,
     rseq: "GGTCTCNNNNN",
   },
-  BsaJI: {
+  bsaji: {
     fcut: 1,
+    name: "BsaJI",
     rcut: 5,
     rseq: "CCNNGG",
   },
-  BsaWI: {
+  bsawi: {
     fcut: 1,
+    name: "BsaWI",
     rcut: 5,
     rseq: "WCCGGW",
   },
-  BsaXI: {
+  bsaxi: {
     fcut: 33,
+    name: "BsaXI",
     rcut: 30,
     rseq: "NNNNNNNNNNNNACNNNNNCTCCNNNNNNNNNN",
   },
-  BseRI: {
+  bseri: {
     fcut: 16,
+    name: "BseRI",
     rcut: 14,
     rseq: "GAGGAGNNNNNNNNNN",
   },
-  BseYI: {
+  bseyi: {
     fcut: 1,
+    name: "BseYI",
     rcut: 5,
     rseq: "CCCAGC",
   },
-  BsgI: {
+  bsgi: {
     fcut: 22,
+    name: "BsgI",
     rcut: 20,
     rseq: "GTGCAGNNNNNNNNNNNNNNNN",
   },
-  BsiEI: {
+  bsiei: {
     fcut: 4,
+    name: "BsiEI",
     rcut: 2,
     rseq: "CGRYCG",
   },
-  BsiHKAI: {
+  bsihkai: {
     fcut: 5,
+    name: "BsiHKAI",
     rcut: 1,
     rseq: "GWGCWC",
   },
-  BsiWI: {
+  bsiwi: {
     fcut: 1,
+    name: "BsiWI",
     rcut: 5,
     rseq: "CGTACG",
   },
-  BslI: {
+  bsli: {
     fcut: 7,
+    name: "BslI",
     rcut: 4,
     rseq: "CCNNNNNNNGG",
   },
-  BsmAI: {
+  bsmai: {
     fcut: 6,
+    name: "BsmAI",
     rcut: 10,
     rseq: "GTCTCNNNNN",
   },
-  BsmBI: {
+  bsmbi: {
     fcut: 7,
+    name: "BsmBI",
     rcut: 11,
     rseq: "CGTCTCNNNNN",
   },
-  BsmFI: {
+  bsmfi: {
     fcut: 15,
+    name: "BsmFI",
     rcut: 19,
     rseq: "GGGACNNNNNNNNNNNNNN",
   },
-  BsmI: {
+  bsmi: {
     fcut: 7,
+    name: "BsmI",
     rcut: 5,
     rseq: "GAATGCN",
   },
-  BsoBI: {
+  bsobi: {
     fcut: 1,
+    name: "BsoBI",
     rcut: 5,
     rseq: "CYCGRG",
   },
-  Bsp1286I: {
+  bsp1286i: {
     fcut: 5,
+    name: "Bsp1286I",
     rcut: 1,
     rseq: "GDGCHC",
   },
-  BspCNI: {
+  bspcni: {
     fcut: 14,
+    name: "BspCNI",
     rcut: 12,
     rseq: "CTCAGNNNNNNNNN",
   },
-  BspDI: {
+  bspdi: {
     fcut: 2,
+    name: "BspDI",
     rcut: 4,
     rseq: "ATCGAT",
   },
-  BspEI: {
+  bspei: {
     fcut: 1,
+    name: "BspEI",
     rcut: 5,
     rseq: "TCCGGA",
   },
-  BspHI: {
+  bsphi: {
     fcut: 1,
+    name: "BspHI",
     rcut: 5,
     rseq: "TCATGA",
   },
-  BspMI: {
+  bspmi: {
     fcut: 10,
+    name: "BspMI",
     rcut: 14,
     rseq: "ACCTGCNNNNNNNN",
   },
-  BspQI: {
+  bspqi: {
     fcut: 8,
+    name: "BspQI",
     rcut: 11,
     rseq: "GCTCTTCNNNN",
   },
-  BsrBI: {
+  bsrbi: {
     fcut: 3,
+    name: "BsrBI",
     rcut: 3,
     rseq: "CCGCTC",
   },
-  BsrDI: {
+  bsrdi: {
     fcut: 8,
+    name: "BsrDI",
     rcut: 6,
     rseq: "GCAATGNN",
   },
-  BsrFI: {
+  bsrfi: {
     fcut: 1,
+    name: "BsrFI",
     rcut: 5,
     rseq: "RCCGGY",
   },
-  BsrGI: {
+  bsrgi: {
     fcut: 1,
+    name: "BsrGI",
     rcut: 5,
     rseq: "TGTACA",
   },
-  BsrI: {
+  bsri: {
     fcut: 6,
+    name: "BsrI",
     rcut: 4,
     rseq: "ACTGGN",
   },
-  BssHII: {
+  bsshii: {
     fcut: 1,
+    name: "BssHII",
     rcut: 5,
     rseq: "GCGCGC",
   },
-  BssSI: {
+  bsssi: {
     fcut: 1,
+    name: "BssSI",
     rcut: 5,
     rseq: "CACGAG",
   },
-  BstAPI: {
+  bstapi: {
     fcut: 7,
+    name: "BstAPI",
     rcut: 4,
     rseq: "GCANNNNNTGC",
   },
-  BstBI: {
+  bstbi: {
     fcut: 2,
+    name: "BstBI",
     rcut: 4,
     rseq: "TTCGAA",
   },
-  BstEII: {
+  bsteii: {
     fcut: 1,
+    name: "BstEII",
     rcut: 6,
     rseq: "GGTNACC",
   },
-  BstNI: {
+  bstni: {
     fcut: 2,
+    name: "BstNI",
     rcut: 3,
     rseq: "CCWGG",
   },
-  BstUI: {
+  bstui: {
     fcut: 2,
+    name: "BstUI",
     rcut: 2,
     rseq: "CGCG",
   },
-  BstXI: {
+  bstxi: {
     fcut: 8,
+    name: "BstXI",
     rcut: 4,
     rseq: "CCANNNNNNTGG",
   },
-  BstYI: {
+  bstyi: {
     fcut: 1,
+    name: "BstYI",
     rcut: 5,
     rseq: "RGATCY",
   },
-  BstZ17I: {
+  bstz17i: {
     fcut: 3,
+    name: "BstZ17I",
     rcut: 3,
     rseq: "GTATAC",
   },
-  Bsu36I: {
+  bsu36i: {
     fcut: 2,
+    name: "Bsu36I",
     rcut: 5,
     rseq: "CCTNAGG",
   },
-  BtgI: {
+  btgi: {
     fcut: 1,
+    name: "BtgI",
     rcut: 5,
     rseq: "CCRYGG",
   },
-  BtgZI: {
+  btgzi: {
     fcut: 16,
+    name: "BtgZI",
     rcut: 20,
     rseq: "GCGATGNNNNNNNNNNNNNN",
   },
-  BtsCI: {
+  btsci: {
     fcut: 7,
+    name: "BtsCI",
     rcut: 5,
     rseq: "GGATGNN",
   },
-  BtsI: {
+  btsi: {
     fcut: 8,
+    name: "BtsI",
     rcut: 6,
     rseq: "GCAGTGNN",
   },
-  BtsIMutI: {
+  btsimuti: {
     fcut: 7,
+    name: "BtsIMutI",
     rcut: 5,
     rseq: "CAGTGNN",
   },
-  Cac8I: {
+  cac8i: {
     fcut: 3,
+    name: "Cac8I",
     rcut: 3,
     rseq: "GCNNGC",
   },
-  ClaI: {
+  clai: {
     fcut: 2,
+    name: "ClaI",
     rcut: 4,
     rseq: "ATCGAT",
   },
-  CspCI: {
+  cspci: {
     fcut: 37,
+    name: "CspCI",
     rcut: 35,
     rseq: "NNNNNNNNNNNNNCAANNNNNGTGGNNNNNNNNNNNN",
   },
-  CviAII: {
+  cviaii: {
     fcut: 1,
+    name: "CviAII",
     rcut: 3,
     rseq: "CATG",
   },
-  "CviKI-1": {
+  "cviki-1": {
     fcut: 2,
+    name: "CviKI-1",
     rcut: 2,
     rseq: "RGCY",
   },
-  CviQI: {
+  cviqi: {
     fcut: 1,
+    name: "CviQI",
     rcut: 3,
     rseq: "GTAC",
   },
-  DdeI: {
+  ddei: {
     fcut: 1,
+    name: "DdeI",
     rcut: 4,
     rseq: "CTNAG",
   },
-  DpnI: {
+  dpni: {
     fcut: 3,
+    name: "DpnI",
     rcut: 3,
     rseq: "GmATC",
   },
-  DpnII: {
+  dpnii: {
     fcut: 0,
+    name: "DpnII",
     rcut: 4,
     rseq: "GATC",
   },
-  DraI: {
+  drai: {
     fcut: 3,
+    name: "DraI",
     rcut: 3,
     rseq: "TTTAAA",
   },
-  DraIII: {
+  draiii: {
     fcut: 6,
+    name: "DraIII",
     rcut: 3,
     rseq: "CACNNNGTG",
   },
-  DrdI: {
+  drdi: {
     fcut: 7,
+    name: "DrdI",
     rcut: 5,
     rseq: "GACNNNNNNGTC",
   },
-  EaeI: {
+  eaei: {
     fcut: 1,
+    name: "EaeI",
     rcut: 5,
     rseq: "YGGCCR",
   },
-  EagI: {
+  eagi: {
     fcut: 1,
+    name: "EagI",
     rcut: 5,
     rseq: "CGGCCG",
   },
-  EarI: {
+  eari: {
     fcut: 7,
+    name: "EarI",
     rcut: 10,
     rseq: "CTCTTCNNNN",
   },
-  EciI: {
+  ecii: {
     fcut: 17,
+    name: "EciI",
     rcut: 15,
     rseq: "GGCGGANNNNNNNNNNN",
   },
-  Eco53kI: {
+  eco53ki: {
     fcut: 3,
+    name: "Eco53kI",
     rcut: 3,
     rseq: "GAGCTC",
   },
-  EcoNI: {
+  econi: {
     fcut: 5,
+    name: "EcoNI",
     rcut: 6,
     rseq: "CCTNNNNNAGG",
   },
-  EcoO109I: {
+  ecoo109i: {
     fcut: 2,
+    name: "EcoO109I",
     rcut: 5,
     rseq: "RGGNCCY",
   },
-  EcoRI: {
+  ecori: {
     fcut: 1,
+    name: "EcoRI",
     rcut: 5,
     rseq: "GAATTC",
   },
-  EcoRV: {
+  ecorv: {
     fcut: 3,
+    name: "EcoRV",
     rcut: 3,
     rseq: "GATATC",
   },
-  Esp3I: {
+  esp3i: {
     fcut: 7,
+    name: "Esp3I",
     rcut: 11,
     rseq: "CGTCTCNNNNN",
   },
-  FatI: {
+  fati: {
     fcut: 0,
+    name: "FatI",
     rcut: 4,
     rseq: "CATG",
   },
-  FauI: {
+  faui: {
     fcut: 9,
+    name: "FauI",
     rcut: 11,
     rseq: "CCCGCNNNNNN",
   },
-  Fnu4HI: {
+  fnu4hi: {
     fcut: 2,
+    name: "Fnu4HI",
     rcut: 3,
     rseq: "GCNGC",
   },
-  FokI: {
+  foki: {
     fcut: 14,
+    name: "FokI",
     rcut: 18,
     rseq: "GGATGNNNNNNNNNNNNN",
   },
-  FseI: {
+  fsei: {
     fcut: 6,
+    name: "FseI",
     rcut: 2,
     rseq: "GGCCGGCC",
   },
-  FspEI: {
+  fspei: {
     fcut: 15,
+    name: "FspEI",
     rcut: 19,
     rseq: "CmCNNNNNNNNNNNNNNNN",
   },
-  FspI: {
+  fspi: {
     fcut: 3,
+    name: "FspI",
     rcut: 3,
     rseq: "TGCGCA",
   },
-  HaeII: {
+  haeii: {
     fcut: 5,
+    name: "HaeII",
     rcut: 1,
     rseq: "RGCGCY",
   },
-  HaeIII: {
+  haeiii: {
     fcut: 2,
+    name: "HaeIII",
     rcut: 2,
     rseq: "GGCC",
   },
-  HgaI: {
+  hgai: {
     fcut: 10,
+    name: "HgaI",
     rcut: 15,
     rseq: "GACGCNNNNNNNNNN",
   },
-  HhaI: {
+  hhai: {
     fcut: 3,
+    name: "HhaI",
     rcut: 1,
     rseq: "GCGC",
   },
-  HinP1I: {
+  hinp1i: {
     fcut: 1,
+    name: "HinP1I",
     rcut: 3,
     rseq: "GCGC",
   },
-  HincII: {
+  hincii: {
     fcut: 3,
+    name: "HincII",
     rcut: 3,
     rseq: "GTYRAC",
   },
-  HindIII: {
+  hindiii: {
     fcut: 1,
+    name: "HindIII",
     rcut: 5,
     rseq: "AAGCTT",
   },
-  HinfI: {
+  hinfi: {
     fcut: 1,
+    name: "HinfI",
     rcut: 4,
     rseq: "GANTC",
   },
-  HpaI: {
+  hpai: {
     fcut: 3,
+    name: "HpaI",
     rcut: 3,
     rseq: "GTTAAC",
   },
-  HpaII: {
+  hpaii: {
     fcut: 1,
+    name: "HpaII",
     rcut: 3,
     rseq: "CCGG",
   },
-  HphI: {
+  hphi: {
     fcut: 13,
+    name: "HphI",
     rcut: 12,
     rseq: "GGTGANNNNNNNN",
   },
-  Hpy166II: {
+  hpy166ii: {
     fcut: 3,
+    name: "Hpy166II",
     rcut: 3,
     rseq: "GTNNAC",
   },
-  Hpy188I: {
+  hpy188i: {
     fcut: 3,
+    name: "Hpy188I",
     rcut: 2,
     rseq: "TCNGA",
   },
-  Hpy188III: {
+  hpy188iii: {
     fcut: 2,
+    name: "Hpy188III",
     rcut: 4,
     rseq: "TCNNGA",
   },
-  Hpy99I: {
+  hpy99i: {
     fcut: 5,
+    name: "Hpy99I",
     rcut: 0,
     rseq: "CGWCG",
   },
-  HpyAV: {
+  hpyav: {
     fcut: 11,
+    name: "HpyAV",
     rcut: 10,
     rseq: "CCTTCNNNNNN",
   },
-  HpyCH4III: {
+  hpych4iii: {
     fcut: 3,
+    name: "HpyCH4III",
     rcut: 2,
     rseq: "ACNGT",
   },
-  HpyCH4IV: {
+  hpych4iv: {
     fcut: 1,
+    name: "HpyCH4IV",
     rcut: 3,
     rseq: "ACGT",
   },
-  HpyCH4V: {
+  hpych4v: {
     fcut: 2,
+    name: "HpyCH4V",
     rcut: 2,
     rseq: "TGCA",
   },
-  "I-CeuI": {
+  "i-ceui": {
     fcut: 18,
+    name: "I-CeuI",
     rcut: 14,
     rseq: "TAACTATAACGGTCCTAAGGTAGCGAA",
   },
-  "I-SceI": {
+  "i-scei": {
     fcut: 9,
+    name: "I-SceI",
     rcut: 5,
     rseq: "TAGGGATAACAGGGTAAT",
   },
-  KasI: {
+  kasi: {
     fcut: 1,
+    name: "KasI",
     rcut: 5,
     rseq: "GGCGCC",
   },
-  KpnI: {
+  kpni: {
     fcut: 5,
+    name: "KpnI",
     rcut: 1,
     rseq: "GGTACC",
   },
-  LpnPI: {
+  lpnpi: {
     fcut: 15,
+    name: "LpnPI",
     rcut: 19,
     rseq: "CmCDGNNNNNNNNNNNNNN",
   },
-  MboI: {
+  mboi: {
     fcut: 0,
+    name: "MboI",
     rcut: 4,
     rseq: "GATC",
   },
-  MboII: {
+  mboii: {
     fcut: 13,
+    name: "MboII",
     rcut: 12,
     rseq: "GAAGANNNNNNNN",
   },
-  MfeI: {
+  mfei: {
     fcut: 1,
+    name: "MfeI",
     rcut: 5,
     rseq: "CAATTG",
   },
-  MluCI: {
+  mluci: {
     fcut: 0,
+    name: "MluCI",
     rcut: 4,
     rseq: "AATT",
   },
-  MluI: {
+  mlui: {
     fcut: 1,
+    name: "MluI",
     rcut: 5,
     rseq: "ACGCGT",
   },
-  MlyI: {
+  mlyi: {
     fcut: 10,
+    name: "MlyI",
     rcut: 10,
     rseq: "GAGTCNNNNN",
   },
-  MmeI: {
+  mmei: {
     fcut: 26,
+    name: "MmeI",
     rcut: 24,
     rseq: "TCCRACNNNNNNNNNNNNNNNNNNNN",
   },
-  MnlI: {
+  mnli: {
     fcut: 11,
+    name: "MnlI",
     rcut: 10,
     rseq: "CCTCNNNNNNN",
   },
-  MscI: {
+  msci: {
     fcut: 3,
+    name: "MscI",
     rcut: 3,
     rseq: "TGGCCA",
   },
-  MseI: {
+  msei: {
     fcut: 1,
+    name: "MseI",
     rcut: 3,
     rseq: "TTAA",
   },
-  MslI: {
+  msli: {
     fcut: 5,
+    name: "MslI",
     rcut: 5,
     rseq: "CAYNNNNRTG",
   },
-  MspA1I: {
+  mspa1i: {
     fcut: 3,
+    name: "MspA1I",
     rcut: 3,
     rseq: "CMGCKG",
   },
-  MspI: {
+  mspi: {
     fcut: 1,
+    name: "MspI",
     rcut: 3,
     rseq: "CCGG",
   },
-  MspJI: {
+  mspji: {
     fcut: 14,
+    name: "MspJI",
     rcut: 18,
     rseq: "mCNNRNNNNNNNNNNNNN",
   },
-  MwoI: {
+  mwoi: {
     fcut: 7,
+    name: "MwoI",
     rcut: 4,
     rseq: "GCNNNNNNNGC",
   },
-  NaeI: {
+  naei: {
     fcut: 3,
+    name: "NaeI",
     rcut: 3,
     rseq: "GCCGGC",
   },
-  NarI: {
+  nari: {
     fcut: 2,
+    name: "NarI",
     rcut: 4,
     rseq: "GGCGCC",
   },
-  NciI: {
+  ncii: {
     fcut: 2,
+    name: "NciI",
     rcut: 3,
     rseq: "CCSGG",
   },
-  NcoI: {
+  ncoi: {
     fcut: 1,
+    name: "NcoI",
     rcut: 5,
     rseq: "CCATGG",
   },
-  NdeI: {
+  ndei: {
     fcut: 2,
+    name: "NdeI",
     rcut: 4,
     rseq: "CATATG",
   },
-  NgoMIV: {
+  ngomiv: {
     fcut: 1,
+    name: "NgoMIV",
     rcut: 5,
     rseq: "GCCGGC",
   },
-  NheI: {
+  nhei: {
     fcut: 1,
+    name: "NheI",
     rcut: 5,
     rseq: "GCTAGC",
   },
-  NlaIII: {
+  nlaiii: {
     fcut: 4,
+    name: "NlaIII",
     rcut: 0,
     rseq: "CATG",
   },
-  NlaIV: {
+  nlaiv: {
     fcut: 3,
+    name: "NlaIV",
     rcut: 3,
     rseq: "GGNNCC",
   },
-  NmeAIII: {
+  nmeaiii: {
     fcut: 26,
+    name: "NmeAIII",
     rcut: 25,
     rseq: "GCCGAGNNNNNNNNNNNNNNNNNNNN",
   },
-  NotI: {
+  noti: {
     fcut: 2,
+    name: "NotI",
     rcut: 6,
     rseq: "GCGGCCGC",
   },
-  NruI: {
+  nrui: {
     fcut: 3,
+    name: "NruI",
     rcut: 3,
     rseq: "TCGCGA",
   },
-  NsiI: {
+  nsii: {
     fcut: 5,
+    name: "NsiI",
     rcut: 1,
     rseq: "ATGCAT",
   },
-  NspI: {
+  nspi: {
     fcut: 5,
+    name: "NspI",
     rcut: 1,
     rseq: "RCATGY",
   },
-  "PI-PspI": {
+  "pi-pspi": {
     fcut: 17,
+    name: "PI-PspI",
     rcut: 13,
     rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
   },
-  "PI-SceI": {
+  "pi-scei": {
     fcut: 15,
+    name: "PI-SceI",
     rcut: 11,
     rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
   },
-  PacI: {
+  paci: {
     fcut: 5,
+    name: "PacI",
     rcut: 3,
     rseq: "TTAATTAA",
   },
-  PaeR7I: {
+  paer7i: {
     fcut: 1,
+    name: "PaeR7I",
     rcut: 5,
     rseq: "CTCGAG",
   },
-  PciI: {
+  pcii: {
     fcut: 1,
+    name: "PciI",
     rcut: 5,
     rseq: "ACATGT",
   },
-  PflFI: {
+  pflfi: {
     fcut: 4,
+    name: "PflFI",
     rcut: 5,
     rseq: "GACNNNGTC",
   },
-  PflMI: {
+  pflmi: {
     fcut: 7,
+    name: "PflMI",
     rcut: 4,
     rseq: "CCANNNNNTGG",
   },
-  PleI: {
+  plei: {
     fcut: 9,
+    name: "PleI",
     rcut: 10,
     rseq: "GAGTCNNNNN",
   },
-  PluTI: {
+  pluti: {
     fcut: 5,
+    name: "PluTI",
     rcut: 1,
     rseq: "GGCGCC",
   },
-  PmeI: {
+  pmei: {
     fcut: 4,
+    name: "PmeI",
     rcut: 4,
     rseq: "GTTTAAAC",
   },
-  PmlI: {
+  pmli: {
     fcut: 3,
+    name: "PmlI",
     rcut: 3,
     rseq: "CACGTG",
   },
-  PpuMI: {
+  ppumi: {
     fcut: 2,
+    name: "PpuMI",
     rcut: 5,
     rseq: "RGGWCCY",
   },
-  PshAI: {
+  pshai: {
     fcut: 5,
+    name: "PshAI",
     rcut: 5,
     rseq: "GACNNNNGTC",
   },
-  PsiI: {
+  psii: {
     fcut: 3,
+    name: "PsiI",
     rcut: 3,
     rseq: "TTATAA",
   },
-  PspGI: {
+  pspgi: {
     fcut: 0,
+    name: "PspGI",
     rcut: 5,
     rseq: "CCWGG",
   },
-  PspOMI: {
+  pspomi: {
     fcut: 1,
+    name: "PspOMI",
     rcut: 5,
     rseq: "GGGCCC",
   },
-  PspXI: {
+  pspxi: {
     fcut: 2,
+    name: "PspXI",
     rcut: 6,
     rseq: "VCTCGAGB",
   },
-  PstI: {
+  psti: {
     fcut: 5,
+    name: "PstI",
     rcut: 1,
     rseq: "CTGCAG",
   },
-  PvuI: {
+  pvui: {
     fcut: 4,
+    name: "PvuI",
     rcut: 2,
     rseq: "CGATCG",
   },
-  PvuII: {
+  pvuii: {
     fcut: 3,
+    name: "PvuII",
     rcut: 3,
     rseq: "CAGCTG",
   },
-  RsaI: {
+  rsai: {
     fcut: 2,
+    name: "RsaI",
     rcut: 2,
     rseq: "GTAC",
   },
-  RsrII: {
+  rsrii: {
     fcut: 2,
+    name: "RsrII",
     rcut: 5,
     rseq: "CGGWCCG",
   },
-  SacI: {
+  saci: {
     fcut: 5,
+    name: "SacI",
     rcut: 1,
     rseq: "GAGCTC",
   },
-  SacII: {
+  sacii: {
     fcut: 4,
+    name: "SacII",
     rcut: 2,
     rseq: "CCGCGG",
   },
-  SalI: {
+  sali: {
     fcut: 1,
+    name: "SalI",
     rcut: 5,
     rseq: "GTCGAC",
   },
-  SapI: {
+  sapi: {
     fcut: 8,
+    name: "SapI",
     rcut: 11,
     rseq: "GCTCTTCNNNN",
   },
-  Sau3AI: {
+  sau3ai: {
     fcut: 0,
+    name: "Sau3AI",
     rcut: 4,
     rseq: "GATC",
   },
-  Sau96I: {
+  sau96i: {
     fcut: 1,
+    name: "Sau96I",
     rcut: 4,
     rseq: "GGNCC",
   },
-  SbfI: {
+  sbfi: {
     fcut: 6,
+    name: "SbfI",
     rcut: 2,
     rseq: "CCTGCAGG",
   },
-  ScaI: {
+  scai: {
     fcut: 3,
+    name: "ScaI",
     rcut: 3,
     rseq: "AGTACT",
   },
-  ScrFI: {
+  scrfi: {
     fcut: 2,
+    name: "ScrFI",
     rcut: 3,
     rseq: "CCNGG",
   },
-  SexAI: {
+  sexai: {
     fcut: 1,
+    name: "SexAI",
     rcut: 6,
     rseq: "ACCWGGT",
   },
-  SfaNI: {
+  sfani: {
     fcut: 10,
+    name: "SfaNI",
     rcut: 14,
     rseq: "GCATCNNNNNNNNN",
   },
-  SfcI: {
+  sfci: {
     fcut: 1,
+    name: "SfcI",
     rcut: 5,
     rseq: "CTRYAG",
   },
-  SfiI: {
+  sfii: {
     fcut: 8,
+    name: "SfiI",
     rcut: 5,
     rseq: "GGCCNNNNNGGCC",
   },
-  SfoI: {
+  sfoi: {
     fcut: 3,
+    name: "SfoI",
     rcut: 3,
     rseq: "GGCGCC",
   },
-  SgrAI: {
+  sgrai: {
     fcut: 2,
+    name: "SgrAI",
     rcut: 6,
     rseq: "CRCCGGYG",
   },
-  SmaI: {
+  smai: {
     fcut: 3,
+    name: "SmaI",
     rcut: 3,
     rseq: "CCCGGG",
   },
-  SmlI: {
+  smli: {
     fcut: 1,
+    name: "SmlI",
     rcut: 5,
     rseq: "CTYRAG",
   },
-  SnaBI: {
+  snabi: {
     fcut: 3,
+    name: "SnaBI",
     rcut: 3,
     rseq: "TACGTA",
   },
-  SpeI: {
+  spei: {
     fcut: 1,
+    name: "SpeI",
     rcut: 5,
     rseq: "ACTAGT",
   },
-  SphI: {
+  sphi: {
     fcut: 5,
+    name: "SphI",
     rcut: 1,
     rseq: "GCATGC",
   },
-  SrfI: {
+  srfi: {
     fcut: 4,
+    name: "SrfI",
     rcut: 4,
     rseq: "GCCCGGGC",
   },
-  SspI: {
+  sspi: {
     fcut: 3,
+    name: "SspI",
     rcut: 3,
     rseq: "AATATT",
   },
-  StuI: {
+  stui: {
     fcut: 3,
+    name: "StuI",
     rcut: 3,
     rseq: "AGGCCT",
   },
-  StyD4I: {
+  styd4i: {
     fcut: 0,
+    name: "StyD4I",
     rcut: 5,
     rseq: "CCNGG",
   },
-  StyI: {
+  styi: {
     fcut: 1,
+    name: "StyI",
     rcut: 5,
     rseq: "CCWWGG",
   },
-  SwaI: {
+  swai: {
     fcut: 4,
+    name: "SwaI",
     rcut: 4,
     rseq: "ATTTAAAT",
   },
-  TaqI: {
+  taqi: {
     fcut: 1,
+    name: "TaqI",
     rcut: 3,
     rseq: "TCGA",
   },
-  TfiI: {
+  tfii: {
     fcut: 1,
+    name: "TfiI",
     rcut: 4,
     rseq: "GAWTC",
   },
-  TseI: {
+  tsei: {
     fcut: 1,
+    name: "TseI",
     rcut: 4,
     rseq: "GCWGC",
   },
-  Tsp45I: {
+  tsp45i: {
     fcut: 0,
+    name: "Tsp45I",
     rcut: 5,
     rseq: "GTSAC",
   },
-  TspMI: {
+  tspmi: {
     fcut: 1,
+    name: "TspMI",
     rcut: 5,
     rseq: "CCCGGG",
   },
-  TspRI: {
+  tspri: {
     fcut: 9,
+    name: "TspRI",
     rcut: 0,
     rseq: "NNCASTGNN",
   },
-  Tth111I: {
+  tth111i: {
     fcut: 4,
+    name: "Tth111I",
     rcut: 5,
     rseq: "GACNNNGTC",
   },
-  XbaI: {
+  xbai: {
     fcut: 1,
+    name: "XbaI",
     rcut: 5,
     rseq: "TCTAGA",
   },
-  XcmI: {
+  xcmi: {
     fcut: 8,
+    name: "XcmI",
     rcut: 7,
     rseq: "CCANNNNNNNNNTGG",
   },
-  XhoI: {
+  xhoi: {
     fcut: 1,
+    name: "XhoI",
     rcut: 5,
     rseq: "CTCGAG",
   },
-  XmaI: {
+  xmai: {
     fcut: 1,
+    name: "XmaI",
     rcut: 5,
     rseq: "CCCGGG",
   },
-  XmnI: {
+  xmni: {
     fcut: 5,
+    name: "XmnI",
     rcut: 5,
     rseq: "GAANNNNTTC",
   },
-  ZraI: {
+  zrai: {
     fcut: 3,
+    name: "ZraI",
     rcut: 3,
     rseq: "GACGTC",
   },

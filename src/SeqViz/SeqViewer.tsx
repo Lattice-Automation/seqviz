@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
-import { Annotation, CutSite, Highlight, NamedRanged, Ranged } from "../elements";
+import { Annotation, CutSite, Highlight, NameRange, Range } from "../elements";
 import isEqual from "../utils/isEqual";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
@@ -16,14 +16,14 @@ interface SeqViewerProps {
   cutSites: CutSite[];
   highlightedRegions: Highlight[];
   name: string;
-  search: NamedRanged[];
+  search: NameRange[];
   selection: Selection;
   seq: string;
   setSelection: (update: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
   size: { height: number; width: number };
-  translations: Ranged[];
+  translations: Range[];
   zoom: { circular: number; linear: number };
 }
 
@@ -42,9 +42,9 @@ Generally, SeqViz expands to fill the height/width of its parent element.
 
 The two solutions are to:
   1. render SeqViz within a container element with a defined height + width
-  2. pass an options.style object to SeqViz with a height + width
+  2. pass a props.style object to SeqViz with a height + width
 
-See: https://github.com/Lattice-Automation/seqviz#optionsstyle-`);
+See: https://github.com/Lattice-Automation/seqviz#style-`);
     }
   }
 

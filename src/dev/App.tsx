@@ -5,12 +5,12 @@
 import * as React from "react";
 
 import { SeqVizProps } from "../SeqViz/SeqViz";
-import { Ranged } from "../elements";
+import { Range } from "../elements";
 import { SeqViz } from "../viewer";
 
 export const App = () => {
   const [search, setSearch] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState<Ranged[]>([]);
+  const [searchResults, setSearchResults] = React.useState<Range[]>([]);
 
   const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
     annotations: [
@@ -21,25 +21,15 @@ export const App = () => {
     bpColors: {},
     colors: ["#8CDEBD"],
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
-    enzymes: [],
-    enzymesCustom: {
-      test: {
+    enzymes: [
+      {
+        name: "custom",
         fcut: 5,
         rcut: 5,
         rseq: "cacgnnnn" /* pass in color */,
       },
-      test2: {
-        fcut: 3,
-        rcut: 3,
-        rseq: "catc", // cut index on REV strand, relative to start of rseq - pass in negative offset
-      },
-      test3: {
-        fcut: 2,
-        rcut: 3,
-        rseq: "ctat", // cut index on REV strand, relative to start of rseq - pass in negative offset
-      },
-    },
-    onSearch: (results: Ranged[]) => {
+    ],
+    onSearch: (results: Range[]) => {
       setSearchResults(results);
     },
     rotateOnScroll: true,
@@ -76,7 +66,7 @@ export const App = () => {
       <SearchBox
         highlightSearch={() => {
           const newBPColors = { ...seqvizProps.bpColors };
-          searchResults.forEach((res: Ranged) => {
+          searchResults.forEach((res: Range) => {
             for (let i = res.start; i < res.end; i++) {
               newBPColors[i] = "orange";
             }

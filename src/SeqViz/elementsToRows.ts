@@ -1,8 +1,8 @@
-import { NamedRanged, Ranged } from "../elements";
+import { NameRange, Range } from "../elements";
 
 // utility funcs for stackElements
-const last = <T extends Ranged>(arr: T[]): T => arr[arr.length - 1];
-const first = <T extends Ranged>(arr: T[]): T => arr[0];
+const last = <T extends Range>(arr: T[]): T => arr[arr.length - 1];
+const first = <T extends Range>(arr: T[]): T => arr[0];
 
 /**
  * Take an array of elements and create a 2D array where non-overlapping elements are in
@@ -20,7 +20,7 @@ const first = <T extends Ranged>(arr: T[]): T => arr[0];
  * 		[		---Ann2---    ]
  * ```
  */
-export const stackElements = <T extends NamedRanged>(elements: T[], seqL: number): T[][] =>
+export const stackElements = <T extends NameRange>(elements: T[], seqL: number): T[][] =>
   [...elements].reduce((acc: T[][], a) => {
     const insertIndex = acc.findIndex(elems => {
       if (a.end === a.start) {
@@ -60,11 +60,7 @@ export const stackElements = <T extends NamedRanged>(elements: T[], seqL: number
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
  */
-export const createMultiRows = <T extends NamedRanged>(
-  elements: T[][],
-  rowLength: number,
-  rowCount: number
-): T[][][] => {
+export const createMultiRows = <T extends NameRange>(elements: T[][], rowLength: number, rowCount: number): T[][][] => {
   const newArr: T[][][] = new Array(rowCount);
 
   // initialize the nested rows in each block
@@ -145,7 +141,7 @@ export const createMultiRows = <T extends NamedRanged>(
  * This is used by the Linear viewer for CutSites and Highlights where it's okay for
  * elements to overlap one another.
  */
-export const createSingleRows = <T extends NamedRanged>(
+export const createSingleRows = <T extends NameRange>(
   elements: T[],
   rowLength: number,
   rowCount: number,
