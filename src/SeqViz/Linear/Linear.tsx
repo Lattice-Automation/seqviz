@@ -20,7 +20,7 @@ export interface LinearProps {
   compSeq: string;
   cutSites: CutSite[];
   elementHeight: number;
-  highlightedRegions: Highlight[];
+  highlights: Highlight[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
@@ -75,7 +75,7 @@ class Linear extends React.Component<LinearProps> {
       compSeq,
       cutSites,
       elementHeight,
-      highlightedRegions,
+      highlights,
       lineHeight,
       onUnmount,
       search,
@@ -141,7 +141,7 @@ class Linear extends React.Component<LinearProps> {
     const searchRows: NameRange[][] =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
-    const highlightRows = createSingleRows(highlightedRegions, bpsPerBlock, arrSize);
+    const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
     const translationRows = translations.length
       ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)
@@ -204,7 +204,7 @@ class Linear extends React.Component<LinearProps> {
           firstBase={firstBase}
           forwardPrimerRows={forwardPrimerRows[i]}
           fullSeq={seq}
-          highlightedRegions={highlightRows[i]}
+          highlights={highlightRows[i]}
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}

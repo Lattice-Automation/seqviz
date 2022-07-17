@@ -51,9 +51,10 @@ export interface HighlightProp {
 /** Highlight is the processed version of HighlightProp */
 export interface Highlight extends HighlightProp {
   color: string;
+  /* direction is ignored for now */
   direction: 1 | -1;
   id: string;
-  name: string; // ignored for now
+  name: string;
 }
 
 export interface Part {

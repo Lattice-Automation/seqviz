@@ -17,7 +17,7 @@ interface FindProps {
     sweepFWD?: boolean;
   }) => string;
   getRotation: (index: number) => string;
-  highlightedRegions: HighlightProp[];
+  highlights: HighlightProp[];
   inputRef: InputRefFuncType;
   lineHeight: number;
   onUnmount: unknown;
@@ -30,7 +30,7 @@ interface FindProps {
 }
 
 export const Find = (props: FindProps) => {
-  const { generateArc, getRotation, highlightedRegions, inputRef, lineHeight, radius, search, seqLength } = props;
+  const { generateArc, getRotation, highlights, inputRef, lineHeight, radius, search, seqLength } = props;
   const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
   const searchArcs = search.map(s => (
     <FindArc
@@ -48,7 +48,7 @@ export const Find = (props: FindProps) => {
     />
   ));
 
-  const highlightArcs = highlightedRegions.map(({ color, end, start }) => (
+  const highlightArcs = highlights.map(({ color, end, start }) => (
     <FindArc
       key={JSON.stringify({ end, start })}
       direction={1}
