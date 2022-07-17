@@ -20,7 +20,8 @@ interface TranslationRowsProps {
   yDiff: number;
 }
 
-export default ({
+/** Rows of translations */
+const TranslationRows = ({
   bpsPerBlock,
   charWidth,
   elementHeight,
@@ -195,29 +196,29 @@ class TranslationRow extends React.Component<TranslationRowProps> {
             <g key={aaId} ref={inputRef(aaId, AAref)} id={aaId} transform={`translate(${x}, 0)`}>
               <path
                 d={path}
+                fill={colorByIndex(a.charCodeAt(0))}
                 id={aaId}
                 shapeRendering="geometricPrecision"
+                stroke={borderColorByIndex(a.charCodeAt(0))}
                 style={{
                   cursor: "pointer",
                   opacity: 0.7,
                   strokeWidth: 0.8,
                 }}
-                fill={colorByIndex(a.charCodeAt(0))}
-                stroke={borderColorByIndex(a.charCodeAt(0))}
               />
               {textShow && (
                 <text
-                  id={aaId}
-                  x={charWidth * 1.5}
-                  y={`${h / 2 + 1}`}
                   cursor="pointer"
                   dominantBaseline="middle"
+                  id={aaId}
                   style={{
                     color: "black",
                     fontSize: 13,
                     fontWeight: 400,
                   }}
                   textAnchor="middle"
+                  x={charWidth * 1.5}
+                  y={`${h / 2 + 1}`}
                 >
                   {a}
                 </text>
@@ -229,3 +230,5 @@ class TranslationRow extends React.Component<TranslationRowProps> {
     );
   }
 }
+
+export default TranslationRows;

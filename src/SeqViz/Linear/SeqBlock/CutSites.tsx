@@ -5,6 +5,7 @@ import { FindXAndWidthType } from "./SeqBlock";
 
 interface HighlightedCutSite {
   cutX: number;
+  direction: 1 | -1;
   end: number;
   fcut: number;
   hangX: number;
@@ -16,7 +17,6 @@ interface HighlightedCutSite {
   id: string;
   name: string;
   rcut: number;
-  direction: 1 | -1;
   start: number;
 }
 
@@ -49,7 +49,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
 /**
  * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
-export default (props: {
+const CutSites = (props: {
   charWidth: number;
   cutSiteRows: CutSite[];
   elementHeight: number;
@@ -98,8 +98,8 @@ export default (props: {
       hangX,
       highlight: {
         color: c.color,
-        x: highlightX,
         width: Math.max(0, highlightWidth - 1),
+        x: highlightX,
       },
       recogStrand: c.direction,
     };
@@ -284,3 +284,5 @@ const HighlightBlock = (props: {
     />
   );
 };
+
+export default CutSites;

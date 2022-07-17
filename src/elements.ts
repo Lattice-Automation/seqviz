@@ -50,10 +50,10 @@ export interface HighlightProp {
 
 /** Highlight is the processed version of HighlightProp */
 export interface Highlight extends HighlightProp {
-  id: string;
-  name: string;
   color: string;
-  direction: 1 | -1; // ignored for now
+  direction: 1 | -1;
+  id: string;
+  name: string; // ignored for now
 }
 
 export interface Part {
@@ -79,22 +79,22 @@ export interface Coor {
 
 /** a single enzyme to use to digest the sequence with */
 export interface Enzyme {
-  fcut: number;
   color?: string;
+  fcut: number;
   rcut: number;
   rseq: string;
 }
 
 /** a single recognition site on the sequence. */
 export interface CutSite extends NamedRanged {
-  /** `1` if top strand (`seq`), `-1` if bottom strand (`compSeq`) */
-  direction: 1 | -1;
-  /** name is the name of the enzyme that created this cut site */
-  name: string;
-  /** index relative to start index of the cut on the top strand */
-  fcut: number;
   /** color to highlight the cutsite with. Empty string if it shouldn't be colored */
   color: string;
+  /** `1` if top strand (`seq`), `-1` if bottom strand (`compSeq`) */
+  direction: 1 | -1;
+  /** index relative to start index of the cut on the top strand */
+  fcut: number;
+  /** name is the name of the enzyme that created this cut site */
+  name: string;
   /** index relative to start index of the cut on the bottom strand */
   rcut: number;
 }

@@ -26,9 +26,9 @@ export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: s
       // modulo the start/end and add an id to each cut-site
       .map(c => ({
         ...c,
-        id: `${enzymeName}-${currEnzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
         end: c.end % seq.length,
         fcut: c.fcut % seq.length,
+        id: `${enzymeName}-${currEnzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
         rcut: c.rcut % seq.length,
         start: c.start % seq.length,
       }))

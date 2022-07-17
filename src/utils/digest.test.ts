@@ -3,21 +3,20 @@ import digest, { findCutSites } from "./digest";
 
 describe("Digest", () => {
   interface test {
-    name: string;
     args: {
-      seq: string;
       enzymeList?: string[];
       enzymesCustom?: { [key: string]: Enzyme };
+      seq: string;
     };
     cutSites: CutSite[];
+    name: string;
   }
 
   const tests: test[] = [
     {
-      name: "cuts with enzyme name",
       args: {
-        seq: "....GACGTC....",
         enzymeList: ["AatII"],
+        seq: "....GACGTC....",
       },
       cutSites: [
         {
@@ -41,11 +40,10 @@ describe("Digest", () => {
           start: 4,
         },
       ],
+      name: "cuts with enzyme name",
     },
     {
-      name: "cuts with custom enzyme",
       args: {
-        seq: "....GACGTC....",
         enzymesCustom: {
           custom: {
             fcut: 5,
@@ -53,6 +51,7 @@ describe("Digest", () => {
             rseq: "GACGTC",
           },
         },
+        seq: "....GACGTC....",
       },
       cutSites: [
         {
@@ -76,20 +75,20 @@ describe("Digest", () => {
           start: 4,
         },
       ],
+      name: "cuts with custom enzyme",
     },
     {
-      name: "returns empty",
       args: {
         seq: "GAGACTACGACTACAG",
       },
       cutSites: [],
+      name: "returns empty",
     },
     {
-      name: "dedupe enzymes",
       args: {
-        seq: "....GACGTC....",
         // AatII is the same enzyme as "custom"
         enzymeList: ["AatII", "AatII"],
+
         enzymesCustom: {
           custom: {
             fcut: 5,
@@ -97,6 +96,7 @@ describe("Digest", () => {
             rseq: "GACGTC",
           },
         },
+        seq: "....GACGTC....",
       },
       cutSites: [
         {
@@ -120,6 +120,7 @@ describe("Digest", () => {
           start: 4,
         },
       ],
+      name: "dedupe enzymes",
     },
   ];
 
@@ -133,27 +134,26 @@ describe("Digest", () => {
 
 describe("FindCutSites", () => {
   interface test {
-    name: string;
     args: {
       enzyme: Enzyme;
-      seq: string;
       enzymeName: string;
+      seq: string;
     };
     cutSites: CutSite[];
+    name: string;
   }
 
   const tests: test[] = [
     {
-      name: "cuts fwd",
       args: {
         enzyme: {
-          fcut: 1,
-          rseq: "atgc",
-          rcut: 2,
           color: "gray",
+          fcut: 1,
+          rcut: 2,
+          rseq: "atgc",
         },
-        seq: "....atgc....",
         enzymeName: "eco",
+        seq: "....atgc....",
       },
       cutSites: [
         {
@@ -167,18 +167,18 @@ describe("FindCutSites", () => {
           start: 4,
         },
       ],
+      name: "cuts fwd",
     },
     {
-      name: "cuts rev",
       args: {
         enzyme: {
-          fcut: 1,
-          rseq: "atgc",
-          rcut: 2,
           color: "gray",
+          fcut: 1,
+          rcut: 2,
+          rseq: "atgc",
         },
-        seq: "....gcatdf....",
         enzymeName: "eco",
+        seq: "....gcatdf....",
       },
       cutSites: [
         {
@@ -192,17 +192,17 @@ describe("FindCutSites", () => {
           start: 4,
         },
       ],
+      name: "cuts rev",
     },
     {
-      name: "cuts ambiguous match",
       args: {
         enzyme: {
           fcut: 7,
-          rseq: "GGTCTCNNNNN",
           rcut: 11,
+          rseq: "GGTCTCNNNNN",
         },
-        seq: "AAAAAGGTCTCAAAAAAAAAAAAAAAAA",
         enzymeName: "BsaI",
+        seq: "AAAAAGGTCTCAAAAAAAAAAAAAAAAA",
       },
       cutSites: [
         {
@@ -216,6 +216,7 @@ describe("FindCutSites", () => {
           start: 5,
         },
       ],
+      name: "cuts ambiguous match",
     },
   ];
 

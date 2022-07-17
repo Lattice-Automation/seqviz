@@ -54,10 +54,10 @@ const search = (query: string, subject: string, mismatch: number, fwd: boolean, 
     const start = match.index % seqLength;
     const end = (start + query.length) % seqLength || seqLength;
     results.push({
-      id: `${start}-${fwd ? "fwd" : "rev"}`,
-      name: "",
       direction: fwd ? 1 : -1,
       end: end,
+      id: `${start}-${fwd ? "fwd" : "rev"}`,
+      name: "",
       start: start,
     });
     match = regex.exec(subject);
@@ -95,10 +95,10 @@ const searchWithMismatch = (query: string, subject: string, mismatch: number, fw
     if (missed <= mismatch) {
       const end = (i + query.length) % subject.length || subject.length;
       results.push({
-        id: `${i}-${fwd ? "fwd" : "rev"}`,
-        name: "",
         direction: fwd ? 1 : -1,
         end: end,
+        id: `${i}-${fwd ? "fwd" : "rev"}`,
+        name: "",
         start: i,
       });
     }
