@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { CutSite, InputRefFuncType } from "../../../elements";
+import { CutSite, Enzyme, InputRefFuncType } from "../../../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface HighlightedCutSite {
   cutX: number;
   direction: 1 | -1;
   end: number;
+  enzyme: Enzyme;
   fcut: number;
   hangX: number;
   highlight: {
@@ -15,7 +16,6 @@ interface HighlightedCutSite {
     x: number;
   };
   id: string;
-  name: string;
   rcut: number;
   start: number;
 }
@@ -97,11 +97,10 @@ const CutSites = (props: {
       cutX,
       hangX,
       highlight: {
-        color: c.color,
+        color: c.enzyme.color,
         width: Math.max(0, highlightWidth - 1),
         x: highlightX,
       },
-      recogStrand: c.direction,
     };
   });
 
@@ -195,7 +194,7 @@ const CutSites = (props: {
                 onMouseOut={() => hoverCutSite(c.id, false)}
                 onMouseOver={() => hoverCutSite(c.id, true)}
               >
-                {c.name}
+                {c.enzyme.name}
               </text>
             )}
 

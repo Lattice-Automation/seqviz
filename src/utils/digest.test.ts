@@ -20,9 +20,14 @@ describe("Digest", () => {
       },
       cutSites: [
         {
-          color: "",
           direction: 1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "AatII",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "AatII-GACGTC-23-fwd",
           name: "AatII",
@@ -30,9 +35,14 @@ describe("Digest", () => {
           start: 4,
         },
         {
-          color: "",
           direction: -1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "AatII",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "AatII-GACGTC-23-rev",
           name: "AatII",
@@ -46,8 +56,8 @@ describe("Digest", () => {
       args: {
         enzymesCustom: {
           custom: {
-            name: "custom",
             fcut: 5,
+            name: "custom",
             rcut: 1,
             rseq: "GACGTC",
           },
@@ -56,9 +66,14 @@ describe("Digest", () => {
       },
       cutSites: [
         {
-          color: "",
           direction: 1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-fwd",
           name: "custom",
@@ -66,9 +81,14 @@ describe("Digest", () => {
           start: 4,
         },
         {
-          color: "",
           direction: -1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-rev",
           name: "custom",
@@ -91,8 +111,8 @@ describe("Digest", () => {
         enzymes: ["AatII", "AatII"],
         enzymesCustom: {
           custom: {
-            name: "custom",
             fcut: 5,
+            name: "custom",
             rcut: 1,
             rseq: "GACGTC",
           },
@@ -101,9 +121,14 @@ describe("Digest", () => {
       },
       cutSites: [
         {
-          color: "",
           direction: 1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-fwd",
           name: "custom",
@@ -111,9 +136,14 @@ describe("Digest", () => {
           start: 4,
         },
         {
-          color: "",
           direction: -1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-rev",
           name: "custom",
@@ -127,8 +157,8 @@ describe("Digest", () => {
       args: {
         enzymes: [
           {
-            name: "custom",
             fcut: 5,
+            name: "custom",
             rcut: 1,
             rseq: "GACGTC",
           },
@@ -137,9 +167,14 @@ describe("Digest", () => {
       },
       cutSites: [
         {
-          color: "",
           direction: 1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-fwd",
           name: "custom",
@@ -147,9 +182,14 @@ describe("Digest", () => {
           start: 4,
         },
         {
-          color: "",
           direction: -1,
           end: 10,
+          enzyme: {
+            fcut: 5,
+            name: "custom",
+            rcut: 1,
+            rseq: "GACGTC",
+          },
           fcut: 9,
           id: "custom-GACGTC-23-rev",
           name: "custom",
@@ -183,9 +223,9 @@ describe("FindCutSites", () => {
     {
       args: {
         enzyme: {
-          name: "eco",
           color: "gray",
           fcut: 1,
+          name: "eco",
           rcut: 2,
           rseq: "atgc",
         },
@@ -193,11 +233,17 @@ describe("FindCutSites", () => {
       },
       cutSites: [
         {
-          color: "gray",
           direction: 1,
           end: 8,
+          enzyme: {
+            color: "gray",
+            fcut: 1,
+            name: "eco",
+            rcut: 2,
+            rseq: "atgc",
+          },
           fcut: 5,
-          id: "",
+          id: "eco-atgc-5-fwd",
           name: "eco",
           rcut: 6,
           start: 4,
@@ -209,8 +255,8 @@ describe("FindCutSites", () => {
       args: {
         enzyme: {
           color: "gray",
-          name: "eco",
           fcut: 1,
+          name: "eco",
           rcut: 2,
           rseq: "atgc",
         },
@@ -218,11 +264,17 @@ describe("FindCutSites", () => {
       },
       cutSites: [
         {
-          color: "gray",
           direction: -1,
           end: 8,
+          enzyme: {
+            color: "gray",
+            fcut: 1,
+            name: "eco",
+            rcut: 2,
+            rseq: "atgc",
+          },
           fcut: 6,
-          id: "",
+          id: "eco-atgc-6-rev",
           name: "eco",
           rcut: 7,
           start: 4,
@@ -233,8 +285,8 @@ describe("FindCutSites", () => {
     {
       args: {
         enzyme: {
-          name: "BsaI",
           fcut: 7,
+          name: "BsaI",
           rcut: 11,
           rseq: "GGTCTCNNNNN",
         },
@@ -242,11 +294,16 @@ describe("FindCutSites", () => {
       },
       cutSites: [
         {
-          color: "",
           direction: 1,
           end: 16,
+          enzyme: {
+            fcut: 7,
+            name: "BsaI",
+            rcut: 11,
+            rseq: "GGTCTCNNNNN",
+          },
           fcut: 12,
-          id: "",
+          id: "BsaI-GGTCTCNNNNN-12-fwd",
           name: "BsaI",
           rcut: 16,
           start: 5,
@@ -254,11 +311,50 @@ describe("FindCutSites", () => {
       ],
       name: "cuts ambiguous match",
     },
+    {
+      args: {
+        enzyme: {
+          color: "gray",
+          fcut: 1,
+          name: "eco",
+          range: {
+            end: 10,
+            start: 3,
+          },
+          rcut: 2,
+          rseq: "atgc",
+        },
+        seq: "....atgc....atgc....gcat...",
+      },
+      cutSites: [
+        {
+          direction: 1,
+          end: 8,
+          enzyme: {
+            color: "gray",
+            fcut: 1,
+            name: "eco",
+            range: {
+              end: 10,
+              start: 3,
+            },
+            rcut: 2,
+            rseq: "atgc",
+          },
+          fcut: 5,
+          id: "eco-atgc-5-fwd",
+          name: "eco",
+          rcut: 6,
+          start: 4,
+        },
+      ],
+      name: "cuts with range",
+    },
   ];
 
   tests.forEach(t => {
     it(t.name, () => {
-      expect(findCutSites(t.args.enzyme, t.args.seq)).toEqual(t.cutSites);
+      expect(findCutSites(t.args.enzyme, t.args.seq, t.args.seq.length)).toEqual(t.cutSites);
     });
   });
 });

@@ -810,12 +810,6 @@ const enzymes: { [key: string]: Enzyme } = {
     rcut: 1,
     rseq: "GCGC",
   },
-  hinp1i: {
-    fcut: 1,
-    name: "HinP1I",
-    rcut: 3,
-    rseq: "GCGC",
-  },
   hincii: {
     fcut: 3,
     name: "HincII",
@@ -833,6 +827,12 @@ const enzymes: { [key: string]: Enzyme } = {
     name: "HinfI",
     rcut: 4,
     rseq: "GANTC",
+  },
+  hinp1i: {
+    fcut: 1,
+    name: "HinP1I",
+    rcut: 3,
+    rseq: "GCGC",
   },
   hpai: {
     fcut: 3,
@@ -1104,18 +1104,6 @@ const enzymes: { [key: string]: Enzyme } = {
     rcut: 1,
     rseq: "RCATGY",
   },
-  "pi-pspi": {
-    fcut: 17,
-    name: "PI-PspI",
-    rcut: 13,
-    rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
-  },
-  "pi-scei": {
-    fcut: 15,
-    name: "PI-SceI",
-    rcut: 11,
-    rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
-  },
   paci: {
     fcut: 5,
     name: "PacI",
@@ -1145,6 +1133,18 @@ const enzymes: { [key: string]: Enzyme } = {
     name: "PflMI",
     rcut: 4,
     rseq: "CCANNNNNTGG",
+  },
+  "pi-pspi": {
+    fcut: 17,
+    name: "PI-PspI",
+    rcut: 13,
+    rseq: "TGGCAAACAGCTATTATGGGTATTATGGGT",
+  },
+  "pi-scei": {
+    fcut: 15,
+    name: "PI-SceI",
+    rcut: 11,
+    rseq: "ATCTATGTCGGGTGCGGAGAAAGAGGTAATGAAATGG",
   },
   plei: {
     fcut: 9,

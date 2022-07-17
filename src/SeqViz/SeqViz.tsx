@@ -99,7 +99,7 @@ export interface SeqVizProps {
   /** whether to show the index row that  */
   showIndex?: boolean;
 
-  /** extra syle props to apply to the outermost div of SeqViz */
+  /** extra style props to apply to the outermost div of SeqViz */
   style?: Record<string, unknown>;
 
   /** ranges of sequence that should have amino acid translations shown */

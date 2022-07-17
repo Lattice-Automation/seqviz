@@ -23,10 +23,14 @@ export const App = () => {
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [
       {
-        name: "custom",
         fcut: 5,
-        rcut: 5,
-        rseq: "cacgnnnn" /* pass in color */,
+        name: "custom",
+        range: {
+          end: 300,
+          start: 80,
+        },
+        rcut: 5 /* pass in color */,
+        rseq: "cacgnnnn",
       },
     ],
     onSearch: (results: Range[]) => {
@@ -49,7 +53,7 @@ export const App = () => {
     translations: [{ direction: 1, end: 69, start: 0 }],
 
     viewer: "both_flip",
-    zoom: { circular: 0, linear: 100 },
+    zoom: { circular: 0, linear: 50 },
     // highlightedRegions: [
     //   { start: 36, end: 66, color: "magenta" },
     //   { start: 70, end: 80 },
