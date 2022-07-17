@@ -123,6 +123,8 @@ interface BlockProps {
  */
 class Block extends React.PureComponent<BlockProps> {
   static contextType = SelectionContext;
+  static context: React.ContextType<typeof SelectionContext>;
+  declare context: React.ContextType<typeof SelectionContext>;
 
   id = randomid();
 

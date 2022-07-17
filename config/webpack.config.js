@@ -1,6 +1,5 @@
 const path = require("path");
 const webpack = require("webpack");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
 let BundleAnalyzerPlugin = require("webpack-bundle-analyzer");
 BundleAnalyzerPlugin = BundleAnalyzerPlugin.BundleAnalyzerPlugin;
@@ -25,27 +24,12 @@ const cdnBuild = {
     publicPath: "/dist/",
   },
   mode: "production",
-  node: {
-    fs: "empty",
-    net: "empty",
-    tls: "empty",
-  },
   module: {
     rules: [
       // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' }, exclude: /node_modules/ },
       { test: /\.(t|j)sx?$/, use: { loader: "ts-loader" }, exclude: /node_modules/ },
       // addition - add source-map support
       { enforce: "pre", test: /\.js$/, exclude: /node_modules/, loader: "source-map-loader" },
-      {
-        test: /\.(ico|jpg|jpeg|png|gif|webp|svg)(\?.*)?$/,
-        exclude: /node_modules/,
-        use: [
-          "file-loader",
-          {
-            loader: "image-webpack-loader",
-          },
-        ],
-      },
       {
         test: /\.(css)$/,
         exclude: /node_modules/,
@@ -59,8 +43,19 @@ const cdnBuild = {
       react: path.resolve(__dirname, "../node_modules/react"),
       "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
     },
+    fallback: {
+      buffer: require.resolve("buffer"),
+      fs: false,
+      net: false,
+      tls: false,
+      path: require.resolve("path-browserify"),
+      string_decoder: require.resolve("string_decoder"),
+      stream: require.resolve("stream-browserify"),
+      timers: require.resolve("timers-browserify"),
+      url: require.resolve("url"),
+    },
   },
-  plugins: [new UglifyJsPlugin(), new webpack.BannerPlugin(banner)],
+  plugins: [new webpack.BannerPlugin(banner)],
   optimization: {
     nodeEnv: "production",
     minimize: true,
