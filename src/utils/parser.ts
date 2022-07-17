@@ -91,7 +91,6 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * ```js
  * directionality("FWD") => 1
  * directionality("FORWARD") => 1
- * directionaltiy("NONSENSE") => 0
  * ```
  */
 export const directionality = (direction: DirectionProp | undefined | string): -1 | 0 | 1 => {

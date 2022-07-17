@@ -76,18 +76,18 @@ export default (props: {
   const sitesWithX: HighlightedCutSite[] = cutSiteRows.map((c: CutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
-    let { width: highlightWidth, x: highlightX } = findXAndWidth(c.recogStart, c.recogEnd);
+    let { width: highlightWidth, x: highlightX } = findXAndWidth(c.start, c.end);
 
-    if (recogContiguous(c.recogStart, c.recogEnd, firstBase, lastBase)) {
-      if (c.recogStart > c.recogEnd) {
+    if (recogContiguous(c.start, c.end, firstBase, lastBase)) {
+      if (c.start > c.end) {
         ({ width: highlightWidth, x: highlightX } = findXAndWidth(
-          c.recogEnd < firstBase ? lastBase : Math.min(lastBase, c.recogEnd),
-          c.recogStart > lastBase ? firstBase : Math.max(firstBase, c.recogStart)
+          c.end < firstBase ? lastBase : Math.min(lastBase, c.end),
+          c.start > lastBase ? firstBase : Math.max(firstBase, c.start)
         ));
       } else {
         ({ width: highlightWidth, x: highlightX } = findXAndWidth(
-          c.recogStart < firstBase ? lastBase : Math.min(lastBase, c.recogStart),
-          c.recogEnd > lastBase ? firstBase : Math.max(firstBase, c.recogEnd)
+          c.start < firstBase ? lastBase : Math.min(lastBase, c.start),
+          c.end > lastBase ? firstBase : Math.max(firstBase, c.end)
         ));
       }
     }
