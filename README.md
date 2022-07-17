@@ -103,7 +103,7 @@ All the following are usable as props for the React component (`seqviz.SeqViz`) 
 
 #### `seq (='')`
 
-The DNA sequence to render.
+A sequence to render. Can be DNA, RNA, or an amino acid sequence.
 
 #### `accession (='')`
 
