@@ -28,12 +28,11 @@ export default (seq: string, enzymeList: string[] = [], enzymesCustom: { [key: s
         ...c,
         id: `${enzymeName}-${currEnzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
         end: c.end % seq.length,
-        fcut: c.fcut < seq.length ? c.fcut : c.fcut - seq.length,
-        rcut: c.rcut < seq.length ? c.rcut : c.rcut - seq.length,
-        recogStart: c.recogStart % seq.length,
-        recogEnd: c.recogEnd % seq.length,
+        fcut: c.fcut % seq.length,
+        rcut: c.rcut % seq.length,
         start: c.start % seq.length,
       }))
+      // deduplicate so there's only one enzyme per index
       .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
 
     return acc;
@@ -54,21 +53,6 @@ export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): C
     ({ fcut, rcut, rseq } = enzymes[enzymeName]);
   }
 
-  let recogSeq = rseq.toLowerCase();
-  let shiftRecogStart = 0;
-  let shiftRecogEnd = 0;
-  let recogStart = 0;
-  let recogEnd = recogSeq.length;
-  while (recogSeq[recogStart] === "n") {
-    shiftRecogStart += 1;
-    recogStart += 1;
-  }
-  while (recogSeq[recogEnd - 1] === "n") {
-    shiftRecogEnd += 1;
-    recogEnd -= 1;
-  }
-
-  const rlen = recogSeq.length;
   const cutSiteIndices: CutSite[] = [];
 
   // Find matches on the top/forward sequence.
@@ -80,13 +64,11 @@ export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): C
     cutSiteIndices.push({
       color: enzyme.color || "",
       direction: 1,
-      end: index + rlen,
+      end: index + rseq.length,
       fcut: index + fcut,
       id: "",
       name: enzymeName,
       rcut: index + rcut,
-      recogEnd: index + recogEnd + shiftRecogEnd,
-      recogStart: index + recogStart - shiftRecogStart,
       start: index,
     });
     result = matcher.exec(seq);
@@ -101,13 +83,11 @@ export const findCutSites = (enzyme: Enzyme, seq: string, enzymeName: string): C
     cutSiteIndices.push({
       color: enzyme.color || "",
       direction: -1,
-      end: index + rlen,
-      fcut: index + rlen - rcut,
+      end: index + rseq.length,
+      fcut: index + rseq.length - rcut,
       id: "",
       name: enzymeName,
-      rcut: index + rlen - fcut,
-      recogEnd: index + recogEnd + shiftRecogEnd,
-      recogStart: index + recogStart - shiftRecogStart,
+      rcut: index + rseq.length - fcut,
       start: index,
     });
     result = rcMatcher.exec(seq);

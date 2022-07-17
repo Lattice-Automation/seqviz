@@ -12,7 +12,7 @@ export interface NamedRanged extends Ranged {
 }
 
 /** DirectionProp is any of the directions for an element that we accept from a user */
-export type DirectionProp = -1 | 0 | 1 | "FORWARD" | "REVERSE" | "FWD" | "REV" | "NONE" | "1" | "0" | "-1" | "NONSENSE";
+export type DirectionProp = -1 | 0 | 1 | "FORWARD" | "REVERSE" | "FWD" | "REV" | "NONE" | "1" | "0" | "-1";
 
 /** AnnotationProp is an annotation provided to SeqViz via the annotations prop. */
 export interface AnnotationProp {
@@ -97,8 +97,6 @@ export interface CutSite extends NamedRanged {
   color: string;
   /** index relative to start index of the cut on the bottom strand */
   rcut: number;
-  recogEnd: number;
-  recogStart: number;
 }
 
 /** supported input sequence types */

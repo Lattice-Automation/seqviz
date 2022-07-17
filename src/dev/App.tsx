@@ -24,9 +24,9 @@ export const App = () => {
     enzymes: [],
     enzymesCustom: {
       test: {
-        fcut: 0,
-        rcut: 0,
-        rseq: "agat" /* pass in color */,
+        fcut: 5,
+        rcut: 5,
+        rseq: "cacgnnnn" /* pass in color */,
       },
       test2: {
         fcut: 3,
