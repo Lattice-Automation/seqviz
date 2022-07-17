@@ -33,6 +33,7 @@ export const App = () => {
         rseq: "cacgnnnn",
       },
     ],
+    highlights: [{ end: 400, start: 300 }],
     onSearch: (results: Range[]) => {
       setSearchResults(results);
     },
@@ -45,7 +46,7 @@ export const App = () => {
      *   201: "red",
      * }, */
     search: { mismatch: 0, query: "gtacc" },
-    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(30),
+    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,

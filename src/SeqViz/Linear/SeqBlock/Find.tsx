@@ -119,14 +119,6 @@ export const FindBlock = (props: {
     start,
   } = props;
 
-  const findBlockProps = {
-    cursor: "pointer",
-    height: 18,
-    stroke: listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    strokeWidth: 1,
-    style: { fill: listenerOnly ? "transparent" : fillStyle },
-  };
-
   let { width, x } = findXAndWidth(start, end);
   if (start > end) {
     ({ width, x } = findXAndWidth(
@@ -135,7 +127,6 @@ export const FindBlock = (props: {
     ));
   }
   const id = randomid();
-
   const selReference = {
     element: seqBlockRef,
     end: end,
@@ -149,5 +140,19 @@ export const FindBlock = (props: {
     y = compYDiff - 1; // complement row result
   }
 
-  return <rect key={id} ref={inputRef(id, selReference)} id={id} width={width} x={x} y={y} {...findBlockProps} />;
+  return (
+    <rect
+      key={id}
+      ref={inputRef(id, selReference)}
+      cursor="pointer"
+      height={18}
+      id={id}
+      stroke={listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)"}
+      strokeWidth={1}
+      style={{ fill: listenerOnly ? "transparent" : fillStyle }}
+      width={width}
+      x={x}
+      y={y}
+    />
+  );
 };
