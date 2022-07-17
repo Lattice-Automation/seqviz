@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, ColorRange, Coor, CutSite, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
+import { Annotation, Coor, CutSite, Highlight, InputRefFuncType, Primer, Ranged, Size } from "../../elements";
 import bindingSites from "../../utils/bindingSites";
 import isEqual from "../../utils/isEqual";
 import { stackElements } from "../elementsToRows";
@@ -34,7 +34,7 @@ export interface CircularProps {
   centralIndex: number;
   compSeq: string;
   cutSites: CutSite[];
-  highlightedRegions: ColorRange[];
+  highlightedRegions: Highlight[];
   inputRef: InputRefFuncType;
   mouseEvent: (e: any) => void;
   name: string;

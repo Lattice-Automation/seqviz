@@ -49,7 +49,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
 /**
  * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
-const CutSites = (props: {
+export default (props: {
   charWidth: number;
   cutSiteRows: CutSite[];
   elementHeight: number;
@@ -99,7 +99,7 @@ const CutSites = (props: {
       highlight: {
         color: c.color,
         x: highlightX,
-        width: highlightWidth - 1,
+        width: Math.max(0, highlightWidth - 1),
       },
       recogStrand: c.direction,
     };
@@ -107,21 +107,21 @@ const CutSites = (props: {
 
   if (!sitesWithX.length) return null;
 
-  const getConnectorXAndWidth = (c: HighlightedCutSite, sequenceCutSite: boolean, complementCutSite: boolean) => {
-    if (sequenceCutSite && complementCutSite) {
+  const getConnectorXAndWidth = (c: HighlightedCutSite, showTopLine: boolean, showBottomLine: boolean) => {
+    if (showTopLine && showBottomLine) {
       return {
         width: Math.abs(c.hangX - c.cutX),
         x: Math.min(c.cutX, c.hangX),
       };
     }
-    if (sequenceCutSite) {
+    if (showTopLine) {
       if (c.start + c.cutX > c.end + c.hangX) {
         return findXAndWidth(firstBase, c.fcut);
       }
       if (c.fcut > c.rcut) return findXAndWidth(firstBase, c.fcut);
       return findXAndWidth(c.fcut, lastBase);
     }
-    if (complementCutSite) {
+    if (showBottomLine) {
       if (c.start + c.cutX > c.end + c.hangX) {
         return findXAndWidth(c.rcut, lastBase);
       }
@@ -138,15 +138,30 @@ const CutSites = (props: {
   return (
     <g className="la-vz-cut-sites">
       {sitesWithX.map((c: HighlightedCutSite) => {
-        // prevent double rendering, by placing the indeces only in the seqBlock
-        // that they need to be shown. Important for the zero-index edge case
-        const sequenceCutSite = c.fcut >= firstBase && c.fcut < lastBase;
-        const complementCutSite = c.rcut >= firstBase && c.rcut < lastBase;
-        const showIndex = sequenceCutSite || complementCutSite;
+        // prevent double rendering of cut-site lines across SeqBlocks. Without this shenanigans below, we wind
+        // if a cut site lands on the last or first base of a SeqBlock, it will also render at the end of a SeqBlock
+        // and the start of the next. Below, we only show a cut if 1. it's wholly within this SeqBlock or
+        // 2. the other cut is also within this block. If both the top and bottom cuts are on the last/first bases,
+        // we render the cut in the first block (ie at the very end of the first block)
+        let showTopLine = c.fcut > firstBase && c.fcut < lastBase;
+        if (c.fcut === firstBase && c.rcut > firstBase && c.rcut <= lastBase) {
+          showTopLine = true;
+        } else if (c.fcut === lastBase && c.rcut >= firstBase && c.rcut <= lastBase) {
+          showTopLine = true;
+        }
 
-        const { width: connectorWidth, x: connectorX } = getConnectorXAndWidth(c, sequenceCutSite, complementCutSite);
+        let showBottomLine = c.rcut > firstBase && c.rcut < lastBase;
+        if (c.rcut === firstBase && c.fcut > firstBase && c.fcut <= lastBase) {
+          showBottomLine = true;
+        } else if (c.rcut === lastBase && c.fcut >= firstBase && c.fcut <= lastBase) {
+          showBottomLine = true;
+        }
+
+        const showConnector = showTopLine || showBottomLine;
+        const { width: connectorWidth, x: connectorX } = getConnectorXAndWidth(c, showTopLine, showBottomLine);
+
         return (
-          <React.Fragment key={`la-vz-cut-site-${c.id}`}>
+          <React.Fragment key={`cut-site-${c.id}-${firstBase}`}>
             {/* custom highlight color block */}
             {c.highlight.color && (
               <HighlightBlock
@@ -162,7 +177,7 @@ const CutSites = (props: {
             )}
 
             {/* label above seq */}
-            {sequenceCutSite && (
+            {showTopLine && (
               <text
                 className="la-vz-cut-site-text"
                 dominantBaseline="hanging"
@@ -185,13 +200,27 @@ const CutSites = (props: {
             )}
 
             {/* lines showing the cut site */}
-            {sequenceCutSite && <rect height={lineHeight} width="1px" x={c.cutX} y={lineYDiff} />}
-            {showIndex && zoom > 10 ? (
-              <rect height="1px" width={connectorWidth} x={connectorX} y={lineHeight + lineYDiff} />
-            ) : null}
-            {complementCutSite && zoom > 10 ? (
-              <rect height={lineHeight} width="1px" x={c.hangX} y={lineHeight + lineYDiff} />
-            ) : null}
+            {showTopLine && (
+              <rect className="la-vz-cut-site-fcut" height={lineHeight} width={1} x={c.cutX} y={lineYDiff} />
+            )}
+            {showConnector && zoom > 10 && (
+              <rect
+                className="la-vz-cut-site-connector"
+                height={1}
+                width={connectorWidth}
+                x={connectorX}
+                y={lineHeight + lineYDiff}
+              />
+            )}
+            {showBottomLine && zoom > 10 && (
+              <rect
+                className="la-vz-cut-site-rcut"
+                height={lineHeight}
+                width={1}
+                x={c.hangX}
+                y={lineHeight + lineYDiff}
+              />
+            )}
 
             {/* dashed outline showing the recog site */}
             {zoom > 10 && (
@@ -255,5 +284,3 @@ const HighlightBlock = (props: {
     />
   );
 };
-
-export default CutSites;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as sizeMe from "react-sizeme";
 
-import { Annotation, ColorRange, CutSite, Ranged } from "../elements";
+import { Annotation, CutSite, Highlight, NamedRanged, Ranged } from "../elements";
 import isEqual from "../utils/isEqual";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
@@ -14,9 +14,9 @@ interface SeqViewerProps {
   bpColors: { [key: number | string]: string };
   compSeq: string;
   cutSites: CutSite[];
-  highlightedRegions: ColorRange[];
+  highlightedRegions: Highlight[];
   name: string;
-  search: Ranged[];
+  search: NamedRanged[];
   selection: Selection;
   seq: string;
   setSelection: (update: Selection) => void;

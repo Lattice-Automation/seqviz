@@ -18,48 +18,38 @@ interface AnnotationRowsProps {
   yDiff: number;
 }
 
-export class AnnotationRows extends React.PureComponent<AnnotationRowsProps> {
-  render() {
-    const {
-      annotationRows,
-      bpsPerBlock,
-      elementHeight,
-      findXAndWidth,
-      firstBase,
-      fullSeq,
-      inputRef,
-      lastBase,
-      seqBlockRef,
-      width,
-      yDiff,
-    } = this.props;
-
-    return (
-      <g className="la-vz-linear-annotations">
-        {annotationRows.map((a: Annotation[], i: number) => {
-          const y = yDiff + elementHeight * i;
-
-          return (
-            <AnnotationRow
-              key={`ann-row-${y}-${firstBase}-${lastBase}`}
-              annotations={a}
-              bpsPerBlock={bpsPerBlock}
-              findXAndWidth={findXAndWidth}
-              firstBase={firstBase}
-              fullSeq={fullSeq}
-              height={elementHeight}
-              inputRef={inputRef}
-              lastBase={lastBase}
-              seqBlockRef={seqBlockRef}
-              width={width}
-              y={y}
-            />
-          );
-        })}
-      </g>
-    );
-  }
-}
+export default ({
+  annotationRows,
+  bpsPerBlock,
+  elementHeight,
+  findXAndWidth,
+  firstBase,
+  fullSeq,
+  inputRef,
+  lastBase,
+  seqBlockRef,
+  width,
+  yDiff,
+}: AnnotationRowsProps) => (
+  <g className="la-vz-linear-annotations">
+    {annotationRows.map((anns: Annotation[], i: number) => (
+      <AnnotationRow
+        key={`ann-row-${anns[0].id}-${firstBase}-${lastBase}`}
+        annotations={anns}
+        bpsPerBlock={bpsPerBlock}
+        findXAndWidth={findXAndWidth}
+        firstBase={firstBase}
+        fullSeq={fullSeq}
+        height={elementHeight}
+        inputRef={inputRef}
+        lastBase={lastBase}
+        seqBlockRef={seqBlockRef}
+        width={width}
+        y={yDiff + elementHeight * i}
+      />
+    ))}
+  </g>
+);
 
 /**
  * a single row of annotations. Multiple of these may be in one seqBlock
@@ -156,23 +146,6 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     // create padding on either side, vertically, of an annotation
     const height = this.props.height * 0.8;
 
-    const rectProps = {
-      shapeRendering: "geometricPrecision",
-    };
-
-    const textProps = {
-      cursor: "pointer",
-      dominantBaseline: "middle",
-      style: {
-        color: "black",
-        fontWeight: 400,
-      },
-      textAnchor: "middle",
-      textRendering: "optimizeLegibility",
-      x: width / 2,
-      y: height / 2 + 1.4,
-    };
-
     const cW = 4; // jagged cutoff width
     const cH = height / 4; // jagged cutoff height
     const [x, w] = [origX, width];
@@ -190,53 +163,55 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
       let bottomRight = `L ${width} ${height}`; // flat right edge
       if ((overflowRight && width > 2 * cW) || crossZero) {
         bottomRight = `
-				L ${width - cW} ${cH}
-				L ${width} ${2 * cH}
-				L ${width - cW} ${3 * cH}
-        L ${width} ${4 * cH}`; // jagged right edge
+          L ${width - cW} ${cH}
+          L ${width} ${2 * cH}
+          L ${width - cW} ${3 * cH}
+          L ${width} ${4 * cH}`; // jagged right edge
       } else if (endFWD) {
         bottomRight = `
-				L ${width} ${height / 2}
-				L ${width - Math.min(2 * cW, w)} ${height}`; // arrow forward
+          L ${width} ${height / 2}
+          L ${width - Math.min(2 * cW, w)} ${height}`; // arrow forward
       }
 
       let bottomLeft = `L 0 ${height} L 0 0`; // flat left edge
       if (overflowLeft && width > 2 * cW) {
         bottomLeft = `
-				L 0 ${height}
-				L ${cW} ${3 * cH}
-				L 0 ${2 * cH}
-				L ${cW} ${cH}
-				L 0 0`; // jagged left edge
+          L 0 ${height}
+          L ${cW} ${3 * cH}
+          L 0 ${2 * cH}
+          L ${cW} ${cH}
+          L 0 0`; // jagged left edge
       } else if (endREV) {
         bottomLeft = `
-				L ${Math.min(2 * cW, w)} ${height}
-				L 0 ${height / 2}
-				L ${Math.min(2 * cW, w)} 0`; // arrow reverse
+          L ${Math.min(2 * cW, w)} ${height}
+          L 0 ${height / 2}
+          L ${Math.min(2 * cW, w)} 0`; // arrow reverse
       }
 
       linePath = `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
     }
 
     if ((forward && overflowRight) || (forward && crossZero)) {
-      if (lastBase - start > 14) {
+      // If it's less than 15 pixels the double arrow barely fits
+      if (width > 15) {
         linePath += `
-      M ${width - 3 * cW} ${cH}
-      L ${width - 2 * cW} ${2 * cH}
-      L ${width - 3 * cW} ${3 * cH}
-      M ${width - 4 * cW} ${cH}
-      L ${width - 3 * cW} ${2 * cH}
-      L ${width - 4 * cW} ${3 * cH}`; // add double arrow forward
+          M ${width - 3 * cW} ${cH}
+          L ${width - 2 * cW} ${2 * cH}
+          L ${width - 3 * cW} ${3 * cH}
+          M ${width - 4 * cW} ${cH}
+          L ${width - 3 * cW} ${2 * cH}
+          L ${width - 4 * cW} ${3 * cH}`; // add double arrow forward
       }
     } else if ((reverse && overflowLeft) || (reverse && crossZero)) {
-      if (end - firstBase > 14) {
+      // If it's less than 15 pixels the double arrow barely fits
+      if (width > 15) {
         linePath += `
-      M ${3 * cW} ${3 * cH}
-      L ${2 * cW} ${cH * 2}
-      L ${3 * cW} ${cH}
-      M ${4 * cW} ${3 * cH}
-      L ${3 * cW} ${cH * 2}
-      L ${4 * cW} ${cH}`; // add double forward reverse
+          M ${3 * cW} ${3 * cH}
+          L ${2 * cW} ${cH * 2}
+          L ${3 * cW} ${cH}
+          M ${4 * cW} ${3 * cH}
+          L ${3 * cW} ${cH * 2}
+          L ${4 * cW} ${cH}`; // add double forward reverse
       }
     }
 
@@ -249,45 +224,51 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
       strokeColor = "gray";
     }
 
-    const annotationPath = (
-      <path
-        ref={inputRef(a.id, {
-          element: seqBlockRef,
-          end: end,
-          name: a.name,
-          ref: a.id,
-          start: start,
-          type: "ANNOTATION",
-        })}
-        className={a.id}
-        id={a.id}
-        style={{
-          cursor: "pointer",
-          fill: color,
-          fillOpacity: 0.7,
-          stroke: strokeColor,
-          strokeWidth: a.type === "insert" ? 2.4 : 0.5,
-        }}
-        {...rectProps}
-        d={linePath}
-        onBlur={() => 0}
-        onFocus={() => 0}
-        onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
-        onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
-      />
-    );
-
     // determine whether the annotation name fits within the width of the annotation
     const nameLength = name.length * 6.75; // aspect ratio of roboto mono is ~0.66
     const nameFits = nameLength < width - 15;
 
     return (
       <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, ${0.1 * this.props.height})`}>
-        {annotationPath}
-        {nameFits ? (
+        <path
+          ref={inputRef(a.id, {
+            element: seqBlockRef,
+            end: end,
+            name: a.name,
+            ref: a.id,
+            start: start,
+            type: "ANNOTATION",
+          })}
+          className={a.id}
+          id={a.id}
+          style={{
+            cursor: "pointer",
+            fill: color,
+            fillOpacity: 0.7,
+            stroke: strokeColor,
+            strokeWidth: a.type === "insert" ? 2.4 : 0.5,
+          }}
+          shapeRendering="geometricPrecision"
+          d={linePath}
+          onBlur={() => 0}
+          onFocus={() => 0}
+          onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
+          onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
+        />
+
+        {nameFits && (
           <text
             fontSize={11}
-            {...textProps}
+            cursor="pointer"
+            dominantBaseline="middle"
+            style={{
+              color: "black",
+              fontWeight: 400,
+            }}
+            textAnchor="middle"
+            textRendering="optimizeLegibility"
+            x={width / 2}
+            y={height / 2 + 1}
             id={a.id}
             onBlur={() => {}}
             onFocus={() => {}}
@@ -296,20 +277,16 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
           >
             {name}
           </text>
-        ) : null}
+        )}
       </g>
     );
   };
 
   render() {
-    const { annotations, width, y } = this.props;
-
-    const height = this.props.height * 0.8;
-    const size = { height, width };
-    const gTranslate = `translate(0, ${y})`;
+    const { annotations, height, width, y } = this.props;
 
     return (
-      <g {...size} className="la-vz-linear-annotation-row" transform={gTranslate}>
+      <g height={height * 0.8} width={width} className="la-vz-linear-annotation-row" transform={`translate(0, ${y})`}>
         {annotations.map(this.renderAnnotation)}
       </g>
     );

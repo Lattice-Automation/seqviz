@@ -1,4 +1,4 @@
-import { Ranged } from "../elements";
+import { NamedRanged, Ranged } from "../elements";
 
 // utility funcs for stackElements
 const last = <T extends Ranged>(arr: T[]): T => arr[arr.length - 1];
@@ -35,7 +35,7 @@ export const stackElements = <T extends Ranged>(elements: T[], seqL: number): T[
         // this annotation doesn't cross the zero index and the last in row doesn't
         return last(elems).end <= a.start;
       }
-      // both this curr anntoation and the last in the row cross the zero index
+      // both this curr annotation and the last in the row cross the zero index
       return last(elems).end < a.start && a.end < first(elems).start;
     });
 
@@ -62,7 +62,11 @@ export const stackElements = <T extends Ranged>(elements: T[], seqL: number): T[
  * NOTE: if an element has a start and end index that are the same, it's assumed to
  * cover the entire plasmid
  */
-export const createMultiRows = <T extends Ranged>(elements: T[][], rowLength: number, rowCount: number): T[][][] => {
+export const createMultiRows = <T extends NamedRanged>(
+  elements: T[][],
+  rowLength: number,
+  rowCount: number
+): T[][][] => {
   const newArr = new Array(rowCount);
 
   // initialize the nested rows in each block
@@ -142,8 +146,8 @@ export const createMultiRows = <T extends Ranged>(elements: T[][], rowLength: nu
  * Search thru the map w/ the given interval finding all relevant elements by finding the appropriate start and end
  * range using Math.floor
  */
-export const createSingleRows = <T extends Ranged>(
-  elements: any[],
+export const createSingleRows = <T extends NamedRanged>(
+  elements: T[],
   rowLength: number,
   rowCount: number,
   duplicateIdsAllowed = true
@@ -159,8 +163,10 @@ export const createSingleRows = <T extends Ranged>(
   for (let i = 0; i < elements.length; i += 1) {
     let { end, start } = elements[i];
 
-    // special case for enzymes that have cutsites away from recog (BsaI)
+    // special case for enzymes that have cut-sites away from recog (BsaI)
+    // @ts-expect-error this is some hack for cut-sites
     if (elements[i].fcut !== undefined) {
+      // @ts-expect-error this is some hack for cut-sites
       const { fcut, rcut } = elements[i];
       start = fcut > end || fcut < start ? fcut : start;
       end = rcut > end || rcut < start ? rcut : end;
@@ -189,7 +195,7 @@ export const createSingleRows = <T extends Ranged>(
         // only add to the array if the user is okay with having duplicates by id.
         // for example, this shouldn't be allowed if multiple translation rows have
         // the same ID
-        if (duplicateIdsAllowed || newArr[s].every(el => el.id !== elements[i].id)) {
+        if (duplicateIdsAllowed || newArr[s].every((el: Element) => el.id !== elements[i].id)) {
           newArr[s].push(elements[i]);
         }
         s += 1;

@@ -1,17 +1,9 @@
 import * as React from "react";
 
-import { InputRefFuncType } from "../../../elements";
+import { InputRefFuncType, Translation } from "../../../elements";
 import { borderColorByIndex, colorByIndex } from "../../../utils/colors";
 import randomid from "../../../utils/randomid";
 import { FindXAndWidthType } from "./SeqBlock";
-
-export interface Translation {
-  AAseq: string;
-  direction: -1 | 1;
-  end: number;
-  id: string;
-  start: number;
-}
 
 interface TranslationRowsProps {
   bpsPerBlock: number;
@@ -28,60 +20,41 @@ interface TranslationRowsProps {
   yDiff: number;
 }
 
-export default class TranslationRows extends React.PureComponent<TranslationRowsProps> {
-  render() {
-    const {
-      bpsPerBlock,
-      charWidth,
-      elementHeight,
-      findXAndWidth,
-      firstBase,
-      fullSeq,
-      inputRef,
-      lastBase,
-      onUnmount,
-      seqBlockRef,
-      translations,
-      yDiff,
-    } = this.props;
-
-    return (
-      <g className="la-vz-linear-translations">
-        {translations.map((t, i) => (
-          <TranslationRow
-            key={`${t.id}-${firstBase}`}
-            bpsPerBlock={bpsPerBlock}
-            charWidth={charWidth}
-            findXAndWidth={findXAndWidth}
-            firstBase={firstBase}
-            fullSeq={fullSeq}
-            height={elementHeight * 0.9}
-            id={t.id}
-            inputRef={inputRef}
-            lastBase={lastBase}
-            seqBlockRef={seqBlockRef}
-            translation={t}
-            y={yDiff + elementHeight * i}
-            onUnmount={onUnmount}
-          />
-        ))}
-      </g>
-    );
-  }
-}
-
-/**
- * TranslationRow
- *
- * a single translation row
- *
- * a row for translations of DNA into Amino Acid sequences so a user can
- * see the resulting protein or peptide sequence within in the viewer
- *
- * chose here to have the row itself, with the pull part seq as a reference
- * cut up the sequence into the dna associated with the current row and
- * translate
- */
+export default ({
+  bpsPerBlock,
+  charWidth,
+  elementHeight,
+  findXAndWidth,
+  firstBase,
+  fullSeq,
+  inputRef,
+  lastBase,
+  onUnmount,
+  seqBlockRef,
+  translations,
+  yDiff,
+}: TranslationRowsProps) => (
+  <g className="la-vz-linear-translations">
+    {translations.map((t, i) => (
+      <TranslationRow
+        key={`${t.id}-${firstBase}`}
+        bpsPerBlock={bpsPerBlock}
+        charWidth={charWidth}
+        findXAndWidth={findXAndWidth}
+        firstBase={firstBase}
+        fullSeq={fullSeq}
+        height={elementHeight * 0.9}
+        id={t.id}
+        inputRef={inputRef}
+        lastBase={lastBase}
+        seqBlockRef={seqBlockRef}
+        translation={t}
+        y={yDiff + elementHeight * i}
+        onUnmount={onUnmount}
+      />
+    ))}
+  </g>
+);
 
 interface TranslationRowProps {
   bpsPerBlock: number;
@@ -99,35 +72,24 @@ interface TranslationRowProps {
   y: number;
 }
 
+/**
+ * A single translation row
+ *
+ * a row for translations of DNA into Amino Acid sequences so a user can
+ * see the resulting protein or peptide sequence within in the viewer
+ *
+ * chose here to have the row itself, with the pull part seq as a reference
+ * cut up the sequence into the dna associated with the current row and
+ * translate
+ */
 class TranslationRow extends React.Component<TranslationRowProps> {
-  static textProps = {
-    cursor: "pointer",
-    dominantBaseline: "middle",
-    style: {
-      color: "black",
-      fontSize: 13,
-      fontWeight: 400,
-    },
-    textAnchor: "middle",
-  };
+  AAs: string[] = [];
 
-  static aaProps = {
-    shapeRendering: "geometricPrecision",
-    style: {
-      cursor: "pointer",
-      opacity: 0.7,
-      strokeWidth: 0.8,
-    },
-  };
-
-  AAs: unknown[] = [];
-
+  // on unmount, clear all AA references.
   componentWillUnmount = () => {
     const { onUnmount } = this.props;
-    this.AAs.forEach(a => {
-      onUnmount(a);
-    });
-  }; // clear all AA references
+    this.AAs.forEach(a => onUnmount(a));
+  };
 
   /**
    * make the actual path string
@@ -234,12 +196,29 @@ class TranslationRow extends React.Component<TranslationRowProps> {
               <path
                 d={path}
                 id={aaId}
-                {...TranslationRow.aaProps}
+                shapeRendering="geometricPrecision"
+                style={{
+                  cursor: "pointer",
+                  opacity: 0.7,
+                  strokeWidth: 0.8,
+                }}
                 fill={colorByIndex(a.charCodeAt(0))}
                 stroke={borderColorByIndex(a.charCodeAt(0))}
               />
               {textShow && (
-                <text id={aaId} x={charWidth * 1.5} y={`${h / 2 + 1.5}`} {...TranslationRow.textProps}>
+                <text
+                  id={aaId}
+                  x={charWidth * 1.5}
+                  y={`${h / 2 + 1.5}`}
+                  cursor="pointer"
+                  dominantBaseline="middle"
+                  style={{
+                    color: "black",
+                    fontSize: 13,
+                    fontWeight: 400,
+                  }}
+                  textAnchor="middle"
+                >
                   {a}
                 </text>
               )}

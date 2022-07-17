@@ -29,17 +29,31 @@ export interface Annotation extends NamedRanged {
   type?: "enzyme" | "insert" | "";
 }
 
+/** Translation is a single translated CDS. */
+export interface Translation extends NamedRanged {
+  AAseq: string;
+  direction: -1 | 1;
+}
+
 /** Primer is a single primer for PCR. Not visualized right now. */
 export interface Primer extends NamedRanged {
   color: string;
   direction: 1 | -1;
 }
 
-/** ColorRange is a region of the plasmid and the desired color for that region. */
-export interface ColorRange {
+/** HighlightProp is a region of the plasmid and the desired highlight for that region. */
+export interface HighlightProp {
   color?: string;
   end: number;
   start: number;
+}
+
+/** Highlight is the processed version of HighlightProp */
+export interface Highlight extends HighlightProp {
+  id: string;
+  name: string;
+  color: string;
+  direction: 1 | -1; // ignored for now
 }
 
 export interface Part {

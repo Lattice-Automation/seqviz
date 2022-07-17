@@ -1,11 +1,23 @@
 import * as React from "react";
 
-import { Annotation, AnnotationProp, ColorRange, CutSite, Enzyme, Part, Ranged } from "../elements";
+import {
+  Annotation,
+  AnnotationProp,
+  CutSite,
+  Enzyme,
+  Highlight,
+  HighlightProp,
+  NamedRanged,
+  Part,
+  Ranged,
+} from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
+import { chooseRandomColor } from "../utils/colors";
 import digest from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { complement, directionality } from "../utils/parser";
+import randomid from "../utils/randomid";
 import search from "../utils/search";
 import { annotationFactory, guessType } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
@@ -48,7 +60,7 @@ export interface SeqVizProps {
   file?: string | File;
 
   /** ranges of the viewer to highlight. */
-  highlightedRegions?: ColorRange[];
+  highlightedRegions?: HighlightProp[];
 
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
@@ -109,7 +121,7 @@ export interface SeqVizState {
   };
   cutSites: CutSite[];
   part: null | Part;
-  search: Ranged[];
+  search: NamedRanged[];
   selection: Selection;
 }
 
@@ -314,7 +326,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   render() {
-    const { name, showComplement, showIndex, style, zoom } = this.props;
+    const { name, showComplement, showIndex, style, highlightedRegions, zoom } = this.props;
     let { compSeq, seq, translations, viewer } = this.props;
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
@@ -341,7 +353,10 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       bpColors: this.props.bpColors || {},
       compSeq: compSeq || "",
       cutSites: cutSites,
-      highlightedRegions: this.props.highlightedRegions || [],
+      highlightedRegions:
+        highlightedRegions?.map(
+          (h): Highlight => ({ ...h, id: randomid(), name: "", color: h.color || chooseRandomColor(), direction: 1 })
+        ) || [],
       name: name || part?.name || "",
       search: search,
       selection: selection,
