@@ -123,6 +123,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
     cutSiteLabels.forEach(c =>
       outerLabels.push({
+        ...c.enzyme,
         ...c,
         start: c.fcut,
         type: "enzyme",

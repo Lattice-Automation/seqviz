@@ -26,21 +26,9 @@ export default (
     // build up cut-sites
     .reduce((acc: { [key: string]: CutSite }, enzyme: Enzyme) => {
       // search for cut sites for this enzyme
-      findCutSites(enzyme, seqToCut)
-        // filter out cut sites that that only start/end at 0-index. I no longer remember what this was for.
-        .filter(c => !(c.fcut === 0 && c.rcut === 0))
-        // modulo the start/end and add an id to each cut-site. this could/should be in `findCutSites`
-        .map(c => ({
-          ...c,
-          end: c.end % seq.length,
-          fcut: c.fcut % seq.length,
-          id: `${enzyme.name}-${enzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
-          rcut: c.rcut % seq.length,
-          start: c.start % seq.length,
-        }))
+      findCutSites(enzyme, seqToCut, seq.length)
         // deduplicate so there's only one enzyme per index
         .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
-
       return acc;
     }, {});
 
@@ -52,9 +40,9 @@ export default (
  *
  * Exported for testing.
  */
-export const findCutSites = (enzyme: Enzyme, seq: string): CutSite[] => {
+export const findCutSites = (enzyme: Enzyme, seq: string, seqL: number): CutSite[] => {
   // get the recognitionSite, fcut, and rcut
-  let { fcut, rcut, rseq } = enzyme;
+  const { fcut, rcut, rseq } = enzyme;
   const cutSites: CutSite[] = [];
 
   // Find matches on the top/forward sequence.
@@ -64,9 +52,9 @@ export const findCutSites = (enzyme: Enzyme, seq: string): CutSite[] => {
     // add the cut site index, after correcting for actual cut site index
     const index = result.index;
     cutSites.push({
-      color: enzyme.color || "",
       direction: 1,
       end: index + rseq.length,
+      enzyme: enzyme,
       fcut: index + fcut,
       id: "",
       name: enzyme.name,
@@ -83,9 +71,9 @@ export const findCutSites = (enzyme: Enzyme, seq: string): CutSite[] => {
     // same as above but correcting for the new reverse complement indexes
     const index = result.index;
     cutSites.push({
-      color: enzyme.color || "",
       direction: -1,
       end: index + rseq.length,
+      enzyme: enzyme,
       fcut: index + rseq.length - rcut,
       id: "",
       name: enzyme.name,
@@ -96,5 +84,22 @@ export const findCutSites = (enzyme: Enzyme, seq: string): CutSite[] => {
   }
 
   // reduce so there's only one enzyme per template cut index
-  return cutSiteIndices.sort((a, b) => a.fcut - b.fcut);
+  return (
+    cutSites
+      .sort((a, b) => a.fcut - b.fcut)
+      // filter out cut sites that that only start/end at 0-index. I no longer remember what this was for
+      .filter(c => !(c.fcut === 0 && c.rcut === 0))
+      // modulo the start/end and add an id to each cut-site
+      .map(c => ({
+        ...c,
+        end: c.end % seqL,
+        fcut: c.fcut % seqL,
+        id: `${enzyme.name}-${enzyme.rseq}-${c.fcut}-${c.direction > 0 ? "fwd" : "rev"}`,
+        rcut: c.rcut % seqL,
+        start: c.start % seqL,
+      }))
+      // if `.range` was provided on the enzyme, limit the search to that range.
+      // https://github.com/Lattice-Automation/seqviz/issues/95
+      .filter(c => (c.enzyme.range ? c.start >= c.enzyme.range.start && c.end <= c.enzyme.range.end : true))
+  );
 };

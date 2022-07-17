@@ -88,29 +88,34 @@ export interface Enzyme {
   /** name is the name of the enzyme. Used in the label above a cut-site */
   name: string;
 
+  /** an optional range over which this enzyme's cut-sites should be limited */
+  range?: {
+    end: number;
+    start: number;
+  };
+
   /** the index of the cut-site on the reverse strand relative to the start of the recognition site */
   rcut: number;
 
   /** the recognition sequence */
   rseq: string;
-
-  /** an optional range over which this enzyme's cut-sites should be limited */
-  range?: Range;
 }
 
-/** a single recognition site on the sequence. */
+/**
+ * a single recognition site on the sequence
+ *
+ * TODO: it should be possible to remove name from below (it's on the enzyme)
+ * and calc fcut/rcut from start/end + enzyme.fcut/rcut
+ */
 export interface CutSite extends NameRange {
-  /** color to highlight the cutsite with. Empty string if it shouldn't be colored */
-  color: string;
-
   /** `1` if top strand (`seq`), `-1` if bottom strand (`compSeq`) */
   direction: 1 | -1;
 
+  /** enzyme used to create this cut-site */
+  enzyme: Enzyme;
+
   /** index relative to start index of the cut on the top strand */
   fcut: number;
-
-  /** name is the name of the enzyme that created this cut site */
-  name: string;
 
   /** index relative to start index of the cut on the bottom strand */
   rcut: number;

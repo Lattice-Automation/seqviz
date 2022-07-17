@@ -125,11 +125,11 @@ const SingleCutSite = (props: {
 
   return (
     <React.Fragment>
-      {cutSite.color && (
+      {cutSite.enzyme.color && (
         <FindArc
           direction={1}
           end={cutSite.end}
-          fillStyle={cutSite.color}
+          fillStyle={cutSite.enzyme.color || ""}
           generateArc={generateArc}
           getRotation={getRotation}
           inputRef={inputRef}

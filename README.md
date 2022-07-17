@@ -182,6 +182,25 @@ enzymes = [
 ];
 ```
 
+Enzymes can be limited to a range via the `range` property on an `Enzyme` object:
+
+```js
+enzymes = [
+  {
+    name: "Cas9",
+    rseq: "NGG", // recognition sequence
+    fcut: 0, // cut index on FWD strand, relative to start of rseq
+    rcut: 1, // cut index on REV strand, relative to start of rseq
+    color: "#D7E5F0", // color to highlight recognition site with
+    range: {
+      // only show recognition sites between 100th and 250th index [100,250]
+      start: 100,
+      end: 250,
+    },
+  },
+];
+```
+
 #### `zoom (={ linear: 50, circular: 0 })`
 
 How zoomed the viewer(s) should be `0-100`. Keyed by viewer type (`viewer`).
