@@ -46,6 +46,7 @@ interface IndexProps {
 export default class Index extends React.PureComponent<IndexProps> {
   static contextType = CentralIndexContext;
   static context: React.ContextType<typeof CentralIndexContext>;
+  declare context: React.ContextType<typeof CentralIndexContext>;
 
   static getDerivedStateFromProps = (nextProps: IndexProps) => {
     const { seqLength } = nextProps;
