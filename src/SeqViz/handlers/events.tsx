@@ -294,13 +294,7 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
     eventRouter;
 
     render() {
-      const { centralIndex, mouseEvent, selection, setCentralIndex, setSelection, ...rest } = this.props;
       const { Circular, name } = this.props;
-
-      const type = Circular ? "circular" : "linear";
-      const id = `la-vz-${type}-${name.replace(/\s/g, "")}-event-router`;
-
-      const newProps = { ...rest, mouseEvent: this.handleMouseEvent };
 
       return (
         <div
@@ -308,15 +302,14 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
             this.eventRouter = ref;
           }}
           className="la-vz-viewer-event-router"
-          id={id}
+          id={`la-vz-${Circular ? "circular" : "linear"}-${name.replace(/\s/g, "")}-event-router`}
           role="presentation"
           tabIndex={-1}
           onKeyDown={this.handleKeyPress}
-          onMouseMove={mouseEvent}
+          onMouseMove={this.props.mouseEvent}
           onWheel={this.handleScrollEvent}
         >
-          {/* @ts-expect-error */}
-          <WrappedComponent {...newProps} />
+          <WrappedComponent {...this.props} mouseEvent={this.handleMouseEvent} />
         </div>
       );
     }

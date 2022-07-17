@@ -27,7 +27,7 @@ interface CutSitesProps {
   seqLength: number;
 }
 
-export default (props: CutSitesProps) => {
+const CutSites = (props: CutSitesProps) => {
   const { cutSites } = props;
   if (!cutSites.length) return null;
 
@@ -48,10 +48,10 @@ export default (props: CutSitesProps) => {
 };
 
 const SingleCutSite = (props: {
+  calculateLinePath: (index: number, startRadius: number, endRadius: number) => string;
   center: Coor;
   cutSite: CutSite;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  calculateLinePath: (index: number, startRadius: number, endRadius: number) => string;
   generateArc: (args: {
     arrowFWD?: boolean;
     arrowREV?: boolean;
@@ -144,12 +144,6 @@ const SingleCutSite = (props: {
         {<path d={connectorLinePath} {...lineStyle} />}
         {<path d={hangLinePath} {...lineStyle} />}
         <path
-          cursor="pointer"
-          fill="rgba(255, 165, 0, 0.2)"
-          fillOpacity={0}
-          shapeRendering="auto"
-          stroke="black"
-          strokeWidth={1}
           ref={inputRef(id, {
             end: end,
             ref: id,
@@ -157,9 +151,17 @@ const SingleCutSite = (props: {
             type: "ENZYME",
           })}
           className={id}
+          cursor="pointer"
           d={recogAreaPath}
+          fill="rgba(255, 165, 0, 0.2)"
+          fillOpacity={0}
+          shapeRendering="auto"
+          stroke="black"
+          strokeWidth={1}
         />
       </g>{" "}
     </React.Fragment>
   );
 };
+
+export default CutSites;

@@ -18,7 +18,12 @@ interface AnnotationRowsProps {
   yDiff: number;
 }
 
-export default ({
+/**
+ * Render each row of annotations into its own row.
+ *
+ * This is not a default export for sake of the React component displayName
+ */
+const AnnotationRows = ({
   annotationRows,
   bpsPerBlock,
   elementHeight,
@@ -240,7 +245,9 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
             type: "ANNOTATION",
           })}
           className={a.id}
+          d={linePath}
           id={a.id}
+          shapeRendering="geometricPrecision"
           style={{
             cursor: "pointer",
             fill: color,
@@ -248,8 +255,6 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
             stroke: strokeColor,
             strokeWidth: a.type === "insert" ? 2.4 : 0.5,
           }}
-          shapeRendering="geometricPrecision"
-          d={linePath}
           onBlur={() => 0}
           onFocus={() => 0}
           onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
@@ -258,9 +263,10 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
 
         {nameFits && (
           <text
-            fontSize={11}
             cursor="pointer"
             dominantBaseline="middle"
+            fontSize={11}
+            id={a.id}
             style={{
               color: "black",
               fontWeight: 400,
@@ -269,9 +275,12 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
             textRendering="optimizeLegibility"
             x={width / 2}
             y={height / 2 + 1}
-            id={a.id}
-            onBlur={() => {}}
-            onFocus={() => {}}
+            onBlur={() => {
+              // do nothing
+            }}
+            onFocus={() => {
+              // do nothing
+            }}
             onMouseOut={() => this.hoverOtherAnnotationRows(a.id, 0.7)}
             onMouseOver={() => this.hoverOtherAnnotationRows(a.id, 1.0)}
           >
@@ -286,9 +295,11 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     const { annotations, height, width, y } = this.props;
 
     return (
-      <g height={height * 0.8} width={width} className="la-vz-linear-annotation-row" transform={`translate(0, ${y})`}>
+      <g className="la-vz-linear-annotation-row" height={height * 0.8} transform={`translate(0, ${y})`} width={width}>
         {annotations.map(this.renderAnnotation)}
       </g>
     );
   }
 }
+
+export default AnnotationRows;

@@ -272,7 +272,9 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
       <div
         ref={this.scroller}
         className="la-vz-linear-scroller"
-        onFocus={() => {}}
+        onFocus={() => {
+          // do nothing
+        }}
         onMouseOver={this.handleMouseOver}
         onScroll={this.handleScrollOrResize}
       >

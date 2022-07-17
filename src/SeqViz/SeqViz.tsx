@@ -326,7 +326,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   render() {
-    const { name, showComplement, showIndex, style, highlightedRegions, zoom } = this.props;
+    const { highlightedRegions, name, showComplement, showIndex, style, zoom } = this.props;
     let { compSeq, seq, translations, viewer } = this.props;
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
@@ -351,7 +351,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       cutSites: cutSites,
       highlightedRegions:
         highlightedRegions?.map(
-          (h): Highlight => ({ ...h, id: randomid(), name: "", color: h.color || chooseRandomColor(), direction: 1 })
+          (h): Highlight => ({ ...h, color: h.color || chooseRandomColor(), direction: 1, id: randomid(), name: "" })
         ) || [],
       name: name || part?.name || "",
       search: search,
