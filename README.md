@@ -56,9 +56,11 @@ npm install seqviz
 #### CDN
 
 <!-- cdn-example(cmd:) -->
+
 ```html
 <script src="https://unpkg.com/seqviz"></script>
 ```
+
 <!-- /cdn-example -->
 
 ### Instantiation
@@ -149,7 +151,7 @@ In the example above, the "Strong promoter" would span the first to twenty-secon
 
 #### `translations (=[])`
 
-An array of `translations` showing amino acids beneath the DNA sequence. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A
+An array of `translations` showing amino acids beneath a DNA sequence. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A
 direction is required: 1 (FWD) or -1 (REV).
 
 ```js

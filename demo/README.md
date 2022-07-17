@@ -1,6 +1,6 @@
 # seqviz Demo
 
-A demonstration of the DNA Sequence Visualizer provided by Lattice. Visit [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) to see the source code and contribute.
+A demonstration of SeqViz. Visit [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) to see the source code and contribute.
 
 ## Running in Development
 
