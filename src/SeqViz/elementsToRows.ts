@@ -5,22 +5,23 @@ const last = <T extends Ranged>(arr: T[]): T => arr[arr.length - 1];
 const first = <T extends Ranged>(arr: T[]): T => arr[0];
 
 /**
- * Take an array of elements (a one deep array) and create an array of
- * array of annotations, where non-overlapping annotations can be in the same
- * row. Example:
+ * Take an array of elements and create a 2D array where non-overlapping elements are in
+ * the same row. Example:
  *
- * input (one array):
+ * input (`T[]`):
+ * ```
  * 		[ ---Ann---	---Ann3---
  * 			 ---Ann2--- ]
+ * ```
  *
- * output (array of array):
+ * output (`T[][]`):
+ * ```
  * 		[ ---Ann--- ---Ann3---]
  * 		[		---Ann2---    ]
+ * ```
  */
-export const stackElements = <T extends Ranged>(elements: T[], seqL: number): T[][] => {
-  const sortedElements = [...elements];
-
-  return sortedElements.reduce((acc, a) => {
+export const stackElements = <T extends NamedRanged>(elements: T[], seqL: number): T[][] =>
+  [...elements].reduce((acc: T[][], a) => {
     const insertIndex = acc.findIndex(elems => {
       if (a.end === a.start) {
         // the element has the same start and end index and therefore the whole
@@ -28,35 +29,32 @@ export const stackElements = <T extends Ranged>(elements: T[], seqL: number): T[
         return false;
       }
       if (last(elems).end <= last(elems).start) {
-        // the last annotation in this row crosses zero index
+        // the last element in this row crosses zero index
         return last(elems).end + seqL <= a.start;
       }
       if (a.end > a.start) {
-        // this annotation doesn't cross the zero index and the last in row doesn't
+        // this element doesn't cross the zero index and the last in row doesn't
         return last(elems).end <= a.start;
       }
-      // both this curr annotation and the last in the row cross the zero index
+      // both this curr element and the last in the row cross the zero index
       return last(elems).end < a.start && a.end < first(elems).start;
     });
 
-    const newAcc: T[][] = [...acc];
-
     if (insertIndex > -1) {
       // insert in the row where it's the new highest
-      newAcc[insertIndex].push(a);
+      acc[insertIndex].push(a);
     } else {
       // create a new row for this entry
-      newAcc.push([a]);
+      acc.push([a]);
     }
-    return newAcc;
+    return acc;
   }, []);
-};
 
 /**
  * given an array of arrays of an element, fragment the element into seq blocks
  *
  * this is needed in the Linear sequence viewer because it's easier to send only the
- * relevant elements to the childSeqBlock, rather to send every SeqBlock everything
+ * relevant elements to the child SeqBlocks, rather to send every SeqBlock everything
  * and have the block figure out whether element is included within it
  *
  * NOTE: if an element has a start and end index that are the same, it's assumed to
@@ -67,7 +65,7 @@ export const createMultiRows = <T extends NamedRanged>(
   rowLength: number,
   rowCount: number
 ): T[][][] => {
-  const newArr = new Array(rowCount);
+  const newArr: T[][][] = new Array(rowCount);
 
   // initialize the nested rows in each block
   for (let i = 0; i < rowCount; i += 1) {
@@ -79,7 +77,7 @@ export const createMultiRows = <T extends NamedRanged>(
 
   // for each row of input
   for (let i = 0; i < elements.length; i += 1) {
-    // for each annotation|ORF in that row
+    // for each element in that row
     for (let j = 0; j < elements[i].length; j += 1) {
       // if the element doesn't cross the zero index
       if (elements[i][j].start < elements[i][j].end) {
@@ -99,7 +97,7 @@ export const createMultiRows = <T extends NamedRanged>(
         // the element crosses the zero index and doesn't cover the whole plasmid
 
         // first, push onto all arrays from the end down to the zero
-        let e = Math.floor(elements[i][j].end / rowLength);
+        let e = Math.floor((elements[i][j].end - 1) / rowLength);
         if (elements[i][j].end === 0) {
           // handle an edge case where element ends at 0-index
           e = -1; // skip adding to rows
@@ -138,13 +136,14 @@ export const createMultiRows = <T extends NamedRanged>(
   for (let i = 0; i < rowCount; i += 1) {
     newArr[i] = newArr[i].filter(a => a[0]);
   }
-
   return newArr;
 };
 
 /**
- * Search thru the map w/ the given interval finding all relevant elements by finding the appropriate start and end
- * range using Math.floor
+ * Given an array of elements and an interval (`rowLength`), bin elements into rows.
+ *
+ * This is used by the Linear viewer for CutSites and Highlights where it's okay for
+ * elements to overlap one another.
  */
 export const createSingleRows = <T extends NamedRanged>(
   elements: T[],
@@ -152,14 +151,14 @@ export const createSingleRows = <T extends NamedRanged>(
   rowCount: number,
   duplicateIdsAllowed = true
 ): T[][] => {
-  const newArr = new Array(rowCount);
+  const newArr: T[][] = new Array(rowCount);
 
   // initialize the nested rows in each block
   for (let i = 0; i < rowCount; i += 1) {
     newArr[i] = [];
   }
 
-  // assign each annotation to its respective array
+  // assign each element to its respective array
   for (let i = 0; i < elements.length; i += 1) {
     let { end, start } = elements[i];
 
@@ -174,7 +173,7 @@ export const createSingleRows = <T extends NamedRanged>(
 
     if (start < end) {
       let k = Math.floor(start / rowLength);
-      const rowEnd = Math.floor(end / rowLength);
+      const rowEnd = Math.floor((end - 1) / rowLength);
 
       while (k <= rowEnd && k < rowCount) {
         newArr[k].push(elements[i]);
@@ -195,7 +194,7 @@ export const createSingleRows = <T extends NamedRanged>(
         // only add to the array if the user is okay with having duplicates by id.
         // for example, this shouldn't be allowed if multiple translation rows have
         // the same ID
-        if (duplicateIdsAllowed || newArr[s].every((el: Element) => el.id !== elements[i].id)) {
+        if (duplicateIdsAllowed || newArr[s].every(el => el.id !== elements[i].id)) {
           newArr[s].push(elements[i]);
         }
         s += 1;

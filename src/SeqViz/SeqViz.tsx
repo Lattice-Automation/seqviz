@@ -338,12 +338,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       compSeq = compSeq || part?.compSeq || complement(seq).compSeq || "";
     }
     if (seqType !== "dna" && translations && translations.length) {
-      // TODO: this really shouldn't in render
+      // TODO: this should have a warning, I just don't want to do it in render
       translations = [];
-      console.warn(
-        "Not rendering translations because seqType: %s. Create an issue if this is a bug: https://github.com/Lattice-Automation/seqviz/issues",
-        seqType
-      );
     }
 
     // Since all the props are optional, we need to parse them to defaults.
@@ -364,7 +360,13 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       setSelection: this.setSelection,
       showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
-      translations: translations || [],
+      translations:
+        (translations &&
+          translations.map(t => ({
+            ...t,
+            end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+          }))) ||
+        [],
       zoom: {
         circular: zoom?.circular || 0,
         linear: zoom?.linear || 50,

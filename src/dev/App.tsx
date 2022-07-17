@@ -56,7 +56,7 @@ export const App = () => {
     showComplement: true,
     showIndex: true,
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
-    translations: [{ direction: 1, end: 70, start: 0 }],
+    translations: [{ direction: 1, end: 69, start: 0 }],
 
     viewer: "both_flip",
     zoom: { circular: 0, linear: 100 },

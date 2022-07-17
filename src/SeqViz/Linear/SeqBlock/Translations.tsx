@@ -209,7 +209,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
                 <text
                   id={aaId}
                   x={charWidth * 1.5}
-                  y={`${h / 2 + 1.5}`}
+                  y={`${h / 2 + 1}`}
                   cursor="pointer"
                   dominantBaseline="middle"
                   style={{
