@@ -13,7 +13,7 @@ import {
 } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { chooseRandomColor } from "../utils/colors";
+import { colorByIndex } from "../utils/colors";
 import digest from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { complement, directionality } from "../utils/parser";
@@ -340,12 +340,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   render() {
-    const { highlightedRegions, highlights, name, showComplement, showIndex, style, zoom } = this.props;
-    let { compSeq, seq, translations, viewer } = this.props;
+    const { highlightedRegions, highlights, name, seq: seqProp, showComplement, showIndex, style, zoom } = this.props;
+    let { compSeq, translations, viewer } = this.props;
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
-    seq = seq || part?.seq || "";
+    const seq = seqProp || part?.seq || "";
     const seqType = this.props.seqType || guessType(seq);
     if (!seq) return <div className="la-vz-seqviz" />;
     if (seqType === "dna") {
@@ -357,9 +357,17 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     }
 
     // process highlights, adding color + id (+ combining deprecated highlightedRegions)
-    const highlightsProcessed = (highlights || [])
-      .concat(highlightedRegions || [])
-      .map((h): Highlight => ({ ...h, color: h.color || chooseRandomColor(), direction: 1, id: randomid(), name: "" }));
+    const highlightsProcessed = (highlights || []).concat(highlightedRegions || []).map(
+      (h, i): Highlight => ({
+        ...h,
+        color: h.color || colorByIndex(i),
+        direction: 1,
+        end: h.end % (seq.length + 1),
+        id: randomid(),
+        name: "",
+        start: h.start % (seq.length + 1),
+      })
+    );
 
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
