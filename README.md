@@ -117,19 +117,11 @@ One of `"linear" | "circular" | "both" | "both_flip"`. The type and orientation 
 
 #### `name (='')`
 
-The name of the sequence/plasmid.
+The name of the sequence/plasmid. Shown at the center of the circular viewer.
 
 #### `compSeq (='')`
 
 The complement sequence. Inferred from `seq` by default.
-
-#### `showComplement (=true)`
-
-Whether to show the complement sequence.
-
-#### `showIndex (=true)`
-
-Whether to show the index line and ticks below the sequence.
 
 #### `annotations (=[])`
 
@@ -199,7 +191,7 @@ enzymes = [
 Ranges of the sequence to highlight. A default color from `colors` is used if none is provided.
 
 ```js
-highlightedRegions: [
+highlights = [
   { start: 36, end: 66, color: "magenta" },
   { start: 70, end: 80 },
 ];
@@ -235,7 +227,7 @@ colors = [
 An object that maps basepairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
 
 ```js
-{ "A": "#FF0000", "T": "blue", 12: "#00FFFF" }
+bpColors = { A: "#FF0000", T: "blue", 12: "#00FFFF" };
 ```
 
 #### `style (={})`
@@ -243,7 +235,7 @@ An object that maps basepairs to their color. The key/bp is either a nucleotide 
 Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if the element around `seqviz` lacks a defined height and/or width. For example:
 
 ```js
-style: { height: "100vh", width: "100vw" }
+style = { height: "100vh", width: "100vw" };
 ```
 
 #### `onSelection (=null)`
@@ -276,7 +268,7 @@ following an `annotation` click.
 A `search` object for specifying search results to highlight on the viewer. An example is below:
 
 ```js
-{ "query": "aatggtctc", "mismatch": 1 }
+search = { query: "aatggtctc", mismatch: 1 };
 ```
 
 Searching supports the following nucleotide wildcards within the `query`.
@@ -329,12 +321,20 @@ A functions that returns whether to copy the selected range on the viewer(s) to 
 An example of an `copyEvent` function for copying after `ctrl+c` or `meta+c` events:
 
 ```js
-copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey);
+copyEvent = event => event.key === "c" && (event.metaKey || event.ctrlKey);
 ```
+
+#### `showComplement (=true)`
+
+Whether to show the complement sequence.
+
+#### `showIndex (=true)`
+
+Whether to show the index line and ticks below the sequence.
 
 #### `rotateOnScroll (=true)`
 
-By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with `rotateOnScroll: false`.
+The circular viewer rotates when scrolling over the viewer by default. That can be disabled with `rotateOnScroll: false`.
 
 #### `backbone (='')`
 
