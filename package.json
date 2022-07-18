@@ -2,17 +2,20 @@
   "name": "seqviz",
   "version": "3.5.2",
   "private": false,
-  "description": "DNA/RNA/AA sequence viewer. Supports custom, GenBank, FASTA, or NCBI accession input",
+  "main": "dist/index.js",
+  "types": "dist/viewer.d.ts",
+  "unpkg": "dist/seqviz.min.js",
+  "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
     "format": "prettier ./src/** --config package.json --write && eslint src --ext ts,tsx --fix",
     "lint": "prettier ./src/** --config package.json --check && eslint src --ext ts,tsx --quiet",
-    "major": "./config/scripts/release.sh major",
-    "minor": "./config/scripts/release.sh minor",
-    "patch": "./config/scripts/release.sh patch",
+    "major": "./config/release.sh major",
+    "minor": "./config/release.sh minor",
+    "patch": "./config/release.sh patch",
     "start": "webpack serve --open --config ./config/webpack.dev.config.js",
-    "test": "node ./config/scripts/test.js",
+    "test": "jest",
     "test:ci": "npm run lint && CI=true npm run test && npm run build"
   },
   "keywords": [
@@ -41,11 +44,8 @@
     "LICENSE",
     "README.md"
   ],
-  "main": "dist/index.js",
-  "types": "dist/viewer.d.ts",
-  "unpkg": "dist/seqviz.min.js",
   "browserslist": [
-    ">0.2%",
+    ">1%",
     "not dead"
   ],
   "prettier": {
@@ -58,143 +58,52 @@
     "importOrderSortSpecifiers": true,
     "printWidth": 120
   },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ],
-      "@babel/preset-typescript",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-typescript",
-        {
-          "allowDeclareFields": true
-        }
-      ],
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "babel-plugin-module-resolver",
-      "@babel/plugin-transform-runtime"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "modulePaths": [
-      "<rootDir>/src"
-    ],
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/config/jest/setup.js"
-    ],
-    "testEnvironment": "jsdom",
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "verbose": true
-  },
   "dependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "buffer": "^6.0.3",
     "bufferpack": "0.0.6",
-    "node-fetch": "^2.6.1",
     "react-sizeme": "^3.0.0",
     "string_decoder": "^1.3.0",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.16.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/plugin-transform-typescript": "^7.18.8",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
-    "@babel/preset-typescript": "^7.12.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/enzyme": "^3.10.10",
     "@types/jest": "^28.1.4",
-    "@types/node-fetch": "^3.0.3",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/xml2js": "^0.4.9",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
-    "babel-jest": "^26.6.3",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "camelcase": "^5.3.1",
-    "core-js": "^3.7.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
     "css-loader": "^3.6.0",
-    "dotenv": "^8.2.0",
-    "dotenv-expand": "^5.1.0",
     "enzyme": "^3.11.0",
     "eslint": "^8.8.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-sort-destructure-keys": "^1.4.0",
     "eslint-plugin-sort-keys-fix": "^1.1.2",
     "eslint-plugin-typescript-sort-keys": "^2.1.0",
-    "file-loader": "^5.0.0",
     "html-webpack-plugin": "^4.5.2",
-    "jest": "^26.0.0",
+    "jest": "^28.0.0",
+    "jest-css-modules": "^2.1.0",
+    "jest-environment-jsdom": "^28.1.3",
+    "jest-fetch-mock": "^3.0.3",
     "path-browserify": "^1.0.1",
     "prettier": "^2.5.1",
     "react": "^17.0.0",
-    "react-dev-utils": "^12.0.1",
     "react-dom": "^17.0.0",
-    "regenerator-runtime": "^0.13.7",
-    "resolve": "^1.19.0",
     "source-map-loader": "^1.1.3",
     "stream-browserify": "^3.0.0",
     "style-loader": "^1.3.0",
     "timers-browserify": "^2.0.12",
+    "ts-jest": "^28.0.0",
     "ts-loader": "^8.3.0",
-    "ts-pnp": "^1.2.0",
     "typescript": "^4.5.2",
     "url": "^0.11.0",
     "webpack": "^5.73.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3",
-    "webpack-manifest-plugin": "^5.0.0",
-    "webpack-node-externals": "^3.0.0",
-    "workbox-webpack-plugin": "^6.0.0",
-    "xml-comment-api": "^1.0.1"
+    "webpack-node-externals": "^3.0.0"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.0 || ^18.0.0",

@@ -26,9 +26,7 @@ const cdnBuild = {
   mode: "production",
   module: {
     rules: [
-      // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' }, exclude: /node_modules/ },
       { test: /\.(t|j)sx?$/, use: { loader: "ts-loader" }, exclude: /node_modules/ },
-      // addition - add source-map support
       { enforce: "pre", test: /\.js$/, exclude: /node_modules/, loader: "source-map-loader" },
       {
         test: /\.(css)$/,
@@ -64,8 +62,7 @@ const cdnBuild = {
 };
 
 /**
- * npmBuild, same as CDN build except node_modules are ignored as externals
- * and the output filename differs
+ * npmBuild, same as CDN build except node_modules are ignored as externals and the output filename differs
  */
 const npmBuild = Object.assign({}, cdnBuild, {
   output: {
