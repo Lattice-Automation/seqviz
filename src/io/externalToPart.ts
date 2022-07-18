@@ -1,5 +1,3 @@
-import * as fetch from "node-fetch";
-
 import { Part } from "../elements";
 import fileToParts from "./filesToParts";
 import { fetchBBB } from "./igemBackbones";
@@ -32,9 +30,9 @@ export default async (
     console.error("backbone specified without a BioBrick");
   }
 
-  const response = await fetch(
-    new fetch.Request(url, { headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" } })
-  )
+  const response = await fetch(url, {
+    headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" },
+  })
     .then(response => response.text())
     .catch(console.error);
 

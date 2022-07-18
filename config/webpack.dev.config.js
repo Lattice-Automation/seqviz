@@ -18,7 +18,6 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, "..", "dist"),
     },
-    historyApiFallback: true,
     port: 9000,
   },
   entry: {
