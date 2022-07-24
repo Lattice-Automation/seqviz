@@ -25,32 +25,31 @@ export default async (
   if (accession.startsWith("BB")) {
     // it's a BioBrick... target the iGEM repo
     igem = true;
-    url = `http://parts.igem.org/xml/part.${accession.trim()}`;
+    url = `http://parts.igem.org/cgi/xml/part.cgi?part=${accession.trim()}`;
   } else if (backbone.length) {
     console.error("backbone specified without a BioBrick");
   }
 
-  const response = await fetch(url, {
-    headers: {
-      "X-Requested-With": "XMLHttpRequest",
-      "access-control-allow-origin": "*",
-    },
-  })
-    .then(response => response.text())
-    .catch(console.error);
+  // request the XML from the webserver
+  let body = "";
+  try {
+    const response = await fetch(url);
+    body = await response.text();
+  } catch (err) {
+    throw new Error(`Failed to retrieve seq via accession '${accession}' from '${url}'`);
+  }
 
-  if (!response) {
-    throw new Error(`Failed to retrieve a seq with accession ${accession} from ${url}`);
+  if (!body) {
+    throw new Error(`Failed to retrieve seq via accession '${accession}' from '${url}'`);
   }
 
   // convert to a part
   const igemBackbone = igem && backbone.length ? { backbone: fetchBBB(backbone), name: backbone } : "";
-
   if (igem && igemBackbone === "") {
     console.error("iGEM BioBrick ID used, but no backbone ID specified.");
   }
 
-  const parts = await fileToParts(response, {
+  const parts = await fileToParts(body, {
     backbone: igemBackbone,
     colors: colors,
   });

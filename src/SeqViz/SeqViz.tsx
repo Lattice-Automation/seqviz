@@ -110,7 +110,7 @@ export interface SeqVizProps {
   style?: Record<string, unknown>;
 
   /** ranges of sequence that should have amino acid translations shown */
-  translations?: Range[];
+  translations?: { direction?: number; end: number; start: number }[];
 
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
@@ -254,12 +254,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       }
     } catch (err) {
       console.warn(
-        `Failed to parse input props. Please report if this is unexpected: https://github.com/Lattice-Automation/seqviz/issues
+        `Failed to parse input props. Please report this: https://github.com/Lattice-Automation/seqviz/issues
   seq: %s
   file: %s
   accession: %s
   error: %s`,
-        seq || undefined,
+        (seq && seq.substring(0, 20) + "...") || undefined,
         file,
         accession,
         err
@@ -352,6 +352,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
 
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
+    // TODO: deriveStateFromProps? I forget why I'm not using that.
     const seq = seqProp || part?.seq || "";
     const seqType = this.props.seqType || guessType(seq);
     if (!seq) return <div className="la-vz-seqviz" />;
@@ -391,13 +392,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       setSelection: this.setSelection,
       showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
-      translations:
-        (translations &&
-          translations.map(t => ({
-            ...t,
-            end: t.start + Math.floor((t.end - t.start) / 3) * 3,
-          }))) ||
-        [],
+      translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
+        direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
+        end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+        start: t.start % seq.length,
+      })),
       zoom: {
         circular: zoom?.circular || 0,
         linear: zoom?.linear || 50,

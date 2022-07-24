@@ -39,7 +39,7 @@ const AnnotationRows = ({
   <g className="la-vz-linear-annotations">
     {annotationRows.map((anns: Annotation[], i: number) => (
       <AnnotationRow
-        key={`ann-row-${anns[0].id}-${firstBase}-${lastBase}`}
+        key={`annotation-linear-row-${anns[0].id}-${firstBase}-${lastBase}`}
         annotations={anns}
         bpsPerBlock={bpsPerBlock}
         findXAndWidth={findXAndWidth}
@@ -85,7 +85,7 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
   renderAnnotation = (a: Annotation, index: number) => {
     const { annotations, bpsPerBlock, findXAndWidth, firstBase, fullSeq, inputRef, lastBase, seqBlockRef } = this.props;
 
-    const { color, direction, end, name, start } = a;
+    const { color, direction, end, id, name, start } = a;
     const forward = direction === 1;
     const reverse = direction === -1;
     let { width, x: origX } = findXAndWidth(start, end);
@@ -234,7 +234,12 @@ class AnnotationRow extends React.PureComponent<AnnotationRowProps> {
     const nameFits = nameLength < width - 15;
 
     return (
-      <g key={`${a.id}-${firstBase}`} id={a.id} transform={`translate(${x}, ${0.1 * this.props.height})`}>
+      <g
+        // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
+        key={`annotation-linear-${id}-${firstBase}-${lastBase}-${overflowLeft}`}
+        id={a.id}
+        transform={`translate(${x}, ${0.1 * this.props.height})`}
+      >
         <path
           ref={inputRef(a.id, {
             element: seqBlockRef,

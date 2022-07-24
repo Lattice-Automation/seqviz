@@ -153,7 +153,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
     return null;
   }
 
-  //is name in top or bottom half?
+  // is the name in top or bottom half?
   const mid = (annLength / 2 + a.start + seqLength - centralIndex) % seqLength;
   const bottomHalf = mid > seqLength * 0.25 && mid < seqLength * 0.75;
 

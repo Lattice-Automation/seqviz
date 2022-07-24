@@ -124,38 +124,30 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
   /**
    * Given a bp, return either the bp as was or a text span if it should have a color.
-   * We're looking up each bp in the props.bpColors map to see if it should be shaded and, if so, wrapping it in a textSpan
+   *
+   * We're looking up each bp in the props.bpColors map to see if it should be shaded and, if so,
+   * wrapping it in a textSpan with that color as a fill
    */
   seqTextSpan = (bp: string, i: number) => {
-    const { charWidth, id } = this.props;
+    const { bpColors, charWidth, firstBase, id } = this.props;
 
-    const color = this.bpColorLookup(bp, i);
-    if (color) {
-      return (
-        <tspan key={i + bp + id} fill={color} x={charWidth * i + charWidth * 0.2}>
-          {bp}
-        </tspan>
-      );
+    let color: string | undefined;
+    if (bpColors) {
+      color =
+        bpColors[bp] ||
+        bpColors[bp.toUpperCase()] ||
+        bpColors[bp.toLowerCase()] ||
+        bpColors[i + firstBase] ||
+        undefined;
     }
 
     return (
       // the +0.2 here and above is to offset the characters they're not right on the left edge. When they are,
       // other elements look like they're shifted too far to the right.
-      <tspan key={i + bp + id} x={charWidth * i + charWidth * 0.2}>
+      <tspan key={i + bp + id} fill={color || undefined} x={charWidth * i + charWidth * 0.2}>
         {bp}
       </tspan>
     );
-  };
-
-  /**
-   * Lookup a bp in the bpColors prop and return the color
-   * associated with the character, if one exists. Store the results
-   */
-  bpColorLookup = (bp: string, i: number) => {
-    const { bpColors, firstBase } = this.props;
-
-    if (!bpColors) return;
-    return bpColors[bp] || bpColors[bp.toUpperCase()] || bpColors[bp.toLowerCase()] || bpColors[i + firstBase] || null;
   };
 
   render() {
@@ -169,6 +161,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       firstBase,
       forwardPrimerRows,
       fullSeq,
+      highlights,
       id,
       inputRef,
       lineHeight,
@@ -190,11 +183,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     if (!size.width || !size.height) return null;
 
-    const svgProps = {
-      display: "block",
-      height: blockHeight,
-      width: size.width,
-    };
     const textProps = {
       dominantBaseline: "hanging",
       fontSize: seqFontSize,
@@ -267,15 +255,15 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       selectEdgeHeight += lineHeight;
     }
 
-    const filteredSearchRows = showComplement ? searchRows : searchRows.filter(r => r.direction === 1);
-
     return (
       <svg
-        {...svgProps}
         ref={inputRef(id, seqRange)}
         className="la-vz-seqblock"
         cursor="text"
+        display="block"
+        height={blockHeight}
         id={id}
+        width={size.width}
         onMouseDown={mouseEvent}
         onMouseMove={mouseEvent}
         onMouseUp={mouseEvent}
@@ -311,10 +299,9 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           selectEdgeHeight={selectEdgeHeight}
           zoom={zoom.linear}
         />
-
         <Find
           compYDiff={compYDiff}
-          filteredRows={filteredSearchRows}
+          filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
           highlights={this.props.highlights}
@@ -410,11 +397,13 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           </text>
         ) : null}
         <Find
-          {...this.props}
           compYDiff={compYDiff}
-          filteredRows={filteredSearchRows}
+          filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
+          firstBase={firstBase}
+          highlights={highlights}
           indexYDiff={indexYDiff}
+          inputRef={inputRef}
           lastBase={lastBase}
           listenerOnly={true}
           seqBlockRef={this}

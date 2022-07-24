@@ -20,75 +20,75 @@ interface FindProps {
 /**
  * Render rectangles around Search results.
  */
-export default function Find(props: FindProps) {
-  const {
-    compYDiff,
-    filteredRows: searchRows,
-    findXAndWidth,
-    firstBase,
-    highlights,
-    indexYDiff,
-    inputRef,
-    lastBase,
-    listenerOnly,
-    seqBlockRef,
-  } = props;
-
-  return (
-    <>
-      {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
-      {highlights.map(({ color, end, id, start }) => (
-        <React.Fragment key={`la-vz-highlight-${id}`}>
-          <FindBlock
-            compYDiff={compYDiff}
-            direction={1}
-            end={end}
-            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-            findXAndWidth={findXAndWidth}
-            firstBase={start}
-            indexYDiff={indexYDiff}
-            inputRef={inputRef}
-            lastBase={end}
-            listenerOnly={listenerOnly}
-            seqBlockRef={seqBlockRef}
-            start={start}
-          />
-          <FindBlock
-            compYDiff={compYDiff}
-            direction={-1}
-            end={end}
-            fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-            findXAndWidth={findXAndWidth}
-            firstBase={start}
-            indexYDiff={indexYDiff}
-            inputRef={inputRef}
-            lastBase={end}
-            listenerOnly={listenerOnly}
-            seqBlockRef={seqBlockRef}
-            start={start}
-          />
-        </React.Fragment>
-      ))}
-      {searchRows.map(s => (
+const Find = ({
+  compYDiff,
+  filteredRows: searchRows,
+  findXAndWidth,
+  firstBase,
+  highlights,
+  indexYDiff,
+  inputRef,
+  lastBase,
+  listenerOnly,
+  seqBlockRef,
+}: FindProps) => (
+  <>
+    {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
+    {highlights.map(({ color, end, id, start }) => (
+      // TODO: what's going on here, why does this lead to duplicates
+      <React.Fragment key={`linear-highlight-${id}-${randomid()}`}>
         <FindBlock
-          key={JSON.stringify(s)}
           compYDiff={compYDiff}
-          direction={s.direction || 1}
-          end={s.end}
-          fillStyle="rgba(255, 251, 7, 0.5)"
+          direction={1}
+          end={end}
+          fillStyle={color || "rgba(0, 251, 7, 0.5)"}
           findXAndWidth={findXAndWidth}
-          firstBase={firstBase}
+          firstBase={start}
           indexYDiff={indexYDiff}
           inputRef={inputRef}
-          lastBase={lastBase}
+          lastBase={end}
           listenerOnly={listenerOnly}
           seqBlockRef={seqBlockRef}
-          start={s.start}
+          start={start}
         />
-      ))}
-    </>
-  );
-}
+        <FindBlock
+          compYDiff={compYDiff}
+          direction={-1}
+          end={end}
+          fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+          findXAndWidth={findXAndWidth}
+          firstBase={start}
+          indexYDiff={indexYDiff}
+          inputRef={inputRef}
+          lastBase={end}
+          listenerOnly={listenerOnly}
+          seqBlockRef={seqBlockRef}
+          start={start}
+        />
+      </React.Fragment>
+    ))}
+
+    {searchRows.map(s => (
+      <FindBlock
+        key={JSON.stringify(s)}
+        compYDiff={compYDiff}
+        direction={s.direction || 1}
+        end={s.end}
+        fillStyle="rgba(255, 251, 7, 0.5)"
+        findXAndWidth={findXAndWidth}
+        firstBase={firstBase}
+        indexYDiff={indexYDiff}
+        inputRef={inputRef}
+        lastBase={lastBase}
+        listenerOnly={listenerOnly}
+        seqBlockRef={seqBlockRef}
+        start={s.start}
+      />
+    ))}
+  </>
+);
+
+export default Find;
 
 export const FindBlock = (props: {
   compYDiff: number;
