@@ -254,7 +254,14 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       }
     } catch (err) {
       console.warn(
-        "Failed to parse input props %s, create an issue if this is bug: Create an issue if this is a bug: https://github.com/Lattice-Automation/seqviz/issues",
+        `Failed to parse input props. Please report if this is unexpected: https://github.com/Lattice-Automation/seqviz/issues
+  seq: %s
+  file: %s
+  accession: %s
+  error: %s`,
+        seq || undefined,
+        file,
+        accession,
         err
       );
     }

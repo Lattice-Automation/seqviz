@@ -31,7 +31,10 @@ export default async (
   }
 
   const response = await fetch(url, {
-    headers: { "X-Requested-With": "XMLHttpRequest", "access-control-allow-origin": "*" },
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+      "access-control-allow-origin": "*",
+    },
   })
     .then(response => response.text())
     .catch(console.error);
