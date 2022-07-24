@@ -141,6 +141,14 @@ class Block extends React.PureComponent<BlockProps> {
       end = 0;
     }
 
+    // props shared between all 3 possible components.
+    const blockProps = {
+      className: "la-vz-linear-sel-block",
+      height: selectHeight,
+      shapeRendering: "auto",
+      y: -5,
+    };
+
     let x: number | null = null;
     let width: number | null = null;
     let secondBlock: JSX.Element | null = null;
@@ -158,9 +166,7 @@ class Block extends React.PureComponent<BlockProps> {
           // all the way around the rest of the plasmid
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
           const { width: secBlockWidth, x: secBlockX } = findXAndWidth(start, lastBase);
-          secondBlock = (
-            <rect className="la-vz-linear-sel-block" height={selectHeight} width={secBlockWidth} x={secBlockX} y={0} />
-          );
+          secondBlock = <rect {...blockProps} width={secBlockWidth} x={secBlockX} />;
           ({ width, x } = findXAndWidth(firstBase, end));
         } else {
           ({ width, x } = findXAndWidth(
@@ -182,16 +188,7 @@ class Block extends React.PureComponent<BlockProps> {
           // all the way around the rest of the plasmid
           // ex: https://user-images.githubusercontent.com/13923102/34791431-f56df23a-f612-11e7-94b4-e302ede155a0.png
           const { width: secBlockWidth, x: secBlockX } = findXAndWidth(end, lastBase);
-          secondBlock = (
-            <rect
-              className="la-vz-linear-sel-block"
-              height={selectHeight}
-              shapeRendering="auto"
-              width={secBlockWidth}
-              x={secBlockX}
-              y={-5}
-            />
-          );
+          secondBlock = <rect {...blockProps} width={secBlockWidth} x={secBlockX} />;
           ({ width, x } = findXAndWidth(firstBase, start));
         } else {
           ({ width, x } = findXAndWidth(start < firstBase ? end : firstBase, end > lastBase ? start : lastBase));
@@ -211,14 +208,7 @@ class Block extends React.PureComponent<BlockProps> {
 
     return (
       <>
-        <rect
-          className="la-vz-linear-sel-block"
-          height={selectHeight}
-          shapeRendering="auto"
-          width={width ? width + 1 : undefined}
-          x={x || undefined}
-          y={-5}
-        />
+        <rect {...blockProps} width={width ? width + 1 : undefined} x={x || undefined} />
         {secondBlock}
       </>
     );

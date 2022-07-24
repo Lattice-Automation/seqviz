@@ -309,8 +309,8 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
     const { findCoor, generateArc, getRotation, rotateCoor } = this;
 
-    // general values/functions used in many/all children
-    const general = {
+    // props contains props used in many/all children
+    const props = {
       center,
       findCoor,
       generateArc,
@@ -344,25 +344,25 @@ class Circular extends React.Component<CircularProps, CircularState> {
         onMouseUp={mouseEvent}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
-          <Selection {...general} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />
+          <Selection {...props} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />
           <Find
-            center={general.center}
-            findCoor={general.findCoor}
-            generateArc={general.generateArc}
-            getRotation={general.getRotation}
+            center={props.center}
+            findCoor={props.findCoor}
+            generateArc={props.generateArc}
+            getRotation={props.getRotation}
             highlights={this.props.highlights}
-            inputRef={general.inputRef}
-            lineHeight={general.lineHeight}
-            radius={general.radius}
-            rotateCoor={general.rotateCoor}
+            inputRef={props.inputRef}
+            lineHeight={props.lineHeight}
+            radius={props.radius}
+            rotateCoor={props.rotateCoor}
             search={search}
             seq={seq}
-            seqLength={general.seqLength}
+            seqLength={props.seqLength}
             totalRows={totalRows}
             onUnmount={onUnmount}
           />
           <Index
-            {...general}
+            {...props}
             compSeq={compSeq}
             name={name}
             seq={seq}
@@ -371,15 +371,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
             totalRows={totalRows}
             yDiff={yDiff}
           />
-          <CutSites {...general} cutSites={cutSites} selectionRows={4} />
+          <CutSites {...props} cutSites={cutSites} selectionRows={4} />
           <Annotations
-            {...general}
+            {...props}
             annotations={annotationsInRows}
             inlinedAnnotations={inlinedLabels}
             rowsToSkip={0}
             size={size}
           />
-          <Labels {...general} labels={outerLabels} size={size} yDiff={yDiff} />
+          <Labels {...props} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>
       </svg>
     );

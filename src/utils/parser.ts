@@ -1,4 +1,4 @@
-import { DirectionProp, Part } from "../elements";
+import { Part } from "../elements";
 
 // from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
 const comp = {
@@ -93,7 +93,7 @@ const rev = new Set(["REV", "REVERSE", "-1", -1]);
  * directionality("FORWARD") => 1
  * ```
  */
-export const directionality = (direction: DirectionProp | undefined | string): -1 | 0 | 1 => {
+export const directionality = (direction: number | string | undefined): -1 | 0 | 1 => {
   if (!direction) {
     return 0;
   }

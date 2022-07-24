@@ -11,13 +11,10 @@ export interface NameRange extends Range {
   name: string;
 }
 
-/** DirectionProp is any of the directions for an element that we accept from a user */
-export type DirectionProp = -1 | 0 | 1 | "FORWARD" | "REVERSE" | "FWD" | "REV" | "NONE" | "1" | "0" | "-1";
-
 /** AnnotationProp is an annotation provided to SeqViz via the annotations prop. */
 export interface AnnotationProp {
   color?: string;
-  direction?: DirectionProp;
+  direction?: number | string;
   end: number;
   name: string;
   start: number;

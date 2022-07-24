@@ -5,20 +5,22 @@
 import * as React from "react";
 
 import { SeqVizProps } from "../SeqViz/SeqViz";
-import { Range } from "../elements";
 import { SeqViz } from "../viewer";
 
 export const App = () => {
-  const [search, setSearch] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState<Range[]>([]);
-
-  const [seqvizProps, setSeqVizProps] = React.useState<SeqVizProps>({
-    annotations: [
-      { direction: 1, end: 60, name: "test", start: 8 },
-      { direction: -1, end: 70, name: "test", start: 270 },
-    ],
-    backbone: "pSB1C3",
-    bpColors: {},
+  const props: SeqVizProps = {
+    accession: "BBa_J23100",
+    // annotations: [
+    //   { direction: 1, end: 60, name: "test", start: 8 },
+    //   { direction: -1, end: 70, name: "test", start: 270 },
+    // ],
+    bpColors: {
+      10: "green",
+      11: "green",
+      12: "green",
+      200: "blue",
+      201: "red",
+    },
     colors: ["#8CDEBD"],
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [
@@ -34,97 +36,42 @@ export const App = () => {
       },
     ],
     highlights: [{ end: 400, start: 300 }],
-    onSearch: (results: Range[]) => {
-      setSearchResults(results);
-    },
     rotateOnScroll: true,
-    /* bpColors: {
-     *   10: "green",
-     *   11: "green",
-     *   12: "green",
-     *   200: "blue",
-     *   201: "red",
-     * }, */
     search: { mismatch: 0, query: "gtacc" },
-    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
+    // seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
     translations: [{ direction: 1, end: 69, start: 0 }],
-
     viewer: "both_flip",
     zoom: { circular: 0, linear: 50 },
-    // highlightedRegions: [
-    //   { start: 36, end: 66, color: "magenta" },
-    //   { start: 70, end: 80 },
-    // ],
-  });
-  const submitIndices = (start: number, end: number, color: string) => {
-    const oldHighlightedRegions = seqvizProps.highlightedRegions ? seqvizProps.highlightedRegions : [];
-    const newHighlightedRegions = [...oldHighlightedRegions, { color, end, start }];
-    setSeqVizProps({ ...seqvizProps, highlightedRegions: newHighlightedRegions });
   };
+
+  const [search, setSearch] = React.useState("");
+  const [start, setStart] = React.useState(0);
+  const [end, setEnd] = React.useState(0);
+  const [color, setColor] = React.useState("#ff6347");
+  const [accession, setAccession] = React.useState("");
+
   return (
     <>
-      <HighlightBox submitIndices={submitIndices} />
-      <SearchBox
-        highlightSearch={() => {
-          const newBPColors = { ...seqvizProps.bpColors };
-          searchResults.forEach((res: Range) => {
-            for (let i = res.start; i < res.end; i++) {
-              newBPColors[i] = "orange";
-            }
-          });
-          setSeqVizProps({ ...seqvizProps, bpColors: newBPColors });
-        }}
-        search={search}
-        onSearch={(search: string) => {
-          setSearch(search);
-          setSeqVizProps({ ...seqvizProps, search: { mismatch: 0, query: search } });
-        }}
-      />
+      <div>
+        <input type="number" value={start} onChange={e => setStart(parseInt(e.target.value))} />
+        <input type="number" value={end} onChange={e => setEnd(parseInt(e.target.value))} />
+        <select value={color} onChange={e => setColor(e.target.value)}>
+          <option value="#ff6347">Red</option>
+          <option value="#3cb371">Green</option>
+          <option value="#87ceeb">Blue</option>
+        </select>
+      </div>
 
-      <SeqViz {...seqvizProps} />
+      <div className="test-input-fields">
+        <input placeholder="search" type="text" value={search} onChange={e => setSearch(e.target.value)} />
+        <input placeholder="accession" type="text" value={accession} onChange={e => setAccession(e.target.value)} />
+      </div>
+
+      <SeqViz {...props} highlights={[{ end, start }]} search={{ mismatch: 0, query: search }} />
     </>
-  );
-};
-
-const HighlightBox = (props: { submitIndices: (start: number, end: number, color: string) => void }) => {
-  const [start, setStart] = React.useState<number>(0);
-  const [end, setEnd] = React.useState<number>(0);
-  const [color, setColor] = React.useState("#ff6347");
-
-  const onClick = () => {
-    if (start >= 0 && end >= start) {
-      props.submitIndices(start, end, color);
-    }
-    if (start) {
-      setStart(0);
-    }
-    if (end) {
-      setEnd(0);
-    }
-  };
-  return (
-    <div>
-      <input type="number" value={start} onChange={e => setStart(parseInt(e.target.value))} />
-      <input type="number" value={end} onChange={e => setEnd(parseInt(e.target.value))} />
-      <select value={color} onChange={e => setColor(e.target.value)}>
-        <option value="#ff6347">Red</option>
-        <option value="#3cb371">Green</option>
-        <option value="#87ceeb">Blue</option>
-      </select>
-      <input type="button" value={"Highlight Range"} onClick={onClick} />
-    </div>
-  );
-};
-
-const SearchBox = (props: { highlightSearch: () => void; onSearch: (search: string) => void; search: string }) => {
-  return (
-    <div>
-      <input type="text" value={props.search} onChange={e => props.onSearch(e.target.value)} />
-      <input type="button" value={"Highlight all searches"} onClick={props.highlightSearch} />
-    </div>
   );
 };

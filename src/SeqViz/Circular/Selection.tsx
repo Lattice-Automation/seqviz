@@ -110,15 +110,12 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
       stroke: "black",
       strokeWidth: edgeStrokeWidth,
     };
-    const selectStyle = {
-      fill: "#DEF6FF",
-      shapeRendering: "auto",
-      stroke: "none",
-    };
 
     return (
       <g className="la-vz-circular-selection">
-        {selLength && <path d={selectPath} transform={getRotation(start)} {...selectStyle} />}
+        {selLength && (
+          <path d={selectPath} fill="#DEF6FF" shapeRendering="auto" stroke="none" transform={getRotation(start)} />
+        )}
         <path d={edgePath} transform={getRotation(start)} {...edgeStyle} />
         {selLength && <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />}
       </g>
