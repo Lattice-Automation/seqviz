@@ -150,7 +150,14 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
           // build up a reference to this whole translation for
           // selection handler (used only for context clicking right now)
-          const AAref = { element, end: AAEnd, name: "aminoacid", parent: ref, start: AAStart, type: "AMINOACID" };
+          const AAref = {
+            element,
+            end: AAEnd,
+            name: "aminoacid",
+            parent: ref,
+            start: AAStart,
+            type: "AMINOACID",
+          };
 
           if (AAStart > AAEnd && firstBase >= bpsPerBlock) {
             // amino acid has crossed zero index in the last SeqBlock

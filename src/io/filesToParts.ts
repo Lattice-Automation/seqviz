@@ -84,7 +84,10 @@ const fileToParts = async (
 ): Promise<Part[]> => {
   const { fileName = "", colors = [], backbone = "" } = options;
   const sourceName = fileName.split(path.sep).pop() || fileName;
-  const source = { file: file instanceof ArrayBuffer ? "" : file, name: sourceName };
+  const source = {
+    file: file instanceof ArrayBuffer ? "" : file,
+    name: sourceName,
+  };
 
   if (!file) {
     throw Error("cannot parse null or empty string");

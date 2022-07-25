@@ -7,7 +7,10 @@ import { fetchBBB } from "./igemBackbones";
  */
 export default async (
   accession: string,
-  options: { backbone?: string; colors?: string[] } = { backbone: "", colors: [] }
+  options: { backbone?: string; colors?: string[] } = {
+    backbone: "",
+    colors: [],
+  }
 ): Promise<Part> => {
   // First try to retrieve the part from local cache.
   const key = accession + options.backbone || "";
