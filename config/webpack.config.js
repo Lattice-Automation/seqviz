@@ -1,40 +1,43 @@
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
-let BundleAnalyzerPlugin = require("webpack-bundle-analyzer");
-BundleAnalyzerPlugin = BundleAnalyzerPlugin.BundleAnalyzerPlugin;
 
-const PACKAGE = require("../package.json");
+const package = require("../package.json");
+const version = package.version;
+const author = package.author;
 
-const VERSION = PACKAGE.version;
-const AUTHOR = PACKAGE.author;
-const packageName = PACKAGE.name;
-const libraryName = "seqviz";
-const banner = `${libraryName} - ${packageName} - ${VERSION} \nprovided and maintained by ${AUTHOR} \nLICENSE MIT`;
-
+/**
+ * cdnBuild is the webpack config for distributing SeqViz to unpkg. It bundles the viewer with all its dependencies.
+ */
 const cdnBuild = {
   entry: path.join(__dirname, "..", "src", "viewer.ts"),
   target: "web",
-  output: {
-    path: path.join(__dirname, "..", "dist"),
-    filename: "seqviz.min.js",
-    library: libraryName,
-    libraryTarget: "umd",
-    umdNamedDefine: true,
-    publicPath: "/dist/",
-  },
   mode: "production",
   module: {
     rules: [
       { test: /\.(t|j)sx?$/, use: { loader: "ts-loader" }, exclude: /node_modules/ },
-      { enforce: "pre", test: /\.js$/, exclude: /node_modules/, loader: "source-map-loader" },
-      {
-        test: /\.(css)$/,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader"],
-      },
+      { test: /\.js$/, enforce: "pre", exclude: /node_modules/, loader: "source-map-loader" },
+      { test: /\.(css)$/, use: ["style-loader", "css-loader"], exclude: /node_modules/ },
     ],
   },
+  optimization: {
+    concatenateModules: false,
+    minimize: true,
+    nodeEnv: "production",
+  },
+  output: {
+    filename: "seqviz.min.js",
+    library: {
+      name: package.name,
+      type: "umd",
+    },
+    path: path.join(__dirname, "..", "dist"),
+    publicPath: "/dist/",
+    umdNamedDefine: true,
+  },
+  plugins: [
+    new webpack.BannerPlugin(`${package.name} - ${version} \nprovided and maintained by ${author} \nLICENSE MIT`),
+  ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
@@ -53,25 +56,26 @@ const cdnBuild = {
       url: require.resolve("url"),
     },
   },
-  plugins: [new webpack.BannerPlugin(banner)],
-  optimization: {
-    nodeEnv: "production",
-    minimize: true,
-    concatenateModules: false,
-  },
 };
 
 /**
- * npmBuild, same as CDN build except node_modules are ignored as externals and the output filename differs
+ * npmBuild is the same as CDN build except node_modules are ignored as externals and the output filename differs.
  */
 const npmBuild = Object.assign({}, cdnBuild, {
+  mode: "none",
+  devtool: "source-map",
+  optimization: {
+    minimize: false,
+  },
   output: {
-    path: path.join(__dirname, "..", "dist"),
     filename: "index.js",
-    library: libraryName,
-    libraryTarget: "umd",
-    umdNamedDefine: true,
+    library: {
+      name: package.name,
+      type: "umd",
+    },
+    path: path.join(__dirname, "..", "dist"),
     publicPath: "/dist/",
+    umdNamedDefine: true,
   },
   externals: [nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })],
 });

@@ -1,21 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/", // path to output directory
-    "sourceMap": true, // allow sourcemap support
-    "strictNullChecks": true, // enable strict null checks as a best practice
-    "module": "commonjs", // specify module code generation
-    "jsx": "react", // use typescript to transpile jsx to js
-    "target": "es5", // specify ECMAScript target version
-    "lib": ["es2015", "dom"], // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
-    "moduleResolution": "node",
-    "declaration": true,
-
-    "strict": false, // TODO: set to true
     "allowJs": false, // allow a partial TypeScript and JavaScript codebase
     "allowUnreachableCode": false,
+    "declaration": true,
+    "jsx": "react", // use typescript to transpile jsx to js
+    "lib": ["es2015", "dom"], // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
+    "module": "commonjs", // specify module code generation
+    "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "strictPropertyInitialization": true
+    "outDir": "./dist/", // path to output directory
+    "sourceMap": true, // allow sourcemap support
+    "strict": false, // TODO: set to true
+    "strictNullChecks": true, // enable strict null checks as a best practice
+    "strictPropertyInitialization": true,
+    "target": "es5" // specify ECMAScript target version
   },
   "include": ["./src/"]
 }
