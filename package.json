@@ -1,11 +1,10 @@
 {
   "name": "seqviz",
+  "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
   "version": "3.5.4",
-  "private": false,
   "main": "dist/index.js",
   "types": "dist/viewer.d.ts",
   "unpkg": "dist/seqviz.min.js",
-  "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
@@ -90,7 +89,6 @@
     "typescript": "^4.5.2",
     "url": "^0.11.0",
     "webpack": "^5.73.0",
-    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3",
     "webpack-node-externals": "^3.0.0"
