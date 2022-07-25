@@ -1,0 +1,7 @@
+{
+  "arrowParens": "avoid",
+  "importOrder": ["^\\w", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "printWidth": 120
+}

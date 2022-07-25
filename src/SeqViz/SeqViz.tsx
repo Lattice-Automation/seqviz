@@ -216,7 +216,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     // New annotations provided.
     if (!isEqual(annotations, this.props.annotations)) {
-      this.setState({ annotations: this.parseAnnotations(this.props.annotations, this.props.seq) });
+      this.setState({
+        annotations: this.parseAnnotations(this.props.annotations, this.props.seq),
+      });
     }
   };
 
