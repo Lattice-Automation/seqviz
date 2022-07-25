@@ -43,4 +43,11 @@ describe("Import parts from external repositories", () => {
       expect(result.name).toMatch(name);
     });
   });
+
+  it("throws error for bad accession", async () => {
+    try {
+      const parts = await externalToPart("asdf");
+      fail(`error expected, parts returned: ${parts}`);
+    } catch (err) {}
+  });
 });
