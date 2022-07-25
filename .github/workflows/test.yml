@@ -1,4 +1,4 @@
-name: CI/CD
+name: test
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [18.x]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -22,10 +22,5 @@ jobs:
         run: npm install
       - name: Run Prettier and ESLint
         run: npm run lint
-      - name: Run Unit Tests and build
+      - name: Run Unit Tests and Build
         run: npm run test:ci
-    # - name: Run Integration Tests
-    #   run: npm run build
-    # deploy:
-    # - name: Deploy to Staging
-    #   run: ???
