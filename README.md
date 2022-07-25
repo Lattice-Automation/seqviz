@@ -346,16 +346,17 @@ Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`
 
 For usability in non-React apps, we provide a thin wrapper around the React component. The viewer's constructor accepts two arguments:
 
-- `element`: either a string id attribute like `"root"` or `"app-root"` or an element; e.g. from `document.getElementById()`
+- `element`: either an element id or an element, e.g. from `document.getElementById()`
 - `props`: props as documented [above](#optionsprops)
 
 ```js
-var viewer = seqviz.Viewer(element, props);
-// Render the viewer to the DOM at the node passed in `${element}`.
+const element = document.getElementById("root");
+const viewer = seqviz.Viewer(element, props);
+// Render the viewer to the DOM at the node passed in $element`.
 viewer.render();
-// Update the viewer's configuration and re-renders.
+// To later update the viewer's configuration and re-renders.
 viewer.setState(props);
-// Render the viewer and returns it as an HTML string.
+// To render the viewer, eg for server-side rendering, and returns it as an HTML string.
 viewer.renderToString();
 ```
 
