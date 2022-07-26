@@ -3,9 +3,6 @@ import { calcTm, getMismatchIndices, returnRanges, reverse } from "./sequence";
 
 /**
  * Gives primers meta information needed by sequence viewers
- 
- 
- 
  */
 export default (primers, vector) => {
   const { compSeq: vectorComp, seq: vectorSeq } = complement(vector);
@@ -15,10 +12,6 @@ export default (primers, vector) => {
 /**
  * Given a list of primer mismatches and the primer's annealing sequence
  * Returns the mismatch indices and the part of primer sequence that actually anneals
- 
- 
- 
- 
  */
 const findMismatches = (sequence, subVector) => {
   let annealSequence = sequence;
@@ -62,10 +55,6 @@ const findMismatches = (sequence, subVector) => {
 
 /**
  * Find binding sites on one strand of DNA
- 
- 
- 
- 
  */
 const findBindingSites = (primers = [], vectorSeq, direction) => {
   const matchLength = 10;

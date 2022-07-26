@@ -82,8 +82,8 @@ export const firstElement = arr => {
   return arr[0];
 };
 
-const fwd = new Set(["FWD", "FORWARD", "FOR", "1", 1]);
-const rev = new Set(["REV", "REVERSE", "-1", -1]);
+const fwd = new Set(["FWD", "FORWARD", "FOR", "1", "top", 1]);
+const rev = new Set(["REV", "REVERSE", "-1", "bottom", -1]);
 
 /**
  * Parse the user defined direction, estimate the direction of the element

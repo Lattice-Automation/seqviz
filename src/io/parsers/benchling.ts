@@ -1,14 +1,13 @@
-import { complement, partFactory } from "../../utils/parser";
+import { Part } from "../../elements";
+import { complement, directionality, partFactory } from "../../utils/parser";
 import randomid from "../../utils/randomid";
 
 /**
- * Benchling presents the easiest format to parse, because their JSON
- * format is very close to our own
+ * Benchling format is just JSON. Besides a slight diff in seq naming and annotation directionality,
+ * Benchling's model matches seqviz's
  */
-export default async text => {
-  // we've already checked, outside this file, that's it's JSON parseable
+export default async (text: string): Promise<Part[]> => {
   const partJSON = JSON.parse(text);
-
   const { compSeq, seq } = complement(partJSON.bases);
 
   // throw an error if the sequence is empty
@@ -16,18 +15,17 @@ export default async text => {
     return Promise.reject(new Error("Empty part sequence... invalid"));
   }
 
-  const part = {
-    ...partFactory(),
-    annotations: partJSON.annotations.map(a => ({
-      ...a,
-      direction: a.strand === 0 ? 1 : a.strand === 1 ? -1 : "NONE",
-      id: randomid(),
-    })),
-    compSeq: compSeq,
-    date: new Date(partJSON.modifiedAt).getTime(),
-    name: partJSON.name || partJSON._id,
-    seq: seq,
-  };
-
-  return [part];
+  return [
+    {
+      ...partFactory(),
+      annotations: partJSON.annotations.map(a => ({
+        ...a,
+        direction: directionality(a.strand),
+        id: randomid(),
+      })),
+      compSeq: compSeq,
+      name: partJSON.name || partJSON._id,
+      seq: seq,
+    },
+  ];
 };

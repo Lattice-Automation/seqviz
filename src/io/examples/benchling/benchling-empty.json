@@ -6,7 +6,7 @@
       "end": 2344,
       "name": "Mlp84B protein_bind",
       "start": 2334,
-      "strand": 1,
+      "strand": -1,
       "type": "protein_bind"
     },
     {
@@ -14,7 +14,7 @@
       "end": 2946,
       "name": "Mlp84B 5'UTR",
       "start": 2867,
-      "strand": 1,
+      "strand": 0,
       "type": "5'UTR"
     },
     {
@@ -30,7 +30,6 @@
       "end": 4964,
       "name": "Mlp84B protein_bind",
       "start": 4954,
-      "strand": 1,
       "type": "protein_bind"
     },
     {
