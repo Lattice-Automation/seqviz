@@ -75,4 +75,37 @@ describe("Converts files to parts (IO)", () => {
     expect(annotation.start).toEqual(499);
     expect(annotation.end).toEqual(500);
   });
+
+  // https://github.com/Lattice-Automation/seqviz/issues/166
+  it("parses benchling annotation direction", async () => {
+    const result = await filesToParts(fs.readFileSync(allFiles["benchling/benchling1.json"], "utf8"));
+
+    expect(result.length).toEqual(1);
+    [
+      {
+        direction: -1,
+        end: 2344,
+        start: 2334,
+      },
+      {
+        direction: 0,
+        end: 2946,
+        start: 2867,
+      },
+      {
+        direction: 1,
+        end: 4655,
+        start: 2867,
+      },
+      {
+        direction: 0,
+        end: 4964,
+        start: 4954,
+      },
+    ].forEach((a, i) => {
+      expect(result[0].annotations[i].start).toEqual(a.start);
+      expect(result[0].annotations[i].end).toEqual(a.end);
+      expect(result[0].annotations[i].direction).toEqual(a.direction);
+    });
+  });
 });
