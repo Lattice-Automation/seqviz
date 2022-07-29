@@ -265,7 +265,6 @@ export const annotationFactory = (i = -1, colors?: string[]): Annotation => ({
   id: randomid(),
   name: "",
   start: 0,
-  type: "",
 });
 
 export const primerFactory = () => ({

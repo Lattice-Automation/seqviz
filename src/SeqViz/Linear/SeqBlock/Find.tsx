@@ -90,7 +90,7 @@ const Find = ({
 
 export default Find;
 
-export const FindBlock = (props: {
+const FindBlock = (props: {
   compYDiff: number;
   direction: -1 | 1;
   end: number;

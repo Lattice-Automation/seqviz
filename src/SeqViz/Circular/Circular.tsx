@@ -80,10 +80,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
   static getDerivedStateFromProps = (nextProps: CircularProps): CircularState => {
     const lineHeight = 14;
-    const annotationsInRows = stackElements(
-      nextProps.annotations.filter(ann => ann.type !== "insert"),
-      nextProps.seq.length
-    );
+    const annotationsInRows = stackElements(nextProps.annotations, nextProps.seq.length);
     const primers = bindingSites(nextProps.primers, nextProps.seq);
     const primersInRows = stackElements(primers, nextProps.seq.length);
 
