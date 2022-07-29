@@ -199,7 +199,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           shapeRendering: "geometricPrecision",
           stroke: a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray",
           strokeLinejoin: "round",
-          strokeWidth: a.type === "insert" ? 2.4 : 0.5,
+          strokeWidth: 0.5,
         }}
         onBlur={() => {}}
         onFocus={() => {}}

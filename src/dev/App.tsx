@@ -9,11 +9,11 @@ import { SeqViz } from "../viewer";
 
 export const App = () => {
   const props: SeqVizProps = {
-    accession: "BBa_J23100",
-    // annotations: [
-    //   { direction: 1, end: 60, name: "test", start: 8 },
-    //   { direction: -1, end: 70, name: "test", start: 270 },
-    // ],
+    // accession: "BBa_J23100",
+    annotations: [
+      { direction: 1, end: 60, name: "test", start: 8 },
+      { direction: -1, end: 70, name: "test", start: 270 },
+    ],
     bpColors: {
       10: "green",
       11: "green",
@@ -38,7 +38,7 @@ export const App = () => {
     highlights: [{ end: 400, start: 300 }],
     rotateOnScroll: true,
     search: { mismatch: 0, query: "gtacc" },
-    // seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
+    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,

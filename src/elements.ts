@@ -7,6 +7,7 @@ export interface Range {
 
 /** NameRange elements have been parsed to include an id and name */
 export interface NameRange extends Range {
+  color?: string;
   id: string;
   name: string;
 }
@@ -23,7 +24,6 @@ export interface AnnotationProp {
 /** Annotation is an annotation after parsing. */
 export interface Annotation extends NameRange {
   color: string;
-  type?: "enzyme" | "insert" | "";
 }
 
 /** Translation is a single translated CDS. */
