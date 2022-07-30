@@ -13,7 +13,6 @@ import {
 } from "../elements";
 import externalToPart from "../io/externalToPart";
 import filesToParts from "../io/filesToParts";
-import { colorByIndex } from "../utils/colors";
 import digest from "../utils/digest";
 import isEqual from "../utils/isEqual";
 import { complement, directionality } from "../utils/parser";
@@ -368,9 +367,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     // process highlights, adding color + id (+ combining deprecated highlightedRegions)
     const highlightsProcessed = (highlights || []).concat(highlightedRegions || []).map(
-      (h, i): Highlight => ({
+      (h): Highlight => ({
         ...h,
-        color: h.color || colorByIndex(i),
+        color: h.color || "rgba(255, 251, 7, 0.5)",
         direction: 1,
         end: h.end % (seq.length + 1),
         id: randomid(),

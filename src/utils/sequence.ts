@@ -1,5 +1,5 @@
 import { Annotation, Range, SeqType } from "../elements";
-import { chooseRandomColor, colorByIndex } from "./colors";
+import { COLORS, chooseRandomColor, colorByIndex } from "./colors";
 import { complement } from "./parser";
 import randomid from "./randomid";
 
@@ -258,14 +258,17 @@ export const calcLength = (start: number, end: number, seqLength: number): numbe
  */
 export const reverse = (seq: string): string => seq.split("").reverse().join("");
 
-export const annotationFactory = (i = -1, colors?: string[]): Annotation => ({
-  color: i >= 0 ? colorByIndex(i, colors) : chooseRandomColor(colors),
-  direction: 0,
-  end: 0,
-  id: randomid(),
-  name: "",
-  start: 0,
-});
+export const annotationFactory = (i = -1, colors?: string[]): Annotation => {
+  const c = colors && colors.length ? colors : COLORS;
+  return {
+    color: i >= 0 ? colorByIndex(i, c) : chooseRandomColor(c),
+    direction: 0,
+    end: 0,
+    id: randomid(),
+    name: "",
+    start: 0,
+  };
+};
 
 export const primerFactory = () => ({
   any: 0,
