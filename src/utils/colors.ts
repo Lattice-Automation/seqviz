@@ -72,10 +72,10 @@ export const chooseRandomColor = (colors?: string[]) => {
 };
 
 /** get an "indexed" color from the colors array */
-export const colorByIndex = (i, colors?: string[]) => (colors || COLORS)[i % (colors || COLORS).length];
+export const colorByIndex = (i: number, colors?: string[]) => (colors || COLORS)[i % (colors || COLORS).length];
 
 /** get an "indexed" color from the colors array */
-export const borderColorByIndex = i => COLOR_BORDER_MAP[COLORS[i % COLORS.length]];
+export const borderColorByIndex = (i: number) => COLOR_BORDER_MAP[COLORS[i % COLORS.length]];
 
 /** cache for input color to those 50% darker */
 const darkerColorCache = {};

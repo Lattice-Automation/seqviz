@@ -21,7 +21,7 @@ export const App = () => {
       200: "blue",
       201: "red",
     },
-    colors: ["#8CDEBD"],
+    // colors: ["#8CDEBD"],
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [
       {
@@ -35,7 +35,7 @@ export const App = () => {
         rseq: "cacgnnnn",
       },
     ],
-    highlights: [{ end: 400, start: 300 }],
+    onSelection: console.log,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "gtacc" },
     seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
@@ -49,9 +49,8 @@ export const App = () => {
   };
 
   const [search, setSearch] = React.useState("");
-  const [start, setStart] = React.useState(0);
-  const [end, setEnd] = React.useState(0);
-  const [color, setColor] = React.useState("#ff6347");
+  const [start, setStart] = React.useState(100);
+  const [end, setEnd] = React.useState(50);
   const [accession, setAccession] = React.useState("");
 
   return (
@@ -59,11 +58,6 @@ export const App = () => {
       <div>
         <input type="number" value={start} onChange={e => setStart(parseInt(e.target.value))} />
         <input type="number" value={end} onChange={e => setEnd(parseInt(e.target.value))} />
-        <select value={color} onChange={e => setColor(e.target.value)}>
-          <option value="#ff6347">Red</option>
-          <option value="#3cb371">Green</option>
-          <option value="#87ceeb">Blue</option>
-        </select>
       </div>
 
       <div className="test-input-fields">

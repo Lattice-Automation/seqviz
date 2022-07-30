@@ -1,10 +1,21 @@
 import * as React from "react";
 
-import { Annotation, CutSite, Highlight, InputRefFuncType, Primer, Range, Size, Translation } from "../../../elements";
+import {
+  Annotation,
+  CutSite,
+  Highlight,
+  InputRefFuncType,
+  NameRange,
+  Primer,
+  Range,
+  Size,
+  Translation,
+} from "../../../elements";
 import { Selection as SelectionType } from "../../handlers/selection";
 import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
+import Highlights from "./Highlights";
 import IndexRow from "./Index";
 import Primers from "./Primers";
 import Selection from "./Selection";
@@ -17,6 +28,12 @@ export type FindXAndWidthType = (
   width: number;
   x: number;
 };
+
+export type FindXAndWidthElementType = (
+  i: number,
+  element: NameRange,
+  elements: NameRange[]
+) => { overflowLeft: boolean; overflowRight: boolean; width: number; x: number };
 
 interface SeqBlockProps {
   annotationRows: Annotation[][];
@@ -77,13 +94,70 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
   };
 
   /**
+   * For elements in arrays, check whether it wraps around the zero index.
+   */
+  findXAndWidthElement = (i: number, element: NameRange, elements: NameRange[]) => {
+    const { bpsPerBlock, firstBase, fullSeq, seq } = this.props;
+    const lastBase = firstBase + seq.length;
+    const { end, start } = element;
+
+    let { width, x } = this.findXAndWidth(start, end);
+
+    // does the element overflow to the left or the right of this seqBlock?
+    let overflowLeft = start < firstBase;
+    let overflowRight = end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
+
+    // if the element starts and ends in a SeqBlock, by circling all the way around,
+    // it will be rendered twice (once from the firstBase to start and another from end to lastBase)
+    // eg: https://user-images.githubusercontent.com/13923102/35816281-54571e70-0a68-11e8-92eb-ab56884337ac.png
+    const split = elements.reduce((acc, el) => (el.id === element.id ? acc + 1 : acc), 0) > 1; // is this element in two pieces?
+    if (split) {
+      if (elements.findIndex(el => el.id === element.id) === i) {
+        // we're in the first half of the split element
+        ({ width, x } = this.findXAndWidth(firstBase, end));
+        overflowLeft = true;
+        overflowRight = false;
+      } else {
+        // we're in the second half of the split element
+        ({ width, x } = this.findXAndWidth(start, lastBase));
+        overflowLeft = false;
+        overflowRight = true;
+      }
+    } else if (start > end) {
+      // the element crosses over the zero index and this needs to be accounted for
+      // this is very similar to the Block rendering logic in ../Selection/Selection.jsx
+      ({ width, x } = this.findXAndWidth(
+        start > lastBase ? firstBase : Math.max(firstBase, start),
+        end < firstBase ? lastBase : Math.min(lastBase, end)
+      ));
+
+      // if this is the first part of element that crosses the zero index
+      if (start > firstBase) {
+        overflowLeft = true;
+        overflowRight = end > lastBase;
+      }
+
+      // if this is the second part of an element, check if it overflows
+      if (end < firstBase) {
+        overflowLeft = start < firstBase;
+        overflowRight = true;
+      }
+    } else if (start === end) {
+      // the element circles the entire plasmid and we aren't currently in a SeqBlock
+      // where the element starts or ends
+      ({ width, x } = this.findXAndWidth(start, end + fullSeq.length));
+    }
+
+    return { overflowLeft, overflowRight, width, x };
+  };
+
+  /**
    * A helper used in child components to position elements on rows. Given first and last base, how far from the left
    * and how wide should it be?
+   *
+   * If an element and elements are provided, it also factors in whether the element circles around the 0-index.
    */
   findXAndWidth = (firstIndex = 0, lastIndex = 0) => {
-    firstIndex |= 0;
-    lastIndex |= 0;
-
     const {
       bpsPerBlock,
       charWidth,
@@ -91,6 +165,9 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       fullSeq: { length: seqLength },
       size,
     } = this.props;
+
+    firstIndex |= 0;
+    lastIndex |= 0;
 
     const lastBase = Math.min(firstBase + bpsPerBlock, seqLength);
     const multiBlock = seqLength >= bpsPerBlock;
@@ -291,6 +368,17 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           selection={selection}
           onUnmount={onUnmount}
         />
+        <Highlights
+          compYDiff={compYDiff}
+          findXAndWidth={this.findXAndWidthElement}
+          firstBase={firstBase}
+          highlights={highlights}
+          indexYDiff={indexYDiff}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          listenerOnly={false}
+          seqBlockRef={this}
+        />
         <Selection.Edges
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
@@ -304,7 +392,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          highlights={this.props.highlights}
           indexYDiff={indexYDiff}
           inputRef={inputRef}
           lastBase={lastBase}
@@ -323,7 +410,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           annotationRows={annotationRows}
           bpsPerBlock={this.props.bpsPerBlock}
           elementHeight={elementHeight}
-          findXAndWidth={this.findXAndWidth}
+          findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           fullSeq={fullSeq}
           inputRef={inputRef}
@@ -400,6 +487,16 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           compYDiff={compYDiff}
           filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
+          firstBase={firstBase}
+          indexYDiff={indexYDiff}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          listenerOnly={true}
+          seqBlockRef={this}
+        />
+        <Highlights
+          compYDiff={compYDiff}
+          findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           highlights={highlights}
           indexYDiff={indexYDiff}

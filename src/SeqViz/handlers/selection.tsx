@@ -4,7 +4,16 @@ import { Range } from "../../elements";
 import { calcGC, calcTm } from "../../utils/sequence";
 import { WithEventsProps } from "./events";
 
-type SelectionTypeEnum = "ANNOTATION" | "PRIMER" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "";
+type SelectionTypeEnum =
+  | "ANNOTATION"
+  | "PRIMER"
+  | "FIND"
+  | "TRANSLATION"
+  | "ENZYME"
+  | "SEQ"
+  | "AMINOACID"
+  | "HIGHLIGHT"
+  | "";
 
 /* SeqVizSelection is a selection holding all meta about the viewer(s) active selection. */
 export interface Selection {
@@ -180,7 +189,8 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         case "PRIMER":
         case "FIND":
         case "TRANSLATION":
-        case "ENZYME": {
+        case "ENZYME":
+        case "HIGHLIGHT": {
           if (!Linear && setCentralIndex) {
             // if an element was clicked on the circular viewer, scroll the linear
             // viewer so the element starts on the first SeqBlock

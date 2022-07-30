@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFuncType, NameRange } from "../../../elements";
 import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
-import { FindXAndWidthType } from "./SeqBlock";
+import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
   const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
@@ -19,7 +19,7 @@ const AnnotationRows = (props: {
   annotationRows: NameRange[][];
   bpsPerBlock: number;
   elementHeight: number;
-  findXAndWidth: FindXAndWidthType;
+  findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   inputRef: InputRefFuncType;
@@ -57,7 +57,7 @@ export default AnnotationRows;
 const AnnotationRow = (props: {
   annotations: NameRange[];
   bpsPerBlock: number;
-  findXAndWidth: FindXAndWidthType;
+  findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   height: number;
@@ -74,21 +74,27 @@ const AnnotationRow = (props: {
     width={props.width}
   >
     {props.annotations.map((a, i) => (
-      <SingleAnnotation
+      <SingleNamedElement
         {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
         key={`annotation-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
-        annotation={a}
+        element={a}
+        elements={props.annotations}
         index={i}
       />
     ))}
   </g>
 );
 
-const SingleAnnotation = (props: {
-  annotation: NameRange;
-  annotations: NameRange[];
+/**
+ * SingleNamedElement is a single rectangular element in the SeqBlock.
+ * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index,
+ * edge of blocks, etc.
+ */
+export const SingleNamedElement = (props: {
   bpsPerBlock: number;
-  findXAndWidth: FindXAndWidthType;
+  element: NameRange;
+  elements: NameRange[];
+  findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   height: number;
@@ -96,84 +102,25 @@ const SingleAnnotation = (props: {
   inputRef: InputRefFuncType;
   lastBase: number;
   seqBlockRef: unknown;
-  width: number;
 }) => {
-  const {
-    annotation,
-    annotations,
-    bpsPerBlock,
-    findXAndWidth,
-    firstBase,
-    fullSeq,
-    index,
-    inputRef,
-    lastBase,
-    seqBlockRef,
-  } = props;
+  const { bpsPerBlock, element, elements, findXAndWidth, firstBase, fullSeq, index, inputRef, lastBase, seqBlockRef } =
+    props;
 
-  const { color, direction, end, name, start } = annotation;
+  const { color, direction, end, name, start } = element;
   const forward = direction === 1;
   const reverse = direction === -1;
-  let { width, x: origX } = findXAndWidth(start, end);
+  const { width, x: origX } = findXAndWidth(index, element, elements);
   const crossZero = start > end && end < firstBase;
 
-  // does the annotation begin or end within this seqBlock with a directionality?
+  // does the element begin or end within this seqBlock with a directionality?
   const endFWD = forward && end > firstBase && end <= lastBase;
   const endREV = reverse && start >= firstBase && start <= lastBase;
 
-  // does the annotation overflow to the left or the right of this seqBlock?
-  let overflowLeft = start < firstBase;
-  let overflowRight = end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
+  // does the element overflow to the left or the right of this seqBlock?
+  const overflowLeft = start < firstBase;
+  const overflowRight = end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
 
-  // if the annotation starts and ends in a SeqBlock, by circling all the way around,
-  // it will be rendered twice (once from the firstBase to start and another from end to lastBase)
-  // eg: https://user-images.githubusercontent.com/13923102/35816281-54571e70-0a68-11e8-92eb-ab56884337ac.png
-  const splitAnnotation =
-    annotations.reduce((acc, ann) => {
-      if (ann.id === annotation.id) {
-        return acc + 1;
-      }
-      return acc;
-    }, 0) > 1; // is this annotation in two pieces?
-
-  if (splitAnnotation) {
-    if (annotations.findIndex(ann => ann.id === annotation.id) === index) {
-      // we're in the first half of the split annotation
-      ({ width, x: origX } = findXAndWidth(firstBase, end));
-      overflowLeft = true;
-      overflowRight = false;
-    } else {
-      // we're in the second half of the split annotation
-      ({ width, x: origX } = findXAndWidth(start, lastBase));
-      overflowLeft = false;
-      overflowRight = true;
-    }
-  } else if (start > end) {
-    // the annotation crosses over the zero index and this needs to be accounted for
-    // this is very similar to the Block rendering logic in ../Selection/Selection.jsx
-    ({ width, x: origX } = findXAndWidth(
-      start > lastBase ? firstBase : Math.max(firstBase, start),
-      end < firstBase ? lastBase : Math.min(lastBase, end)
-    ));
-
-    // if this is the first part of annotation that crosses the zero index
-    if (start > firstBase) {
-      overflowLeft = true;
-      overflowRight = end > lastBase;
-    }
-
-    // if this is the second part of an annotation, check if it overflows
-    if (end < firstBase) {
-      overflowLeft = start < firstBase;
-      overflowRight = true;
-    }
-  } else if (start === end) {
-    // the annotation circles the entire plasmid and we aren't currently in a SeqBlock
-    // where the annotation starts or ends
-    ({ width, x: origX } = findXAndWidth(start, end + fullSeq.length));
-  }
-
-  // create padding on either side, vertically, of an annotation
+  // create padding on either side, vertically, of an element
   const height = props.height * 0.8;
 
   const cW = 4; // jagged cutoff width
@@ -181,7 +128,7 @@ const SingleAnnotation = (props: {
   const [x, w] = [origX, width];
 
   // create the SVG path, starting at the topLeft and working clockwise
-  // there is additional logic here for if the annotation overflows
+  // there is additional logic here for if the element overflows
   // to the left or right of this seqBlock, where a "jagged edge" is created
   const topLeft = endREV ? `M ${2 * cW} 0` : "M 0 0";
   const topRight = endFWD ? `L ${width - 2 * cW} 0` : `L ${width} 0`;
@@ -240,24 +187,24 @@ const SingleAnnotation = (props: {
     }
   }
 
-  // determine whether the annotation name fits within the width of the annotation
+  // determine whether the element name fits within the width of the element
   const nameLength = name.length * 6.75; // aspect ratio of roboto mono is ~0.66
   const nameFits = nameLength < width - 15;
 
   return (
-    <g id={annotation.id} transform={`translate(${x}, ${0.1 * height})`}>
+    <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
       <path
-        ref={inputRef(annotation.id, {
+        ref={inputRef(element.id, {
           element: seqBlockRef,
           end: end,
-          name: annotation.name,
-          ref: annotation.id,
+          name: element.name,
+          ref: element.id,
           start: start,
           type: "ANNOTATION",
         })}
-        className={annotation.id}
+        className={element.id}
         d={linePath}
-        id={annotation.id}
+        id={element.id}
         shapeRendering="geometricPrecision"
         style={{
           cursor: "pointer",
@@ -268,8 +215,8 @@ const SingleAnnotation = (props: {
         }}
         onBlur={() => 0}
         onFocus={() => 0}
-        onMouseOut={() => hoverOtherAnnotationRows(annotation.id, 0.7)}
-        onMouseOver={() => hoverOtherAnnotationRows(annotation.id, 1.0)}
+        onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
+        onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
       />
 
       {nameFits && (
@@ -277,7 +224,7 @@ const SingleAnnotation = (props: {
           cursor="pointer"
           dominantBaseline="middle"
           fontSize={11}
-          id={annotation.id}
+          id={element.id}
           style={{
             color: "black",
             fontWeight: 400,
@@ -292,8 +239,8 @@ const SingleAnnotation = (props: {
           onFocus={() => {
             // do nothing
           }}
-          onMouseOut={() => hoverOtherAnnotationRows(annotation.id, 0.7)}
-          onMouseOver={() => hoverOtherAnnotationRows(annotation.id, 1.0)}
+          onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
+          onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
         >
           {name}
         </text>
