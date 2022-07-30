@@ -52,7 +52,7 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
 
     // at least 3 rows inward from default radius (ie index row)
     const rowShiftHeight = lineHeight * rowsToSkip;
-    const radiusAdjust = lineHeight * 3;
+    const radiusAdjust = lineHeight * 2 + 3;
     let currBRadius = radius - radiusAdjust - rowShiftHeight;
     let currTRadius = currBRadius - lineHeight; // top radius
 
