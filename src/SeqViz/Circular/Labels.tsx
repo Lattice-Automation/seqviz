@@ -1,10 +1,10 @@
 import * as React from "react";
 
 import { Coor, InputRefFuncType, Size } from "../../elements";
-import { CHAR_WIDTH, ILabel } from "./Circular";
+import { CHAR_WIDTH, GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
-export interface LabelWithCoors {
+interface LabelWithCoors {
   label: ILabel;
   lineCoor: Coor;
   textAnchor: "start" | "end";
@@ -25,17 +25,7 @@ export interface GroupedLabelsWithCoors {
 interface LabelsProps {
   center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  generateArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
+  genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
   labels: ILabel[];
@@ -96,40 +86,42 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
     const { center, findCoor, labels, lineHeight, radius, seqLength, size, yDiff } = props;
 
     // create a radius outside the plasmid map for placing the names
-    const textRadiusAdjust = seqLength > 200 ? lineHeight * 2 : lineHeight * 3.5;
+    const textRadiusAdjust = seqLength > RENDER_SEQ_LENGTH_CUTOFF ? lineHeight * 2 : lineHeight * 3.5;
     const textRadius = radius + textRadiusAdjust;
 
     /**
-     * add positional information to each label. this includes the coordinates
-     * for the textCoor (starting point for text), line (starting point
-     * for the line connecting plasmid to name) and the textAnchor (does the name
-     * get positioned so it starts at the textCoor or ends at the textCoor?)
+     * Add positional information to each label. This includes:
+     * - textCoor: point next to the text
+     * - lineCoor: point next to the plasmid arc/circle
+     * - textAnchor: alignment
      */
     const labelsWithCoordinates: LabelWithCoors[] = labels
       .reduce((acc: ILabel[], labelRow) => acc.concat(labelRow), [])
       .map(a => {
-        // find the mid-point, vertically, for the label, correcting for entities
+        // find the mid-point, vertically, for the label, correcting for elements
         // that cross the zero-index
         let annCenter: number;
         if (a.type === "enzyme") {
           annCenter = a.start;
         } else if (a.end > a.start) {
-          const annMidSum = a.end + a.start;
-          annCenter = annMidSum / 2;
+          annCenter = (a.end + a.start) / 2;
         } else {
           const annStart = a.start - seqLength;
           const annMidSum = annStart + a.end;
           annCenter = annMidSum / 2;
         }
 
+        // connect the label to the plasmid's index unless we're showing bases. If we're showing
+        // bases, keep it just outside those.
+        const lineCoorRadius = seqLength > RENDER_SEQ_LENGTH_CUTOFF ? radius : textRadius - lineHeight / 2;
+
         // find the seed-points
-        const lineCoor = findCoor(annCenter, radius, true);
+        const lineCoor = findCoor(annCenter, lineCoorRadius, true);
         const textCoor = findCoor(annCenter, textRadius, true);
-        const left = textCoor.x <= center.x;
 
         // find the textAnchor, based on which side of plasmid it's on
-        const textAnchor = left ? "end" : "start";
-        const label = a; // just to keep short-hand in return
+        const textAnchor = textCoor.x <= center.x ? "end" : "start";
+        const label = a;
         return { label, lineCoor, textAnchor, textCoor };
       });
 
@@ -331,7 +323,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
           }
           // a group of names which should render an overlap block
           return (
-            <g key={`${first.id}_listener`} id={`${first.id}-label`}>
+            <g key={`${first.id}-listener`} id={`${first.id}-label`}>
               {labelLines}
               <text
                 className="la-vz-circular-label"

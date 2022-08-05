@@ -95,13 +95,13 @@ class Edges extends React.PureComponent<EdgesProps> {
         // below 40 zoom the chars are so small we may as well not widen the selection edges.
         width: wide ? 2 : 1,
       },
-      y: "-5",
+      y: -5,
     };
 
     return (
       <g className="la-vz-linear-sel-edges">
-        {startEdge !== null && <rect {...rect} x={wide ? x - 1 : x} />}
-        {lastEdge !== null && <rect {...rect} x={wide ? secondEdgeX - 1 : secondEdgeX} />}
+        {startEdge !== null && <rect {...rect} x={x} />}
+        {lastEdge !== null && <rect {...rect} x={secondEdgeX} />}
       </g>
     );
   }

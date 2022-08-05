@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { InputRefFuncType, NameRange } from "../../../elements";
-import randomid from "../../../utils/randomid";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
@@ -22,7 +21,7 @@ const Highlights = (props: {
     {/* We use two LinearFindBlocks here because we want to span both the top and bottom strand for a highlight */}
     {props.highlights.map((h, i) => (
       // TODO: what's going on here, why does this lead to duplicates
-      <SingleHighlight key={`linear-highlight-${h.id}-${randomid()}`} {...props} highlight={h} index={i} />
+      <SingleHighlight key={`linear-highlight-${h.id}-${props.listenerOnly}`} {...props} highlight={h} index={i} />
     ))}
   </>
 );
@@ -44,13 +43,21 @@ const SingleHighlight = (props: {
 }) => {
   const { width, x } = props.findXAndWidth(props.index, props.highlight, props.highlights);
 
+  let highlightStyle = {};
+  if (props.listenerOnly) {
+    highlightStyle = { fill: "transparent" };
+  } else if (props.highlight.color) {
+    highlightStyle = { fill: props.highlight.color };
+  }
+
   const rectProps = {
+    className: "la-vz-highlight",
     cursor: "pointer",
     height: 18,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
     strokeWidth: 1,
-    style: { fill: props.listenerOnly ? "transparent" : props.highlight.color || "rgba(255, 251, 7, 0.5)" },
+    style: highlightStyle,
     width: width,
     x: x,
   };
