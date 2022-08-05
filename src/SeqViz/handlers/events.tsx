@@ -293,24 +293,20 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
     /** a reference used only so we can focus on the event router after mounting */
     eventRouter;
 
-    render() {
-      const { Circular, name } = this.props;
-
-      return (
-        <div
-          ref={ref => {
-            this.eventRouter = ref;
-          }}
-          className="la-vz-viewer-event-router"
-          id={`la-vz-${Circular ? "circular" : "linear"}-${name.replace(/\s/g, "")}-event-router`}
-          role="presentation"
-          tabIndex={-1}
-          onKeyDown={this.handleKeyPress}
-          onMouseMove={this.props.mouseEvent}
-          onWheel={this.handleScrollEvent}
-        >
-          <WrappedComponent {...this.props} mouseEvent={this.handleMouseEvent} />
-        </div>
-      );
-    }
+    render = () => (
+      <div
+        ref={ref => {
+          this.eventRouter = ref;
+        }}
+        className="la-vz-viewer-event-router"
+        id={`la-vz-${this.props.Circular ? "circular" : "linear"}-event-router`}
+        role="presentation"
+        tabIndex={-1}
+        onKeyDown={this.handleKeyPress}
+        onMouseMove={this.props.mouseEvent}
+        onWheel={this.handleScrollEvent}
+      >
+        <WrappedComponent {...this.props} mouseEvent={this.handleMouseEvent} />
+      </div>
+    );
   };
