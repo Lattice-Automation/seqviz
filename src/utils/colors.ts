@@ -57,13 +57,6 @@ export const COLOR_BORDER_MAP = {
   "#FAA887": "#B36446", // light blue
 };
 
-export const INSERT_COLORS = [
-  "#6bdbdc", // insert 1
-  "#a066c9", // insert 2
-  "#bbd44c", // insert 3
-  "#f3995b", // insert 4
-];
-
 // color generator function
 export const chooseRandomColor = (colors?: string[]) => {
   const choices = colors || COLORS;

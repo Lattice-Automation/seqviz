@@ -157,35 +157,16 @@ const CutSites = (props: {
         }
 
         const showConnector = showTopLine || showBottomLine;
-        const { width: connectorWidth, x: connectorX } = getConnectorXAndWidth(c, showTopLine, showBottomLine);
+        const { x: connectorX } = getConnectorXAndWidth(c, showTopLine, showBottomLine);
 
         return (
           <React.Fragment key={`cut-site-${c.id}-${firstBase}`}>
-            {/* custom highlight color block */}
-            {c.highlight.color && (
-              <HighlightBlock
-                color={c.highlight.color}
-                connector={c}
-                end={c.end}
-                findXAndWidth={findXAndWidth}
-                id={c.id}
-                lineHeight={lineHeight}
-                start={c.start}
-                yDiff={c.direction > 0 ? lineYDiff : lineYDiff + lineHeight}
-              />
-            )}
-
             {/* label above seq */}
             {showTopLine && (
               <text
                 className="la-vz-cut-site-text"
                 dominantBaseline="hanging"
                 id={c.id}
-                style={{
-                  cursor: "pointer",
-                  fill: "rgb(51, 51, 51)",
-                  fillOpacity: 0.8,
-                }}
                 textAnchor="start"
                 x={c.cutX}
                 y={yDiff}
@@ -200,30 +181,24 @@ const CutSites = (props: {
 
             {/* lines showing the cut site */}
             {showTopLine && (
-              <rect className="la-vz-cut-site-fcut" height={lineHeight} width={1} x={c.cutX} y={lineYDiff} />
+              <path className="la-vz-cut-site" d={`M ${c.cutX} ${lineYDiff} L ${c.cutX} ${lineYDiff + lineHeight}`} />
             )}
             {showConnector && zoom > 10 && (
-              <rect
-                className="la-vz-cut-site-connector"
-                height={1}
-                width={connectorWidth}
-                x={connectorX}
-                y={lineHeight + lineYDiff}
+              <path
+                className="la-vz-cut-site"
+                d={`M ${connectorX} ${lineYDiff + lineHeight} L ${c.hangX} ${lineYDiff + lineHeight}`}
               />
             )}
             {showBottomLine && zoom > 10 && (
-              <rect
-                className="la-vz-cut-site-rcut"
-                height={lineHeight}
-                width={1}
-                x={c.hangX}
-                y={lineHeight + lineYDiff}
+              <path
+                className="la-vz-cut-site"
+                d={`M ${c.hangX} ${lineYDiff + lineHeight} L ${c.hangX} ${lineYDiff + 2 * lineHeight}`}
               />
             )}
 
-            {/* dashed outline showing the recog site */}
+            {/* outline showing the recog site */}
             {zoom > 10 && (
-              <rect
+              <path
                 ref={inputRef(c.id, {
                   element: null,
                   end: c.end,
@@ -231,56 +206,18 @@ const CutSites = (props: {
                   start: c.start,
                   type: "ENZYME",
                 })} // for highlighting
-                className={c.id}
-                height={lineHeight * 2}
-                strokeDasharray="4,5"
-                style={{
-                  fill: "rgb(255, 165, 0, 0.3)",
-                  fillOpacity: 0,
-                  stroke: "rgb(150,150,150)",
-                  strokeWidth: 1,
-                }}
-                width={c.highlight.width}
-                x={c.highlight.x}
-                y={lineYDiff}
+                className="la-vz-cut-site"
+                d={`M ${c.highlight.x} ${lineYDiff}
+                    L ${c.highlight.x + c.highlight.width + 1} ${lineYDiff}
+                    L ${c.highlight.x + c.highlight.width + 1} ${lineYDiff + 2 * lineHeight}
+                    L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
+                style={c.enzyme.color ? { fill: c.enzyme.color } : {}}
               />
             )}
           </React.Fragment>
         );
       })}
     </g>
-  );
-};
-
-const HighlightBlock = (props: {
-  color: string;
-  connector: HighlightedCutSite;
-  end: number;
-  findXAndWidth: FindXAndWidthType;
-  id: string;
-  lineHeight: number;
-  start: number;
-  yDiff: number;
-}) => {
-  const { color, end, findXAndWidth, id, lineHeight, start, yDiff } = props;
-  const { width, x } = findXAndWidth(start, end);
-
-  return (
-    <rect
-      key={id}
-      className="la-vz-cut-site-highlight"
-      height={lineHeight}
-      id={id}
-      style={{
-        cursor: "pointer",
-        fill: color,
-        stroke: "rgba(0, 0, 0, 0.5)",
-        strokeWidth: 0,
-      }}
-      width={width}
-      x={x}
-      y={yDiff}
-    />
   );
 };
 

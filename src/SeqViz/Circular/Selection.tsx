@@ -2,21 +2,12 @@ import * as React from "react";
 
 import { Coor, InputRefFuncType } from "../../elements";
 import { SelectionContext } from "../handlers/selection";
+import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CircularSelectionProps {
   center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  generateArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
+  genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
   lineHeight: number;
@@ -41,7 +32,7 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
   declare context: React.ContextType<typeof SelectionContext>;
 
   render() {
-    const { findCoor, generateArc, getRotation, lineHeight, radius, seq, seqLength, totalRows } = this.props;
+    const { findCoor, genArc, getRotation, lineHeight, radius, seq, seqLength, totalRows } = this.props;
     const { clockwise, end, ref, start } = this.context;
 
     // calculate the length of the current selection region
@@ -63,8 +54,8 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
 
     // const calc the size of the selection radii
     let topR = radius + lineHeight; // outer radius
-    if (seq.length < 200) {
-      topR += 2 * lineHeight;
+    if (seq.length <= RENDER_SEQ_LENGTH_CUTOFF) {
+      topR += 2 * lineHeight + 3;
     }
     const bAdjust = lineHeight * totalRows; // adjust bottom radius
     let bottomR = radius - bAdjust; // inner radius
@@ -90,14 +81,6 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
       lArc = true;
     }
 
-    const selectPath = generateArc({
-      innerRadius: bottomR,
-      largeArc: lArc,
-      length: selLength,
-      outerRadius: topR,
-      sweepFWD: sFlagF,
-    });
-
     // this should be very thin when the selection range starts and ends at same point
     let edgeStrokeWidth = 2;
     if (start === end) {
@@ -114,7 +97,19 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
     return (
       <g className="la-vz-circular-selection">
         {selLength && (
-          <path d={selectPath} fill="#DEF6FF" shapeRendering="auto" stroke="none" transform={getRotation(start)} />
+          <path
+            d={genArc({
+              innerRadius: bottomR,
+              largeArc: lArc,
+              length: selLength,
+              outerRadius: topR,
+              sweepFWD: sFlagF,
+            })}
+            fill="#DEF6FF"
+            shapeRendering="auto"
+            stroke="none"
+            transform={getRotation(start)}
+          />
         )}
         <path d={edgePath} transform={getRotation(start)} {...edgeStyle} />
         {selLength && <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />}

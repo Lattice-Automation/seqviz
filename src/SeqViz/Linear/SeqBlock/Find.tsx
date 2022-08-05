@@ -35,7 +35,6 @@ const Find = ({
         compYDiff={compYDiff}
         direction={s.direction || 1}
         end={s.end}
-        fillStyle="rgba(255, 251, 7, 0.5)"
         findXAndWidth={findXAndWidth}
         firstBase={firstBase}
         indexYDiff={indexYDiff}
@@ -55,7 +54,6 @@ const FindBlock = ({
   compYDiff,
   direction,
   end,
-  fillStyle,
   findXAndWidth,
   firstBase,
   indexYDiff,
@@ -68,7 +66,6 @@ const FindBlock = ({
   compYDiff: number;
   direction: -1 | 1;
   end: number;
-  fillStyle: string;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   indexYDiff: number;
@@ -102,12 +99,14 @@ const FindBlock = ({
         start: start,
         type: "FIND",
       })}
+      className="la-vz-search"
       cursor="pointer"
       height={18}
       id={id}
+      shapeRendering="crispEdges"
       stroke={listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)"}
       strokeWidth={1}
-      style={{ fill: listenerOnly ? "transparent" : fillStyle }}
+      style={listenerOnly ? { fill: "transparent" } : {}}
       width={width}
       x={x}
       y={y}

@@ -3,22 +3,13 @@ import * as React from "react";
 import { Annotation, Coor, InputRefFuncType, Size } from "../../elements";
 import { COLOR_BORDER_MAP, darkerColor } from "../../utils/colors";
 import CentralIndexContext from "../handlers/centralIndex";
+import { GenArcFunc } from "./Circular";
 
 interface AnnotationsProps {
   annotations: Annotation[][];
   center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  generateArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
+  genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inlinedAnnotations: string[];
   inputRef: InputRefFuncType;
@@ -75,7 +66,7 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
                     centralIndex={circular}
                     currBRadius={currBRadius}
                     currTRadius={currTRadius}
-                    generateArc={this.props.generateArc}
+                    genArc={this.props.genArc}
                     getRotation={this.props.getRotation}
                     hoverAnnotation={this.hoverAnnotation}
                     id={`la-vz-${ann.id}-annotation-circular-row`}
@@ -100,7 +91,7 @@ interface SingleAnnotationProps {
   centralIndex: number;
   currBRadius: number;
   currTRadius: number;
-  generateArc: (args: {
+  genArc: (args: {
     arrowFWD?: boolean;
     arrowREV?: boolean;
     innerRadius: number;
@@ -131,7 +122,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
     centralIndex,
     currBRadius,
     currTRadius,
-    generateArc,
+    genArc,
     getRotation,
     hoverAnnotation,
     inlinedAnnotations,
@@ -157,7 +148,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
   const mid = (annLength / 2 + a.start + seqLength - centralIndex) % seqLength;
   const bottomHalf = mid > seqLength * 0.25 && mid < seqLength * 0.75;
 
-  const path = generateArc({
+  const path = genArc({
     arrowFWD: a.direction === 1,
     arrowREV: a.direction === -1,
     innerRadius: currBRadius,
@@ -166,7 +157,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
     outerRadius: currTRadius,
     sweepFWD: true,
   });
-  const namePath = generateArc({
+  const namePath = genArc({
     arrowFWD: false,
     arrowREV: false,
     innerRadius: bottomHalf ? currBRadius : currTRadius,

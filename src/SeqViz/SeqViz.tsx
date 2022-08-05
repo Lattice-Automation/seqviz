@@ -369,7 +369,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const highlightsProcessed = (highlights || []).concat(highlightedRegions || []).map(
       (h): Highlight => ({
         ...h,
-        color: h.color || "rgba(255, 251, 7, 0.5)",
         direction: 1,
         end: h.end % (seq.length + 1),
         id: randomid(),
@@ -399,8 +398,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         start: t.start % seq.length,
       })),
       zoom: {
-        circular: zoom?.circular || 0,
-        linear: zoom?.linear || 50,
+        circular: typeof zoom?.circular == "number" ? zoom.circular : 0,
+        linear: typeof zoom?.linear == "number" ? zoom.linear : 50,
       },
     };
 

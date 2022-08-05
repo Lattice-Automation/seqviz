@@ -2,22 +2,13 @@ import * as React from "react";
 
 import { Coor, InputRefFuncType, Size } from "../../elements";
 import CentralIndexContext from "../handlers/centralIndex";
+import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface IndexProps {
   center: Coor;
   compSeq: string;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
-  generateArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
+  genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inputRef: InputRefFuncType;
   lineHeight: number;
@@ -33,13 +24,13 @@ interface IndexProps {
 }
 
 /**
- * this component renders the following:
- * 		1. the name (center or bottom)
- * 		2. the number of bps (center or bottom)
- * 		3. the plasmid circle
- * 		4. the index ticks and numbers along the plasmid circle
+ * The Index component renders the plasmid's:
+ * 		1. name (center or bottom)
+ * 		2. number of bps (center or bottom)
+ * 		3. index circle
+ * 		4. index ticks and numbers along the plasmid circle
  *
- * center or bottom here refers to the fact that the name/bps of the
+ * The center or bottom here refers to the fact that the name/bps of the
  * part need to be pushed to the bottom of the circular viewer if there
  * are too many elements in the circular viewer and the name won't fit
  */
@@ -99,13 +90,24 @@ export default class Index extends React.PureComponent<IndexProps> {
       firstBase += seqLength;
       lastBase += seqLength;
     }
+
     const basepairsToRender: JSX.Element[] = [];
     for (let i = firstBase; i <= lastBase; i += 1) {
       basepairsToRender.push(
-        <text key={`la-vz-base_${i}`} {...findCoor(0, radius + 2 * lineHeight)} transform={getRotation(i + 0.25)}>
+        <text
+          key={`la-vz-base-${i}`}
+          {...findCoor(0, radius + 2 * lineHeight)}
+          dominantBaseline="middle"
+          transform={getRotation(i)}
+        >
           {seqForCircular.charAt(i)}
         </text>,
-        <text key={`la-vz-base_comp_${i}`} {...findCoor(0, radius + lineHeight)} transform={getRotation(i + 0.25)}>
+        <text
+          key={`la-vz-base-comp-${i}`}
+          {...findCoor(0, radius + lineHeight)}
+          dominantBaseline="middle"
+          transform={getRotation(i)}
+        >
           {compSeqForCircular.charAt(i)}
         </text>
       );
@@ -117,7 +119,7 @@ export default class Index extends React.PureComponent<IndexProps> {
     const {
       center,
       findCoor,
-      generateArc,
+      genArc,
       getRotation,
       lineHeight,
       name,
@@ -143,6 +145,7 @@ export default class Index extends React.PureComponent<IndexProps> {
     const cutoff = 30;
     const nameSpans: string[] = [];
     let nameIndex = 0;
+
     // TODO: react freaks out when the circ viewer is small and each line is one char
     // bc there are shared keys (also it's just not a good look)
     while (nameIndex < name.length) {
@@ -173,11 +176,6 @@ export default class Index extends React.PureComponent<IndexProps> {
     const tickCoorEnd = findCoor(0, radius - 10);
 
     // create tick and text style
-    const nameStyle = {
-      fontSize: 20,
-      fontWeight: 500,
-      textAnchor: "middle",
-    };
     const subtitleStyle = {
       fill: "gray",
       fontSize: 14,
@@ -200,16 +198,17 @@ export default class Index extends React.PureComponent<IndexProps> {
     };
 
     // generate the full circle around the edge of the plasmid
-    const indexCurve = generateArc({
+    const indexCurve = genArc({
       innerRadius: radius,
       largeArc: true,
       length: seqLength / 2,
       outerRadius: radius,
     });
+
     return (
       <g className="la-vz-circular-index">
         {/* A label showing the name of the plasmid */}
-        <text {...nameStyle}>
+        <text style={{ fontSize: 20, fontWeight: 500 }} textAnchor="middle">
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
               {n}
@@ -222,12 +221,12 @@ export default class Index extends React.PureComponent<IndexProps> {
           {`${seqLength} bp`}
         </text>
 
-        {/* If less than 200bp long, render the bp of the plasmid */}
-        {seq.length < 200 ? <g className="la-vz-circular-bps">{this.renderBasepairs()}</g> : null}
+        {/* If less than cutoff long, render the bp of the plasmid */}
+        {seq.length <= RENDER_SEQ_LENGTH_CUTOFF ? <g className="la-vz-circular-bps">{this.renderBasepairs()}</g> : null}
 
         {/* The ticks and their index labels */}
         {ticks.map(t => (
-          <g key={`la-vz-${t}_tick`} transform={getRotation(t - 0.5)}>
+          <g key={`la-vz-tick-${t}`} transform={getRotation(t - 0.5)}>
             <path
               d={`M ${tickCoorStart.x} ${tickCoorStart.y}
                 L ${tickCoorEnd.x} ${tickCoorEnd.y}`}

@@ -11,46 +11,57 @@ export const App = () => {
   const props: SeqVizProps = {
     // accession: "BBa_J23100",
     annotations: [
-      { direction: 1, end: 60, name: "test", start: 8 },
+      { direction: 60, end: 300, name: "test", start: 8 },
       { direction: -1, end: 70, name: "test", start: 270 },
     ],
     bpColors: {
       10: "green",
       11: "green",
       12: "green",
-      200: "blue",
-      201: "red",
+      16: "blue",
     },
     // colors: ["#8CDEBD"],
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [
       {
-        fcut: 5,
+        color: "rgba(0,0,250,0.25)",
+        fcut: 2,
         name: "custom",
         range: {
           end: 300,
           start: 80,
-        },
-        rcut: 5 /* pass in color */,
-        rseq: "cacgnnnn",
+        } /* pass in color */,
+        rcut: 5,
+        rseq: "ngatagn",
       },
+      // {
+      //   fcut: 1,
+      //   name: "custom",
+      //   range: {
+      //     end: 300,
+      //     start: 80,
+      //   },
+      //   rcut: 3,
+      //   rseq: "nacgn",
+      // },
     ],
+    name: "Development Plasmid",
     onSelection: console.log,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "gtacc" },
-    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(2),
+    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(5),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
     translations: [{ direction: 1, end: 69, start: 0 }],
     viewer: "both_flip",
-    zoom: { circular: 0, linear: 50 },
+    zoom: { circular: 90, linear: 50 },
   };
 
   const [search, setSearch] = React.useState("");
-  const [start, setStart] = React.useState(100);
-  const [end, setEnd] = React.useState(50);
+  const [start, setStart] = React.useState(0);
+  const [end, setEnd] = React.useState(1);
   const [accession, setAccession] = React.useState("");
 
   return (

@@ -18,6 +18,9 @@ import Selection from "./Selection";
 // just divide the width of some rectangular text by it's number of characters
 export const CHAR_WIDTH = 7.801;
 
+/** Sequence length cutoff below which the circular viewer's sequence won't be rendered. */
+export const RENDER_SEQ_LENGTH_CUTOFF = 250;
+
 export interface ILabel {
   end: number;
   id?: string;
@@ -26,7 +29,20 @@ export interface ILabel {
   type: "enzyme" | "annotation";
 }
 
-export interface CircularProps {
+/** GenArcFunc is a method that makes an arc on the viewer for a Circular child. */
+export type GenArcFunc = (args: {
+  arrowFWD?: boolean;
+  arrowREV?: boolean;
+  innerRadius: number;
+  largeArc: boolean;
+  length: number;
+  offset?: number;
+  outerRadius: number;
+  // see svg.arc large-arc-flag
+  sweepFWD?: boolean;
+}) => string;
+
+interface CircularProps {
   Circular: boolean;
   Linear: boolean;
   annotations: Annotation[];
@@ -61,6 +77,7 @@ interface CircularState {
   seqLength: number;
 }
 
+/** Circular is a circular viewer that contains a bunch of arcs. */
 class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
   declare context: React.ContextType<typeof CentralIndexContext>;
@@ -146,11 +163,9 @@ class Circular extends React.Component<CircularProps, CircularState> {
   shouldComponentUpdate = (nextProps: CircularProps) => !isEqual(nextProps, this.props);
 
   /**
-   * find the rotation transformation needed to put a child element in the
-   * correct location around the plasmid
-   *
-   * this func makes use of the centralIndex field in parent state
-   * to rotate the plasmid viewer
+   * Return the SVG rotation transformation needed to put a child element in the
+   * correct location around the plasmid. This func makes use of the centralIndex field in parent state
+   * to rotate the plasmid viewer.
    */
   getRotation = (index: number): string => {
     const { center } = this.props;
@@ -166,10 +181,10 @@ class Circular extends React.Component<CircularProps, CircularState> {
   };
 
   /**
-   * given an index along the plasmid and its radius, find the coordinate
+   * Given an index along the plasmid and its radius, find the coordinate
    * will be used in many of the child components
    *
-   * in general this is for lines and labels
+   * In general, this is for lines and labels
    */
   findCoor = (index: number, radius: number, rotate?: boolean): Coor => {
     const { center } = this.props;
@@ -188,7 +203,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
   };
 
   /**
-   * given a coordinate, and the degrees to rotate it, find the new coordinate
+   * Given a coordinate, and the degrees to rotate it, find the new coordinate
    * (assuming that the rotation is around the center)
    *
    * in general this is for text and arcs
@@ -218,12 +233,12 @@ class Circular extends React.Component<CircularProps, CircularState> {
   };
 
   /**
-   * given an inner and outer radius, and the length of the element, return the
-   * path for an arc that circles the plasmid. the optional paramters sweepFWD and sweepREV
+   * Given an inner and outer radius, and the length of the element, return the
+   * path for an arc that circles the plasmid. The optional paramters sweepFWD and sweepREV
    * are needed for selection arcs (where the direction of the arc isn't known beforehand)
    * and arrowFWD and arrowREV are needed for annotations, where there may be directionality
    */
-  generateArc = (args: {
+  genArc: GenArcFunc = (args: {
     arrowFWD?: boolean;
     arrowREV?: boolean;
     innerRadius: number;
@@ -301,16 +316,15 @@ class Circular extends React.Component<CircularProps, CircularState> {
       size,
       yDiff,
     } = this.props;
-
     const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, primersInRows, seqLength } = this.state;
 
-    const { findCoor, generateArc, getRotation, rotateCoor } = this;
+    const { findCoor, genArc, getRotation, rotateCoor } = this;
 
     // props contains props used in many/all children
     const props = {
       center,
       findCoor,
-      generateArc,
+      genArc,
       getRotation,
       inputRef,
       lineHeight,
@@ -342,6 +356,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />
+          <CutSites {...props} cutSites={cutSites} selectionRows={4} />
           <Index
             {...props}
             compSeq={compSeq}
@@ -355,7 +370,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
           <Find
             center={props.center}
             findCoor={props.findCoor}
-            generateArc={props.generateArc}
+            genArc={props.genArc}
             getRotation={props.getRotation}
             highlights={this.props.highlights}
             inputRef={props.inputRef}
@@ -368,7 +383,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
             totalRows={totalRows}
             onUnmount={onUnmount}
           />
-          <CutSites {...props} cutSites={cutSites} selectionRows={4} />
           <Annotations
             {...props}
             annotations={annotationsInRows}
@@ -382,5 +396,62 @@ class Circular extends React.Component<CircularProps, CircularState> {
     );
   }
 }
+
+/**
+ * Create an SVG arc around a single element in the Circular Viewer.
+ */
+export const Arc = (props: {
+  className: string;
+  color?: string;
+  direction: -1 | 1;
+  end: number;
+  genArc: GenArcFunc;
+  getRotation: (index: number) => string;
+  inputRef: InputRefFuncType;
+  lineHeight: number;
+  radius: number;
+  seqLength: number;
+  start: number;
+}) => {
+  const { className, color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
+
+  let { end } = props;
+  // crosses the zero index
+  if (end < start) {
+    end += seqLength;
+  }
+
+  const resultLength = Math.abs(end - start);
+  const findPath = genArc({
+    innerRadius: radius - lineHeight / 2,
+    largeArc: resultLength > seqLength / 2,
+    length: resultLength,
+    outerRadius: radius + lineHeight / 2,
+    sweepFWD: true,
+  });
+
+  const id = `${className}-circular-${start}-${end}-${direction}`;
+
+  return (
+    <path
+      key={id}
+      ref={inputRef(id, {
+        end: end,
+        ref: id,
+        start: start,
+        type: "FIND",
+      })}
+      className={className}
+      cursor="pointer"
+      d={findPath}
+      fill={color}
+      id={id}
+      shapeRendering="auto"
+      stroke="rgba(0, 0, 0, 0.5)"
+      strokeWidth={1}
+      transform={getRotation(start)}
+    />
+  );
+};
 
 export default withViewerHOCs(Circular);

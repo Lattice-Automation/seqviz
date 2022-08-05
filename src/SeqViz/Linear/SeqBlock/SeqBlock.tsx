@@ -289,7 +289,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of the sequence strand
     const indexYDiff = cutSiteYDiff + cutSiteHeight;
-    const indexHeight = zoomed ? lineHeight : 0; // bases not shown at < 10 zoom
+    const indexHeight = lineHeight;
 
     // height and yDiff of the complement strand
     const compYDiff = indexYDiff + indexHeight;
@@ -314,7 +314,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     // const indexRowHeight = showIndex ? elementHeight : 0;
 
     // calc the height necessary for the sequence selection
-    let selectHeight =
+    const selectHeight =
       forwardPrimerHeight +
       cutSiteHeight +
       indexHeight +
@@ -328,7 +328,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // needed because otherwise the selection height is very small
     if (!zoomed && selectHeight <= elementHeight) {
-      selectHeight += lineHeight;
       selectEdgeHeight += lineHeight;
     }
 
