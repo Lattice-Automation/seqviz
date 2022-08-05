@@ -32,41 +32,41 @@ interface FindProps {
 export const Find = (props: FindProps) => {
   const { generateArc, getRotation, highlights, inputRef, lineHeight, radius, search, seqLength } = props;
   const threshold = seqLength >= 200 ? search.length / seqLength <= 0.02 : true;
-  const searchArcs = search.map(s => (
-    <FindArc
-      key={JSON.stringify(s)}
-      direction={s.direction || 1}
-      end={s.end}
-      fillStyle={"rgba(255, 251, 7, 0.5)"}
-      generateArc={generateArc}
-      getRotation={getRotation}
-      inputRef={inputRef}
-      lineHeight={lineHeight}
-      radius={radius}
-      seqLength={seqLength}
-      start={s.start}
-    />
-  ));
 
-  const highlightArcs = highlights.map(({ color, end, start }) => (
-    <FindArc
-      key={JSON.stringify({ end, start })}
-      direction={1}
-      end={end}
-      fillStyle={color || "rgba(0, 251, 7, 0.5)"}
-      generateArc={generateArc}
-      getRotation={getRotation}
-      inputRef={inputRef}
-      lineHeight={lineHeight}
-      radius={radius}
-      seqLength={seqLength}
-      start={start}
-    />
-  ));
   return (
     <g className="la-vz-circular-search-results">
-      {threshold && searchArcs}
-      {highlightArcs}
+      {threshold &&
+        search.map(s => (
+          <FindArc
+            key={JSON.stringify(s)}
+            direction={s.direction || 1}
+            end={s.end}
+            fillStyle={"rgba(255, 251, 7, 0.5)"}
+            generateArc={generateArc}
+            getRotation={getRotation}
+            inputRef={inputRef}
+            lineHeight={lineHeight}
+            radius={radius}
+            seqLength={seqLength}
+            start={s.start}
+          />
+        ))}
+
+      {highlights.map(({ color, end, start }) => (
+        <FindArc
+          key={JSON.stringify({ end, start })}
+          direction={1}
+          end={end}
+          fillStyle={color || "rgba(0, 251, 7, 0.5)"}
+          generateArc={generateArc}
+          getRotation={getRotation}
+          inputRef={inputRef}
+          lineHeight={lineHeight}
+          radius={radius}
+          seqLength={seqLength}
+          start={start}
+        />
+      ))}
     </g>
   );
 };
