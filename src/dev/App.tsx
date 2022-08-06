@@ -11,7 +11,7 @@ export const App = () => {
   const props: SeqVizProps = {
     // accession: "BBa_J23100",
     annotations: [
-      { direction: 60, end: 300, name: "test", start: 8 },
+      { direction: 60, end: 300, name: "test", start: 25 },
       { direction: -1, end: 70, name: "test", start: 270 },
     ],
     bpColors: {
@@ -24,13 +24,9 @@ export const App = () => {
     copyEvent: event => event.key === "c" && (event.metaKey || event.ctrlKey),
     enzymes: [
       {
-        color: "rgba(0,0,250,0.25)",
+        // color: "rgba(0,0,250,0.25)",
         fcut: 2,
         name: "custom",
-        range: {
-          end: 300,
-          start: 80,
-        } /* pass in color */,
         rcut: 5,
         rseq: "ngatagn",
       },

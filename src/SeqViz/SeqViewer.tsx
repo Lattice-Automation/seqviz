@@ -136,18 +136,16 @@ See: https://github.com/Lattice-Automation/seqviz#style-`);
 
     const pixelPerBP = (radius * Math.PI) / seqLength;
     const totalPixelsOfArc = pixelPerBP * bpsOnArc;
-
     radius = totalPixelsOfArc / (Math.PI * (bpsOnArc / seqLength));
-    radius = radius === 0 ? 1 : radius;
-    const yDiff = 0;
+
     return {
       Circular: true,
       Linear: false,
       bpsOnArc,
       center,
-      radius,
+      radius: radius === 0 ? 1 : radius,
       size,
-      yDiff,
+      yDiff: 0,
       zoom: { circular: zoom },
     };
   };
