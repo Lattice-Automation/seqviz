@@ -103,22 +103,17 @@ export const SingleNamedElement = (props: {
   lastBase: number;
   seqBlockRef: unknown;
 }) => {
-  const { bpsPerBlock, element, elements, findXAndWidth, firstBase, fullSeq, index, inputRef, lastBase, seqBlockRef } =
-    props;
+  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase, seqBlockRef } = props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
   const reverse = direction === -1;
-  const { width, x: origX } = findXAndWidth(index, element, elements);
+  const { overflowLeft, overflowRight, width, x: origX } = findXAndWidth(index, element, elements);
   const crossZero = start > end && end < firstBase;
 
   // does the element begin or end within this seqBlock with a directionality?
   const endFWD = forward && end > firstBase && end <= lastBase;
   const endREV = reverse && start >= firstBase && start <= lastBase;
-
-  // does the element overflow to the left or the right of this seqBlock?
-  const overflowLeft = start < firstBase;
-  const overflowRight = end > lastBase || (start === end && fullSeq.length > bpsPerBlock); // start === end means covers whole plasmid
 
   // create padding on either side, vertically, of an element
   const height = props.height * 0.8;

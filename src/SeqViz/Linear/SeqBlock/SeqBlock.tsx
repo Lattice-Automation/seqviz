@@ -461,7 +461,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         {zoomed && (
           <CutSiteRow
             charWidth={charWidth}
-            cutSiteRows={cutSiteRows}
+            cutSites={cutSiteRows}
             elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}

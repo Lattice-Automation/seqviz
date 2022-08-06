@@ -51,7 +51,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
  */
 const CutSites = (props: {
   charWidth: number;
-  cutSiteRows: CutSite[];
+  cutSites: CutSite[];
   elementHeight: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
@@ -62,7 +62,7 @@ const CutSites = (props: {
   zoom: { linear: number };
 }) => {
   const {
-    cutSiteRows,
+    cutSites,
     findXAndWidth,
     firstBase,
     inputRef,
@@ -73,7 +73,7 @@ const CutSites = (props: {
   } = props;
 
   // Add x and width to each cut site.
-  const sitesWithX: HighlightedCutSite[] = cutSiteRows.map((c: CutSite) => {
+  const sitesWithX: HighlightedCutSite[] = cutSites.map((c: CutSite) => {
     const { x: cutX } = findXAndWidth(c.fcut, c.fcut);
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { width: highlightWidth, x: highlightX } = findXAndWidth(c.start, c.end);
@@ -98,7 +98,7 @@ const CutSites = (props: {
       hangX,
       highlight: {
         color: c.enzyme.color,
-        width: Math.max(0, highlightWidth - 1),
+        width: Math.max(0, highlightWidth),
         x: highlightX,
       },
     };
