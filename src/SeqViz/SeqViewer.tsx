@@ -58,10 +58,7 @@ See: https://github.com/Lattice-Automation/seqviz#style-`);
    */
   linearProps = () => {
     const { seq, size } = this.props;
-
-    let zoom = this.props.zoom.linear || 50;
-    zoom = Math.max(zoom, 0);
-    zoom = Math.min(zoom, 100);
+    const zoom = this.props.zoom.linear;
 
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
@@ -115,10 +112,7 @@ See: https://github.com/Lattice-Automation/seqviz#style-`);
       seq: { length: seqLength },
       size,
     } = this.props;
-
-    let zoom = this.props.zoom.circular || 0;
-    zoom = Math.max(zoom, 0);
-    zoom = Math.min(zoom, 100);
+    const zoom = this.props.zoom.circular;
 
     const center = {
       x: size.width / 2,

@@ -231,6 +231,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const {
       annotationRows,
       blockHeight,
+      bpsPerBlock,
       charWidth,
       compSeq,
       cutSiteRows,
@@ -354,7 +355,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             showIndex={showIndex}
             size={size}
             transform={`translate(0, ${indexRowYDiff})`}
-            zoom={this.props.zoom}
+            zoom={zoom}
           />
         )}
         <Selection.Block
@@ -368,13 +369,14 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           onUnmount={onUnmount}
         />
         <Highlights
-          compYDiff={compYDiff}
+          compYDiff={compYDiff - 3}
           findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           highlights={highlights}
-          indexYDiff={indexYDiff}
+          indexYDiff={indexYDiff - 3}
           inputRef={inputRef}
           lastBase={lastBase}
+          lineHeight={lineHeight}
           listenerOnly={false}
           seqBlockRef={this}
         />
@@ -407,7 +409,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         />
         <AnnotationRows
           annotationRows={annotationRows}
-          bpsPerBlock={this.props.bpsPerBlock}
+          bpsPerBlock={bpsPerBlock}
           elementHeight={elementHeight}
           findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
@@ -468,8 +470,8 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             inputRef={inputRef}
             lastBase={lastBase}
             lineHeight={lineHeight}
-            yDiff={cutSiteYDiff}
-            zoom={this.props.zoom}
+            yDiff={cutSiteYDiff - 3}
+            zoom={zoom}
           />
         )}
         {zoomed ? (
@@ -494,13 +496,14 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           seqBlockRef={this}
         />
         <Highlights
-          compYDiff={compYDiff}
+          compYDiff={compYDiff - 3}
           findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           highlights={highlights}
-          indexYDiff={indexYDiff}
+          indexYDiff={indexYDiff - 3}
           inputRef={inputRef}
           lastBase={lastBase}
+          lineHeight={lineHeight}
           listenerOnly={true}
           seqBlockRef={this}
         />

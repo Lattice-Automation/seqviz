@@ -14,6 +14,7 @@ const Highlights = (props: {
   indexYDiff: number;
   inputRef: InputRefFuncType;
   lastBase: number;
+  lineHeight: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;
 }) => (
@@ -38,6 +39,7 @@ const SingleHighlight = (props: {
   indexYDiff: number;
   inputRef: InputRefFuncType;
   lastBase: number;
+  lineHeight: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;
 }) => {
@@ -53,7 +55,7 @@ const SingleHighlight = (props: {
   const rectProps = {
     className: "la-vz-highlight",
     cursor: "pointer",
-    height: 18,
+    height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
     strokeWidth: 1,
@@ -73,7 +75,7 @@ const SingleHighlight = (props: {
           type: "HIGHLIGHT",
         })}
         {...rectProps}
-        y={props.indexYDiff - 1}
+        y={props.indexYDiff}
       />
       <rect
         key={`linear-highlight-${props.highlight.id}-bottom`}
@@ -84,7 +86,7 @@ const SingleHighlight = (props: {
           type: "HIGHLIGHT",
         })}
         {...rectProps}
-        y={props.compYDiff - 1}
+        y={props.compYDiff}
       />
     </>
   );

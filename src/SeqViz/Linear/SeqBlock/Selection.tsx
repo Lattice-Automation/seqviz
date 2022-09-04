@@ -143,7 +143,7 @@ class Block extends React.PureComponent<BlockProps> {
 
     // props shared between all 3 possible components.
     const blockProps = {
-      className: "la-vz-linear-sel-block",
+      className: "la-vz-selection",
       height: selectHeight,
       shapeRendering: "auto",
       y: -5,

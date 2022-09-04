@@ -62,7 +62,6 @@ const CutSites = (props: {
   zoom: { linear: number };
 }) => {
   const {
-    cutSites,
     findXAndWidth,
     firstBase,
     inputRef,
@@ -71,6 +70,10 @@ const CutSites = (props: {
     yDiff,
     zoom: { linear: zoom },
   } = props;
+  let { cutSites } = props;
+
+  // TODO: fix cut-sites across the zero index
+  cutSites = cutSites.filter(c => c.end > c.start);
 
   // Add x and width to each cut site.
   const sitesWithX: HighlightedCutSite[] = cutSites.map((c: CutSite) => {
@@ -130,10 +133,7 @@ const CutSites = (props: {
     return { width: 0, x: 0 };
   };
 
-  // This would normally be 1xlineHeight (one row after the label row), but the text starts right at the top of the
-  // sequence row, so we need to adjust upward for that.
-  const lineYDiff = 0.8 * lineHeight;
-
+  const lineYDiff = yDiff + lineHeight;
   return (
     <g className="la-vz-cut-sites">
       {sitesWithX.map((c: HighlightedCutSite) => {
@@ -208,8 +208,8 @@ const CutSites = (props: {
                 })} // for highlighting
                 className="la-vz-cut-site"
                 d={`M ${c.highlight.x} ${lineYDiff}
-                    L ${c.highlight.x + c.highlight.width + 1} ${lineYDiff}
-                    L ${c.highlight.x + c.highlight.width + 1} ${lineYDiff + 2 * lineHeight}
+                    L ${c.highlight.x + c.highlight.width} ${lineYDiff}
+                    L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
                     L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
                 style={c.enzyme.color ? { fill: c.enzyme.color } : {}}
               />
