@@ -8,7 +8,7 @@ import enzymes from "./utils/enzymes";
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViz, enzymes as Enzymes };
+export { SeqViz, SeqVizProps, enzymes as Enzymes };
 
 /**
  * Return a Viewer object with three properties:
