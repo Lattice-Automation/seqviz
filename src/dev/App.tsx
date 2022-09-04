@@ -52,9 +52,10 @@ export const App = () => {
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
     translations: [{ direction: 1, end: 69, start: 0 }],
     viewer: "both_flip",
-    zoom: { circular: 90, linear: 50 },
+    // zoom: { circular: 90, linear: 50 },
   };
 
+  const [zoom, setZoom] = React.useState(30);
   const [search, setSearch] = React.useState("");
   const [start, setStart] = React.useState(0);
   const [end, setEnd] = React.useState(1);
@@ -70,9 +71,15 @@ export const App = () => {
       <div className="test-input-fields">
         <input placeholder="search" type="text" value={search} onChange={e => setSearch(e.target.value)} />
         <input placeholder="accession" type="text" value={accession} onChange={e => setAccession(e.target.value)} />
+        <input placeholder="zoom" value={zoom} onChange={e => setZoom(parseInt(e.target.value) || 0)} />
       </div>
 
-      <SeqViz {...props} highlights={[{ end, start }]} search={{ mismatch: 0, query: search }} />
+      <SeqViz
+        {...props}
+        highlights={[{ end, start }]}
+        search={{ mismatch: 0, query: search }}
+        zoom={{ circular: zoom, linear: zoom }}
+      />
     </>
   );
 };

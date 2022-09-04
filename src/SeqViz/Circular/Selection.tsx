@@ -98,6 +98,7 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
       <g className="la-vz-circular-selection">
         {selLength && (
           <path
+            className="la-vz-selection"
             d={genArc({
               innerRadius: bottomR,
               largeArc: lArc,
@@ -105,7 +106,6 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
               outerRadius: topR,
               sweepFWD: sFlagF,
             })}
-            fill="#DEF6FF"
             shapeRendering="auto"
             stroke="none"
             transform={getRotation(start)}

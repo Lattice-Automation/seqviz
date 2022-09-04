@@ -44,6 +44,10 @@
   fill: rgba(255, 251, 7, 0.25);
 }
 
+.la-vz-selection {
+  fill: #def6ff;
+}
+
 .la-vz-cut-site {
   fill: transparent;
   stroke: black;
@@ -102,10 +106,6 @@
   width: 100%;
   padding: 0;
   overflow: visible;
-}
-
-.la-vz-linear-sel-block {
-  fill: #def6ff;
 }
 
 .la-vz-scroll::-webkit-scrollbar {

@@ -20,9 +20,9 @@ import randomid from "../utils/randomid";
 import search from "../utils/search";
 import { annotationFactory, guessType } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
+import "./SeqViz.css";
 import CentralIndexContext from "./handlers/centralIndex";
 import { Selection, SelectionContext, defaultSelection } from "./handlers/selection";
-import "./style.css";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -398,8 +398,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         start: t.start % seq.length,
       })),
       zoom: {
-        circular: typeof zoom?.circular == "number" ? zoom.circular : 0,
-        linear: typeof zoom?.linear == "number" ? zoom.linear : 50,
+        circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,
+        linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear)) : 50,
       },
     };
 
