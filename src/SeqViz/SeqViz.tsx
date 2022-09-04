@@ -221,6 +221,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     }
   };
 
+  /** Log the error that called the catch. */
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("error caught in SeqViz: %v %v", error, errorInfo);
+  }
+
   /**
    * Set the part from a file or an accession ID
    */
