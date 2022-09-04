@@ -7,7 +7,7 @@
     "history": "^4.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^3.3.0",
+    "react-scripts": "^5.0.1",
     "semantic-ui-react": "^0.87.3",
     "seqviz": "file:.."
   },
