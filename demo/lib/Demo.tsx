@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { isEqual } from "lodash";
 import Image from "next/image";
 import * as React from "react";
