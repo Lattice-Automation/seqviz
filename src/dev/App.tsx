@@ -45,7 +45,7 @@ export const App = () => {
     onSelection: console.log,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "gtacc" },
-    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(5),
+    seq: "AGATAGAGATACACGACTAGCATCACGATCGCTAGCTACTAGCATCAGCTACTATCTTCAGCTACGACTATCGGACTACATTACGACGAT".repeat(20),
     showAnnotations: true,
     showComplement: true,
     showIndex: true,

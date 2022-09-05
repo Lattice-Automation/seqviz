@@ -10,7 +10,7 @@
 }
 
 .la-vz-seqviz svg {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .la-vz-seqviz svg text {
@@ -110,6 +110,7 @@
 .la-vz-seqblock {
   width: 100%;
   padding: 0;
+  /* this is for when very zoomed out and the bp index disappears beneath the next block */
   overflow: visible;
 }
 
