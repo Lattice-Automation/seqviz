@@ -6,7 +6,7 @@ import { Button, Checkbox, Container, Divider, Dropdown, Grid, Icon, Input, Menu
 import { SeqViz } from "seqviz";
 
 import { Header } from "./Header";
-import { history, imgPrefix, updateUrl, urlParams } from "./utils";
+import { history, updateUrl, urlParams } from "./utils";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -151,12 +151,7 @@ class App extends React.Component<{ setDemoState: any; part: any; enzymes: any }
               ) : (
                 <div id="landing-zone">
                   <div id="getting-started-card" className="card">
-                    <Image
-                      id="seqviz-brand-getting-started"
-                      src={`${imgPrefix()}/seqviz-brand-small.png`}
-                      width={500}
-                      height={170}
-                    />
+                    <Image id="seqviz-brand-getting-started" src="/seqviz-brand-small.png" width={500} height={170} />
                   </div>
                   <div id="landing-card" className="card">
                     <div id="starting-instructions">
@@ -417,7 +412,7 @@ class SidebarHeader extends React.Component {
     return (
       <div className="sidebar-header">
         <div id="header-left">
-          <Image id="seqviz-graphic" src={`${imgPrefix()}//seqviz-logo.png`} height={48} width={48} />
+          <Image id="seqviz-graphic" src="/seqviz-logo.png" height={48} width={48} />
           <h3>Settings</h3>
         </div>
         <Button
@@ -436,7 +431,7 @@ class SidebarHeader extends React.Component {
 const SidebarFooter = () => (
   <div className="sidebar-footer">
     <Divider clearing />
-    <Image id="lattice-brand" src={`${imgPrefix()}/lattice-brand.png`} height={60} width={150} />
+    <Image id="lattice-brand" src="/lattice-brand.png" height={60} width={150} />
     <p>
       Created by{" "}
       <span>
