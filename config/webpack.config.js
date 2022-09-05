@@ -26,7 +26,7 @@ const cdnBuild = {
     nodeEnv: "production",
   },
   output: {
-    globalObject: "self",
+    globalObject: "this",
     filename: "seqviz.min.js",
     library: {
       name: package.name,
@@ -69,7 +69,7 @@ const npmBuild = Object.assign({}, cdnBuild, {
     minimize: false,
   },
   output: {
-    globalObject: "self",
+    globalObject: "this",
     filename: "index.js",
     library: {
       name: package.name,
