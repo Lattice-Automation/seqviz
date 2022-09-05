@@ -147,6 +147,9 @@ See: https://github.com/Lattice-Automation/seqviz#style-`);
   render() {
     const { Circular: circularViewer, cutSites, seq } = this.props;
 
+    // sometimes (TODO: why?) we get zero height/width on first render
+    if (!this.props.size.height || !this.props.size.width) return;
+
     return (
       <div className="la-vz-viewer-container">
         {circularViewer ? (
