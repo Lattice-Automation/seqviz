@@ -2,7 +2,7 @@ import Image from "next/image";
 import * as React from "react";
 import { Button, Dropdown, Icon, Input, Label, Popup } from "semantic-ui-react";
 
-import { history, updateUrl, urlParams } from "./utils";
+import { history, imgPrefix, updateUrl, urlParams } from "./utils";
 
 const backboneOptions = [
   { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
@@ -63,7 +63,7 @@ export class Header extends React.Component {
           </a>
           <Image
             id="brand"
-            src="/seqviz-logo.png"
+            src={`${imgPrefix()}/seqviz-logo.png`}
             floated="right"
             height={48}
             width={48}

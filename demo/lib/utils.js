@@ -30,3 +30,7 @@ export const updateUrl = query => {
 
   history.push(search);
 };
+
+export const imgPrefix = () => {
+  return process.env.NODE_ENV === "production" ? "https://tools.latticeautomation.com/seqviz/" : "";
+};
