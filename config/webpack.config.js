@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const package = require("../package.json");
 const version = package.version;
@@ -19,7 +20,7 @@ const cdnBuild = {
       { test: /\.js$/, enforce: "pre", loader: "source-map-loader", exclude: /node_modules/ },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
         exclude: /node_modules/,
       },
     ],
@@ -42,6 +43,7 @@ const cdnBuild = {
   },
   plugins: [
     new webpack.BannerPlugin(`${package.name} - ${version} \nprovided and maintained by ${author} \nLICENSE MIT`),
+    new MiniCssExtractPlugin(),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
