@@ -266,7 +266,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       fontSize: seqFontSize,
       lengthAdjust: "spacing",
       textAnchor: "start",
-      textLength: size.width,
+      textLength: size.width >= 0 ? size.width : 1,
       textRendering: "optimizeLegibility",
     };
 
@@ -340,7 +340,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         display="block"
         height={blockHeight}
         id={id}
-        width={size.width}
+        width={size.width >= 0 ? size.width : 0}
         onMouseDown={mouseEvent}
         onMouseMove={mouseEvent}
         onMouseUp={mouseEvent}

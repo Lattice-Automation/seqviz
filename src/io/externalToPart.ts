@@ -26,7 +26,7 @@ export default async (
   if (accession.startsWith("BB")) {
     // it's a BioBrick... target the iGEM repo
     igem = true;
-    url = `http://parts.igem.org/cgi/xml/part.cgi?part=${accession.trim()}`;
+    url = `https://cors-anywhere.herokuapp.com/http://parts.igem.org/cgi/xml/part.cgi?part=${accession.trim()}`;
   } else if (backbone.length) {
     console.error("backbone specified without a BioBrick");
   }

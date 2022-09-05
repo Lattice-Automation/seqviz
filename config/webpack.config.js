@@ -20,7 +20,7 @@ const cdnBuild = {
       { test: /\.js$/, enforce: "pre", loader: "source-map-loader", exclude: /node_modules/ },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: ["style-loader", "css-loader"],
         exclude: /node_modules/,
       },
     ],

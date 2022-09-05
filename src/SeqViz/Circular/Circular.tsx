@@ -349,7 +349,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
         className="la-vz-circular-viewer"
         height={size.height}
         id={plasmidId}
-        width={size.width}
+        width={size.width >= 0 ? size.width : 0}
         onMouseDown={mouseEvent}
         onMouseMove={mouseEvent}
         onMouseUp={mouseEvent}

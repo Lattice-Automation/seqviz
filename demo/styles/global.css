@@ -1,3 +1,250 @@
+body {
+  min-width: 1000px; /* minimum width of 1000px */
+  width: auto !important; /* Firefox will set width as auto */
+  width: 1000px; /* As IE6 ignores !important it will set width as 1000px; */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+div,
+input,
+label,
+button {
+  font-family: Roboto Mono, Monaco, monospace !important;
+  font-size: 1.1rem !important;
+}
+
+h1 {
+  font-family: Roboto Mono, Monaco, monospace !important;
+}
+
+.ui.container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.sidebar-container {
+  min-width: 1024px;
+  min-height: 724px;
+}
+
+#options-sidebar {
+  width: 320px;
+}
+
+.sidebar-header {
+  height: 64px;
+  padding: 8px 16px;
+  margin: auto 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar-header h3 {
+  margin: auto 0 !important;
+}
+
+.sidebar-header #header-left {
+  display: flex;
+}
+
+.sidebar .slider {
+  width: 100%;
+}
+
+.circular-button#sidebar-toggle-close {
+  margin: auto 0;
+  border: none;
+  background: white;
+}
+
+.circular-button#sidebar-toggle-close:hover {
+  background: #f2f2f2;
+}
+
+#seqviz-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 724px;
+}
+
+#seqviewer {
+  /* height is 100% of the viewport height less the header height */
+  height: calc(100% - 64px);
+  width: 100%;
+  margin: 0px;
+  flex: 1 1 0;
+}
+
+#selection-name {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#selection-type {
+  font-style: italic;
+}
+
+#selection-label {
+  font-weight: bold;
+}
+
+#selection-name,
+#selection-type,
+#selection-length,
+#selection-range,
+#sequence-gc,
+#sequence-tm {
+  padding: 5px;
+}
+
+#selection-label {
+  padding: 5px 0px 5px 5px;
+}
+
+.sidebar-footer {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  padding: 8px;
+}
+
+#lattice-brand {
+  height: 64px;
+  margin: 0 auto 8px auto;
+}
+
+.sidebar-footer p {
+  font-size: 0.8em !important;
+  margin-bottom: 8px;
+}
+
+.sidebar-footer span {
+  font-weight: bold;
+}
+
+#landing-zone {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  width: 500px;
+  margin: auto;
+  padding: 16px;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(124, 124, 124, 0.16), 0 3px 6px rgba(124, 124, 124, 0.23);
+}
+
+#getting-started-card {
+  text-align: center;
+  height: 200px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#landing-card {
+  margin-bottom: 1rem;
+}
+
+#lattice-card {
+  text-align: center;
+  margin-bottom: 1rem;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+#lattice-card div {
+  margin: auto;
+}
+
+#seqviz-brand-getting-started {
+  padding: 12px 24px;
+  margin: auto;
+}
+
+#starting-instructions {
+  padding: 16px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+#easy-start {
+  padding: 16px;
+  margin-top: 24px;
+  text-align: center;
+}
+
+#default-part-button {
+  margin-right: 12px;
+  padding: 10px 12px;
+  width: 80px;
+  color: white;
+  background: #14b7db;
+  border-radius: 0.25rem;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24);
+}
+
+.option {
+  display: flex;
+}
+
+.option span {
+  margin: auto 8px auto 0;
+}
+
+#options-search span {
+  width: 80px;
+}
+
+#options-search input {
+  width: 100%;
+}
+
+#seqviz-graphic {
+  height: 36px;
+  margin: auto 16px auto 0;
+}
+
+#enzyme-grid {
+  margin-left: 10px;
+  padding: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+#enzyme-grid .enzyme-grid-column {
+  margin: 0px;
+  padding: 5px;
+}
+
+#enzyme-grid .enzyme-grid-row {
+  margin: 0px;
+  padding: 0px;
+}
+
+#enzyme-grid .enzyme-button {
+  padding: 10px;
+}
+
 .part-input {
   border-right: 1px solid #f0f0f0;
   border-left: 1px solid #f0f0f0;
