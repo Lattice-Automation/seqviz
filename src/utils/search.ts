@@ -11,12 +11,8 @@ export default (query: string, mismatch = 0, seq = "", seqType: SeqType): NameRa
     return [];
   }
 
-  // Only start searching after query is at least 3 letters, lowest meaningful length
-  if (query.length - mismatch < 3) {
-    console.warn(
-      "Search too broad, please narrow parameters. Less than 3 symbols to match: %d",
-      query.length - mismatch
-    );
+  // Only start searching after query is at least 2 letters, lowest meaningful length
+  if (query.length - mismatch < 2) {
     return [];
   }
 
@@ -29,7 +25,7 @@ export default (query: string, mismatch = 0, seq = "", seqType: SeqType): NameRa
 
   if (indices.length > 4000) {
     // Fail out with warning. Rendering would be too expensive.
-    console.error("Search too broad, %d matches. Please narrow parameters.", indices.length);
+    console.error("Search too broad: >4000 matches. Please narrow parameters.");
     return [];
   }
 

@@ -246,7 +246,7 @@ class LinearZoomInput extends React.Component {
           max="100"
           defaultValue="50"
           onChange={e => {
-            setDemoState({ lzoom: e.target.value });
+            setDemoState({ lzoom: parseInt(e.target.value) });
           }}
           className="slider"
           id="lzoom"

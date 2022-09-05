@@ -52,7 +52,7 @@ export const App = () => {
     style: { height: "calc(100vh - 20px)", width: "calc(100vw)" },
     translations: [{ direction: 1, end: 69, start: 0 }],
     viewer: "both_flip",
-    // zoom: { circular: 90, linear: 50 },
+    zoom: { circular: 0, linear: 50 },
   };
 
   const [zoom, setZoom] = React.useState(30);
