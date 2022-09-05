@@ -32,22 +32,6 @@ interface SeqViewerProps {
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component<SeqViewerProps> {
-  constructor(props: SeqViewerProps) {
-    super(props);
-    const { size } = props;
-
-    if ((!size.height || !size.width) && process.env.NODE_ENV !== "test") {
-      console.error(`SeqViz viewer rendered in an element without a height or width.
-Generally, SeqViz expands to fill the height/width of its parent element.
-
-The two solutions are to:
-  1. render SeqViz within a container element with a defined height + width
-  2. pass a props.style object to SeqViz with a height + width
-
-See: https://github.com/Lattice-Automation/seqviz#style-`);
-    }
-  }
-
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: any) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
@@ -146,9 +130,6 @@ See: https://github.com/Lattice-Automation/seqviz#style-`);
 
   render() {
     const { Circular: circularViewer, cutSites, seq } = this.props;
-
-    // sometimes (TODO: why?) we get zero height/width on first render
-    if (!this.props.size.height || !this.props.size.width) return;
 
     return (
       <div className="la-vz-viewer-container">
