@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
     "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
-    "format": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
+    "fix": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
     "lint": "prettier ./src/** --check && eslint src --ext ts,tsx --quiet",
     "major": "./config/release.sh major",
     "minor": "./config/release.sh minor",
