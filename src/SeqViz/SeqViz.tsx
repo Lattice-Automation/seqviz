@@ -395,7 +395,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       selection: selection,
       seq: seq,
       setSelection: this.setSelection,
-      showComplement: (!!compSeq && (typeof showComplement === "undefined" ? showComplement : true)) || false,
+      showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
         direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,

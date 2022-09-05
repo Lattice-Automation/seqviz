@@ -1,23 +1,9 @@
 import { isEqual } from "lodash";
-import React, { Component } from "react";
-import {
-	Button,
-	Checkbox,
-	Container,
-	Divider,
-	Dropdown,
-	Grid,
-	Icon,
-	Image,
-	Input,
-	Menu,
-	Sidebar
-} from "semantic-ui-react";
+import Image from "next/image";
+import * as React from "react";
+import { Button, Checkbox, Container, Divider, Dropdown, Grid, Icon, Input, Menu, Sidebar } from "semantic-ui-react";
 import { SeqViz } from "seqviz";
-import LatticeLogo from "../src/lattice-brand.png";
-import SeqvizLogo from "../src/seqviz-brand-small.png";
-import seqvizGraphic from "../src/seqviz-logo.png";
-import "./App.css";
+
 import { Header } from "./Header";
 import { history, updateUrl, urlParams } from "./utils";
 
@@ -35,7 +21,7 @@ interface DemoState {
   viewType: string;
   annotations: boolean;
   primers: boolean;
-  complement: boolean;
+  showComplement: boolean;
   index: boolean;
   query: string;
   enzymes: any[];
@@ -44,14 +30,14 @@ interface DemoState {
   searchResults: any;
 }
 
-export class Demo extends Component<DemoProps, DemoState> {
+export default class Demo extends React.Component<DemoProps, DemoState> {
   state: DemoState = {
     part: urlParams().biobrick,
     backbone: urlParams().backbone,
     viewType: "",
     annotations: true,
     primers: true,
-    complement: true,
+    showComplement: true,
     index: true,
     query: "",
     enzymes: [],
@@ -73,7 +59,7 @@ export class Demo extends Component<DemoProps, DemoState> {
     });
   }
 
-  setDemoState = state => {
+  setDemoState = (state: DemoState) => {
     let newState = Object.keys(state).reduce((newState, key) => {
       if (state[key].constructor === "Object") {
         newState[key] = { ...this.state[key], ...state[key] };
@@ -91,7 +77,7 @@ export class Demo extends Component<DemoProps, DemoState> {
   }
 }
 
-class App extends Component<{ setDemoState: any; part: any; enzymes: any }, { visible: boolean }> {
+class App extends React.Component<{ setDemoState: any; part: any; enzymes: any }, { visible: boolean }> {
   state = { visible: false };
 
   toggleSidebar = () => {
@@ -144,7 +130,7 @@ class App extends Component<{ setDemoState: any; part: any; enzymes: any }, { vi
               />
             </Menu.Item> */}
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput setDemoState={setDemoState} name="complement" label="Show complement" />
+              <CheckboxInput setDemoState={setDemoState} name="showComplement" label="Show complement" />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput setDemoState={setDemoState} name="index" label="Show axis" />
@@ -164,7 +150,7 @@ class App extends Component<{ setDemoState: any; part: any; enzymes: any }, { vi
               ) : (
                 <div id="landing-zone">
                   <div id="getting-started-card" className="card">
-                    <Image id="seqviz-brand-getting-started" src={SeqvizLogo} floated="right" />
+                    <Image id="seqviz-brand-getting-started" src="/seqviz-brand-small.png" width={500} height={170} />
                   </div>
                   <div id="landing-card" className="card">
                     <div id="starting-instructions">
@@ -211,9 +197,10 @@ class App extends Component<{ setDemoState: any; part: any; enzymes: any }, { vi
   }
 }
 
-export class ViewerTypeInput extends Component {
+export class ViewerTypeInput extends React.Component {
   render() {
     const { setDemoState } = this.props;
+
     return (
       <div className="option" id="topology">
         <span>Topology</span>
@@ -231,7 +218,7 @@ export class ViewerTypeInput extends Component {
   }
 }
 
-class LinearZoomInput extends Component {
+class LinearZoomInput extends React.Component {
   render() {
     const { setDemoState } = this.props;
 
@@ -254,7 +241,7 @@ class LinearZoomInput extends Component {
   }
 }
 
-class SearchQueryInput extends Component {
+class SearchQueryInput extends React.Component {
   render() {
     const {
       setDemoState,
@@ -276,11 +263,12 @@ class SearchQueryInput extends Component {
   }
 }
 
-class EnzymeInput extends Component {
+class EnzymeInput extends React.Component {
   state = { PstI: false, EcoRI: false, XbaI: false, SpeI: false };
 
   handleChange = enzyme => {
     const { setDemoState, enzymes } = this.props;
+
     let newEnzymes = [];
     if (enzymes.includes(enzyme)) {
       newEnzymes = enzymes.filter(e => e !== enzyme);
@@ -351,7 +339,7 @@ class EnzymeInput extends Component {
   }
 }
 
-class CheckboxInput extends Component {
+class CheckboxInput extends React.Component {
   render() {
     const { name, label, setDemoState } = this.props;
 
@@ -369,7 +357,7 @@ class CheckboxInput extends Component {
   }
 }
 
-class SequenceViewer extends Component {
+class SequenceViewer extends React.Component {
   shouldComponentUpdate = nextProps => {
     const { searchResults, selection, ...rest } = this.props;
     const { searchResults: nextSearchResults, selection: nextSelection, ...nextRest } = nextProps;
@@ -384,7 +372,7 @@ class SequenceViewer extends Component {
       viewType: view = "both",
       annotations = true,
       // primers = true,
-      complement = true,
+      showComplement = true,
       index = true,
       query = "",
       enzymes = [],
@@ -400,7 +388,7 @@ class SequenceViewer extends Component {
         backbone={backbone}
         viewer={viewType}
         showAnnotations={annotations}
-        showComplement={complement}
+        showComplement={showComplement}
         showIndex={index}
         onSelection={selection => {
           setDemoState({ selection: selection });
@@ -408,14 +396,7 @@ class SequenceViewer extends Component {
         onSearch={results => {
           setDemoState({ searchResults: results });
         }}
-        searchQuery={{ query: query }}
-        copySeq={{
-          key: "c",
-          meta: true,
-          ctrl: false,
-          shift: false,
-          alt: false,
-        }}
+        search={{ query: query }}
         enzymes={enzymes}
         zoom={{ linear: lzoom }}
       />
@@ -423,14 +404,14 @@ class SequenceViewer extends Component {
   }
 }
 
-class SidebarHeader extends Component {
+class SidebarHeader extends React.Component {
   render() {
     const { toggleSidebar } = this.props;
 
     return (
       <div className="sidebar-header">
         <div id="header-left">
-          <Image id="seqviz-graphic" src={seqvizGraphic} />
+          <Image id="seqviz-graphic" src="/seqviz-logo.png" height={48} width={48} />
           <h3>Settings</h3>
         </div>
         <Button
@@ -449,7 +430,7 @@ class SidebarHeader extends Component {
 const SidebarFooter = () => (
   <div className="sidebar-footer">
     <Divider clearing />
-    <Image id="lattice-brand" src={LatticeLogo} />
+    <Image id="lattice-brand" src="/lattice-brand.png" height={60} width={150} />
     <p>
       Created by{" "}
       <span>
