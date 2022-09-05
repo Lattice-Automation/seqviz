@@ -31,3 +31,4 @@ yarn-error.log*
 # next.js
 /.next/
 demo/.next/
+/demo/out/
