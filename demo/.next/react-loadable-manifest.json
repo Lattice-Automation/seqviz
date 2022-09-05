@@ -1,0 +1,11 @@
+{
+  "index.tsx -> ../lib/Demo": {
+    "id": 7160,
+    "files": [
+      "static/chunks/framework-cced8bec47e0c21f.js",
+      "static/chunks/29107295.fbcfe2172188e46f.js",
+      "static/chunks/831.8d392d69a6f24127.js",
+      "static/chunks/160.52220887ba8c50ad.js"
+    ]
+  }
+}
