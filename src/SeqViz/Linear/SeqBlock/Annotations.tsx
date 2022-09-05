@@ -5,6 +5,7 @@ import { COLOR_BORDER_MAP, darkerColor } from "../../../utils/colors";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
+  if (!document) return;
   const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
   for (let i = 0; i < elements.length; i += 1) {
     elements[i].style.fillOpacity = `${opacity}`;

@@ -180,6 +180,8 @@ export default <T extends WithEventsProps>(WrappedComponent: React.ComponentType
         seq,
       } = this.props;
 
+      if (!document) return;
+
       const formerFocus = document.activeElement;
       const tempNode = document.createElement("textarea");
       if (ref === "ALL") {

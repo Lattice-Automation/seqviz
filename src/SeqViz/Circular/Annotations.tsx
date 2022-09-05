@@ -31,6 +31,8 @@ interface AnnotationsProps {
 export default class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className: string, opacity: number) => {
+    if (!document) return;
+
     const elements = document.getElementsByClassName(className);
     for (let i = 0; i < elements.length; i += 1) {
       // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.

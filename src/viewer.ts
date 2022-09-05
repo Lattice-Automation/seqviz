@@ -21,6 +21,8 @@ export const Viewer = (element: string | HTMLElement = "root", options: SeqVizPr
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly
   let domElement: HTMLElement | null;
+  if (!document) return;
+
   if (typeof element === "string") {
     if (document.getElementById(element)) {
       domElement = document.getElementById(element);
