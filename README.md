@@ -197,9 +197,9 @@ highlights = [
 ];
 ```
 
-#### `zoom (={ linear: 50, circular: 0 })`
+#### `zoom (={ linear: 50 })`
 
-How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type (`viewer`).
+How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type (`viewer`). `circular` used to be but isn't presently supported.
 
 #### `colors (=[])`
 
