@@ -121,10 +121,12 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
     idToRange = new Map<string, Selection>();
 
     componentDidMount = () => {
+      if (!document) return;
       document.addEventListener("mouseup", this.stopDrag);
     };
 
     componentWillUnmount = () => {
+      if (!document) return;
       document.removeEventListener("mouseup", this.stopDrag);
     };
 

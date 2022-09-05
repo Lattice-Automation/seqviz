@@ -25,6 +25,8 @@ interface HighlightedCutSite {
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
  */
 const hoverCutSite = (className: string, on = false) => {
+  if (!document) return;
+
   let elements = document.getElementsByClassName(`${className}-name`);
   for (let i = 0; i < elements.length; i += 1) {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
