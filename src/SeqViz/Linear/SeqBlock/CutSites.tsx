@@ -159,7 +159,7 @@ const CutSites = (props: {
         }
 
         const showConnector = showTopLine || showBottomLine;
-        const { x: connectorX } = getConnectorXAndWidth(c, showTopLine, showBottomLine);
+        const { width: connectorWidth, x: connectorX } = getConnectorXAndWidth(c, showTopLine, showBottomLine);
 
         return (
           <React.Fragment key={`cut-site-${c.id}-${firstBase}`}>
@@ -188,7 +188,9 @@ const CutSites = (props: {
             {showConnector && zoom > 10 && (
               <path
                 className="la-vz-cut-site"
-                d={`M ${connectorX} ${lineYDiff + lineHeight} L ${c.hangX} ${lineYDiff + lineHeight}`}
+                d={`M ${connectorX} ${lineYDiff + lineHeight} L ${connectorX + connectorWidth} ${
+                  lineYDiff + lineHeight
+                }`}
               />
             )}
             {showBottomLine && zoom > 10 && (

@@ -411,10 +411,10 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // Arrange the viewers based on the viewer prop.
     viewer = viewer || "both";
     const linear = (viewer === "linear" || viewer.includes("both")) && (
-      <SeqViewer key="linear" Circular={false} {...props} />
+      <SeqViewer key="linear" Circular={false} viewer={viewer} {...props} />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
-      <SeqViewer key="circular" Circular {...props} />
+      <SeqViewer key="circular" Circular viewer={viewer} {...props} />
     );
     const bothFlipped = viewer === "both_flip";
     const viewers = bothFlipped ? [linear, circular] : [circular, linear];

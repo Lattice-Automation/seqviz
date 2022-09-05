@@ -25,9 +25,9 @@ export const App = () => {
     enzymes: [
       {
         // color: "rgba(0,0,250,0.25)",
-        fcut: 2,
+        fcut: 5,
         name: "custom",
-        rcut: 5,
+        rcut: 2,
         rseq: "ngatagn",
       },
       // {

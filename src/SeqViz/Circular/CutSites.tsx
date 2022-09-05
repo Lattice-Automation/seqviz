@@ -18,8 +18,10 @@ interface CutSitesProps {
 }
 
 const CutSites = (props: CutSitesProps) => {
-  const { cutSites } = props;
+  let { cutSites } = props;
   if (!cutSites.length) return null;
+
+  cutSites = cutSites.filter(c => c.end > c.start);
 
   const calculateLinePath = (index: number, startRadius: number, endRadius: number): string => {
     const { findCoor } = props;

@@ -24,6 +24,7 @@ interface SeqViewerProps {
   showIndex: boolean;
   size: { height: number; width: number };
   translations: Range[];
+  viewer: string;
   zoom: { circular: number; linear: number };
 }
 
@@ -129,7 +130,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
   };
 
   render() {
-    const { Circular: circularViewer, cutSites, seq } = this.props;
+    const { Circular: circularViewer, seq } = this.props;
 
     return (
       <div className="la-vz-viewer-container">
@@ -141,7 +142,6 @@ class SeqViewer extends React.Component<SeqViewerProps> {
                 {...this.state}
                 {...this.circularProps()}
                 centralIndex={circular}
-                cutSites={cutSites}
                 primers={[]}
                 setCentralIndex={setCentralIndex}
                 showPrimers={false}
