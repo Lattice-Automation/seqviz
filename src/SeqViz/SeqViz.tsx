@@ -116,7 +116,11 @@ export interface SeqVizProps {
 
   /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {
-    /** how zoomed to make the circular viewer. default: 0 */
+    /**
+     * how zoomed to make the circular viewer. default: 0
+     *
+     * @deprecated reach out if this is of interest
+     */
     circular?: number;
 
     /** how zoomed to make the linear viewer. default: 50 */
@@ -404,7 +408,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       })),
       zoom: {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,
-        linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear)) : 50,
+        linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear, 0), 100) : 50,
       },
     };
 

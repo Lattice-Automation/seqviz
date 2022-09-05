@@ -10,7 +10,7 @@
 }
 
 .la-vz-seqviz svg {
-  overflow: visible;
+  overflow: hidden;
 }
 
 .la-vz-seqviz svg text {

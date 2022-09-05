@@ -111,11 +111,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
     const bpsOnArc = seqLength * beta; // calc using the full expression
 
     // scale the radius so only (bpsOnArc) many bps are shown
-    let radius = limitingDim * 0.34;
-
-    const pixelPerBP = (radius * Math.PI) / seqLength;
-    const totalPixelsOfArc = pixelPerBP * bpsOnArc;
-    radius = totalPixelsOfArc / (Math.PI * (bpsOnArc / seqLength));
+    const radius = limitingDim * 0.34;
 
     return {
       Circular: true,

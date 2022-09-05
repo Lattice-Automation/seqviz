@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from "react";
 import { Button, Dropdown, Icon, Image, Input, Label, Popup } from "semantic-ui-react";
 

@@ -6,9 +6,8 @@
   "scripts": {
     "build": "next build && next export",
     "deploy": "npm update seqviz && npm run build && aws s3 sync ./out s3://lattice-tools-s3/seqviz --profile lattice --delete && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*' --profile lattice",
-    "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next dev"
   },
   "dependencies": {
     "browserslist": "^4.21.3",
