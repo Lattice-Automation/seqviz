@@ -13,6 +13,7 @@ export default () => (
       <meta name="theme-color" content="#000000" />
 
       <title>seqviz - Sequence Visualizer by Lattice Automation</title>
+      <link rel="shortcut icon" type="image/x-icon" href="https://tools.latticeautomation.com/seqviz/favicon.ico" />
       <meta name="Description" content="DNA Sequence Visualizer by Lattice Automation" />
       <meta name="google" content="notranslate" />
 

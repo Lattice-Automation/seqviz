@@ -8,7 +8,7 @@ module.exports = {
   images: isProd
     ? {
         domains: ["https://tools.latticeautomation.com/seqviz"],
-        // path: "https://tools.latticeautomation.com/seqviz/_next/image",
+        path: "https://tools.latticeautomation.com/seqviz",
       }
     : undefined,
 };
