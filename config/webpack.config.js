@@ -15,9 +15,9 @@ const cdnBuild = {
   mode: "production",
   module: {
     rules: [
-      { test: /\.(t|j)sx?$/, use: { loader: "ts-loader" }, exclude: /node_modules/ },
-      { test: /\.js$/, enforce: "pre", exclude: /node_modules/, loader: "source-map-loader" },
-      { test: /\.(css)$/, use: ["style-loader", "css-loader"], exclude: /node_modules/ },
+      { test: /\.(t|j)sx?$/, loader: "ts-loader", exclude: /node_modules/ },
+      { test: /\.js$/, enforce: "pre", loader: "source-map-loader", exclude: /node_modules/ },
+      { test: /\.(css)$/, use: ["isomorphic-style-loader", "css-loader"], exclude: /node_modules/ },
     ],
   },
   optimization: {
