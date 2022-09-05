@@ -1,6 +1,5 @@
-import Image from "next/image";
 import * as React from "react";
-import { Button, Dropdown, Icon, Input, Label, Popup } from "semantic-ui-react";
+import { Button, Dropdown, Icon, Image, Input, Label, Popup } from "semantic-ui-react";
 
 import { history, updateUrl, urlParams } from "./utils";
 
@@ -63,10 +62,8 @@ export class Header extends React.Component {
           </a>
           <Image
             id="brand"
-            src="/seqviz-logo.png"
+            src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png"
             floated="right"
-            height={48}
-            width={48}
             onClick={() => {
               if (history.location.search !== "") {
                 updateUrl({ backbone: "pSB1C3", biobrick: "" });
