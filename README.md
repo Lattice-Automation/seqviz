@@ -5,7 +5,7 @@
 &nbsp;
 
 <div align="center">
-  <img src="./demo/seqviz-gif-v2.gif">
+  <img src="./demo/public/seqviz-gif-v2.gif">
 </div>
 
 &nbsp;

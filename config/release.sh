@@ -18,3 +18,5 @@ git push
 version="$(jq -r '.version' < 'package.json')"
 release="$(gh release create "$version" --title "$version" --generate-notes --target develop)"
 open "$release"
+
+npm run demo
