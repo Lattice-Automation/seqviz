@@ -13,9 +13,17 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
-    "target": "es5",
+    "target": "ESNext",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.ts", "pages/_app.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/index.ts",
+    "pages/_app.js",
+    "../src/**/*.ts",
+    "../src/**/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }

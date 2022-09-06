@@ -16,7 +16,7 @@ export { SeqViz, SeqVizProps, enzymes as Enzymes };
  *  - `setState(options)` to update the viewer's internal state
  *  - `renderToString` to return an HTML representation of the Viewer
  */
-export const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) => {
+const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) => {
   // used to keep track of whether to re-render after a "set" call
   let rendered = false;
   // get the HTML element by ID or use as is if passed directly
@@ -69,3 +69,5 @@ export const Viewer = (element: string | HTMLElement = "root", options: SeqVizPr
     setState,
   };
 };
+
+export { Viewer };
