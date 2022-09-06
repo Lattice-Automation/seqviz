@@ -1,11 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const package = require("../package.json");
-const version = package.version;
-const author = package.author;
 
 /**
  * cdnBuild is the webpack config for distributing SeqViz to unpkg. It bundles the viewer with all its dependencies.
@@ -42,8 +39,9 @@ const cdnBuild = {
     umdNamedDefine: true,
   },
   plugins: [
-    new webpack.BannerPlugin(`${package.name} - ${version} \nprovided and maintained by ${author} \nLICENSE MIT`),
-    new MiniCssExtractPlugin(),
+    new webpack.BannerPlugin(
+      `${package.name} - ${package.version} \nprovided and maintained by ${package.author} \nLICENSE MIT`
+    ),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],

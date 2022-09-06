@@ -7,15 +7,14 @@
   "unpkg": "dist/seqviz.min.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",
-    "demo": "cd demo && npm run deploy && cd .. && git add . && git commit -m \"Update demo\"",
+    "demo": "cd demo && npm run deploy",
     "fix": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
     "lint": "prettier ./src/** --check && eslint src --ext ts,tsx --quiet",
     "major": "./config/release.sh major",
     "minor": "./config/release.sh minor",
     "patch": "./config/release.sh patch",
-    "start": "webpack serve --open --config ./config/webpack.dev.config.js",
-    "test": "jest",
-    "test:ci": "npm run lint && CI=true npm run test && npm run build"
+    "start": "cd demo && npm run start",
+    "test": "CI=true jest"
   },
   "keywords": [
     "AA",

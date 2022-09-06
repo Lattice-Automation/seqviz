@@ -8,7 +8,8 @@ To run the demo as part of development:
 
 ```bash
 git clone https://github.com/Lattice-Automation/seqviz
-cd ./seqviz/demo
+cd seqviz/demo && npm install
+cd seqviz
 npm install
 npm start
 ```

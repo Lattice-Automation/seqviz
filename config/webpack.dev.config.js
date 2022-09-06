@@ -1,6 +1,6 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const base = require("./webpack.config");
 
@@ -30,7 +30,7 @@ module.exports = {
       filename: "index.html",
       template: path.join(__dirname, "..", "src", "dev", "index.html"),
     }),
-    new MiniCssExtractPlugin(),
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
   ],
   output: {
     filename: "[name].bundle.js",
