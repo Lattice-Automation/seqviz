@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as ReactDOMServer from "react-dom/server";
 
-import SeqViz, { SeqVizProps } from "./SeqViz/SeqViz";
-import "./SeqViz/SeqViz.css";
-import enzymes from "./utils/enzymes";
+import SeqViz, { SeqVizProps } from "./SeqViz";
+import "./SeqViz.css";
+import enzymes from "./enzymes";
 
 /**
  * Export a React component directly for React-based development

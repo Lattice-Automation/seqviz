@@ -1,8 +1,8 @@
 import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
-import { complement, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+import { complement, partFactory } from "../../parser";
+import { annotationFactory } from "../../sequence";
 
 /**
  * SBOL v2.0 schema definition can be found at: http://sbolstandard.org/wp-content/uploads/2016/06/SBOL-data-model-2.2.1.pdf

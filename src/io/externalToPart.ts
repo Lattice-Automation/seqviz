@@ -21,7 +21,7 @@ export default async (
 
   // The user doesn't specify the target registry, so we have to infer it from the passed accession: iGEM or NCBI
   const { backbone = "" } = options;
-  let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
+  let url = `https://eutils.ncbi.nlm.nih.gov/entrez/eefetch.fcgi?db=nuccore&id=${accession.trim()}&rettype=gbwithparts&retmode=text`;
   let igem = false;
   if (accession.startsWith("BB")) {
     // it's a BioBrick... target the iGEM repo

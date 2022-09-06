@@ -1,9 +1,9 @@
 import * as xml2js from "xml2js";
 
+import { colorByIndex } from "../../colors";
 import { Part } from "../../elements";
-import { colorByIndex } from "../../utils/colors";
-import { complement, partFactory } from "../../utils/parser";
-import randomid from "../../utils/randomid";
+import { complement, partFactory } from "../../parser";
+import randomid from "../../randomid";
 
 /*
   <sbol:Sequence rdf:about="https://synbiohub.cidarlab.org/public/Demo/A1_sequence/1">

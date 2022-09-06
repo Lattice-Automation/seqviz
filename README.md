@@ -151,7 +151,7 @@ translations = [
 
 #### `enzymes (=[])`
 
-An array of restriction `enzymes` to show the recognition sites for. A list of pre-defined enzymes in [src/utils/enzymes.ts](src/utils/enzymes.ts) can be referenced by name. Example:
+An array of restriction `enzymes` to show the recognition sites for. A list of pre-defined enzymes in [src/enzymes.ts](src/enzymes.ts) can be referenced by name. Example:
 
 ```js
 enzymes = [
