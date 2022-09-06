@@ -7,7 +7,7 @@
     "build": "next build && next export",
     "deploy": "npm update seqviz && npm run build && aws s3 sync ./out s3://lattice-tools-s3/seqviz --profile lattice --delete && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*' --profile lattice",
     "lint": "next lint",
-    "start": "next dev"
+    "start": "open http://localhost:3010/ && next dev -p 3010"
   },
   "dependencies": {
     "browserslist": "^4.21.3",
@@ -20,7 +20,6 @@
     "react-dom": "^17.0.2",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.3",
-    "seqviz": "file:..",
     "typescript": "^4.8.2"
   },
   "browserslist": {

@@ -7,16 +7,25 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" != "develop" ]; then
   exit 1;
 fi
 
-npm run test:ci
+# run tests
+npm run test
+
+# bump the package version
 npm version "$1" --git-tag-version
+
+# build the package
 npm run build
+
+# build and deploy the demo
+npm run demo
+
+# git commit
 git add .
 git commit --amend -C HEAD
 npm publish
 git push
 
+# create a release + tag
 version="$(jq -r '.version' < 'package.json')"
 release="$(gh release create "$version" --title "$version" --generate-notes --target develop)"
 open "$release"
-
-npm run demo

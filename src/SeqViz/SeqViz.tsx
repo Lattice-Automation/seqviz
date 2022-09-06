@@ -20,7 +20,6 @@ import randomid from "../utils/randomid";
 import search from "../utils/search";
 import { annotationFactory, guessType } from "../utils/sequence";
 import SeqViewer from "./SeqViewer";
-import "./SeqViz.css";
 import CentralIndexContext from "./handlers/centralIndex";
 import { Selection, SelectionContext, defaultSelection } from "./handlers/selection";
 
