@@ -1,8 +1,8 @@
 import * as path from "path";
 
+import { COLORS } from "../colors";
 import { Part } from "../elements";
-import { COLORS } from "../utils/colors";
-import { complement, partFactory } from "../utils/parser";
+import { complement, partFactory } from "../parser";
 import parseBenchling from "./parsers/benchling";
 import parseBioBrick from "./parsers/biobrick";
 import parseFASTA from "./parsers/fasta";

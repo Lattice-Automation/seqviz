@@ -15,7 +15,7 @@ import {
   Sidebar,
 } from "semantic-ui-react";
 
-import SeqViz from "../../src/SeqViz/SeqViz";
+import SeqViz from "../../src/SeqViz";
 import { Header } from "./Header";
 import { history, updateUrl, urlParams } from "./utils";
 

@@ -6,8 +6,8 @@ import * as bufferpack from "bufferpack";
 import { StringDecoder } from "string_decoder";
 import * as xml2js from "xml2js";
 
-import { complement, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+import { complement, partFactory } from "../../parser";
+import { annotationFactory } from "../../sequence";
 
 export default async (fileArrayBuffer, options) => {
   const { fileName = "" } = options;

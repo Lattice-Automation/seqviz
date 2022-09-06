@@ -1,8 +1,8 @@
 import * as xml2js from "xml2js";
 
 import { Part } from "../../elements";
-import { complement, firstElement, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+import { complement, firstElement, partFactory } from "../../parser";
+import { annotationFactory } from "../../sequence";
 
 /**
  * converts an XML part representation of a BioBrick part into a format

@@ -1,6 +1,6 @@
 import { Part } from "../../elements";
-import { complement, directionality, partFactory } from "../../utils/parser";
-import randomid from "../../utils/randomid";
+import { complement, directionality, partFactory } from "../../parser";
+import randomid from "../../randomid";
 
 /**
  * Benchling format is just JSON. Besides a slight diff in seq naming and annotation directionality,

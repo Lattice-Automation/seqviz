@@ -1,5 +1,5 @@
 // just a pared down version of: https://github.com/eamitchell/ab1ToJSON/blob/master/clientside.js
-import randomid from "../../utils/randomid";
+import randomid from "../../randomid";
 
 const tagDict = {
   baseCalls2: { tagName: "PBAS", tagNum: 2, typeToReturn: "getChar" },

@@ -1,5 +1,5 @@
-import { complement, extractDate, partFactory } from "../../utils/parser";
-import { annotationFactory } from "../../utils/sequence";
+import { complement, extractDate, partFactory } from "../../parser";
+import { annotationFactory } from "../../sequence";
 
 // a list of recognized types that would constitute an annotation name
 const tagNameSet = new Set(["gene", "product", "note", "db_xref", "protein_id", "label", "lab_host", "locus_tag"]);
