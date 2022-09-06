@@ -34,6 +34,8 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.184"
+    "@types/lodash": "^4.14.184",
+    "@types/react": "^18.0.18",
+    "webpack": "^5.74.0"
   }
 }

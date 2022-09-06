@@ -2,10 +2,13 @@
 
 A demonstration of SeqViz. Visit [Lattice-Automation/seqviz](https://github.com/Lattice-Automation/seqviz) to see the source code and contribute.
 
-## Running in Development
+## Development
 
-To run a local copy of this demo, clone the [seqviz library](https://github.com/Lattice-Automation/seqviz), and `cd /demo`. Then run `npm install` and `npm start`.
+To run the demo as part of development:
 
-The demo is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-The demo will be running the latest version of the seqviz library.
+```bash
+git clone https://github.com/Lattice-Automation/seqviz
+cd ./seqviz/demo
+npm install
+npm start
+```
