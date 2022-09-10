@@ -78,7 +78,7 @@ interface CircularState {
 }
 
 /** Circular is a circular viewer that contains a bunch of arcs. */
-class Circular extends React.PureComponent<CircularProps, CircularState> {
+class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
   declare context: React.ContextType<typeof CentralIndexContext>;
 

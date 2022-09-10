@@ -1,5 +1,5 @@
 import * as React from "react";
-import parse, { ParseOptions } from "seqparse";
+import seqparse, { ParseOptions } from "seqparse";
 
 import SeqViewerContainer from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
@@ -279,7 +279,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       }
 
       // Parse a sequence file or accession
-      const parsed = await parse((accession || file || "").toString(), parseOptions);
+      const parsed = await seqparse((accession || file || "").toString(), parseOptions);
       return {
         annotations: this.parseAnnotations(parsed.annotations, parsed.seq),
         compSeq: complement(parsed.seq).compSeq,
