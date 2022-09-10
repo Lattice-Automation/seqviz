@@ -6,7 +6,6 @@ import * as React from "react";
 import Linear from "./Linear/Linear";
 import SeqBlock from "./Linear/SeqBlock";
 import SeqViewer from "./SeqViewer";
-import filesToParts from "./io/filesToParts";
 import { SeqViz } from "./viewer";
 
 const defaultProps = {
@@ -67,12 +66,8 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with Genbank file string input", async () => {
-    const file = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
+    const file = path.join(__dirname, "data", "pBbE0c-RFP_1.gb");
     const fileContents = fs.readFileSync(file, "utf8");
-    const parts = await filesToParts([fileContents], {
-      fileName: "pBbE0c-RFP_1.gb",
-    }); // expected part
-    const part = parts[0];
 
     const wrapper = mount(<SeqViz {...defaultProps} file={fileContents} />);
     const componentDidMount = wrapper.instance().componentDidMount;
@@ -85,109 +80,6 @@ describe("SeqViz rendering (React)", () => {
     // check that the part state matches the state of the Genbank file
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
     expect(wrapper.state().part.seq).toEqual(part.seq);
-  });
-
-  it("renders with Genbank File/Blob input", async () => {
-    const fileName = path.join(__dirname, "io", "examples", "genbank", "pBbE0c-RFP_1.gb");
-    const fileContents = fs.readFileSync(fileName, "utf8");
-    const parts = await filesToParts([fileContents], {
-      fileName: fileName,
-    });
-    const part = parts[0];
-    const file = new File([fileContents], fileName, { type: "text/plain" });
-
-    const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const componentDidMount = wrapper.instance().componentDidMount;
-    if (componentDidMount) {
-      await componentDidMount();
-    } else {
-      throw new Error("componentDidMount not defined");
-    }
-
-    // check that the part state matches the state of the Genbank file
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-    expect(wrapper.state().part).toMatchObject({
-      compSeq: part.compSeq,
-      seq: part.seq,
-    });
-    expect(part.name).toMatch(/.{2,}/);
-    expect(part.seq).toMatch(/.{2,}/);
-  });
-
-  it("renders with FASTA File/Blob input", async () => {
-    const fileName = path.join(__dirname, "io", "examples", "fasta", "R0010_AB.gb");
-    const fileContents = fs.readFileSync(fileName, "utf8");
-    const parts = await filesToParts([fileContents], {
-      fileName: fileName,
-    });
-    const part = parts[0];
-    const file = new File([fileContents], fileName, { type: "text/plain" });
-
-    const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const componentDidMount = wrapper.instance().componentDidMount;
-    if (componentDidMount) {
-      await componentDidMount();
-    } else {
-      throw new Error("componentDidMount not defined");
-    }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-    expect(wrapper.state().part).toMatchObject({
-      compSeq: part.compSeq,
-      seq: part.seq,
-    });
-    expect(part.name).toMatch(/.{2,}/);
-    expect(part.seq).toMatch(/.{2,}/);
-  });
-
-  it("renders with SBOL File/Blob input", async () => {
-    const fileName = path.join(__dirname, "io", "examples", "sbol", "v2", "A1.xml");
-    const fileContents = fs.readFileSync(fileName, "utf8");
-    const parts = await filesToParts([fileContents], {
-      fileName: fileName,
-    });
-    const part = parts[0];
-    const file = new File([fileContents], fileName, { type: "text/plain" });
-
-    const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const componentDidMount = wrapper.instance().componentDidMount;
-    if (componentDidMount) {
-      await componentDidMount();
-    } else {
-      throw new Error("componentDidMount not defined");
-    }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-    expect(wrapper.state().part).toMatchObject({
-      compSeq: part.compSeq,
-      seq: part.seq,
-    });
-    expect(part.name).toMatch(/.{2,}/);
-    expect(part.seq).toMatch(/.{2,}/);
-  });
-
-  it("renders with SnapGene File/Blob input", async () => {
-    const fileName = path.join(__dirname, "io", "examples", "snapgene", "pBbB8c-GFP.dna");
-    const fileContents = fs.readFileSync(fileName);
-    const file = new File([fileContents], fileName);
-    const parts = await filesToParts([file], { fileName });
-    const part = parts[0];
-
-    const wrapper = mount(<SeqViz {...defaultProps} file={file} />);
-    const componentDidMount = wrapper.instance().componentDidMount;
-    if (componentDidMount) {
-      await componentDidMount();
-    } else {
-      throw new Error("componentDidMount not defined");
-    }
-
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'part' does not exist on type 'Readonly<{... Remove this comment to see the full error message
-    expect(wrapper.state().part).toMatchObject({
-      compSeq: part.compSeq,
-      seq: part.seq,
-    });
-    expect(part.name).toMatch(/.{2,}/);
-    expect(part.seq).toMatch(/.{2,}/);
   });
 
   it("renders with an Amino Acid sequence", async () => {

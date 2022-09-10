@@ -314,15 +314,9 @@ Callback executed after a search event with a `searchResults` object. Called onc
 ];
 ```
 
-#### `copyEvent (=(KeyboardEvent) => false)`
+#### `copyEvent (=(e: KeyboardEvent) => e => e.key === "c" && (e.metaKey || e.ctrlKey))`
 
-A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
-
-An example of an `copyEvent` function for copying after `ctrl+c` or `meta+c` events:
-
-```js
-copyEvent = event => event.key === "c" && (event.metaKey || event.ctrlKey);
-```
+A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard). The default method copies sequence after any `ctrl+c` or `meta+c` keyboard events.
 
 #### `showComplement (=true)`
 
@@ -335,12 +329,6 @@ Whether to show the index line and ticks below the sequence.
 #### `rotateOnScroll (=true)`
 
 The circular viewer rotates when scrolling over the viewer by default. That can be disabled with `rotateOnScroll: false`.
-
-#### `backbone (='')`
-
-This is a feature specific to [BioBricks](https://parts.igem.org/Plasmid_backbones/Assembly) (`accession`). The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, and `pSB1T3`.
-
-Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`).
 
 ### Viewer without React
 

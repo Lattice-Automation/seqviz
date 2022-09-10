@@ -160,9 +160,9 @@ export const getAlphabet = (seqType: SeqType) => {
  * Infer the type of a sequence. This is *without* any ambiguous symbols, so maybe wrong by being overly strict.
  */
 export const guessType = (seq: string): "dna" | "rna" | "aa" | "unknown" => {
-  if (/^[atgc]+$/i.test(seq)) {
+  if (/^[atgcn.]+$/i.test(seq)) {
     return "dna";
-  } else if (/^[augc]+$/i.test(seq)) {
+  } else if (/^[augcn.]+$/i.test(seq)) {
     return "rna";
   } else if (aminoAcidRegex.test(seq)) {
     return "aa";

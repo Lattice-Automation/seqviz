@@ -1,6 +1,8 @@
 import * as React from "react";
+import parse, { ParseOptions } from "seqparse";
 
-import SeqViewer from "./SeqViewer";
+import SeqViewerContainer from "./SeqViewerContainer";
+import { COLORS, colorByIndex } from "./colors";
 import digest from "./digest";
 import {
   Annotation,
@@ -10,28 +12,32 @@ import {
   Highlight,
   HighlightProp,
   NameRange,
-  Part,
   Range,
+  SeqType,
 } from "./elements";
-import CentralIndexContext from "./handlers/centralIndex";
-import { Selection, SelectionContext, defaultSelection } from "./handlers/selection";
-import externalToPart from "./io/externalToPart";
-import filesToParts from "./io/filesToParts";
+import { Selection } from "./handlers/selection";
 import isEqual from "./isEqual";
 import { complement, directionality } from "./parser";
-import randomid from "./randomid";
 import search from "./search";
 import { annotationFactory, guessType } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
-  /** an NCBI or iGEM accession to retrieve a sequence using */
+  /**
+   * an NCBI or iGEM accession to retrieve a sequence using
+   *
+   * @deprecated use `...seqparse.parse(accession)` to fetch and parse the accession to SeqViz props
+   */
   accession?: string;
 
   /** a list of annotations to render to the viewer */
   annotations?: AnnotationProp[];
 
-  /** an iGEM backbone to render within the viewer */
+  /**
+   * an iGEM backbone to render within the viewer
+   *
+   * @deprecated append `backbone` to `props.seq`
+   */
   backbone?: string;
 
   /** nucleotides keyed by symbol or index and the color to apply to it */
@@ -58,7 +64,11 @@ export interface SeqVizProps {
     [key: string]: Enzyme;
   };
 
-  /** a file to parse and render. Genbank, FASTA, SnapGene, JBEI, SBOLv1/2, ab1, and SeqBuilder formats are supported */
+  /**
+   * a file to parse and render. Genbank, FASTA, SnapGene, JBEI, SBOLv1/2, ab1, and SeqBuilder formats are supported
+   *
+   * @deprecated use `...seqparse.parse(file)` outside of SeqViz to parse a file to SeqViz props
+   */
   file?: string | File;
 
   /**
@@ -92,7 +102,7 @@ export interface SeqVizProps {
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
 
-  /** the type of the sequence. Without passing this, the type is guessed after ambiguous symbols (eg 'N') */
+  /** the type of the sequence. Without passing this, the type is guessed */
   seqType?: "dna" | "rna" | "aa";
 
   /** whether to render the annotation rows */
@@ -128,17 +138,13 @@ export interface SeqVizProps {
 }
 
 export interface SeqVizState {
-  accession: string;
   annotations: Annotation[];
-  centralIndex: {
-    circular: number;
-    linear: number;
-    setCentralIndex: (type: "linear" | "circular", value: number) => void;
-  };
+  compSeq: string;
   cutSites: CutSite[];
-  part: null | Part;
+  name: string;
   search: NameRange[];
-  selection: Selection;
+  seq: string;
+  seqType: SeqType;
 }
 
 /**
@@ -152,7 +158,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     bpColors: {},
     colors: [],
     compSeq: "",
-    copyEvent: () => false,
+    copyEvent: e => e.key === "c" && (e.metaKey || e.ctrlKey),
     enzymes: [],
     enzymesCustom: {},
     name: "",
@@ -173,34 +179,58 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     super(props);
 
     this.state = {
-      accession: "",
-      annotations: this.parseAnnotations(props.annotations, props.seq),
-      centralIndex: {
-        circular: 0,
-        linear: 0,
-        setCentralIndex: this.setCentralIndex,
-      },
+      annotations: [],
+      compSeq: "",
       cutSites: [],
-      part: null,
+      name: "",
       search: [],
-      selection: { ...defaultSelection },
+      seq: "",
+      seqType: "unknown",
     };
   }
 
+  /** Log caught errors. */
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("Error caught in SeqViz: %v %v", error, errorInfo);
+  }
+
   componentDidMount = async () => {
-    await this.setPart();
+    const input = await this.parseInput();
+
+    this.setState(input);
+    this.search(input.seq);
+    this.cut(input.seq);
   };
 
   /*
-   * Re-parse props to state if the seq/accession/file changed, the enzymes/enzymesCustom changed, or annotations changed
+   * Re-parse props to state if there are changes to:
+   * - seq/accession/file (this probably means we need to update the rest)
+   * - search input changes
+   * - enzymes change
+   * - annotations
+   *
+   * This is needed for the parse(accession) call that makes an async fetch to a remote repository
+   * https://reactjs.org/docs/react-component.html#componentdidupdate
    */
   componentDidUpdate = async (
-    { accession = "", annotations, backbone, enzymes, enzymesCustom, file, search }: SeqVizProps,
-    { part }
+    // previous props
+    { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
+    // previous state
+    { seq }: SeqVizState
   ) => {
-    // New access or part provided, do a lookup.
-    if (accession !== this.props.accession || backbone !== this.props.backbone || file !== this.props.file) {
-      await this.setPart(); // new accession/remote ID
+    // New accession or file provided, fetch and/or parse.
+    if (accession !== this.props.accession || file !== this.props.file || (this.props.seq && this.props.seq !== seq)) {
+      const input = await this.parseInput();
+      this.setState({
+        annotations: input.annotations,
+        compSeq: input.compSeq,
+        name: input.name,
+        seq: input.seq,
+        seqType: input.seqType,
+      });
+      this.search(seq);
+      this.cut(seq);
+      return;
     }
 
     // New search parameters provided.
@@ -208,12 +238,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       search &&
       (!this.props.search || search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch)
     ) {
-      this.search(part); // new search parameters
+      this.search(seq); // new search parameters
     }
 
     // New digest parameters.
     if (!isEqual(enzymes, this.props.enzymes) || !isEqual(enzymesCustom, this.props.enzymesCustom)) {
-      this.cut(part);
+      this.cut(seq);
     }
 
     // New annotations provided.
@@ -224,90 +254,80 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     }
   };
 
-  /** Log the error that called the catch. */
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("error caught in SeqViz: %v %v", error, errorInfo);
-  }
-
   /**
-   * Set the part from a file or an accession ID
+   * If a file or accession were passed, parse it. This might be a call to a remote iGEM or NCBI server.
    */
-  setPart = async () => {
-    const { accession, file, seq } = this.props;
+  parseInput = async (): Promise<{
+    annotations: Annotation[];
+    compSeq: string;
+    name: string;
+    seq: string;
+    seqType: SeqType;
+  }> => {
+    const { accession, annotations, file, seq } = this.props;
+    const name = this.props.name || "";
 
-    try {
-      if (accession) {
-        const part = await externalToPart(accession, this.props);
-        this.setState({
-          part: {
-            ...part,
-            annotations: this.parseAnnotations(part.annotations, part.seq),
-          },
-        });
-        this.search(part);
-        this.cut(part);
-      } else if (file) {
-        const parts = await filesToParts(file, this.props);
-        this.setState({
-          part: {
-            ...parts[0],
-            annotations: this.parseAnnotations(parts[0].annotations, parts[0].seq),
-          },
-        });
-        this.search(parts[0]);
-        this.cut(parts[0]);
-      } else if (seq) {
-        this.cut({ seq });
-      } else {
-        console.warn("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
+    // Fetch the seq if we need to get it from a remote repository
+    if (accession || file) {
+      // Add settings for source buffer and name (for SnapGene)
+      const parseOptions = {
+        cors: true,
+      } as ParseOptions;
+      if (file && file instanceof File) {
+        parseOptions.fileName = file.name;
+        parseOptions.source = await file.arrayBuffer();
       }
-    } catch (err) {
-      console.warn(
-        `Failed to parse input props. Please report this: https://github.com/Lattice-Automation/seqviz/issues
-  seq: %s
-  file: %s
-  accession: %s
-  error: %s`,
-        (seq && seq.substring(0, 20) + "...") || undefined,
-        file,
-        accession,
-        err
-      );
+
+      // Parse a sequence file or accession
+      const parsed = await parse((accession || file || "").toString(), parseOptions);
+      return {
+        annotations: this.parseAnnotations(parsed.annotations, parsed.seq),
+        compSeq: complement(parsed.seq).compSeq,
+        name: parsed.name,
+        seq: parsed.seq,
+        seqType: guessType(parsed.seq),
+      };
+    } else if (seq) {
+      // Fill in default props just using the seq
+      return {
+        annotations: this.parseAnnotations(annotations, seq),
+        compSeq: complement(seq).compSeq,
+        name,
+        seq,
+        seqType: guessType(seq),
+      };
     }
+    throw new Error("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
   };
 
   /**
    * Search for the query sequence in the part sequence, set in state.
    */
-  search = (part: Part | null) => {
+  search = (seq: string) => {
     const { onSearch, search: searchProp, seqType } = this.props;
-    const seq = this.props.seq || (part && part.seq) || "";
 
     if (!searchProp || !seq) {
       return;
     }
 
     const results = search(searchProp.query, searchProp.mismatch, seq, seqType || guessType(seq));
-
-    // We should be able to call search on every significant prop change to seq/file/accession/search.
-    // Instead, we run into infinite recursion. TODO: what's triggering repeated rerenders if we remove below.
     if (isEqual(results, this.state.search)) {
       return;
     }
 
     this.setState({ search: results });
-    if (onSearch) onSearch(results);
+    onSearch && onSearch(results);
   };
 
   /**
    * Find and save enzymes' cutsite locations.
    */
-  cut = (part: { seq: string } | null = null) => {
-    const { enzymes, enzymesCustom, seq } = this.props;
+  cut = (seq: string) => {
+    const { enzymes, enzymesCustom } = this.props;
 
     let cutSites: CutSite[] = [];
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      cutSites = digest(seq || (part && part.seq) || "", enzymes || [], enzymesCustom || {});
+      cutSites = digest(seq || "", enzymes || [], enzymesCustom || {});
     }
 
     if (!isEqual(cutSites, this.state.cutSites)) {
@@ -322,82 +342,38 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     (annotations || []).map((a, i) => ({
       ...annotationFactory(i, this.props.colors),
       ...a,
+      color: a.color || colorByIndex(i, COLORS),
       direction: directionality(a.direction),
       end: a.end % (seq.length + 1),
       start: a.start % (seq.length + 1),
     }));
 
-  /**
-   * Update the central index of the linear or circular viewer.
-   */
-  setCentralIndex = (type: "linear" | "circular", value: number) => {
-    if (type !== "linear" && type !== "circular") {
-      throw new Error(`Unknown central index type: ${type}`);
-    }
-
-    if (this.state.centralIndex[type] === value) {
-      return; // nothing changed
-    }
-
-    this.setState({
-      centralIndex: { ...this.state.centralIndex, [type]: value },
-    });
-  };
-
-  /**
-   * Update selection in state. Should only be performed from handlers/selection.jsx
-   */
-  setSelection = (selection: Selection) => {
-    const { onSelection } = this.props;
-    this.setState({ selection });
-    if (onSelection) {
-      onSelection(selection);
-    }
-  };
-
   render() {
-    const { highlightedRegions, highlights, name, seq: seqProp, showComplement, showIndex, style, zoom } = this.props;
-    let { compSeq, translations, viewer } = this.props;
-    const { annotations, centralIndex, cutSites, part, search, selection } = this.state;
+    const { highlightedRegions, highlights, showComplement, showIndex, style, zoom } = this.props;
+    let { translations } = this.props;
+    const { compSeq, seq, seqType } = this.state;
 
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
-    // TODO: deriveStateFromProps? I forget why I'm not using that.
-    const seq = seqProp || part?.seq || "";
-    const seqType = this.props.seqType || guessType(seq);
     if (!seq) return <div className="la-vz-seqviz" />;
-    if (seqType === "dna") {
-      compSeq = compSeq || part?.compSeq || complement(seq).compSeq || "";
-    }
+
     if (seqType !== "dna" && translations && translations.length) {
       // TODO: this should have a warning, I just don't want to do it in render
       translations = [];
     }
 
-    // process highlights, adding color + id (+ combining deprecated highlightedRegions)
-    const highlightsProcessed = (highlights || []).concat(highlightedRegions || []).map(
-      (h): Highlight => ({
-        ...h,
-        direction: 1,
-        end: h.end % (seq.length + 1),
-        id: randomid(),
-        name: "",
-        start: h.start % (seq.length + 1),
-      })
-    );
-
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
-      ...this.props,
-      annotations: annotations && annotations.length ? annotations : part?.annotations || [],
       bpColors: this.props.bpColors || {},
-      compSeq: compSeq || "",
-      cutSites: cutSites,
-      highlights: highlightsProcessed,
-      name: name || part?.name || "",
-      search: search,
-      selection: selection,
-      seq: seq,
-      setSelection: this.setSelection,
+      highlights: (highlights || []).concat(highlightedRegions || []).map(
+        (h, i): Highlight => ({
+          ...h,
+          direction: 1,
+          end: h.end % (seq.length + 1),
+          id: `highlight-${i}-${h.start}-${h.end}`,
+          name: "",
+          start: h.start % (seq.length + 1),
+        })
+      ),
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
@@ -405,28 +381,21 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         end: t.start + Math.floor((t.end - t.start) / 3) * 3,
         start: t.start % seq.length,
       })),
+      viewer: this.props.viewer || "both",
       zoom: {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,
         linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear, 0), 100) : 50,
       },
+      onSelection:
+        this.props.onSelection ||
+        (() => {
+          // do nothing
+        }),
     };
-
-    // Arrange the viewers based on the viewer prop.
-    viewer = viewer || "both";
-    const linear = (viewer === "linear" || viewer.includes("both")) && (
-      <SeqViewer key="linear" Circular={false} viewer={viewer} {...props} />
-    );
-    const circular = (viewer === "circular" || viewer.includes("both")) && (
-      <SeqViewer key="circular" Circular viewer={viewer} {...props} />
-    );
-    const bothFlipped = viewer === "both_flip";
-    const viewers = bothFlipped ? [linear, circular] : [circular, linear];
 
     return (
       <div className="la-vz-seqviz" style={style}>
-        <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={selection}>{viewers.filter(v => v)}</SelectionContext.Provider>
-        </CentralIndexContext.Provider>
+        <SeqViewerContainer {...props} {...this.state} />
       </div>
     );
   }
