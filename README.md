@@ -25,15 +25,8 @@
 
 ### Features
 
-#### Multiple input formats
-
-- Raw sequence and annotations
-- File (FASTA, GenBank, SBOL, SnapGene)
-- Accession (NCBI or iGEM)
-
 #### Linear and/or Circular sequence viewer
 
-- Display as a linear viewer, circular viewer, or both
 - Annotations with names and colors
 - Amino acid translations
 - Enzyme cut sites
@@ -95,19 +88,31 @@ More details are in the [Viewer without React](#viewer-without-react) section.
 
 All the following are usable as props for the React component (`seqviz.SeqViz`) or as options for the plain JS implementation (`seqviz.Viewer()`).
 
-#### Required (one of)
+#### Required
 
 #### `seq (='')`
 
-A sequence to render. Can be DNA, RNA, or an amino acid sequence.
+A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 
-#### `accession (='')`
+##### File or Accession
 
-An NCBI accession ID or iGEM part ID. Populates `name`, `seq`, and `annotations`.
+There are `@deprecated` props -- `file` and `accession` -- that will be parsed to `seq` and `annotations` props. But we recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
 
-#### `file (=null)`
+```jsx
+import seqparse from "seqparse";
 
-A [File](https://developer.mozilla.org/en-US/docs/Web/API/File), [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob), or body (string/utf8) from a FASTA, Genbank, SnapGene, or SBOL file. Populates `name`, `seq`, and `annotations`.
+export default () => {
+  const [seq, setSeq] = useState(null);
+
+  useEffect(async () => {
+    setSeq(await seqparse("NC_011521"));
+  });
+
+  if (!seq) return null;
+
+  return <SeqViz {...seq} />;
+};
+```
 
 #### Optional
 

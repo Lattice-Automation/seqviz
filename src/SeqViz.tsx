@@ -105,13 +105,17 @@ export interface SeqVizProps {
   /** the type of the sequence. Without passing this, the type is guessed */
   seqType?: "dna" | "rna" | "aa";
 
-  /** whether to render the annotation rows */
+  /**
+   * whether to render the annotation rows
+   *
+   * @deprecated to avoid rendering annotations, don't pass any
+   */
   showAnnotations?: boolean;
 
   /** whether to render the complement sequence */
   showComplement?: boolean;
 
-  /** whether to show the index row that  */
+  /** whether to show the index row with ticks and indexes  */
   showIndex?: boolean;
 
   /** extra style props to apply to the outermost div of SeqViz */

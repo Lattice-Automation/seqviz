@@ -3,7 +3,7 @@
   "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
   "version": "3.5.22",
   "main": "dist/index.js",
-  "types": "dist/viewer.d.ts",
+  "types": "dist/index.d.ts",
   "unpkg": "dist/seqviz.min.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack --config ./config/webpack.config.js",

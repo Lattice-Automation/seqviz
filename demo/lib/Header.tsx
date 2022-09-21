@@ -1,21 +1,6 @@
 // @ts-nocheck
 import * as React from "react";
-import { Button, Dropdown, Icon, Image, Input, Label, Popup } from "semantic-ui-react";
-
-import { history, updateUrl, urlParams } from "./utils";
-
-const backboneOptions = [
-  { key: "psb1c3", value: "pSB1C3", text: "pSB1C3" },
-  { key: "psb1a3", value: "pSB1A3", text: "pSB1A3" },
-  { key: "psb1ac3", value: "pSB1AC3", text: "pSB1AC3" },
-  { key: "psb1ak3", value: "pSB1AK3", text: "pSB1AK3" },
-  { key: "psb1at3", value: "pSB1AT3", text: "pSB1AT3" },
-  { key: "psb1k3", value: "pSB1K3", text: "pSB1K3" },
-  { key: "psb1t3", value: "pSB1T3", text: "pSB1T3" },
-  { key: "psb1a7", value: "pSB1A7", text: "pSB1A7" },
-  { key: "bba_k1362091", value: "BBa_K1362091", text: "BBa_K1362091" },
-  { key: "bba_k823055", value: "BBa_K823055", text: "BBa_K823055" },
-];
+import { Button, Icon, Image, Popup } from "semantic-ui-react";
 
 export class Header extends React.Component {
   state = { active: false };
@@ -23,7 +8,7 @@ export class Header extends React.Component {
   handleMetaClick = () => this.setState(prevState => ({ active: !prevState.active }));
 
   render() {
-    const { setDemoState, part, toggleSidebar } = this.props;
+    const { part, toggleSidebar } = this.props;
     // Hack to render a bottom margin for linear map when the meta bar is open
 
     if (this.state.active && document.getElementById("la-vz-seqblock-container")) {
@@ -50,8 +35,6 @@ export class Header extends React.Component {
             content="Options"
             position="bottom left"
           />
-          <BackBoneInput setDemoState={setDemoState} />
-          <PartInput setDemoState={setDemoState} part={part} />
           <SelectionInfo {...this.props} active={this.state.active} handleMetaClick={this.handleMetaClick} />
           <a
             id="github-link"
@@ -61,16 +44,7 @@ export class Header extends React.Component {
           >
             <Icon name="github" size="large" />
           </a>
-          <Image
-            id="brand"
-            src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png"
-            floated="right"
-            onClick={() => {
-              if (history.location.search !== "") {
-                updateUrl({ backbone: "pSB1C3", biobrick: "" });
-              }
-            }}
-          />
+          <Image id="brand" src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png" floated="right" />
         </div>
         {this.state.active && part && (
           <div id="header-meta">
@@ -150,75 +124,6 @@ export class HeaderMeta extends React.Component {
           )}
         </div>
       )
-    );
-  }
-}
-
-export class BackBoneInput extends React.Component {
-  state = { focus: false, hover: false }; // default backbone
-
-  render() {
-    return (
-      <div className="backbone-picker">
-        <Label
-          className={`input-label ${this.state.hover ? "hover" : ""}`}
-          onClick={() => document.getElementById("backbone-dropdown").click()}
-          onMouseDown={e => e.preventDefault()}
-        >
-          BACKBONE
-        </Label>
-        <Dropdown
-          id="backbone-dropdown"
-          placeholder={urlParams().backbone}
-          floating
-          fluid
-          options={backboneOptions}
-          onChange={(_, data) => {
-            updateUrl({ backbone: data.value });
-          }}
-          onFocus={() => this.setState({ focus: true })}
-          onMouseOver={() => this.setState({ hover: true })}
-          onBlur={() => this.setState({ focus: false })}
-          onMouseLeave={() => this.setState({ hover: false })}
-        />
-      </div>
-    );
-  }
-}
-
-export class PartInput extends React.Component {
-  state = { focus: false, hover: false };
-
-  render() {
-    const { part } = this.props;
-
-    return (
-      <Input
-        icon="search"
-        autoComplete="off"
-        className="part-input"
-        id="part-input"
-        label={
-          <Label
-            className={`input-label ${this.state.hover ? "hover" : ""}`}
-            onClick={() => document.getElementById("part-input").focus()}
-            onMouseDown={e => e.preventDefault()}
-          >
-            BioBrick
-          </Label>
-        }
-        labelPosition="left"
-        name="accession"
-        value={part}
-        placeholder="Search iGEM..."
-        onChange={(_, data) => {
-          updateUrl({ biobrick: data.value });
-        }}
-        onFocus={() => this.setState({ focus: true })}
-        onMouseOver={() => this.setState({ hover: true })}
-        onBlur={() => this.setState({ focus: false })}
-        onMouseLeave={() => this.setState({ hover: false })}
-      />
     );
   }
 }

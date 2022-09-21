@@ -1,5 +1,3 @@
-// @ts-nocheck
-import { isEqual } from "lodash";
 import * as React from "react";
 import {
   Button,
@@ -14,10 +12,11 @@ import {
   Menu,
   Sidebar,
 } from "semantic-ui-react";
+import seqparse from "seqparse";
 
 import SeqViz from "../../src/SeqViz";
+import { AnnotationProp } from "../../src/elements";
 import { Header } from "./Header";
-import { history, updateUrl, urlParams } from "./utils";
 
 const viewerTypeOptions = [
   { key: "both", value: "both", text: "Both" },
@@ -25,86 +24,66 @@ const viewerTypeOptions = [
   { key: "linear", value: "linear", text: "Linear" },
 ];
 
-interface DemoProps {}
-interface DemoState {
-  biobrick?: any;
-  part: any;
-  backbone: any;
-  viewType: string;
-  annotations: boolean;
-  primers: boolean;
-  showComplement: boolean;
-  index: boolean;
-  query: string;
+interface AppProps {}
+interface AppState {
   enzymes: any[];
-  lzoom: number;
-  selection: any;
+  primers: boolean;
+  name: string;
+  search: { query: string };
   searchResults: any;
+  selection: any;
+  annotations: AnnotationProp[];
+  seq: string;
+  showComplement: boolean;
+  showIndex: boolean;
+  showSidebar: boolean;
+  viewType: string;
+  zoom: number;
 }
 
-export default class Demo extends React.Component<DemoProps, DemoState> {
-  state: DemoState = {
-    part: urlParams().biobrick,
-    backbone: urlParams().backbone,
-    viewType: "",
-    annotations: true,
-    primers: true,
-    showComplement: true,
-    index: true,
-    query: "",
+export default class App extends React.Component<AppProps, AppState> {
+  state: AppState = {
+    annotations: [],
     enzymes: [],
-    lzoom: 50,
-    selection: {},
+    primers: true,
+    name: "",
+    search: { query: "" },
     searchResults: {},
+    seq: "",
+    selection: {},
+    showComplement: true,
+    showIndex: true,
+    showSidebar: false,
+    viewType: "",
+    zoom: 50,
   };
 
-  constructor(props: DemoProps) {
-    super(props);
+  componentDidMount = async () => {
+    const seq = await seqparse("NC_011521");
 
-    // on changes to backbone or part, update that in state
-    history.listen(() => {
-      const { backbone, biobrick } = urlParams();
-
-      if (backbone !== this.state.backbone || biobrick !== this.state.biobrick) {
-        this.setState({ backbone: backbone, part: biobrick });
-      }
-    });
-  }
-
-  setDemoState = (state: DemoState) => {
-    let newState = Object.keys(state).reduce((newState, key) => {
-      if (state[key].constructor === "Object") {
-        newState[key] = { ...this.state[key], ...state[key] };
-      } else {
-        newState[key] = state[key];
-      }
-      return newState;
-    }, {});
-
-    this.setState({ ...this.state, ...newState });
+    this.setState({ seq: seq.seq, annotations: seq.annotations, name: seq.name });
   };
-
-  render() {
-    return <App {...this.state} setDemoState={this.setDemoState} />;
-  }
-}
-
-class App extends React.Component<{ setDemoState: any; part: any; enzymes: any }, { visible: boolean }> {
-  state = { visible: false };
 
   toggleSidebar = () => {
-    const { visible } = this.state;
-    this.setState({ visible: !visible });
+    const { showSidebar } = this.state;
+    this.setState({ showSidebar: !showSidebar });
   };
 
   handleHide = () => {
-    this.setState({ visible: false });
+    this.setState({ showSidebar: false });
+  };
+
+  toggleEnzyme = (e: string) => {
+    const { enzymes } = this.state;
+
+    if (enzymes.includes(e)) {
+      this.setState({ enzymes: enzymes.filter(enz => enz !== e) });
+    } else {
+      this.setState({ enzymes: [...enzymes, e] });
+    }
   };
 
   render() {
-    const { setDemoState, part, enzymes } = this.props;
-    const { visible } = this.state;
-
     return (
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable className="sidebar-container">
@@ -115,95 +94,58 @@ class App extends React.Component<{ setDemoState: any; part: any; enzymes: any }
             animation="overlay"
             vertical
             onHide={this.handleHide}
-            visible={visible}
+            visible={this.state.showSidebar}
           >
             <SidebarHeader toggleSidebar={this.toggleSidebar} />
             <Menu.Item as="a">
-              <ViewerTypeInput setDemoState={setDemoState} />
+              <ViewerTypeInput
+                setType={(viewType: string) => {
+                  this.setState({ viewType });
+                }}
+              />
             </Menu.Item>
             <Menu.Item as="a">
-              <LinearZoomInput setDemoState={setDemoState} />
+              <LinearZoomInput setZoom={zoom => this.setState({ zoom })} />
             </Menu.Item>
             <Menu.Item as="a">
-              <SearchQueryInput setDemoState={setDemoState} searchResults={this.props.searchResults} />
-            </Menu.Item>
-            {/* <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput
-                setDemoState={setDemoState}
-                name="annotations"
-                label="Show annotations"
-              />
-            </Menu.Item> */}
-            {/* <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput
-                setDemoState={setDemoState}
-                name="primers"
-                label="Show primers"
-              />
-            </Menu.Item> */}
-            <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput setDemoState={setDemoState} name="showComplement" label="Show complement" />
+              <SearchQueryInput setQuery={query => this.setState({ search: { query } })} />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput setDemoState={setDemoState} name="index" label="Show axis" />
+              <CheckboxInput
+                set={(showComplement: boolean) => this.setState({ showComplement })}
+                name="showComplement"
+                label="Show complement"
+              />
+            </Menu.Item>
+            <Menu.Item as="a" className="options-checkbox">
+              <CheckboxInput set={showIndex => this.setState({ showIndex })} name="index" label="Show axis" />
             </Menu.Item>
             <Menu.Item as="a">
-              <EnzymeInput setDemoState={setDemoState} enzymes={enzymes} />
+              <EnzymeInput enzymes={this.state.enzymes} toggleEnzyme={this.toggleEnzyme} />
             </Menu.Item>
             <SidebarFooter />
           </Sidebar>
-          <Sidebar.Pusher as={Container} fluid dimmed={visible}>
+          <Sidebar.Pusher as={Container} fluid dimmed={this.state.showSidebar}>
             <div id="seqviz-container">
+              {/* @ts-ignore */}
               <Header {...this.props} toggleSidebar={this.toggleSidebar} />
-              {part ? (
-                <div id="seqviewer">
-                  <SequenceViewer {...this.props} />
-                </div>
-              ) : (
-                <div id="landing-zone">
-                  <div id="getting-started-card" className="card">
-                    <Image
-                      id="seqviz-brand-getting-started"
-                      src="https://tools.latticeautomation.com/seqviz/seqviz-brand-small.png"
-                    />
-                  </div>
-                  <div id="landing-card" className="card">
-                    <div id="starting-instructions">
-                      Type a <strong>BioBrick ID</strong> from <br />
-                      iGEM's{" "}
-                      <a target="_blank" rel="noopener noreferrer" href="http://parts.igem.org/Main_Page">
-                        Registry of Standard Biological Parts
-                      </a>{" "}
-                      <br />
-                      into the search above to get started
-                    </div>
-                    <Divider horizontal>Or</Divider>
-                    <StartButton setDemoState={setDemoState} />
-                  </div>
-                  <div id="lattice-card" className="card">
-                    <div>
-                      <p>
-                        Created by{" "}
-                        <a target="_blank" rel="noopener noreferrer" href="https://latticeautomation.com/">
-                          Lattice Automation
-                        </a>
-                      </p>
-                    </div>{" "}
-                    <div>
-                      <Icon name="github" />
-                      <span>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="https://github.com/Lattice-Automation/seqviz"
-                        >
-                          seqviz
-                        </a>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              )}
+              <div id="seqviewer">
+                {this.state.seq && (
+                  // @ts-ignore
+                  <SeqViz
+                    annotations={this.state.annotations}
+                    enzymes={this.state.enzymes}
+                    name={this.state.name}
+                    onSelection={selection => this.setState({ selection })}
+                    search={this.state.search}
+                    seq={this.state.seq}
+                    showComplement={this.state.showComplement}
+                    showIndex={this.state.showIndex}
+                    viewer={this.state.viewType as "linear" | "circular"}
+                    zoom={{ linear: this.state.zoom }}
+                  />
+                )}
+              </div>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
@@ -212,235 +154,120 @@ class App extends React.Component<{ setDemoState: any; part: any; enzymes: any }
   }
 }
 
-export class ViewerTypeInput extends React.Component {
-  render() {
-    const { setDemoState } = this.props;
+const ViewerTypeInput = ({ setType }: { setType: (viewType: string) => void }) => (
+  <div className="option" id="topology">
+    <span>Topology</span>
+    <Dropdown
+      defaultValue="both"
+      fluid
+      selection
+      options={viewerTypeOptions}
+      onChange={(_, data) => {
+        setType(`${data.value}`);
+      }}
+    />
+  </div>
+);
 
-    return (
-      <div className="option" id="topology">
-        <span>Topology</span>
-        <Dropdown
-          defaultValue="both"
-          fluid
-          selection
-          options={viewerTypeOptions}
-          onChange={(_, data) => {
-            setDemoState({ viewType: data.value });
-          }}
-        />
-      </div>
-    );
-  }
-}
+const LinearZoomInput = ({ setZoom }: { setZoom: (zoom: number) => void }) => (
+  <div className="option" id="zoom">
+    <span>Zoom</span>
+    <input
+      type="range"
+      min="1"
+      max="100"
+      defaultValue="50"
+      onChange={e => {
+        setZoom(parseInt(e.target.value));
+      }}
+      className="slider"
+      id="zoom"
+    />
+  </div>
+);
 
-class LinearZoomInput extends React.Component {
-  render() {
-    const { setDemoState } = this.props;
+const SearchQueryInput = ({ setQuery }: { setQuery: (query: string) => void }) => (
+  <div className="option" id="options-search">
+    <Input icon="search" placeholder="Search..." onChange={(_, data) => setQuery(data.value)} />
+  </div>
+);
 
-    return (
-      <div className="option" id="zoom">
-        <span>Zoom</span>
-        <input
-          type="range"
-          min="1"
-          max="100"
-          defaultValue="50"
-          onChange={e => {
-            setDemoState({ lzoom: parseInt(e.target.value) });
-          }}
-          className="slider"
-          id="lzoom"
-        />
-      </div>
-    );
-  }
-}
+const CheckboxInput = ({ name, label, set }: { name: string; label: string; set: (v: any) => void }) => (
+  <Checkbox toggle defaultChecked name={name} label={label} onChange={(_, data) => set(data.checked)} />
+);
 
-class SearchQueryInput extends React.Component {
-  render() {
-    const {
-      setDemoState,
-      searchResults: { searchResults = [] },
-    } = this.props;
+const EnzymeInput = ({ enzymes, toggleEnzyme }: { enzymes: string[]; toggleEnzyme: (e: string) => void }) => (
+  <div className="option" id="enzymes">
+    <span>Enzymes</span>
+    <Grid id="enzyme-grid" columns={2}>
+      <Grid.Row className="enzyme-grid-row">
+        <Grid.Column className="enzyme-grid-column">
+          <Button
+            fluid
+            className="enzyme-button"
+            active={enzymes.includes("PstI")}
+            color={enzymes.includes("PstI") ? "blue" : null}
+            onClick={() => toggleEnzyme("PstI")}
+          >
+            PstI
+          </Button>
+        </Grid.Column>
+        <Grid.Column className="enzyme-grid-column">
+          <Button
+            fluid
+            className="enzyme-button"
+            active={enzymes.includes("EcoRI")}
+            color={enzymes.includes("EcoRI") ? "blue" : null}
+            onClick={() => toggleEnzyme("EcoRI")}
+          >
+            EcoRI
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+      <Grid.Row className="enzyme-grid-row">
+        <Grid.Column className="enzyme-grid-column">
+          <Button
+            fluid
+            className="enzyme-button"
+            active={enzymes.includes("XbaI")}
+            color={enzymes.includes("XbaI") ? "blue" : null}
+            onClick={() => toggleEnzyme("XbaI")}
+          >
+            XbaI
+          </Button>
+        </Grid.Column>
+        <Grid.Column className="enzyme-grid-column">
+          <Button
+            fluid
+            className="enzyme-button"
+            active={enzymes.includes("SpeI")}
+            color={enzymes.includes("SpeI") ? "blue" : null}
+            onClick={() => toggleEnzyme("SpeI")}
+          >
+            SpeI
+          </Button>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
+  </div>
+);
 
-    return (
-      <div className="option" id="options-search">
-        <span>{`${searchResults.length} results`}</span>
-        <Input
-          icon="search"
-          placeholder="Search..."
-          onChange={(_, data) => {
-            setDemoState({ query: data.value });
-          }}
-        />
-      </div>
-    );
-  }
-}
-
-class EnzymeInput extends React.Component {
-  state = { PstI: false, EcoRI: false, XbaI: false, SpeI: false };
-
-  handleChange = enzyme => {
-    const { setDemoState, enzymes } = this.props;
-
-    let newEnzymes = [];
-    if (enzymes.includes(enzyme)) {
-      newEnzymes = enzymes.filter(e => e !== enzyme);
-      this.setState({ [enzyme]: false });
-    } else {
-      newEnzymes = enzymes.concat([enzyme]);
-      this.setState({ [enzyme]: true });
-    }
-    setDemoState({ enzymes: newEnzymes });
-  };
-
-  render() {
-    return (
-      <div className="option" id="enzymes">
-        <span>Enzymes</span>
-        <Grid id="enzyme-grid" columns={2}>
-          <Grid.Row className="enzyme-grid-row">
-            <Grid.Column className="enzyme-grid-column">
-              <Button
-                fluid
-                className="enzyme-button"
-                active={this.state.PstI}
-                color={this.state.PstI ? "blue" : null}
-                onClick={() => this.handleChange("PstI")}
-              >
-                PstI
-              </Button>
-            </Grid.Column>
-            <Grid.Column className="enzyme-grid-column">
-              <Button
-                fluid
-                className="enzyme-button"
-                active={this.state.EcoRI}
-                color={this.state.EcoRI ? "blue" : null}
-                onClick={() => this.handleChange("EcoRI")}
-              >
-                EcoRI
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row className="enzyme-grid-row">
-            <Grid.Column className="enzyme-grid-column">
-              <Button
-                fluid
-                className="enzyme-button"
-                active={this.state.XbaI}
-                color={this.state.XbaI ? "blue" : null}
-                onClick={() => this.handleChange("XbaI")}
-              >
-                XbaI
-              </Button>
-            </Grid.Column>
-            <Grid.Column className="enzyme-grid-column">
-              <Button
-                fluid
-                className="enzyme-button"
-                active={this.state.SpeI}
-                color={this.state.SpeI ? "blue" : null}
-                onClick={() => this.handleChange("SpeI")}
-              >
-                SpeI
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </div>
-    );
-  }
-}
-
-class CheckboxInput extends React.Component {
-  render() {
-    const { name, label, setDemoState } = this.props;
-
-    return (
-      <Checkbox
-        toggle
-        defaultChecked
-        name={name}
-        label={label}
-        onChange={(_, data) => {
-          setDemoState({ [name]: data.checked });
-        }}
-      />
-    );
-  }
-}
-
-class SequenceViewer extends React.Component {
-  shouldComponentUpdate = nextProps => {
-    const { searchResults, selection, ...rest } = this.props;
-    const { searchResults: nextSearchResults, selection: nextSelection, ...nextRest } = nextProps;
-
-    return !isEqual(rest, nextRest);
-  };
-
-  render() {
-    const {
-      part = "",
-      backbone = "",
-      viewType: view = "both",
-      annotations = true,
-      // primers = true,
-      showComplement = true,
-      index = true,
-      query = "",
-      enzymes = [],
-      lzoom = 50,
-      setDemoState,
-    } = this.props;
-
-    const viewType = view || "both";
-
-    return (
-      <SeqViz
-        accession={part}
-        backbone={backbone}
-        viewer={viewType}
-        showAnnotations={annotations}
-        showComplement={showComplement}
-        showIndex={index}
-        onSelection={selection => {
-          setDemoState({ selection: selection });
-        }}
-        onSearch={results => {
-          setDemoState({ searchResults: results });
-        }}
-        search={{ query: query }}
-        enzymes={enzymes}
-        zoom={{ linear: lzoom }}
-      />
-    );
-  }
-}
-
-class SidebarHeader extends React.Component {
-  render() {
-    const { toggleSidebar } = this.props;
-
-    return (
-      <div className="sidebar-header">
-        <div id="header-left">
-          <Image id="seqviz-graphic" src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png" />
-          <h3>Settings</h3>
-        </div>
-        <Button
-          onClick={toggleSidebar}
-          id="sidebar-toggle-close"
-          className="circular-button"
-          circular
-          floated="right"
-          icon="angle left"
-        />
-      </div>
-    );
-  }
-}
+const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) => (
+  <div className="sidebar-header">
+    <div id="header-left">
+      <Image id="seqviz-graphic" src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png" />
+      <h3>Settings</h3>
+    </div>
+    <Button
+      onClick={toggleSidebar}
+      id="sidebar-toggle-close"
+      className="circular-button"
+      circular
+      floated="right"
+      icon="angle left"
+    />
+  </div>
+);
 
 const SidebarFooter = () => (
   <div className="sidebar-footer">
@@ -487,25 +314,5 @@ const SidebarFooter = () => (
     <p>
       <span>contact@latticeautomation.com</span>
     </p>
-  </div>
-);
-
-const StartButton = () => (
-  <div id="easy-start">
-    <Button
-      id="default-part-button"
-      onClick={() => {
-        updateUrl({ backbone: "pSB1C3", biobrick: "BBa_K1598008" });
-      }}
-    >
-      CLICK
-    </Button>
-    <span>
-      to load default part (
-      <a target="_blank" rel="noopener noreferrer" href="http://parts.igem.org/Part:BBa_K1598008">
-        BBa_K1598008
-      </a>
-      )
-    </span>
   </div>
 );

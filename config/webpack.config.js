@@ -8,7 +8,7 @@ const package = require("../package.json");
  * cdnBuild is the webpack config for distributing SeqViz to unpkg. It bundles the viewer with all its dependencies.
  */
 const cdnBuild = {
-  entry: path.join(__dirname, "..", "src", "viewer.ts"),
+  entry: path.join(__dirname, "..", "src", "index.ts"),
   target: "web",
   mode: "production",
   module: {
