@@ -25,15 +25,8 @@
 
 ### Features
 
-#### Multiple input formats
-
-- Raw sequence and annotations
-- File (FASTA, GenBank, SBOL, SnapGene)
-- Accession (NCBI or iGEM)
-
 #### Linear and/or Circular sequence viewer
 
-- Display as a linear viewer, circular viewer, or both
 - Annotations with names and colors
 - Amino acid translations
 - Enzyme cut sites
@@ -95,19 +88,31 @@ More details are in the [Viewer without React](#viewer-without-react) section.
 
 All the following are usable as props for the React component (`seqviz.SeqViz`) or as options for the plain JS implementation (`seqviz.Viewer()`).
 
-#### Required (one of)
+#### Required
 
 #### `seq (='')`
 
-A sequence to render. Can be DNA, RNA, or an amino acid sequence.
+A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 
-#### `accession (='')`
+##### File or Accession
 
-An NCBI accession ID or iGEM part ID. Populates `name`, `seq`, and `annotations`.
+There are `@deprecated` props -- `file` and `accession` -- that will be parsed to `seq` and `annotations` props. But we recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
 
-#### `file (=null)`
+```jsx
+import seqparse from "seqparse";
 
-A [File](https://developer.mozilla.org/en-US/docs/Web/API/File), [Blob](https://developer.mozilla.org/en-US/docs/Web/API/Blob), or body (string/utf8) from a FASTA, Genbank, SnapGene, or SBOL file. Populates `name`, `seq`, and `annotations`.
+export default () => {
+  const [seq, setSeq] = useState(null);
+
+  useEffect(async () => {
+    setSeq(await seqparse("NC_011521"));
+  });
+
+  if (!seq) return null;
+
+  return <SeqViz {...seq} />;
+};
+```
 
 #### Optional
 
@@ -314,15 +319,9 @@ Callback executed after a search event with a `searchResults` object. Called onc
 ];
 ```
 
-#### `copyEvent (=(KeyboardEvent) => false)`
+#### `copyEvent (=(e: KeyboardEvent) => e => e.key === "c" && (e.metaKey || e.ctrlKey))`
 
-A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard).
-
-An example of an `copyEvent` function for copying after `ctrl+c` or `meta+c` events:
-
-```js
-copyEvent = event => event.key === "c" && (event.metaKey || event.ctrlKey);
-```
+A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard). The default method copies sequence after any `ctrl+c` or `meta+c` keyboard events.
 
 #### `showComplement (=true)`
 
@@ -335,12 +334,6 @@ Whether to show the index line and ticks below the sequence.
 #### `rotateOnScroll (=true)`
 
 The circular viewer rotates when scrolling over the viewer by default. That can be disabled with `rotateOnScroll: false`.
-
-#### `backbone (='')`
-
-This is a feature specific to [BioBricks](https://parts.igem.org/Plasmid_backbones/Assembly) (`accession`). The library currently supports `BBa_K1362091`, `BBa_K823055`, `pSB1A3`, `pSB1A7`, `pSB1AC3`, `pSB1AK3`, `pSB1AT3`, `pSB1C3`, `pSB1K3`, and `pSB1T3`.
-
-Custom backbones, as DNA strings, are also supported (for example: `ATGATATAGAT`).
 
 ### Viewer without React
 

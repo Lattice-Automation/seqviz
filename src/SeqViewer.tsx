@@ -29,7 +29,7 @@ interface SeqViewerProps {
 }
 
 /**
- * a parent sequence viewer component that holds whatever is common between
+ * A parent sequence viewer component that holds whatever is common between
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component<SeqViewerProps> {
@@ -129,7 +129,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
     const { Circular: circularViewer, seq } = this.props;
 
     return (
-      <div className="la-vz-viewer-container">
+      <div className="la-vz-viewer">
         {circularViewer ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
