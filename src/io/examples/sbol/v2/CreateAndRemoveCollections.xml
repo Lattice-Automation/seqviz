@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<rdf:RDF xmlns:grn="urn:bbn.com:tasbe:grn/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:annot="http://myannotation.org/" xmlns:prov="http://www.w3.org/ns/prov#">
-  <sbol:Collection rdf:about="http://www.async.ece.utah.edu/myParts/1.0">
-    <sbol:persistentIdentity rdf:resource="http://www.async.ece.utah.edu/myParts"/>
-    <sbol:displayId>myParts</sbol:displayId>
-    <sbol:version>1.0</sbol:version>
-  </sbol:Collection>
-</rdf:RDF>

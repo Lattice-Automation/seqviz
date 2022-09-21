@@ -4,9 +4,6 @@
 .la-vz-seqviz {
   height: 100%;
   width: 100%;
-
-  display: flex;
-  flex-direction: row;
 }
 
 .la-vz-seqviz svg {
@@ -29,6 +26,12 @@
 }
 
 .la-vz-viewer-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.la-vz-viewer-container,
+.la-vz-viewer {
   height: 100%;
   width: 100%;
   position: relative;
