@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFuncType, NameRange } from "../elements";
+import { InputRefFunc, NameRange } from "../elements";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
@@ -12,7 +12,7 @@ const Highlights = (props: {
   firstBase: number;
   highlights: NameRange[];
   indexYDiff: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   lineHeight: number;
   listenerOnly: boolean;
@@ -37,7 +37,7 @@ const SingleHighlight = (props: {
   highlights: NameRange[];
   index: number;
   indexYDiff: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   lineHeight: number;
   listenerOnly: boolean;

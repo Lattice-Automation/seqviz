@@ -1,38 +1,40 @@
-import { shallow } from "enzyme";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+
 import * as React from "react";
 
 import SeqBlock from "./SeqBlock";
 
 const defaultProps = {
-  annotationRows: [],
   blockHeight: 40,
   bpsPerBlock: 100,
   charWidth: 12,
   cutSiteRows: [],
   elementHeight: 16,
+  highlights: [],
   firstBase: 0,
   forwardPrimerRows: [],
   highlightedRegions: [],
   id: "",
-  inputRef: (_: string, __: any) => React.createRef(),
+  inputRef: () => {
+    // do nothing
+  },
   key: "",
   lineHeight: 14,
   mouseEvent: () => {},
   name: "",
   onUnmount: () => {},
-  primers: [],
   reversePrimerRows: [],
   searchRows: [],
   selection: {},
   seqFontSize: 12,
-  showComplement: false,
-  showIndex: false,
-  showPrimers: false,
+  showComplement: true,
+  showIndex: true,
   size: { height: 600, width: 1200 },
   translations: [],
   y: 0,
   zoom: { linear: 50 },
-  zoomed: false,
+  zoomed: true,
 };
 
 /**
@@ -43,10 +45,10 @@ const defaultProps = {
  * longer than the sequence (whose width is determined by charWidth)
  */
 describe("SeqBlock", () => {
-  it("renders with a single block", () => {
+  it("renders with a single block", async () => {
     const seq = "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
-    const wrapper = shallow(
-      // @ts-expect-error on input ref func
+    render(
+      // @ts-ignore
       <SeqBlock
         {...defaultProps}
         annotationRows={[
@@ -55,7 +57,7 @@ describe("SeqBlock", () => {
               color: "#80D849",
               direction: 1,
               end: 71,
-              id: "test",
+              id: "test-annotation",
               name: "RBS",
               start: 0,
             },
@@ -67,12 +69,9 @@ describe("SeqBlock", () => {
       />
     );
 
-    const seqBlock = wrapper.instance();
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'findXAndWidth' does not exist on type 'C... Remove this comment to see the full error message
-    const { width, x } = seqBlock.findXAndWidth(0, seq.length);
-
-    expect(x).toEqual(1);
-    expect(width).toBeGreaterThan(defaultProps.charWidth * seq.length - 5);
-    expect(width).toBeLessThan(defaultProps.charWidth * seq.length + 5);
+    // Verify it was rendered with the test seq
+    const seqBlock = screen.getByTestId("la-vz-seq");
+    expect(seqBlock).toBeTruthy();
+    expect(seqBlock.textContent).toEqual(seq);
   });
 });

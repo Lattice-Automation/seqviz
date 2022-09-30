@@ -1,17 +1,16 @@
 import * as React from "react";
 
-import { Coor, HighlightProp, InputRefFuncType, Range } from "../elements";
+import { Coor, HighlightProp, InputRefFunc, Range } from "../elements";
 import { Arc, GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
-export const Find = (props: {
+const Find = (props: {
   center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   highlights: HighlightProp[];
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
-  onUnmount: unknown;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   search: Range[];
@@ -60,3 +59,5 @@ export const Find = (props: {
     </g>
   );
 };
+
+export default Find;

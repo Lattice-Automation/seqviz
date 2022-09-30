@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as ReactDOMServer from "react-dom/server";
 
 import SeqViz, { SeqVizProps } from "./SeqViz";
 import "./SeqViz.css";
@@ -48,7 +47,7 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
    * Return an HTML string representation of the viewer
    */
   const renderToString = () => {
-    return ReactDOMServer.renderToString(viewer);
+    return require("react-dom/server").renderToString(viewer);
   };
 
   /**

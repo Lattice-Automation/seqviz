@@ -16,7 +16,7 @@ interface IndexProps {
 }
 
 /**
- * a basepair indexing row for tracking the location of the current bp of DNA.
+ * Index is a row with numbers showing the indexes of base pairs in the sequence.
  */
 export default class Index extends React.PureComponent<IndexProps> {
   // given each basepair in the sequence, go through each and find whether 1) it is divisible

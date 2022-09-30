@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import * as React from "react";
 
-const Demo = dynamic(() => import("../lib/Demo"), {
+const App = dynamic(() => import("../lib/App"), {
   ssr: false,
 });
 
@@ -24,6 +24,6 @@ export default () => (
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135275522-2"></script>
     </Head>
 
-    <Demo />
+    <App />
   </React.Fragment>
 );

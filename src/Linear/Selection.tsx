@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFuncType } from "../elements";
+import { InputRefFunc } from "../elements";
 import { Selection, SelectionContext } from "../handlers/selection";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
@@ -111,7 +111,7 @@ interface BlockProps {
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: string) => void;
   selectHeight: number;

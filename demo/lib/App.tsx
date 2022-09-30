@@ -16,57 +16,64 @@ import seqparse from "seqparse";
 
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
-import { Header } from "./Header";
+import Header from "./Header";
+import demoPart from "./demoPart";
 
 const viewerTypeOptions = [
-  { key: "both", value: "both", text: "Both" },
-  { key: "circular", value: "circular", text: "Circular" },
-  { key: "linear", value: "linear", text: "Linear" },
+  { key: "both", text: "Both", value: "both" },
+  { key: "circular", text: "Circular", value: "circular" },
+  { key: "linear", text: "Linear", value: "linear" },
 ];
 
-interface AppProps {}
 interface AppState {
+  annotations: AnnotationProp[];
   enzymes: any[];
-  primers: boolean;
   name: string;
+  primers: boolean;
   search: { query: string };
   searchResults: any;
   selection: any;
-  annotations: AnnotationProp[];
   seq: string;
   showComplement: boolean;
   showIndex: boolean;
+  showSelectionMeta: boolean;
   showSidebar: boolean;
   viewType: string;
   zoom: number;
 }
 
-export default class App extends React.Component<AppProps, AppState> {
+export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
     enzymes: [],
-    primers: true,
     name: "",
+    primers: true,
     search: { query: "" },
     searchResults: {},
-    seq: "",
     selection: {},
+    seq: "",
     showComplement: true,
     showIndex: true,
+    showSelectionMeta: false,
     showSidebar: false,
     viewType: "",
     zoom: 50,
   };
 
   componentDidMount = async () => {
-    const seq = await seqparse("NC_011521");
+    const seq = await seqparse(demoPart);
 
-    this.setState({ seq: seq.seq, annotations: seq.annotations, name: seq.name });
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
   };
 
   toggleSidebar = () => {
     const { showSidebar } = this.state;
     this.setState({ showSidebar: !showSidebar });
+  };
+
+  toggleShowSelectionMeta = () => {
+    const { showSelectionMeta } = this.state;
+    this.setState({ showSelectionMeta: !showSelectionMeta });
   };
 
   handleHide = () => {
@@ -88,13 +95,13 @@ export default class App extends React.Component<AppProps, AppState> {
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable className="sidebar-container">
           <Sidebar
-            stylename="sidebar-container"
-            id="options-sidebar"
-            as={Menu}
             animation="overlay"
+            as={Menu}
+            id="options-sidebar"
+            stylename="sidebar-container"
             vertical
-            onHide={this.handleHide}
             visible={this.state.showSidebar}
+            onHide={this.handleHide}
           >
             <SidebarHeader toggleSidebar={this.toggleSidebar} />
             <Menu.Item as="a">
@@ -112,37 +119,40 @@ export default class App extends React.Component<AppProps, AppState> {
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
-                set={(showComplement: boolean) => this.setState({ showComplement })}
-                name="showComplement"
                 label="Show complement"
+                name="showComplement"
+                set={(showComplement: boolean) => this.setState({ showComplement })}
               />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput set={showIndex => this.setState({ showIndex })} name="index" label="Show axis" />
+              <CheckboxInput label="Show axis" name="index" set={showIndex => this.setState({ showIndex })} />
             </Menu.Item>
             <Menu.Item as="a">
               <EnzymeInput enzymes={this.state.enzymes} toggleEnzyme={this.toggleEnzyme} />
             </Menu.Item>
             <SidebarFooter />
           </Sidebar>
-          <Sidebar.Pusher as={Container} fluid dimmed={this.state.showSidebar}>
+          <Sidebar.Pusher as={Container} dimmed={this.state.showSidebar} fluid>
             <div id="seqviz-container">
-              {/* @ts-ignore */}
-              <Header {...this.props} toggleSidebar={this.toggleSidebar} />
+              <Header
+                selection={this.state.selection}
+                showSelectionMeta={this.state.showSelectionMeta}
+                toggleShowSelectionMeta={this.toggleShowSelectionMeta}
+                toggleSidebar={this.toggleSidebar}
+              />
               <div id="seqviewer">
                 {this.state.seq && (
-                  // @ts-ignore
                   <SeqViz
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}
-                    onSelection={selection => this.setState({ selection })}
                     search={this.state.search}
                     seq={this.state.seq}
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     viewer={this.state.viewType as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
+                    onSelection={selection => this.setState({ selection })}
                   />
                 )}
               </div>
@@ -160,8 +170,8 @@ const ViewerTypeInput = ({ setType }: { setType: (viewType: string) => void }) =
     <Dropdown
       defaultValue="both"
       fluid
-      selection
       options={viewerTypeOptions}
+      selection
       onChange={(_, data) => {
         setType(`${data.value}`);
       }}
@@ -173,15 +183,15 @@ const LinearZoomInput = ({ setZoom }: { setZoom: (zoom: number) => void }) => (
   <div className="option" id="zoom">
     <span>Zoom</span>
     <input
-      type="range"
-      min="1"
-      max="100"
+      className="slider"
       defaultValue="50"
+      id="zoom"
+      max="100"
+      min="1"
+      type="range"
       onChange={e => {
         setZoom(parseInt(e.target.value));
       }}
-      className="slider"
-      id="zoom"
     />
   </div>
 );
@@ -192,21 +202,21 @@ const SearchQueryInput = ({ setQuery }: { setQuery: (query: string) => void }) =
   </div>
 );
 
-const CheckboxInput = ({ name, label, set }: { name: string; label: string; set: (v: any) => void }) => (
-  <Checkbox toggle defaultChecked name={name} label={label} onChange={(_, data) => set(data.checked)} />
+const CheckboxInput = ({ label, name, set }: { label: string; name: string; set: (v: any) => void }) => (
+  <Checkbox defaultChecked label={label} name={name} toggle onChange={(_, data) => set(data.checked)} />
 );
 
 const EnzymeInput = ({ enzymes, toggleEnzyme }: { enzymes: string[]; toggleEnzyme: (e: string) => void }) => (
   <div className="option" id="enzymes">
     <span>Enzymes</span>
-    <Grid id="enzyme-grid" columns={2}>
+    <Grid columns={2} id="enzyme-grid">
       <Grid.Row className="enzyme-grid-row">
         <Grid.Column className="enzyme-grid-column">
           <Button
-            fluid
-            className="enzyme-button"
             active={enzymes.includes("PstI")}
+            className="enzyme-button"
             color={enzymes.includes("PstI") ? "blue" : null}
+            fluid
             onClick={() => toggleEnzyme("PstI")}
           >
             PstI
@@ -214,10 +224,10 @@ const EnzymeInput = ({ enzymes, toggleEnzyme }: { enzymes: string[]; toggleEnzym
         </Grid.Column>
         <Grid.Column className="enzyme-grid-column">
           <Button
-            fluid
-            className="enzyme-button"
             active={enzymes.includes("EcoRI")}
+            className="enzyme-button"
             color={enzymes.includes("EcoRI") ? "blue" : null}
+            fluid
             onClick={() => toggleEnzyme("EcoRI")}
           >
             EcoRI
@@ -227,10 +237,10 @@ const EnzymeInput = ({ enzymes, toggleEnzyme }: { enzymes: string[]; toggleEnzym
       <Grid.Row className="enzyme-grid-row">
         <Grid.Column className="enzyme-grid-column">
           <Button
-            fluid
-            className="enzyme-button"
             active={enzymes.includes("XbaI")}
+            className="enzyme-button"
             color={enzymes.includes("XbaI") ? "blue" : null}
+            fluid
             onClick={() => toggleEnzyme("XbaI")}
           >
             XbaI
@@ -238,10 +248,10 @@ const EnzymeInput = ({ enzymes, toggleEnzyme }: { enzymes: string[]; toggleEnzym
         </Grid.Column>
         <Grid.Column className="enzyme-grid-column">
           <Button
-            fluid
-            className="enzyme-button"
             active={enzymes.includes("SpeI")}
+            className="enzyme-button"
             color={enzymes.includes("SpeI") ? "blue" : null}
+            fluid
             onClick={() => toggleEnzyme("SpeI")}
           >
             SpeI
@@ -259,12 +269,12 @@ const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) => (
       <h3>Settings</h3>
     </div>
     <Button
-      onClick={toggleSidebar}
-      id="sidebar-toggle-close"
-      className="circular-button"
       circular
+      className="circular-button"
       floated="right"
       icon="angle left"
+      id="sidebar-toggle-close"
+      onClick={toggleSidebar}
     />
   </div>
 );
@@ -276,7 +286,7 @@ const SidebarFooter = () => (
     <p>
       Created by{" "}
       <span>
-        <a target="_blank" rel="noopener noreferrer" href="https://latticeautomation.com/">
+        <a href="https://latticeautomation.com/" rel="noopener noreferrer" target="_blank">
           Lattice Automation
         </a>
       </span>
@@ -284,7 +294,7 @@ const SidebarFooter = () => (
     <p>
       <Icon name="github" />
       <span>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/Lattice-Automation/seqviz">
+        <a href="https://github.com/Lattice-Automation/seqviz" rel="noopener noreferrer" target="_blank">
           seqviz
         </a>
       </span>
@@ -292,9 +302,9 @@ const SidebarFooter = () => (
       <Icon name="medium" />
       <span>
         <a
-          target="_blank"
-          rel="noopener noreferrer"
           href="https://medium.com/@lattice.core/visualize-your-dna-sequences-with-seqviz-b1d945eb9684"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Story
         </a>
@@ -303,9 +313,9 @@ const SidebarFooter = () => (
       <Icon name="edit outline" />
       <span>
         <a
-          target="_blank"
-          rel="noopener noreferrer"
           href="https://docs.google.com/forms/d/1ILD3UwPvdkQlM06En7Pl9VqVpN_-g5iWs-B6gjKh9b0/viewform?edit_requested=true"
+          rel="noopener noreferrer"
+          target="_blank"
         >
           Survey
         </a>

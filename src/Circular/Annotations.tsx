@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
-import { Annotation, Coor, InputRefFuncType, Size } from "../elements";
+import { Annotation, Coor, InputRefFunc, Size } from "../elements";
 import CentralIndexContext from "../handlers/centralIndex";
 import { GenArcFunc } from "./Circular";
 
@@ -12,7 +12,7 @@ interface AnnotationsProps {
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inlinedAnnotations: string[];
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
@@ -30,12 +30,11 @@ interface AnnotationsProps {
  */
 export default class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
-  hoverAnnotation = (className: string, opacity: number) => {
+  hoverAnnotation = (className: string, opacity: string) => {
     if (!document) return;
 
-    const elements = document.getElementsByClassName(className);
+    const elements = document.getElementsByClassName(className) as HTMLCollectionOf<SVGPathElement>;
     for (let i = 0; i < elements.length; i += 1) {
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
       elements[i].style.fillOpacity = opacity;
     }
   };
@@ -55,9 +54,10 @@ export default class Annotations extends React.PureComponent<AnnotationsProps> {
           <g className="la-vz-circular-annotations">
             {annotations.reduce((acc: any[], anns: Annotation[], i) => {
               if (i) {
+                // increment the annRow radii on every loop after first
                 currBRadius -= lineHeight + 3;
                 currTRadius -= lineHeight + 3;
-              } // increment the annRow radii if on every loop after first
+              }
 
               return acc.concat(
                 anns.map(ann => (
@@ -93,29 +93,18 @@ interface SingleAnnotationProps {
   centralIndex: number;
   currBRadius: number;
   currTRadius: number;
-  genArc: (args: {
-    arrowFWD?: boolean;
-    arrowREV?: boolean;
-    innerRadius: number;
-    largeArc: boolean;
-    length: number;
-    offset?: number;
-    outerRadius: number;
-    // see svg.arc large-arc-flag
-    sweepFWD?: boolean;
-  }) => string;
+  genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  hoverAnnotation: (className: string, opacity: number) => void;
+  hoverAnnotation: (className: string, opacity: string) => void;
   id: string;
   inlinedAnnotations: string[];
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   seqLength: number;
 }
 
 /**
- * A component for a single annotation within the Circular Viewer
- *
+ * SingleAnnotation renders a single annotation within the Circular Viewer
  */
 const SingleAnnotation = (props: SingleAnnotationProps) => {
   const {
@@ -196,8 +185,8 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         }}
         onBlur={() => {}}
         onFocus={() => {}}
-        onMouseOut={() => hoverAnnotation(a.id, 0.7)}
-        onMouseOver={() => hoverAnnotation(a.id, 1.0)}
+        onMouseOut={() => hoverAnnotation(a.id, "0.7")}
+        onMouseOver={() => hoverAnnotation(a.id, "1.0")}
       />
       {inlinedAnnotations.includes(a.id) && (
         <text
@@ -205,8 +194,8 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           id={a.id}
           onBlur={() => {}}
           onFocus={() => {}}
-          onMouseOut={() => hoverAnnotation(a.id, 0.7)}
-          onMouseOver={() => hoverAnnotation(a.id, 1.0)}
+          onMouseOut={() => hoverAnnotation(a.id, "0.7")}
+          onMouseOver={() => hoverAnnotation(a.id, "1.0")}
         >
           <textPath
             cursor="pointer"

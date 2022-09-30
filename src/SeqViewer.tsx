@@ -23,6 +23,8 @@ interface SeqViewerProps {
   showComplement: boolean;
   showIndex: boolean;
   size: { height: number; width: number };
+  /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
+  testSize?: { height: number; width: number };
   translations: Range[];
   viewer: string;
   zoom: { circular: number; linear: number };
@@ -42,7 +44,8 @@ class SeqViewer extends React.Component<SeqViewerProps> {
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    const { seq, size } = this.props;
+    const { seq } = this.props;
+    const size = this.props.testSize || this.props.size;
     const zoom = this.props.zoom.linear;
 
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
@@ -61,7 +64,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
       bpsPerBlock = Math.round(bpsPerBlock * (70 / zoom));
     }
 
-    if (bpsPerBlock < seq.length) {
+    if (size.width && bpsPerBlock < seq.length) {
       size.width -= 28; // -28 px for the padding (10px) + scroll bar (18px)
     }
 
@@ -95,8 +98,8 @@ class SeqViewer extends React.Component<SeqViewerProps> {
   circularProps = () => {
     const {
       seq: { length: seqLength },
-      size,
     } = this.props;
+    const size = this.props.testSize || this.props.size;
     const zoom = this.props.zoom.circular;
 
     const center = {
@@ -126,37 +129,29 @@ class SeqViewer extends React.Component<SeqViewerProps> {
   };
 
   render() {
-    const { Circular: circularViewer, seq } = this.props;
+    const size = this.props.testSize || this.props.size;
 
     return (
-      <div className="la-vz-viewer">
-        {circularViewer ? (
+      <div className="la-vz-viewer" data-testid="la-vz-seq-viewer">
+        {this.props.Circular ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
               <Circular
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
+                size={size}
                 centralIndex={circular}
-                primers={[]}
                 setCentralIndex={setCentralIndex}
-                showPrimers={false}
               />
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          <Linear
-            {...this.props}
-            {...this.state}
-            {...this.linearProps()}
-            primers={[]}
-            seqLength={seq.length}
-            showPrimers={false}
-          />
+          <Linear {...this.props} {...this.state} {...this.linearProps()} size={size} />
         )}
       </div>
     );
   }
 }
 
-export default sizeMe.withSize({ monitorHeight: true })(SeqViewer);
+export default sizeMe.withSize({ monitorHeight: true, monitorWidth: true })(SeqViewer);

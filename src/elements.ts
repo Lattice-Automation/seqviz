@@ -62,7 +62,7 @@ export interface Part {
   seq: string;
 }
 
-export type InputRefFuncType = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
+export type InputRefFunc = <T>(id: string, ref: unknown) => React.LegacyRef<T>;
 
 export interface Size {
   height: number;

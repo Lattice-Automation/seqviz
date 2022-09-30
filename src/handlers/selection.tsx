@@ -15,7 +15,7 @@ type SelectionTypeEnum =
   | "HIGHLIGHT"
   | "";
 
-/* SeqVizSelection is a selection holding all meta about the viewer(s) active selection. */
+/* Selection holds all meta about the viewer(s) active selection. */
 export interface Selection {
   clockwise: boolean;
   color?: string;

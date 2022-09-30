@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { InputRefFuncType, Translation } from "../elements";
+import { InputRefFunc, Translation } from "../elements";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -12,7 +12,7 @@ interface TranslationRowsProps {
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
   seqBlockRef: unknown;
@@ -74,14 +74,8 @@ interface TranslationRowProps {
 }
 
 /**
- * A single translation row
- *
- * a row for translations of DNA into Amino Acid sequences so a user can
- * see the resulting protein or peptide sequence within in the viewer
- *
- * chose here to have the row itself, with the pull part seq as a reference
- * cut up the sequence into the dna associated with the current row and
- * translate
+ * A single row for translations of DNA into Amino Acid sequences so a user can
+ * see the resulting protein or peptide sequence in the viewer
  */
 class TranslationRow extends React.Component<TranslationRowProps> {
   AAs: string[] = [];
