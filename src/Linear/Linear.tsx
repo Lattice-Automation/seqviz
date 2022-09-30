@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import bindingSites from "../bindingSites";
-import { Annotation, CutSite, Highlight, InputRefFuncType, NameRange, Primer, Range, Size } from "../elements";
+import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import { Selection } from "../handlers/selection";
@@ -21,21 +20,18 @@ export interface LinearProps {
   cutSites: CutSite[];
   elementHeight: number;
   highlights: Highlight[];
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   mouseEvent: React.MouseEventHandler;
   name: string;
   onUnmount: (id: string) => void;
-  primers: Primer[];
   search: NameRange[];
   selection: Selection;
   seq: string;
   seqFontSize: number;
-  seqLength: number;
   setSelection: (selection: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
-  showPrimers: boolean;
   size: Size;
   translations: Range[];
   zoom: { linear: number };
@@ -48,7 +44,6 @@ export interface LinearProps {
  * 	text (seq)
  * 	Index (axis)
  * 	Annotations
- *  Primers
  *  Finds
  *  Translations
  *  Selections
@@ -82,18 +77,10 @@ class Linear extends React.Component<LinearProps> {
       seq,
       showComplement,
       showIndex,
-      showPrimers,
       size,
       translations,
       zoom,
     } = this.props;
-
-    let { primers } = this.props;
-
-    primers = bindingSites(primers, seq);
-
-    const forwardPrimers = primers.filter(primer => primer.direction === 1);
-    const reversePrimers = primers.filter(primer => primer.direction === -1);
 
     // un-official definition for being zoomed in. Being over 10 seems like a decent cut-off
     const zoomed = zoom.linear > 10;
@@ -129,14 +116,6 @@ class Linear extends React.Component<LinearProps> {
       bpsPerBlock,
       arrSize
     );
-
-    const forwardPrimerRows = showPrimers // primers...
-      ? createMultiRows(stackElements(forwardPrimers, seq.length), bpsPerBlock, arrSize)
-      : new Array(arrSize).fill([]);
-
-    const reversePrimerRows = showPrimers // primers...
-      ? createMultiRows(stackElements(reversePrimers, seq.length), bpsPerBlock, arrSize)
-      : new Array(arrSize).fill([]);
 
     const searchRows: NameRange[][] =
       search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
@@ -176,12 +155,6 @@ class Linear extends React.Component<LinearProps> {
       if (cutSiteRows[i].length) {
         blockHeight += lineHeight; // space for cutsite name
       }
-      if (showPrimers && forwardPrimerRows[i].length) {
-        blockHeight += elementHeight * 3 * forwardPrimerRows[i].length;
-      }
-      if (showPrimers && reversePrimerRows[i].length) {
-        blockHeight += elementHeight * 3 * reversePrimerRows[i].length;
-      }
 
       blockHeights[i] = blockHeight;
     }
@@ -202,21 +175,18 @@ class Linear extends React.Component<LinearProps> {
           cutSiteRows={cutSiteRows[i]}
           elementHeight={elementHeight}
           firstBase={firstBase}
-          forwardPrimerRows={forwardPrimerRows[i]}
           fullSeq={seq}
           highlights={highlightRows[i]}
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}
           mouseEvent={this.props.mouseEvent}
-          reversePrimerRows={reversePrimerRows[i]}
           searchRows={searchRows[i]}
           selection={this.props.selection}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
           showComplement={showComplement}
           showIndex={showIndex}
-          showPrimers={showPrimers}
           size={size}
           translations={translationRows[i]}
           y={yDiff}

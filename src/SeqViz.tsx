@@ -46,7 +46,7 @@ export interface SeqVizProps {
   /** a list of colors to populate un-colored annotations with. HEX, RGB, names are supported */
   colors?: string[];
 
-  /** the complementary sequence to `seq`. Ignored if `seqType: "aa"` */
+  /** the complementary sequence to `seq`. Inferred by default. Ignored if `seqType: "aa"` */
   compSeq?: string;
 
   /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the currently selected seq is copied */
@@ -132,7 +132,7 @@ export interface SeqVizProps {
     /**
      * how zoomed to make the circular viewer. default: 0
      *
-     * @deprecated reach out if this is of interest
+     * @deprecated make a Github issue if this is a desired feature
      */
     circular?: number;
 
@@ -398,8 +398,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     };
 
     return (
-      <div className="la-vz-seqviz" style={style}>
-        <SeqViewerContainer {...props} {...this.state} />
+      <div className="la-vz-seqviz" data-testid="la-vz-seqviz-rendered" style={style}>
+        <SeqViewerContainer {...this.props} {...props} {...this.state} />
       </div>
     );
   }

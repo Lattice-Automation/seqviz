@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, InputRefFuncType, Size } from "../elements";
+import { Coor, InputRefFunc, Size } from "../elements";
 import CentralIndexContext from "../handlers/centralIndex";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
@@ -10,7 +10,7 @@ interface IndexProps {
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   name: string;
   radius: number;

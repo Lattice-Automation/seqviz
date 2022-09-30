@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CutSite, Enzyme, InputRefFuncType } from "../elements";
+import { CutSite, Enzyme, InputRefFunc } from "../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface HighlightedCutSite {
@@ -57,7 +57,7 @@ const CutSites = (props: {
   elementHeight: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   lineHeight: number;
   yDiff: number;

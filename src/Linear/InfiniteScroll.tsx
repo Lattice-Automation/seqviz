@@ -18,11 +18,10 @@ interface InfiniteScrollState {
 }
 
 /**
- * A wrapper around the seqBlocks. Renders only the seqBlocks that are
+ * InfiniteScroll is a wrapper around the seqBlocks. Renders only the seqBlocks that are
  * within the range of the current dom viewerport
  *
- * This component should sense scroll events and, during one, recheck which
- * seqBlocks should currently be shown
+ * This component should sense scroll events and, during one, recheck which sequences are shown.
  */
 export default class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
   static contextType = CentralIndexContext;
@@ -219,13 +218,13 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
   /**
    * handleMouseOver is for detecting when the user is performing a drag event
    * at the very top or the very bottom of DIV. If they are, this starts
-   * a recursive incrementation of the DIV's scrollTop (ie an upward or downward scroll
-   * event), that's only terminated by the user leaving the scroll area
+   * a incrementing the div's scrollTop (ie an upward or downward scroll event) that's
+   * terminated by the user leaving the scroll area
    *
-   * also the rate of the scrollTop is proportional to how far from the top or the
+   * The rate of the scrollTop is proportional to how far from the top or the
    * bottom the user is (within [-40, 0] for top, and [0, 40] for bottom)
    */
-  handleMouseOver = e => {
+  handleMouseOver = (e: React.MouseEvent<HTMLDivElement>) => {
     // not relevant, some other type of event, not a selection drag
     if (e.buttons !== 1) {
       if (this.timeoutID) {
@@ -238,17 +237,19 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
     // top of the viewer and, if it is, try and increment the current
     // centralIndex (triggering a downward scroll event)
     const scrollerBlock = this.scroller.current.getBoundingClientRect();
-    let percFromTop = (e.clientY - scrollerBlock.top) / scrollerBlock.height;
-    if (percFromTop > 0.9) {
-      percFromTop = Math.min(1, percFromTop);
-      let scaledPerc = percFromTop - 0.9;
-      scaledPerc *= 10;
-      const scaledScroll = 15 * scaledPerc;
+    let scrollRatio = (e.clientY - scrollerBlock.top) / scrollerBlock.height;
+    if (scrollRatio > 0.9) {
+      scrollRatio = Math.min(1, scrollRatio);
+      let scalingRatio = scrollRatio - 0.9;
+      scalingRatio *= 10;
+      const scaledScroll = 15 * scalingRatio;
+
       this.incrementScroller(scaledScroll);
-    } else if (percFromTop < 0.1) {
-      percFromTop = 0.1 - Math.max(0, percFromTop);
-      const scaledPerc = 10 * percFromTop;
-      const scaledScroll = -15 * scaledPerc;
+    } else if (scrollRatio < 0.1) {
+      scrollRatio = 0.1 - Math.max(0, scrollRatio);
+      const scalingRatio = 10 * scrollRatio;
+      const scaledScroll = -15 * scalingRatio;
+
       this.incrementScroller(scaledScroll);
     } else {
       this.stopIncrementingScroller();
@@ -270,6 +271,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
     return (
       <div
+        data-testid="la-vz-viewer-linear"
         ref={this.scroller}
         className="la-vz-linear-scroller"
         onFocus={() => {
@@ -279,7 +281,7 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
         onScroll={this.handleScrollOrResize}
       >
         <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height }}>
-          <div style={{ height: spaceAbove, width: width || 0 }} />
+          <div className="la-vz-seqblock-padding-top" style={{ height: spaceAbove, width: width || 0 }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
       </div>

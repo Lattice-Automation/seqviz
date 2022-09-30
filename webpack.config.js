@@ -2,13 +2,13 @@ const path = require("path");
 const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 
-const package = require("../package.json");
+const package = require("./package.json");
 
 /**
  * cdnBuild is the webpack config for distributing SeqViz to unpkg. It bundles the viewer with all its dependencies.
  */
 const cdnBuild = {
-  entry: path.join(__dirname, "..", "src", "index.ts"),
+  entry: path.join(__dirname, "src", "index.ts"),
   target: "web",
   mode: "production",
   module: {
@@ -46,8 +46,8 @@ const cdnBuild = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
     alias: {
-      react: path.resolve(__dirname, "../node_modules/react"),
-      "react-dom": path.resolve(__dirname, "../node_modules/react-dom"),
+      react: path.resolve(__dirname, "node_modules/react"),
+      "react-dom": path.resolve(__dirname, "node_modules/react-dom"),
     },
     fallback: {
       buffer: require.resolve("buffer"),
@@ -79,11 +79,11 @@ const npmBuild = Object.assign({}, cdnBuild, {
       name: package.name,
       type: "umd",
     },
-    path: path.join(__dirname, "..", "dist"),
+    path: path.join(__dirname, "dist"),
     publicPath: "/dist/",
     umdNamedDefine: true,
   },
-  externals: [nodeExternals({ modulesDir: path.join(__dirname, "..", "node_modules") })],
+  externals: [nodeExternals({ modulesDir: path.join(__dirname, "node_modules") })],
 });
 
 module.exports = [cdnBuild, npmBuild];

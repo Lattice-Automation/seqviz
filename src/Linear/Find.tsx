@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFuncType, Range } from "../elements";
+import { InputRefFunc, Range } from "../elements";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -23,7 +23,7 @@ const Find = ({
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   indexYDiff: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;
@@ -69,7 +69,7 @@ const FindBlock = ({
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   indexYDiff: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;

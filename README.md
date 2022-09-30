@@ -96,21 +96,21 @@ A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 
 ##### File or Accession
 
-There are `@deprecated` props -- `file` and `accession` -- that will be parsed to `seq` and `annotations` props. But we recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
+There are `@deprecated` props -- `file` and `accession` -- that will be parsed to `seq`, `name`, and `annotations` props. But we recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
 
 ```jsx
 import seqparse from "seqparse";
 
 export default () => {
-  const [seq, setSeq] = useState(null);
+  const [part, setPart] = useState(null);
 
   useEffect(async () => {
-    setSeq(await seqparse("NC_011521"));
+    setPart(await seqparse("NC_011521"));
   });
 
-  if (!seq) return null;
+  if (!part) return null;
 
-  return <SeqViz {...seq} />;
+  return <SeqViz name={part.name} seq={part.seq} annotations={part.annotations} />;
 };
 ```
 
@@ -118,19 +118,15 @@ export default () => {
 
 #### `viewer (='both')`
 
-One of `"linear" | "circular" | "both" | "both_flip"`. The type and orientation of the sequence viewers. `both` means the circular viewer fills the left side of SeqViz and the linear viewer fills the right. `both_flip` is the opposite: the linear viewer is on the left and the circular viewer is on the right.
+The type and orientation of the sequence viewers. One of `"linear" | "circular" | "both" | "both_flip"`. `both` means the circular viewer fills the left side of SeqViz, and the linear viewer fills the right. `both_flip` is the opposite: the linear viewer is on the left, and the circular viewer is on the right.
 
 #### `name (='')`
 
 The name of the sequence/plasmid. Shown at the center of the circular viewer.
 
-#### `compSeq (='')`
-
-The complement sequence. Inferred from `seq` by default.
-
 #### `annotations (=[])`
 
-An array of `annotations` to show. Each `Annotation` requires 0-based start (inclusive) and end (exclusive) indexes. For arrows, set the annotation's direction to `1` for forward arrows and `-1` for reverse arrows. Names are rendered on top of the annotation.
+An array of `Annotation`s to render. Each `Annotation` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the annotations. Set the annotation's direction to `1` for forward arrows and `-1` for reverse arrows.
 
 ```js
 annotations = [
@@ -144,8 +140,7 @@ In the example above, the "Strong promoter" would span the first to twenty-secon
 
 #### `translations (=[])`
 
-An array of `translations` showing amino acids beneath a DNA sequence. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A
-direction is required: 1 (FWD) or -1 (REV).
+An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: 1 (FWD) or -1 (REV).
 
 ```js
 translations = [
@@ -156,7 +151,7 @@ translations = [
 
 #### `enzymes (=[])`
 
-An array of restriction `enzymes` to show the recognition sites for. A list of pre-defined enzymes in [src/enzymes.ts](src/enzymes.ts) can be referenced by name. Example:
+An array of restriction `enzymes` to show recognition sites for. A list of pre-defined enzymes in [src/enzymes.ts](src/enzymes.ts) can be referenced by name. Example:
 
 ```js
 enzymes = [
@@ -168,21 +163,7 @@ enzymes = [
     fcut: 0, // cut index on FWD strand, relative to start of rseq
     rcut: 1, // cut index on REV strand, relative to start of rseq
     color: "#D7E5F0", // color to highlight recognition site with
-  },
-];
-```
-
-Enzymes can be limited to a range via the `range` property on an `Enzyme` object:
-
-```js
-enzymes = [
-  {
-    name: "Cas9",
-    rseq: "NGG", // recognition sequence
-    fcut: 0, // cut index on FWD strand, relative to start of rseq
-    rcut: 1, // cut index on REV strand, relative to start of rseq
-    color: "#D7E5F0", // color to highlight recognition site with
-    // only show recognition sites between 100th and 250th index [100,250]
+    // (optional) only show recognition sites between 100th and 250th index [100, 250)
     range: {
       start: 100,
       end: 250,
@@ -193,7 +174,7 @@ enzymes = [
 
 #### `highlights (=[])`
 
-Ranges of the sequence to highlight. A default color from `colors` is used if none is provided.
+Ranges of sequence to highlight. A default color from `colors` is used if none is provided.
 
 ```js
 highlights = [
@@ -204,32 +185,15 @@ highlights = [
 
 #### `zoom (={ linear: 50 })`
 
-How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type (`viewer`). `circular` used to be but isn't presently supported.
+How zoomed the viewer(s) should be `0-100`. Key'ed by viewer type, but only `linear` is supported.
 
 #### `colors (=[])`
 
-An array of colors to use for annotations, translations, and highlights. Defaults to:
-
-```js
-colors = [
-  "#9DEAED", // cyan
-  "#8FDE8C", // green
-  "#CFF283", // light green
-  "#8CDEBD", // teal
-  "#F0A3CE", // pink
-  "#F7C672", // orange
-  "#F07F7F", // red
-  "#FAA887", // red-orange
-  "#F099F7", // magenta
-  "#C59CFF", // purple
-  "#6B81FF", // blue
-  "#85A6FF", // light blue
-];
-```
+An array of colors to use for annotations, translations, and highlights. Defaults are in [src/colors.ts](src/colors.ts).
 
 #### `bpColors (={})`
 
-An object that maps basepairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
+An object mapping basepairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
 
 ```js
 bpColors = { A: "#FF0000", T: "blue", 12: "#00FFFF" };
@@ -237,19 +201,18 @@ bpColors = { A: "#FF0000", T: "blue", 12: "#00FFFF" };
 
 #### `style (={})`
 
-Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if the element around `seqviz` lacks a defined height and/or width. For example:
+Style for `seqviz`'s outer container div. Empty by default. Useful for setting the height and width of the viewer if the element around `seqviz` lacks one. For example:
 
 ```js
 style = { height: "100vh", width: "100vw" };
 ```
 
-#### `onSelection (=null)`
+#### `onSelection (=(_: Selection) => {})`
 
-Callback function executed after selection events. Should accept a single `selection` argument: `(selection) => {}`.
+Callback executed after selection events. Accepts a single [`Selection` type](https://github.com/Lattice-Automation/seqviz/blob/01f6e7b956d18281d4d901b47c4a4becd75f0dc6/src/handlers/selection.tsx#L19) argument.
 
-This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `searchElement` was
-clicked, the `selection` object will have info on the selected element. The example below is of a `selection` object
-following an `annotation` click.
+This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `search` was
+clicked, the `selection` object will have info on the selected element. The example below shows an `Annotation` selection.
 
 ```js
 {
@@ -268,39 +231,19 @@ following an `annotation` click.
 }
 ```
 
-#### `search (=null)`
+#### `search (={})`
 
-A `search` object for specifying search results to highlight on the viewer. An example is below:
+Sequence search parameters. Takes a `query` sequence and the [maximum allowable `mismatch`](https://en.wikipedia.org/wiki/Hamming_distance) for a match (default: 0). Matches are highlighted.
 
 ```js
 search = { query: "aatggtctc", mismatch: 1 };
 ```
 
-Searching supports the following nucleotide wildcards within the `query`.
+Searching supports wildcard symbols. Eg: `{ query: "AANAA" }`. All symbols supported are in [src/sequence.ts](src/sequence.ts).
 
-```js
-{
-  "y": ["c", "t"],
-  "r": ["a", "g"],
-  "w": ["a", "t"],
-  "s": ["c", "g"],
-  "k": ["g", "t"],
-  "m": ["a", "c"],
-  "d": ["a", "g", "t"],
-  "v": ["a", "c", "g"],
-  "h": ["a", "c", "t"],
-  "b": ["c", "g", "t"],
-  "x": ["a", "c", "g", "t"],
-  "n": ["a", "c", "g", "t"]
-}
-```
+#### `onSearch (=(_: Range) => {})`
 
-`mismatch` is an `int` denoting the maximum allowable mismatch between the query and a match within the viewer's
-sequence (see: [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance)).
-
-#### `onSearch (=null)`
-
-Callback executed after a search event with a `searchResults` object. Called once on initial render. An example of `searchResults` is below:
+A callback executed after a search event. Called once on search. An example of search results is below:
 
 ```js
 [
@@ -319,21 +262,13 @@ Callback executed after a search event with a `searchResults` object. Called onc
 ];
 ```
 
-#### `copyEvent (=(e: KeyboardEvent) => e => e.key === "c" && (e.metaKey || e.ctrlKey))`
+#### `copyEvent (=(e: KeyboardEvent) => e.key === "c" && (e.metaKey || e.ctrlKey))`
 
-A functions that returns whether to copy the selected range on the viewer(s) to the [user's clipboard](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Interact_with_the_clipboard). The default method copies sequence after any `ctrl+c` or `meta+c` keyboard events.
+A function returning whether to copy the viewer(s) current selection during a keyboard event. The default method copies sequence after any `ctrl+c` or `meta+c` keyboard events.
 
 #### `showComplement (=true)`
 
 Whether to show the complement sequence.
-
-#### `showIndex (=true)`
-
-Whether to show the index line and ticks below the sequence.
-
-#### `rotateOnScroll (=true)`
-
-The circular viewer rotates when scrolling over the viewer by default. That can be disabled with `rotateOnScroll: false`.
 
 ### Viewer without React
 

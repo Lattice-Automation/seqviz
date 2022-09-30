@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, CutSite, InputRefFuncType } from "../elements";
+import { Coor, CutSite, InputRefFunc } from "../elements";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CutSitesProps {
@@ -9,7 +9,7 @@ interface CutSitesProps {
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
@@ -46,7 +46,7 @@ const SingleCutSite = (props: {
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;

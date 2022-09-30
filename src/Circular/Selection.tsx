@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, InputRefFuncType } from "../elements";
+import { Coor, InputRefFunc } from "../elements";
 import { SelectionContext } from "../handlers/selection";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
@@ -9,9 +9,8 @@ interface CircularSelectionProps {
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
-  onUnmount: unknown;
   radius: number;
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   seq: string;
@@ -81,17 +80,11 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
       lArc = true;
     }
 
-    // this should be very thin when the selection range starts and ends at same point
-    let edgeStrokeWidth = 2;
-    if (start === end) {
-      edgeStrokeWidth = 1;
-    }
-
     const edgeStyle = {
       fill: "transparent",
       shapeRendering: "auto",
       stroke: "black",
-      strokeWidth: edgeStrokeWidth,
+      strokeWidth: 1,
     };
 
     return (

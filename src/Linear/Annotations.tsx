@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
-import { InputRefFuncType, NameRange } from "../elements";
+import { InputRefFunc, NameRange } from "../elements";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
@@ -23,7 +23,7 @@ const AnnotationRows = (props: {
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   seqBlockRef: unknown;
   width: number;
@@ -62,7 +62,7 @@ const AnnotationRow = (props: {
   firstBase: number;
   fullSeq: string;
   height: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   seqBlockRef: unknown;
   width: number;
@@ -100,7 +100,7 @@ export const SingleNamedElement = (props: {
   fullSeq: string;
   height: number;
   index: number;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lastBase: number;
   seqBlockRef: unknown;
 }) => {

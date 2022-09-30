@@ -1,7 +1,6 @@
 import * as React from "react";
 
-import bindingSites from "../bindingSites";
-import { Annotation, Coor, CutSite, Highlight, InputRefFuncType, Primer, Range, Size } from "../elements";
+import { Annotation, Coor, CutSite, Highlight, InputRefFunc, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import CentralIndexContext from "../handlers/centralIndex";
@@ -9,7 +8,7 @@ import { Selection as SelectionType } from "../handlers/selection";
 import isEqual from "../isEqual";
 import Annotations from "./Annotations";
 import CutSites from "./CutSites";
-import { Find } from "./Find";
+import Find from "./Find";
 import Index from "./Index";
 import Labels from "./Labels";
 import Selection from "./Selection";
@@ -51,11 +50,10 @@ interface CircularProps {
   compSeq: string;
   cutSites: CutSite[];
   highlights: Highlight[];
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   mouseEvent: (e: any) => void;
   name: string;
   onUnmount: (id: string) => void;
-  primers: Primer[];
   radius: number;
   search: Range[];
   selection: SelectionType;
@@ -63,7 +61,6 @@ interface CircularProps {
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
   setSelection: (selection: SelectionType) => void;
   showIndex: boolean;
-  showPrimers: boolean;
   size: Size;
   yDiff: number;
 }
@@ -73,7 +70,6 @@ interface CircularState {
   inlinedLabels: string[];
   lineHeight: number;
   outerLabels: ILabel[];
-  primersInRows: Primer[][];
   seqLength: number;
 }
 
@@ -90,7 +86,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
       inlinedLabels: [],
       lineHeight: 0,
       outerLabels: [],
-      primersInRows: [],
       seqLength: 0,
     };
   }
@@ -98,8 +93,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
   static getDerivedStateFromProps = (nextProps: CircularProps): CircularState => {
     const lineHeight = 14;
     const annotationsInRows = stackElements(nextProps.annotations, nextProps.seq.length);
-    const primers = bindingSites(nextProps.primers, nextProps.seq);
-    const primersInRows = stackElements(primers, nextProps.seq.length);
 
     /**
      * find the element labels that need to be rendered outside the plasmid. This is done for
@@ -152,7 +145,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
       inlinedLabels: inlinedLabels,
       lineHeight: lineHeight,
       outerLabels: outerLabels,
-      primersInRows: primersInRows,
       seqLength: nextProps.seq.length,
     };
   };
@@ -300,23 +292,9 @@ class Circular extends React.Component<CircularProps, CircularState> {
   };
 
   render() {
-    const {
-      center,
-      compSeq,
-      cutSites,
-      inputRef,
-      mouseEvent,
-      name,
-      onUnmount,
-      radius,
-      search,
-      seq,
-      showIndex,
-      showPrimers,
-      size,
-      yDiff,
-    } = this.props;
-    const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, primersInRows, seqLength } = this.state;
+    const { center, compSeq, cutSites, inputRef, mouseEvent, name, radius, search, seq, showIndex, size, yDiff } =
+      this.props;
+    const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, seqLength } = this.state;
 
     const { findCoor, genArc, getRotation, rotateCoor } = this;
 
@@ -333,20 +311,16 @@ class Circular extends React.Component<CircularProps, CircularState> {
       seqLength,
     };
 
-    // calculate the selection row height based on number of annotation and primers
+    // calculate the selection row height based on number of annotation
     let totalRows = 4 + annotationsInRows.length;
-
-    if (showPrimers) {
-      totalRows += primersInRows.length;
-    }
-
     const plasmidId = `la-vz-${name}-viewer-circular`;
     if (!size.height) return null;
 
     return (
       <svg
         ref={inputRef(plasmidId, { type: "SEQ" })}
-        className="la-vz-circular-viewer"
+        className="la-vz-viewer-circular"
+        data-testid="la-vz-viewer-circular"
         height={size.height}
         id={plasmidId}
         width={size.width >= 0 ? size.width : 0}
@@ -355,7 +329,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
         onMouseUp={mouseEvent}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
-          <Selection {...props} seq={seq} totalRows={totalRows} onUnmount={onUnmount} />
+          <Selection {...props} seq={seq} totalRows={totalRows} />
           <CutSites {...props} cutSites={cutSites} selectionRows={4} />
           <Index
             {...props}
@@ -381,7 +355,6 @@ class Circular extends React.Component<CircularProps, CircularState> {
             seq={seq}
             seqLength={props.seqLength}
             totalRows={totalRows}
-            onUnmount={onUnmount}
           />
           <Annotations
             {...props}
@@ -407,7 +380,7 @@ export const Arc = (props: {
   end: number;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFuncType;
+  inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
   seqLength: number;
