@@ -125,7 +125,7 @@ export default class App extends React.Component<any, AppState> {
               />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput label="Show axis" name="index" set={showIndex => this.setState({ showIndex })} />
+              <CheckboxInput label="Show index" name="index" set={showIndex => this.setState({ showIndex })} />
             </Menu.Item>
             <Menu.Item as="a">
               <EnzymeInput enzymes={this.state.enzymes} toggleEnzyme={this.toggleEnzyme} />

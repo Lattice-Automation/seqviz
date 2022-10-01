@@ -56,6 +56,13 @@
   fill: #def6ff;
 }
 
+.la-vz-selection-edge {
+  fill: transparent;
+  shape-rendering: auto;
+  stroke: black;
+  fill: black;
+}
+
 .la-vz-cut-site {
   fill: transparent;
   stroke: black;
@@ -73,6 +80,7 @@
   margin: auto;
   font-size: 13px;
   font-weight: 300;
+  cursor: text;
 }
 
 .la-vz-circular-bps {

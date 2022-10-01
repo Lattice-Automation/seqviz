@@ -85,23 +85,21 @@ class Edges extends React.PureComponent<EdgesProps> {
       return null;
     }
 
-    // inlining style in the SVG for speed sake
-    const wide = start !== end && zoom > 60;
-    const rect = {
-      height: selectEdgeHeight,
-      shapeRendering: "crispEdges",
-      style: {
-        fill: "black",
-        // below 40 zoom the chars are so small we may as well not widen the selection edges.
-        width: wide ? 2 : 1,
-      },
-      y: -5,
-    };
-
     return (
-      <g className="la-vz-linear-sel-edges">
-        {startEdge !== null && <rect {...rect} x={x} />}
-        {lastEdge !== null && <rect {...rect} x={secondEdgeX} />}
+      <g>
+        {startEdge !== null && (
+          <rect height={selectEdgeHeight} className="la-vz-selection-edge" x={x} y={-5} width={1} strokeWidth={0} />
+        )}
+        {lastEdge !== null && (
+          <rect
+            height={selectEdgeHeight}
+            className="la-vz-selection-edge"
+            x={secondEdgeX}
+            y={-5}
+            width={1}
+            strokeWidth={0}
+          />
+        )}
       </g>
     );
   }

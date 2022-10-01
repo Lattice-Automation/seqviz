@@ -363,27 +363,37 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           listenerOnly={false}
           seqBlockRef={this}
         />
-        <TranslationRows
-          {...this.props}
-          findXAndWidth={this.findXAndWidth}
-          firstBase={firstBase}
-          lastBase={lastBase}
-          seqBlockRef={this}
-          yDiff={translationYDiff}
-        />
-        <AnnotationRows
-          annotationRows={annotationRows}
-          bpsPerBlock={bpsPerBlock}
-          elementHeight={elementHeight}
-          findXAndWidth={this.findXAndWidthElement}
-          firstBase={firstBase}
-          fullSeq={fullSeq}
-          inputRef={inputRef}
-          lastBase={lastBase}
-          seqBlockRef={this}
-          width={size.width}
-          yDiff={annYDiff}
-        />
+        {translations.length && (
+          <TranslationRows
+            translations={translations}
+            inputRef={inputRef}
+            onUnmount={onUnmount}
+            fullSeq={fullSeq}
+            elementHeight={elementHeight}
+            bpsPerBlock={bpsPerBlock}
+            charWidth={charWidth}
+            findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            lastBase={lastBase}
+            seqBlockRef={this}
+            yDiff={translationYDiff}
+          />
+        )}
+        {annotationRows.length && (
+          <AnnotationRows
+            annotationRows={annotationRows}
+            bpsPerBlock={bpsPerBlock}
+            elementHeight={elementHeight}
+            findXAndWidth={this.findXAndWidthElement}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            lastBase={lastBase}
+            seqBlockRef={this}
+            width={size.width}
+            yDiff={annYDiff}
+          />
+        )}
         {zoomed && (
           <CutSiteRow
             charWidth={charWidth}

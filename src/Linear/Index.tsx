@@ -114,11 +114,10 @@ export default class Index extends React.PureComponent<IndexProps> {
 
     if (!showIndex) return null;
 
-    // 28 accounts for 10px padding on linear scroller and 8px scroller gutter
     const { width } = findXAndWidth(firstBase, lastBase);
 
     return (
-      <g className="la-vz-linear-index" transform={transform}>
+      <g transform={transform}>
         <rect
           fill="#B0B9C2"
           style={{
