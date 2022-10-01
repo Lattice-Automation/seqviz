@@ -76,7 +76,7 @@
 }
 
 .la-vz-index-line {
-  shape-rendering: crispEdges;
+  shape-rendering: geometricPrecision;
   fill: transparent;
   stroke: rgb(115, 119, 125);
   stroke-width: 1;
