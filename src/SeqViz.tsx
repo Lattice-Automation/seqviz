@@ -378,6 +378,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
           start: h.start % (seq.length + 1),
         })
       ),
+      onSelection:
+        this.props.onSelection ||
+        (() => {
+          // do nothing
+        }),
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
@@ -390,11 +395,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,
         linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear, 0), 100) : 50,
       },
-      onSelection:
-        this.props.onSelection ||
-        (() => {
-          // do nothing
-        }),
     };
 
     return (

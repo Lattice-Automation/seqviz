@@ -1,4 +1,4 @@
-LOCUS       pBbS0c-RFP              4224 bp    DNA     circular
+export default `LOCUS       pBbS0c-RFP              4224 bp    DNA     circular
 ACCESSION   pBbS0c-RFP
 VERSION     pBbS0c-RFP.1
 KEYWORDS    .
@@ -110,3 +110,4 @@ ORIGIN
      4141 tcttatttca ttatggtgaa agttggaacc tcttacgtgc cgatcaacgt ctcattttcg
      4201 ccagatatcg aattcatgag atct
 //
+`;

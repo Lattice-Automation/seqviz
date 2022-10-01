@@ -359,25 +359,25 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           indexYDiff={indexYDiff - 3}
           inputRef={inputRef}
           lastBase={lastBase}
-          listenerOnly={false}
           lineHeight={lineHeight}
+          listenerOnly={false}
           seqBlockRef={this}
           zoomed={zoomed}
         />
         {translations.length && (
           <TranslationRows
-            translations={translations}
-            inputRef={inputRef}
-            onUnmount={onUnmount}
-            fullSeq={fullSeq}
-            elementHeight={elementHeight}
             bpsPerBlock={bpsPerBlock}
             charWidth={charWidth}
+            elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
             lastBase={lastBase}
             seqBlockRef={this}
+            translations={translations}
             yDiff={translationYDiff}
+            onUnmount={onUnmount}
           />
         )}
         {annotationRows.length && (
@@ -410,12 +410,12 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           />
         )}
         {zoomed ? (
-          <text {...textProps} id={id} className="la-vz-seq" y={indexYDiff} data-testid="la-vz-seq">
+          <text {...textProps} className="la-vz-seq" data-testid="la-vz-seq" id={id} y={indexYDiff}>
             {seq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}
         {compSeq && zoomed && showComplement ? (
-          <text {...textProps} id={id} className="la-vz-comp-seq" y={compYDiff} data-testid="la-vz-comp-seq">
+          <text {...textProps} className="la-vz-comp-seq" data-testid="la-vz-comp-seq" id={id} y={compYDiff}>
             {compSeq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}

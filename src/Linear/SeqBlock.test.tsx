@@ -11,10 +11,10 @@ const defaultProps = {
   charWidth: 12,
   cutSiteRows: [],
   elementHeight: 16,
-  highlights: [],
   firstBase: 0,
   forwardPrimerRows: [],
   highlightedRegions: [],
+  highlights: [],
   id: "",
   inputRef: () => {
     // do nothing

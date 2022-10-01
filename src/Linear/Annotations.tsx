@@ -201,8 +201,8 @@ const SingleNamedElement = (props: {
         className={`${element.id} la-vz-annotation`}
         cursor="pointer"
         d={linePath}
-        id={element.id}
         fill={color}
+        id={element.id}
         stroke={color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
         onBlur={() => {
           // do nothing
@@ -218,9 +218,9 @@ const SingleNamedElement = (props: {
         <text
           className="la-vz-annotation-label"
           cursor="pointer"
+          dominantBaseline="middle"
           fontSize={11}
           id={element.id}
-          dominantBaseline="middle"
           textAnchor="middle"
           x={width / 2}
           y={height / 2 + 1}

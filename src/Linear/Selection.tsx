@@ -26,7 +26,7 @@ class Edges extends React.PureComponent<EdgesProps> {
   id = randomid();
 
   render() {
-    const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight, zoom } = this.props;
+    const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
     const { clockwise, end, ref, start } = this.context;
 
     let startEdge: number | null = null;
@@ -88,16 +88,16 @@ class Edges extends React.PureComponent<EdgesProps> {
     return (
       <g>
         {startEdge !== null && (
-          <rect height={selectEdgeHeight} className="la-vz-selection-edge" x={x} y={-5} width={1} strokeWidth={0} />
+          <rect className="la-vz-selection-edge" height={selectEdgeHeight} strokeWidth={0} width={1} x={x} y={-5} />
         )}
         {lastEdge !== null && (
           <rect
-            height={selectEdgeHeight}
             className="la-vz-selection-edge"
+            height={selectEdgeHeight}
+            strokeWidth={0}
+            width={1}
             x={secondEdgeX}
             y={-5}
-            width={1}
-            strokeWidth={0}
           />
         )}
       </g>
