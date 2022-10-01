@@ -10,14 +10,17 @@ fi
 # run tests
 npm run test
 
-# bump the package version
-npm version "$1" --git-tag-version
-
 # build the package
 npm run build
 
 # build and deploy the demo
 npm run demo
+
+# bump the package version
+npm version "$1" --git-tag-version
+
+# build the package again with new version
+npm run build
 
 # git commit
 git add .
