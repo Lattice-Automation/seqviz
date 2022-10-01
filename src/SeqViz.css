@@ -11,7 +11,7 @@
 }
 
 .la-vz-seqviz svg text {
-  fill: #2a2a2a;
+  fill: rgb(42, 42, 42);
   font-family: Roboto Mono, Monaco, monospace;
   user-select: none;
 
@@ -53,7 +53,7 @@
 }
 
 .la-vz-selection {
-  fill: #def6ff;
+  fill: rgb(222, 246, 255);
 }
 
 .la-vz-selection-edge {
@@ -75,15 +75,45 @@
   cursor: pointer;
 }
 
+.la-vz-index-line {
+  shape-rendering: crispEdges;
+  fill: transparent;
+  stroke: rgb(115, 119, 125);
+  stroke-width: 1;
+}
+
+.la-vz-index-tick {
+  fill: transparent;
+  shape-rendering: geometricPrecision;
+  stroke: rgb(115, 119, 125);
+  stroke-width: 1;
+}
+
+.la-vz-index-tick-label {
+  font-weight: 300;
+  fill: rgb(115, 119, 125);
+  text-rendering: optimizeLegibility;
+}
+
+.la-vz-annotation {
+  shape-rendering: geometricPrecision;
+  fill-opacity: 0.7;
+  stroke-width: 0.5;
+}
+
+.la-vz-annotation-label {
+  color: rgb(42, 42, 42);
+  font-weight: 400;
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+  text-rendering: optimizeLegibility;
+}
+
 /* Circular Viewer */
 .la-vz-viewer-circular {
   margin: auto;
   font-size: 13px;
   font-weight: 300;
-  cursor: text;
-}
-
-.la-vz-circular-bps {
   cursor: text;
 }
 
@@ -96,7 +126,7 @@
 }
 
 .la-vz-label-line {
-  stroke: #9eaab8;
+  stroke: rgb(158, 170, 184);
   stroke-width: 1;
   fill: none;
 }
@@ -132,7 +162,7 @@
 .la-vz-scroll::-webkit-scrollbar-thumb {
   background-clip: padding-box;
   border-radius: 7px;
-  background-color: #a6a6a6;
+  background-color: rgb(166, 166, 166);
 }
 
 .la-vz-scroll::-webkit-scrollbar-track {
@@ -142,5 +172,5 @@
 .la-vz-scroll::-webkit-scrollbar-track-piece {
   background-clip: padding-box;
   border-radius: 7px;
-  background-color: #ececec;
+  background-color: rgb(236, 236, 236);
 }

@@ -138,9 +138,8 @@ class Linear extends React.Component<LinearProps> {
       ids[i] = seqs[i] + String(i);
 
       // find the line height for the seq block based on how many rows need to be shown
-      let blockHeight = lineHeight * 1.1; // this is for padding between the SeqBlocks
+      let blockHeight = lineHeight * 2.1; // this is for padding between the SeqBlocks
       if (zoomed) {
-        blockHeight += lineHeight; // is zoomed in enough
         blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
       }
       if (showIndex) {

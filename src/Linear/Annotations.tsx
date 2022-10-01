@@ -91,7 +91,7 @@ const AnnotationRow = (props: {
  * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index,
  * edge of blocks, etc.
  */
-export const SingleNamedElement = (props: {
+const SingleNamedElement = (props: {
   bpsPerBlock: number;
   element: NameRange;
   elements: NameRange[];
@@ -198,35 +198,30 @@ export const SingleNamedElement = (props: {
           start: start,
           type: "ANNOTATION",
         })}
-        className={element.id}
+        className={`${element.id} la-vz-annotation`}
+        cursor="pointer"
         d={linePath}
         id={element.id}
-        shapeRendering="geometricPrecision"
-        style={{
-          cursor: "pointer",
-          fill: color,
-          fillOpacity: 0.7,
-          stroke: color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray",
-          strokeWidth: 0.5,
+        fill={color}
+        stroke={color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
+        onBlur={() => {
+          // do nothing
         }}
-        onBlur={() => 0}
-        onFocus={() => 0}
+        onFocus={() => {
+          // do nothing
+        }}
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
       />
 
       {nameFits && (
         <text
+          className="la-vz-annotation-label"
           cursor="pointer"
-          dominantBaseline="middle"
           fontSize={11}
           id={element.id}
-          style={{
-            color: "black",
-            fontWeight: 400,
-          }}
+          dominantBaseline="middle"
           textAnchor="middle"
-          textRendering="optimizeLegibility"
           x={width / 2}
           y={height / 2 + 1}
           onBlur={() => {

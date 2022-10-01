@@ -16,7 +16,9 @@ const Find = ({
   inputRef,
   lastBase,
   listenerOnly,
+  lineHeight,
   seqBlockRef,
+  zoomed,
 }: {
   compYDiff: number;
   filteredRows: Range[];
@@ -25,8 +27,10 @@ const Find = ({
   indexYDiff: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  lineHeight: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;
+  zoomed: boolean;
 }) => (
   <>
     {searchRows.map(s => (
@@ -40,9 +44,11 @@ const Find = ({
         indexYDiff={indexYDiff}
         inputRef={inputRef}
         lastBase={lastBase}
+        lineHeight={lineHeight}
         listenerOnly={listenerOnly}
         seqBlockRef={seqBlockRef}
         start={s.start}
+        zoomed={zoomed}
       />
     ))}
   </>
@@ -58,10 +64,12 @@ const FindBlock = ({
   firstBase,
   indexYDiff,
   inputRef,
+  lineHeight,
   lastBase,
   listenerOnly,
   seqBlockRef,
   start,
+  zoomed,
 }: {
   compYDiff: number;
   direction: -1 | 1;
@@ -71,9 +79,11 @@ const FindBlock = ({
   indexYDiff: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  lineHeight: number;
   listenerOnly: boolean;
   seqBlockRef: unknown;
   start: number;
+  zoomed: boolean;
 }) => {
   let { width, x } = findXAndWidth(start, end);
   if (start > end) {
@@ -84,9 +94,9 @@ const FindBlock = ({
   }
 
   const id = randomid();
-  let y = indexYDiff - 1; // template row result
-  if (direction < 0) {
-    y = compYDiff - 1; // complement row result
+  let y = indexYDiff; // template row result
+  if (direction < 0 || !zoomed) {
+    y = compYDiff; // complement row result
   }
 
   return (
@@ -101,7 +111,7 @@ const FindBlock = ({
       })}
       className="la-vz-search"
       cursor="pointer"
-      height={18}
+      height={lineHeight}
       id={id}
       shapeRendering="crispEdges"
       stroke={listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)"}

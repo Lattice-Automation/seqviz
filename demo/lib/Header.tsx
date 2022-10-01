@@ -34,7 +34,7 @@ export default Header;
 
 const ToggleSelectionMetaButton = ({ showSelectionMeta, toggleShowSelectionMeta }) => (
   <div className="meta-toggle">
-    <Button active={showSelectionMeta} id="meta-button" toggle onClick={toggleShowSelectionMeta}>
+    <Button active={!showSelectionMeta} id="meta-button" toggle onClick={toggleShowSelectionMeta}>
       {showSelectionMeta ? "HIDE META" : "SHOW META"}
     </Button>
   </div>
