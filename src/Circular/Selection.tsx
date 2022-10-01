@@ -56,7 +56,7 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
     if (seq.length <= RENDER_SEQ_LENGTH_CUTOFF) {
       topR += 2 * lineHeight + 3;
     }
-    const bAdjust = lineHeight * totalRows; // adjust bottom radius
+    const bAdjust = lineHeight * (totalRows - 1); // adjust bottom radius
     let bottomR = radius - bAdjust; // inner radius
 
     if (bottomR < 0 || topR < 0) {
@@ -80,15 +80,8 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
       lArc = true;
     }
 
-    const edgeStyle = {
-      fill: "transparent",
-      shapeRendering: "auto",
-      stroke: "black",
-      strokeWidth: 1,
-    };
-
     return (
-      <g className="la-vz-circular-selection">
+      <g>
         {selLength && (
           <path
             className="la-vz-selection"
@@ -104,8 +97,10 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
             transform={getRotation(start)}
           />
         )}
-        <path d={edgePath} transform={getRotation(start)} {...edgeStyle} />
-        {selLength && <path d={edgePath} transform={getRotation(end)} {...edgeStyle} />}
+        <path className="la-vz-selection-edge" d={edgePath} transform={getRotation(start)} strokeWidth={1} />
+        {selLength && (
+          <path className="la-vz-selection-edge" d={edgePath} transform={getRotation(end)} strokeWidth={1} />
+        )}
       </g>
     );
   }

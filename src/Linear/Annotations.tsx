@@ -29,7 +29,7 @@ const AnnotationRows = (props: {
   width: number;
   yDiff: number;
 }) => (
-  <g className="la-vz-linear-annotations">
+  <g>
     {props.annotationRows.map((anns: NameRange[], i: number) => (
       <AnnotationRow
         key={`annotation-linear-row-${anns[0].id}-${props.firstBase}-${props.lastBase}`}
