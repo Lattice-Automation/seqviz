@@ -173,27 +173,12 @@ export default class Index extends React.PureComponent<IndexProps> {
 
     // these are just created once, but are rotated to each position along the plasmid
     const tickCoorStart = findCoor(0, radius);
-    const tickCoorEnd = findCoor(0, radius - 10);
+    const tickCoorEnd = findCoor(0, radius - 7);
 
     // create tick and text style
     const subtitleStyle = {
       fill: "gray",
       fontSize: 14,
-      textAnchor: "middle",
-    };
-    const indexCircleStyle = {
-      fill: "transparent",
-      stroke: "#73777D",
-      strokeWidth: 3,
-    };
-    const tickLineStyle = {
-      fill: "transparent",
-      shapeRendering: "geometricPrecision",
-      stroke: "black",
-      strokeWidth: 1,
-    };
-    const tickTextStyle = {
-      fontWeight: 300,
       textAnchor: "middle",
     };
 
@@ -206,9 +191,9 @@ export default class Index extends React.PureComponent<IndexProps> {
     });
 
     return (
-      <g className="la-vz-circular-index">
+      <g>
         {/* A label showing the name of the plasmid */}
-        <text style={{ fontSize: 20, fontWeight: 500 }} textAnchor="middle">
+        <text fontSize={20} fontWeight={500} textAnchor="middle">
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
               {n}
@@ -222,17 +207,22 @@ export default class Index extends React.PureComponent<IndexProps> {
         </text>
 
         {/* If less than cutoff long, render the bp of the plasmid */}
-        {seq.length <= RENDER_SEQ_LENGTH_CUTOFF ? <g className="la-vz-circular-bps">{this.renderBasepairs()}</g> : null}
+        {seq.length <= RENDER_SEQ_LENGTH_CUTOFF && <g className="la-vz-circular-bps">{this.renderBasepairs()}</g>}
 
         {/* The ticks and their index labels */}
         {ticks.map(t => (
           <g key={`la-vz-tick-${t}`} transform={getRotation(t - 0.5)}>
             <path
-              d={`M ${tickCoorStart.x} ${tickCoorStart.y}
-                L ${tickCoorEnd.x} ${tickCoorEnd.y}`}
-              {...tickLineStyle}
+              className="la-vz-index-tick"
+              d={`M ${tickCoorStart.x} ${tickCoorStart.y} L ${tickCoorEnd.x} ${tickCoorEnd.y}`}
             />
-            <text x={tickCoorEnd.x} y={tickCoorEnd.y + lineHeight} {...tickTextStyle}>
+            <text
+              fontSize={11}
+              textAnchor="middle"
+              className="la-vz-index-tick-label"
+              x={tickCoorEnd.x}
+              y={tickCoorEnd.y + lineHeight}
+            >
               {t}
             </text>
           </g>
@@ -240,8 +230,8 @@ export default class Index extends React.PureComponent<IndexProps> {
 
         {/* The two arcs that make the plasmid's circle */}
         <g>
-          <path d={indexCurve} transform={getRotation(seqLength * 0.75)} {...indexCircleStyle} />
-          <path d={indexCurve} transform={getRotation(seqLength * 0.25)} {...indexCircleStyle} />
+          <path className="la-vz-index-line" d={indexCurve} transform={getRotation(seqLength * 0.75)} />
+          <path className="la-vz-index-line" d={indexCurve} transform={getRotation(seqLength * 0.25)} />
         </g>
       </g>
     );

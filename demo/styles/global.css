@@ -17,12 +17,12 @@ div,
 input,
 label,
 button {
-  font-family: Roboto Mono, Monaco, monospace !important;
-  font-size: 1.1rem !important;
+  font-family: Roboto Mono, Monaco, monospace;
+  font-size: 1.1rem;
 }
 
 h1 {
-  font-family: Roboto Mono, Monaco, monospace !important;
+  font-family: Roboto Mono, Monaco, monospace;
 }
 
 .ui.container {

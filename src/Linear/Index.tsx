@@ -11,7 +11,7 @@ interface IndexProps {
   seq: string;
   showIndex: boolean;
   size: Size;
-  transform: string | undefined;
+  yDiff: number;
   zoom: { linear: number };
 }
 
@@ -66,12 +66,6 @@ export default class Index extends React.PureComponent<IndexProps> {
       i += tickInc;
     }
 
-    const tickStyle = {
-      height: 8,
-      width: 1,
-      // shapeRendering: "crispEdges"
-    };
-
     return tickIndexes.map(p => {
       let { x: tickFromLeft } = findXAndWidth(p - 1, p - 1); // for midpoint
       tickFromLeft += charWidth / 2;
@@ -93,15 +87,8 @@ export default class Index extends React.PureComponent<IndexProps> {
 
       return (
         <React.Fragment key={p}>
-          <rect fill="#A3A3A3" style={tickStyle} transform={transTick} />
-          <text
-            style={{
-              dominantBaseline: "hanging",
-              fontSize: 11,
-              textRendering: "optimizeLegibility",
-            }}
-            transform={transText}
-          >
+          <path className="la-vz-index-tick" d="M 0 0 L 0 7" transform={transTick} />
+          <text fontSize={11} className="la-vz-index-tick-label" dominantBaseline="hanging" transform={transText}>
             {p}
           </text>
         </React.Fragment>
@@ -110,22 +97,14 @@ export default class Index extends React.PureComponent<IndexProps> {
   };
 
   render() {
-    const { findXAndWidth, firstBase, lastBase, showIndex, transform } = this.props;
+    const { findXAndWidth, firstBase, lastBase, showIndex, yDiff } = this.props;
 
     if (!showIndex) return null;
-
-    const { width } = findXAndWidth(firstBase, lastBase);
+    const { x, width } = findXAndWidth(firstBase, lastBase);
 
     return (
-      <g transform={transform}>
-        <rect
-          fill="#B0B9C2"
-          style={{
-            height: 1,
-            shapeRendering: "crispEdges",
-            width: width,
-          }}
-        />
+      <g transform={`translate(0, ${yDiff})`}>
+        <path className="la-vz-index-line" d={`M 0 1 L ${x + width} 1`} />
         {this.genTicks()}
       </g>
     );

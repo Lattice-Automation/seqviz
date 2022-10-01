@@ -284,7 +284,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     // height and ydiff of the index row.
     const elementGap = annotationRows.length + translations.length ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
-    // const indexRowHeight = showIndex ? elementHeight : 0;
 
     // calc the height necessary for the sequence selection
     // it starts 5 above the top of the SeqBlock
@@ -293,7 +292,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // needed because otherwise the selection height is very small
     if (!zoomed && selectHeight <= elementHeight) {
-      selectEdgeHeight += lineHeight;
+      selectEdgeHeight = elementHeight;
     }
 
     return (
@@ -318,7 +317,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             seq={seq}
             showIndex={showIndex}
             size={size}
-            transform={`translate(0, ${indexRowYDiff})`}
+            yDiff={indexRowYDiff}
             zoom={zoom}
           />
         )}
@@ -353,15 +352,17 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           zoom={zoom.linear}
         />
         <Find
-          compYDiff={compYDiff}
+          compYDiff={compYDiff - 3}
           filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          indexYDiff={indexYDiff}
+          indexYDiff={indexYDiff - 3}
           inputRef={inputRef}
           lastBase={lastBase}
           listenerOnly={false}
+          lineHeight={lineHeight}
           seqBlockRef={this}
+          zoomed={zoomed}
         />
         {translations.length && (
           <TranslationRows
@@ -419,15 +420,17 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           </text>
         ) : null}
         <Find
-          compYDiff={compYDiff}
+          compYDiff={compYDiff - 3}
           filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          indexYDiff={indexYDiff}
+          indexYDiff={indexYDiff - 3}
           inputRef={inputRef}
           lastBase={lastBase}
+          lineHeight={lineHeight}
           listenerOnly={true}
           seqBlockRef={this}
+          zoomed={zoomed}
         />
         <Highlights
           compYDiff={compYDiff - 3}

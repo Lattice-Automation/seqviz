@@ -171,18 +171,12 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           start: a.start,
           type: "ANNOTATION",
         })}
-        className={a.id}
+        className={`${a.id} la-vz-annotation`}
         d={path}
         id={a.id}
-        style={{
-          cursor: "pointer",
-          fill: a.color,
-          fillOpacity: 0.7,
-          shapeRendering: "geometricPrecision",
-          stroke: a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray",
-          strokeLinejoin: "round",
-          strokeWidth: 0.5,
-        }}
+        fill={a.color}
+        stroke={a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray"}
+        cursor="pointer"
         onBlur={() => {}}
         onFocus={() => {}}
         onMouseOut={() => hoverAnnotation(a.id, "0.7")}
@@ -198,12 +192,14 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           onMouseOver={() => hoverAnnotation(a.id, "1.0")}
         >
           <textPath
+            className="la-vz-annotation-label"
             cursor="pointer"
             dominantBaseline="middle"
             id={a.id}
             startOffset={bottomHalf ? "25%" : "75%"}
             textAnchor="middle"
             xlinkHref={`#${circAnnID}`}
+            fontSize={11}
           >
             {a.name}
           </textPath>
