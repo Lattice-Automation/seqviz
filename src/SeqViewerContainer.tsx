@@ -41,12 +41,12 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
     super(props);
 
     this.state = {
-      selection: { ...defaultSelection },
       centralIndex: {
         circular: 0,
         linear: 0,
         setCentralIndex: this.setCentralIndex,
       },
+      selection: { ...defaultSelection },
     };
   }
 

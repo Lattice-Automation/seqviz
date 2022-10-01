@@ -88,7 +88,7 @@ export default class Index extends React.PureComponent<IndexProps> {
       return (
         <React.Fragment key={p}>
           <path className="la-vz-index-tick" d="M 0 0 L 0 7" transform={transTick} />
-          <text fontSize={11} className="la-vz-index-tick-label" dominantBaseline="hanging" transform={transText}>
+          <text className="la-vz-index-tick-label" dominantBaseline="hanging" fontSize={11} transform={transText}>
             {p}
           </text>
         </React.Fragment>
@@ -100,7 +100,7 @@ export default class Index extends React.PureComponent<IndexProps> {
     const { findXAndWidth, firstBase, lastBase, showIndex, yDiff } = this.props;
 
     if (!showIndex) return null;
-    const { x, width } = findXAndWidth(firstBase, lastBase);
+    const { width, x } = findXAndWidth(firstBase, lastBase);
 
     return (
       <g transform={`translate(0, ${yDiff})`}>

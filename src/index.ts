@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { renderToString as reactRenderToString } from "react-dom/server";
 
 import SeqViz, { SeqVizProps } from "./SeqViz";
 import "./SeqViz.css";
@@ -9,6 +10,7 @@ import enzymes from "./enzymes";
  * Export a React component directly for React-based development
  */
 export { SeqViz, SeqVizProps, enzymes as Enzymes };
+export default SeqViz;
 
 /**
  * Return a Viewer object with three properties:
@@ -47,7 +49,7 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
    * Return an HTML string representation of the viewer
    */
   const renderToString = () => {
-    return require("react-dom/server").renderToString(viewer);
+    return reactRenderToString(viewer);
   };
 
   /**

@@ -271,9 +271,9 @@ export default class InfiniteScroll extends React.PureComponent<InfiniteScrollPr
 
     return (
       <div
-        data-testid="la-vz-viewer-linear"
         ref={this.scroller}
         className="la-vz-linear-scroller"
+        data-testid="la-vz-viewer-linear"
         onFocus={() => {
           // do nothing
         }}

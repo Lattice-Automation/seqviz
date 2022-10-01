@@ -1,11 +1,10 @@
 import "@testing-library/jest-dom";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 
-import * as fs from "fs";
-import * as path from "path";
 import * as React from "react";
 
 import { SeqViz } from ".";
+import demoPart from "./demoPart";
 
 const props = {
   annotations: [
@@ -57,11 +56,8 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with Genbank file string input", async () => {
-    const file = path.join(__dirname, "data", "pBbS0c-RFP.gb");
-    const fileContents = fs.readFileSync(file, "utf8");
-
     // TODO: what the hell is it complaining about
-    render(<SeqViz {...props} file={fileContents} />);
+    render(<SeqViz {...props} file={demoPart} />);
     await waitFor(() => expect(screen.getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
 
     expect(screen.getAllByTestId("la-vz-seq-viewer")).toHaveLength(2);

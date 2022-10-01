@@ -312,7 +312,7 @@ class Circular extends React.Component<CircularProps, CircularState> {
     };
 
     // calculate the selection row height based on number of annotation
-    let totalRows = 4 + annotationsInRows.length;
+    const totalRows = 4 + annotationsInRows.length;
     const plasmidId = `la-vz-${name}-viewer-circular`;
     if (!size.height) return null;
 

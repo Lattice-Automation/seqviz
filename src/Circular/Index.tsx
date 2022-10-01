@@ -217,9 +217,9 @@ export default class Index extends React.PureComponent<IndexProps> {
               d={`M ${tickCoorStart.x} ${tickCoorStart.y} L ${tickCoorEnd.x} ${tickCoorEnd.y}`}
             />
             <text
+              className="la-vz-index-tick-label"
               fontSize={11}
               textAnchor="middle"
-              className="la-vz-index-tick-label"
               x={tickCoorEnd.x}
               y={tickCoorEnd.y + lineHeight}
             >

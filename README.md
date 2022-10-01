@@ -96,7 +96,7 @@ A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 
 ##### File or Accession
 
-There are `@deprecated` props -- `file` and `accession` -- that will be parsed to `seq`, `name`, and `annotations` props. But we recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
+`file` and `accession` are -- deprecated -- props that will parse a file or accession-ID to `seq`, `name`, and `annotations` props. We recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
 
 ```jsx
 import seqparse from "seqparse";

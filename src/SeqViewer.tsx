@@ -140,9 +140,9 @@ class SeqViewer extends React.Component<SeqViewerProps> {
                 {...this.props}
                 {...this.state}
                 {...this.circularProps()}
-                size={size}
                 centralIndex={circular}
                 setCentralIndex={setCentralIndex}
+                size={size}
               />
             )}
           </CentralIndexContext.Consumer>
