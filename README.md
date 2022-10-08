@@ -23,10 +23,10 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ## Used By
 
-<p align="left">
+<p align="left" style="display:flex;align-items:center">
   <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-asimov.png" width="200" />
+  <img src="./demo/public/logos-asimov.png" width="175" />
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="./demo/public/logos-corteva.jpeg" width="200" />
 </p>
