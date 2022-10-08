@@ -330,7 +330,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     if (!seq.length) {
       return; // TODO why is this happening
     }
-  
+
     const { enzymes, enzymesCustom } = this.props;
 
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
