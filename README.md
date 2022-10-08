@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="110" src="https://imgur.com/rkJ1irF.png">
+  <img src="https://imgur.com/rkJ1irF.png" height="110">
 </div>
 
 <div align="center">
@@ -23,7 +23,7 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ## Used By
 
-<p align="center">
+<p align="left">
   <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img src="./demo/public/logos-asimov.png" width="200" />
