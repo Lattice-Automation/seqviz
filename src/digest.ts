@@ -64,10 +64,14 @@ export const findCutSites = (enzyme: Enzyme, seq: string, seqL: number): CutSite
     result = matcher.exec(seq);
   }
 
+  // We don't want to double-count cuts by enzymes whose recognition seq is the
+  // same in the forward and reverse complement direction (eg SpeI).
+  const dupRevComp = rseq === reverseComplement(rseq);
+
   // Now matches in the reverse complement direction.
   const rcMatcher = createRegex(reverseComplement(rseq), "dna");
   result = rcMatcher.exec(seq);
-  while (result) {
+  while (result && !dupRevComp) {
     // same as above but correcting for the new reverse complement indexes
     const index = result.index;
     cutSites.push({

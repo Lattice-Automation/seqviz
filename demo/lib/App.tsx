@@ -15,7 +15,7 @@ import {
 import seqparse from "seqparse";
 
 import SeqViz from "../../src/SeqViz";
-import { AnnotationProp } from "../../src/elements";
+import { AnnotationProp, Translation } from "../../src/elements";
 import Header from "./Header";
 import demoPart from "./demoPart";
 
@@ -38,6 +38,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
+  translations: {start: number, end: number}[],
   viewType: string;
   zoom: number;
 }
@@ -45,10 +46,10 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
-    enzymes: [],
+    enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     primers: true,
-    search: { query: "" },
+    search: { query: "ttnnnaat" },
     searchResults: {},
     selection: {},
     seq: "",
@@ -56,6 +57,7 @@ export default class App extends React.Component<any, AppState> {
     showIndex: true,
     showSelectionMeta: false,
     showSidebar: false,
+    translations: [{start: 61, end: 910}],
     viewType: "",
     zoom: 50,
   };
@@ -146,13 +148,14 @@ export default class App extends React.Component<any, AppState> {
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}
+                    onSelection={selection => this.setState({ selection })}
                     search={this.state.search}
                     seq={this.state.seq}
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
+                    translations={this.state.translations}
                     viewer={this.state.viewType as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
-                    onSelection={selection => this.setState({ selection })}
                   />
                 )}
               </div>

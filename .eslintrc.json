@@ -25,6 +25,7 @@
       }
     ],
     "no-empty": "warn",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "react/jsx-sort-props": [2, { "reservedFirst": true, "callbacksLast": true }],
     "react/prop-types": "off", // too many prop types warnings in handlers/selection.tsx. Should revist
     "sort-destructure-keys/sort-destructure-keys": 2,

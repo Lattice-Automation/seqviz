@@ -327,15 +327,14 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * Find and save enzymes' cutsite locations.
    */
   cut = (seq: string) => {
+    if (!seq.length) {
+      return; // TODO why is this happening
+    }
+  
     const { enzymes, enzymesCustom } = this.props;
 
-    let cutSites: CutSite[] = [];
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      cutSites = digest(seq || "", enzymes || [], enzymesCustom || {});
-    }
-
-    if (!isEqual(cutSites, this.state.cutSites)) {
-      this.setState({ cutSites });
+      this.setState({ cutSites: digest(seq || "", enzymes || [], enzymesCustom || {}) });
     }
   };
 
@@ -368,6 +367,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
       bpColors: this.props.bpColors || {},
+      cutSites: this.state.cutSites,
       highlights: (highlights || []).concat(highlightedRegions || []).map(
         (h, i): Highlight => ({
           ...h,
