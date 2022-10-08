@@ -5,12 +5,12 @@
 &nbsp;
 
 <div align="center">
-  <img src="./demo/public/seqviz-gif-v2.gif">
+  <img src="./demo/public/seqviz-screenshot.png">
 </div>
 
 &nbsp;
 
-## SeqViz
+---
 
 `SeqViz` is a sequence viewer. It supports multiple input formats, display settings, and callbacks for integration into any JavaScript app.
 
