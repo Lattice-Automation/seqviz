@@ -33,7 +33,7 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ## Features
 
-### Linear and Circular Sequence Ciewer
+### Linear and Circular Sequence Viewer
 
 - Annotations with names and colors
 - Amino acid translations
@@ -114,7 +114,7 @@ export default () => {
 
   useEffect(async () => {
     setPart(await seqparse("NC_011521"));
-  });
+  }, [seqparse, setPart]);
 
   if (!part) return null;
 
