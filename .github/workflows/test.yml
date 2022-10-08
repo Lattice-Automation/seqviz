@@ -18,9 +18,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          registry-url: http://registry.npmjs.org
       - run: npm ci
         env:
+          # I do not understand which package makes this required. Or if this is required for everyone.
+          # Getting 405s without it.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm run build
       - run: npm run lint
