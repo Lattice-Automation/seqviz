@@ -2,39 +2,39 @@
   <img height="110" src="https://imgur.com/rkJ1irF.png">
 </div>
 
-&nbsp;
-
 <div align="center">
   <img src="./demo/public/seqviz-screenshot.png">
 </div>
 
 &nbsp;
 
----
+`SeqViz` is a DNA, RNA, and protein sequence viewer.
 
-`SeqViz` is a sequence viewer. It supports multiple input formats, display settings, and callbacks for integration into any JavaScript app.
-
+- [Demo](#demo)
 - [Features](#features)
 - [Usage](#usage)
   - [Installation](#installation)
   - [Instantiation](#instantiation)
   - [Props](#props)
-  - [Viewer without React](#viewer-without-react)
-- [Demo](#demo)
+  - [Without React](#without-react)
 - [Contact Us](#contact-us)
 
-### Features
+## Demo
 
-#### Linear and/or Circular sequence viewer
+You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz) (source is in [/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md)).
+
+## Features
+
+### Linear and Circular Sequence Ciewer
 
 - Annotations with names and colors
 - Amino acid translations
 - Enzyme cut sites
-- Searching and highlighting
+- Searching with mismatches and highlighting
 
-#### Sequence and element selection
+### Sequence and Element Selection
 
-- Selecting a sequence range -- or clicking an `annotation`, `translation`, `enzyme` or `searchElement` -- will highlight that section of the viewer(s) and pass the selection to the `onSelection()` callback
+- Selecting a range on the viewer(s), or clicking an `annotation`, `translation`, `cutSite` or `searchResult`, will highlight the selection and pass it to the `onSelection()` callback.
 
 ## Usage
 
@@ -270,7 +270,7 @@ A function returning whether to copy the viewer(s) current selection during a ke
 
 Whether to show the complement sequence.
 
-### Viewer without React
+### Without React
 
 For usability in non-React apps, we provide a thin wrapper around the React component. The viewer's constructor accepts two arguments:
 
@@ -287,14 +287,6 @@ viewer.setState(props);
 // To render the viewer, eg for server-side rendering, and returns it as an HTML string.
 viewer.renderToString();
 ```
-
-## Demo
-
-You can see a demonstration with iGEM BioBricks at: [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz).
-
-For developers, the demo source code is at [seqviz/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
-
-You can also check out an example of using SeqViz to view NCBI GenBank entries in our [Medium post](https://medium.com/lattice-automation/visualize-your-dna-sequences-with-seqviz-b1d945eb9684).
 
 ## Contact Us
 
