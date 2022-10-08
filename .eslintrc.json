@@ -12,7 +12,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "sort-destructure-keys", "sort-keys-fix", "typescript-sort-keys"],
+  "plugins": ["react", "@typescript-eslint", "sort-destructure-keys", "sort-keys-fix", "typescript-sort-keys", "react-hooks"],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-empty-function": "warn",
@@ -31,7 +31,9 @@
     "sort-destructure-keys/sort-destructure-keys": 2,
     "sort-keys-fix/sort-keys-fix": "error",
     "typescript-sort-keys/interface": "error",
-    "typescript-sort-keys/string-enum": "error"
+    "typescript-sort-keys/string-enum": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "settings": {
     "react": {

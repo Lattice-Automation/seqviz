@@ -15,7 +15,7 @@ import {
 import seqparse from "seqparse";
 
 import SeqViz from "../../src/SeqViz";
-import { AnnotationProp, Translation } from "../../src/elements";
+import { AnnotationProp } from "../../src/elements";
 import Header from "./Header";
 import demoPart from "./demoPart";
 
