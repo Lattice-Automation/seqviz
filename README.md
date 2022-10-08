@@ -19,7 +19,7 @@
 
 ## Demo
 
-You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
+You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](./demo).
 
 ## Used By
 
