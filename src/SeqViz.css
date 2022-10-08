@@ -7,7 +7,7 @@
 }
 
 .la-vz-seqviz svg {
-  overflow: visible;
+  overflow: visible !important;
 }
 
 .la-vz-seqviz svg text {

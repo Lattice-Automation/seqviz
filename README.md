@@ -6,8 +6,6 @@
   <img src="./demo/public/seqviz-screenshot.png">
 </div>
 
-&nbsp;
-
 `SeqViz` is a DNA, RNA, and protein sequence viewer.
 
 - [Demo](#demo)
@@ -21,7 +19,11 @@
 
 ## Demo
 
-You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz) (source is in [/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md)).
+You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
+
+<!-- ## Used By -->
+
+<!-- ![](./demo/public/logos-asimov.png | width=200)  |  ![](./demo/public/logos-corteva.png | width=200) | ![](./demo/public/logos-ginkgo.png | width=200) -->
 
 ## Features
 
