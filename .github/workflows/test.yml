@@ -12,16 +12,17 @@ jobs:
       matrix:
         node-version: [18.x]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - name: Build
-        run: npm run build
-      - name: Lint
-        run: npm run lint
-      - name: Test
-        run: npm run test
+      - run: npm ci
+        env:
+          # I do not understand which package makes this required. Or if this is required for everyone.
+          # Getting 405s without it.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm run build
+      - run: npm run lint
+      - run: npm run test

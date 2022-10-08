@@ -10,7 +10,9 @@ import enzymes from "./enzymes";
  * Export a React component directly for React-based development
  */
 export { SeqViz, enzymes as Enzymes };
+
 export default SeqViz;
+
 export type { SeqVizProps } from "./SeqViz";
 
 /**
