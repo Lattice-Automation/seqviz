@@ -8,15 +8,21 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+
+<!-- What is the bug? -->
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+
+<!-- What should happen instead? -->
 
 **Screenshots**
-If applicable, add screenshots to help explain your problem.
+
+<!-- Screenshots are appreciated, not required. -->
 
 **Your environment:**
+
+<!-- 
  - OS: [e.g. iOS]
  - Browser [e.g. chrome, safari]
  - Version [e.g. 22]
+ -->
