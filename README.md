@@ -21,9 +21,15 @@
 
 You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](https://github.com/Lattice-Automation/seqviz/tree/master/demo/README.md).
 
-<!-- ## Used By -->
+## Used By
 
-<!-- ![](./demo/public/logos-asimov.png | width=200)  |  ![](./demo/public/logos-corteva.png | width=200) | ![](./demo/public/logos-ginkgo.png | width=200) -->
+<p align="center">
+  <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="./demo/public/logos-asimov.png" width="200" />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="./demo/public/logos-corteva.jpeg" width="200" />
+</p>
 
 ## Features
 
