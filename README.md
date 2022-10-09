@@ -8,6 +8,18 @@
 
 `SeqViz` is a DNA, RNA, and protein sequence viewer.
 
+#### Used By
+
+<p align="left" style="display:flex;align-items:center">
+  <a href="https://www.ginkgobioworks.com/" target="_blank"><img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" /></a>
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <a href="https://www.asimov.com/" target="_blank"><img src="./demo/public/logos-asimov.png" width="175" /></a>
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <a href="https://www.corteva.com/" target="_blank"><img src="./demo/public/logos-corteva.jpeg" width="200" /></a>
+</p>
+
+## Table of Contents
+
 - [Demo](#demo)
 - [Features](#features)
 - [Usage](#usage)
@@ -20,16 +32,6 @@
 ## Demo
 
 You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](./demo).
-
-## Used By
-
-<p align="left" style="display:flex;align-items:center">
-  <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
-  &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-asimov.png" width="175" />
-  &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-corteva.jpeg" width="200" />
-</p>
 
 ## Features
 
@@ -282,7 +284,7 @@ Whether to show the complement sequence.
 
 For usability in non-React apps, we provide a thin wrapper around the React component. The viewer's constructor accepts two arguments:
 
-- `element`: either an element id or an element, e.g. from `document.getElementById()`
+- `element`: either an element id or an [HTMLElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
 - `props`: props as documented [above](#optionsprops)
 
 ```js
