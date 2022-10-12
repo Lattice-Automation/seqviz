@@ -10,15 +10,15 @@
 
 #### Used By
 
-<p align="left" style="display:flex;align-items:center">
-  <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
+<div align="left">
+  <img align=top src="./demo/public/logos-ginkgo.png" width="300" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-asimov.png" width="175" />
+  <img align=top src="./demo/public/logos-asimov.png" width="150" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-corteva.jpeg" width="200" />
+  <img align=top src="./demo/public/logos-corteva.jpeg" width="200" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img src="./demo/public/logos-genomeminer.png" width="200" />
-</p>
+  <img align=top src="./demo/public/logos-genomeminer.png" width="220" />
+</div>
 
 ## Table of Contents
 
