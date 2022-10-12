@@ -11,11 +11,13 @@
 #### Used By
 
 <p align="left" style="display:flex;align-items:center">
-  <a href="https://www.ginkgobioworks.com/" target="_blank"><img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" /></a>
+  <img src="./demo/public/logos-ginkgo.png" width="300" style="margin:20" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <a href="https://www.asimov.com/" target="_blank"><img src="./demo/public/logos-asimov.png" width="175" /></a>
+  <img src="./demo/public/logos-asimov.png" width="175" />
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <a href="https://www.corteva.com/" target="_blank"><img src="./demo/public/logos-corteva.jpeg" width="200" /></a>
+  <img src="./demo/public/logos-corteva.jpeg" width="200" />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img src="./demo/public/logos-genomeminer.png" width="200" />
 </p>
 
 ## Table of Contents
