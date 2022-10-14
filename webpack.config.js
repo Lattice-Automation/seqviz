@@ -34,7 +34,7 @@ const cdnBuild = {
       name: package.name,
       type: "umd",
     },
-    path: path.join(__dirname, "..", "dist"),
+    path: path.join(__dirname, "dist"),
     publicPath: "/dist/",
     umdNamedDefine: true,
   },
