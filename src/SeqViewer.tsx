@@ -1,11 +1,11 @@
 import * as React from "react";
-import * as sizeMe from "react-sizeme";
+import { withResizeDetector } from "react-resize-detector";
 
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
 import { Annotation, CutSite, Highlight, NameRange, Range } from "./elements";
 import CentralIndexContext from "./handlers/centralIndex";
-import { Selection } from "./handlers/selection";
+import { Selection, SelectionContext } from "./handlers/selection";
 import isEqual from "./isEqual";
 
 interface SeqViewerProps {
@@ -14,19 +14,20 @@ interface SeqViewerProps {
   bpColors: { [key: number | string]: string };
   compSeq: string;
   cutSites: CutSite[];
+  height: number;
   highlights: Highlight[];
   name: string;
   search: NameRange[];
-  selection: Selection;
   seq: string;
   setSelection: (update: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
-  size: { height: number; width: number };
+  targetRef: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
   translations: Range[];
   viewer: string;
+  width: number;
   zoom: { circular: number; linear: number };
 }
 
@@ -35,7 +36,10 @@ interface SeqViewerProps {
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewer extends React.Component<SeqViewerProps> {
-  /** this is here because the size listener is returning a new "size" prop every time */
+  static contextType = SelectionContext;
+  declare context: React.ContextType<typeof SelectionContext>;
+
+  /** this is here because the size listener is returning a new size prop every time */
   shouldComponentUpdate = (nextProps: SeqViewerProps, nextState: any) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
@@ -45,7 +49,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
    */
   linearProps = () => {
     const { seq } = this.props;
-    const size = this.props.testSize || this.props.size;
+    const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.linear;
 
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
@@ -99,7 +103,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
     const {
       seq: { length: seqLength },
     } = this.props;
-    const size = this.props.testSize || this.props.size;
+    const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.circular;
 
     const center = {
@@ -129,29 +133,26 @@ class SeqViewer extends React.Component<SeqViewerProps> {
   };
 
   render() {
-    const size = this.props.testSize || this.props.size;
-
     return (
-      <div className="la-vz-viewer" data-testid="la-vz-seq-viewer">
+      <div ref={this.props.targetRef} className="la-vz-viewer" data-testid="la-vz-seq-viewer">
         {this.props.Circular ? (
           <CentralIndexContext.Consumer>
             {({ circular, setCentralIndex }) => (
               <Circular
                 {...this.props}
-                {...this.state}
                 {...this.circularProps()}
                 centralIndex={circular}
+                selection={this.context}
                 setCentralIndex={setCentralIndex}
-                size={size}
               />
             )}
           </CentralIndexContext.Consumer>
         ) : (
-          <Linear {...this.props} {...this.state} {...this.linearProps()} size={size} />
+          <Linear {...this.props} {...this.linearProps()} selection={this.context} />
         )}
       </div>
     );
   }
 }
 
-export default sizeMe.withSize({ monitorHeight: true, monitorWidth: true })(SeqViewer);
+export default withResizeDetector(SeqViewer);

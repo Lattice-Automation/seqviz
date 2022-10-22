@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, Size, Translation } from "../elements";
-import { Selection as SelectionType } from "../handlers/selection";
 import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
@@ -43,7 +42,6 @@ interface SeqBlockProps {
   mouseEvent: React.MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
   searchRows: Range[];
-  selection: SelectionType;
   seq: string;
   seqFontSize: number;
   showComplement: boolean;
@@ -230,7 +228,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       mouseEvent,
       onUnmount,
       searchRows,
-      selection,
       seq,
       seqFontSize,
       showComplement,
@@ -328,7 +325,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           inputRef={inputRef}
           lastBase={lastBase}
           selectHeight={selectHeight}
-          selection={selection}
           onUnmount={onUnmount}
         />
         <Highlights

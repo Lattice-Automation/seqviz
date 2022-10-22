@@ -56,7 +56,6 @@ interface CircularProps {
   onUnmount: (id: string) => void;
   radius: number;
   search: Range[];
-  selection: SelectionType;
   seq: string;
   setCentralIndex: (type: "linear" | "circular", update: number) => void;
   setSelection: (selection: SelectionType) => void;
@@ -427,4 +426,5 @@ export const Arc = (props: {
   );
 };
 
+// @ts-ignore
 export default withViewerHOCs(Circular);

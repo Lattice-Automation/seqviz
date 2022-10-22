@@ -83,10 +83,10 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
 
     // Arrange the viewers based on the viewer prop.
     const linear = (viewer === "linear" || viewer.includes("both")) && (
-      <SeqViewer key="linear" Circular={false} selection={selection} setSelection={this.setSelection} {...this.props} />
+      <SeqViewer key="linear" Circular={false} setSelection={this.setSelection} {...this.props} />
     );
     const circular = (viewer === "circular" || viewer.includes("both")) && (
-      <SeqViewer key="circular" Circular selection={selection} setSelection={this.setSelection} {...this.props} />
+      <SeqViewer key="circular" Circular setSelection={this.setSelection} {...this.props} />
     );
     const bothFlipped = viewer === "both_flip";
     const viewers = bothFlipped ? [linear, circular] : [circular, linear];

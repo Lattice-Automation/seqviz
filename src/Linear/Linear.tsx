@@ -26,7 +26,6 @@ export interface LinearProps {
   name: string;
   onUnmount: (id: string) => void;
   search: NameRange[];
-  selection: Selection;
   seq: string;
   seqFontSize: number;
   setSelection: (selection: Selection) => void;
@@ -181,7 +180,6 @@ class Linear extends React.Component<LinearProps> {
           lineHeight={lineHeight}
           mouseEvent={this.props.mouseEvent}
           searchRows={searchRows[i]}
-          selection={this.props.selection}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
           showComplement={showComplement}
@@ -211,4 +209,5 @@ class Linear extends React.Component<LinearProps> {
   }
 }
 
+// @ts-ignore
 export default withViewerHOCs(Linear);

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { InputRefFunc } from "../elements";
-import { Selection, SelectionContext } from "../handlers/selection";
+import { SelectionContext } from "../handlers/selection";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -113,7 +113,6 @@ interface BlockProps {
   lastBase: number;
   onUnmount: (a: string) => void;
   selectHeight: number;
-  selection: Selection;
 }
 
 /**

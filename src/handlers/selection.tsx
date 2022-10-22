@@ -65,7 +65,6 @@ export interface WithSelectionProps extends WithEventsProps {
   mouseEvent: (e: any) => void;
   name: string;
   onUnmount: (id: string) => void;
-  selection: Selection;
   seq: string;
   setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
   setSelection: (selection: Selection) => void;
@@ -79,7 +78,6 @@ export interface SelectionHandlerProps {
   center?: { x: number; y: number };
   centralIndex?: number;
   name: string;
-  selection: Selection;
   seq: string;
   setCentralIndex?: (viewer: "linear" | "circular", index: number) => void;
   setSelection: (selection: Selection) => void;
@@ -97,6 +95,9 @@ export interface SelectionHandlerProps {
 export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T>) =>
   class extends React.Component<T & SelectionHandlerProps> {
     static displayName = "WithSelectionHandler";
+
+    static contextType = SelectionContext;
+    declare context: React.ContextType<typeof SelectionContext>;
 
     /** Only state is the selection range */
     state = { ...defaultSelection };
@@ -257,7 +258,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      * Handle a sequence selection on a linear viewer
      */
     linearSeqEvent = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
-      const { selection } = this.props;
+      const selection = this.context;
 
       const currBase = this.calculateBaseLinear(e, knownRange);
       const clockwiseDrag = selection.start !== null && currBase >= selection.start;
@@ -290,7 +291,9 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      * Handle a sequence selection event on the circular viewer
      */
     circularSeqEvent = (e: SeqVizMouseEvent) => {
-      const { selection, seq } = this.props;
+      const { seq } = this.props;
+      const selection = this.context;
+
       const { start } = selection;
       let { clockwise, end } = selection;
 
@@ -325,8 +328,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         const crossedZero = change > changeThreshold; // zero was crossed if base jumped more than changeThreshold
         this.forward = increased ? !crossedZero : crossedZero; // bases increased XOR crossed zero
         const lengthChange = crossedZero ? seqLength - change : change; // the change at the point where we cross zero has to be normalized by seqLength
-        let sameDirectionMove =
-          this.forward === this.props.selection.clockwise || this.props.selection.clockwise === null; // moving in same direction as start of drag or start of drag
+        let sameDirectionMove = this.forward === selection.clockwise || selection.clockwise === null; // moving in same direction as start of drag or start of drag
 
         if (sameDirectionMove) {
           this.fullSelectionLength += lengthChange;
@@ -337,7 +339,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         this.previousBase = currBase; // done comparing with previous base, update previous base
         if (this.fullSelectionLength < seqLength * 0.01 && !this.shiftSelection) {
           clockwise = this.forward; // near selection start so selection direction is up for grabs
-          const check = this.calcSelectionLength(this.props.selection.start, currBase, this.forward); // check actual current selection length
+          const check = this.calcSelectionLength(selection.start, currBase, this.forward); // check actual current selection length
           if (this.fullSelectionLength < 0) {
             this.fullSelectionLength = check; // This is to correct for errors when dragging too fast
           }
@@ -346,9 +348,9 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
           }
           end = currBase;
         }
-        sameDirectionMove = this.forward === this.props.selection.clockwise; // recalculate this in case we've switched selection directionality
+        sameDirectionMove = this.forward === selection.clockwise; // recalculate this in case we've switched selection directionality
 
-        const check = this.calcSelectionLength(this.props.selection.start, currBase, this.props.selection.clockwise); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
+        const check = this.calcSelectionLength(selection.start, currBase, selection.clockwise); // check the selection length, this is agnostic to the ALL reference and will always calculate from where you cursor is to the start of selection
 
         if (this.selectionStarted && this.shiftSelection && check > this.fullSelectionLength) {
           this.fullSelectionLength = check; // shift select catch up
@@ -445,18 +447,20 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
      * properties of the selection that should be updated.
      */
     setSelection = (newSelection: Selection) => {
+      const selection = this.context;
       const { setSelection } = this.props;
+
       if (
-        newSelection.start === this.props.selection.start &&
-        newSelection.end === this.props.selection.end &&
-        newSelection.ref === this.props.selection.ref &&
+        newSelection.start === selection.start &&
+        newSelection.end === selection.end &&
+        newSelection.ref === selection.ref &&
         // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
         ["SEQ", "AMINOACID", ""].includes(newSelection.type || "")
       ) {
         return;
       }
       const { clockwise, element, end, name, ref, start, type }: any = {
-        ...this.props.selection,
+        ...selection,
         ...newSelection,
       };
 
@@ -465,7 +469,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
       const gc = calcGC(seq);
       const tm = calcTm(seq);
 
-      const selection = {
+      setSelection({
         clockwise,
         element,
         end,
@@ -477,9 +481,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         start,
         tm,
         type,
-      };
-
-      setSelection(selection);
+      });
     };
 
     /**

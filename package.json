@@ -47,7 +47,7 @@
     "not dead"
   ],
   "dependencies": {
-    "react-sizeme": "^3.0.0",
+    "react-resize-detector": "^7.1.2",
     "seqparse": "^0.1.9"
   },
   "devDependencies": {

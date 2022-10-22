@@ -38,7 +38,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: {start: number, end: number}[],
+  translations: { end: number; start: number }[];
   viewType: string;
   zoom: number;
 }
@@ -57,7 +57,7 @@ export default class App extends React.Component<any, AppState> {
     showIndex: true,
     showSelectionMeta: false,
     showSidebar: false,
-    translations: [{start: 61, end: 910}],
+    translations: [{ end: 910, start: 61 }],
     viewType: "",
     zoom: 50,
   };
@@ -148,7 +148,6 @@ export default class App extends React.Component<any, AppState> {
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}
-                    onSelection={selection => this.setState({ selection })}
                     search={this.state.search}
                     seq={this.state.seq}
                     showComplement={this.state.showComplement}
@@ -156,6 +155,7 @@ export default class App extends React.Component<any, AppState> {
                     translations={this.state.translations}
                     viewer={this.state.viewType as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
+                    onSelection={selection => this.setState({ selection })}
                   />
                 )}
               </div>
