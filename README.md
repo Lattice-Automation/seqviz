@@ -106,9 +106,14 @@ All the following are usable as props for the React component (`seqviz.SeqViz`) 
 
 A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 
-##### File or Accession
+#### File or Accession
 
-`file` and `accession` are -- deprecated -- props that will parse a file or accession-ID to `seq`, `name`, and `annotations` props. We recommend doing that outside of `SeqViz` with [the `seqparse` package](https://github.com/Lattice-Automation/seqparse). For example:
+These props are `@deprecated` and may be removed in a future major release. We recommend parsing sequence files outside of `SeqViz` with the [`seqparse` package](https://github.com/Lattice-Automation/seqparse).
+
+- `file` is a FASTA, GenBank, SnapGene, JBEI, or SBOL file (`string` | [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File))
+- `accession` is an NCBI accession-ID (`string`)
+
+For example:
 
 ```jsx
 import seqparse from "seqparse";
@@ -116,7 +121,8 @@ import seqparse from "seqparse";
 export default () => {
   const [seq, setSeq] = useState({ name: "", seq: "", annotations: [] });
 
-  useEffect(async () => setSeq(await seqparse("NC_011521")));
+  // fetch and parse a sequence from NCBI: https://www.ncbi.nlm.nih.gov/nuccore/MN623123.1
+  useEffect(async () => setSeq(await seqparse("MN623123.1")));
 
   return <SeqViz name={seq.name} seq={seq.seq} annotations={seq.annotations} />;
 };

@@ -38,7 +38,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { end: number; start: number }[];
+  translations: { end: number; start: number; direction?: 1 | -1 }[];
   viewType: string;
   zoom: number;
 }
@@ -57,7 +57,11 @@ export default class App extends React.Component<any, AppState> {
     showIndex: true,
     showSelectionMeta: false,
     showSidebar: false,
-    translations: [{ end: 910, start: 61 }],
+    translations: [
+      { end: 630, start: 6, direction: -1 },
+      { end: 1147, start: 736 },
+      { end: 1885, start: 1165 },
+    ],
     viewType: "",
     zoom: 50,
   };
