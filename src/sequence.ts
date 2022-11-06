@@ -206,45 +206,6 @@ export const returnRanges = (indices: number[]): number[][] => {
 };
 
 /**
- * Calculate the GC% of a sequence
- */
-export const calcGC = (seq: string): number => {
-  if (!seq) {
-    return 0;
-  }
-  const gcCount = (seq.match(/[CG]/gi) || []).length;
-  const gcPerc = (gcCount / seq.length) * 100;
-
-  return parseFloat(gcPerc.toFixed(2));
-};
-
-/**
- * Calculate the melting temp for a given sequence
- */
-export const calcTm = (seq: string, match: string = seq): number => {
-  const numberbps = seq.length; // number of base pairs
-  const numbergcs = (seq.match(/[CG]/gi) || []).length; // number of Gs and Cs
-  const numberats = (seq.match(/[AT]/gi) || []).length; // number of As and Ts
-  const numbermismatches = getMismatchIndices(seq, match).length; // # of mismatches
-  const gcpercent = calcGC(seq);
-  // https://www.biophp.org/minitools/melting_temperature/demo.php?formula=basic
-  // formula valid for bps 0-14
-  if (numberbps < 14) {
-    return 2 * numberats + 4 * numbergcs;
-  }
-
-  // http://depts.washington.edu/bakerpg/primertemp/
-  // formula valid for bps  25-45, gc% > 40 and seq terminates in one or more G/C
-  if (numberbps > 24 && numberbps < 46 && gcpercent > 40 && seq.slice(0, 1) in { C: "C", G: "G" }) {
-    return (100 / numberbps) * (0.815 * numberbps + 0.41 * numbergcs - numbermismatches - 6.75);
-  }
-
-  // https://www.biophp.org/minitools/melting_temperature/demo.php?formula=basic
-  // generic formula for bps 14+ no mismatch
-  return Math.round(64.9 + (41 * (numbergcs - 16.4)) / numberbps);
-};
-
-/**
  * Calculate the length of a sequence
  */
 export const calcLength = (start: number, end: number, seqLength: number): number => {

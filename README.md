@@ -114,15 +114,11 @@ A sequence to render. Can be a DNA, RNA, or amino acid sequence.
 import seqparse from "seqparse";
 
 export default () => {
-  const [part, setPart] = useState(null);
+  const [seq, setSeq] = useState({ name: "", seq: "", annotations: [] });
 
-  useEffect(async () => {
-    setPart(await seqparse("NC_011521"));
-  }, [seqparse, setPart]);
+  useEffect(async () => setSeq(await seqparse("NC_011521")));
 
-  if (!part) return null;
-
-  return <SeqViz name={part.name} seq={part.seq} annotations={part.annotations} />;
+  return <SeqViz name={seq.name} seq={seq.seq} annotations={seq.annotations} />;
 };
 ```
 
@@ -148,11 +144,11 @@ annotations = [
 ];
 ```
 
-In the example above, the "Strong promoter" would span the first to twenty-second basepair.
+In the example above, the "Strong promoter" would span the first to twenty-second base pair.
 
 #### `translations (=[])`
 
-An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: 1 (FWD) or -1 (REV).
+An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: `1` (FWD) or `-1` (REV).
 
 ```js
 translations = [
@@ -205,7 +201,7 @@ An array of colors to use for annotations, translations, and highlights. Default
 
 #### `bpColors (={})`
 
-An object mapping basepairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
+An object mapping base pairs to their color. The key/bp is either a nucleotide type or 0-based index. Example:
 
 ```js
 bpColors = { A: "#FF0000", T: "blue", 12: "#00FFFF" };
@@ -219,27 +215,31 @@ Style for `seqviz`'s outer container div. Empty by default. Useful for setting t
 style = { height: "100vh", width: "100vw" };
 ```
 
+#### `selection (={})`
+
+This (optional) `selection` prop is useful if you want to externally manage and set the `selection` state:
+
+```js
+selection = {
+  start: 133,
+  end: 457,
+  clockwise: true,
+};
+```
+
 #### `onSelection (=(_: Selection) => {})`
 
-Callback executed after selection events. Accepts a single [`Selection` type](https://github.com/Lattice-Automation/seqviz/blob/01f6e7b956d18281d4d901b47c4a4becd75f0dc6/src/handlers/selection.tsx#L19) argument.
+A callback executed after selection events. It accepts a single [`Selection` type](https://github.com/Lattice-Automation/seqviz/blob/01f6e7b956d18281d4d901b47c4a4becd75f0dc6/src/handlers/selection.tsx#L19) argument.
 
-This occurs after drag/drop selection and clicks. If an `annotation`, `translation`, `enzyme` or `search` was
-clicked, the `selection` object will have info on the selected element. The example below shows an `Annotation` selection.
+This occurs after drag/drop selections and clicks. It will have meta on `annotation`, `translation`, `enzyme`, `highlight` or `search` elements if one was selected. The example below shows an `annotation` selection:
 
 ```js
 {
-  // selection
-  "name": "lacZ fragment",
-  "type": "ANNOTATION",
-  "seq": "ctatgcggcatcagagcagattgtactgagagtgcaccatatgcggtgtgaaataccgcacagatgcgtaaggagaaaataccgcatcaggcgccattcgccattcaggctgcgcaactgttgggaagggcgatcggtgcgggcctcttcgctattacgccagctggcgaaagggggatgtgctgcaaggcgattaagttgggtaacgccagggttttcccagtcacgacgttgtaaaacgacggccagtgccaagcttgcatgcctgcaggtcgactctagaggatccccgggtaccgagctcgaattcgtaatcatggtcat",
-  "gc": 55.3,
-  "tm": 85,
-  "start": 133,
   "end": 457,
   "length": 324,
-  "direction": -1
-  "clockwise": true,
-  "color": "#8FDE8C",
+  "name": "lacZ fragment",
+  "start": 133,
+  "type": "ANNOTATION",
 }
 ```
 
@@ -251,11 +251,11 @@ Sequence search parameters. Takes a `query` sequence and the [maximum allowable 
 search = { query: "aatggtctc", mismatch: 1 };
 ```
 
-Searching supports wildcard symbols. Eg: `{ query: "AANAA" }`. All symbols supported are in [src/sequence.ts](src/sequence.ts).
+Searching supports wildcard symbols, e.g. `{ query: "AANAA" }`. All symbols supported are in [src/sequence.ts](src/sequence.ts).
 
 #### `onSearch (=(_: Range) => {})`
 
-A callback executed after a search event. Called once on search. An example of search results is below:
+A callback executed after a search event. This is called once on initial render and every time the sequence changes thereafter. An example of search results is below:
 
 ```js
 [

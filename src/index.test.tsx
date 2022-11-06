@@ -89,4 +89,18 @@ describe("SeqViz rendering (React)", () => {
 
     cleanup();
   });
+
+  it("renders with an external Selection", async () => {
+    const aaSeq = "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK";
+
+    const { getAllByTestId } = render(
+      <SeqViz {...props} seq={aaSeq} viewer="linear" selection={{ start: 1, end: 15 }} />
+    );
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+
+    expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
+    expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(2);
+
+    cleanup();
+  });
 });

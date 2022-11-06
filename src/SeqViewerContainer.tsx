@@ -15,6 +15,11 @@ interface SeqViewerContainerProps {
   name: string;
   onSelection: (selection: Selection) => void;
   search: NameRange[];
+  selection?: {
+    start: number;
+    end: number;
+    clockwise?: boolean;
+  };
   seq: string;
   showComplement: boolean;
   showIndex: boolean;
@@ -46,7 +51,7 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
         linear: 0,
         setCentralIndex: this.setCentralIndex,
       },
-      selection: { ...defaultSelection },
+      selection: this.getSelection(defaultSelection, props.selection),
     };
   }
 
@@ -73,12 +78,31 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
    * Update selection in state. Should only be performed from handlers/selection.jsx
    */
   setSelection = (selection: Selection) => {
-    this.setState({ selection });
-    if (this.props.onSelection) this.props.onSelection(selection);
+    // If the user passed a selection, do not update our state here
+    const { element, ref, parent, ...rest } = selection;
+    if (!this.props.selection) this.setState({ selection });
+    if (this.props.onSelection) this.props.onSelection(rest);
+  };
+
+  /**
+   * Returns the selection that was either a prop (optional) or the selection maintained in state.
+   */
+  getSelection = (
+    state: Selection,
+    prop?: {
+      start: number;
+      end: number;
+      clockwise?: boolean;
+    }
+  ): Selection => {
+    if (prop) {
+      return { ...prop, clockwise: typeof prop.clockwise === "undefined" || !!prop.clockwise };
+    }
+    return state;
   };
 
   render() {
-    const { viewer } = this.props;
+    const { selection: selectionProp, viewer } = this.props;
     const { centralIndex, selection } = this.state;
 
     // Arrange the viewers based on the viewer prop.
@@ -94,7 +118,9 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
     return (
       <div className="la-vz-viewer-container">
         <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={selection}>{viewers.filter(v => v)}</SelectionContext.Provider>
+          <SelectionContext.Provider value={this.getSelection(selection, selectionProp)}>
+            {viewers.filter(v => v)}
+          </SelectionContext.Provider>
         </CentralIndexContext.Provider>
       </div>
     );

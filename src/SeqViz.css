@@ -58,7 +58,7 @@
 
 .la-vz-selection-edge {
   fill: transparent;
-  shape-rendering: auto;
+  shape-rendering: geometricPrecision;
   stroke: black;
   fill: black;
 }

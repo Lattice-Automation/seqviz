@@ -17,7 +17,7 @@ import seqparse from "seqparse";
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
 import Header from "./Header";
-import demoPart from "./demoPart";
+import demoFileBlob from "./demoFileBlob";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -63,8 +63,7 @@ export default class App extends React.Component<any, AppState> {
   };
 
   componentDidMount = async () => {
-    const seq = await seqparse(demoPart);
-
+    const seq = await seqparse(demoFileBlob);
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
   };
 

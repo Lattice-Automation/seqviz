@@ -88,11 +88,20 @@ class Edges extends React.PureComponent<EdgesProps> {
     return (
       <g>
         {startEdge !== null && (
-          <rect className="la-vz-selection-edge" height={selectEdgeHeight} strokeWidth={0} width={1} x={x} y={-5} />
+          <rect
+            className="la-vz-selection-edge"
+            data-testid="la-vz-selection-edge"
+            height={selectEdgeHeight}
+            strokeWidth={0}
+            width={1}
+            x={x}
+            y={-5}
+          />
         )}
         {lastEdge !== null && (
           <rect
             className="la-vz-selection-edge"
+            data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             strokeWidth={0}
             width={1}
@@ -141,6 +150,7 @@ class Block extends React.PureComponent<BlockProps> {
     // props shared between all 3 possible components.
     const blockProps = {
       className: "la-vz-selection",
+      "data-testid": "la-vz-selection-block",
       height: selectHeight,
       shapeRendering: "auto",
       y: -5,

@@ -99,6 +99,16 @@ export interface SeqVizProps {
     query: string;
   };
 
+  /**
+   * Externally managed selection.
+   *
+   * If passed, SeqViz uses this prop as the selection range, rather than the internally managed selection */
+  selection?: {
+    start: number;
+    end: number;
+    clockwise?: boolean;
+  };
+
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
 

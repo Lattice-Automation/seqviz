@@ -1,35 +1,22 @@
 import * as React from "react";
 
 import { Range } from "../elements";
-import { calcGC, calcTm } from "../sequence";
 import { WithEventsProps } from "./events";
 
-type SelectionTypeEnum =
-  | "ANNOTATION"
-  | "PRIMER"
-  | "FIND"
-  | "TRANSLATION"
-  | "ENZYME"
-  | "SEQ"
-  | "AMINOACID"
-  | "HIGHLIGHT"
-  | "";
+type SelectionTypeEnum = "ANNOTATION" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "HIGHLIGHT" | "";
 
-/* Selection holds all meta about the viewer(s) active selection. */
+/* Selection holds meta about the viewer(s) active selection. */
 export interface Selection {
   clockwise: boolean;
   color?: string;
   direction?: number;
   element?: Range;
   end: number;
-  gc?: number;
   length?: number;
   name?: string;
   parent?: Selection;
   ref?: null | string;
-  seq?: string;
   start: number;
-  tm?: number;
   type?: SelectionTypeEnum;
 }
 
@@ -37,13 +24,10 @@ export interface Selection {
 export const defaultSelection: Selection = {
   clockwise: true,
   end: 0,
-  gc: 0,
   length: 0,
   name: "",
   ref: null,
-  seq: "",
   start: 0,
-  tm: 0,
   type: "",
 };
 
@@ -189,7 +173,6 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
       const { direction, element, end, start } = knownRange;
       switch (knownRange.type) {
         case "ANNOTATION":
-        case "PRIMER":
         case "FIND":
         case "TRANSLATION":
         case "ENZYME":
@@ -279,9 +262,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         this.setSelection({
           ...defaultSelection,
           clockwise: clockwiseDrag,
-
           end: currBase,
-          // clears other meta
           start: selection.start,
         });
       }
@@ -314,6 +295,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
           end: currBase,
           ref: "",
           start: selStart,
+          type: "SEQ",
         });
       } else if (
         e.type === "mousemove" &&
@@ -384,6 +366,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
           clockwise: clockwise,
           end: end,
           start: start,
+          type: "SEQ",
         });
       }
     };
@@ -454,7 +437,7 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
         newSelection.start === selection.start &&
         newSelection.end === selection.end &&
         newSelection.ref === selection.ref &&
-        // to support reclicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
+        // to support re-clicking the annotation and causing it to fire a la gh issue https://github.com/Lattice-Automation/seqviz/issues/142
         ["SEQ", "AMINOACID", ""].includes(newSelection.type || "")
       ) {
         return;
@@ -465,43 +448,17 @@ export default <T extends WithSelectionProps>(WrappedComp: React.ComponentType<T
       };
 
       const length = this.calcSelectionLength(start, end, clockwise);
-      const seq = this.getSelectedSequence(start, end, clockwise);
-      const gc = calcGC(seq);
-      const tm = calcTm(seq);
 
       setSelection({
         clockwise,
         element,
         end,
-        gc,
         length,
         name,
         ref,
-        seq,
         start,
-        tm,
         type,
       });
-    };
-
-    /**
-     * Return the string subsequence from the range' start to end
-     */
-    getSelectedSequence = (start: number, end: number, clock: number) => {
-      const { seq } = this.props;
-      if (end < start && !clock) {
-        return seq.substring(end, start);
-      }
-      if (end > start && !clock) {
-        return seq.substring(end, seq.length) + seq.substring(0, start);
-      }
-      if (end > start && clock) {
-        return seq.substring(start, end);
-      }
-      if (end < start && clock) {
-        return seq.substring(start, seq.length) + seq.substring(0, end);
-      }
-      return "";
     };
 
     /**

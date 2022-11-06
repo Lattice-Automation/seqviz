@@ -147,7 +147,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
           const AAref = {
             element,
             end: AAEnd,
-            name: "aminoacid",
+            name: "",
             parent: ref,
             start: AAStart,
             type: "AMINOACID",
