@@ -7,6 +7,9 @@ if [ "$(git rev-parse --abbrev-ref HEAD)" != "develop" ]; then
   exit 1;
 fi
 
+# lint
+npm run lint
+
 # run tests
 npm run test
 

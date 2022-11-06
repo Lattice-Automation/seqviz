@@ -94,7 +94,7 @@ describe("SeqViz rendering (React)", () => {
     const aaSeq = "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK";
 
     const { getAllByTestId } = render(
-      <SeqViz {...props} seq={aaSeq} viewer="linear" selection={{ start: 1, end: 15 }} />
+      <SeqViz {...props} selection={{ end: 15, start: 1 }} seq={aaSeq} viewer="linear" />
     );
     await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
 

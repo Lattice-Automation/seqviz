@@ -104,9 +104,9 @@ export interface SeqVizProps {
    *
    * If passed, SeqViz uses this prop as the selection range, rather than the internally managed selection */
   selection?: {
-    start: number;
-    end: number;
     clockwise?: boolean;
+    end: number;
+    start: number;
   };
 
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */

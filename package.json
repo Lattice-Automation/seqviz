@@ -10,7 +10,6 @@
     "demo": "cd demo && npm run deploy",
     "fix": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
     "lint": "prettier ./src/** --check && eslint src --ext ts,tsx --quiet",
-    "major": "./release.sh major",
     "minor": "./release.sh minor",
     "patch": "./release.sh patch",
     "start": "cd demo && npm run start",

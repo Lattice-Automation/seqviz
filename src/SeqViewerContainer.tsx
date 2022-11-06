@@ -16,9 +16,9 @@ interface SeqViewerContainerProps {
   onSelection: (selection: Selection) => void;
   search: NameRange[];
   selection?: {
-    start: number;
-    end: number;
     clockwise?: boolean;
+    end: number;
+    start: number;
   };
   seq: string;
   showComplement: boolean;
@@ -79,7 +79,7 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
    */
   setSelection = (selection: Selection) => {
     // If the user passed a selection, do not update our state here
-    const { element, ref, parent, ...rest } = selection;
+    const { element, parent, ref, ...rest } = selection;
     if (!this.props.selection) this.setState({ selection });
     if (this.props.onSelection) this.props.onSelection(rest);
   };
@@ -90,9 +90,9 @@ export default class SeqViewerContainer extends React.Component<SeqViewerContain
   getSelection = (
     state: Selection,
     prop?: {
-      start: number;
-      end: number;
       clockwise?: boolean;
+      end: number;
+      start: number;
     }
   ): Selection => {
     if (prop) {
