@@ -290,4 +290,18 @@ describe("Search", () => {
     });
     expect(resultsNull.length).toEqual(0);
   });
+
+  it("finds amino-acid sequence with wild-card", () => {
+    const query = "          BVNGH".trim(); // b is a wild-card
+    const subject = "PILVELDGDVNGHKFSVSG";
+
+    const results = search(query, 0, subject, "aa");
+
+    expect(results.length).toEqual(1);
+    expect(results[0]).toMatchObject({
+      direction: 1,
+      end: 13,
+      start: 8,
+    });
+  });
 });

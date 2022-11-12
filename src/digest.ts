@@ -1,7 +1,7 @@
-import { CutSite, Enzyme } from "./elements";
+import { CutSite, Enzyme, SeqType } from "./elements";
 import presetEnzymes from "./enzymes";
-import { reverseComplement } from "./parser";
 import { createRegex } from "./search";
+import { reverseComplement } from "./sequence";
 
 /**
  * Digest a sequence with the enzymes and return an array of cut-site.
@@ -10,6 +10,7 @@ import { createRegex } from "./search";
  */
 export default (
   seq: string,
+  seqType: SeqType,
   enzymes: (Enzyme | string)[] = [],
   enzymesCustom: { [key: string]: Enzyme } = {}
 ): CutSite[] => {
@@ -26,7 +27,7 @@ export default (
     // build up cut-sites
     .reduce((acc: { [key: string]: CutSite }, enzyme: Enzyme) => {
       // search for cut sites for this enzyme
-      findCutSites(enzyme, seqToCut, seq.length)
+      findCutSites(enzyme, seqToCut, seqType, seq.length)
         // deduplicate so there's only one enzyme per index
         .forEach(c => (acc[`${c.fcut}-${c.direction}`] = c));
       return acc;
@@ -40,13 +41,15 @@ export default (
  *
  * Exported for testing.
  */
-export const findCutSites = (enzyme: Enzyme, seq: string, seqL: number): CutSite[] => {
+export const findCutSites = (enzyme: Enzyme, seq: string, seqType: SeqType, seqL: number): CutSite[] => {
+  if (seqType === "aa") return [];
+
   // get the recognitionSite, fcut, and rcut
   const { fcut, rcut, rseq } = enzyme;
   const cutSites: CutSite[] = [];
 
   // Find matches on the top/forward sequence.
-  const matcher = createRegex(rseq, "dna");
+  const matcher = createRegex(rseq, seqType);
   let result = matcher.exec(seq);
   while (result) {
     // add the cut site index, after correcting for actual cut site index
@@ -66,10 +69,10 @@ export const findCutSites = (enzyme: Enzyme, seq: string, seqL: number): CutSite
 
   // We don't want to double-count cuts by enzymes whose recognition seq is the
   // same in the forward and reverse complement direction (eg SpeI).
-  const dupRevComp = rseq === reverseComplement(rseq);
+  const dupRevComp = rseq === reverseComplement(rseq, seqType);
 
   // Now matches in the reverse complement direction.
-  const rcMatcher = createRegex(reverseComplement(rseq), "dna");
+  const rcMatcher = createRegex(reverseComplement(rseq, seqType), seqType);
   result = rcMatcher.exec(seq);
   while (result && !dupRevComp) {
     // same as above but correcting for the new reverse complement indexes

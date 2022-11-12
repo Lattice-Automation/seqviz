@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, Size } from "../elements";
+import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import withViewerHOCs from "../handlers";
 import { Selection } from "../handlers/selection";
@@ -28,6 +28,7 @@ export interface LinearProps {
   search: NameRange[];
   seq: string;
   seqFontSize: number;
+  seqType: SeqType;
   setSelection: (selection: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
@@ -74,6 +75,7 @@ class Linear extends React.Component<LinearProps> {
       onUnmount,
       search,
       seq,
+      seqType,
       showComplement,
       showIndex,
       size,
@@ -122,7 +124,7 @@ class Linear extends React.Component<LinearProps> {
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
     const translationRows = translations.length
-      ? createSingleRows(createLinearTranslations(translations, seq), bpsPerBlock, arrSize)
+      ? createSingleRows(createLinearTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {

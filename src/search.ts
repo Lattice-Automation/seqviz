@@ -1,6 +1,5 @@
 import { NameRange, SeqType } from "./elements";
-import { complement } from "./parser";
-import { getAlphabet, nucleotides, reverse } from "./sequence";
+import { complement, getAlphabet, nucleotides, reverse } from "./sequence";
 
 /**
  * Search the seq in the forward and reverse complement strands.
@@ -18,7 +17,7 @@ export default (query: string, mismatch = 0, seq = "", seqType: SeqType): NameRa
 
   const indices = search(query, seq, mismatch, true, seqType);
   if (["dna", "rna"].includes(seqType)) {
-    const { compSeq } = complement(seq);
+    const { compSeq } = complement(seq, seqType);
     const compIndices = search(reverse(query), compSeq, mismatch, false, seqType);
     indices.push(...compIndices);
   }

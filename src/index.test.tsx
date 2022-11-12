@@ -90,7 +90,7 @@ describe("SeqViz rendering (React)", () => {
     cleanup();
   });
 
-  it("renders with an external Selection", async () => {
+  it("renders with an externally set Selection prop", async () => {
     const aaSeq = "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK";
 
     const { getAllByTestId } = render(

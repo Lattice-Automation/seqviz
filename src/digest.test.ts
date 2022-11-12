@@ -143,7 +143,7 @@ describe("Digest", () => {
 
   tests.forEach(t => {
     it(t.name, () => {
-      const cutSites = digest(t.args.seq, t.args.enzymes, t.args.enzymesCustom);
+      const cutSites = digest(t.args.seq, "dna", t.args.enzymes, t.args.enzymesCustom);
       expect(cutSites).toMatchObject(t.cutSites);
     });
   });
@@ -294,7 +294,7 @@ describe("FindCutSites", () => {
 
   tests.forEach(t => {
     it(t.name, () => {
-      expect(findCutSites(t.args.enzyme, t.args.seq, t.args.seq.length)).toEqual(t.cutSites);
+      expect(findCutSites(t.args.enzyme, t.args.seq, "dna", t.args.seq.length)).toEqual(t.cutSites);
     });
   });
 });

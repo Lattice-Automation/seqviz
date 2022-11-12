@@ -1,6 +1,4 @@
-import { COLORS, chooseRandomColor, colorByIndex } from "./colors";
-import { Annotation, Range, SeqType } from "./elements";
-import { complement } from "./parser";
+import { Range, SeqType } from "./elements";
 import randomid from "./randomid";
 
 /**
@@ -124,7 +122,6 @@ const codon2AA = {
 };
 
 const aminoAcids = Array.from(new Set(Object.values(codon2AA)).values()).join("");
-const aminoAcidRegex = new RegExp(`^[${aminoAcids}]+$`, "i");
 const aminoAcidsMap = aminoAcids
   .toLowerCase()
   .split("")
@@ -138,10 +135,7 @@ const aminoAcidsMap = aminoAcids
  */
 const aaAlphabet = {
   b: { d: "d", n: "n" },
-
   j: { i: "i", l: "l" },
-  // ".": aminoAcidsMap, TODO: debug
-  // "*": aminoAcidsMap,
   x: aminoAcidsMap,
   z: { e: "e", q: "q" },
 };
@@ -156,10 +150,13 @@ export const getAlphabet = (seqType: SeqType) => {
   }[seqType];
 };
 
+const aminoAcidRegex = new RegExp(`^[${aminoAcids}BJXZ]+$`, "i");
+
 /**
  * Infer the type of a sequence. This is *without* any ambiguous symbols, so maybe wrong by being overly strict.
  */
-export const guessType = (seq: string): "dna" | "rna" | "aa" | "unknown" => {
+export const guessType = (seq: string): SeqType => {
+  seq = seq.substring(0, 1000);
   if (/^[atgcn.]+$/i.test(seq)) {
     return "dna";
   } else if (/^[augcn.]+$/i.test(seq)) {
@@ -171,85 +168,107 @@ export const guessType = (seq: string): "dna" | "rna" | "aa" | "unknown" => {
 };
 
 /**
- * Find the mismatches
- */
-export const getMismatchIndices = (sequence: string, match: string): number[] =>
-  sequence
-    .split("")
-    .map((nucleotide, i) => {
-      if (nucleotide !== match.split("")[i]) {
-        return i;
-      }
-      return -1;
-    })
-    .filter(e => e !== -1);
-
-/**
- * Combine sequential indices into ranges
- */
-export const returnRanges = (indices: number[]): number[][] => {
-  let currStart = indices[0];
-  let currCount = indices[0] - 1;
-  const ranges: number[][] = [];
-  indices.forEach((index, i) => {
-    if (index > currCount + 1) {
-      ranges.push([currStart, indices[i - 1]]);
-      currStart = index;
-      currCount = index - 1;
-    }
-    if (index === indices[indices.length - 1]) {
-      ranges.push([currStart, index]);
-    }
-    currCount += 1;
-  });
-  return ranges;
-};
-
-/**
- * Calculate the length of a sequence
- */
-export const calcLength = (start: number, end: number, seqLength: number): number => {
-  if (end > start) return end - start;
-  if (end === start) return seqLength;
-  return seqLength - start + end;
-};
-
-/**
  * Reverses a string sequence
  */
 export const reverse = (seq: string): string => seq.split("").reverse().join("");
 
-export const annotationFactory = (i = -1, colors?: string[]): Annotation => {
-  const c = colors && colors.length ? colors : COLORS;
-  return {
-    color: i >= 0 ? colorByIndex(i, c) : chooseRandomColor(c),
-    direction: 0,
-    end: 0,
-    id: randomid(),
-    name: "",
-    start: 0,
-  };
+// from http://arep.med.harvard.edu/labgc/adnan/projects/Utilities/revcomp.html
+let dnaComp = {
+  a: "t",
+  b: "v",
+  c: "g",
+  d: "h",
+  g: "c",
+  h: "d",
+  k: "m",
+  m: "k",
+  n: "n",
+  r: "y",
+  s: "s",
+  t: "a",
+  u: "a",
+  v: "b",
+  w: "w",
+  x: "x",
+  y: "r",
+};
+dnaComp = {
+  ...dnaComp,
+  ...Object.keys(dnaComp).reduce((acc, k) => ({ ...acc, [k.toUpperCase()]: dnaComp[k].toUpperCase() }), {}),
 };
 
-export const primerFactory = () => ({
-  any: 0,
-  complementId: "",
-  dimer: 0,
-  gc: 0,
-  hairpin: 0,
-  id: randomid(),
-  name: "",
-  overhang: "",
-  penalty: 0,
-  sequence: "",
-  stability: 0,
-  strict: false,
-  tm: 0,
-  vector: "",
-});
+/**
+ * A map from each basepair to its complement
+ */
+const typeToCompMap = {
+  aa: Object.keys(aminoAcidsMap).reduce((acc, k) => ({ ...acc, [k.toUpperCase()]: "", [k.toLowerCase()]: "" }), {
+    B: "",
+    J: "",
+    Z: "",
+    b: "",
+    j: "",
+    z: "",
+  }),
+  dna: dnaComp,
+  rna: { ...dnaComp, A: "U", a: "u" },
+  undefined: dnaComp,
+};
 
 /**
- * Given a sequence of DNA, translate it into an AMINO ACID sequence
+ * Return the filtered sequence and its complement if its an empty string, return the same for both.
+ */
+export const complement = (origSeq: string, seqType: SeqType): { compSeq: string; seq: string } => {
+  if (!origSeq) {
+    return { compSeq: "", seq: "" };
+  }
+  const compMap = typeToCompMap[seqType];
+
+  // filter out unrecognized base pairs and build up the complement
+  let seq = "";
+  let compSeq = "";
+  for (let i = 0, origLength = origSeq.length; i < origLength; i += 1) {
+    if (origSeq[i] in compMap) {
+      seq += origSeq[i];
+      compSeq += compMap[origSeq[i]];
+    }
+  }
+  return { compSeq, seq };
+};
+
+/**
+ * Return the reverse complement of a DNA sequence
+ */
+export const reverseComplement = (inputSeq: string, seqType: SeqType): string => {
+  const { compSeq } = complement(inputSeq, seqType);
+  return compSeq.split("").reverse().join("");
+};
+
+const fwd = new Set(["FWD", "fwd", "FORWARD", "forward", "FOR", "for", "TOP", "top", "1", 1]);
+const rev = new Set(["REV", "rev", "REVERSE", "reverse", "BOTTOM", "bottom", "-1", -1]);
+
+/**
+ * Parse the user defined direction, estimate the direction of the element
+ *
+ * ```js
+ * directionality("FWD") => 1
+ * directionality("FORWARD") => 1
+ * ```
+ */
+export const directionality = (direction: number | string | undefined): -1 | 0 | 1 => {
+  if (!direction) {
+    return 0;
+  }
+  if (fwd.has(direction)) {
+    return 1;
+  }
+  if (rev.has(direction)) {
+    return -1;
+  }
+  return 0;
+};
+
+/**
+ * Given a sequence, translate it into an Amino Acid sequence
  */
 export const translateDNA = (seqInput: string): string => {
   const seq = seqInput.toUpperCase();
@@ -278,32 +297,30 @@ export const translateDNA = (seqInput: string): string => {
  * actual translation. For example, if the user selects 5 bps and makes a translation,
  * only the first 3 will be used. so the actual start is 1 and the actual end is 3 (inclusive)
  */
-export const createLinearTranslations = (translations: Range[], dnaSeq: string) => {
+export const createLinearTranslations = (translations: Range[], seq: string, seqType: SeqType) => {
   // elongate the original sequence to account for translations that cross the zero index
-  const dnaDoubled = dnaSeq + dnaSeq;
+  const dnaDoubled = seq + seq;
   return translations.map(t => {
     const { direction, start } = t;
     let { end } = t;
-    if (start > end) end += dnaSeq.length;
+    if (start > end) end += seq.length;
 
     // get the DNA sub sequence
-    const subDNASeq =
-      direction === 1
-        ? dnaDoubled.substring(start, end)
-        : complement(dnaDoubled.substring(start, end)).compSeq.split("").reverse().join(""); // get reverse complement
+    const subSeq =
+      direction === 1 ? dnaDoubled.substring(start, end) : reverseComplement(dnaDoubled.substring(start, end), seqType);
 
     // translate the DNA sub sequence
-    const AAseq = direction === 1 ? translateDNA(subDNASeq) : translateDNA(subDNASeq).split("").reverse().join(""); // translate
+    const AAseq = direction === 1 ? translateDNA(subSeq) : translateDNA(subSeq).split("").reverse().join(""); // translate
 
     // the starting point for the translation, reading left to right (regardless of translation
     // direction). this is later needed to calculate the number of bps needed in the first
     // and last codons
     const tStart = direction === 1 ? start : end - AAseq.length * 3;
-    let tEnd = direction === 1 ? (start + AAseq.length * 3) % dnaSeq.length : end % dnaSeq.length;
+    let tEnd = direction === 1 ? (start + AAseq.length * 3) % seq.length : end % seq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
     if (tEnd === 0) {
-      tEnd += dnaSeq.length;
+      tEnd += seq.length;
     }
 
     return {

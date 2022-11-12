@@ -17,9 +17,9 @@ import {
 } from "./elements";
 import { Selection } from "./handlers/selection";
 import isEqual from "./isEqual";
-import { complement, directionality } from "./parser";
+import randomid from "./randomid";
 import search from "./search";
-import { annotationFactory, guessType } from "./sequence";
+import { complement, directionality, guessType } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -112,7 +112,7 @@ export interface SeqVizProps {
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
 
-  /** the type of the sequence. Without passing this, the type is guessed */
+  /** the type of the sequence. If this isn't passed, the type is guessed */
   seqType?: "dna" | "rna" | "aa";
 
   /**
@@ -212,8 +212,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const input = await this.parseInput();
 
     this.setState(input);
-    this.search(input.seq);
-    this.cut(input.seq);
+    // this.search(input.seq);
+    this.cut(input.seq, input.seqType);
   };
 
   /*
@@ -242,8 +242,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         seq: input.seq,
         seqType: input.seqType,
       });
-      this.search(seq);
-      this.cut(seq);
+      // this.search(seq);
+      // this.cut(seq, input.seqType);
       return;
     }
 
@@ -252,12 +252,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       search &&
       (!this.props.search || search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch)
     ) {
-      this.search(seq); // new search parameters
+      // this.search(seq); // new search parameters
     }
 
     // New digest parameters.
     if (!isEqual(enzymes, this.props.enzymes) || !isEqual(enzymesCustom, this.props.enzymesCustom)) {
-      this.cut(seq);
+      // this.cut(seq, seqType);
     }
 
     // New annotations provided.
@@ -294,21 +294,23 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
       // Parse a sequence file or accession
       const parsed = await seqparse((accession || file || "").toString(), parseOptions);
+      const seqType = guessType(parsed.seq);
       return {
         annotations: this.parseAnnotations(parsed.annotations, parsed.seq),
-        compSeq: complement(parsed.seq).compSeq,
+        compSeq: complement(parsed.seq, seqType).compSeq,
         name: parsed.name,
         seq: parsed.seq,
-        seqType: guessType(parsed.seq),
+        seqType,
       };
     } else if (seq) {
       // Fill in default props just using the seq
+      const seqType = guessType(seq);
       return {
         annotations: this.parseAnnotations(annotations, seq),
-        compSeq: complement(seq).compSeq,
+        compSeq: complement(seq, seqType).compSeq,
         name,
         seq,
-        seqType: guessType(seq),
+        seqType,
       };
     }
     throw new Error("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
@@ -336,7 +338,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   /**
    * Find and save enzymes' cutsite locations.
    */
-  cut = (seq: string) => {
+  cut = (seq: string, seqType: SeqType) => {
     if (!seq.length) {
       return; // TODO why is this happening
     }
@@ -344,7 +346,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const { enzymes, enzymesCustom } = this.props;
 
     if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
-      this.setState({ cutSites: digest(seq || "", enzymes || [], enzymesCustom || {}) });
+      this.setState({ cutSites: digest(seq || "", seqType, enzymes || [], enzymesCustom || {}) });
     }
   };
 
@@ -353,7 +355,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    */
   parseAnnotations = (annotations: AnnotationProp[] | null = null, seq = ""): Annotation[] =>
     (annotations || []).map((a, i) => ({
-      ...annotationFactory(i, this.props.colors),
+      id: randomid(),
       ...a,
       color: a.color || colorByIndex(i, COLORS),
       direction: directionality(a.direction),
