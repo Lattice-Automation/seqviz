@@ -41,7 +41,7 @@ const ToggleSelectionMetaButton = ({ showSelectionMeta, toggleShowSelectionMeta 
 );
 
 const SelectionMetaRow = ({ selection }) => {
-  const { end, feature, gc, length, start, tm } = selection;
+  const { end, feature, length, start } = selection;
   const noneSelected = start === end;
 
   return (
@@ -76,18 +76,6 @@ const SelectionMetaRow = ({ selection }) => {
             <p id="value">
               {start} - {end}
             </p>
-          </div>
-        )}
-        {gc !== 0 && (
-          <div className="meta-datum">
-            <p id="field">GC</p>
-            <p id="value">{gc}%</p>
-          </div>
-        )}
-        {tm !== 0 && (
-          <div className="meta-datum">
-            <p id="field">TM</p>
-            <p id="value">{tm}°C</p>
           </div>
         )}
       </div>
