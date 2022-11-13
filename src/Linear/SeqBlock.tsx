@@ -1,6 +1,16 @@
 import * as React from "react";
 
-import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, Size, Translation } from "../elements";
+import {
+  Annotation,
+  CutSite,
+  Highlight,
+  InputRefFunc,
+  NameRange,
+  Range,
+  SeqType,
+  Size,
+  Translation,
+} from "../elements";
 import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
@@ -44,6 +54,7 @@ interface SeqBlockProps {
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
+  seqType: SeqType;
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
@@ -230,6 +241,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       searchRows,
       seq,
       seqFontSize,
+      seqType,
       showComplement,
       showIndex,
       size,
@@ -264,7 +276,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of the sequence strand
     const indexYDiff = cutSiteYDiff + cutSiteHeight;
-    const indexHeight = lineHeight;
+    const indexHeight = seqType === "aa" ? 0 : lineHeight; // if aa, no seq row is shown
 
     // height and yDiff of the complement strand
     const compYDiff = indexYDiff + indexHeight;
@@ -312,6 +324,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             firstBase={firstBase}
             lastBase={lastBase}
             seq={seq}
+            seqType={seqType}
             showIndex={showIndex}
             size={size}
             yDiff={indexRowYDiff}
@@ -371,6 +384,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             inputRef={inputRef}
             lastBase={lastBase}
             seqBlockRef={this}
+            seqType={seqType}
             translations={translations}
             yDiff={translationYDiff}
             onUnmount={onUnmount}
@@ -405,12 +419,12 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             zoom={zoom}
           />
         )}
-        {zoomed ? (
+        {zoomed && seqType !== "aa" ? (
           <text {...textProps} className="la-vz-seq" data-testid="la-vz-seq" id={id} y={indexYDiff}>
             {seq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}
-        {compSeq && zoomed && showComplement ? (
+        {compSeq && zoomed && showComplement && seqType !== "aa" ? (
           <text {...textProps} className="la-vz-comp-seq" data-testid="la-vz-comp-seq" id={id} y={compYDiff}>
             {compSeq.split("").map(this.seqTextSpan)}
           </text>

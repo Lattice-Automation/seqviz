@@ -5,7 +5,7 @@ import { createMultiRows, createSingleRows, stackElements } from "../elementsToR
 import withViewerHOCs from "../handlers";
 import { Selection } from "../handlers/selection";
 import isEqual from "../isEqual";
-import { createLinearTranslations } from "../sequence";
+import { createTranslations } from "../sequence";
 import InfiniteScroll from "./InfiniteScroll";
 import SeqBlock from "./SeqBlock";
 
@@ -124,7 +124,7 @@ class Linear extends React.Component<LinearProps> {
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
     const translationRows = translations.length
-      ? createSingleRows(createLinearTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
+      ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {
@@ -139,7 +139,10 @@ class Linear extends React.Component<LinearProps> {
       ids[i] = seqs[i] + String(i);
 
       // find the line height for the seq block based on how many rows need to be shown
-      let blockHeight = lineHeight * 2.1; // this is for padding between the SeqBlocks
+      let blockHeight = lineHeight * 1.1; // this is for padding between the SeqBlocks
+      if (seqType != "aa") {
+        blockHeight += lineHeight; // for sequence row
+      }
       if (zoomed) {
         blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
       }
@@ -184,6 +187,7 @@ class Linear extends React.Component<LinearProps> {
           searchRows={searchRows[i]}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
+          seqType={seqType}
           showComplement={showComplement}
           showIndex={showIndex}
           size={size}

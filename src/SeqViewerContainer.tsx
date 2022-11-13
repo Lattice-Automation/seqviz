@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import SeqViewer from "./SeqViewer";
-import { Annotation, CutSite, Highlight, NameRange, Range } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
 import CentralIndexContext from "./handlers/centralIndex";
 import { Selection, SelectionContext, defaultSelection } from "./handlers/selection";
 import isEqual from "./isEqual";
@@ -21,6 +21,7 @@ interface SeqViewerContainerProps {
     start: number;
   };
   seq: string;
+  seqType: SeqType;
   showComplement: boolean;
   showIndex: boolean;
   translations: Range[];

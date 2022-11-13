@@ -298,27 +298,31 @@ export const translate = (seqInput: string, seqType: SeqType): string => {
 /**
  * for each translation (range + direction) and the input sequence, convert it to a translation and amino acid sequence
  */
-export const createLinearTranslations = (translations: Range[], seq: string, seqType: SeqType) => {
+export const createTranslations = (translations: Range[], seq: string, seqType: SeqType) => {
   // elongate the original sequence to account for translations that cross the zero index
-  const dnaDoubled = seq + seq;
+  const seqDoubled = seq + seq;
+  const bpPerBlock = seqType === "aa" ? 1 : 3;
+
   return translations.map(t => {
     const { direction, start } = t;
     let { end } = t;
     if (start > end) end += seq.length;
 
-    // get the DNA sub sequence
-    const subSeq =
-      direction === 1 ? dnaDoubled.substring(start, end) : reverseComplement(dnaDoubled.substring(start, end), seqType);
+    // TODO: below will fail on an "aa" type sequence if direction = -1. At the time of writing, this won't be reached, anyway
 
-    // translate the DNA sub sequence
+    // get the subsequence
+    const subSeq =
+      direction === 1 ? seqDoubled.substring(start, end) : reverseComplement(seqDoubled.substring(start, end), seqType);
+
+    // translate the subsequence
     const aaSeq =
       direction === 1 ? translate(subSeq, seqType) : translate(subSeq, seqType).split("").reverse().join(""); // translate
 
     // the starting point for the translation, reading left to right (regardless of translation
     // direction). this is later needed to calculate the number of bps needed in the first
     // and last codons
-    const tStart = direction === 1 ? start : end - aaSeq.length * 3;
-    let tEnd = direction === 1 ? (start + aaSeq.length * 3) % seq.length : end % seq.length;
+    const tStart = direction === 1 ? start : end - aaSeq.length * bpPerBlock;
+    let tEnd = direction === 1 ? (start + aaSeq.length * bpPerBlock) % seq.length : end % seq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
     if (tEnd === 0) {

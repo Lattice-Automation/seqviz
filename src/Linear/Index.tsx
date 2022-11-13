@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Size } from "../elements";
+import { SeqType, Size } from "../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
@@ -9,6 +9,7 @@ interface IndexProps {
   firstBase: number;
   lastBase: number;
   seq: string;
+  seqType: SeqType;
   showIndex: boolean;
   size: Size;
   yDiff: number;
@@ -23,7 +24,7 @@ export default class Index extends React.PureComponent<IndexProps> {
   // by the number set for tally thresholding and, if it is, 2) add its location to the list
   // of positions for tickInc
   genTicks = () => {
-    const { charWidth, findXAndWidth, firstBase, seq, size, zoom } = this.props;
+    const { charWidth, findXAndWidth, firstBase, seq, seqType, size, zoom } = this.props;
     const seqLength = seq.length;
 
     // the tally's distance on the x-axis is zoom dependent:
@@ -47,6 +48,11 @@ export default class Index extends React.PureComponent<IndexProps> {
         break;
       default:
         tickInc = 10;
+    }
+
+    // if rendering amino acids, double the tick frequency
+    if (seqType === "aa") {
+      tickInc = tickInc / 2;
     }
 
     // create the array that will hold all the indexes in the array

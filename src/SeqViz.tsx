@@ -212,7 +212,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const input = await this.parseInput();
 
     this.setState(input);
-    // this.search(input.seq);
+    this.search(input.seq);
     this.cut(input.seq, input.seqType);
   };
 
@@ -230,7 +230,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // previous props
     { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
     // previous state
-    { seq }: SeqVizState
+    { seq, seqType }: SeqVizState
   ) => {
     // New accession or file provided, fetch and/or parse.
     if (accession !== this.props.accession || file !== this.props.file || (this.props.seq && this.props.seq !== seq)) {
@@ -242,8 +242,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         seq: input.seq,
         seqType: input.seqType,
       });
-      // this.search(seq);
-      // this.cut(seq, input.seqType);
+      this.search(seq);
+      this.cut(seq, input.seqType);
       return;
     }
 
@@ -252,12 +252,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       search &&
       (!this.props.search || search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch)
     ) {
-      // this.search(seq); // new search parameters
+      this.search(seq); // new search parameters
     }
 
     // New digest parameters.
     if (!isEqual(enzymes, this.props.enzymes) || !isEqual(enzymesCustom, this.props.enzymesCustom)) {
-      // this.cut(seq, seqType);
+      this.cut(seq, seqType);
     }
 
     // New annotations provided.
@@ -372,8 +372,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     if (!seq) return <div className="la-vz-seqviz" />;
 
     if (seqType !== "dna" && seqType !== "rna" && translations && translations.length) {
-      // TODO: this should have a warning, I just don't want to do it in render
-      translations = [];
+      // make the entire sequence the "translation"
+      // TODO: during some grand future refactor, make this cleaner and more transparent to the user
+      translations = [{ direction: 1, end: seq.length, start: 0 }];
     }
 
     // Since all the props are optional, we need to parse them to defaults.

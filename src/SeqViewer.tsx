@@ -3,7 +3,7 @@ import { withResizeDetector } from "react-resize-detector";
 
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
-import { Annotation, CutSite, Highlight, NameRange, Range } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
 import CentralIndexContext from "./handlers/centralIndex";
 import { Selection, SelectionContext } from "./handlers/selection";
 import isEqual from "./isEqual";
@@ -19,6 +19,7 @@ interface SeqViewerProps {
   name: string;
   search: NameRange[];
   seq: string;
+  seqType: SeqType;
   setSelection: (update: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
@@ -48,7 +49,7 @@ class SeqViewer extends React.Component<SeqViewerProps> {
    * on the screen at a given time and what should their size be
    */
   linearProps = () => {
-    const { seq } = this.props;
+    const { seq, seqType } = this.props;
     const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.linear;
 
@@ -57,6 +58,9 @@ class SeqViewer extends React.Component<SeqViewerProps> {
     // otherwise the sequence needs to be cut into smaller subsequences
     // a sliding scale in width related to the degree of zoom currently active
     let bpsPerBlock = Math.round((size.width / seqFontSize) * 1.4) || 1; // width / 1 * seqFontSize
+    if (seqType === "aa") {
+      bpsPerBlock = Math.round(bpsPerBlock / 3); // more space for each amino acid
+    }
 
     if (zoom <= 5) {
       bpsPerBlock *= 3;

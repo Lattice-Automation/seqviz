@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { InputRefFunc, Translation } from "../elements";
+import { InputRefFunc, SeqType, Translation } from "../elements";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -16,6 +16,7 @@ interface TranslationRowsProps {
   lastBase: number;
   onUnmount: (a: unknown) => void;
   seqBlockRef: unknown;
+  seqType: SeqType;
   translations: Translation[];
   yDiff: number;
 }
@@ -32,6 +33,7 @@ const TranslationRows = ({
   lastBase,
   onUnmount,
   seqBlockRef,
+  seqType,
   translations,
   yDiff,
 }: TranslationRowsProps) => (
@@ -49,6 +51,7 @@ const TranslationRows = ({
         inputRef={inputRef}
         lastBase={lastBase}
         seqBlockRef={seqBlockRef}
+        seqType={seqType}
         translation={t}
         y={yDiff + elementHeight * i}
         onUnmount={onUnmount}
@@ -69,6 +72,7 @@ interface TranslationRowProps {
   lastBase: number;
   onUnmount: (a: unknown) => void;
   seqBlockRef: unknown;
+  seqType: SeqType;
   translation: Translation;
   y: number;
 }
@@ -88,14 +92,13 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
   /**
    * make the actual path string
-   *
-   * c = base pair count
-   * m = multiplier (FWD or REV)
    */
   genPath = (count: number, multiplier: number) => {
     const { charWidth, height: h } = this.props; // width adjust
+
     const nW = count * charWidth;
     const wA = multiplier * 3;
+
     return `M 0 0
 			L ${nW} 0
 			L ${nW + wA} ${h / 2}
@@ -116,6 +119,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
       inputRef,
       lastBase,
       seqBlockRef: element,
+      seqType,
       translation,
       y,
     } = this.props;
@@ -124,8 +128,11 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
     // build up a reference to this whole translation for
     // selection handler (used only for context clicking right now)
-    const type = "TRANSLATION";
-    const ref = { element, end, name: "translation", start, type };
+    const ref = { element, end, name: "translation", start, type: "TRANSLATION" };
+
+    // if rendering an amino-acid sequence directly, each amino acid block is 1:1 with a "base pair".
+    // otherwise, each amino-acid covers three bases.
+    const bpPerBlockCount = seqType === "aa" ? 1 : 3;
 
     // substring and split only the amino acids that are relevant to this
     // particular sequence block
@@ -139,8 +146,8 @@ class TranslationRow extends React.Component<TranslationRowProps> {
 
           // calculate the start and end point of each amino acid
           // modulo needed here for translations that cross zero index
-          let AAStart = (start + i * 3) % fullSeq.length;
-          let AAEnd = start + i * 3 + 3;
+          let AAStart = (start + i * bpPerBlockCount) % fullSeq.length;
+          let AAEnd = start + i * bpPerBlockCount + bpPerBlockCount;
 
           // build up a reference to this whole translation for
           // selection handler (used only for context clicking right now)
@@ -170,20 +177,20 @@ class TranslationRow extends React.Component<TranslationRowProps> {
           // larger translation
 
           // the amino acid doesn't fit within this SeqBlock (even partially)
-          if (AAStart > lastBase || AAEnd < firstBase) return null;
+          if (AAStart >= lastBase || AAEnd <= firstBase) return null;
 
-          let textShow = true; // whether to show amino acids abbreviation
-          let bpCount = 3; // start off assuming the full thing is shown
+          let showAminoAcidLabel = true; // whether to show amino acids abbreviation
+          let bpCount = bpPerBlockCount; // start off assuming the full thing is shown
           if (AAStart < firstBase) {
-            bpCount = Math.min(3, AAEnd - firstBase);
-            if (bpCount < 2) {
+            bpCount = Math.min(bpPerBlockCount, AAEnd - firstBase);
+            if (bpCount < 2 && seqType !== "aa") {
               // w/ one bp, the amino acid is probably too small for an abbreviation
-              textShow = false;
+              showAminoAcidLabel = false;
             }
           } else if (AAEnd > lastBase) {
-            bpCount = Math.min(3, lastBase - AAStart);
-            if (bpCount < 2) {
-              textShow = false;
+            bpCount = Math.min(bpPerBlockCount, lastBase - AAStart);
+            if (bpCount < 2 && seqType !== "aa") {
+              showAminoAcidLabel = false;
             }
           }
 
@@ -207,9 +214,11 @@ class TranslationRow extends React.Component<TranslationRowProps> {
                   strokeWidth: 0.8,
                 }}
               />
-              {textShow && (
+
+              {showAminoAcidLabel && (
                 <text
                   cursor="pointer"
+                  data-testid="la-vz-translation"
                   dominantBaseline="middle"
                   id={aaId}
                   style={{
@@ -218,7 +227,7 @@ class TranslationRow extends React.Component<TranslationRowProps> {
                     fontWeight: 400,
                   }}
                   textAnchor="middle"
-                  x={charWidth * 1.5}
+                  x={bpCount * 0.5 * charWidth}
                   y={`${h / 2 + 1}`}
                 >
                   {a}
