@@ -1,22 +1,18 @@
 import * as React from "react";
 
-import { Coor, HighlightProp, InputRefFunc, Range } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { HighlightProp, Range } from "../elements";
 import { Arc, GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 const Find = (props: {
-  center: Coor;
-  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   highlights: HighlightProp[];
   inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
   search: Range[];
-  seq: string;
   seqLength: number;
-  totalRows: number;
 }) => {
   const { genArc, getRotation, highlights, inputRef, lineHeight, radius, search, seqLength } = props;
   const threshold = seqLength > RENDER_SEQ_LENGTH_CUTOFF ? search.length / seqLength <= 0.02 : true;

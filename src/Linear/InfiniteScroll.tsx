@@ -1,7 +1,7 @@
 import * as React from "react";
 
+import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
-import CentralIndexContext from "../handlers/centralIndex";
 import isEqual from "../isEqual";
 
 interface InfiniteScrollProps {
@@ -25,6 +25,7 @@ interface InfiniteScrollState {
  */
 export default class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
   static contextType = CentralIndexContext;
+  static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;
 
   /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */

@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { InputRefFunc } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
-import { InputRefFunc, NameRange } from "../elements";
+import { NameRange } from "../elements";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
@@ -92,19 +93,16 @@ const AnnotationRow = (props: {
  * edge of blocks, etc.
  */
 const SingleNamedElement = (props: {
-  bpsPerBlock: number;
   element: NameRange;
   elements: NameRange[];
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
-  fullSeq: string;
   height: number;
   index: number;
   inputRef: InputRefFunc;
   lastBase: number;
-  seqBlockRef: unknown;
 }) => {
-  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase, seqBlockRef } = props;
+  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase } = props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
@@ -191,12 +189,12 @@ const SingleNamedElement = (props: {
     <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
       <path
         ref={inputRef(element.id, {
-          element: seqBlockRef,
           end: end,
           name: element.name,
           ref: element.id,
           start: start,
           type: "ANNOTATION",
+          viewer: "LINEAR",
         })}
         className={`${element.id} la-vz-annotation`}
         cursor="pointer"

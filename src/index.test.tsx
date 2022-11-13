@@ -22,10 +22,9 @@ const props = {
 describe("SeqViz rendering (React)", () => {
   it("renders", async () => {
     const { getAllByTestId } = render(<SeqViz {...props} />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
 
-    // renders both a circular and linear viewer by default
-    expect(getAllByTestId("la-vz-seq-viewer")).toHaveLength(2);
+    expect(getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
 
     // renders full sequence
     const seqs = getAllByTestId("la-vz-seq");
@@ -37,7 +36,7 @@ describe("SeqViz rendering (React)", () => {
 
   it("renders with linear viewer only", async () => {
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} viewer="linear" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
 
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
@@ -47,7 +46,7 @@ describe("SeqViz rendering (React)", () => {
 
   it("renders with circular viewer only", async () => {
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} viewer="circular" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
 
     expect(getByTestId("la-vz-viewer-circular")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-circular")).toHaveLength(1);
@@ -58,17 +57,15 @@ describe("SeqViz rendering (React)", () => {
   it("renders with Genbank file string input", async () => {
     // TODO: what the hell is it complaining about
     render(<SeqViz {...props} file={demoPart} />);
-    await waitFor(() => expect(screen.getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(screen.getAllByTestId("la-vz-seqviz")).toBeTruthy());
 
-    expect(screen.getAllByTestId("la-vz-seq-viewer")).toHaveLength(2);
+    expect(screen.getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
 
     // Verify the file's sequence is rendered.
     // The linear viewer will cut off the end, this is just the prefix
     const seqs = screen.getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
-    expect(seq).toContain(
-      "ttgacagctagctcagtcctaggtactgtgctagctactagtgaaagaggagaaatactagatggcttcctccgaagacgttatcaaagagtt"
-    );
+    expect(seq).toContain("ttgacagctagctcagtcctaggtactgtgctagcta");
 
     cleanup();
   });
@@ -78,7 +75,7 @@ describe("SeqViz rendering (React)", () => {
       "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK*";
 
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} seq={aaSeq} seqType="aa" viewer="linear" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
 
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
@@ -91,15 +88,19 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with an externally set Selection prop", async () => {
-    const aaSeq = "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK";
-
+    // TODO: what's going on here with the negative size in SeqViewerContainer
     const { getAllByTestId } = render(
-      <SeqViz {...props} selection={{ end: 15, start: 1 }} seq={aaSeq} viewer="linear" />
+      <SeqViz
+        {...props}
+        selection={{ end: 15, start: 1 }}
+        seq="MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK"
+        viewer="linear"
+      />
     );
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz-rendered")).toBeTruthy());
+    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy(), { timeout: 1000 });
 
     expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
-    expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(2);
+    expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(1);
 
     cleanup();
   });

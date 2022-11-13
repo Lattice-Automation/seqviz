@@ -15,10 +15,10 @@ import {
   Range,
   SeqType,
 } from "./elements";
-import { Selection } from "./handlers/selection";
 import isEqual from "./isEqual";
 import randomid from "./randomid";
 import search from "./search";
+import { Selection } from "./selectionContext";
 import { complement, directionality, guessType } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
@@ -380,6 +380,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // Since all the props are optional, we need to parse them to defaults.
     const props = {
       bpColors: this.props.bpColors || {},
+      copyEvent: this.props.copyEvent || (() => false),
       cutSites: this.state.cutSites,
       highlights: (highlights || []).concat(highlightedRegions || []).map(
         (h, i): Highlight => ({
@@ -396,6 +397,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         (() => {
           // do nothing
         }),
+      rotateOnScroll: !!this.props.rotateOnScroll,
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
@@ -411,7 +413,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     };
 
     return (
-      <div className="la-vz-seqviz" data-testid="la-vz-seqviz-rendered" style={style}>
+      <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={style}>
         <SeqViewerContainer {...this.props} {...props} {...this.state} />
       </div>
     );

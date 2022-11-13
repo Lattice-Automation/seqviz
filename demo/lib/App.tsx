@@ -39,7 +39,7 @@ interface AppState {
   showSelectionMeta: boolean;
   showSidebar: boolean;
   translations: { end: number; start: number; direction?: 1 | -1 }[];
-  viewType: string;
+  viewer: string;
   zoom: number;
 }
 
@@ -62,13 +62,17 @@ export default class App extends React.Component<any, AppState> {
       { end: 1147, start: 736 },
       { end: 1885, start: 1165 },
     ],
-    viewType: "",
+    viewer: "",
     zoom: 50,
   };
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
-    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+    // this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK", viewer: "linear" });
+    
+
+    
   };
 
   toggleSidebar = () => {
@@ -111,8 +115,8 @@ export default class App extends React.Component<any, AppState> {
             <SidebarHeader toggleSidebar={this.toggleSidebar} />
             <Menu.Item as="a">
               <ViewerTypeInput
-                setType={(viewType: string) => {
-                  this.setState({ viewType });
+                setType={(viewer: string) => {
+                  this.setState({ viewer });
                 }}
               />
             </Menu.Item>
@@ -156,8 +160,9 @@ export default class App extends React.Component<any, AppState> {
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
-                    viewer={this.state.viewType as "linear" | "circular"}
+                    viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
+                    selection={this.state.selection}
                     onSelection={selection => this.setState({ selection })}
                   />
                 )}

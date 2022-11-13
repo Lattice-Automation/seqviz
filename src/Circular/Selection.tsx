@@ -1,18 +1,15 @@
 import * as React from "react";
 
-import { Coor, InputRefFunc } from "../elements";
-import { SelectionContext } from "../handlers/selection";
+import { Coor } from "../elements";
+import SelectionContext from "../selectionContext";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CircularSelectionProps {
-  center: Coor;
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
   seq: string;
   seqLength: number;
   totalRows: number;
@@ -28,11 +25,16 @@ interface CircularSelectionProps {
  */
 export default class Selection extends React.PureComponent<CircularSelectionProps> {
   static contextType = SelectionContext;
+  static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
   render() {
     const { findCoor, genArc, getRotation, lineHeight, radius, seq, seqLength, totalRows } = this.props;
     const { clockwise, end, ref, start } = this.context;
+
+    if (typeof start === "undefined" || typeof end === "undefined") {
+      return;
+    }
 
     // calculate the length of the current selection region
     let selLength = 0;

@@ -288,6 +288,10 @@ A function returning whether to copy the viewer(s) current selection during a ke
 
 Whether to show the complement sequence.
 
+#### `rotateOnScroll (=true)`
+
+By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with rotateOnScroll: false.
+
 ### Without React
 
 For usability in non-React apps, we provide a thin wrapper around the React component. The viewer's constructor accepts two arguments:

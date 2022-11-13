@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { InputRefFunc, NameRange } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { NameRange } from "../elements";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
@@ -69,10 +70,10 @@ const SingleHighlight = (props: {
       <rect
         key={`linear-highlight-${props.highlight.id}-top`}
         ref={props.inputRef(props.highlight.id, {
-          element: props.highlight,
           ref: props.highlight.id,
           ...props.highlight,
           type: "HIGHLIGHT",
+          viewer: "LINEAR",
         })}
         {...rectProps}
         y={props.indexYDiff}
@@ -80,10 +81,10 @@ const SingleHighlight = (props: {
       <rect
         key={`linear-highlight-${props.highlight.id}-bottom`}
         ref={props.inputRef(props.highlight.id, {
-          element: props.highlight,
           ref: props.highlight.id,
           ...props.highlight,
           type: "HIGHLIGHT",
+          viewer: "LINEAR",
         })}
         {...rectProps}
         y={props.compYDiff}

@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { InputRefFunc, SeqType, Translation } from "../elements";
+import { SeqType, Translation } from "../elements";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -15,7 +16,6 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
-  seqBlockRef: unknown;
   seqType: SeqType;
   translations: Translation[];
   yDiff: number;
@@ -32,7 +32,6 @@ const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
-  seqBlockRef,
   seqType,
   translations,
   yDiff,
@@ -50,7 +49,6 @@ const TranslationRows = ({
         id={t.id}
         inputRef={inputRef}
         lastBase={lastBase}
-        seqBlockRef={seqBlockRef}
         seqType={seqType}
         translation={t}
         y={yDiff + elementHeight * i}
@@ -68,10 +66,9 @@ interface TranslationRowProps {
   fullSeq: string;
   height: number;
   id?: string;
-  inputRef: (id: string, ref: unknown) => React.LegacyRef<SVGAElement>;
+  inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
-  seqBlockRef: unknown;
   seqType: SeqType;
   translation: Translation;
   y: number;
@@ -81,7 +78,7 @@ interface TranslationRowProps {
  * A single row for translations of DNA into Amino Acid sequences so a user can
  * see the resulting protein or peptide sequence in the viewer
  */
-class TranslationRow extends React.Component<TranslationRowProps> {
+class TranslationRow extends React.PureComponent<TranslationRowProps> {
   AAs: string[] = [];
 
   // on unmount, clear all AA references.
@@ -118,17 +115,12 @@ class TranslationRow extends React.Component<TranslationRowProps> {
       height: h,
       inputRef,
       lastBase,
-      seqBlockRef: element,
       seqType,
       translation,
       y,
     } = this.props;
 
     const { AAseq, direction, end, id, start } = translation;
-
-    // build up a reference to this whole translation for
-    // selection handler (used only for context clicking right now)
-    const ref = { element, end, name: "translation", start, type: "TRANSLATION" };
 
     // if rendering an amino-acid sequence directly, each amino acid block is 1:1 with a "base pair".
     // otherwise, each amino-acid covers three bases.
@@ -138,7 +130,18 @@ class TranslationRow extends React.Component<TranslationRowProps> {
     // particular sequence block
     const AAs = AAseq.split("");
     return (
-      <g ref={inputRef(id, ref)} id={id} transform={`translate(0, ${y})`}>
+      <g
+        ref={inputRef(id, {
+          end,
+          name: "translation",
+          parent: { ...translation, type: "TRANSLATION" },
+          start,
+          type: "AMINOACID",
+          viewer: "LINEAR",
+        })}
+        id={id}
+        transform={`translate(0, ${y})`}
+      >
         {AAs.map((a, i) => {
           // generate and store an id reference (that's used for selection)
           const aaId = randomid();
@@ -148,17 +151,6 @@ class TranslationRow extends React.Component<TranslationRowProps> {
           // modulo needed here for translations that cross zero index
           let AAStart = (start + i * bpPerBlockCount) % fullSeq.length;
           let AAEnd = start + i * bpPerBlockCount + bpPerBlockCount;
-
-          // build up a reference to this whole translation for
-          // selection handler (used only for context clicking right now)
-          const AAref = {
-            element,
-            end: AAEnd,
-            name: "",
-            parent: ref,
-            start: AAStart,
-            type: "AMINOACID",
-          };
 
           if (AAStart > AAEnd && firstBase >= bpsPerBlock) {
             // amino acid has crossed zero index in the last SeqBlock
@@ -201,7 +193,18 @@ class TranslationRow extends React.Component<TranslationRowProps> {
           const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
           return (
-            <g key={aaId} ref={inputRef(aaId, AAref)} id={aaId} transform={`translate(${x}, 0)`}>
+            <g
+              key={aaId}
+              ref={inputRef(aaId, {
+                end: AAEnd,
+                parent: { ...translation, type: "TRANSLATION" },
+                start: AAStart,
+                type: "AMINOACID",
+                viewer: "LINEAR",
+              })}
+              id={aaId}
+              transform={`translate(${x}, 0)`}
+            >
               <path
                 d={path}
                 fill={colorByIndex(a.charCodeAt(0))}

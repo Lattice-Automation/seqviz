@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { InputRefFunc, Range } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { Range } from "../elements";
 import randomid from "../randomid";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -17,7 +18,6 @@ const Find = ({
   lastBase,
   lineHeight,
   listenerOnly,
-  seqBlockRef,
   zoomed,
 }: {
   compYDiff: number;
@@ -29,7 +29,6 @@ const Find = ({
   lastBase: number;
   lineHeight: number;
   listenerOnly: boolean;
-  seqBlockRef: unknown;
   zoomed: boolean;
 }) => (
   <>
@@ -46,7 +45,6 @@ const Find = ({
         lastBase={lastBase}
         lineHeight={lineHeight}
         listenerOnly={listenerOnly}
-        seqBlockRef={seqBlockRef}
         start={s.start}
         zoomed={zoomed}
       />
@@ -67,7 +65,6 @@ const FindBlock = ({
   lastBase,
   lineHeight,
   listenerOnly,
-  seqBlockRef,
   start,
   zoomed,
 }: {
@@ -81,7 +78,6 @@ const FindBlock = ({
   lastBase: number;
   lineHeight: number;
   listenerOnly: boolean;
-  seqBlockRef: unknown;
   start: number;
   zoomed: boolean;
 }) => {
@@ -103,11 +99,11 @@ const FindBlock = ({
     <rect
       key={id}
       ref={inputRef(id, {
-        element: seqBlockRef,
         end: end,
         id: id,
         start: start,
         type: "FIND",
+        viewer: "LINEAR",
       })}
       className="la-vz-search"
       cursor="pointer"

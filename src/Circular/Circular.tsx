@@ -1,10 +1,9 @@
 import * as React from "react";
 
-import { Annotation, Coor, CutSite, Highlight, InputRefFunc, Range, Size } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import CentralIndexContext from "../centralIndexContext";
+import { Annotation, Coor, CutSite, Highlight, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
-import withViewerHOCs from "../handlers";
-import CentralIndexContext from "../handlers/centralIndex";
-import { Selection as SelectionType } from "../handlers/selection";
 import isEqual from "../isEqual";
 import Annotations from "./Annotations";
 import CutSites from "./CutSites";
@@ -42,23 +41,19 @@ export type GenArcFunc = (args: {
 }) => string;
 
 interface CircularProps {
-  Circular: boolean;
-  Linear: boolean;
   annotations: Annotation[];
   center: { x: number; y: number };
-  centralIndex: number;
   compSeq: string;
   cutSites: CutSite[];
+  handleMouseEvent: (e: any) => void;
   highlights: Highlight[];
   inputRef: InputRefFunc;
-  mouseEvent: (e: any) => void;
   name: string;
   onUnmount: (id: string) => void;
   radius: number;
+  rotateOnScroll: boolean;
   search: Range[];
   seq: string;
-  setCentralIndex: (type: "linear" | "circular", update: number) => void;
-  setSelection: (selection: SelectionType) => void;
   showIndex: boolean;
   size: Size;
   yDiff: number;
@@ -73,8 +68,9 @@ interface CircularState {
 }
 
 /** Circular is a circular viewer that contains a bunch of arcs. */
-class Circular extends React.Component<CircularProps, CircularState> {
+export default class Circular extends React.Component<CircularProps, CircularState> {
   static contextType = CentralIndexContext;
+  static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;
 
   constructor(props: CircularProps) {
@@ -290,8 +286,32 @@ class Circular extends React.Component<CircularProps, CircularState> {
       Z`;
   };
 
+  /**
+   * handle a scroll event and, if it's a CIRCULAR viewer, update the
+   * current central index
+   */
+  handleScrollEvent = (e: React.WheelEvent<SVGElement>) => {
+    const { rotateOnScroll, seq } = this.props;
+    if (!rotateOnScroll) return;
+
+    // a "large scroll" (1000) should rotate through 20% of the plasmid
+    let delta = seq.length * (e.deltaY / 5000);
+    delta = Math.floor(delta);
+
+    // must scroll by *some* amount (only matters for very small plasmids)
+    if (delta === 0) {
+      if (e.deltaY > 0) delta = 1;
+      else delta = -1;
+    }
+
+    let newCentralIndex = this.context.circular + delta;
+    newCentralIndex = (newCentralIndex + seq.length) % seq.length;
+
+    this.context.setCentralIndex("CIRCULAR", newCentralIndex);
+  };
+
   render() {
-    const { center, compSeq, cutSites, inputRef, mouseEvent, name, radius, search, seq, showIndex, size, yDiff } =
+    const { center, compSeq, cutSites, handleMouseEvent, inputRef, name, radius, search, seq, showIndex, size, yDiff } =
       this.props;
     const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, seqLength } = this.state;
 
@@ -317,15 +337,16 @@ class Circular extends React.Component<CircularProps, CircularState> {
 
     return (
       <svg
-        ref={inputRef(plasmidId, { type: "SEQ" })}
+        ref={inputRef(plasmidId, { type: "SEQ", viewer: "CIRCULAR" })}
         className="la-vz-viewer-circular"
         data-testid="la-vz-viewer-circular"
         height={size.height}
         id={plasmidId}
         width={size.width >= 0 ? size.width : 0}
-        onMouseDown={mouseEvent}
-        onMouseMove={mouseEvent}
-        onMouseUp={mouseEvent}
+        onMouseDown={handleMouseEvent}
+        onMouseMove={handleMouseEvent}
+        onMouseUp={handleMouseEvent}
+        onWheel={this.handleScrollEvent}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} />
@@ -341,27 +362,16 @@ class Circular extends React.Component<CircularProps, CircularState> {
             yDiff={yDiff}
           />
           <Find
-            center={props.center}
-            findCoor={props.findCoor}
             genArc={props.genArc}
             getRotation={props.getRotation}
             highlights={this.props.highlights}
             inputRef={props.inputRef}
             lineHeight={props.lineHeight}
             radius={props.radius}
-            rotateCoor={props.rotateCoor}
             search={search}
-            seq={seq}
             seqLength={props.seqLength}
-            totalRows={totalRows}
           />
-          <Annotations
-            {...props}
-            annotations={annotationsInRows}
-            inlinedAnnotations={inlinedLabels}
-            rowsToSkip={0}
-            size={size}
-          />
+          <Annotations {...props} annotations={annotationsInRows} inlinedAnnotations={inlinedLabels} rowsToSkip={0} />
           <Labels {...props} labels={outerLabels} size={size} yDiff={yDiff} />
         </g>
       </svg>
@@ -412,6 +422,7 @@ export const Arc = (props: {
         ref: id,
         start: start,
         type: "FIND",
+        viewer: "CIRCULAR",
       })}
       className={className}
       cursor="pointer"
@@ -425,6 +436,3 @@ export const Arc = (props: {
     />
   );
 };
-
-// @ts-ignore
-export default withViewerHOCs(Circular);

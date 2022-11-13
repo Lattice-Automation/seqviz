@@ -1,24 +1,21 @@
 import * as React from "react";
 
+import { InputRefFunc } from "../SelectionHandler";
+import CentralIndexContext from "../centralIndexContext";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
-import { Annotation, Coor, InputRefFunc, Size } from "../elements";
-import CentralIndexContext from "../handlers/centralIndex";
+import { Annotation } from "../elements";
 import { GenArcFunc } from "./Circular";
 
 interface AnnotationsProps {
   annotations: Annotation[][];
-  center: Coor;
-  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inlinedAnnotations: string[];
   inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
   rowsToSkip: number;
   seqLength: number;
-  size: Size;
 }
 
 /**
@@ -170,6 +167,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           ref: a.id,
           start: a.start,
           type: "ANNOTATION",
+          viewer: "CIRCULAR",
         })}
         className={`${a.id} la-vz-annotation`}
         cursor="pointer"

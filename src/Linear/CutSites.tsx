@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { CutSite, Enzyme, InputRefFunc } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { CutSite, Enzyme } from "../elements";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface HighlightedCutSite {
@@ -52,9 +53,7 @@ const recogContiguous = (start: number, end: number, firstBase: number, lastBase
  * Renders enzyme cut sites above the linear sequences. Shows the enzyme name and the recognition site.
  */
 const CutSites = (props: {
-  charWidth: number;
   cutSites: CutSite[];
-  elementHeight: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   inputRef: InputRefFunc;
@@ -188,9 +187,8 @@ const CutSites = (props: {
             {showConnector && zoom > 10 && (
               <path
                 className="la-vz-cut-site"
-                d={`M ${connectorX} ${lineYDiff + lineHeight} L ${connectorX + connectorWidth} ${
-                  lineYDiff + lineHeight
-                }`}
+                d={`M ${connectorX} ${lineYDiff + lineHeight}
+                    L ${connectorX + connectorWidth} ${lineYDiff + lineHeight}`}
               />
             )}
             {showBottomLine && zoom > 10 && (
@@ -204,11 +202,12 @@ const CutSites = (props: {
             {zoom > 10 && (
               <path
                 ref={inputRef(c.id, {
-                  element: null,
+                  clockwise: true,
                   end: c.end,
                   id: c.id,
                   start: c.start,
                   type: "ENZYME",
+                  viewer: "LINEAR",
                 })} // for highlighting
                 className="la-vz-cut-site"
                 d={`M ${c.highlight.x} ${lineYDiff}

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Coor, InputRefFunc, Size } from "../elements";
+import { Coor, Size } from "../elements";
 import { CHAR_WIDTH, GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
@@ -27,7 +27,6 @@ interface LabelsProps {
   findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
-  inputRef: InputRefFunc;
   labels: ILabel[];
   lineHeight: number;
   radius: number;

@@ -26,22 +26,18 @@
 }
 
 .la-vz-viewer-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.la-vz-viewer-container,
-.la-vz-viewer {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
 .la-vz-viewer-event-router {
+  display: flex;
+  flex-direction: row;
   position: absolute;
   outline: none;
   height: 100%;
-  width: inherit;
+  width: 100%;
 }
 
 .la-vz-search {

@@ -1,17 +1,14 @@
 import * as React from "react";
 
-import { Annotation, CutSite, Highlight, InputRefFunc, NameRange, Range, SeqType, Size } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
-import withViewerHOCs from "../handlers";
-import { Selection } from "../handlers/selection";
 import isEqual from "../isEqual";
 import { createTranslations } from "../sequence";
 import InfiniteScroll from "./InfiniteScroll";
 import SeqBlock from "./SeqBlock";
 
 export interface LinearProps {
-  Circular: boolean;
-  Linear: boolean;
   annotations: Annotation[];
   bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
@@ -19,17 +16,15 @@ export interface LinearProps {
   compSeq: string;
   cutSites: CutSite[];
   elementHeight: number;
+  handleMouseEvent: React.MouseEventHandler;
   highlights: Highlight[];
   inputRef: InputRefFunc;
   lineHeight: number;
-  mouseEvent: React.MouseEventHandler;
-  name: string;
   onUnmount: (id: string) => void;
   search: NameRange[];
   seq: string;
   seqFontSize: number;
   seqType: SeqType;
-  setSelection: (selection: Selection) => void;
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
@@ -48,7 +43,7 @@ export interface LinearProps {
  *  Translations
  *  Selections
  */
-class Linear extends React.Component<LinearProps> {
+export default class Linear extends React.Component<LinearProps> {
   /**
    * Deep equality comparison
    */
@@ -179,11 +174,11 @@ class Linear extends React.Component<LinearProps> {
           elementHeight={elementHeight}
           firstBase={firstBase}
           fullSeq={seq}
+          handleMouseEvent={this.props.handleMouseEvent}
           highlights={highlightRows[i]}
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}
-          mouseEvent={this.props.mouseEvent}
           searchRows={searchRows[i]}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
@@ -214,6 +209,3 @@ class Linear extends React.Component<LinearProps> {
     );
   }
 }
-
-// @ts-ignore
-export default withViewerHOCs(Linear);

@@ -1,16 +1,7 @@
 import * as React from "react";
 
-import {
-  Annotation,
-  CutSite,
-  Highlight,
-  InputRefFunc,
-  NameRange,
-  Range,
-  SeqType,
-  Size,
-  Translation,
-} from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
 import AnnotationRows from "./Annotations";
 import CutSiteRow from "./CutSites";
 import Find from "./Find";
@@ -44,12 +35,12 @@ interface SeqBlockProps {
   elementHeight: number;
   firstBase: number;
   fullSeq: string;
+  handleMouseEvent: React.MouseEventHandler<SVGSVGElement>;
   highlights: Highlight[];
   id: string;
   inputRef: InputRefFunc;
   key: string;
   lineHeight: number;
-  mouseEvent: React.MouseEventHandler<SVGSVGElement>;
   onUnmount: (a: string) => void;
   searchRows: Range[];
   seq: string;
@@ -232,11 +223,11 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
       elementHeight,
       firstBase,
       fullSeq,
+      handleMouseEvent,
       highlights,
       id,
       inputRef,
       lineHeight,
-      mouseEvent,
       onUnmount,
       searchRows,
       seq,
@@ -262,13 +253,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     };
 
     const lastBase = firstBase + seq.length;
-    const seqRange = {
-      element: this,
-      end: lastBase,
-      ref: id,
-      start: firstBase,
-      type: "SEQ",
-    };
 
     // height and yDiff of cut sites
     const cutSiteYDiff = 0; // spacing for cutSite names
@@ -306,16 +290,22 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     return (
       <svg
-        ref={inputRef(id, seqRange)}
+        ref={inputRef(id, {
+          end: lastBase,
+          ref: id,
+          start: firstBase,
+          type: "SEQ",
+          viewer: "LINEAR",
+        })}
         className="la-vz-seqblock"
         cursor="text"
         display="block"
         height={blockHeight}
         id={id}
         width={size.width >= 0 ? size.width : 0}
-        onMouseDown={mouseEvent}
-        onMouseMove={mouseEvent}
-        onMouseUp={mouseEvent}
+        onMouseDown={handleMouseEvent}
+        onMouseMove={handleMouseEvent}
+        onMouseUp={handleMouseEvent}
       >
         {showIndex && (
           <IndexRow
@@ -335,7 +325,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
           fullSeq={fullSeq}
-          inputRef={inputRef}
           lastBase={lastBase}
           selectHeight={selectHeight}
           onUnmount={onUnmount}
@@ -358,7 +347,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           fullSeq={fullSeq}
           lastBase={lastBase}
           selectEdgeHeight={selectEdgeHeight}
-          zoom={zoom.linear}
         />
         <Find
           compYDiff={compYDiff - 3}
@@ -370,7 +358,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           lastBase={lastBase}
           lineHeight={lineHeight}
           listenerOnly={false}
-          seqBlockRef={this}
           zoomed={zoomed}
         />
         {translations.length && (
@@ -383,7 +370,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
-            seqBlockRef={this}
             seqType={seqType}
             translations={translations}
             yDiff={translationYDiff}
@@ -407,9 +393,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
         )}
         {zoomed && (
           <CutSiteRow
-            charWidth={charWidth}
             cutSites={cutSiteRows}
-            elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
             firstBase={firstBase}
             inputRef={inputRef}
@@ -439,7 +423,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           lastBase={lastBase}
           lineHeight={lineHeight}
           listenerOnly={true}
-          seqBlockRef={this}
           zoomed={zoomed}
         />
         <Highlights

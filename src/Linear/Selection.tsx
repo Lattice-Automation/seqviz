@@ -1,8 +1,7 @@
 import * as React from "react";
 
-import { InputRefFunc } from "../elements";
-import { SelectionContext } from "../handlers/selection";
 import randomid from "../randomid";
+import SelectionContext from "../selectionContext";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -11,7 +10,6 @@ interface EdgesProps {
   fullSeq: string;
   lastBase: number;
   selectEdgeHeight: number;
-  zoom: number;
 }
 
 /**
@@ -21,6 +19,7 @@ interface EdgesProps {
  */
 class Edges extends React.PureComponent<EdgesProps> {
   static contextType = SelectionContext;
+  static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
   id = randomid();
@@ -28,6 +27,10 @@ class Edges extends React.PureComponent<EdgesProps> {
   render() {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
     const { clockwise, end, ref, start } = this.context;
+
+    if (typeof start === "undefined" || typeof end === "undefined") {
+      return;
+    }
 
     let startEdge: number | null = null;
     let lastEdge: number | null = null;
@@ -118,7 +121,6 @@ interface BlockProps {
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
-  inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: string) => void;
   selectHeight: number;
@@ -138,6 +140,10 @@ class Block extends React.PureComponent<BlockProps> {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectHeight } = this.props;
     const { clockwise, ref } = this.context;
     let { end, start } = this.context;
+
+    if (typeof start === "undefined" || typeof end === "undefined") {
+      return;
+    }
 
     // there's no need to render a selection block (rect) if just one point has been selected
     if (start === end && ref !== "ALL") return null;

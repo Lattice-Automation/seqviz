@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { Coor, CutSite, InputRefFunc } from "../elements";
+import { InputRefFunc } from "../SelectionHandler";
+import { Coor, CutSite } from "../elements";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CutSitesProps {
@@ -41,16 +42,12 @@ const CutSites = (props: CutSitesProps) => {
 
 const SingleCutSite = (props: {
   calculateLinePath: (index: number, startRadius: number, endRadius: number) => string;
-  center: Coor;
   cutSite: CutSite;
-  findCoor: (index: number, radius: number, rotate?: boolean) => Coor;
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   inputRef: InputRefFunc;
   lineHeight: number;
   radius: number;
-  rotateCoor: (coor: Coor, degrees: number) => Coor;
-  selectionRows: number;
   seqLength: number;
 }) => {
   const { calculateLinePath, cutSite, genArc, getRotation, inputRef, lineHeight, radius, seqLength } = props;
@@ -88,6 +85,7 @@ const SingleCutSite = (props: {
           ref: id,
           start: start,
           type: "ENZYME",
+          viewer: "CIRCULAR",
         })}
         className="la-vz-cut-site"
         cursor="pointer"
