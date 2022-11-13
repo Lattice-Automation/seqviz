@@ -50,11 +50,10 @@ const rnaAlphabet = {
 
 /**
  * mapping the 64 standard codons to amino acids
- * no synth AA's
  *
  * adapted from: "https://github.com/keithwhor/NtSeq/blob/master/lib/nt.js
  */
-const codon2AA = {
+const dnaCodonToAminoAcid = {
   AAA: "K",
   AAC: "N",
   AAG: "K",
@@ -121,7 +120,7 @@ const codon2AA = {
   TTT: "F",
 };
 
-const aminoAcids = Array.from(new Set(Object.values(codon2AA)).values()).join("");
+const aminoAcids = Array.from(new Set(Object.values(dnaCodonToAminoAcid)).values()).join("");
 const aminoAcidsMap = aminoAcids
   .toLowerCase()
   .split("")
@@ -267,35 +266,37 @@ export const directionality = (direction: number | string | undefined): -1 | 0 |
   return 0;
 };
 
+const rnaCodonToAminoAcid = Object.keys(dnaCodonToAminoAcid).reduce(
+  (acc, k) => ({ ...acc, [k.replace(/T/gi, "U")]: dnaCodonToAminoAcid[k] }),
+  {}
+);
+
 /**
  * Given a sequence, translate it into an Amino Acid sequence
  */
-export const translateDNA = (seqInput: string): string => {
+export const translate = (seqInput: string, seqType: SeqType): string => {
+  if (seqType === "aa") {
+    return seqInput;
+  }
+
+  let codonMap: { [key: string]: string } = dnaCodonToAminoAcid;
+  if (seqType === "rna") {
+    codonMap = rnaCodonToAminoAcid;
+  }
+
   const seq = seqInput.toUpperCase();
   const seqLength = seq.length;
   let aaSeq = "";
   for (let i = 0, j = 0; i < seqLength; i += 3, j += 1) {
     if (i + 2 < seqLength) {
-      aaSeq += codon2AA[seq[i] + seq[i + 1] + seq[i + 2]] || "?";
+      aaSeq += codonMap[seq[i] + seq[i + 1] + seq[i + 2]] || "?";
     }
   }
   return aaSeq;
 };
 
 /**
- * createLinearTranslations
- *
- * a function used by SeqViewer/Circular to take a "translation", as it's stored
- * in the DB (just a start and end point referencing the part sequence) and convert
- * that into elements that are useful for the SeqBlocks
- *
- * the seqBlocks need, at a minimum, to know the direction of the translation, the
- * amino acids relevant to their seqBlock, and the start and end point of the translation
- *
- * the actual start and end point of the translation will usually differ from that in storage,
- * because not all basepairs within the start and end point might be used within the
- * actual translation. For example, if the user selects 5 bps and makes a translation,
- * only the first 3 will be used. so the actual start is 1 and the actual end is 3 (inclusive)
+ * for each translation (range + direction) and the input sequence, convert it to a translation and amino acid sequence
  */
 export const createLinearTranslations = (translations: Range[], seq: string, seqType: SeqType) => {
   // elongate the original sequence to account for translations that cross the zero index
@@ -310,13 +311,14 @@ export const createLinearTranslations = (translations: Range[], seq: string, seq
       direction === 1 ? dnaDoubled.substring(start, end) : reverseComplement(dnaDoubled.substring(start, end), seqType);
 
     // translate the DNA sub sequence
-    const AAseq = direction === 1 ? translateDNA(subSeq) : translateDNA(subSeq).split("").reverse().join(""); // translate
+    const aaSeq =
+      direction === 1 ? translate(subSeq, seqType) : translate(subSeq, seqType).split("").reverse().join(""); // translate
 
     // the starting point for the translation, reading left to right (regardless of translation
     // direction). this is later needed to calculate the number of bps needed in the first
     // and last codons
-    const tStart = direction === 1 ? start : end - AAseq.length * 3;
-    let tEnd = direction === 1 ? (start + AAseq.length * 3) % seq.length : end % seq.length;
+    const tStart = direction === 1 ? start : end - aaSeq.length * 3;
+    let tEnd = direction === 1 ? (start + aaSeq.length * 3) % seq.length : end % seq.length;
 
     // treating one particular edge case where the start at zero doesn't make sense
     if (tEnd === 0) {
@@ -327,7 +329,7 @@ export const createLinearTranslations = (translations: Range[], seq: string, seq
       id: randomid(),
       name: "translation",
       ...t,
-      AAseq: AAseq,
+      AAseq: aaSeq,
       end: tEnd,
       start: tStart,
     };

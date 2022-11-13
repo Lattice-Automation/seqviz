@@ -371,7 +371,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
     if (!seq) return <div className="la-vz-seqviz" />;
 
-    if (seqType !== "dna" && translations && translations.length) {
+    if (seqType !== "dna" && seqType !== "rna" && translations && translations.length) {
       // TODO: this should have a warning, I just don't want to do it in render
       translations = [];
     }

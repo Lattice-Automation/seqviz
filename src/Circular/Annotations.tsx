@@ -177,8 +177,12 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         fill={a.color}
         id={a.id}
         stroke={a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray"}
-        onBlur={() => {}}
-        onFocus={() => {}}
+        onBlur={() => {
+          // do nothing
+        }}
+        onFocus={() => {
+          // do nothing
+        }}
         onMouseOut={() => hoverAnnotation(a.id, "0.7")}
         onMouseOver={() => hoverAnnotation(a.id, "1.0")}
       />
@@ -186,8 +190,12 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         <text
           dy={-0.4 * lineHeight}
           id={a.id}
-          onBlur={() => {}}
-          onFocus={() => {}}
+          onBlur={() => {
+            // do nothing
+          }}
+          onFocus={() => {
+            // do nothing
+          }}
           onMouseOut={() => hoverAnnotation(a.id, "0.7")}
           onMouseOver={() => hoverAnnotation(a.id, "1.0")}
         >

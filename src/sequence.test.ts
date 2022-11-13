@@ -1,4 +1,5 @@
-import { complement, directionality, guessType, reverseComplement } from "./sequence";
+import { SeqType } from "./elements";
+import { complement, directionality, guessType, reverseComplement, translate } from "./sequence";
 
 describe("Sequence utilities", () => {
   it("detects type", () => {
@@ -29,7 +30,7 @@ describe("Sequence utilities", () => {
     );
   });
 
-  it("returns empty of an RNA sequence", () => {
+  it("complement of an RNA sequence", () => {
     const inSeq = "UACGAUCUUAG";
 
     const { compSeq, seq } = complement(inSeq, "rna");
@@ -38,7 +39,7 @@ describe("Sequence utilities", () => {
     expect(compSeq).toEqual("AUGCUAGAAUC");
   });
 
-  it("returns empty compSeq for amino-acid", () => {
+  it("complement of empty compSeq for amino-acid", () => {
     const inSeq =
       "MSKGEELFTGVVPILVELbjDGDVNGHKFSVSGEGEGdatYGKLTLKFICTTGKLPVPWPTLMSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWP";
 
@@ -48,7 +49,7 @@ describe("Sequence utilities", () => {
     expect(compSeq).toEqual("");
   });
 
-  it("returns the reverse complement", () => {
+  it("reverseComplements DNA sequence", () => {
     const revCompSeq = reverseComplement(
       "acacgattgcccgacggattcatgagatgtcaggccgcaaagggcgcctggtggcGATGAATTGCGCGGCCATTCCGGAGTCCCTCGccgagagcgagttattcggcgtggtcagcggtgcctacaccggcgctgatcgctccagagtcg",
       "dna"
@@ -59,16 +60,44 @@ describe("Sequence utilities", () => {
     );
   });
 
-  it("parses directionality from multiple formats", () => {
-    expect(directionality("FWD")).toEqual(1);
-    expect(directionality("FORWARD")).toEqual(1);
-    expect(directionality(1)).toEqual(1);
-    expect(directionality("1")).toEqual(1);
-    expect(directionality("test")).toEqual(0);
-    expect(directionality("NONE")).toEqual(0);
-    expect(directionality("REVERSE")).toEqual(-1);
-    expect(directionality("REV")).toEqual(-1);
-    expect(directionality(-1)).toEqual(-1);
-    expect(directionality("-1")).toEqual(-1);
+  [
+    {
+      expect: "TRLPDGFMRCQAAKGAWWR*IARPFRSPSPRASYSAWSAVPTPALIAPES",
+      seq: "acacgattgcccgacggattcatgagatgtcaggccgcaaagggcgcctggtggcGATGAATTGCGCGGCCATTCCGGAGTCCCTCGccgagagcgagttattcggcgtggtcagcggtgcctacaccggcgctgatcgctccagagtcg",
+      seqType: "dna",
+    },
+    {
+      expect: "TRLPDGFMRCQAAKGAWWR*IARPFRSPSPRASYSAWSAVPTPALIAPES",
+      seq: "ACACGAUUGCCCGACGGAUUCAUGAGAUGUCAGGCCGCAAAGGGCGCCUGGUGGCGAUGAAUUGCGCGGCCAUUCCGGAGUCCCUCGCCGAGAGCGAGUUAUUCGGCGUGGUCAGCGGUGCCUACACCGGCGCUGAUCGCUCCAGAGUCG",
+      seqType: "rna",
+    },
+    {
+      expect: "TRLPDGFMRCQAAKGAWWR*IARPFRSPSPRASYSAWSAVPTPALIAPES",
+      seq: "TRLPDGFMRCQAAKGAWWR*IARPFRSPSPRASYSAWSAVPTPALIAPES",
+      seqType: "aa",
+    },
+  ].forEach(test => {
+    it(`translates sequence: ${test.seqType}`, () => {
+      const seq = translate(test.seq, test.seqType as SeqType);
+
+      expect(seq).toEqual(test.expect);
+    });
+  });
+
+  [
+    ["FWD", 1],
+    ["FORWARD", 1],
+    [1, 1],
+    ["1", 1],
+    ["test", 0],
+    ["NONE", 0],
+    ["REVERSE", -1],
+    ["REV", -1],
+    [-1, -1],
+    ["-1", -1],
+  ].forEach(([i, o]) => {
+    it(`parses directionality: ${i}`, () => {
+      expect(directionality(i)).toEqual(o);
+    });
   });
 });
