@@ -4,7 +4,6 @@ import CentralIndexContext from "./centralIndexContext";
 import debounce from "./debounce";
 import { Selection } from "./selectionContext";
 
-/* EventHandlerProps are those needed by the WithEventsHandler HOC */
 export interface EventsHandlerProps {
   bpsPerBlock: number;
   children: React.ReactNode;
@@ -16,8 +15,7 @@ export interface EventsHandlerProps {
 }
 
 /**
- * WithEventsHandler is an HOC that wraps the SeqViewers and handles the routing of all
- * events, including keypresses, mouse clicks, etc.
+ * EventHandler handles the routing of all events, including keypresses, mouse clicks, etc.
  */
 export class EventHandler extends React.PureComponent<EventsHandlerProps> {
   static contextType = CentralIndexContext;

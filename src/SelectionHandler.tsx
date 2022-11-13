@@ -12,7 +12,6 @@ export type SeqVizMouseEvent = React.MouseEvent & {
   target: { id: string };
 };
 
-/* SelectionHandlerProps are those required by the WithSelectionHandler HOC. */
 export interface SelectionHandlerProps {
   bpsPerBlock: number;
   center: { x: number; y: number };
@@ -29,7 +28,7 @@ export interface SelectionHandlerProps {
 }
 
 /**
- * The selection HOC wraps viewers with a component that handles sequence selection. Each click, drag, etc, is
+ * SelectionHandler handles sequence selection. Each click, drag, etc, is
  * noted and mapped to a sequence index.
  */
 export default class SelectionHandler extends React.PureComponent<SelectionHandlerProps> {
