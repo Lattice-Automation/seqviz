@@ -68,11 +68,7 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
-    // this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
-    this.setState({ annotations: seq.annotations, name: seq.name, seq: "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDRAEVK", viewer: "linear" });
-    
-
-    
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
   };
 
   toggleSidebar = () => {
