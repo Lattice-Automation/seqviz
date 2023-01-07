@@ -1,7 +1,5 @@
 body {
-  min-width: 1000px; /* minimum width of 1000px */
   width: auto !important; /* Firefox will set width as auto */
-  width: 1000px; /* As IE6 ignores !important it will set width as 1000px; */
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
@@ -29,10 +27,6 @@ h1 {
   margin-left: 0 !important;
   margin-right: 0 !important;
   height: 100%;
-}
-
-.sidebar-container {
-  min-width: 1024px;
 }
 
 #options-sidebar {
@@ -304,7 +298,6 @@ input#part-input {
   margin: auto 0;
   box-shadow: 0 2px 8px #f0f1f2;
   width: 100%;
-  min-width: 1024px;
   display: flex;
   vertical-align: middle;
 }

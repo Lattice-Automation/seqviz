@@ -84,7 +84,7 @@ export default class Index extends React.PureComponent<IndexProps> {
 
       let { x: textFromLeft } = findXAndWidth(p - 1, p - 1);
       textFromLeft += charWidth / 2;
-      textFromLeft -= textWidth / 2 + 2; // this +2 I cannot explain
+      textFromLeft -= textWidth / 2 + 3; // this +3 I cannot explain
       textFromLeft = Math.max(0, textFromLeft); // keep off left edge
       textFromLeft = Math.min(size.width - textWidth / 2, textFromLeft); // keep off right edge
 

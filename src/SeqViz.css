@@ -54,7 +54,6 @@
 
 .la-vz-selection-edge {
   fill: black;
-  shape-rendering: crispEdges;
   stroke: black;
 }
 

@@ -266,7 +266,7 @@ export default class Labels extends React.Component<LabelsProps, LabelsState> {
       x = Math.max(CHAR_WIDTH * (g.name.length + 1), x);
       x = Math.min(size.width - (g.name.length + 1) * CHAR_WIDTH, x);
       y = Math.max(CHAR_WIDTH, y);
-      y = Math.min(size.height - CHAR_WIDTH - 13, y); // assuming 13px font-size w/ padding
+      y = Math.min(size.height - CHAR_WIDTH - 12, y); // assuming 12px font-size w/ padding
       return { ...g, textCoor: { x, y } };
     });
   };

@@ -112,6 +112,7 @@ const CutSites = (props: {
 
   if (!sitesWithX.length) return null;
 
+  // This gets the x and width of the connector line that connects the forward and reverse cut sites
   const getConnectorXAndWidth = (c: HighlightedCutSite, showTopLine: boolean, showBottomLine: boolean) => {
     if (showTopLine && showBottomLine) {
       return {
@@ -171,7 +172,7 @@ const CutSites = (props: {
                 dominantBaseline="hanging"
                 id={c.id}
                 textAnchor="start"
-                x={c.cutX}
+                x={c.highlight.x}
                 y={yDiff}
                 onBlur={() => 0}
                 onFocus={() => 0}

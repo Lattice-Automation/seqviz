@@ -99,9 +99,21 @@ export default class Selection extends React.PureComponent<CircularSelectionProp
             transform={getRotation(start)}
           />
         )}
-        <path className="la-vz-selection-edge" d={edgePath} strokeWidth={1} transform={getRotation(start)} />
+        <path
+          className="la-vz-selection-edge"
+          d={edgePath}
+          shapeRendering="geometricPrecision"
+          strokeWidth={1}
+          transform={getRotation(start)}
+        />
         {selLength && (
-          <path className="la-vz-selection-edge" d={edgePath} strokeWidth={1} transform={getRotation(end)} />
+          <path
+            className="la-vz-selection-edge"
+            d={edgePath}
+            shapeRendering="geometricPrecision"
+            strokeWidth={1}
+            transform={getRotation(end)}
+          />
         )}
       </g>
     );
