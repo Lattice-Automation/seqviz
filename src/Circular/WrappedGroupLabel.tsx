@@ -1,6 +1,7 @@
 import * as React from "react";
 
-import { CHAR_WIDTH, ILabel } from "./Circular";
+import { CHAR_WIDTH } from "../SeqViewerContainer";
+import { ILabel } from "./Circular";
 import { GroupedLabelsWithCoors } from "./Labels";
 
 interface WrappedGroupLabelProps {

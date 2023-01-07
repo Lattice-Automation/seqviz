@@ -46,7 +46,7 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
-    enzymes: ["PstI", "EcoRI", "XbaI", "SpeI", { name: "BamHI", rseq: "CTAG", fcut: 1, rcut: 5 }],
+    enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     primers: true,
     search: { query: "ttnnnaat" },

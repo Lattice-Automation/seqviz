@@ -1,7 +1,8 @@
 import * as React from "react";
 
+import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { Coor, Size } from "../elements";
-import { CHAR_WIDTH, GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
+import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import WrappedGroupLabel from "./WrappedGroupLabel";
 
 interface LabelWithCoors {

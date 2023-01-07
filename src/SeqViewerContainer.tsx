@@ -10,6 +10,13 @@ import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./ele
 import isEqual from "./isEqual";
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
+/**
+ * This is the width in pixels of a character that's 12px
+ * This will need to change whenever the css of the plasmid viewer text changes
+ * just divide the width of some rectangular text by it's number of characters
+ */
+export const CHAR_WIDTH = 7.2;
+
 interface SeqViewerContainerProps {
   annotations: Annotation[];
   bpColors: { [key: number | string]: string };

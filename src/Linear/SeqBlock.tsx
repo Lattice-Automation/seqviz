@@ -3,7 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
 import AnnotationRows from "./Annotations";
-import CutSiteRow from "./CutSites";
+import { CutSites } from "./CutSites";
 import Find from "./Find";
 import Highlights from "./Highlights";
 import IndexRow from "./Index";
@@ -390,18 +390,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             yDiff={annYDiff}
           />
         )}
-        {zoomed && (
-          <CutSiteRow
-            cutSites={cutSiteRows}
-            findXAndWidth={this.findXAndWidth}
-            firstBase={firstBase}
-            inputRef={inputRef}
-            lastBase={lastBase}
-            lineHeight={lineHeight}
-            yDiff={cutSiteYDiff - 3}
-            zoom={zoom}
-          />
-        )}
         {zoomed && seqType !== "aa" ? (
           <text {...textProps} className="la-vz-seq" data-testid="la-vz-seq" id={id} y={indexYDiff}>
             {seq.split("").map(this.seqTextSpan)}
@@ -412,6 +400,19 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
             {compSeq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}
+        {zoomed && (
+          <CutSites
+            cutSites={cutSiteRows}
+            findXAndWidth={this.findXAndWidth}
+            firstBase={firstBase}
+            inputRef={inputRef}
+            lastBase={lastBase}
+            lineHeight={lineHeight}
+            size={size}
+            yDiff={cutSiteYDiff - 3}
+            zoom={zoom}
+          />
+        )}
         <Find
           compYDiff={compYDiff - 3}
           filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}

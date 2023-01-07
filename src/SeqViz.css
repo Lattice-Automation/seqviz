@@ -65,6 +65,7 @@
 }
 
 .la-vz-cut-site-highlight {
+  cursor: pointer;
   fill: rgb(255, 251, 7);
   fill-opacity: 0;
   shape-rendering: auto;
