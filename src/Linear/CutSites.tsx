@@ -40,7 +40,7 @@ const hoverCutSite = (className: string, on = false) => {
   }
 };
 
-/** 
+/**
  * Is the recognition site entirely within this SeqBlock?
  */
 const isWithinSeqBlock = (start: number, end: number, firstBase: number, lastBase: number) => {
@@ -164,10 +164,10 @@ const CutSites = (props: {
 
         return (
           <React.Fragment key={`cut-site-${c.id}-${firstBase}`}>
-            {/* label above seq */}
+            {/* enzyme name label above the cut-site */}
             {showTopLine && (
               <text
-                className="la-vz-cut-site-text"
+                className={`la-vz-cut-site-text ${c.id}-name`}
                 dominantBaseline="hanging"
                 id={c.id}
                 textAnchor="start"
@@ -180,6 +180,26 @@ const CutSites = (props: {
               >
                 {c.enzyme.name}
               </text>
+            )}
+
+            {/* outline showing the recognition site */}
+            {zoom > 10 && (
+              <path
+                ref={inputRef(c.id, {
+                  clockwise: true,
+                  end: c.end,
+                  id: c.id,
+                  start: c.start,
+                  type: "ENZYME",
+                  viewer: "LINEAR",
+                })} // for highlighting
+                className={`la-vz-cut-site-highlight ${c.id}`}
+                d={`M ${c.highlight.x} ${lineYDiff}
+                    L ${c.highlight.x + c.highlight.width} ${lineYDiff}
+                    L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
+                    L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
+                style={c.enzyme.color?.length ? { fill: c.enzyme.color } : {}}
+              />
             )}
 
             {/* lines showing the cut site */}
@@ -197,26 +217,6 @@ const CutSites = (props: {
               <path
                 className="la-vz-cut-site"
                 d={`M ${c.hangX} ${lineYDiff + lineHeight} L ${c.hangX} ${lineYDiff + 2 * lineHeight}`}
-              />
-            )}
-
-            {/* outline showing the recog site */}
-            {zoom > 10 && (
-              <path
-                ref={inputRef(c.id, {
-                  clockwise: true,
-                  end: c.end,
-                  id: c.id,
-                  start: c.start,
-                  type: "ENZYME",
-                  viewer: "LINEAR",
-                })} // for highlighting
-                className="la-vz-cut-site"
-                d={`M ${c.highlight.x} ${lineYDiff}
-                    L ${c.highlight.x + c.highlight.width} ${lineYDiff}
-                    L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
-                    L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
-                style={c.enzyme.color ? { fill: c.enzyme.color } : {}}
               />
             )}
           </React.Fragment>
