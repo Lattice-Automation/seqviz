@@ -67,7 +67,7 @@
 }
 
 .la-vz-cut-site-text {
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
 }
 
@@ -105,10 +105,16 @@
   text-rendering: optimizeLegibility;
 }
 
+.la-vz-translation-amino-acid-label {
+  color: rgb(42, 42, 42);
+  font-size: 12px;
+  font-weight: 400;
+}
+
 /* Circular Viewer */
 .la-vz-viewer-circular {
   margin: auto;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 300;
   cursor: text;
 }

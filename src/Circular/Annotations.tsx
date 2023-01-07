@@ -201,7 +201,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
             className="la-vz-annotation-label"
             cursor="pointer"
             dominantBaseline="middle"
-            fontSize={11}
+            fontSize={12}
             id={a.id}
             startOffset={bottomHalf ? "25%" : "75%"}
             textAnchor="middle"

@@ -14,7 +14,7 @@ import Selection from "./Selection";
 
 // this will need to change whenever the css of the plasmid viewer text changes
 // just divide the width of some rectangular text by it's number of characters
-export const CHAR_WIDTH = 7.801;
+export const CHAR_WIDTH = 7.2;
 
 /** Sequence length cutoff below which the circular viewer's sequence won't be rendered. */
 export const RENDER_SEQ_LENGTH_CUTOFF = 250;

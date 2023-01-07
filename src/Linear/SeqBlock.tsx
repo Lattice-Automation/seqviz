@@ -159,8 +159,7 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     let x = 0;
     if (firstIndex >= firstBase) {
-      // is the +1 weird? yes. does it slightly improve alignments? also yes.
-      x = (firstIndex - firstBase) * charWidth + 1;
+      x = (firstIndex - firstBase) * charWidth;
       x = Math.max(x, 0) || 0;
     }
 

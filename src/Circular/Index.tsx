@@ -177,7 +177,7 @@ export default class Index extends React.PureComponent<IndexProps> {
     // create tick and text style
     const subtitleStyle = {
       fill: "gray",
-      fontSize: 14,
+      fontSize: 12,
       textAnchor: "middle",
     };
 
@@ -217,7 +217,7 @@ export default class Index extends React.PureComponent<IndexProps> {
             />
             <text
               className="la-vz-index-tick-label"
-              fontSize={11}
+              fontSize={12}
               textAnchor="middle"
               x={tickCoorEnd.x}
               y={tickCoorEnd.y + lineHeight}

@@ -220,15 +220,11 @@ class TranslationRow extends React.PureComponent<TranslationRowProps> {
 
               {showAminoAcidLabel && (
                 <text
+                  className="la-vz-translation-amino-acid-label"
                   cursor="pointer"
                   data-testid="la-vz-translation"
                   dominantBaseline="middle"
                   id={aaId}
-                  style={{
-                    color: "black",
-                    fontSize: 13,
-                    fontWeight: 400,
-                  }}
                   textAnchor="middle"
                   x={bpCount * 0.5 * charWidth}
                   y={`${h / 2 + 1}`}

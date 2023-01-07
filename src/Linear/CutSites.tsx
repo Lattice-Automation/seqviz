@@ -40,8 +40,10 @@ const hoverCutSite = (className: string, on = false) => {
   }
 };
 
-// is this recognition site entirely within this SeqBlock?
-const recogContiguous = (start: number, end: number, firstBase: number, lastBase: number) => {
+/** 
+ * Is the recognition site entirely within this SeqBlock?
+ */
+const isWithinSeqBlock = (start: number, end: number, firstBase: number, lastBase: number) => {
   if ((start < firstBase && end < firstBase) || (start > lastBase && end > lastBase)) return true;
   if (end >= start) {
     return end < lastBase && start > firstBase;
@@ -82,7 +84,7 @@ const CutSites = (props: {
     const { x: hangX } = findXAndWidth(c.rcut, c.rcut);
     let { width: highlightWidth, x: highlightX } = findXAndWidth(c.start, c.end);
 
-    if (recogContiguous(c.start, c.end, firstBase, lastBase)) {
+    if (isWithinSeqBlock(c.start, c.end, firstBase, lastBase)) {
       if (c.start > c.end) {
         ({ width: highlightWidth, x: highlightX } = findXAndWidth(
           c.end < firstBase ? lastBase : Math.min(lastBase, c.end),

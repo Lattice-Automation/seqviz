@@ -28,11 +28,11 @@ h1 {
 .ui.container {
   margin-left: 0 !important;
   margin-right: 0 !important;
+  height: 100%;
 }
 
 .sidebar-container {
   min-width: 1024px;
-  min-height: 724px;
 }
 
 #options-sidebar {
@@ -71,11 +71,10 @@ h1 {
 }
 
 #seqviz-container {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 724px;
 }
 
 #seqviewer {
