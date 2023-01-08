@@ -6,12 +6,12 @@ import CentralIndexContext from "../centralIndexContext";
 import { Annotation, Coor, CutSite, Highlight, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
 import isEqual from "../isEqual";
-import Annotations from "./Annotations";
-import CutSites from "./CutSites";
-import Find from "./Find";
-import Index from "./Index";
-import Labels from "./Labels";
-import Selection from "./Selection";
+import { Annotations } from "./Annotations";
+import { CutSites } from "./CutSites";
+import { Find } from "./Find";
+import { Index } from "./Index";
+import { Labels } from "./Labels";
+import { Selection } from "./Selection";
 
 /** Sequence length cutoff below which the circular viewer's sequence won't be rendered. */
 export const RENDER_SEQ_LENGTH_CUTOFF = 250;

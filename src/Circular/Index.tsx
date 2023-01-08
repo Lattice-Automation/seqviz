@@ -33,7 +33,7 @@ interface IndexProps {
  * part need to be pushed to the bottom of the circular viewer if there
  * are too many elements in the circular viewer and the name won't fit
  */
-export default class Index extends React.PureComponent<IndexProps> {
+export class Index extends React.PureComponent<IndexProps> {
   static contextType = CentralIndexContext;
   static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;

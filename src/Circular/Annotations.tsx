@@ -25,7 +25,7 @@ interface AnnotationsProps {
  * Annotations might overlap with one another. To avoid that, annotations are first moved into rows -- non-overlapping
  * arrays or annotation arrays -- and then used to create the array of array of annotation paths.
  */
-export default class Annotations extends React.PureComponent<AnnotationsProps> {
+export class Annotations extends React.PureComponent<AnnotationsProps> {
   /** during an annotation hover event, darken all other pieces of the same annotation */
   hoverAnnotation = (className: string, opacity: string) => {
     if (!document) return;

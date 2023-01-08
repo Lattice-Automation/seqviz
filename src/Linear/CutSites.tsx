@@ -54,11 +54,11 @@ export const CutSites = (props: {
     <g className="la-vz-cut-sites">
       {labelledCutSites.map(c => {
         return (
-          <React.Fragment key={`cut-site-${c.c.id}-${firstBase}`}>
+          <g key={`cut-site-${c.c.id}-${firstBase}`}>
             {/* enzyme name label above the cut-site */}
             {c.label.render && (
               <text
-                className={`la-vz-cut-site-text ${c.c.id}-name`}
+                className={`la-vz-cut-site-text ${c.c.id}-label`}
                 dominantBaseline="hanging"
                 id={c.c.id}
                 textAnchor="start"
@@ -97,22 +97,25 @@ export const CutSites = (props: {
 
             {/* lines showing the cut site */}
             {c.top.render && (
-              <path className="la-vz-cut-site" d={`M ${c.top.x} ${lineYDiff} L ${c.top.x} ${lineYDiff + lineHeight}`} />
+              <path
+                className={`la-vz-cut-site ${c.c.id}`}
+                d={`M ${c.top.x} ${lineYDiff} L ${c.top.x} ${lineYDiff + lineHeight}`}
+              />
             )}
             {c.connector.render && zoom > 10 && (
               <path
-                className="la-vz-cut-site"
+                className={`la-vz-cut-site ${c.c.id}`}
                 d={`M ${c.connector.x} ${lineYDiff + lineHeight}
                     L ${c.connector.x + c.connector.width} ${lineYDiff + lineHeight}`}
               />
             )}
             {c.bottom.render && zoom > 10 && (
               <path
-                className="la-vz-cut-site"
+                className={`la-vz-cut-site ${c.c.id}`}
                 d={`M ${c.bottom.x} ${lineYDiff + lineHeight} L ${c.bottom.x} ${lineYDiff + 2 * lineHeight}`}
               />
             )}
-          </React.Fragment>
+          </g>
         );
       })}
     </g>
@@ -308,19 +311,24 @@ type CutSiteLabelled = CutSiteEnhanced & {
  * context: https://github.com/Lattice-Automation/seqviz/issues/104
  */
 const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] => {
-  let labelled = cutSites.map(c => ({ ...c, label: { render: c.top.render, text: c.c.name, x: c.highlight.x } }));
+  const unlabelled = cutSites
+    .filter(c => !c.top.render)
+    .map(c => ({ ...c, label: { render: false, text: c.c.name, x: c.highlight.x } }));
+  const labelled = cutSites
+    .filter(c => c.top.render)
+    .sort((a, b) => a.top.x - b.top.x)
+    .map(c => ({ ...c, label: { render: c.top.render, text: c.c.name, x: c.highlight.x } }));
 
   // shift the labels left that will overflow to the right
   const overflow = (c: CutSiteLabelled): boolean => {
     return c.label.x + c.label.text.length * CHAR_WIDTH > size.width;
   };
 
-  labelled = labelled.map(c => {
+  labelled.forEach(c => {
     const width = c.label.text.length * CHAR_WIDTH;
     if (overflow(c)) {
-      return { ...c, label: { ...c.label, x: size.width - width } };
+      c.label.x = size.width - width;
     }
-    return c;
   });
 
   // if two labels overlap, shift the righter most one to the right
@@ -328,7 +336,7 @@ const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] 
     return c1.label.x + c1.label.text.length * CHAR_WIDTH > c2.label.x;
   };
 
-  labelled = labelled.map((c, i) => {
+  labelled.forEach((c, i) => {
     if (i == 0) return c;
     const last = labelled[i - 1];
 
@@ -339,14 +347,13 @@ const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] 
   });
 
   // remove labels that now overflow the right of the screen
-  labelled = labelled.map(c => {
+  labelled.forEach(c => {
     if (overflow(c)) {
-      return { ...c, label: { ...c.label, render: false } };
+      c.label.render = false;
     }
-    return c;
   });
 
-  return labelled;
+  return unlabelled.concat(labelled);
 };
 
 /**
@@ -358,7 +365,7 @@ const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] 
 const onCutSiteHover = (className: string, on = false) => {
   if (!document) return;
 
-  let elements = document.getElementsByClassName(`${className}-name`);
+  let elements = document.getElementsByClassName(`${className}-label`);
   for (let i = 0; i < elements.length; i += 1) {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
     elements[i].style.fillOpacity = on ? 1.0 : 0.8;
@@ -369,5 +376,7 @@ const onCutSiteHover = (className: string, on = false) => {
   for (let i = 0; i < elements.length; i += 1) {
     // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
     elements[i].style.fillOpacity = on ? 0.25 : 0;
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
+    elements[i].style.strokeWidth = on ? 1.5 : 1;
   }
 };

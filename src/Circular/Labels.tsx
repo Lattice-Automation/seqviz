@@ -3,7 +3,7 @@ import * as React from "react";
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { Coor, Size } from "../elements";
 import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
-import WrappedGroupLabel from "./WrappedGroupLabel";
+import { WrappedGroupLabel } from "./WrappedGroupLabel";
 
 interface LabelWithCoors {
   label: ILabel;
@@ -51,7 +51,7 @@ interface LabelsState {
  * of the viewer, for scaling these names and positioning in the Y-direction
  * to avoid this overlap problem
  */
-export default class Labels extends React.Component<LabelsProps, LabelsState> {
+export class Labels extends React.Component<LabelsProps, LabelsState> {
   constructor(props: LabelsProps) {
     super(props);
 

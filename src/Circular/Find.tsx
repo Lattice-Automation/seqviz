@@ -4,7 +4,7 @@ import { InputRefFunc } from "../SelectionHandler";
 import { HighlightProp, Range } from "../elements";
 import { Arc, GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
-const Find = (props: {
+export const Find = (props: {
   genArc: GenArcFunc;
   getRotation: (index: number) => string;
   highlights: HighlightProp[];
@@ -55,5 +55,3 @@ const Find = (props: {
     </g>
   );
 };
-
-export default Find;

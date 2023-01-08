@@ -23,7 +23,7 @@ interface CircularSelectionProps {
  * if nothing is selected, it should just be the single cursor
  * without a middle highlighted region
  */
-export default class Selection extends React.PureComponent<CircularSelectionProps> {
+export class Selection extends React.PureComponent<CircularSelectionProps> {
   static contextType = SelectionContext;
   static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;

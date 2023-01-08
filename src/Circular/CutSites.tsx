@@ -18,7 +18,7 @@ interface CutSitesProps {
   seqLength: number;
 }
 
-const CutSites = (props: CutSitesProps) => {
+export const CutSites = (props: CutSitesProps) => {
   let { cutSites } = props;
   if (!cutSites.length) return null;
 
@@ -120,5 +120,3 @@ const SingleCutSite = (props: {
     </g>
   );
 };
-
-export default CutSites;
