@@ -365,18 +365,14 @@ const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] 
 const onCutSiteHover = (className: string, on = false) => {
   if (!document) return;
 
-  let elements = document.getElementsByClassName(`${className}-label`);
+  let elements = document.getElementsByClassName(`${className}-label`) as HTMLCollectionOf<HTMLElement>;
   for (let i = 0; i < elements.length; i += 1) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
-    elements[i].style.fillOpacity = on ? 1.0 : 0.8;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
-    elements[i].style.fontWeight = on ? 400 : 300;
+    elements[i].style.fillOpacity = on ? "1.0" : "0.8";
+    elements[i].style.fontWeight = on ? "400" : "300";
   }
-  elements = document.getElementsByClassName(className);
+  elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
   for (let i = 0; i < elements.length; i += 1) {
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
-    elements[i].style.fillOpacity = on ? 0.25 : 0;
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'style' does not exist on type 'Element'.
-    elements[i].style.strokeWidth = on ? 1.5 : 1;
+    elements[i].style.fillOpacity = on ? "0.25" : "0";
+    elements[i].style.stroke = on ? "black" : "rgb(115, 119, 125)";
   }
 };
