@@ -20,6 +20,8 @@ const props = {
 };
 
 describe("SeqViz rendering (React)", () => {
+  afterEach(() => cleanup());
+
   it("renders", async () => {
     const { getAllByTestId } = render(<SeqViz {...props} />);
     await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
@@ -30,8 +32,6 @@ describe("SeqViz rendering (React)", () => {
     const seqs = getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
     expect(seq).toEqual(props.seq);
-
-    cleanup();
   });
 
   it("renders with linear viewer only", async () => {
@@ -40,8 +40,6 @@ describe("SeqViz rendering (React)", () => {
 
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
-
-    cleanup();
   });
 
   it("renders with circular viewer only", async () => {
@@ -50,8 +48,6 @@ describe("SeqViz rendering (React)", () => {
 
     expect(getByTestId("la-vz-viewer-circular")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-circular")).toHaveLength(1);
-
-    cleanup();
   });
 
   it("renders with Genbank file string input", async () => {
@@ -66,8 +62,6 @@ describe("SeqViz rendering (React)", () => {
     const seqs = screen.getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
     expect(seq).toContain("ttgacagctagctcagtcctaggtactgtgctagcta");
-
-    cleanup();
   });
 
   it("renders with an Amino Acid sequence", async () => {
@@ -83,8 +77,6 @@ describe("SeqViz rendering (React)", () => {
     // const seqs = getAllByTestId("la-vz-translation");
     // const seq = seqs.map(s => s.textContent).join("");
     // expect(seq).toEqual(aaSeq);
-
-    cleanup();
   });
 
   it("renders with an externally set Selection prop", async () => {
@@ -101,7 +93,5 @@ describe("SeqViz rendering (React)", () => {
 
     expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(1);
-
-    cleanup();
   });
 });
