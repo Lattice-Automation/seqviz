@@ -47,7 +47,7 @@
   ],
   "dependencies": {
     "react-resize-detector": "^7.1.2",
-    "seqparse": "^0.1.9"
+    "seqparse": "^0.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
