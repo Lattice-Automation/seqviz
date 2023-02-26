@@ -230,7 +230,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const circularProps = this.circularProps();
 
     return (
-      <div ref={this.props.targetRef} className="la-vz-viewer-container" data-testid="la-vz-viewer-container">
+      <div style={{ height: "inherit", width: "inherit" }} ref={this.props.targetRef} className="la-vz-viewer-container" data-testid="la-vz-viewer-container">
         <CentralIndexContext.Provider value={centralIndex}>
           <SelectionContext.Provider value={this.getSelection(selection, selectionProp)}>
             <SelectionHandler

@@ -17,7 +17,17 @@ const cdnBuild = {
       { test: /\.js$/, enforce: "pre", loader: "source-map-loader", exclude: /node_modules/ },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          'isomorphic-style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ],
+        // use: ["style-loader", "css-loader"],
         exclude: /node_modules/,
       },
     ],
