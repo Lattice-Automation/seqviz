@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 
 import * as React from "react";
 
-import SeqBlock from "./SeqBlock";
+import { SeqBlock } from "./SeqBlock";
 
 const defaultProps = {
   blockHeight: 40,

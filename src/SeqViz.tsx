@@ -294,7 +294,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     seq: string;
     seqType: SeqType;
   } => {
-    const { annotations, name = "", file, seq } = props || this.props;
+    const { annotations, file, name = "", seq } = props || this.props;
 
     if (file) {
       // Parse a sequence file
@@ -339,7 +339,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * Search for the query sequence in the part sequence, set in state.
    */
   search = (props: SeqVizProps, seq: string): { search: NameRange[] } => {
-    const { search: searchProp, seqType, onSearch } = props;
+    const { onSearch, search: searchProp, seqType } = props;
 
     if (!searchProp || !seq || !seq.length) {
       return { search: [] };
