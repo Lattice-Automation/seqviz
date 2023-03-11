@@ -83,9 +83,14 @@ class Edges extends React.PureComponent<EdgesProps> {
       return null;
     }
 
-    /* handling case where cursor is rendered on each line */
+    // handling case where cursor is rendered on each line
     if (startEdge === null && lastEdge === null) {
       return null;
+    }
+
+    // if the start and last edge are the same, exclude the second
+    if (startEdge == lastEdge) {
+      lastEdge = null;
     }
 
     return (
