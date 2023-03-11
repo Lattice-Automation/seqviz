@@ -148,6 +148,7 @@ export default class App extends React.Component<any, AppState> {
               <div id="seqviewer">
                 {this.state.seq && (
                   <SeqViz
+                    // accession="MN623123"
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}

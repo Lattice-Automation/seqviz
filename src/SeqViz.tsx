@@ -1,5 +1,5 @@
 import * as React from "react";
-import seqparse, { ParseOptions } from "seqparse";
+import seqparse, { ParseOptions, parseFile } from "seqparse";
 
 import SeqViewerContainer from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
@@ -15,11 +15,10 @@ import {
   Range,
   SeqType,
 } from "./elements";
-import isEqual from "./isEqual";
-import randomid from "./randomid";
+import { isEqual } from "./isEqual";
 import search from "./search";
 import { Selection } from "./selectionContext";
-import { complement, directionality, guessType } from "./sequence";
+import { complement, directionality, guessType, randomid } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -192,15 +191,37 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   constructor(props: SeqVizProps) {
     super(props);
 
+    const seq = this.parseInput(props);
     this.state = {
-      annotations: [],
-      compSeq: "",
-      cutSites: [],
-      name: "",
-      search: [],
-      seq: "",
-      seqType: "unknown",
+      ...seq,
+      ...this.search(props, seq.seq),
+      ...this.cut(seq.seq, seq.seqType),
     };
+  }
+
+  /**
+   * If an accession was provided, query it here.
+   */
+  componentDidMount(): void {
+    const { accession } = this.props;
+    if (!accession || !accession.length) {
+      return;
+    }
+
+    // Query an accession to a sequence
+    seqparse(accession, { cors: true }).then(parsed => {
+      const seqType = guessType(parsed.seq);
+
+      this.setState({
+        annotations: this.parseAnnotations(parsed.annotations, parsed.seq),
+        compSeq: complement(parsed.seq, seqType).compSeq,
+        name: parsed.name,
+        seq: parsed.seq,
+        seqType,
+        ...this.search(this.props, parsed.seq),
+        ...this.cut(parsed.seq, seqType),
+      });
+    });
   }
 
   /** Log caught errors. */
@@ -208,15 +229,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     console.error("Error caught in SeqViz: %v %v", error, errorInfo);
   }
 
-  componentDidMount = async () => {
-    const input = await this.parseInput();
-
-    this.setState(input);
-    this.search(input.seq);
-    this.cut(input.seq, input.seqType);
-  };
-
-  /*
+  /**
    * Re-parse props to state if there are changes to:
    * - seq/accession/file (this probably means we need to update the rest)
    * - search input changes
@@ -226,7 +239,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * This is needed for the parse(accession) call that makes an async fetch to a remote repository
    * https://reactjs.org/docs/react-component.html#componentdidupdate
    */
-  componentDidUpdate = async (
+  componentDidUpdate = (
     // previous props
     { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
     // previous state
@@ -234,16 +247,16 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   ) => {
     // New accession or file provided, fetch and/or parse.
     if (accession !== this.props.accession || file !== this.props.file || (this.props.seq && this.props.seq !== seq)) {
-      const input = await this.parseInput();
+      const input = this.parseInput();
       this.setState({
         annotations: input.annotations,
         compSeq: input.compSeq,
         name: input.name,
         seq: input.seq,
         seqType: input.seqType,
+        ...this.search(this.props, input.seq),
+        ...this.cut(input.seq, input.seqType),
       });
-      this.search(seq);
-      this.cut(seq, input.seqType);
       return;
     }
 
@@ -252,12 +265,12 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       search &&
       (!this.props.search || search.query !== this.props.search.query || search.mismatch !== this.props.search.mismatch)
     ) {
-      this.search(seq); // new search parameters
+      this.setState(this.search(this.props, seq)); // new search parameters
     }
 
     // New digest parameters.
     if (!isEqual(enzymes, this.props.enzymes) || !isEqual(enzymesCustom, this.props.enzymesCustom)) {
-      this.cut(seq, seqType);
+      this.setState(this.cut(seq, seqType));
     }
 
     // New annotations provided.
@@ -269,39 +282,38 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   };
 
   /**
-   * If a file or accession were passed, parse it. This might be a call to a remote iGEM or NCBI server.
+   * If a file is provided or a sequence is provided, parse it and its annotations.
+   * If an accession is provided, query a remote repository and parse the sequence and annotations.
    */
-  parseInput = async (): Promise<{
+  parseInput = (
+    props?: SeqVizProps
+  ): {
     annotations: Annotation[];
     compSeq: string;
     name: string;
     seq: string;
     seqType: SeqType;
-  }> => {
-    const { accession, annotations, file, seq } = this.props;
-    const name = this.props.name || "";
+  } => {
+    const { annotations, file, name = "", seq } = props || this.props;
 
-    // Fetch the seq if we need to get it from a remote repository
-    if (accession || file) {
-      // Add settings for source buffer and name (for SnapGene)
-      const parseOptions = {
-        cors: true,
-      } as ParseOptions;
+    if (file) {
+      // Parse a sequence file
+      const parseOptions = {} as ParseOptions;
       if (file && file instanceof File) {
         parseOptions.fileName = file.name;
-        parseOptions.source = await file.arrayBuffer();
       }
 
-      // Parse a sequence file or accession
-      const parsed = await seqparse((accession || file || "").toString(), parseOptions);
-      const seqType = guessType(parsed.seq);
-      return {
-        annotations: this.parseAnnotations(parsed.annotations, parsed.seq),
-        compSeq: complement(parsed.seq, seqType).compSeq,
-        name: parsed.name,
-        seq: parsed.seq,
-        seqType,
-      };
+      const parsed = parseFile(file.toString(), parseOptions);
+      if (parsed.length) {
+        const seqType = guessType(parsed[0].seq);
+        return {
+          annotations: this.parseAnnotations(parsed[0].annotations, parsed[0].seq),
+          compSeq: complement(parsed[0].seq, seqType).compSeq,
+          name: parsed[0].name,
+          seq: parsed[0].seq,
+          seqType,
+        };
+      }
     } else if (seq) {
       // Fill in default props just using the seq
       const seqType = guessType(seq);
@@ -313,42 +325,41 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         seqType,
       };
     }
-    throw new Error("No 'seq', 'file', or 'accession' provided to SeqViz... Nothing to render");
+
+    return {
+      annotations: [],
+      compSeq: "",
+      name: "",
+      seq: "",
+      seqType: "dna",
+    };
   };
 
   /**
    * Search for the query sequence in the part sequence, set in state.
    */
-  search = (seq: string) => {
-    const { onSearch, search: searchProp, seqType } = this.props;
+  search = (props: SeqVizProps, seq: string): { search: NameRange[] } => {
+    const { onSearch, search: searchProp, seqType } = props;
 
-    if (!searchProp || !seq) {
-      return;
+    if (!searchProp || !seq || !seq.length) {
+      return { search: [] };
     }
 
     const results = search(searchProp.query, searchProp.mismatch, seq, seqType || guessType(seq));
-    if (isEqual(results, this.state.search)) {
-      return;
+    if (this.state && isEqual(results, this.state.search)) {
+      return { search: this.state.search };
     }
 
-    this.setState({ search: results });
     onSearch && onSearch(results);
+    return { search: results };
   };
 
   /**
-   * Find and save enzymes' cutsite locations.
+   * Find and save enzymes' cut-site locations.
    */
-  cut = (seq: string, seqType: SeqType) => {
-    if (!seq.length) {
-      return; // TODO why is this happening
-    }
-
-    const { enzymes, enzymesCustom } = this.props;
-
-    if (enzymes || enzymesCustom) {
-      this.setState({ cutSites: digest(seq || "", seqType, enzymes || [], enzymesCustom || {}) });
-    }
-  };
+  cut = (seq: string, seqType: SeqType): { cutSites: CutSite[] } => ({
+    cutSites: digest(seq || "", seqType, this.props.enzymes || [], this.props.enzymesCustom || {}),
+  });
 
   /**
    * Fix annotations to add unique ids, fix directionality, and modulo the start and end of each.

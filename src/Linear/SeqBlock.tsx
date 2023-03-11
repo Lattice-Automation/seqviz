@@ -8,7 +8,7 @@ import Find from "./Find";
 import Highlights from "./Highlights";
 import IndexRow from "./Index";
 import Selection from "./Selection";
-import TranslationRows from "./Translations";
+import { TranslationRows } from "./Translations";
 
 export type FindXAndWidthType = (
   n1?: number | null,
@@ -70,7 +70,7 @@ interface SeqBlockProps {
  * the sequence, and flair around it including the
  * complementary sequence, sequence index, and anotations *
  */
-export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
+export class SeqBlock extends React.PureComponent<SeqBlockProps> {
   static defaultProps = {};
 
   componentWillUnmount = () => {

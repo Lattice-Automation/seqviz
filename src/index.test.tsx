@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 
 import * as React from "react";
 
@@ -20,44 +20,38 @@ const props = {
 };
 
 describe("SeqViz rendering (React)", () => {
-  it("renders", async () => {
-    const { getAllByTestId } = render(<SeqViz {...props} />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
+  afterEach(() => cleanup());
 
+  it("renders", () => {
+    const { getAllByTestId } = render(<SeqViz {...props} />);
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
 
     // renders full sequence
     const seqs = getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
     expect(seq).toEqual(props.seq);
-
-    cleanup();
   });
 
-  it("renders with linear viewer only", async () => {
+  it("renders with linear viewer only", () => {
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} viewer="linear" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
 
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
-
-    cleanup();
   });
 
-  it("renders with circular viewer only", async () => {
+  it("renders with circular viewer only", () => {
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} viewer="circular" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
 
     expect(getByTestId("la-vz-viewer-circular")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-circular")).toHaveLength(1);
-
-    cleanup();
   });
 
   it("renders with Genbank file string input", async () => {
-    // TODO: what the hell is it complaining about
     render(<SeqViz {...props} file={demoPart} />);
-    await waitFor(() => expect(screen.getAllByTestId("la-vz-seqviz")).toBeTruthy());
+    expect(screen.getAllByTestId("la-vz-seqviz")).toBeTruthy();
 
     expect(screen.getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
 
@@ -66,29 +60,23 @@ describe("SeqViz rendering (React)", () => {
     const seqs = screen.getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
     expect(seq).toContain("ttgacagctagctcagtcctaggtactgtgctagcta");
-
-    cleanup();
   });
 
-  it("renders with an Amino Acid sequence", async () => {
+  it("renders with an Amino Acid sequence", () => {
     const aaSeq =
       "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK*";
 
     const { getAllByTestId, getByTestId } = render(<SeqViz {...props} seq={aaSeq} seqType="aa" viewer="linear" />);
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy());
-
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
 
     // const seqs = getAllByTestId("la-vz-translation");
     // const seq = seqs.map(s => s.textContent).join("");
     // expect(seq).toEqual(aaSeq);
-
-    cleanup();
   });
 
-  it("renders with an externally set Selection prop", async () => {
-    // TODO: what's going on here with the negative size in SeqViewerContainer
+  it("renders with an externally set Selection prop", () => {
     const { getAllByTestId } = render(
       <SeqViz
         {...props}
@@ -97,11 +85,8 @@ describe("SeqViz rendering (React)", () => {
         viewer="linear"
       />
     );
-    await waitFor(() => expect(getAllByTestId("la-vz-seqviz")).toBeTruthy(), { timeout: 1000 });
-
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(1);
-
-    cleanup();
   });
 });

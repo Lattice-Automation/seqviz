@@ -3,7 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
 import { SeqType, Translation } from "../elements";
-import randomid from "../randomid";
+import { randomid } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface TranslationRowsProps {
@@ -22,7 +22,7 @@ interface TranslationRowsProps {
 }
 
 /** Rows of translations */
-const TranslationRows = ({
+export const TranslationRows = ({
   bpsPerBlock,
   charWidth,
   elementHeight,
@@ -239,5 +239,3 @@ class TranslationRow extends React.PureComponent<TranslationRowProps> {
     );
   }
 }
-
-export default TranslationRows;

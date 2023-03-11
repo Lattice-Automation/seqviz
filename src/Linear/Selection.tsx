@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import randomid from "../randomid";
 import SelectionContext from "../selectionContext";
+import { randomid } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {

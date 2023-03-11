@@ -7,7 +7,7 @@ import Linear from "./Linear/Linear";
 import SelectionHandler from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
-import isEqual from "./isEqual";
+import { isEqual } from "./isEqual";
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
 /**

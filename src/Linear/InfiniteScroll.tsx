@@ -2,7 +2,7 @@ import * as React from "react";
 
 import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
-import isEqual from "../isEqual";
+import { isEqual } from "../isEqual";
 
 interface InfiniteScrollProps {
   blockHeights: number[];
@@ -23,7 +23,7 @@ interface InfiniteScrollState {
  *
  * This component should sense scroll events and, during one, recheck which sequences are shown.
  */
-export default class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
+export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, InfiniteScrollState> {
   static contextType = CentralIndexContext;
   static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;

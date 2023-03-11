@@ -4,7 +4,7 @@
  * copy-paste from StackOverflow: https://stackoverflow.com/a/25456134
  *
  */
-const isEqual = (x, y) => {
+export const isEqual = (x, y) => {
   if (x === y) {
     return true;
   } else if (typeof x === "object" && x !== null && typeof y === "object" && y !== null) {
@@ -20,5 +20,3 @@ const isEqual = (x, y) => {
   }
   return false;
 };
-
-export default isEqual;

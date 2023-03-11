@@ -3,10 +3,10 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
-import isEqual from "../isEqual";
+import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
-import InfiniteScroll from "./InfiniteScroll";
-import SeqBlock from "./SeqBlock";
+import { InfiniteScroll } from "./InfiniteScroll";
+import { SeqBlock } from "./SeqBlock";
 
 export interface LinearProps {
   annotations: Annotation[];
