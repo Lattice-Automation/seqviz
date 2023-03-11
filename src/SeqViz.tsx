@@ -345,7 +345,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     const { enzymes, enzymesCustom } = this.props;
 
-    if ((enzymes && enzymes.length) || (enzymesCustom && Object.keys(enzymesCustom).length)) {
+    if (enzymes || enzymesCustom) {
       this.setState({ cutSites: digest(seq || "", seqType, enzymes || [], enzymesCustom || {}) });
     }
   };
