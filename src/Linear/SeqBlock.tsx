@@ -243,7 +243,6 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
     if (!size.width || !size.height) return null;
 
     const textProps = {
-      dominantBaseline: "hanging",
       fontSize: seqFontSize,
       lengthAdjust: "spacing",
       textAnchor: "start",
@@ -391,12 +390,24 @@ export default class SeqBlock extends React.PureComponent<SeqBlockProps> {
           />
         )}
         {zoomed && seqType !== "aa" ? (
-          <text {...textProps} className="la-vz-seq" data-testid="la-vz-seq" id={id} y={indexYDiff}>
+          <text
+            {...textProps}
+            className="la-vz-seq"
+            data-testid="la-vz-seq"
+            id={id}
+            transform={`translate(0, ${indexYDiff + lineHeight / 2})`}
+          >
             {seq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}
         {compSeq && zoomed && showComplement && seqType !== "aa" ? (
-          <text {...textProps} className="la-vz-comp-seq" data-testid="la-vz-comp-seq" id={id} y={compYDiff}>
+          <text
+            {...textProps}
+            className="la-vz-comp-seq"
+            data-testid="la-vz-comp-seq"
+            id={id}
+            transform={`translate(0, ${compYDiff + lineHeight / 2})`}
+          >
             {compSeq.split("").map(this.seqTextSpan)}
           </text>
         ) : null}

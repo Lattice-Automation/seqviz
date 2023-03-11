@@ -55,6 +55,7 @@
 .la-vz-selection-edge {
   fill: black;
   stroke: black;
+  shape-rendering: geometricPrecision;
 }
 
 .la-vz-cut-site {
