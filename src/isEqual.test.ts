@@ -1,4 +1,4 @@
-import isEqual from "./isEqual";
+import { isEqual } from "./isEqual";
 
 describe("Deep equality checking", () => {
   it("compares two objects", () => {

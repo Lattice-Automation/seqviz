@@ -5,7 +5,7 @@ import { CHAR_WIDTH } from "../SeqViewerContainer";
 import CentralIndexContext from "../centralIndexContext";
 import { Annotation, Coor, CutSite, Highlight, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
-import isEqual from "../isEqual";
+import { isEqual } from "../isEqual";
 import { Annotations } from "./Annotations";
 import { CutSites } from "./CutSites";
 import { Find } from "./Find";

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Range } from "../elements";
-import randomid from "../randomid";
+import { randomid } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**

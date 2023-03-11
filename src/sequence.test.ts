@@ -1,5 +1,5 @@
 import { SeqType } from "./elements";
-import { complement, directionality, guessType, reverseComplement, translate } from "./sequence";
+import { complement, directionality, guessType, randomid, reverseComplement, translate } from "./sequence";
 
 describe("Sequence utilities", () => {
   it("detects type", () => {
@@ -99,5 +99,21 @@ describe("Sequence utilities", () => {
     it(`parses directionality: ${i}`, () => {
       expect(directionality(i)).toEqual(o);
     });
+  });
+});
+
+describe("Create random IDs", () => {
+  it("creates unique IDs", () => {
+    const seenIDs = new Set();
+
+    for (let i = 0; i < 10; i++) {
+      const id = randomid();
+
+      expect(typeof id).toEqual(typeof "");
+      expect(id.length).toEqual(10);
+      expect(seenIDs.has(id)).toBe(false);
+
+      seenIDs.add(id);
+    }
   });
 });
