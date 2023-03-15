@@ -2,12 +2,13 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { NameRange } from "../elements";
+import { highlight } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
- * Render rectangles aroun highlighted ranges.
+ * Render rectangles around highlighted ranges.
  */
-const Highlights = (props: {
+export const Highlights = (props: {
   compYDiff: number;
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
@@ -27,8 +28,6 @@ const Highlights = (props: {
     ))}
   </>
 );
-
-export default Highlights;
 
 const SingleHighlight = (props: {
   compYDiff: number;
@@ -54,13 +53,13 @@ const SingleHighlight = (props: {
   }
 
   const rectProps = {
-    className: "la-vz-highlight",
-    cursor: "pointer",
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    strokeWidth: 1,
-    style: highlightStyle,
+    style: {
+      ...highlight,
+      ...highlightStyle,
+    },
     width: width,
     x: x,
   };
@@ -77,6 +76,7 @@ const SingleHighlight = (props: {
         })}
         {...rectProps}
         y={props.indexYDiff}
+        style={highlight}
       />
       <rect
         key={`linear-highlight-${props.highlight.id}-bottom`}
@@ -88,6 +88,7 @@ const SingleHighlight = (props: {
         })}
         {...rectProps}
         y={props.compYDiff}
+        style={highlight}
       />
     </>
   );

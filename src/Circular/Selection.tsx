@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { Coor } from "../elements";
 import SelectionContext from "../selectionContext";
+import { highlight, selectionEdge } from "../style";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CircularSelectionProps {
@@ -86,7 +87,7 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
       <g>
         {selLength && (
           <path
-            className="la-vz-selection"
+            style={highlight}
             d={genArc({
               innerRadius: bottomR,
               largeArc: lArc,
@@ -99,22 +100,8 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
             transform={getRotation(start)}
           />
         )}
-        <path
-          className="la-vz-selection-edge"
-          d={edgePath}
-          shapeRendering="geometricPrecision"
-          strokeWidth={1}
-          transform={getRotation(start)}
-        />
-        {selLength && (
-          <path
-            className="la-vz-selection-edge"
-            d={edgePath}
-            shapeRendering="geometricPrecision"
-            strokeWidth={1}
-            transform={getRotation(end)}
-          />
-        )}
+        <path d={edgePath} transform={getRotation(start)} style={selectionEdge} />
+        {selLength && <path d={edgePath} transform={getRotation(end)} style={selectionEdge} />}
       </g>
     );
   }

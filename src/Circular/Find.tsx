@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { HighlightProp, Range } from "../elements";
+import { search } from "../style";
 import { Arc, GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 export const Find = (props: {
@@ -23,7 +24,6 @@ export const Find = (props: {
         search.map(s => (
           <Arc
             key={JSON.stringify(s)}
-            className="la-vz-search"
             direction={s.direction || 1}
             end={s.end}
             genArc={genArc}
@@ -33,13 +33,13 @@ export const Find = (props: {
             radius={radius}
             seqLength={seqLength}
             start={s.start}
+            style={search}
           />
         ))}
 
       {highlights.map(({ color, end, start }) => (
         <Arc
           key={`la-vz-highlight-${start}-${end}`}
-          className="la-vz-highlight"
           color={color}
           direction={1}
           end={end}
@@ -50,6 +50,7 @@ export const Find = (props: {
           radius={radius}
           seqLength={seqLength}
           start={start}
+          style={search}
         />
       ))}
     </g>

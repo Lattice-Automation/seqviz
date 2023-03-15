@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { SeqType, Size } from "../elements";
+import { indexLine, indexTick, indexTickLabel, svgText } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
@@ -93,8 +94,13 @@ export default class Index extends React.PureComponent<IndexProps> {
 
       return (
         <React.Fragment key={p}>
-          <path className="la-vz-index-tick" d="M 0 0 L 0 7" transform={transTick} />
-          <text className="la-vz-index-tick-label" dominantBaseline="hanging" fontSize={12} transform={transText}>
+          <path className="la-vz-index-tick" d="M 0 0 L 0 7" transform={transTick} style={indexTick} />
+          <text
+            className="la-vz-index-tick-label"
+            dominantBaseline="hanging"
+            transform={transText}
+            style={indexTickLabel}
+          >
             {p}
           </text>
         </React.Fragment>
@@ -110,7 +116,7 @@ export default class Index extends React.PureComponent<IndexProps> {
 
     return (
       <g transform={`translate(0, ${yDiff})`}>
-        <path className="la-vz-index-line" d={`M 0 1 L ${x + width} 1`} />
+        <path className="la-vz-index-line" d={`M 0 1 L ${x + width} 1`} style={indexLine} />
         {this.genTicks()}
       </g>
     );

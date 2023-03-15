@@ -344,6 +344,7 @@ export default class Circular extends React.Component<CircularProps, CircularSta
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onWheel={this.handleScrollEvent}
+        overflow="visible"
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} />
@@ -380,7 +381,6 @@ export default class Circular extends React.Component<CircularProps, CircularSta
  * Create an SVG arc around a single element in the Circular Viewer.
  */
 export const Arc = (props: {
-  className: string;
   color?: string;
   direction: -1 | 1;
   end: number;
@@ -391,8 +391,9 @@ export const Arc = (props: {
   radius: number;
   seqLength: number;
   start: number;
+  style: React.CSSProperties;
 }) => {
-  const { className, color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
+  const { color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
 
   let { end } = props;
   // crosses the zero index
@@ -409,7 +410,7 @@ export const Arc = (props: {
     sweepFWD: true,
   });
 
-  const id = `${className}-circular-${start}-${end}-${direction}`;
+  const id = `circular-${start}-${end}-${direction}`;
 
   return (
     <path
@@ -421,7 +422,6 @@ export const Arc = (props: {
         type: "FIND",
         viewer: "CIRCULAR",
       })}
-      className={className}
       cursor="pointer"
       d={findPath}
       fill={color}

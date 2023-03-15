@@ -3,6 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { NameRange } from "../elements";
+import { svgText } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
@@ -230,6 +231,7 @@ const SingleNamedElement = (props: {
           }}
           onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
           onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+          style={svgText}
         >
           {name}
         </text>

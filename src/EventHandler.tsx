@@ -256,6 +256,14 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
       onMouseDown={this.handleMouseEvent}
       onMouseMove={this.props.handleMouseEvent}
       onMouseUp={this.handleMouseEvent}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        height: "100%",
+        outline: "none",
+        position: "absolute",
+        width: "100%",
+      }}
     >
       {this.props.children}
     </div>

@@ -4,6 +4,7 @@ import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
 import { SeqType, Translation } from "../elements";
 import { randomid } from "../sequence";
+import { svgText } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface TranslationRowsProps {
@@ -228,6 +229,7 @@ class TranslationRow extends React.PureComponent<TranslationRowProps> {
                   textAnchor="middle"
                   x={bpCount * 0.5 * charWidth}
                   y={`${h / 2 + 1}`}
+                  style={svgText}
                 >
                   {a}
                 </text>

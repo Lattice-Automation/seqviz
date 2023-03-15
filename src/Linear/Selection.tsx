@@ -2,6 +2,7 @@ import * as React from "react";
 
 import SelectionContext from "../selectionContext";
 import { randomid } from "../sequence";
+import { selection, selectionEdge } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -97,7 +98,7 @@ class Edges extends React.PureComponent<EdgesProps> {
       <g>
         {startEdge !== null && (
           <rect
-            className="la-vz-selection-edge"
+            style={selectionEdge}
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
@@ -109,7 +110,7 @@ class Edges extends React.PureComponent<EdgesProps> {
         )}
         {lastEdge !== null && (
           <rect
-            className="la-vz-selection-edge"
+            style={selectionEdge}
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
@@ -162,11 +163,10 @@ class Block extends React.PureComponent<BlockProps> {
 
     // props shared between all 3 possible components.
     const blockProps = {
-      className: "la-vz-selection",
       "data-testid": "la-vz-selection-block",
       height: selectHeight,
-      shapeRendering: "auto",
       y: -5,
+      style: selection,
     };
 
     let x: number | null = null;

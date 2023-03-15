@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
+import { svgText } from "../style";
 import { ILabel } from "./Circular";
 import { GroupedLabelsWithCoors } from "./Labels";
 
@@ -15,7 +16,7 @@ interface WrappedGroupLabelProps {
 }
 
 /**
- * a component that groups several other labels together so they're all viewable at once
+ * Groups several other labels together so they're all viewable at once
  *
  * given the currently active annotation block, with multiple annotations and enzymes,
  * render each in a single "block", which is a g element with a rect "containing" the
@@ -103,7 +104,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
     <g key={key} onMouseLeave={() => setHoveredGroup("")}>
       <path className="la-vz-label-line" d={linePath} />
       <rect fill="white" height={rectHeight} stroke="none" width={rectWidth} {...rectCoor} />
-      <text {...groupCoor}>
+      <text {...groupCoor} style={svgText}>
         {labelRows.map((r, i) => (
           // turn each group of label rows into a text span
           // that's vertically spaced from the row above it

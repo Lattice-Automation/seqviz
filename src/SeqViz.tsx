@@ -424,7 +424,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     };
 
     return (
-      <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={style}>
+      <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={{ height: "100%", width: "100%", ...style }}>
         <SeqViewerContainer {...this.props} {...props} {...this.state} />
       </div>
     );

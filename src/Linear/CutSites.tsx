@@ -3,6 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { CutSite, Size } from "../elements";
+import { cutSiteHighlight, svgText } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**
@@ -68,6 +69,7 @@ export const CutSites = (props: {
                 onFocus={() => 0}
                 onMouseOut={() => onCutSiteHover(c.c.id, false)}
                 onMouseOver={() => onCutSiteHover(c.c.id, true)}
+                style={{ ...svgText, cursor: "pointer", fontSize: 12 }}
               >
                 {c.label.text}
               </text>
@@ -89,7 +91,7 @@ export const CutSites = (props: {
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff}
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
                     L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
-                style={c.c.color?.length ? { fill: c.c.color } : {}}
+                style={c.c.color?.length ? { ...cutSiteHighlight, fill: c.c.color } : cutSiteHighlight}
                 onMouseOut={() => onCutSiteHover(c.c.id, false)}
                 onMouseOver={() => onCutSiteHover(c.c.id, true)}
               />

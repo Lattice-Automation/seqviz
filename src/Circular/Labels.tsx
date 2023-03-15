@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { Coor, Size } from "../elements";
+import { svgText } from "../style";
 import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import { WrappedGroupLabel } from "./WrappedGroupLabel";
 
@@ -312,6 +313,7 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                   {...g.textCoor}
                   dominantBaseline="middle"
                   textAnchor={g.textAnchor}
+                  style={svgText}
                 >
                   {g.name}
                 </text>
@@ -332,6 +334,7 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                 textAnchor={g.textAnchor}
                 onMouseEnter={() => this.setHoveredGroup(first.id || "")}
                 {...g.textCoor}
+                style={svgText}
               >
                 {g.name}
               </text>
