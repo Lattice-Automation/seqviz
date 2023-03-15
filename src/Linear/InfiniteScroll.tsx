@@ -28,9 +28,8 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;
 
-  /** ref to a div that's for scrolling: https://flow.org/en/docs/react/types/ */
-  scroller;
-  insideDOM;
+  scroller: React.RefObject<HTMLDivElement> = React.createRef(); // ref to a div for scrolling
+  insideDOM: React.RefObject<HTMLDivElement> = React.createRef(); // ref to a div inside the scroller div
   timeoutID;
 
   constructor(props: InfiniteScrollProps) {
@@ -41,8 +40,6 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
       // start off with first 5 blocks shown
       visibleBlocks: new Array(Math.min(5, props.seqBlocks.length)).fill(null).map((_, i) => i),
     };
-    this.scroller = React.createRef();
-    this.insideDOM = React.createRef();
   }
 
   componentDidMount = () => {
@@ -51,7 +48,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   };
 
   componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: InfiniteScrollState, snapshot: any) => {
-    if (!this.scroller) {
+    if (!this.scroller.current) {
       // scroller not mounted yet
       return;
     }
@@ -77,7 +74,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    */
   getSnapshotBeforeUpdate = (prevProps: InfiniteScrollProps) => {
     // find the current top block
-    const top = this.scroller ? this.scroller.current.scrollTop : 0;
+    const top = this.scroller.current ? this.scroller.current.scrollTop : 0;
 
     // find out 1) which block this is at the edge of the top
     // and 2) how far from the top of that block we are right now
@@ -98,6 +95,10 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    * that should then be scrolled to in linear
    */
   scrollToCentralIndex = () => {
+    if (!this.scroller.current) {
+      return;
+    }
+
     const {
       blockHeights,
       bpsPerBlock,
@@ -155,6 +156,10 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    * so that the central index is visible
    */
   restoreSnapshot = snapshot => {
+    if (!this.scroller.current) {
+      return;
+    }
+
     const { blockHeights } = this.props;
     const { blockIndex, blockY } = snapshot;
 
@@ -168,6 +173,10 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    * update if so
    */
   handleScrollOrResize = () => {
+    if (!this.scroller.current || !this.insideDOM.current) {
+      return;
+    }
+
     const {
       blockHeights,
       size: { height },
@@ -204,6 +213,10 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   incrementScroller = incAmount => {
     this.stopIncrementingScroller();
     this.timeoutID = setTimeout(() => {
+      if (!this.scroller.current) {
+        return;
+      }
+
       this.scroller.current.scrollTop += incAmount;
       this.incrementScroller(incAmount);
     }, 5);
@@ -226,6 +239,10 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    * bottom the user is (within [-40, 0] for top, and [0, 40] for bottom)
    */
   handleMouseOver = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!this.scroller.current) {
+      return;
+    }
+
     // not relevant, some other type of event, not a selection drag
     if (e.buttons !== 1) {
       if (this.timeoutID) {
