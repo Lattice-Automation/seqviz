@@ -18,7 +18,7 @@ import {
 import { isEqual } from "./isEqual";
 import search from "./search";
 import { Selection } from "./selectionContext";
-import { complement, directionality, guessType, randomid } from "./sequence";
+import { complement, directionality, guessType, randomID } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -366,7 +366,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    */
   parseAnnotations = (annotations: AnnotationProp[] | null = null, seq = ""): Annotation[] =>
     (annotations || []).map((a, i) => ({
-      id: randomid(),
+      id: randomID(),
       ...a,
       color: a.color || colorByIndex(i, COLORS),
       direction: directionality(a.direction),

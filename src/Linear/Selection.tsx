@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import SelectionContext from "../selectionContext";
-import { randomid } from "../sequence";
+import { randomID } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -22,7 +22,7 @@ class Edges extends React.PureComponent<EdgesProps> {
   static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
-  id = randomid();
+  id = randomID();
 
   render() {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
@@ -141,7 +141,7 @@ class Block extends React.PureComponent<BlockProps> {
   static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
-  id = randomid();
+  id = randomID();
 
   render() {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectHeight } = this.props;

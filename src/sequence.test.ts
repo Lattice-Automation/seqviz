@@ -1,5 +1,5 @@
 import { SeqType } from "./elements";
-import { complement, directionality, guessType, randomid, reverseComplement, translate } from "./sequence";
+import { complement, directionality, guessType, randomID, reverseComplement, translate } from "./sequence";
 
 describe("Sequence utilities", () => {
   it("detects type", () => {
@@ -107,7 +107,7 @@ describe("Create random IDs", () => {
     const seenIDs = new Set();
 
     for (let i = 0; i < 10; i++) {
-      const id = randomid();
+      const id = randomID();
 
       expect(typeof id).toEqual(typeof "");
       expect(id.length).toEqual(10);

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Range } from "../elements";
-import { randomid } from "../sequence";
+import { randomID } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**
@@ -89,7 +89,7 @@ const FindBlock = ({
     ));
   }
 
-  const id = randomid();
+  const id = randomID();
   let y = indexYDiff; // template row result
   if (direction < 0 || !zoomed) {
     y = compYDiff; // complement row result

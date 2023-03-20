@@ -329,7 +329,7 @@ export const createTranslations = (translations: Range[], seq: string, seqType: 
     }
 
     return {
-      id: randomid(),
+      id: randomID(),
       name: "translation",
       ...t,
       AAseq: aaSeq,
@@ -344,7 +344,7 @@ export const createTranslations = (translations: Range[], seq: string, seqType: 
  *
  * Lazily copied from StackOverflow: https://stackoverflow.com/a/57355127
  */
-export const randomid = (n = 10) => {
+export const randomID = (n = 10) => {
   const add = 1;
   let max = 12 - add;
   max = Math.pow(10, n + add);

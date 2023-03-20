@@ -21,34 +21,37 @@ const first = <T extends Range>(arr: T[]): T => arr[0];
  * ```
  */
 export const stackElements = <T extends NameRange>(elements: T[], seqL: number): T[][] =>
-  [...elements].reduce((acc: T[][], a) => {
-    const insertIndex = acc.findIndex(elems => {
-      if (a.end === a.start) {
-        // the element has the same start and end index and therefore the whole
-        // plasmid (so it shouldn't fit into any existing row)
-        return false;
-      }
-      if (last(elems).end <= last(elems).start) {
-        // the last element in this row crosses zero index
-        return last(elems).end + seqL <= a.start;
-      }
-      if (a.end > a.start) {
-        // this element doesn't cross the zero index and the last in row doesn't
-        return last(elems).end <= a.start;
-      }
-      // both this curr element and the last in the row cross the zero index
-      return last(elems).end < a.start && a.end < first(elems).start;
-    });
+  [...elements]
+    .sort((a, b) => a.end - b.end)
+    .sort((a, b) => a.start - b.start)
+    .reduce((acc: T[][], a) => {
+      const insertIndex = acc.findIndex(elements => {
+        if (a.end === a.start) {
+          // the element has the same start and end index and therefore the whole
+          // plasmid (so it shouldn't fit into any existing row)
+          return false;
+        }
+        if (last(elements).end <= last(elements).start) {
+          // the last element in this row crosses zero index
+          return last(elements).end + seqL <= a.start;
+        }
+        if (a.end > a.start) {
+          // this element doesn't cross the zero index and the last in row doesn't
+          return last(elements).end <= a.start;
+        }
+        // both this curr element and the last in the row cross the zero index
+        return last(elements).end < a.start && a.end < first(elements).start;
+      });
 
-    if (insertIndex > -1) {
-      // insert in the row where it's the new highest
-      acc[insertIndex].push(a);
-    } else {
-      // create a new row for this entry
-      acc.push([a]);
-    }
-    return acc;
-  }, []);
+      if (insertIndex > -1) {
+        // insert in the row where it's the new highest
+        acc[insertIndex].push(a);
+      } else {
+        // create a new row for this entry
+        acc.push([a]);
+      }
+      return acc;
+    }, []);
 
 /**
  * given an array of arrays of an element, fragment the element into seq blocks

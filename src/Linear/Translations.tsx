@@ -3,7 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
 import { SeqType, Translation } from "../elements";
-import { randomid } from "../sequence";
+import { randomID } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface TranslationRowsProps {
@@ -144,7 +144,7 @@ class TranslationRow extends React.PureComponent<TranslationRowProps> {
       >
         {AAs.map((a, i) => {
           // generate and store an id reference (that's used for selection)
-          const aaId = randomid();
+          const aaId = randomID();
           this.AAs.push(aaId);
 
           // calculate the start and end point of each amino acid
