@@ -294,7 +294,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     seq: string;
     seqType: SeqType;
   } => {
-    const { annotations, file, name = "", seq } = props || this.props;
+    const { annotations, compSeq, file, name = "", seq } = props || this.props;
 
     if (file) {
       // Parse a sequence file
@@ -319,7 +319,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       const seqType = guessType(seq);
       return {
         annotations: this.parseAnnotations(annotations, seq),
-        compSeq: complement(seq, seqType).compSeq,
+        compSeq: compSeq || complement(seq, seqType).compSeq,
         name,
         seq,
         seqType,

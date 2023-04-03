@@ -89,4 +89,25 @@ describe("SeqViz rendering (React)", () => {
     expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(1);
   });
+
+  // https://github.com/Lattice-Automation/seqviz/issues/203
+  it("renders a distinct compSeq", () => {
+    const seq = "ATGC";
+    const compSeq = "00TA";
+
+    const { getAllByTestId } = render(
+      <SeqViz {...props} compSeq={compSeq} selection={{ end: 15, start: 1 }} seq={seq} viewer="linear" />
+    );
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
+
+    const seqValue = getAllByTestId("la-vz-seq")
+      .map(s => s.textContent)
+      .join("");
+    const compSeqValue = getAllByTestId("la-vz-comp-seq")
+      .map(s => s.textContent)
+      .join("");
+
+    expect(seqValue).toEqual(seq);
+    expect(compSeqValue).toEqual(compSeq);
+  });
 });
