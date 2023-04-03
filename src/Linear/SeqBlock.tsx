@@ -297,6 +297,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         })}
         className="la-vz-seqblock"
         cursor="text"
+        data-testid="la-vz-seqblock"
         display="block"
         height={blockHeight}
         id={id}

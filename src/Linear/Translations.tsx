@@ -36,7 +36,7 @@ export const TranslationRows = ({
   translations,
   yDiff,
 }: TranslationRowsProps) => (
-  <g className="la-vz-linear-translations">
+  <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
     {translations.map((t, i) => (
       <TranslationRow
         key={`${t.id}-${firstBase}`}
