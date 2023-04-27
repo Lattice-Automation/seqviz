@@ -134,7 +134,7 @@ export interface SeqVizProps {
   translations?: { direction?: number; end: number; start: number }[];
 
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
-  viewer?: "linear" | "circular" | "both" | "both_flip";
+  viewer?: "linear" | "circular" | "both" | "both_flip" | "linear_one_row";
 
   /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {

@@ -5,6 +5,7 @@ import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size } from 
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
+import { InfiniteHorizontalScroll } from "./InfiniteHorizontalScroll";
 import { InfiniteScroll } from "./InfiniteScroll";
 import { SeqBlock } from "./SeqBlock";
 
@@ -21,6 +22,7 @@ export interface LinearProps {
   inputRef: InputRefFunc;
   lineHeight: number;
   onUnmount: (id: string) => void;
+  oneRow: boolean;
   search: NameRange[];
   seq: string;
   seqFontSize: number;
@@ -62,12 +64,14 @@ export default class Linear extends React.Component<LinearProps> {
     const {
       annotations,
       bpsPerBlock,
+      charWidth,
       compSeq,
       cutSites,
       elementHeight,
       highlights,
       lineHeight,
       onUnmount,
+      oneRow,
       search,
       seq,
       seqType,
@@ -82,7 +86,7 @@ export default class Linear extends React.Component<LinearProps> {
     const zoomed = zoom.linear > 10;
 
     // the actual fragmenting of the sequence into subblocks. generates all info that will be needed
-    // including sequence blocks, complement blocks, annotations, blockHeights
+    // including sequence blocks, complement blocks, annotations, blockHeights, blockWidths
     const seqLength = seq.length;
     let arrSize = Math.round(Math.ceil(seqLength / bpsPerBlock));
     if (arrSize === Number.POSITIVE_INFINITY) arrSize = 1;
@@ -91,6 +95,7 @@ export default class Linear extends React.Component<LinearProps> {
     const seqs = new Array(arrSize); // arrays for sequences...
     const compSeqs = new Array(arrSize); // complements...
     const blockHeights = new Array(arrSize); // block heights...
+    const blockWidths = new Array(arrSize); // block widths...
 
     const cutSiteRows = cutSites.length
       ? createSingleRows(cutSites, bpsPerBlock, arrSize)
@@ -122,6 +127,10 @@ export default class Linear extends React.Component<LinearProps> {
       ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
+    let maxBlockHeight = 0;
+    let maxTranslationRowSize = 0;
+    let maxAnnotationRowSize = 0;
+
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
@@ -130,6 +139,7 @@ export default class Linear extends React.Component<LinearProps> {
       seqs[i] = seq.substring(firstBase, lastBase);
       compSeqs[i] = compSeq.substring(firstBase, lastBase);
 
+      const blockWidth = seqs[i].length * charWidth;
       // store a unique id from the block
       ids[i] = seqs[i] + String(i);
 
@@ -155,10 +165,27 @@ export default class Linear extends React.Component<LinearProps> {
       }
 
       blockHeights[i] = blockHeight;
+      blockWidths[i] = blockWidth;
+      if (blockHeight > maxBlockHeight) {
+        maxBlockHeight = blockHeight;
+      }
+      if (maxTranslationRowSize < translationRows[i].length) {
+        maxTranslationRowSize = translationRows[i].length;
+      }
+      if (maxAnnotationRowSize < annotationRows[i].length) {
+        maxAnnotationRowSize = annotationRows[i].length;
+      }
+    }
+
+    if (oneRow) {
+      for (let i = 0; i < arrSize; i += 1) {
+        blockHeights[i] = maxBlockHeight;
+      }
     }
 
     const seqBlocks: JSX.Element[] = [];
     let yDiff = 0;
+    let xDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
@@ -166,9 +193,10 @@ export default class Linear extends React.Component<LinearProps> {
           key={ids[i]}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
+          blockWidth={blockWidths[i]}
           bpColors={this.props.bpColors}
           bpsPerBlock={bpsPerBlock}
-          charWidth={this.props.charWidth}
+          charWidth={charWidth}
           compSeq={compSeqs[i]}
           cutSiteRows={cutSiteRows[i]}
           elementHeight={elementHeight}
@@ -179,6 +207,9 @@ export default class Linear extends React.Component<LinearProps> {
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}
+          maxAnnotationRowSize={maxAnnotationRowSize}
+          maxTranslationRowSize={maxTranslationRowSize}
+          oneRow={oneRow}
           searchRows={searchRows[i]}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
@@ -187,17 +218,28 @@ export default class Linear extends React.Component<LinearProps> {
           showIndex={showIndex}
           size={size}
           translations={translationRows[i]}
+          x={xDiff}
           y={yDiff}
           zoom={zoom}
           zoomed={zoomed}
           onUnmount={onUnmount}
         />
       );
+      xDiff += blockWidths[i];
       yDiff += blockHeights[i];
     }
 
     return (
-      seqBlocks.length && (
+      seqBlocks.length > 0 &&
+      (oneRow ? (
+        <InfiniteHorizontalScroll
+          blockWidths={blockWidths}
+          bpsPerBlock={bpsPerBlock}
+          seqBlocks={seqBlocks}
+          size={size}
+          totalWidth={blockWidths.reduce((acc, w) => acc + w, 0)}
+        />
+      ) : (
         <InfiniteScroll
           blockHeights={blockHeights}
           bpsPerBlock={bpsPerBlock}
@@ -205,7 +247,7 @@ export default class Linear extends React.Component<LinearProps> {
           size={size}
           totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}
         />
-      )
+      ))
     );
   }
 }

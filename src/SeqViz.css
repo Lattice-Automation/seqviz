@@ -183,3 +183,21 @@
   background-color: rgb(236, 236, 236);
   border-radius: 7px;
 }
+
+/* One Row Linear Viewer */
+.la-vz-linear-one-row-scroller {
+  cursor: text;
+  font-weight: 300;
+  outline: none !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px;
+  position: relative;
+  height: 100%;
+}
+
+.la-vz-linear-one-row-seqblock-container {
+  display: flex;
+  flex-direction: row;
+}
+

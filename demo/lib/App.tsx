@@ -23,6 +23,8 @@ const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
   { key: "circular", text: "Circular", value: "circular" },
   { key: "linear", text: "Linear", value: "linear" },
+  { key: "both_flip", text: "Both Flip", value: "both_flip" },
+  { key: "linear_one_row", text: "Linear One Row", value: "linear_one_row" },
 ];
 
 interface AppState {
@@ -38,7 +40,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { end: number; start: number; direction?: 1 | -1 }[];
+  translations: { direction?: 1 | -1, end: number; start: number; }[];
   viewer: string;
   zoom: number;
 }
@@ -58,7 +60,7 @@ export default class App extends React.Component<any, AppState> {
     showSelectionMeta: false,
     showSidebar: false,
     translations: [
-      { end: 630, start: 6, direction: -1 },
+      { direction: -1, end: 630, start: 6 },
       { end: 1147, start: 736 },
       { end: 1885, start: 1165 },
     ],
@@ -153,13 +155,13 @@ export default class App extends React.Component<any, AppState> {
                     enzymes={this.state.enzymes}
                     name={this.state.name}
                     search={this.state.search}
+                    selection={this.state.selection}
                     seq={this.state.seq}
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
-                    selection={this.state.selection}
                     onSelection={selection => this.setState({ selection })}
                   />
                 )}

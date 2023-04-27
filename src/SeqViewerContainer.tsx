@@ -42,7 +42,7 @@ interface SeqViewerContainerProps {
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
   translations: Range[];
-  viewer: "linear" | "circular" | "both" | "both_flip";
+  viewer: "linear" | "circular" | "both" | "both_flip" | "linear_one_row";
   width: number;
   zoom: { circular: number; linear: number };
 }
@@ -134,6 +134,8 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       size.width /= 2;
     }
 
+    const oneRow = viewer.includes("one_row");
+
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
     // otherwise the sequence needs to be cut into smaller subsequences
@@ -169,6 +171,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       charWidth,
       elementHeight,
       lineHeight,
+      oneRow,
       seqFontSize,
       size,
       zoom: { linear: zoom },
@@ -252,7 +255,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   setSelection={this.setSelection}
                 >
                   {/* TODO: this sucks, some breaking refactor in future should get rid of it SeqViewer */}
-                  {viewer === "linear" && (
+                  {(viewer === "linear" || viewer === "linear_one_row") && (
                     <Linear
                       {...linearProps}
                       handleMouseEvent={handleMouseEvent}

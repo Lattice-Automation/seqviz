@@ -27,6 +27,7 @@ export type FindXAndWidthElementType = (
 interface SeqBlockProps {
   annotationRows: Annotation[][];
   blockHeight: number;
+  blockWidth: number;
   bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
   charWidth: number;
@@ -41,7 +42,10 @@ interface SeqBlockProps {
   inputRef: InputRefFunc;
   key: string;
   lineHeight: number;
+  maxAnnotationRowSize: number;
+  maxTranslationRowSize: number;
   onUnmount: (a: string) => void;
+  oneRow: boolean;
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
@@ -50,6 +54,7 @@ interface SeqBlockProps {
   showIndex: boolean;
   size: Size;
   translations: Translation[];
+  x: number;
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
@@ -215,6 +220,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const {
       annotationRows,
       blockHeight,
+      blockWidth,
       bpsPerBlock,
       charWidth,
       compSeq,
@@ -227,7 +233,10 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       id,
       inputRef,
       lineHeight,
+      maxAnnotationRowSize,
+      maxTranslationRowSize,
       onUnmount,
+      oneRow,
       searchRows,
       seq,
       seqFontSize,
@@ -254,7 +263,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of cut sites
     const cutSiteYDiff = 0; // spacing for cutSite names
-    const cutSiteHeight = zoomed && cutSiteRows.length ? lineHeight : 0;
+    const cutSiteHeight = zoomed && (cutSiteRows.length || oneRow) ? lineHeight : 0;
 
     // height and yDiff of the sequence strand
     const indexYDiff = cutSiteYDiff + cutSiteHeight;
@@ -266,14 +275,14 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight = elementHeight * translations.length;
+    const translationHeight = elementHeight * (oneRow ? maxTranslationRowSize : translations.length);
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
-    const annHeight = elementHeight * annotationRows.length;
+    const annHeight = elementHeight * (oneRow ? maxAnnotationRowSize : annotationRows.length);
 
     // height and ydiff of the index row.
-    const elementGap = annotationRows.length + translations.length ? 3 : 0;
+    const elementGap = annotationRows.length || translations.length || oneRow ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
@@ -295,13 +304,13 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           type: "SEQ",
           viewer: "LINEAR",
         })}
-        className="la-vz-seqblock"
+        className={oneRow ? "la-vz-linear-one-row-seqblock" : "la-vz-seqblock"}
         cursor="text"
         data-testid="la-vz-seqblock"
         display="block"
         height={blockHeight}
         id={id}
-        width={size.width >= 0 ? size.width : 0}
+        width={oneRow ? blockWidth : size.width}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
