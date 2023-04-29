@@ -1,10 +1,10 @@
 import * as React from "react";
 import { withResizeDetector } from "react-resize-detector";
 
-import Circular from "./Circular/Circular";
+import Circular, { CircularProps } from "./Circular/Circular";
 import { EventHandler } from "./EventHandler";
-import Linear from "./Linear/Linear";
-import SelectionHandler from "./SelectionHandler";
+import Linear, { LinearProps } from "./Linear/Linear";
+import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
@@ -17,14 +17,25 @@ import SelectionContext, { Selection, defaultSelection } from "./selectionContex
  */
 export const CHAR_WIDTH = 7.2;
 
+export interface CustomChildrenProps {
+  circularProps: Omit<CircularProps, "handleMouseEvent" | "inputRef" | "onUnmount">;
+  handleMouseEvent: React.MouseEventHandler;
+  inputRef: InputRefFunc,
+  linearProps: Omit<LinearProps, "handleMouseEvent" | "inputRef" | "onUnmount">;
+  onUnmount: (ref: string) => void;
+}
+
 interface SeqViewerContainerProps {
   annotations: Annotation[];
   bpColors: { [key: number | string]: string };
+  children?: (props: CustomChildrenProps) => React.ReactNode;
+  circularRef?: React.RefObject<HTMLElement>;
   compSeq: string;
   copyEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   cutSites: CutSite[];
   height: number;
   highlights: Highlight[];
+  linearRef?: React.RefObject<HTMLElement>;
   name: string;
   onSelection: (selection: Selection) => void;
   rotateOnScroll: boolean;
@@ -129,8 +140,11 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.linear;
 
-    // hack
-    if (viewer.includes("both")) {
+    if (this.props.linearRef?.current && this.props.children) {
+      size.width = this.props.linearRef.current.clientWidth;
+      size.height = this.props.linearRef.current.clientHeight;
+    } else if (viewer.includes("both")) {
+      // hack
       size.width /= 2;
     }
 
@@ -192,8 +206,11 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.circular;
 
-    // hack
-    if (viewer.includes("both")) {
+    if (this.props.circularRef?.current) {
+      size.width = this.props.circularRef.current.clientWidth;
+      size.height = this.props.circularRef.current.clientHeight;
+    } else if (viewer.includes("both")) {
+      // hack
       size.width /= 2;
     }
 
@@ -251,6 +268,14 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   seq={seq}
                   setSelection={this.setSelection}
                 >
+                  {this.props.children ? this.props.children({
+                    circularProps,
+                    handleMouseEvent,
+                    inputRef,
+                    linearProps,
+                    onUnmount,
+                  }) :
+                  <>
                   {/* TODO: this sucks, some breaking refactor in future should get rid of it SeqViewer */}
                   {viewer === "linear" && (
                     <Linear
@@ -300,6 +325,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                       />
                     </>
                   )}
+                  </>}
                 </EventHandler>
               )}
             </SelectionHandler>

@@ -14,6 +14,8 @@ import {
 } from "semantic-ui-react";
 import seqparse from "seqparse";
 
+import Circular from "../../src/Circular/Circular";
+import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
 import Header from "./Header";
@@ -23,10 +25,12 @@ const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
   { key: "circular", text: "Circular", value: "circular" },
   { key: "linear", text: "Linear", value: "linear" },
+  { key: "both_flip", text: "Both Flip", value: "both_flip" },
 ];
 
 interface AppState {
   annotations: AnnotationProp[];
+  customChildren: boolean;
   enzymes: any[];
   name: string;
   primers: boolean;
@@ -38,7 +42,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { end: number; start: number; direction?: 1 | -1 }[];
+  translations: { direction?: 1 | -1; end: number; start: number }[];
   viewer: string;
   zoom: number;
 }
@@ -46,6 +50,7 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
+    customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     primers: true,
@@ -58,13 +63,15 @@ export default class App extends React.Component<any, AppState> {
     showSelectionMeta: false,
     showSidebar: false,
     translations: [
-      { end: 630, start: 6, direction: -1 },
+      { direction: -1, end: 630, start: 6 },
       { end: 1147, start: 736 },
       { end: 1885, start: 1165 },
     ],
     viewer: "",
     zoom: 50,
   };
+  linearRef: React.RefObject<HTMLDivElement> = React.createRef();
+  circularRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
@@ -96,6 +103,59 @@ export default class App extends React.Component<any, AppState> {
   };
 
   render() {
+
+    let customChildren = null;
+    if (this.state.customChildren) {
+      customChildren = ({ circularProps, linearProps, ...props }) => {
+        if (this.state.viewer === "linear") {
+          return  (
+              <div ref={this.linearRef} style={{ height: "70%", width: "100%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+          );
+        } else if (this.state.viewer === "circular") {
+          return  (
+            <div ref={this.circularRef} style={{ height: "75%", width: "100%" }}>
+              <Circular {...circularProps} {...props} />
+            </div>
+          );
+        } else if (this.state.viewer === "both") {
+          return (
+            <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
+              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+            </div>
+          );
+        } else if (this.state.viewer === "both_flip") {
+          return (
+            <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
+              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+              <div ref={this.linearRef} style={{ height: "25%", width: "100%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+              <div ref={this.circularRef} style={{ height: "75%", width: "100%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+            </div>
+          );
+        }
+      }
+    }
+
     return (
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable className="sidebar-container">
@@ -132,6 +192,13 @@ export default class App extends React.Component<any, AppState> {
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput label="Show index" name="index" set={showIndex => this.setState({ showIndex })} />
             </Menu.Item>
+            <Menu.Item as="a" className="options-checkbox">
+              <CheckboxInput
+                label="Custom Children"
+                name="customChildren"
+                set={customChildren => this.setState({ customChildren })}
+              />
+            </Menu.Item>
             <Menu.Item as="a">
               <EnzymeInput enzymes={this.state.enzymes} toggleEnzyme={this.toggleEnzyme} />
             </Menu.Item>
@@ -149,19 +216,24 @@ export default class App extends React.Component<any, AppState> {
                 {this.state.seq && (
                   <SeqViz
                     // accession="MN623123"
+                    key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
+                    circularRef={this.circularRef}
                     enzymes={this.state.enzymes}
+                    linearRef={this.linearRef}
                     name={this.state.name}
                     search={this.state.search}
+                    selection={this.state.selection}
                     seq={this.state.seq}
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
-                    selection={this.state.selection}
                     onSelection={selection => this.setState({ selection })}
-                  />
+                  >
+                    {customChildren}
+                  </SeqViz>
                 )}
               </div>
             </div>

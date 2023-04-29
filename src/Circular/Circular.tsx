@@ -37,7 +37,7 @@ export type GenArcFunc = (args: {
   sweepFWD?: boolean;
 }) => string;
 
-interface CircularProps {
+export interface CircularProps {
   annotations: Annotation[];
   center: { x: number; y: number };
   compSeq: string;

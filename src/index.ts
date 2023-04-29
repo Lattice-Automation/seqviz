@@ -6,14 +6,24 @@ import SeqViz, { SeqVizProps } from "./SeqViz";
 import "./SeqViz.css";
 import enzymes from "./enzymes";
 
+import Linear from "./Linear/Linear";
+
+import Circular from "./Circular/Circular";
+
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViz, enzymes as Enzymes };
+export { SeqViz, Linear, Circular, enzymes as Enzymes };
+
+
 
 export default SeqViz;
 
 export type { SeqVizProps } from "./SeqViz";
+
+export type { CircularProps } from "./Circular/Circular";
+
+export type { LinearProps } from "./Linear/Linear";
 
 /**
  * Return a Viewer object with three properties:

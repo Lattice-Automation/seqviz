@@ -1,7 +1,7 @@
 import * as React from "react";
 import seqparse, { ParseOptions, parseFile } from "seqparse";
 
-import SeqViewerContainer from "./SeqViewerContainer";
+import SeqViewerContainer, { CustomChildrenProps } from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
 import digest from "./digest";
 import {
@@ -42,6 +42,11 @@ export interface SeqVizProps {
   /** nucleotides keyed by symbol or index and the color to apply to it */
   bpColors?: { [key: number | string]: string };
 
+  children?: (props: CustomChildrenProps) => React.ReactNode;
+
+  /** Custom child circular viewer ref */
+  circularRef?: React.RefObject<HTMLElement>;
+
   /** a list of colors to populate un-colored annotations with. HEX, RGB, names are supported */
   colors?: string[];
 
@@ -79,6 +84,9 @@ export interface SeqVizProps {
 
   /** ranges of sequence to highlight on the viewer */
   highlights?: HighlightProp[];
+
+  /** Custom child linear viewer ref */
+  linearRef?: React.RefObject<HTMLElement>;
 
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
