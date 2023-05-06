@@ -218,10 +218,9 @@ export default class App extends React.Component<any, AppState> {
                     // accession="MN623123"
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
-                    circularRef={this.circularRef}
                     enzymes={this.state.enzymes}
-                    linearRef={this.linearRef}
                     name={this.state.name}
+                    refs={{circular: this.circularRef, linear: this.linearRef}}
                     search={this.state.search}
                     selection={this.state.selection}
                     seq={this.state.seq}

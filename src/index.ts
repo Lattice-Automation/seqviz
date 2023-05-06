@@ -2,20 +2,16 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { renderToString as reactRenderToString } from "react-dom/server";
 
+import Circular from "./Circular/Circular";
+import Linear from "./Linear/Linear";
 import SeqViz, { SeqVizProps } from "./SeqViz";
 import "./SeqViz.css";
 import enzymes from "./enzymes";
-
-import Linear from "./Linear/Linear";
-
-import Circular from "./Circular/Circular";
 
 /**
  * Export a React component directly for React-based development
  */
 export { SeqViz, Linear, Circular, enzymes as Enzymes };
-
-
 
 export default SeqViz;
 

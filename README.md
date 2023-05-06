@@ -294,7 +294,7 @@ By default, the circular viewer rotates when scrolling over the viewer. That can
 
 #### `Custom Rendering`
 
-This makes use of the `children`, `linearRef`, and `circularRef` props to allow custom rendering of the sequence viewers. For example, to render the linear viewer above the circular viewer:
+This makes use of the `children` and `refs` props to allow custom rendering of the sequence viewers. For example, to render the linear viewer above the circular viewer:
 
 ```jsx
 import { useRef } from "react";
@@ -308,8 +308,7 @@ export default () => {
     <SeqViz
       name="J23100"
       seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
-      linearRef={linearRef}
-      curcularRef={circularRef}
+      refs={{circular: circularRef, linear: linearRef}}
     >
       {({ circularProps, linearProps, ...props }) => (
         <div
