@@ -82,7 +82,7 @@ export default () => (
 
 #### Non-React
 
-More details are in the [Viewer without React](#viewer-without-react) section.
+More details are in the [Viewer without React](#without-react) section.
 
 ```html
 <script>
@@ -291,6 +291,42 @@ Whether to show the complement sequence.
 #### `rotateOnScroll (=true)`
 
 By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with rotateOnScroll: false.
+
+#### `Custom Rendering`
+
+This makes use of the `children` and `refs` props to allow custom rendering of the sequence viewers. For example, to render the linear viewer above the circular viewer:
+
+```jsx
+import { useRef } from "react";
+import { SeqViz, Linear, Circular } from "seqviz";
+
+export default () => {
+  const linearRef = useRef();
+  const circularRef = useRef();
+
+  return (
+    <SeqViz
+      name="J23100"
+      seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
+      refs={{circular: circularRef, linear: linearRef}}
+    >
+      {({ circularProps, linearProps, ...props }) => (
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
+          <div ref={linearRef} style={{ height: "25%", width: "100%" }}>
+            <Linear {...linearProps} {...props} />
+          </div>
+          <div ref={circularRef} style={{ height: "75%", width: "100%" }}>
+            <Circular {...circularProps} {...props} />
+          </div>
+        </div>
+      )}
+    </SeqViz>
+  );
+};
+
+```
 
 ### Without React
 

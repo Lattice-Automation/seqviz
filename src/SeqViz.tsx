@@ -1,7 +1,7 @@
 import * as React from "react";
 import seqparse, { ParseOptions, parseFile } from "seqparse";
 
-import SeqViewerContainer from "./SeqViewerContainer";
+import SeqViewerContainer, { CustomChildrenProps, SeqVizChildRefs } from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
 import digest from "./digest";
 import {
@@ -41,6 +41,9 @@ export interface SeqVizProps {
 
   /** nucleotides keyed by symbol or index and the color to apply to it */
   bpColors?: { [key: number | string]: string };
+
+  /** Custom children to render within the SeqViz component. This is useful for when custom rendering the positioning of children viewers (Linear, Circular). */
+  children?: (props: CustomChildrenProps) => React.ReactNode;
 
   /** a list of colors to populate un-colored annotations with. HEX, RGB, names are supported */
   colors?: string[];
@@ -88,6 +91,9 @@ export interface SeqVizProps {
 
   /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
   onSelection?: (selection: Selection) => void;
+
+  /** Refs associated with custom children. */
+  refs?: SeqVizChildRefs;
 
   /** whether the circular viewer should rotate when the mouse scrolls over the plasmid */
   rotateOnScroll?: boolean;

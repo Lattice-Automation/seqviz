@@ -14,6 +14,8 @@ import {
 } from "semantic-ui-react";
 import seqparse from "seqparse";
 
+import Circular from "../../src/Circular/Circular";
+import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
 import Header from "./Header";
@@ -29,6 +31,7 @@ const viewerTypeOptions = [
 
 interface AppState {
   annotations: AnnotationProp[];
+  customChildren: boolean;
   enzymes: any[];
   name: string;
   primers: boolean;
@@ -48,6 +51,7 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
+    customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     primers: true,
@@ -67,6 +71,8 @@ export default class App extends React.Component<any, AppState> {
     viewer: "",
     zoom: 50,
   };
+  linearRef: React.RefObject<HTMLDivElement> = React.createRef();
+  circularRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
@@ -98,6 +104,59 @@ export default class App extends React.Component<any, AppState> {
   };
 
   render() {
+
+    let customChildren = null;
+    if (this.state.customChildren) {
+      customChildren = ({ circularProps, linearProps, ...props }) => {
+        if (this.state.viewer === "linear") {
+          return  (
+              <div ref={this.linearRef} style={{ height: "100%", width: "100%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+          );
+        } else if (this.state.viewer === "circular") {
+          return  (
+            <div ref={this.circularRef} style={{ height: "100%", width: "100%" }}>
+              <Circular {...circularProps} {...props} />
+            </div>
+          );
+        } else if (this.state.viewer === "both") {
+          return (
+            <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
+              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+            </div>
+          );
+        } else if (this.state.viewer === "both_flip") {
+          return (
+            <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
+              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+              <div ref={this.linearRef} style={{ height: "25%", width: "100%" }}>
+                <Linear {...linearProps} {...props} />
+              </div>
+              <div ref={this.circularRef} style={{ height: "75%", width: "100%" }}>
+                <Circular {...circularProps} {...props} />
+              </div>
+            </div>
+          );
+        }
+      }
+    }
+
     return (
       <div style={{ height: "100vh" }}>
         <Sidebar.Pushable className="sidebar-container">
@@ -134,6 +193,13 @@ export default class App extends React.Component<any, AppState> {
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput label="Show index" name="index" set={showIndex => this.setState({ showIndex })} />
             </Menu.Item>
+            <Menu.Item as="a" className="options-checkbox">
+              <CheckboxInput
+                label="Custom Children"
+                name="customChildren"
+                set={customChildren => this.setState({ customChildren })}
+              />
+            </Menu.Item>
             <Menu.Item as="a">
               <EnzymeInput enzymes={this.state.enzymes} toggleEnzyme={this.toggleEnzyme} />
             </Menu.Item>
@@ -151,9 +217,11 @@ export default class App extends React.Component<any, AppState> {
                 {this.state.seq && (
                   <SeqViz
                     // accession="MN623123"
+                    key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}
+                    refs={{circular: this.circularRef, linear: this.linearRef}}
                     search={this.state.search}
                     selection={this.state.selection}
                     seq={this.state.seq}
@@ -163,7 +231,9 @@ export default class App extends React.Component<any, AppState> {
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
                     onSelection={selection => this.setState({ selection })}
-                  />
+                  >
+                    {customChildren}
+                  </SeqViz>
                 )}
               </div>
             </div>
