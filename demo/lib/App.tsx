@@ -109,13 +109,13 @@ export default class App extends React.Component<any, AppState> {
       customChildren = ({ circularProps, linearProps, ...props }) => {
         if (this.state.viewer === "linear") {
           return  (
-              <div ref={this.linearRef} style={{ height: "70%", width: "100%" }}>
+              <div ref={this.linearRef} style={{ height: "100%", width: "100%" }}>
                 <Linear {...linearProps} {...props} />
               </div>
           );
         } else if (this.state.viewer === "circular") {
           return  (
-            <div ref={this.circularRef} style={{ height: "75%", width: "100%" }}>
+            <div ref={this.circularRef} style={{ height: "100%", width: "100%" }}>
               <Circular {...circularProps} {...props} />
             </div>
           );

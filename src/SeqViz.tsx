@@ -42,6 +42,7 @@ export interface SeqVizProps {
   /** nucleotides keyed by symbol or index and the color to apply to it */
   bpColors?: { [key: number | string]: string };
 
+  /** Custom children to render within the SeqViz component. This is useful for when custom rendering the positioning of children viewers (Linear, Circular). */
   children?: (props: CustomChildrenProps) => React.ReactNode;
 
   /** Custom child circular viewer ref */
