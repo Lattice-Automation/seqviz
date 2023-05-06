@@ -114,7 +114,8 @@ export default class App extends React.Component<any, AppState> {
                 <Linear {...linearProps} {...props} />
               </div>
           );
-        } else if (this.state.viewer === "circular") {
+        }
+         else if (this.state.viewer === "circular") {
           return  (
             <div ref={this.circularRef} style={{ height: "100%", width: "100%" }}>
               <Circular {...circularProps} {...props} />
@@ -123,10 +124,10 @@ export default class App extends React.Component<any, AppState> {
         } else if (this.state.viewer === "both") {
           return (
             <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
-              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+              <div ref={this.circularRef} style={{ height: "100%", width: "50%" }}>
                 <Circular {...circularProps} {...props} />
               </div>
-              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+              <div ref={this.linearRef} style={{ height: "100%", width: "50%" }}>
                 <Linear {...linearProps} {...props} />
               </div>
             </div>
@@ -134,10 +135,10 @@ export default class App extends React.Component<any, AppState> {
         } else if (this.state.viewer === "both_flip") {
           return (
             <div style={{ display: "flex", flexDirection: "row", height: "100%", width: "100%" }}>
-              <div ref={this.linearRef} style={{ height: "100%", width: "30%" }}>
+              <div ref={this.linearRef} style={{ height: "100%", width: "50%" }}>
                 <Linear {...linearProps} {...props} />
               </div>
-              <div ref={this.circularRef} style={{ height: "100%", width: "70%" }}>
+              <div ref={this.circularRef} style={{ height: "100%", width: "50%" }}>
                 <Circular {...circularProps} {...props} />
               </div>
             </div>
@@ -228,7 +229,7 @@ export default class App extends React.Component<any, AppState> {
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
-                    viewer={this.state.viewer as "linear" | "circular"}
+                    viewer={this.state.viewer as "linear" | "linear_one_row" | "circular"}
                     zoom={{ linear: this.state.zoom }}
                     onSelection={selection => this.setState({ selection })}
                   >
