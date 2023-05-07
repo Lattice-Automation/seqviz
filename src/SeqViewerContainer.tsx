@@ -152,8 +152,6 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       size.width /= 2;
     }
 
-    const oneRow = viewer.includes("one_row");
-
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
     // otherwise the sequence needs to be cut into smaller subsequences
@@ -179,9 +177,14 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     }
 
     const charWidth = size.width / bpsPerBlock; // width of each basepair
-
     const lineHeight = 1.4 * seqFontSize; // aspect ratio is 1.4 for roboto mono
-    const elementHeight = 16; // the height, in pixels, of annotations, ORFs, etc
+    const elementHeight = 16; // the height, in pixels, of annotations, translations, etc
+
+    const oneRow = viewer.includes("one_row");
+    if (oneRow) {
+      bpsPerBlock = seq.length;
+      size.width = seq.length * charWidth;
+    }
 
     return {
       ...this.props,

@@ -87,8 +87,7 @@ export default class Linear extends React.Component<LinearProps> {
 
     // the actual fragmenting of the sequence into subblocks. generates all info that will be needed
     // including sequence blocks, complement blocks, annotations, blockHeights, blockWidths
-    const seqLength = seq.length;
-    let arrSize = Math.round(Math.ceil(seqLength / bpsPerBlock));
+    let arrSize = Math.round(Math.ceil(seq.length / bpsPerBlock));
     if (arrSize === Number.POSITIVE_INFINITY) arrSize = 1;
 
     const ids = new Array(arrSize); // array of SeqBlock ids
@@ -106,8 +105,8 @@ export default class Linear extends React.Component<LinearProps> {
      */
     const vetAnnotations = (annotations: Annotation[]) => {
       annotations.forEach(ann => {
-        if (ann.end === 0 && ann.start > ann.end) ann.end = seqLength;
-        if (ann.start === seqLength && ann.end < ann.start) ann.start = 0;
+        if (ann.end === 0 && ann.start > ann.end) ann.end = seq.length;
+        if (ann.start === seq.length && ann.end < ann.start) ann.start = 0;
       });
       return annotations;
     };
@@ -126,7 +125,6 @@ export default class Linear extends React.Component<LinearProps> {
 
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
-    // TODO: this should also use createMultiRows
     const translationRows = translations.length
       ? createMultiRows(stackElements(createTranslations(translations, seq, seqType), seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
@@ -141,7 +139,7 @@ export default class Linear extends React.Component<LinearProps> {
 
       const blockWidth = seqs[i].length * charWidth;
       // store a unique id from the block
-      ids[i] = seqs[i] + String(i);
+      ids[i] = `seqblock-${i}-${firstBase}-${lastBase}`;
 
       // find the line height for the seq block based on how many rows need to be shown
       let blockHeight = lineHeight * 1.1; // this is for padding between the SeqBlocks

@@ -178,7 +178,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       const start = Math.max(firstIndex, firstBase);
       const end = Math.min(lastIndex, lastBase);
 
-      width = size.width * ((end - start) / bpsPerBlock);
+      width = (end - start) * charWidth;
       width = Math.abs(width) || 0;
     } else if (firstBase + bpsPerBlock > seqLength && multiBlock) {
       // it's an element in the last SeqBlock, that doesn't span the whole width

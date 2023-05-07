@@ -52,9 +52,7 @@ const AnnotationRows = (props: {
           props.elementHeight *
             (props.oneRow
               ? Math.max(
-                  ...anns.map(
-                    ann => props.stackedPositions.findIndex(row => row.some(item => item.id === ann.id)) as number
-                  )
+                  ...anns.map(ann => props.stackedPositions.findIndex(row => row.some(item => item.id === ann.id)))
                 )
               : i)
         }
