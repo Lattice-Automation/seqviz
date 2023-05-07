@@ -119,7 +119,7 @@ export default class Linear extends React.Component<LinearProps> {
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
     const translationRows = translations.length
-      ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
+      ? createMultiRows(stackElements(createTranslations(translations, seq, seqType), seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {
@@ -186,7 +186,7 @@ export default class Linear extends React.Component<LinearProps> {
           showComplement={showComplement}
           showIndex={showIndex}
           size={size}
-          translations={translationRows[i]}
+          translationRows={translationRows[i]}
           y={yDiff}
           zoom={zoom}
           zoomed={zoomed}
