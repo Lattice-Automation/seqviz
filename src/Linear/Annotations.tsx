@@ -49,7 +49,14 @@ const AnnotationRows = (props: {
         width={props.width}
         y={
           props.yDiff +
-          props.elementHeight * (props.oneRow ? Math.max(...anns.map(ann => props.stackedPositions.findIndex( row => row.some(item => item.id === ann.id)) as number)) : i)
+          props.elementHeight *
+            (props.oneRow
+              ? Math.max(
+                  ...anns.map(
+                    ann => props.stackedPositions.findIndex(row => row.some(item => item.id === ann.id)) as number
+                  )
+                )
+              : i)
         }
       />
     ))}

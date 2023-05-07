@@ -55,7 +55,11 @@ export const TranslationRows = ({
         lastBase={lastBase}
         seqType={seqType}
         translation={t}
-        y={yDiff + elementHeight * (oneRow ? (stackedPositions.findIndex(rows => rows.some(item => item.id === t.id)) as number) : i)}
+        y={
+          yDiff +
+          elementHeight *
+            (oneRow ? (stackedPositions.findIndex(rows => rows.some(item => item.id === t.id)) as number) : i)
+        }
         onUnmount={onUnmount}
       />
     ))}

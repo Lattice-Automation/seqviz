@@ -134,7 +134,7 @@ export interface SeqVizProps {
   showIndex?: boolean;
 
   /** extra style props to apply to the outermost div of SeqViz */
-  style?: Record<string, unknown>;
+  style?: React.CSSProperties;
 
   /** ranges of sequence that should have amino acid translations shown */
   translations?: { direction?: number; end: number; start: number }[];

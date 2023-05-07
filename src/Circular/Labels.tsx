@@ -18,7 +18,7 @@ export interface GroupedLabelsWithCoors {
   labels: ILabel[];
   lineCoor: Coor;
   name: string;
-  overflow: unknown;
+  overflow: boolean;
   textAnchor: "start" | "end";
   textCoor: Coor;
 }
