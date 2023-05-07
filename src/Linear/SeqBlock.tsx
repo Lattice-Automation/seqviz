@@ -275,15 +275,16 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight =
-      elementHeight * (oneRow ? Math.max(...annotationPositions.values()) + 1 : translations.length);
+    const maxStackedTranslations = translationPositions.size ? Math.max(...translationPositions.values()) + 1 : 0;
+    const translationHeight = elementHeight * (oneRow ? maxStackedTranslations : translations.length);
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
-    const annHeight = elementHeight * (oneRow ? Math.max(...translationPositions.values()) + 1 : annotationRows.length);
+    const maxStackedAnnotations = annotationPositions.size ? Math.max(...annotationPositions.values()) + 1 : 0;
+    const annHeight = elementHeight * (oneRow ? maxStackedAnnotations : annotationRows.length);
 
     // height and ydiff of the index row.
-    const elementGap = annotationRows.length || translations.length || oneRow ? 3 : 0;
+    const elementGap = translationHeight || annHeight ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
@@ -379,6 +380,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            oneRow={oneRow}
             positions={translationPositions}
             seqType={seqType}
             translations={translations}

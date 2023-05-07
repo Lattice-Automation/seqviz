@@ -154,8 +154,6 @@ export default class Linear extends React.Component<LinearProps> {
       ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
-    let maxBlockHeight = 0;
-
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
       const lastBase = firstBase + bpsPerBlock;
@@ -191,15 +189,6 @@ export default class Linear extends React.Component<LinearProps> {
 
       blockHeights[i] = blockHeight;
       blockWidths[i] = blockWidth;
-      if (blockHeight > maxBlockHeight) {
-        maxBlockHeight = blockHeight;
-      }
-    }
-
-    if (oneRow) {
-      for (let i = 0; i < arrSize; i += 1) {
-        blockHeights[i] = maxBlockHeight;
-      }
     }
 
     const seqBlocks: JSX.Element[] = [];
