@@ -2,7 +2,7 @@ import * as React from "react";
 
 import SelectionContext from "../selectionContext";
 import { randomID } from "../sequence";
-import { highlight, selection, selectionEdge } from "../style";
+import { selection, selectionEdge } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {

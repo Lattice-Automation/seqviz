@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { SeqType, Size } from "../elements";
-import { indexLine, indexTick, indexTickLabel, svgText } from "../style";
+import { indexLine, indexTick, indexTickLabel } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface IndexProps {
