@@ -6,7 +6,6 @@ import * as React from "react";
 import { SeqBlock } from "./SeqBlock";
 
 const defaultProps = {
-  annotationPositions: new Map(),
   blockHeight: 40,
   bpsPerBlock: 100,
   charWidth: 12,
@@ -32,7 +31,8 @@ const defaultProps = {
   showComplement: true,
   showIndex: true,
   size: { height: 600, width: 1200 },
-  translationPositions: new Map(),
+  stackedAnnotations: [],
+  stackedTranslations: [],
   translations: [],
   y: 0,
   zoom: { linear: 50 },

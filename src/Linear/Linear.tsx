@@ -112,32 +112,8 @@ export default class Linear extends React.Component<LinearProps> {
       return annotations;
     };
 
-    const computeRangePositions = (ranges: NameRange[]) => {
-      const results = new Map<string, number>();
-      const sortedRanges = [...ranges];
-      const curIndices = new Map<number, NameRange>();
-      sortedRanges
-        .sort((a, b) => {
-          if (a.start === b.start) {
-            return a.end - b.end;
-          }
-          return a.start - b.start;
-        })
-        .forEach(range => {
-          for (let ind = 0; ; ind++) {
-            const existingRange = curIndices.get(ind);
-            if (!existingRange || existingRange.end < range.start - 1) {
-              curIndices.set(ind, range);
-              results.set(range.id, ind);
-              break;
-            }
-          }
-        });
-      return results;
-    };
-
-    const annotationPositions = computeRangePositions(annotations);
-    const translationPositions = computeRangePositions(translations);
+    const stackedAnnotations = stackElements(vetAnnotations(annotations), seq.length);
+    const stackedTranslations = stackElements(translations, seq.length);
 
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
@@ -150,6 +126,7 @@ export default class Linear extends React.Component<LinearProps> {
 
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
+    // TODO: this should also use createMultiRows
     const translationRows = translations.length
       ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
@@ -199,7 +176,6 @@ export default class Linear extends React.Component<LinearProps> {
       seqBlocks.push(
         <SeqBlock
           key={ids[i]}
-          annotationPositions={annotationPositions}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
           blockWidth={blockWidths[i]}
@@ -224,7 +200,8 @@ export default class Linear extends React.Component<LinearProps> {
           showComplement={showComplement}
           showIndex={showIndex}
           size={size}
-          translationPositions={translationPositions}
+          stackedAnnotations={stackedAnnotations}
+          stackedTranslations={stackedTranslations}
           translations={translationRows[i]}
           x={xDiff}
           y={yDiff}

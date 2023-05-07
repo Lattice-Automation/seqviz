@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
-import { NameRange } from "../elements";
+import { Annotation, NameRange } from "../elements";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
@@ -27,8 +27,8 @@ const AnnotationRows = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   oneRow: boolean;
-  positions: Map<string, number>;
   seqBlockRef: unknown;
+  stackedPositions: Annotation[][];
   width: number;
   yDiff: number;
 }) => (
@@ -49,7 +49,7 @@ const AnnotationRows = (props: {
         width={props.width}
         y={
           props.yDiff +
-          props.elementHeight * (props.oneRow ? Math.max(...anns.map(ann => props.positions.get(ann.id) as number)) : i)
+          props.elementHeight * (props.oneRow ? Math.max(...anns.map(ann => props.stackedPositions.findIndex( row => row.some(item => item.id === ann.id)) as number)) : i)
         }
       />
     ))}

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { SeqType, Translation } from "../elements";
+import { NameRange, SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
 import { FindXAndWidthType } from "./SeqBlock";
 
@@ -17,8 +17,8 @@ interface TranslationRowsProps {
   lastBase: number;
   onUnmount: (a: unknown) => void;
   oneRow: boolean;
-  positions: Map<string, number>;
   seqType: SeqType;
+  stackedPositions: NameRange[][];
   translations: Translation[];
   yDiff: number;
 }
@@ -35,8 +35,8 @@ export const TranslationRows = ({
   lastBase,
   onUnmount,
   oneRow,
-  positions,
   seqType,
+  stackedPositions,
   translations,
   yDiff,
 }: TranslationRowsProps) => (
@@ -55,7 +55,7 @@ export const TranslationRows = ({
         lastBase={lastBase}
         seqType={seqType}
         translation={t}
-        y={yDiff + elementHeight * (oneRow ? (positions.get(t.id) as number) : i)}
+        y={yDiff + elementHeight * (oneRow ? (stackedPositions.findIndex(rows => rows.some(item => item.id === t.id)) as number) : i)}
         onUnmount={onUnmount}
       />
     ))}
