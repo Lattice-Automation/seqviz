@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 
 import * as React from "react";
 
@@ -16,7 +16,7 @@ const props = {
   ],
   name: "test_part",
   seq: "ATGGTAGTTAGATAGGGATACCGATAGACTTGAGAGATACCGCATCTATTTACGACCAGCGAGCAG",
-  testSize: { height: 600, width: 800 },
+  testSize: { height: 900, width: 800 },
 };
 
 describe("SeqViz rendering (React)", () => {
@@ -50,30 +50,30 @@ describe("SeqViz rendering (React)", () => {
   });
 
   it("renders with Genbank file string input", async () => {
-    render(<SeqViz {...props} file={demoPart} />);
-    expect(screen.getAllByTestId("la-vz-seqviz")).toBeTruthy();
-
-    expect(screen.getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
+    const { getAllByTestId } = render(<SeqViz {...props} file={demoPart} />);
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
+    expect(getAllByTestId("la-vz-viewer-container")).toHaveLength(1);
 
     // Verify the file's sequence is rendered.
     // The linear viewer will cut off the end, this is just the prefix
-    const seqs = screen.getAllByTestId("la-vz-seq");
+    const seqs = getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
     expect(seq).toContain("ttgacagctagctcagtcctaggtactgtgctagcta");
   });
 
   it("renders with an Amino Acid sequence", () => {
     const aaSeq =
-      "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKVNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK*";
+      "MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLKFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDDGDNHYLSTQSALSKDPNEKRDHMVLLEFVTAAGITHGMDELYK*";
 
-    const { getAllByTestId, getByTestId } = render(<SeqViz {...props} seq={aaSeq} seqType="aa" viewer="linear" />);
+    const { getAllByTestId, getByTestId } = render(<SeqViz {...props} seq={aaSeq} viewer="linear" />);
     expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
     expect(getByTestId("la-vz-viewer-linear")).toBeTruthy();
     expect(getAllByTestId("la-vz-viewer-linear")).toHaveLength(1);
 
-    // const seqs = getAllByTestId("la-vz-translation");
-    // const seq = seqs.map(s => s.textContent).join("");
-    // expect(seq).toEqual(aaSeq);
+    const seqs = getAllByTestId("la-vz-linear-translation");
+    const seq = seqs.map(s => s.textContent).join("");
+    expect(seq.length).toBeGreaterThan(0);
+    expect(aaSeq).toContain(seq);
   });
 
   it("renders with an externally set Selection prop", () => {
@@ -88,5 +88,26 @@ describe("SeqViz rendering (React)", () => {
     expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-block")).toBeTruthy();
     expect(getAllByTestId("la-vz-selection-edge")).toHaveLength(1);
+  });
+
+  // https://github.com/Lattice-Automation/seqviz/issues/203
+  it("renders a distinct compSeq", () => {
+    const seq = "ATGC";
+    const compSeq = "00TA";
+
+    const { getAllByTestId } = render(
+      <SeqViz {...props} compSeq={compSeq} selection={{ end: 15, start: 1 }} seq={seq} viewer="linear" />
+    );
+    expect(getAllByTestId("la-vz-seqviz")).toBeTruthy();
+
+    const seqValue = getAllByTestId("la-vz-seq")
+      .map(s => s.textContent)
+      .join("");
+    const compSeqValue = getAllByTestId("la-vz-comp-seq")
+      .map(s => s.textContent)
+      .join("");
+
+    expect(seqValue).toEqual(seq);
+    expect(compSeqValue).toEqual(compSeq);
   });
 });

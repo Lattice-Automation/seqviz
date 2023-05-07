@@ -1,7 +1,7 @@
 import * as React from "react";
 import seqparse, { ParseOptions, parseFile } from "seqparse";
 
-import SeqViewerContainer from "./SeqViewerContainer";
+import SeqViewerContainer, { CustomChildrenProps, SeqVizChildRefs } from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
 import digest from "./digest";
 import {
@@ -18,7 +18,7 @@ import {
 import { isEqual } from "./isEqual";
 import search from "./search";
 import { Selection } from "./selectionContext";
-import { complement, directionality, guessType, randomid } from "./sequence";
+import { complement, directionality, guessType, randomID } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -41,6 +41,9 @@ export interface SeqVizProps {
 
   /** nucleotides keyed by symbol or index and the color to apply to it */
   bpColors?: { [key: number | string]: string };
+
+  /** Custom children to render within the SeqViz component. This is useful for when custom rendering the positioning of children viewers (Linear, Circular). */
+  children?: (props: CustomChildrenProps) => React.ReactNode;
 
   /** a list of colors to populate un-colored annotations with. HEX, RGB, names are supported */
   colors?: string[];
@@ -88,6 +91,9 @@ export interface SeqVizProps {
 
   /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
   onSelection?: (selection: Selection) => void;
+
+  /** Refs associated with custom children. */
+  refs?: SeqVizChildRefs;
 
   /** whether the circular viewer should rotate when the mouse scrolls over the plasmid */
   rotateOnScroll?: boolean;
@@ -294,7 +300,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     seq: string;
     seqType: SeqType;
   } => {
-    const { annotations, file, name = "", seq } = props || this.props;
+    const { annotations, compSeq, file, name = "", seq } = props || this.props;
 
     if (file) {
       // Parse a sequence file
@@ -319,7 +325,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       const seqType = guessType(seq);
       return {
         annotations: this.parseAnnotations(annotations, seq),
-        compSeq: complement(seq, seqType).compSeq,
+        compSeq: compSeq || complement(seq, seqType).compSeq,
         name,
         seq,
         seqType,
@@ -366,7 +372,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    */
   parseAnnotations = (annotations: AnnotationProp[] | null = null, seq = ""): Annotation[] =>
     (annotations || []).map((a, i) => ({
-      id: randomid(),
+      id: randomID(),
       ...a,
       color: a.color || colorByIndex(i, COLORS),
       direction: directionality(a.direction),
@@ -382,8 +388,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
     if (!seq) return <div className="la-vz-seqviz" />;
 
-    if (seqType !== "dna" && seqType !== "rna" && translations && translations.length) {
-      // make the entire sequence the "translation"
+    // If the seqType is aa, make the entire sequence the "translation"
+    if (seqType === "aa") {
       // TODO: during some grand future refactor, make this cleaner and more transparent to the user
       translations = [{ direction: 1, end: seq.length, start: 0 }];
     }

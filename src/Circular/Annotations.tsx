@@ -189,6 +189,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         <text
           dy={-0.4 * lineHeight}
           id={a.id}
+          style={svgText}
           onBlur={() => {
             // do nothing
           }}
@@ -197,7 +198,6 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
           }}
           onMouseOut={() => hoverAnnotation(a.id, "0.7")}
           onMouseOver={() => hoverAnnotation(a.id, "1.0")}
-          style={svgText}
         >
           <textPath
             className="la-vz-annotation-label"

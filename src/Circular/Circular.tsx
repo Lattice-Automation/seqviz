@@ -37,7 +37,7 @@ export type GenArcFunc = (args: {
   sweepFWD?: boolean;
 }) => string;
 
-interface CircularProps {
+export interface CircularProps {
   annotations: Annotation[];
   center: { x: number; y: number };
   compSeq: string;
@@ -339,12 +339,12 @@ export default class Circular extends React.Component<CircularProps, CircularSta
         data-testid="la-vz-viewer-circular"
         height={size.height}
         id={plasmidId}
+        overflow="visible"
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onWheel={this.handleScrollEvent}
-        overflow="visible"
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} />
@@ -393,7 +393,7 @@ export const Arc = (props: {
   start: number;
   style: React.CSSProperties;
 }) => {
-  const { color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
+  const { color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start, style } = props;
 
   let { end } = props;
   // crosses the zero index
@@ -429,6 +429,7 @@ export const Arc = (props: {
       shapeRendering="auto"
       stroke="rgba(0, 0, 0, 0.5)"
       strokeWidth={1}
+      style={style}
       transform={getRotation(start)}
     />
   );

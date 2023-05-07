@@ -87,7 +87,6 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
       <g>
         {selLength && (
           <path
-            style={highlight}
             d={genArc({
               innerRadius: bottomR,
               largeArc: lArc,
@@ -97,11 +96,12 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
             })}
             shapeRendering="auto"
             stroke="none"
+            style={highlight}
             transform={getRotation(start)}
           />
         )}
-        <path d={edgePath} transform={getRotation(start)} style={selectionEdge} />
-        {selLength && <path d={edgePath} transform={getRotation(end)} style={selectionEdge} />}
+        <path d={edgePath} style={selectionEdge} transform={getRotation(start)} />
+        {selLength && <path d={edgePath} style={selectionEdge} transform={getRotation(end)} />}
       </g>
     );
   }

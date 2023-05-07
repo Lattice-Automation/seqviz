@@ -8,7 +8,8 @@
     "deploy": "npm update seqviz && npm run build && aws s3 sync ./out s3://lattice-tools-s3/seqviz --delete && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*'",
     "fix": "prettier ./lib/** ./pages/** --write && eslint lib --ext ts,tsx --fix",
     "lint": "prettier ./lib/** --check && eslint lib --ext ts,tsx --quiet",
-    "start": "open http://localhost:3010/ && next dev -p 3010"
+    "start": "open http://localhost:3010/ && next dev -p 3010",
+    "dev": "next dev -p 3010"
   },
   "dependencies": {
     "browserslist": "^4.21.3",
@@ -36,6 +37,6 @@
   "devDependencies": {
     "@types/lodash": "^4.14.184",
     "@types/react": "^18.0.18",
-    "webpack": "^5.74.0"
+    "webpack": "^5.76.0"
   }
 }

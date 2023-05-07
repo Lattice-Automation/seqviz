@@ -117,7 +117,7 @@ const SingleCutSite = (props: {
       />
 
       {/* a line showing the end of the cut-site */}
-      <path style={cutSiteStyle} d={calculateLinePath(rcut - start, midR, botR)} />
+      <path d={calculateLinePath(rcut - start, midR, botR)} style={cutSiteStyle} />
     </g>
   );
 };

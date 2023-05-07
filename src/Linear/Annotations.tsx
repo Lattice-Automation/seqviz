@@ -220,6 +220,7 @@ const SingleNamedElement = (props: {
           dominantBaseline="middle"
           fontSize={12}
           id={element.id}
+          style={svgText}
           textAnchor="middle"
           x={width / 2}
           y={height / 2 + 1}
@@ -231,7 +232,6 @@ const SingleNamedElement = (props: {
           }}
           onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
           onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
-          style={svgText}
         >
           {name}
         </text>

@@ -62,6 +62,7 @@ export const CutSites = (props: {
                 className={`la-vz-cut-site-text ${c.c.id}-label`}
                 dominantBaseline="hanging"
                 id={c.c.id}
+                style={{ ...svgText, cursor: "pointer", fontSize: 12 }}
                 textAnchor="start"
                 x={c.label.x}
                 y={yDiff}
@@ -69,7 +70,6 @@ export const CutSites = (props: {
                 onFocus={() => 0}
                 onMouseOut={() => onCutSiteHover(c.c.id, false)}
                 onMouseOver={() => onCutSiteHover(c.c.id, true)}
-                style={{ ...svgText, cursor: "pointer", fontSize: 12 }}
               >
                 {c.label.text}
               </text>

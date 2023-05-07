@@ -251,11 +251,6 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
       className="la-vz-viewer-event-router"
       id="la-vz-event-router"
       role="presentation"
-      tabIndex={-1}
-      onKeyDown={this.handleKeyPress}
-      onMouseDown={this.handleMouseEvent}
-      onMouseMove={this.props.handleMouseEvent}
-      onMouseUp={this.handleMouseEvent}
       style={{
         display: "flex",
         flexDirection: "row",
@@ -264,6 +259,11 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
         position: "absolute",
         width: "100%",
       }}
+      tabIndex={-1}
+      onKeyDown={this.handleKeyPress}
+      onMouseDown={this.handleMouseEvent}
+      onMouseMove={this.props.handleMouseEvent}
+      onMouseUp={this.handleMouseEvent}
     >
       {this.props.children}
     </div>

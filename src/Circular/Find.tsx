@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { HighlightProp, Range } from "../elements";
-import { search } from "../style";
+import { search as searchStyle } from "../style";
 import { Arc, GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 export const Find = (props: {
@@ -33,7 +33,7 @@ export const Find = (props: {
             radius={radius}
             seqLength={seqLength}
             start={s.start}
-            style={search}
+            style={searchStyle}
           />
         ))}
 
@@ -50,7 +50,7 @@ export const Find = (props: {
           radius={radius}
           seqLength={seqLength}
           start={start}
-          style={search}
+          style={searchStyle}
         />
       ))}
     </g>

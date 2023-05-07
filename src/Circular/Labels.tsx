@@ -312,8 +312,8 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                   id={first.id}
                   {...g.textCoor}
                   dominantBaseline="middle"
-                  textAnchor={g.textAnchor}
                   style={svgText}
+                  textAnchor={g.textAnchor}
                 >
                   {g.name}
                 </text>

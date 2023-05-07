@@ -1,8 +1,8 @@
 import * as React from "react";
 
 import SelectionContext from "../selectionContext";
-import { randomid } from "../sequence";
-import { selection, selectionEdge } from "../style";
+import { randomID } from "../sequence";
+import { highlight, selection, selectionEdge } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface EdgesProps {
@@ -23,7 +23,7 @@ class Edges extends React.PureComponent<EdgesProps> {
   static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
-  id = randomid();
+  id = randomID();
 
   render() {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectEdgeHeight } = this.props;
@@ -98,11 +98,11 @@ class Edges extends React.PureComponent<EdgesProps> {
       <g>
         {startEdge !== null && (
           <rect
-            style={selectionEdge}
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
             strokeWidth={0}
+            style={selectionEdge}
             width={1}
             x={x}
             y={-5}
@@ -110,11 +110,11 @@ class Edges extends React.PureComponent<EdgesProps> {
         )}
         {lastEdge !== null && (
           <rect
-            style={selectionEdge}
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
             strokeWidth={0}
+            style={selectionEdge}
             width={1}
             x={secondEdgeX}
             y={-5}
@@ -142,7 +142,7 @@ class Block extends React.PureComponent<BlockProps> {
   static context: React.ContextType<typeof SelectionContext>;
   declare context: React.ContextType<typeof SelectionContext>;
 
-  id = randomid();
+  id = randomID();
 
   render() {
     const { findXAndWidth, firstBase, fullSeq, lastBase, selectHeight } = this.props;
@@ -165,8 +165,8 @@ class Block extends React.PureComponent<BlockProps> {
     const blockProps = {
       "data-testid": "la-vz-selection-block",
       height: selectHeight,
-      y: -5,
       style: selection,
+      y: -5,
     };
 
     let x: number | null = null;

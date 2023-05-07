@@ -1,10 +1,10 @@
 import * as React from "react";
 import { withResizeDetector } from "react-resize-detector";
 
-import Circular from "./Circular/Circular";
+import Circular, { CircularProps } from "./Circular/Circular";
 import { EventHandler } from "./EventHandler";
-import Linear from "./Linear/Linear";
-import SelectionHandler from "./SelectionHandler";
+import Linear, { LinearProps } from "./Linear/Linear";
+import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
@@ -17,9 +17,23 @@ import SelectionContext, { Selection, defaultSelection } from "./selectionContex
  */
 export const CHAR_WIDTH = 7.2;
 
+export interface CustomChildrenProps {
+  circularProps: Omit<CircularProps, "handleMouseEvent" | "inputRef" | "onUnmount">;
+  handleMouseEvent: React.MouseEventHandler;
+  inputRef: InputRefFunc;
+  linearProps: Omit<LinearProps, "handleMouseEvent" | "inputRef" | "onUnmount">;
+  onUnmount: (ref: string) => void;
+}
+
+export interface SeqVizChildRefs {
+  circular?: React.RefObject<HTMLElement>;
+  linear?: React.RefObject<HTMLElement>;
+}
+
 interface SeqViewerContainerProps {
   annotations: Annotation[];
   bpColors: { [key: number | string]: string };
+  children?: (props: CustomChildrenProps) => React.ReactNode;
   compSeq: string;
   copyEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   cutSites: CutSite[];
@@ -27,6 +41,7 @@ interface SeqViewerContainerProps {
   highlights: Highlight[];
   name: string;
   onSelection: (selection: Selection) => void;
+  refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
   search: NameRange[];
   selection?: {
@@ -129,8 +144,11 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.linear;
 
-    // hack
-    if (viewer.includes("both")) {
+    if (this.props.refs?.linear?.current && this.props.children) {
+      size.width = this.props.refs.linear.current.clientWidth;
+      size.height = this.props.refs.linear.current.clientHeight;
+    } else if (viewer.includes("both")) {
+      // hack
       size.width /= 2;
     }
 
@@ -192,8 +210,11 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const size = this.props.testSize || { height: this.props.height, width: this.props.width };
     const zoom = this.props.zoom.circular;
 
-    // hack
-    if (viewer.includes("both")) {
+    if (this.props.refs?.circular?.current) {
+      size.width = this.props.refs.circular.current.clientWidth;
+      size.height = this.props.refs.circular.current.clientHeight;
+    } else if (viewer.includes("both")) {
+      // hack
       size.width /= 2;
     }
 
@@ -229,18 +250,20 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const linearProps = this.linearProps();
     const circularProps = this.circularProps();
 
+    const mergedSelection = this.getSelection(selection, selectionProp);
+
     return (
       <div
         ref={this.props.targetRef}
         data-testid="la-vz-viewer-container"
         style={{
           height: "100%",
-          width: "100%",
           position: "relative",
+          width: "100%",
         }}
       >
         <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={this.getSelection(selection, selectionProp)}>
+          <SelectionContext.Provider value={mergedSelection}>
             <SelectionHandler
               bpsPerBlock={linearProps.bpsPerBlock}
               center={circularProps.center}
@@ -255,57 +278,69 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   bpsPerBlock={linearProps.bpsPerBlock}
                   copyEvent={this.props.copyEvent}
                   handleMouseEvent={handleMouseEvent}
-                  selection={selection}
+                  selection={mergedSelection}
                   seq={seq}
                   setSelection={this.setSelection}
                 >
-                  {/* TODO: this sucks, some breaking refactor in future should get rid of it SeqViewer */}
-                  {viewer === "linear" && (
-                    <Linear
-                      {...linearProps}
-                      handleMouseEvent={handleMouseEvent}
-                      inputRef={inputRef}
-                      onUnmount={onUnmount}
-                    />
-                  )}
-                  {viewer === "circular" && (
-                    <Circular
-                      {...circularProps}
-                      handleMouseEvent={handleMouseEvent}
-                      inputRef={inputRef}
-                      onUnmount={onUnmount}
-                    />
-                  )}
-                  {viewer === "both" && (
+                  {this.props.children ? (
+                    this.props.children({
+                      circularProps,
+                      handleMouseEvent,
+                      inputRef,
+                      linearProps,
+                      onUnmount,
+                    })
+                  ) : (
                     <>
-                      <Circular
-                        {...circularProps}
-                        handleMouseEvent={handleMouseEvent}
-                        inputRef={inputRef}
-                        onUnmount={onUnmount}
-                      />
-                      <Linear
-                        {...linearProps}
-                        handleMouseEvent={handleMouseEvent}
-                        inputRef={inputRef}
-                        onUnmount={onUnmount}
-                      />
-                    </>
-                  )}
-                  {viewer === "both_flip" && (
-                    <>
-                      <Linear
-                        {...linearProps}
-                        handleMouseEvent={handleMouseEvent}
-                        inputRef={inputRef}
-                        onUnmount={onUnmount}
-                      />
-                      <Circular
-                        {...circularProps}
-                        handleMouseEvent={handleMouseEvent}
-                        inputRef={inputRef}
-                        onUnmount={onUnmount}
-                      />
+                      {/* TODO: this sucks, some breaking refactor in future should get rid of it SeqViewer */}
+                      {viewer === "linear" && (
+                        <Linear
+                          {...linearProps}
+                          handleMouseEvent={handleMouseEvent}
+                          inputRef={inputRef}
+                          onUnmount={onUnmount}
+                        />
+                      )}
+                      {viewer === "circular" && (
+                        <Circular
+                          {...circularProps}
+                          handleMouseEvent={handleMouseEvent}
+                          inputRef={inputRef}
+                          onUnmount={onUnmount}
+                        />
+                      )}
+                      {viewer === "both" && (
+                        <>
+                          <Circular
+                            {...circularProps}
+                            handleMouseEvent={handleMouseEvent}
+                            inputRef={inputRef}
+                            onUnmount={onUnmount}
+                          />
+                          <Linear
+                            {...linearProps}
+                            handleMouseEvent={handleMouseEvent}
+                            inputRef={inputRef}
+                            onUnmount={onUnmount}
+                          />
+                        </>
+                      )}
+                      {viewer === "both_flip" && (
+                        <>
+                          <Linear
+                            {...linearProps}
+                            handleMouseEvent={handleMouseEvent}
+                            inputRef={inputRef}
+                            onUnmount={onUnmount}
+                          />
+                          <Circular
+                            {...circularProps}
+                            handleMouseEvent={handleMouseEvent}
+                            inputRef={inputRef}
+                            onUnmount={onUnmount}
+                          />
+                        </>
+                      )}
                     </>
                   )}
                 </EventHandler>

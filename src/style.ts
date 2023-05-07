@@ -1,23 +1,23 @@
 import * as React from "react";
 
 export const svgText: React.CSSProperties = {
+  MozUserSelect: "none",
+  WebkitUserSelect: "none",
+  background: "none",
   fill: "rgb(42, 42, 42)",
   fontFamily: "Roboto Mono, Monaco, monospace",
-  userSelect: "none",
-  WebkitUserSelect: "none",
-  MozUserSelect: "none",
   msUserSelect: "none",
-  background: "none",
+  userSelect: "none",
 };
 
 export const search: React.CSSProperties = {
-  fill: "rgba(255, 251, 7, 0.5)",
   cursor: "pointer",
+  fill: "rgba(255, 251, 7, 0.5)",
 };
 
 export const highlight: React.CSSProperties = {
-  fill: "rgba(255, 251, 7, 0.25)",
   cursor: "pointer",
+  fill: "rgba(255, 251, 7, 0.25)",
   strokeWidth: 1,
 };
 
@@ -28,16 +28,16 @@ export const selection: React.CSSProperties = {
 
 export const selectionEdge: React.CSSProperties = {
   fill: "black",
+  shapeRendering: "geometricPrecision",
   stroke: "black",
   strokeWidth: 1,
-  shapeRendering: "geometricPrecision",
 };
 
 export const cutSite: React.CSSProperties = {
   fill: "transparent",
   shapeRendering: "auto",
-  strokeWidth: 1,
   stroke: "rgb(115, 119, 125)",
+  strokeWidth: 1,
 };
 
 export const cutSiteHighlight: React.CSSProperties = {
@@ -45,28 +45,28 @@ export const cutSiteHighlight: React.CSSProperties = {
   fill: "rgb(255, 251, 7)",
   fillOpacity: 0,
   shapeRendering: "auto",
-  strokeWidth: 1,
   stroke: "rgb(115, 119, 125)",
+  strokeWidth: 1,
 };
 
 export const indexLine: React.CSSProperties = {
   fill: "transparent",
   shapeRendering: "geometricPrecision",
-  strokeWidth: 1,
   stroke: "rgb(115, 119, 125)",
+  strokeWidth: 1,
 };
 
 export const indexTick: React.CSSProperties = {
   fill: "transparent",
   shapeRendering: "geometricPrecision",
-  strokeWidth: 1,
   stroke: "rgb(115, 119, 125)",
+  strokeWidth: 1,
 };
 
 export const indexTickLabel: React.CSSProperties = {
   ...svgText,
   fill: "rgb(115, 119, 125)",
+  fontSize: 12,
   fontWeight: 300,
   textRendering: "optimizeLegibility",
-  fontSize: 12,
 };

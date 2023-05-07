@@ -75,8 +75,8 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        y={props.indexYDiff}
         style={highlight}
+        y={props.indexYDiff}
       />
       <rect
         key={`linear-highlight-${props.highlight.id}-bottom`}
@@ -87,8 +87,8 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        y={props.compYDiff}
         style={highlight}
+        y={props.compYDiff}
       />
     </>
   );

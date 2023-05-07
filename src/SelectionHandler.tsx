@@ -233,7 +233,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
    * Handle a sequence selection event on the circular viewer
    */
   handleCircularSeqEvent = (e: SeqVizMouseEvent) => {
-    const { seq } = this.props;
+    const { seq, setCentralIndex } = this.props;
     const selection = this.context;
 
     const { start } = selection;
@@ -249,6 +249,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
         : this.calcSelectionLength(selStart, currBase, true); // check clockwise selection length
       this.selectionStarted = lookahead > 0; // update check for whether there is a prior selection
       this.resetCircleDragVars(selStart); // begin drag event
+      setCentralIndex?.("LINEAR", selStart);
 
       this.setSelection({
         ...defaultSelection,

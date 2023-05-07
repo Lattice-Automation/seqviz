@@ -50,7 +50,7 @@ interface SeqBlockProps {
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
-  translations: Translation[];
+  translationRows: Translation[][];
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
@@ -236,7 +236,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       showComplement,
       showIndex,
       size,
-      translations,
+      translationRows,
       zoom,
       zoomed,
     } = this.props;
@@ -267,14 +267,14 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight = elementHeight * translations.length;
+    const translationHeight = elementHeight * translationRows.length;
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
     const annHeight = elementHeight * annotationRows.length;
 
     // height and ydiff of the index row.
-    const elementGap = annotationRows.length + translations.length ? 3 : 0;
+    const elementGap = annotationRows.length + translationRows.length ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
@@ -298,14 +298,15 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         })}
         className="la-vz-seqblock"
         cursor="text"
+        data-testid="la-vz-seqblock"
         display="block"
         height={blockHeight}
         id={id}
+        overflow="visible"
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
-        overflow="visible"
       >
         {showIndex && (
           <IndexRow
@@ -360,7 +361,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           listenerOnly={false}
           zoomed={zoomed}
         />
-        {translations.length && (
+        {translationRows.length && (
           <TranslationRows
             bpsPerBlock={bpsPerBlock}
             charWidth={charWidth}
@@ -371,7 +372,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             inputRef={inputRef}
             lastBase={lastBase}
             seqType={seqType}
-            translations={translations}
+            translationRows={translationRows}
             yDiff={translationYDiff}
             onUnmount={onUnmount}
           />
@@ -397,8 +398,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             className="la-vz-seq"
             data-testid="la-vz-seq"
             id={id}
-            transform={`translate(0, ${indexYDiff + lineHeight / 2})`}
             style={svgText}
+            transform={`translate(0, ${indexYDiff + lineHeight / 2})`}
           >
             {seq.split("").map(this.seqTextSpan)}
           </text>
@@ -409,8 +410,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             className="la-vz-comp-seq"
             data-testid="la-vz-comp-seq"
             id={id}
-            transform={`translate(0, ${compYDiff + lineHeight / 2})`}
             style={svgText}
+            transform={`translate(0, ${compYDiff + lineHeight / 2})`}
           >
             {compSeq.split("").map(this.seqTextSpan)}
           </text>

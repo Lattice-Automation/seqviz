@@ -98,8 +98,8 @@ export class Index extends React.PureComponent<IndexProps> {
           key={`la-vz-base-${i}`}
           {...findCoor(0, radius + 2 * lineHeight)}
           dominantBaseline="middle"
-          transform={getRotation(i)}
           style={svgText}
+          transform={getRotation(i)}
         >
           {seqForCircular.charAt(i)}
         </text>,
@@ -107,8 +107,8 @@ export class Index extends React.PureComponent<IndexProps> {
           key={`la-vz-base-comp-${i}`}
           {...findCoor(0, radius + lineHeight)}
           dominantBaseline="middle"
-          transform={getRotation(i)}
           style={svgText}
+          transform={getRotation(i)}
         >
           {compSeqForCircular.charAt(i)}
         </text>
@@ -195,7 +195,7 @@ export class Index extends React.PureComponent<IndexProps> {
     return (
       <g>
         {/* A label showing the name of the plasmid */}
-        <text fontSize={20} fontWeight={500} textAnchor="middle" style={svgText}>
+        <text fontSize={20} fontWeight={500} style={svgText} textAnchor="middle">
           {nameSpans.map((n, i) => (
             <tspan key={n} x={nameCoor.x} y={nameCoor.y + i * 25}>
               {n}
@@ -221,10 +221,10 @@ export class Index extends React.PureComponent<IndexProps> {
             />
             <text
               className="la-vz-index-tick-label"
+              style={indexTickLabel}
               textAnchor="middle"
               x={tickCoorEnd.x}
               y={tickCoorEnd.y + lineHeight}
-              style={indexTickLabel}
             >
               {t}
             </text>
@@ -236,14 +236,14 @@ export class Index extends React.PureComponent<IndexProps> {
           <path
             className="la-vz-index-line"
             d={indexCurve}
-            transform={getRotation(seqLength * 0.75)}
             style={indexLine}
+            transform={getRotation(seqLength * 0.75)}
           />
           <path
             className="la-vz-index-line"
             d={indexCurve}
-            transform={getRotation(seqLength * 0.25)}
             style={indexLine}
+            transform={getRotation(seqLength * 0.25)}
           />
         </g>
       </g>

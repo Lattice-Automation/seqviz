@@ -94,12 +94,12 @@ export default class Index extends React.PureComponent<IndexProps> {
 
       return (
         <React.Fragment key={p}>
-          <path className="la-vz-index-tick" d="M 0 0 L 0 7" transform={transTick} style={indexTick} />
+          <path className="la-vz-index-tick" d="M 0 0 L 0 7" style={indexTick} transform={transTick} />
           <text
             className="la-vz-index-tick-label"
             dominantBaseline="hanging"
-            transform={transText}
             style={indexTickLabel}
+            transform={transText}
           >
             {p}
           </text>

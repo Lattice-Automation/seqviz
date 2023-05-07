@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 
 import * as React from "react";
 
@@ -31,7 +31,7 @@ const defaultProps = {
   showComplement: true,
   showIndex: true,
   size: { height: 600, width: 1200 },
-  translations: [],
+  translationRows: [],
   y: 0,
   zoom: { linear: 50 },
   zoomed: true,
@@ -73,5 +73,7 @@ describe("SeqBlock", () => {
     const seqBlock = screen.getByTestId("la-vz-seq");
     expect(seqBlock).toBeTruthy();
     expect(seqBlock.textContent).toEqual(seq);
+
+    cleanup();
   });
 });
