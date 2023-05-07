@@ -68,7 +68,7 @@ export default class App extends React.Component<any, AppState> {
       { end: 1147, start: 736 },
       { end: 1885, start: 1165 },
     ],
-    viewer: "",
+    viewer: "both",
     zoom: 50,
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();

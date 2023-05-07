@@ -394,6 +394,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            oneRow={oneRow}
             seqBlockRef={this}
             width={size.width}
             yDiff={annYDiff}

@@ -26,6 +26,7 @@ const AnnotationRows = (props: {
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
+  oneRow: boolean;
   seqBlockRef: unknown;
   width: number;
   yDiff: number;
@@ -42,6 +43,7 @@ const AnnotationRows = (props: {
         height={props.elementHeight}
         inputRef={props.inputRef}
         lastBase={props.lastBase}
+        oneRow={props.oneRow}
         seqBlockRef={props.seqBlockRef}
         width={props.width}
         y={props.yDiff + props.elementHeight * i}
@@ -65,6 +67,7 @@ const AnnotationRow = (props: {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  oneRow: boolean;
   seqBlockRef: unknown;
   width: number;
   y: number;
@@ -101,8 +104,9 @@ const SingleNamedElement = (props: {
   index: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  oneRow: boolean;
 }) => {
-  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase } = props;
+  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase, oneRow } = props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
@@ -129,7 +133,7 @@ const SingleNamedElement = (props: {
 
   let linePath = "";
   let bottomRight = `L ${width} ${height}`; // flat right edge
-  if ((overflowRight && width > 2 * cW) || crossZero) {
+  if ((overflowRight && width > 2 * cW && !oneRow) || crossZero) {
     bottomRight = `
         L ${width - cW} ${cH}
         L ${width} ${2 * cH}
@@ -142,7 +146,7 @@ const SingleNamedElement = (props: {
   }
 
   let bottomLeft = `L 0 ${height} L 0 0`; // flat left edge
-  if (overflowLeft && width > 2 * cW) {
+  if (overflowLeft && width > 2 * cW && !oneRow) {
     bottomLeft = `
         L 0 ${height}
         L ${cW} ${3 * cH}
