@@ -28,6 +28,7 @@
   - [Installation](#installation)
   - [Instantiation](#instantiation)
   - [Props](#props)
+  - [Custom Viewer Positioning](#custom-viewer-positioning)
   - [Without React](#without-react)
 - [Contact Us](#contact-us)
 
@@ -37,7 +38,7 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ## Features
 
-### Linear and Circular Sequence Viewer
+### Linear and Circular Sequence Viewers
 
 - Annotations with names and colors
 - Amino acid translations
@@ -292,32 +293,30 @@ Whether to show the complement sequence.
 
 By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with rotateOnScroll: false.
 
-#### `Custom Rendering`
+#### `refs: (={ circular: undefined, linear: undefined })`
+
+See: [custom viewer positioning](#custom-viewer-positioning)
+
+### Custom Viewer Positioning
 
 This makes use of the `children` and `refs` props to allow custom rendering of the sequence viewers. For example, to render the linear viewer above the circular viewer:
 
 ```jsx
 import { useRef } from "react";
-import { SeqViz, Linear, Circular } from "seqviz";
+import { Circular, Linear, SeqViz } from "seqviz";
 
 export default () => {
+  const circular = useRef();
   const linearRef = useRef();
-  const circularRef = useRef();
 
   return (
-    <SeqViz
-      name="J23100"
-      seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
-      refs={{circular: circularRef, linear: linearRef}}
-    >
+    <SeqViz name="J23100" seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC" refs={{ circular, linear }}>
       {({ circularProps, linearProps, ...props }) => (
-        <div
-          style={{ display: "flex", flexDirection: "column", width: "100%" }}
-        >
-          <div ref={linearRef} style={{ height: "25%", width: "100%" }}>
+        <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+          <div ref={linear} style={{ height: "25%", width: "100%" }}>
             <Linear {...linearProps} {...props} />
           </div>
-          <div ref={circularRef} style={{ height: "75%", width: "100%" }}>
+          <div ref={circular} style={{ height: "75%", width: "100%" }}>
             <Circular {...circularProps} {...props} />
           </div>
         </div>
@@ -325,7 +324,6 @@ export default () => {
     </SeqViz>
   );
 };
-
 ```
 
 ### Without React

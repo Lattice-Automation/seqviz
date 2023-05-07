@@ -128,7 +128,7 @@ export default class Linear extends React.Component<LinearProps> {
 
     // TODO: this should also use createMultiRows
     const translationRows = translations.length
-      ? createSingleRows(createTranslations(translations, seq, seqType), bpsPerBlock, arrSize)
+      ? createMultiRows(stackElements(createTranslations(translations, seq, seqType), seq.length), bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {
@@ -202,7 +202,7 @@ export default class Linear extends React.Component<LinearProps> {
           size={size}
           stackedAnnotations={stackedAnnotations}
           stackedTranslations={stackedTranslations}
-          translations={translationRows[i]}
+          translationRows={translationRows[i]}
           x={xDiff}
           y={yDiff}
           zoom={zoom}

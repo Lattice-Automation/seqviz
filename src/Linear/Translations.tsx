@@ -19,7 +19,7 @@ interface TranslationRowsProps {
   oneRow: boolean;
   seqType: SeqType;
   stackedPositions: NameRange[][];
-  translations: Translation[];
+  translationRows: Translation[][];
   yDiff: number;
 }
 
@@ -34,46 +34,67 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
-  oneRow,
   seqType,
-  stackedPositions,
-  translations,
+  translationRows,
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
-    {translations.map((t, i) => (
+    {translationRows.map((translations, i) => (
       <TranslationRow
-        key={`${t.id}-${firstBase}`}
+        key={`i-${firstBase}`}
         bpsPerBlock={bpsPerBlock}
         charWidth={charWidth}
         findXAndWidth={findXAndWidth}
         firstBase={firstBase}
         fullSeq={fullSeq}
         height={elementHeight * 0.9}
-        id={t.id}
         inputRef={inputRef}
         lastBase={lastBase}
         seqType={seqType}
-        translation={t}
-        y={
-          yDiff +
-          elementHeight *
-            (oneRow ? (stackedPositions.findIndex(rows => rows.some(item => item.id === t.id)) as number) : i)
-        }
+        translations={translations}
+        y={yDiff + elementHeight * i}
         onUnmount={onUnmount}
       />
     ))}
   </g>
 );
 
-interface TranslationRowProps {
+/**
+ * A single row of translations. Multiple of these may be in one seqBlock
+ * vertically stacked on top of one another in non-overlapping arrays.
+ */
+const TranslationRow = (props: {
   bpsPerBlock: number;
   charWidth: number;
   findXAndWidth: FindXAndWidthType;
   firstBase: number;
   fullSeq: string;
   height: number;
-  id?: string;
+  inputRef: InputRefFunc;
+  lastBase: number;
+  onUnmount: (a: unknown) => void;
+  seqType: SeqType;
+  translations: Translation[];
+  y: number;
+}) => (
+  <>
+    {props.translations.map((t, i) => (
+      <SingleNamedElement
+        {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
+        key={`translation-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
+        translation={t}
+      />
+    ))}
+  </>
+);
+
+interface SingleNamedElementProps {
+  bpsPerBlock: number;
+  charWidth: number;
+  findXAndWidth: FindXAndWidthType;
+  firstBase: number;
+  fullSeq: string;
+  height: number;
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
@@ -86,7 +107,7 @@ interface TranslationRowProps {
  * A single row for translations of DNA into Amino Acid sequences so a user can
  * see the resulting protein or peptide sequence in the viewer
  */
-class TranslationRow extends React.PureComponent<TranslationRowProps> {
+class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
   AAs: string[] = [];
 
   // on unmount, clear all AA references.

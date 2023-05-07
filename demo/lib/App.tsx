@@ -43,7 +43,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { direction?: 1 | -1; end: number; start: number; }[];
+  translations: { direction?: 1 | -1; end: number; start: number }[];
   viewer: string;
   zoom: number;
 }
@@ -104,19 +104,17 @@ export default class App extends React.Component<any, AppState> {
   };
 
   render() {
-
     let customChildren = null;
     if (this.state.customChildren) {
       customChildren = ({ circularProps, linearProps, ...props }) => {
         if (this.state.viewer === "linear") {
-          return  (
-              <div ref={this.linearRef} style={{ height: "100%", width: "100%" }}>
-                <Linear {...linearProps} {...props} />
-              </div>
+          return (
+            <div ref={this.linearRef} style={{ height: "100%", width: "100%" }}>
+              <Linear {...linearProps} {...props} />
+            </div>
           );
-        }
-         else if (this.state.viewer === "circular") {
-          return  (
+        } else if (this.state.viewer === "circular") {
+          return (
             <div ref={this.circularRef} style={{ height: "100%", width: "100%" }}>
               <Circular {...circularProps} {...props} />
             </div>
@@ -155,7 +153,7 @@ export default class App extends React.Component<any, AppState> {
             </div>
           );
         }
-      }
+      };
     }
 
     return (
@@ -222,7 +220,7 @@ export default class App extends React.Component<any, AppState> {
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
                     name={this.state.name}
-                    refs={{circular: this.circularRef, linear: this.linearRef}}
+                    refs={{ circular: this.circularRef, linear: this.linearRef }}
                     search={this.state.search}
                     selection={this.state.selection}
                     seq={this.state.seq}

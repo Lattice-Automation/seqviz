@@ -33,7 +33,7 @@ const defaultProps = {
   size: { height: 600, width: 1200 },
   stackedAnnotations: [],
   stackedTranslations: [],
-  translations: [],
+  translationRows: [],
   y: 0,
   zoom: { linear: 50 },
   zoomed: true,

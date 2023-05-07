@@ -53,7 +53,7 @@ interface SeqBlockProps {
   size: Size;
   stackedAnnotations: Annotation[][];
   stackedTranslations: NameRange[][];
-  translations: Translation[];
+  translationRows: Translation[][];
   x: number;
   y: number;
   zoom: { linear: number };
@@ -244,7 +244,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       size,
       stackedAnnotations,
       stackedTranslations,
-      translations,
+      translationRows,
       zoom,
       zoomed,
     } = this.props;
@@ -275,14 +275,14 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight = elementHeight * (oneRow ? stackedTranslations.length : translations.length);
+    const translationHeight = elementHeight * (oneRow ? stackedTranslations.length : translationRows.length);
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
     const annHeight = elementHeight * (oneRow ? stackedAnnotations.length : annotationRows.length);
 
-    // height and ydiff of the index row.
-    const elementGap = translationHeight || annHeight ? 3 : 0;
+    // height and yDiff of the index row.
+    const elementGap = annotationRows.length + translationRows.length ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
@@ -368,7 +368,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           listenerOnly={false}
           zoomed={zoomed}
         />
-        {translations.length && (
+        {translationRows.length && (
           <TranslationRows
             bpsPerBlock={bpsPerBlock}
             charWidth={charWidth}
@@ -381,7 +381,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             oneRow={oneRow}
             seqType={seqType}
             stackedPositions={stackedTranslations}
-            translations={translations}
+            translationRows={translationRows}
             yDiff={translationYDiff}
             onUnmount={onUnmount}
           />

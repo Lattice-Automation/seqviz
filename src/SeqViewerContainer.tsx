@@ -253,10 +253,12 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const linearProps = this.linearProps();
     const circularProps = this.circularProps();
 
+    const mergedSelection = this.getSelection(selection, selectionProp);
+
     return (
       <div ref={this.props.targetRef} className="la-vz-viewer-container" data-testid="la-vz-viewer-container">
         <CentralIndexContext.Provider value={centralIndex}>
-          <SelectionContext.Provider value={this.getSelection(selection, selectionProp)}>
+          <SelectionContext.Provider value={mergedSelection}>
             <SelectionHandler
               bpsPerBlock={linearProps.bpsPerBlock}
               center={circularProps.center}
@@ -271,7 +273,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   bpsPerBlock={linearProps.bpsPerBlock}
                   copyEvent={this.props.copyEvent}
                   handleMouseEvent={handleMouseEvent}
-                  selection={selection}
+                  selection={mergedSelection}
                   seq={seq}
                   setSelection={this.setSelection}
                 >
