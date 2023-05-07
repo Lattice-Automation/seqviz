@@ -13,6 +13,7 @@
     "minor": "./release.sh minor",
     "patch": "./release.sh patch",
     "start": "cd demo && npm run start",
+    "dev": "cd demo && npm install && npm run dev",
     "test": "CI=true jest"
   },
   "keywords": [
