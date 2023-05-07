@@ -27,6 +27,7 @@ const AnnotationRows = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   oneRow: boolean;
+  positions: Map<string, number>;
   seqBlockRef: unknown;
   width: number;
   yDiff: number;
@@ -44,6 +45,7 @@ const AnnotationRows = (props: {
         inputRef={props.inputRef}
         lastBase={props.lastBase}
         oneRow={props.oneRow}
+        positions={props.positions}
         seqBlockRef={props.seqBlockRef}
         width={props.width}
         y={props.yDiff + props.elementHeight * i}
@@ -68,6 +70,7 @@ const AnnotationRow = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   oneRow: boolean;
+  positions: Map<string, number>;
   seqBlockRef: unknown;
   width: number;
   y: number;
@@ -84,7 +87,7 @@ const AnnotationRow = (props: {
         key={`annotation-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
         element={a}
         elements={props.annotations}
-        index={i}
+        index={props.positions.get(a.id) as number}
       />
     ))}
   </g>

@@ -49,7 +49,7 @@ export class Annotations extends React.PureComponent<AnnotationsProps> {
       <CentralIndexContext.Consumer>
         {({ circular }) => (
           <g className="la-vz-circular-annotations">
-            {annotations.reduce((acc: any[], anns: Annotation[], i) => {
+            {annotations.reduce((acc: React.ReactNode[], anns: Annotation[], i) => {
               if (i) {
                 // increment the annRow radii on every loop after first
                 currBRadius -= lineHeight + 3;
@@ -86,7 +86,7 @@ export class Annotations extends React.PureComponent<AnnotationsProps> {
 
 interface SingleAnnotationProps {
   annotation: Annotation;
-  calcBorderColor: (c: any) => any;
+  calcBorderColor: (c: string) => string | null;
   centralIndex: number;
   currBRadius: number;
   currTRadius: number;

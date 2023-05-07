@@ -391,7 +391,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // If the seqType is aa, make the entire sequence the "translation"
     if (seqType === "aa") {
       // TODO: during some grand future refactor, make this cleaner and more transparent to the user
-      translations = [{ direction: 1, end: seq.length, start: 0 }];
+      translations = [{ direction: 1, end: seq.length, id: randomID(), name: randomID(), start: 0 }];
     }
 
     // Since all the props are optional, we need to parse them to defaults.
@@ -417,11 +417,16 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       rotateOnScroll: !!this.props.rotateOnScroll,
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
-      translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
-        direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
-        end: t.start + Math.floor((t.end - t.start) / 3) * 3,
-        start: t.start % seq.length,
-      })),
+      translations: (translations || []).map(
+        t =>
+          ({
+            direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
+            end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+            id: randomID(),
+            name: randomID(),
+            start: t.start % seq.length,
+          } as NameRange)
+      ),
       viewer: this.props.viewer || "both",
       zoom: {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,

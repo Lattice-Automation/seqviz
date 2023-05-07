@@ -53,7 +53,7 @@ export class InfiniteHorizontalScroll extends React.PureComponent<
   componentDidUpdate = (
     prevProps: InfiniteHorizontalScrollProps,
     prevState: InfiniteHorizontalScrollState,
-    snapshot: any
+    snapshot: { blockIndex: number; blockX: number }
   ) => {
     if (!this.scroller.current) {
       // scroller not mounted yet

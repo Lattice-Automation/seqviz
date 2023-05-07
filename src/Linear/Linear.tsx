@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
-import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size } from "../elements";
+import { Annotation, CutSite, Highlight, NameRange, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
@@ -30,7 +30,7 @@ export interface LinearProps {
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
-  translations: Range[];
+  translations: NameRange[];
   zoom: { linear: number };
 }
 
@@ -112,6 +112,33 @@ export default class Linear extends React.Component<LinearProps> {
       return annotations;
     };
 
+    const computeRangePositions = (ranges: NameRange[]) => {
+      const results = new Map<string, number>();
+      const sortedRanges = [...ranges];
+      const curIndices = new Map<number, NameRange>();
+      sortedRanges
+        .sort((a, b) => {
+          if (a.start === b.start) {
+            return a.end - b.end;
+          }
+          return a.start - b.start;
+        })
+        .forEach(range => {
+          for (let ind = 0; ; ind++) {
+            const existingRange = curIndices.get(ind);
+            if (!existingRange || existingRange.end < range.start - 1) {
+              curIndices.set(ind, range);
+              results.set(range.id, ind);
+              break;
+            }
+          }
+        });
+      return results;
+    };
+
+    const annotationPositions = computeRangePositions(annotations);
+    const translationPositions = computeRangePositions(translations);
+
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
       bpsPerBlock,
@@ -128,8 +155,6 @@ export default class Linear extends React.Component<LinearProps> {
       : new Array(arrSize).fill([]);
 
     let maxBlockHeight = 0;
-    let maxTranslationRowSize = 0;
-    let maxAnnotationRowSize = 0;
 
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
@@ -169,12 +194,6 @@ export default class Linear extends React.Component<LinearProps> {
       if (blockHeight > maxBlockHeight) {
         maxBlockHeight = blockHeight;
       }
-      if (maxTranslationRowSize < translationRows[i].length) {
-        maxTranslationRowSize = translationRows[i].length;
-      }
-      if (maxAnnotationRowSize < annotationRows[i].length) {
-        maxAnnotationRowSize = annotationRows[i].length;
-      }
     }
 
     if (oneRow) {
@@ -191,6 +210,7 @@ export default class Linear extends React.Component<LinearProps> {
       seqBlocks.push(
         <SeqBlock
           key={ids[i]}
+          annotationPositions={annotationPositions}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
           blockWidth={blockWidths[i]}
@@ -207,8 +227,6 @@ export default class Linear extends React.Component<LinearProps> {
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}
-          maxAnnotationRowSize={maxAnnotationRowSize}
-          maxTranslationRowSize={maxTranslationRowSize}
           oneRow={oneRow}
           searchRows={searchRows[i]}
           seq={seqs[i]}
@@ -217,6 +235,7 @@ export default class Linear extends React.Component<LinearProps> {
           showComplement={showComplement}
           showIndex={showIndex}
           size={size}
+          translationPositions={translationPositions}
           translations={translationRows[i]}
           x={xDiff}
           y={yDiff}

@@ -25,6 +25,7 @@ export type FindXAndWidthElementType = (
 ) => { overflowLeft: boolean; overflowRight: boolean; width: number; x: number };
 
 interface SeqBlockProps {
+  annotationPositions: Map<string, number>;
   annotationRows: Annotation[][];
   blockHeight: number;
   blockWidth: number;
@@ -42,8 +43,6 @@ interface SeqBlockProps {
   inputRef: InputRefFunc;
   key: string;
   lineHeight: number;
-  maxAnnotationRowSize: number;
-  maxTranslationRowSize: number;
   onUnmount: (a: string) => void;
   oneRow: boolean;
   searchRows: Range[];
@@ -53,6 +52,7 @@ interface SeqBlockProps {
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
+  translationPositions: Map<string, number>;
   translations: Translation[];
   x: number;
   y: number;
@@ -218,6 +218,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
   render() {
     const {
+      annotationPositions,
       annotationRows,
       blockHeight,
       blockWidth,
@@ -233,8 +234,6 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       id,
       inputRef,
       lineHeight,
-      maxAnnotationRowSize,
-      maxTranslationRowSize,
       onUnmount,
       oneRow,
       searchRows,
@@ -244,6 +243,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       showComplement,
       showIndex,
       size,
+      translationPositions,
       translations,
       zoom,
       zoomed,
@@ -275,11 +275,12 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight = elementHeight * (oneRow ? maxTranslationRowSize : translations.length);
+    const translationHeight =
+      elementHeight * (oneRow ? Math.max(...annotationPositions.values()) + 1 : translations.length);
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
-    const annHeight = elementHeight * (oneRow ? maxAnnotationRowSize : annotationRows.length);
+    const annHeight = elementHeight * (oneRow ? Math.max(...translationPositions.values()) + 1 : annotationRows.length);
 
     // height and ydiff of the index row.
     const elementGap = annotationRows.length || translations.length || oneRow ? 3 : 0;
@@ -378,6 +379,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            positions={translationPositions}
             seqType={seqType}
             translations={translations}
             yDiff={translationYDiff}
@@ -395,6 +397,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             inputRef={inputRef}
             lastBase={lastBase}
             oneRow={oneRow}
+            positions={annotationPositions}
             seqBlockRef={this}
             width={size.width}
             yDiff={annYDiff}

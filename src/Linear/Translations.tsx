@@ -16,6 +16,7 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
+  positions: Map<string, number>;
   seqType: SeqType;
   translations: Translation[];
   yDiff: number;
@@ -32,12 +33,13 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
+  positions,
   seqType,
   translations,
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
-    {translations.map((t, i) => (
+    {translations.map((t) => (
       <TranslationRow
         key={`${t.id}-${firstBase}`}
         bpsPerBlock={bpsPerBlock}
@@ -51,7 +53,7 @@ export const TranslationRows = ({
         lastBase={lastBase}
         seqType={seqType}
         translation={t}
-        y={yDiff + elementHeight * i}
+        y={yDiff + elementHeight * (positions.get(t.id) as number)}
         onUnmount={onUnmount}
       />
     ))}

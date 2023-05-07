@@ -47,7 +47,11 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
     window.addEventListener("resize", this.handleScrollOrResize);
   };
 
-  componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: InfiniteScrollState, snapshot: any) => {
+  componentDidUpdate = (
+    prevProps: InfiniteScrollProps,
+    prevState: InfiniteScrollState,
+    snapshot: { blockIndex: number; blockX: number }
+  ) => {
     if (!this.scroller.current) {
       // scroller not mounted yet
       return;
