@@ -3,6 +3,7 @@
     "allowJs": false, // allow a partial TypeScript and JavaScript codebase
     "allowUnreachableCode": false,
     "declaration": true,
+    "downlevelIteration": true,
     "jsx": "react", // use typescript to transpile jsx to js
     "lib": ["es2015", "dom"], // https://marcobotto.com/blog/compiling-and-bundling-typescript-libraries-with-webpack/
     "module": "commonjs", // specify module code generation

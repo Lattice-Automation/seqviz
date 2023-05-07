@@ -6,7 +6,7 @@ interface RefSelection extends Selection {
   viewer: "LINEAR" | "CIRCULAR";
 }
 
-export type InputRefFunc = (id: string, ref: RefSelection) => React.LegacyRef<SVGPathElement> | undefined;
+export type InputRefFunc = (id: string, ref: RefSelection) => React.LegacyRef<any> | undefined;
 
 export type SeqVizMouseEvent = React.MouseEvent & {
   target: { id: string };
@@ -96,6 +96,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
    **/
   inputRef = (ref: string, selectRange: Selection) => {
     this.idToRange.set(ref, { ref, ...selectRange });
+    return undefined;
   };
 
   /**

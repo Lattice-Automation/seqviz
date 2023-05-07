@@ -43,7 +43,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { direction?: 1 | -1, end: number; start: number; }[];
+  translations: { direction?: 1 | -1; end: number; start: number; }[];
   viewer: string;
   zoom: number;
 }
