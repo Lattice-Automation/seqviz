@@ -293,7 +293,7 @@ Whether to show the complement sequence.
 
 By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with rotateOnScroll: false.
 
-#### `refs: (={ circular: undefined, linear: undefined })`
+#### `refs (={ circular: undefined, linear: undefined })`
 
 See: [custom viewer positioning](#custom-viewer-positioning)
 
