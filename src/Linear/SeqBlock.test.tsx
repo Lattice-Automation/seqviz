@@ -21,9 +21,13 @@ const defaultProps = {
   },
   key: "",
   lineHeight: 14,
-  mouseEvent: () => {},
+  mouseEvent: () => {
+    // do nothing
+  },
   name: "",
-  onUnmount: () => {},
+  onUnmount: () => {
+    // do nothing
+  },
   reversePrimerRows: [],
   searchRows: [],
   selection: {},

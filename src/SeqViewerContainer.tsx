@@ -113,7 +113,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
    */
   setSelection = (selection: Selection) => {
     // If the user passed a selection, do not update our state here
-    const { parent, ref, ...rest } = selection;
+    const { parent: _, ref: __, ...rest } = selection;
     if (!this.props.selection) this.setState({ selection });
     if (this.props.onSelection) this.props.onSelection(rest);
   };
@@ -256,7 +256,16 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     const mergedSelection = this.getSelection(selection, selectionProp);
 
     return (
-      <div ref={this.props.targetRef} className="la-vz-viewer-container" data-testid="la-vz-viewer-container">
+      <div
+        ref={this.props.targetRef}
+        className="la-vz-viewer-container"
+        data-testid="la-vz-viewer-container"
+        style={{
+          height: "100%",
+          position: "relative",
+          width: "100%",
+        }}
+      >
         <CentralIndexContext.Provider value={centralIndex}>
           <SelectionContext.Provider value={mergedSelection}>
             <SelectionHandler

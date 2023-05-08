@@ -209,6 +209,18 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * If an accession was provided, query it here.
    */
   componentDidMount(): void {
+    // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
+    // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
+    if (typeof window !== "undefined") {
+      /* eslint-disable */
+      require("webfontloader").load({
+        google: {
+          families: ["Roboto Mono:300,400,500"],
+        },
+      });
+    }
+
+    // Check if an accession was passed, we'll query it here if so
     const { accession } = this.props;
     if (!accession || !accession.length) {
       return;
@@ -435,7 +447,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     };
 
     return (
-      <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={style}>
+      <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={{ height: "100%", width: "100%", ...style }}>
         <SeqViewerContainer {...this.props} {...props} {...this.state} />
       </div>
     );
