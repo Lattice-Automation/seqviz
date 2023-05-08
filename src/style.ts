@@ -151,3 +151,18 @@ export const seqBlock: CSS.Properties = {
   padding: 0,
   width: "100%",
 };
+
+export const linearOneRowScroller: CSS.Properties = {
+  cursor: "text",
+  fontWeight: 300,
+  height: "100%",
+  outline: "none !important",
+  overflowX: "auto",
+  overflowY: "hidden",
+  padding: "10",
+  position: "relative",
+};
+
+export const linearOneRowSeqBlock: CSS.Properties = {
+  padding: 0,
+};

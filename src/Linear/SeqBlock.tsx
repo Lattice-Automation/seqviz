@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
-import { seqBlock, svgText } from "../style";
+import { linearOneRowSeqBlock, seqBlock, svgText } from "../style";
 import AnnotationRows from "./Annotations";
 import { CutSites } from "./CutSites";
 import Find from "./Find";
@@ -283,7 +283,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const annHeight = elementHeight * (oneRow ? stackedAnnotations.length : annotationRows.length);
 
     // height and yDiff of the index row.
-    const elementGap = annotationRows.length + translationRows.length ? 3 : 0;
+    const elementGap = translationHeight || annHeight ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
@@ -305,15 +305,15 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           type: "SEQ",
           viewer: "LINEAR",
         })}
-        className={oneRow ? "la-vz-linear-one-row-seqblock" : "la-vz-seqblock"}
+        className="la-vz-seqblock"
         cursor="text"
         data-testid="la-vz-seqblock"
         display="block"
         height={blockHeight}
         id={id}
         overflow="visible"
-        style={seqBlock}
-        width={size.width >= 0 ? size.width : 0}
+        style={oneRow ? linearOneRowSeqBlock : seqBlock}
+        width={oneRow ? blockWidth : size.width}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}

@@ -35,14 +35,16 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
+  oneRow,
   seqType,
+  stackedPositions,
   translationRows,
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
     {translationRows.map((translations, i) => (
       <TranslationRow
-        key={`i-${firstBase}`}
+        key={`${i}-${firstBase}`}
         bpsPerBlock={bpsPerBlock}
         charWidth={charWidth}
         findXAndWidth={findXAndWidth}
@@ -53,7 +55,17 @@ export const TranslationRows = ({
         lastBase={lastBase}
         seqType={seqType}
         translations={translations}
-        y={yDiff + elementHeight * i}
+        y={
+          yDiff +
+          elementHeight *
+            (oneRow
+              ? Math.max(
+                  ...translations.map(
+                    t => stackedPositions.findIndex(row => row.some(item => item.id === t.id)) as number
+                  )
+                )
+              : i)
+        }
         onUnmount={onUnmount}
       />
     ))}

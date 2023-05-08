@@ -3,6 +3,7 @@ import * as React from "react";
 import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
 import { isEqual } from "../isEqual";
+import { linearOneRowScroller } from "../style";
 
 interface InfiniteHorizontalScrollProps {
   blockWidths: number[];
@@ -296,13 +297,18 @@ export class InfiniteHorizontalScroll extends React.PureComponent<
         ref={this.scroller}
         className="la-vz-linear-one-row-scroller"
         data-testid="la-vz-viewer-linear"
+        style={linearOneRowScroller}
         onFocus={() => {
           // do nothing
         }}
         onMouseOver={this.handleMouseOver}
         onScroll={this.handleScrollOrResize}
       >
-        <div ref={this.insideDOM} className="la-vz-linear-one-row-seqblock-container" style={{ width }}>
+        <div
+          ref={this.insideDOM}
+          className="la-vz-linear-one-row-seqblock-container"
+          style={{ display: "flex", flexDirection: "row", width }}
+        >
           <div className="la-vz-seqblock-padding-left" style={{ height: height || 0, width: spaceLeft }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>

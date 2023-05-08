@@ -113,7 +113,7 @@ export default class Linear extends React.Component<LinearProps> {
     };
 
     const stackedAnnotations = stackElements(vetAnnotations(annotations), seq.length);
-    const stackedTranslations = stackElements(translations, seq.length);
+    const stackedTranslations = stackElements(createTranslations(translations, seq, seqType), seq.length);
 
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
@@ -126,9 +126,8 @@ export default class Linear extends React.Component<LinearProps> {
 
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
-    // TODO: this should also use createMultiRows
     const translationRows = translations.length
-      ? createMultiRows(stackElements(createTranslations(translations, seq, seqType), seq.length), bpsPerBlock, arrSize)
+      ? createMultiRows(stackedTranslations, bpsPerBlock, arrSize)
       : new Array(arrSize).fill([]);
 
     for (let i = 0; i < arrSize; i += 1) {
