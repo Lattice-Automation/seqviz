@@ -1,7 +1,7 @@
 {
   "name": "seqviz",
   "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
-  "version": "3.8.5",
+  "version": "3.8.6",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "unpkg": "dist/seqviz.min.js",
