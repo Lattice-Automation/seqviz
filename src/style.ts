@@ -142,7 +142,7 @@ export const linearScroller: CSS.Properties = {
   outline: "none !important",
   overflowX: "hidden",
   overflowY: "scroll",
-  padding: "10",
+  padding: "10px",
   position: "relative",
 };
 
