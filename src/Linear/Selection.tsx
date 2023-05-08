@@ -105,6 +105,8 @@ class Edges extends React.PureComponent<EdgesProps> {
             style={selectionEdge}
             x={x}
             y={-5}
+            width={1}
+            strokeWidth={0}
           />
         )}
         {lastEdge !== null && (
@@ -116,6 +118,8 @@ class Edges extends React.PureComponent<EdgesProps> {
             style={selectionEdge}
             x={secondEdgeX}
             y={-5}
+            width={1}
+            strokeWidth={0}
           />
         )}
       </g>

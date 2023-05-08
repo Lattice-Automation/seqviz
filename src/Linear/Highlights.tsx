@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { NameRange } from "../elements";
-import { highlight } from "../style";
+import { highlight as highlightStyle } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
@@ -45,11 +45,11 @@ const SingleHighlight = (props: {
 }) => {
   const { width, x } = props.findXAndWidth(props.index, props.highlight, props.highlights);
 
-  let highlightStyle = {};
+  let fill = highlightStyle.fill;
   if (props.listenerOnly) {
-    highlightStyle = { fill: "transparent" };
+    // fill = "transparent";
   } else if (props.highlight.color?.length) {
-    highlightStyle = { fill: props.highlight.color };
+    // fill = props.highlight.color;
   }
 
   const rectProps = {
@@ -57,10 +57,8 @@ const SingleHighlight = (props: {
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    style: {
-      ...highlight,
-      ...highlightStyle,
-    },
+    fill,
+    style: highlightStyle,
     width: width,
     x: x,
   };
@@ -76,6 +74,7 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
+        fill="rgba(255, 251, 7, 0.25)"
         y={props.indexYDiff}
       />
       <rect
@@ -87,6 +86,7 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
+        fill="rgba(255, 251, 7, 0.25)"
         y={props.compYDiff}
       />
     </>

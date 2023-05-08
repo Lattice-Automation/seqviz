@@ -30,7 +30,6 @@ export const selectionEdge: React.CSSProperties = {
   fill: "black",
   shapeRendering: "geometricPrecision",
   stroke: "black",
-  strokeWidth: 1,
 };
 
 export const cutSite: React.CSSProperties = {
