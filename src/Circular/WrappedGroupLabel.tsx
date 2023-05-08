@@ -122,6 +122,8 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
                   style={circularLabel}
                   tabIndex={-1}
                   y={groupCoor.y + (i + 0.5) * lineHeight}
+                  onMouseLeave={() => setHoveredLabelUnderline(l.id || "", false)}
+                  onMouseOver={() => setHoveredLabelUnderline(l.id || "", true)}
                 >
                   {l.name}
                 </tspan>
@@ -134,4 +136,16 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
       <rect fill="none" height={rectHeight} stroke="black" strokeWidth={1.5} width={rectWidth} {...rectCoor} />
     </g>
   );
+};
+
+export const setHoveredLabelUnderline = (id: string, underline: boolean) => {
+  if (!document) return;
+
+  const element = document.getElementById(id);
+  if (!element) return;
+  if (underline) {
+    element.style.textDecoration = "underline";
+  } else {
+    element.style.textDecoration = "none";
+  }
 };

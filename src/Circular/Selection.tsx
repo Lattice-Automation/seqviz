@@ -104,9 +104,9 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
         <path
           className="la-vz-selection-edge"
           d={edgePath}
+          strokeWidth={1}
           style={selectionEdge}
           transform={getRotation(start)}
-          strokeWidth={1}
         />
         {selLength && (
           <path className="la-vz-selection-edge" d={edgePath} style={selectionEdge} transform={getRotation(end)} />

@@ -101,23 +101,23 @@ export const CutSites = (props: {
             {c.top.render && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
-                style={cutSite}
                 d={`M ${c.top.x} ${lineYDiff} L ${c.top.x} ${lineYDiff + lineHeight}`}
+                style={cutSite}
               />
             )}
             {c.connector.render && zoom > 10 && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
-                style={cutSite}
                 d={`M ${c.connector.x} ${lineYDiff + lineHeight}
                     L ${c.connector.x + c.connector.width} ${lineYDiff + lineHeight}`}
+                style={cutSite}
               />
             )}
             {c.bottom.render && zoom > 10 && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
-                style={cutSite}
                 d={`M ${c.bottom.x} ${lineYDiff + lineHeight} L ${c.bottom.x} ${lineYDiff + 2 * lineHeight}`}
+                style={cutSite}
               />
             )}
           </g>

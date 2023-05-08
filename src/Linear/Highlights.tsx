@@ -45,7 +45,7 @@ const SingleHighlight = (props: {
 }) => {
   const { width, x } = props.findXAndWidth(props.index, props.highlight, props.highlights);
 
-  let fill = highlightStyle.fill;
+  const fill = highlightStyle.fill;
   if (props.listenerOnly) {
     // fill = "transparent";
   } else if (props.highlight.color?.length) {
@@ -54,10 +54,10 @@ const SingleHighlight = (props: {
 
   const rectProps = {
     className: "la-vz-highlight",
+    fill,
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    fill,
     style: highlightStyle,
     width: width,
     x: x,

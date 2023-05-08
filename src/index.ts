@@ -5,7 +5,6 @@ import { renderToString as reactRenderToString } from "react-dom/server";
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
 import SeqViz, { SeqVizProps } from "./SeqViz";
-import "./SeqViz.css";
 import enzymes from "./enzymes";
 
 /**
