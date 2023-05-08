@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Coor, CutSite } from "../elements";
+import { cutSiteHighlight, cutSite as cutSiteStyle } from "../style";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CutSitesProps {
@@ -96,11 +97,11 @@ const SingleCutSite = (props: {
           outerRadius: topR,
           sweepFWD: true,
         })}
-        style={cutSite.enzyme.color ? { fill: cutSite.enzyme.color } : {}}
+        style={cutSite.enzyme.color ? { ...cutSiteHighlight, fill: cutSite.enzyme.color } : cutSiteHighlight}
       />
 
       {/* a line showing the start of the cut-site */}
-      <path className="la-vz-cut-site" d={calculateLinePath(fcut - start, topR, midR)} />
+      <path className="la-vz-cut-site" d={calculateLinePath(fcut - start, topR, midR)} style={cutSiteStyle} />
 
       {/* a connector line for the cut-site */}
       <path
@@ -113,10 +114,11 @@ const SingleCutSite = (props: {
           outerRadius: midR,
           sweepFWD: true,
         })}
+        style={cutSiteStyle}
       />
 
       {/* a line showing the end of the cut-site */}
-      <path className="la-vz-cut-site" d={calculateLinePath(rcut - start, midR, botR)} />
+      <path className="la-vz-cut-site" d={calculateLinePath(rcut - start, midR, botR)} style={cutSiteStyle} />
     </g>
   );
 };

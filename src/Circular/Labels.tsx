@@ -2,8 +2,9 @@ import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { Coor, Size } from "../elements";
+import { circularLabel, circularLabelLine } from "../style";
 import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
-import { WrappedGroupLabel } from "./WrappedGroupLabel";
+import { WrappedGroupLabel, setHoveredLabelUnderline } from "./WrappedGroupLabel";
 
 interface LabelWithCoors {
   label: ILabel;
@@ -294,9 +295,17 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
           const fC = g.forkCoor || g.textCoor;
           const labelLines = (
             <>
-              <path className="la-vz-label-line" d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`} />
+              <path
+                className="la-vz-label-line"
+                d={`M${g.lineCoor.x} ${g.lineCoor.y} L${fC.x} ${fC.y}`}
+                style={circularLabelLine}
+              />
               {g.forkCoor && (
-                <path className="la-vz-label-line" d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`} />
+                <path
+                  className="la-vz-label-line"
+                  d={`M${fC.x} ${fC.y} L${g.textCoor.x} ${g.textCoor.y}`}
+                  style={circularLabelLine}
+                />
               )}
             </>
           );
@@ -311,7 +320,10 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                   id={first.id}
                   {...g.textCoor}
                   dominantBaseline="middle"
+                  style={circularLabel}
                   textAnchor={g.textAnchor}
+                  onMouseEnter={() => setHoveredLabelUnderline(first.id || "", true)}
+                  onMouseLeave={() => setHoveredLabelUnderline(first.id || "", false)}
                 >
                   {g.name}
                 </text>
@@ -329,6 +341,7 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                 className="la-vz-circular-label"
                 dominantBaseline="middle"
                 id={first.id}
+                style={circularLabel}
                 textAnchor={g.textAnchor}
                 onMouseEnter={() => this.setHoveredGroup(first.id || "")}
                 {...g.textCoor}

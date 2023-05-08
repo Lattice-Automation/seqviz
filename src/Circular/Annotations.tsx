@@ -4,6 +4,7 @@ import { InputRefFunc } from "../SelectionHandler";
 import CentralIndexContext from "../centralIndexContext";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { Annotation } from "../elements";
+import { annotation, annotationLabel, svgText } from "../style";
 import { GenArcFunc } from "./Circular";
 
 interface AnnotationsProps {
@@ -49,7 +50,7 @@ export class Annotations extends React.PureComponent<AnnotationsProps> {
       <CentralIndexContext.Consumer>
         {({ circular }) => (
           <g className="la-vz-circular-annotations">
-            {annotations.reduce((acc: any[], anns: Annotation[], i) => {
+            {annotations.reduce((acc: React.ReactNode[], anns: Annotation[], i) => {
               if (i) {
                 // increment the annRow radii on every loop after first
                 currBRadius -= lineHeight + 3;
@@ -86,7 +87,7 @@ export class Annotations extends React.PureComponent<AnnotationsProps> {
 
 interface SingleAnnotationProps {
   annotation: Annotation;
-  calcBorderColor: (c: any) => any;
+  calcBorderColor: (c: string) => string;
   centralIndex: number;
   currBRadius: number;
   currTRadius: number;
@@ -175,6 +176,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         fill={a.color}
         id={a.id}
         stroke={a.color ? COLOR_BORDER_MAP[a.color] || calcBorderColor(a.color) : "gray"}
+        style={annotation}
         onBlur={() => {
           // do nothing
         }}
@@ -188,6 +190,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         <text
           dy={-0.4 * lineHeight}
           id={a.id}
+          style={svgText}
           onBlur={() => {
             // do nothing
           }}
@@ -204,6 +207,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
             fontSize={12}
             id={a.id}
             startOffset={bottomHalf ? "25%" : "75%"}
+            style={annotationLabel}
             textAnchor="middle"
             xlinkHref={`#${circAnnID}`}
           >

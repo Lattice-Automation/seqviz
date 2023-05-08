@@ -220,7 +220,7 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    *
    * if it is a regular click, pass on as normal
    */
-  handleMouseEvent = (e: React.MouseEvent) => {
+  handleMouseEvent = (e: React.MouseEvent<HTMLDivElement>) => {
     const { handleMouseEvent } = this.props;
 
     if (e.type === "mouseup") {
@@ -251,6 +251,14 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
       className="la-vz-viewer-event-router"
       id="la-vz-event-router"
       role="presentation"
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        height: "100%",
+        outline: "none",
+        position: "absolute",
+        width: "100%",
+      }}
       tabIndex={-1}
       onKeyDown={this.handleKeyPress}
       onMouseDown={this.handleMouseEvent}

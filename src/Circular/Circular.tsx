@@ -6,6 +6,7 @@ import CentralIndexContext from "../centralIndexContext";
 import { Annotation, Coor, CutSite, Highlight, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
+import { viewerCircular } from "../style";
 import { Annotations } from "./Annotations";
 import { CutSites } from "./CutSites";
 import { Find } from "./Find";
@@ -339,6 +340,8 @@ export default class Circular extends React.Component<CircularProps, CircularSta
         data-testid="la-vz-viewer-circular"
         height={size.height}
         id={plasmidId}
+        overflow="visible"
+        style={viewerCircular}
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
@@ -391,8 +394,10 @@ export const Arc = (props: {
   radius: number;
   seqLength: number;
   start: number;
+  style: React.CSSProperties;
 }) => {
-  const { className, color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start } = props;
+  const { className, color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start, style } =
+    props;
 
   let { end } = props;
   // crosses the zero index
@@ -409,7 +414,7 @@ export const Arc = (props: {
     sweepFWD: true,
   });
 
-  const id = `${className}-circular-${start}-${end}-${direction}`;
+  const id = `circular-${start}-${end}-${direction}`;
 
   return (
     <path
@@ -429,6 +434,7 @@ export const Arc = (props: {
       shapeRendering="auto"
       stroke="rgba(0, 0, 0, 0.5)"
       strokeWidth={1}
+      style={style}
       transform={getRotation(start)}
     />
   );

@@ -2,10 +2,11 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
+import { seqBlock, svgText } from "../style";
 import AnnotationRows from "./Annotations";
 import { CutSites } from "./CutSites";
 import Find from "./Find";
-import Highlights from "./Highlights";
+import { Highlights } from "./Highlights";
 import IndexRow from "./Index";
 import Selection from "./Selection";
 import { TranslationRows } from "./Translations";
@@ -301,6 +302,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         display="block"
         height={blockHeight}
         id={id}
+        overflow="visible"
+        style={seqBlock}
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
@@ -396,6 +399,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             className="la-vz-seq"
             data-testid="la-vz-seq"
             id={id}
+            style={svgText}
             transform={`translate(0, ${indexYDiff + lineHeight / 2})`}
           >
             {seq.split("").map(this.seqTextSpan)}
@@ -407,6 +411,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             className="la-vz-comp-seq"
             data-testid="la-vz-comp-seq"
             id={id}
+            style={svgText}
             transform={`translate(0, ${compYDiff + lineHeight / 2})`}
           >
             {compSeq.split("").map(this.seqTextSpan)}

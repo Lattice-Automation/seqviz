@@ -4,6 +4,7 @@ import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
 import { SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
+import { translationAminoAcidLabel } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface TranslationRowsProps {
@@ -252,6 +253,7 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
                   data-testid="la-vz-translation"
                   dominantBaseline="middle"
                   id={aaId}
+                  style={translationAminoAcidLabel}
                   textAnchor="middle"
                   x={bpCount * 0.5 * charWidth}
                   y={`${h / 2 + 1}`}

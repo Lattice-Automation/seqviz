@@ -3,6 +3,7 @@ import * as React from "react";
 import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
 import { isEqual } from "../isEqual";
+import { linearScroller } from "../style";
 
 interface InfiniteScrollProps {
   blockHeights: number[];
@@ -15,6 +16,11 @@ interface InfiniteScrollProps {
 interface InfiniteScrollState {
   centralIndex: number;
   visibleBlocks: number[];
+}
+
+interface InfiniteScrollSnapshot {
+  blockIndex: number;
+  blockY: number;
 }
 
 /**
@@ -47,7 +53,11 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
     window.addEventListener("resize", this.handleScrollOrResize);
   };
 
-  componentDidUpdate = (prevProps: InfiniteScrollProps, prevState: InfiniteScrollState, snapshot: any) => {
+  componentDidUpdate = (
+    prevProps: InfiniteScrollProps,
+    prevState: InfiniteScrollState,
+    snapshot: InfiniteScrollSnapshot
+  ) => {
     if (!this.scroller.current) {
       // scroller not mounted yet
       return;
@@ -72,7 +82,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   /**
    * more info at: https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate
    */
-  getSnapshotBeforeUpdate = (prevProps: InfiniteScrollProps) => {
+  getSnapshotBeforeUpdate = (prevProps: InfiniteScrollProps): InfiniteScrollSnapshot => {
     // find the current top block
     const top = this.scroller.current ? this.scroller.current.scrollTop : 0;
 
@@ -155,7 +165,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
    * the component has mounted to the DOM or updated, and the window should be scrolled downwards
    * so that the central index is visible
    */
-  restoreSnapshot = snapshot => {
+  restoreSnapshot = (snapshot: InfiniteScrollSnapshot) => {
     if (!this.scroller.current) {
       return;
     }
@@ -292,13 +302,14 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
         ref={this.scroller}
         className="la-vz-linear-scroller"
         data-testid="la-vz-viewer-linear"
+        style={linearScroller}
         onFocus={() => {
           // do nothing
         }}
         onMouseOver={this.handleMouseOver}
         onScroll={this.handleScrollOrResize}
       >
-        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height }}>
+        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height, width: "100%" }}>
           <div className="la-vz-seqblock-padding-top" style={{ height: spaceAbove, width: width || 0 }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>

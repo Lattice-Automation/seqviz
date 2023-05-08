@@ -2,12 +2,13 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { NameRange } from "../elements";
+import { highlight as highlightStyle } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 /**
- * Render rectangles aroun highlighted ranges.
+ * Render rectangles around highlighted ranges.
  */
-const Highlights = (props: {
+export const Highlights = (props: {
   compYDiff: number;
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
@@ -28,8 +29,6 @@ const Highlights = (props: {
   </>
 );
 
-export default Highlights;
-
 const SingleHighlight = (props: {
   compYDiff: number;
   findXAndWidth: FindXAndWidthElementType;
@@ -46,21 +45,19 @@ const SingleHighlight = (props: {
 }) => {
   const { width, x } = props.findXAndWidth(props.index, props.highlight, props.highlights);
 
-  let highlightStyle = {};
+  let fill = highlightStyle.fill;
   if (props.listenerOnly) {
-    highlightStyle = { fill: "transparent" };
-  } else if (props.highlight.color) {
-    highlightStyle = { fill: props.highlight.color };
+    fill = "transparent";
+  } else if (props.highlight.color?.length) {
+    fill = props.highlight.color;
   }
 
   const rectProps = {
     className: "la-vz-highlight",
-    cursor: "pointer",
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    strokeWidth: 1,
-    style: highlightStyle,
+    style: { ...highlightStyle, fill },
     width: width,
     x: x,
   };

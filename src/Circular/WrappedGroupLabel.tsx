@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
+import { circularLabel, svgText } from "../style";
 import { ILabel } from "./Circular";
 import { GroupedLabelsWithCoors } from "./Labels";
 
@@ -15,7 +16,7 @@ interface WrappedGroupLabelProps {
 }
 
 /**
- * a component that groups several other labels together so they're all viewable at once
+ * Groups several other labels together so they're all viewable at once
  *
  * given the currently active annotation block, with multiple annotations and enzymes,
  * render each in a single "block", which is a g element with a rect "containing" the
@@ -48,7 +49,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
       const splitRegex = new RegExp(`.{1,${maxCharPerRow}}`, "g");
       const splitLabelNameRows = l.name.match(splitRegex) || [];
       if (splitLabelNameRows.length) {
-        splitLabelNameRows.forEach(splitLabel => {
+        splitLabelNameRows.forEach((splitLabel: string) => {
           acc.push([{ ...l, name: splitLabel.trim() }]);
         });
         return acc;
@@ -103,7 +104,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
     <g key={key} onMouseLeave={() => setHoveredGroup("")}>
       <path className="la-vz-label-line" d={linePath} />
       <rect fill="white" height={rectHeight} stroke="none" width={rectWidth} {...rectCoor} />
-      <text {...groupCoor}>
+      <text {...groupCoor} style={svgText}>
         {labelRows.map((r, i) => (
           // turn each group of label rows into a text span
           // that's vertically spaced from the row above it
@@ -118,8 +119,11 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
                   className="la-vz-circular-label"
                   dominantBaseline="middle"
                   id={l.id}
+                  style={circularLabel}
                   tabIndex={-1}
                   y={groupCoor.y + (i + 0.5) * lineHeight}
+                  onMouseLeave={() => setHoveredLabelUnderline(l.id || "", false)}
+                  onMouseOver={() => setHoveredLabelUnderline(l.id || "", true)}
                 >
                   {l.name}
                 </tspan>
@@ -132,4 +136,16 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
       <rect fill="none" height={rectHeight} stroke="black" strokeWidth={1.5} width={rectWidth} {...rectCoor} />
     </g>
   );
+};
+
+export const setHoveredLabelUnderline = (id: string, underline: boolean) => {
+  if (!document) return;
+
+  const element = document.getElementById(id);
+  if (!element) return;
+  if (underline) {
+    element.style.textDecoration = "underline";
+  } else {
+    element.style.textDecoration = "none";
+  }
 };

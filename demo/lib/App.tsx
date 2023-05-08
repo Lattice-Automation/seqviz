@@ -33,7 +33,6 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
-  primers: boolean;
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -53,7 +52,6 @@ export default class App extends React.Component<any, AppState> {
     customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
-    primers: true,
     search: { query: "ttnnnaat" },
     searchResults: {},
     selection: {},
@@ -218,7 +216,9 @@ export default class App extends React.Component<any, AppState> {
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
+                    highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
+                    onSelection={selection => this.setState({ selection })}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
                     search={this.state.search}
                     selection={this.state.selection}
@@ -228,7 +228,6 @@ export default class App extends React.Component<any, AppState> {
                     translations={this.state.translations}
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
-                    onSelection={selection => this.setState({ selection })}
                   >
                     {customChildren}
                   </SeqViz>

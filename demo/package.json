@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "browserslist": "^4.21.3",
-    "caniuse-lite": "^1.0.30001390",
     "history": "^4.10.1",
     "lodash": "^4.17.21",
     "next": "^12.3.1",
