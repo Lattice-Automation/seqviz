@@ -1,29 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap");
 
-/* Circular Viewer */
-
 .la-vz-circular-label:hover {
   text-decoration: underline;
-}
-
-/* Linear Viewer */
-
-.la-vz-scroll::-webkit-scrollbar {
-  width: 7px;
-}
-
-.la-vz-scroll::-webkit-scrollbar-thumb {
-  background-clip: padding-box;
-  background-color: rgb(166, 166, 166);
-  border-radius: 7px;
-}
-
-.la-vz-scroll::-webkit-scrollbar-track {
-  border-radius: 20px;
-}
-
-.la-vz-scroll::-webkit-scrollbar-track-piece {
-  background-clip: padding-box;
-  background-color: rgb(236, 236, 236);
-  border-radius: 7px;
 }
