@@ -1,6 +1,26 @@
-import * as React from "react";
+// My css.d.ts file
+import type * as CSS from "csstype";
 
-export const svgText: React.CSSProperties = {
+declare module "csstype" {
+  interface Properties {
+    // Allow namespaced CSS Custom Properties
+    [index: `--theme-${string}`]: any;
+
+    // Allow any CSS Custom Properties
+    [index: `--${string}`]: any;
+
+    // ...or allow any other property
+    [index: string]: any;
+
+    // Add a CSS Custom Property
+    "--theme-color"?: "black" | "white";
+
+    // Add a missing property
+    WebkitRocketLauncher?: string;
+  }
+}
+
+export const svgText: CSS.Properties = {
   MozUserSelect: "none",
   WebkitUserSelect: "none",
   background: "none",
@@ -10,73 +30,73 @@ export const svgText: React.CSSProperties = {
   userSelect: "none",
 };
 
-export const search: React.CSSProperties = {
+export const search: CSS.Properties = {
   cursor: "pointer",
   fill: "rgba(255, 251, 7, 0.5)",
 };
 
-export const highlight: React.CSSProperties = {
+export const highlight: CSS.Properties = {
   cursor: "pointer",
   fill: "rgba(255, 251, 7, 0.25)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const selection: React.CSSProperties = {
+export const selection: CSS.Properties = {
   fill: "rgb(222, 246, 255)",
   shapeRendering: "auto",
 };
 
-export const selectionEdge: React.CSSProperties = {
+export const selectionEdge: CSS.Properties = {
   fill: "black",
   shapeRendering: "geometricPrecision",
   stroke: "black",
 };
 
-export const cutSite: React.CSSProperties = {
+export const cutSite: CSS.Properties = {
   fill: "transparent",
   shapeRendering: "auto",
   stroke: "rgb(115, 119, 125)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const cutSiteHighlight: React.CSSProperties = {
+export const cutSiteHighlight: CSS.Properties = {
   cursor: "pointer",
   fill: "rgb(255, 251, 7)",
   fillOpacity: 0,
   shapeRendering: "auto",
   stroke: "rgb(115, 119, 125)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const indexLine: React.CSSProperties = {
+export const indexLine: CSS.Properties = {
   fill: "transparent",
   shapeRendering: "geometricPrecision",
   stroke: "rgb(115, 119, 125)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const indexTick: React.CSSProperties = {
+export const indexTick: CSS.Properties = {
   fill: "transparent",
   shapeRendering: "geometricPrecision",
   stroke: "rgb(115, 119, 125)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const indexTickLabel: React.CSSProperties = {
+export const indexTickLabel: CSS.Properties = {
   ...svgText,
   fill: "rgb(115, 119, 125)",
-  fontSize: 12,
+  fontSize: "12",
   fontWeight: 300,
   textRendering: "optimizeLegibility",
 };
 
-export const annotation: React.CSSProperties = {
-  fillOpacity: 0.7,
+export const annotation: CSS.Properties = {
+  fillOpacity: "0.7",
   shapeRendering: "geometricPrecision",
-  strokeWidth: 0.5,
+  strokeWidth: "0.5",
 };
 
-export const annotationLabel: React.CSSProperties = {
+export const annotationLabel: CSS.Properties = {
   ...svgText,
   color: "rgb(42, 42, 42)",
   fontWeight: 400,
@@ -85,48 +105,48 @@ export const annotationLabel: React.CSSProperties = {
   textRendering: "optimizeLegibility",
 };
 
-export const translationAminoAcidLabel: React.CSSProperties = {
+export const translationAminoAcidLabel: CSS.Properties = {
   ...svgText,
   color: "rgb(42, 42, 42)",
-  fontSize: 12,
+  fontSize: "12",
   fontWeight: 400,
 };
 
-export const viewerCircular: React.CSSProperties = {
+export const viewerCircular: CSS.Properties = {
   cursor: "text",
-  fontSize: 12,
+  fontSize: "12",
   fontWeight: 300,
   margin: "auto",
 };
 
-export const circularLabel: React.CSSProperties = {
+export const circularLabel: CSS.Properties = {
   ...svgText,
   cursor: "pointer",
 };
 
-export const circularLabelHover: React.CSSProperties = {
+export const circularLabelHover: CSS.Properties = {
   ...circularLabel,
   textDecoration: "underline",
 };
 
-export const circularLabelLine: React.CSSProperties = {
+export const circularLabelLine: CSS.Properties = {
   fill: "none",
   stroke: "rgb(158, 170, 184)",
-  strokeWidth: 1,
+  strokeWidth: "1",
 };
 
-export const linearScroller: React.CSSProperties = {
+export const linearScroller: CSS.Properties = {
   cursor: "text",
   fontWeight: 300,
   height: "100%",
   outline: "none !important",
   overflowX: "hidden",
   overflowY: "scroll",
-  padding: 10,
+  padding: "10",
   position: "relative",
 };
 
-export const seqBlock: React.CSSProperties = {
+export const seqBlock: CSS.Properties = {
   overflow: "visible",
   padding: 0,
   width: "100%",
