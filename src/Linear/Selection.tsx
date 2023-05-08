@@ -102,9 +102,7 @@ class Edges extends React.PureComponent<EdgesProps> {
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
-            strokeWidth={0}
             style={selectionEdge}
-            width={1}
             x={x}
             y={-5}
           />
@@ -115,9 +113,7 @@ class Edges extends React.PureComponent<EdgesProps> {
             data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
-            strokeWidth={0}
             style={selectionEdge}
-            width={1}
             x={secondEdgeX}
             y={-5}
           />

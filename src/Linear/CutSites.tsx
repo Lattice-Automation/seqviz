@@ -3,7 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { CutSite, Size } from "../elements";
-import { cutSiteHighlight, svgText } from "../style";
+import { cutSite, cutSiteHighlight, svgText } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**
@@ -101,12 +101,14 @@ export const CutSites = (props: {
             {c.top.render && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
+                style={cutSite}
                 d={`M ${c.top.x} ${lineYDiff} L ${c.top.x} ${lineYDiff + lineHeight}`}
               />
             )}
             {c.connector.render && zoom > 10 && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
+                style={cutSite}
                 d={`M ${c.connector.x} ${lineYDiff + lineHeight}
                     L ${c.connector.x + c.connector.width} ${lineYDiff + lineHeight}`}
               />
@@ -114,6 +116,7 @@ export const CutSites = (props: {
             {c.bottom.render && zoom > 10 && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
+                style={cutSite}
                 d={`M ${c.bottom.x} ${lineYDiff + lineHeight} L ${c.bottom.x} ${lineYDiff + 2 * lineHeight}`}
               />
             )}

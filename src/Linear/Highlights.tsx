@@ -48,7 +48,7 @@ const SingleHighlight = (props: {
   let highlightStyle = {};
   if (props.listenerOnly) {
     highlightStyle = { fill: "transparent" };
-  } else if (props.highlight.color) {
+  } else if (props.highlight.color?.length) {
     highlightStyle = { fill: props.highlight.color };
   }
 
@@ -76,7 +76,6 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        style={highlight}
         y={props.indexYDiff}
       />
       <rect
@@ -88,7 +87,6 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        style={highlight}
         y={props.compYDiff}
       />
     </>

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Coor } from "../elements";
 import SelectionContext from "../selectionContext";
-import { highlight, selectionEdge } from "../style";
+import { highlight, selection, selectionEdge } from "../style";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CircularSelectionProps {
@@ -97,7 +97,7 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
             })}
             shapeRendering="auto"
             stroke="none"
-            style={highlight}
+            style={selection}
             transform={getRotation(start)}
           />
         )}

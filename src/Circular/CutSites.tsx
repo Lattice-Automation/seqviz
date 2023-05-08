@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Coor, CutSite } from "../elements";
-import { cutSite as cutSiteStyle } from "../style";
+import { cutSiteHighlight, cutSite as cutSiteStyle } from "../style";
 import { GenArcFunc, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 
 interface CutSitesProps {
@@ -97,7 +97,7 @@ const SingleCutSite = (props: {
           outerRadius: topR,
           sweepFWD: true,
         })}
-        style={cutSite.enzyme.color ? { ...cutSiteStyle, fill: cutSite.enzyme.color } : cutSiteStyle}
+        style={cutSite.enzyme.color ? { ...cutSiteHighlight, fill: cutSite.enzyme.color } : cutSiteHighlight}
       />
 
       {/* a line showing the start of the cut-site */}
