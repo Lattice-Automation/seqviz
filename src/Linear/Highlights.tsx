@@ -45,20 +45,19 @@ const SingleHighlight = (props: {
 }) => {
   const { width, x } = props.findXAndWidth(props.index, props.highlight, props.highlights);
 
-  const fill = highlightStyle.fill;
+  let fill = highlightStyle.fill;
   if (props.listenerOnly) {
-    // fill = "transparent";
+    fill = "transparent";
   } else if (props.highlight.color?.length) {
-    // fill = props.highlight.color;
+    fill = props.highlight.color;
   }
 
   const rectProps = {
     className: "la-vz-highlight",
-    fill,
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",
-    style: highlightStyle,
+    style: { ...highlightStyle, fill },
     width: width,
     x: x,
   };
@@ -74,7 +73,6 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        fill="rgba(255, 251, 7, 0.25)"
         y={props.indexYDiff}
       />
       <rect
@@ -86,7 +84,6 @@ const SingleHighlight = (props: {
           viewer: "LINEAR",
         })}
         {...rectProps}
-        fill="rgba(255, 251, 7, 0.25)"
         y={props.compYDiff}
       />
     </>

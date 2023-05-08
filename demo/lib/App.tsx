@@ -216,7 +216,7 @@ export default class App extends React.Component<any, AppState> {
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
-                    highlights={[]}
+                    highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
                     onSelection={selection => this.setState({ selection })}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
