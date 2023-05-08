@@ -261,6 +261,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
           position: "relative",
           width: "100%",
         }}
+        className="la-vz-viewer-container"
       >
         <CentralIndexContext.Provider value={centralIndex}>
           <SelectionContext.Provider value={mergedSelection}>

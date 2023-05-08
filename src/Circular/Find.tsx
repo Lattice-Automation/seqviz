@@ -24,6 +24,7 @@ export const Find = (props: {
         search.map(s => (
           <Arc
             key={JSON.stringify(s)}
+            className="la-vz-search" // isn't necessary except it used to be set, am afraid some customer is using it
             direction={s.direction || 1}
             end={s.end}
             genArc={genArc}
@@ -40,6 +41,7 @@ export const Find = (props: {
       {highlights.map(({ color, end, start }) => (
         <Arc
           key={`la-vz-highlight-${start}-${end}`}
+          className="la-vz-search"
           color={color}
           direction={1}
           end={end}

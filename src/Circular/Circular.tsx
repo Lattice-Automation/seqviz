@@ -6,6 +6,7 @@ import CentralIndexContext from "../centralIndexContext";
 import { Annotation, Coor, CutSite, Highlight, Range, Size } from "../elements";
 import { stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
+import { viewerCircular } from "../style";
 import { Annotations } from "./Annotations";
 import { CutSites } from "./CutSites";
 import { Find } from "./Find";
@@ -345,6 +346,7 @@ export default class Circular extends React.Component<CircularProps, CircularSta
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onWheel={this.handleScrollEvent}
+        style={viewerCircular}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} />
@@ -381,6 +383,7 @@ export default class Circular extends React.Component<CircularProps, CircularSta
  * Create an SVG arc around a single element in the Circular Viewer.
  */
 export const Arc = (props: {
+  className: string;
   color?: string;
   direction: -1 | 1;
   end: number;
@@ -393,7 +396,8 @@ export const Arc = (props: {
   start: number;
   style: React.CSSProperties;
 }) => {
-  const { color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start, style } = props;
+  const { color, direction, genArc, getRotation, inputRef, className, lineHeight, radius, seqLength, start, style } =
+    props;
 
   let { end } = props;
   // crosses the zero index
@@ -415,6 +419,7 @@ export const Arc = (props: {
   return (
     <path
       key={id}
+      className={className}
       ref={inputRef(id, {
         end: end,
         ref: id,

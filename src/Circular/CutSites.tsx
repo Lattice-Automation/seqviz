@@ -88,6 +88,7 @@ const SingleCutSite = (props: {
           type: "ENZYME",
           viewer: "CIRCULAR",
         })}
+        className="la-vz-cut-site"
         cursor="pointer"
         d={genArc({
           innerRadius: botR,
@@ -100,7 +101,7 @@ const SingleCutSite = (props: {
       />
 
       {/* a line showing the start of the cut-site */}
-      <path d={calculateLinePath(fcut - start, topR, midR)} style={cutSiteStyle} />
+      <path className="la-vz-cut-site" d={calculateLinePath(fcut - start, topR, midR)} style={cutSiteStyle} />
 
       {/* a connector line for the cut-site */}
       <path
@@ -117,7 +118,7 @@ const SingleCutSite = (props: {
       />
 
       {/* a line showing the end of the cut-site */}
-      <path d={calculateLinePath(rcut - start, midR, botR)} style={cutSiteStyle} />
+      <path className="la-vz-cut-site" d={calculateLinePath(rcut - start, midR, botR)} style={cutSiteStyle} />
     </g>
   );
 };

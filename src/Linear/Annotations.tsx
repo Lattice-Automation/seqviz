@@ -3,7 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { NameRange } from "../elements";
-import { svgText } from "../style";
+import { annotation, annotationLabel, svgText } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
 const hoverOtherAnnotationRows = (className: string, opacity: number) => {
@@ -211,6 +211,7 @@ const SingleNamedElement = (props: {
         }}
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+        style={annotation}
       />
 
       {nameFits && (
@@ -220,7 +221,6 @@ const SingleNamedElement = (props: {
           dominantBaseline="middle"
           fontSize={12}
           id={element.id}
-          style={svgText}
           textAnchor="middle"
           x={width / 2}
           y={height / 2 + 1}
@@ -232,6 +232,7 @@ const SingleNamedElement = (props: {
           }}
           onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
           onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+          style={annotationLabel}
         >
           {name}
         </text>

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
-import { svgText } from "../style";
+import { seqBlock, svgText } from "../style";
 import AnnotationRows from "./Annotations";
 import { CutSites } from "./CutSites";
 import Find from "./Find";
@@ -307,6 +307,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
+        style={seqBlock}
       >
         {showIndex && (
           <IndexRow

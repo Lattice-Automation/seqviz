@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
-import { svgText } from "../style";
+import { circularLabel, svgText } from "../style";
 import { ILabel } from "./Circular";
 import { GroupedLabelsWithCoors } from "./Labels";
 
@@ -118,6 +118,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
                 <tspan
                   className="la-vz-circular-label"
                   dominantBaseline="middle"
+                  style={circularLabel}
                   id={l.id}
                   tabIndex={-1}
                   y={groupCoor.y + (i + 0.5) * lineHeight}

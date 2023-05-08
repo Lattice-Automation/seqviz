@@ -70,3 +70,65 @@ export const indexTickLabel: React.CSSProperties = {
   fontWeight: 300,
   textRendering: "optimizeLegibility",
 };
+
+export const annotation: React.CSSProperties = {
+  fillOpacity: 0.7,
+  shapeRendering: "geometricPrecision",
+  strokeWidth: 0.5,
+};
+
+export const annotationLabel: React.CSSProperties = {
+  ...svgText,
+  color: "rgb(42, 42, 42)",
+  fontWeight: 400,
+  shapeRendering: "geometricPrecision",
+  strokeLinejoin: "round",
+  textRendering: "optimizeLegibility",
+};
+
+export const translationAminoAcidLabel: React.CSSProperties = {
+  ...svgText,
+  color: "rgb(42, 42, 42)",
+  fontSize: 12,
+  fontWeight: 400,
+};
+
+export const viewerCircular: React.CSSProperties = {
+  cursor: "text",
+  fontSize: 12,
+  fontWeight: 300,
+  margin: "auto",
+};
+
+export const circularLabel: React.CSSProperties = {
+  ...svgText,
+  cursor: "pointer",
+};
+
+export const circularLabelHover: React.CSSProperties = {
+  ...circularLabel,
+  textDecoration: "underline",
+};
+
+export const circularLabelLine: React.CSSProperties = {
+  fill: "none",
+  strokeWidth: 1,
+  stroke: "rgb(158, 170, 184)",
+};
+
+export const linearScroller: React.CSSProperties = {
+  cursor: "text",
+  fontWeight: 300,
+  height: "100%",
+  outline: "none !important",
+  overflowX: "hidden",
+  overflowY: "scroll",
+  padding: 10,
+  position: "relative",
+};
+
+export const seqBlock: React.CSSProperties = {
+  width: "100%",
+  padding: 0,
+  overflow: "visible",
+};

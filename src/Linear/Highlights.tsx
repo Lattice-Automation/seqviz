@@ -53,6 +53,7 @@ const SingleHighlight = (props: {
   }
 
   const rectProps = {
+    className: "la-vz-highlight",
     height: props.lineHeight,
     id: props.highlight.id,
     stroke: props.listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)",

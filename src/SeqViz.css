@@ -1,117 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500&display=swap");
 
-.la-vz-seqviz {
-}
-
-.la-vz-seqviz svg {
-}
-
-.la-vz-seqviz svg text {
-}
-
-.la-vz-seqviz svg text:selection {
-}
-
-.la-vz-viewer-container {
-}
-
-.la-vz-viewer-event-router {
-}
-
-.la-vz-search {
-}
-
-.la-vz-highlight {
-}
-
-.la-vz-selection {
-}
-
-.la-vz-selection-edge {
-}
-
-.la-vz-cut-site {
-}
-
-.la-vz-cut-site-highlight {
-}
-
-.la-vz-cut-site-text {
-}
-
-.la-vz-index-line {
-}
-
-.la-vz-index-tick {
-}
-
-.la-vz-index-tick-label {
-}
-
-.la-vz-annotation {
-  fill-opacity: 0.7;
-  shape-rendering: geometricPrecision;
-  stroke-width: 0.5;
-}
-
-.la-vz-annotation-label {
-  color: rgb(42, 42, 42);
-  font-weight: 400;
-  shape-rendering: geometricPrecision;
-  stroke-linejoin: round;
-  text-rendering: optimizeLegibility;
-}
-
-.la-vz-translation-amino-acid-label {
-  color: rgb(42, 42, 42);
-  font-size: 12px;
-  font-weight: 400;
-}
-
 /* Circular Viewer */
-.la-vz-viewer-circular {
-  cursor: text;
-  font-size: 12px;
-  font-weight: 300;
-  margin: auto;
-}
-
-.la-vz-circular-label {
-  cursor: pointer;
-}
 
 .la-vz-circular-label:hover {
   text-decoration: underline;
 }
 
-.la-vz-label-line {
-  fill: none;
-  stroke-width: 1;
-  stroke: rgb(158, 170, 184);
-}
-
 /* Linear Viewer */
-.la-vz-linear-scroller {
-  cursor: text;
-  font-weight: 300;
-  height: 100%;
-  outline: none !important;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 10px;
-  position: relative;
-}
-
-.la-vz-seqblock-container {
-  width: 100%;
-}
-
-.la-vz-seqblock {
-  width: 100%;
-  padding: 0;
-  /* this is for when very zoomed out and the bp index disappears beneath the next block */
-  overflow: visible;
-}
 
 .la-vz-scroll::-webkit-scrollbar {
   width: 7px;

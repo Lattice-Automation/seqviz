@@ -4,7 +4,7 @@ import { InputRefFunc } from "../SelectionHandler";
 import CentralIndexContext from "../centralIndexContext";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { Annotation } from "../elements";
-import { svgText } from "../style";
+import { annotation, annotationLabel, svgText } from "../style";
 import { GenArcFunc } from "./Circular";
 
 interface AnnotationsProps {
@@ -184,6 +184,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
         }}
         onMouseOut={() => hoverAnnotation(a.id, "0.7")}
         onMouseOver={() => hoverAnnotation(a.id, "1.0")}
+        style={annotation}
       />
       {inlinedAnnotations.includes(a.id) && (
         <text
@@ -208,6 +209,7 @@ const SingleAnnotation = (props: SingleAnnotationProps) => {
             startOffset={bottomHalf ? "25%" : "75%"}
             textAnchor="middle"
             xlinkHref={`#${circAnnID}`}
+            style={annotationLabel}
           >
             {a.name}
           </textPath>

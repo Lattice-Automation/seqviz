@@ -3,6 +3,7 @@ import * as React from "react";
 import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
 import { isEqual } from "../isEqual";
+import { linearScroller } from "../style";
 
 interface InfiniteScrollProps {
   blockHeights: number[];
@@ -297,8 +298,9 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
         }}
         onMouseOver={this.handleMouseOver}
         onScroll={this.handleScrollOrResize}
+        style={linearScroller}
       >
-        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height }}>
+        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height, width: "100%" }}>
           <div className="la-vz-seqblock-padding-top" style={{ height: spaceAbove, width: width || 0 }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
