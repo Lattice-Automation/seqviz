@@ -303,11 +303,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         height={blockHeight}
         id={id}
         overflow="visible"
+        style={seqBlock}
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
-        style={seqBlock}
       >
         {showIndex && (
           <IndexRow

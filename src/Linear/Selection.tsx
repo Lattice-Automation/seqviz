@@ -98,8 +98,8 @@ class Edges extends React.PureComponent<EdgesProps> {
       <g>
         {startEdge !== null && (
           <rect
-            data-testid="la-vz-selection-edge"
             className="la-vz-selection-edge"
+            data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
             strokeWidth={0}
@@ -111,8 +111,8 @@ class Edges extends React.PureComponent<EdgesProps> {
         )}
         {lastEdge !== null && (
           <rect
-            data-testid="la-vz-selection-edge"
             className="la-vz-selection-edge"
+            data-testid="la-vz-selection-edge"
             height={selectEdgeHeight}
             shapeRendering="crispEdges"
             strokeWidth={0}

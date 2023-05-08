@@ -220,7 +220,7 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    *
    * if it is a regular click, pass on as normal
    */
-  handleMouseEvent = (e: React.MouseEvent) => {
+  handleMouseEvent = (e: React.MouseEvent<HTMLDivElement>) => {
     const { handleMouseEvent } = this.props;
 
     if (e.type === "mouseup") {

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { Coor, Size } from "../elements";
-import { circularLabel, circularLabelLine, svgText } from "../style";
+import { circularLabel, circularLabelLine } from "../style";
 import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import { WrappedGroupLabel } from "./WrappedGroupLabel";
 

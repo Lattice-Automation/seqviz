@@ -87,6 +87,7 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
       <g>
         {selLength && (
           <path
+            className="la-vz-selection"
             d={genArc({
               innerRadius: bottomR,
               largeArc: lArc,
@@ -94,16 +95,15 @@ export class Selection extends React.PureComponent<CircularSelectionProps> {
               outerRadius: topR,
               sweepFWD: sFlagF,
             })}
-            className="la-vz-selection"
             shapeRendering="auto"
             stroke="none"
             style={highlight}
             transform={getRotation(start)}
           />
         )}
-        <path d={edgePath} style={selectionEdge} transform={getRotation(start)} className="la-vz-selection-edge" />
+        <path className="la-vz-selection-edge" d={edgePath} style={selectionEdge} transform={getRotation(start)} />
         {selLength && (
-          <path d={edgePath} style={selectionEdge} transform={getRotation(end)} className="la-vz-selection-edge" />
+          <path className="la-vz-selection-edge" d={edgePath} style={selectionEdge} transform={getRotation(end)} />
         )}
       </g>
     );

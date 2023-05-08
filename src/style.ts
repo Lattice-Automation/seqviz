@@ -112,8 +112,8 @@ export const circularLabelHover: React.CSSProperties = {
 
 export const circularLabelLine: React.CSSProperties = {
   fill: "none",
-  strokeWidth: 1,
   stroke: "rgb(158, 170, 184)",
+  strokeWidth: 1,
 };
 
 export const linearScroller: React.CSSProperties = {
@@ -128,7 +128,7 @@ export const linearScroller: React.CSSProperties = {
 };
 
 export const seqBlock: React.CSSProperties = {
-  width: "100%",
-  padding: 0,
   overflow: "visible",
+  padding: 0,
+  width: "100%",
 };

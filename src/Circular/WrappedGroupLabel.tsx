@@ -49,7 +49,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
       const splitRegex = new RegExp(`.{1,${maxCharPerRow}}`, "g");
       const splitLabelNameRows = l.name.match(splitRegex) || [];
       if (splitLabelNameRows.length) {
-        splitLabelNameRows.forEach(splitLabel => {
+        splitLabelNameRows.forEach((splitLabel: string) => {
           acc.push([{ ...l, name: splitLabel.trim() }]);
         });
         return acc;
@@ -118,8 +118,8 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
                 <tspan
                   className="la-vz-circular-label"
                   dominantBaseline="middle"
-                  style={circularLabel}
                   id={l.id}
+                  style={circularLabel}
                   tabIndex={-1}
                   y={groupCoor.y + (i + 0.5) * lineHeight}
                 >

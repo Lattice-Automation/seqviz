@@ -341,12 +341,12 @@ export default class Circular extends React.Component<CircularProps, CircularSta
         height={size.height}
         id={plasmidId}
         overflow="visible"
+        style={viewerCircular}
         width={size.width >= 0 ? size.width : 0}
         onMouseDown={handleMouseEvent}
         onMouseMove={handleMouseEvent}
         onMouseUp={handleMouseEvent}
         onWheel={this.handleScrollEvent}
-        style={viewerCircular}
       >
         <g className="la-vz-circular-root" transform={`translate(0, ${yDiff})`}>
           <Selection {...props} seq={seq} totalRows={totalRows} />
@@ -396,7 +396,7 @@ export const Arc = (props: {
   start: number;
   style: React.CSSProperties;
 }) => {
-  const { color, direction, genArc, getRotation, inputRef, className, lineHeight, radius, seqLength, start, style } =
+  const { className, color, direction, genArc, getRotation, inputRef, lineHeight, radius, seqLength, start, style } =
     props;
 
   let { end } = props;
@@ -419,7 +419,6 @@ export const Arc = (props: {
   return (
     <path
       key={id}
-      className={className}
       ref={inputRef(id, {
         end: end,
         ref: id,
@@ -427,6 +426,7 @@ export const Arc = (props: {
         type: "FIND",
         viewer: "CIRCULAR",
       })}
+      className={className}
       cursor="pointer"
       d={findPath}
       fill={color}
