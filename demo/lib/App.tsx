@@ -50,7 +50,7 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
-    customChildren: true,
+    customChildren: false,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     search: { query: "ttnnnaat" },

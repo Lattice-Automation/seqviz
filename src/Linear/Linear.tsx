@@ -5,7 +5,6 @@ import { Annotation, CutSite, Highlight, NameRange, SeqType, Size } from "../ele
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
-import { InfiniteHorizontalScroll } from "./InfiniteHorizontalScroll";
 import { InfiniteScroll } from "./InfiniteScroll";
 import { SeqBlock } from "./SeqBlock";
 
@@ -213,24 +212,13 @@ export default class Linear extends React.Component<LinearProps> {
     }
 
     return (
-      seqBlocks.length > 0 &&
-      (oneRow ? (
-        <InfiniteHorizontalScroll
-          blockWidths={blockWidths}
-          bpsPerBlock={bpsPerBlock}
-          seqBlocks={seqBlocks}
-          size={size}
-          totalWidth={blockWidths.reduce((acc, w) => acc + w, 0)}
-        />
-      ) : (
-        <InfiniteScroll
-          blockHeights={blockHeights}
-          bpsPerBlock={bpsPerBlock}
-          seqBlocks={seqBlocks}
-          size={size}
-          totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}
-        />
-      ))
+      <InfiniteScroll
+        blockHeights={blockHeights}
+        bpsPerBlock={bpsPerBlock}
+        seqBlocks={seqBlocks}
+        size={size}
+        totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}
+      />
     );
   }
 }
