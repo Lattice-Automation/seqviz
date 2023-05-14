@@ -215,6 +215,7 @@ export default class Linear extends React.Component<LinearProps> {
       <InfiniteScroll
         blockHeights={blockHeights}
         bpsPerBlock={bpsPerBlock}
+        oneRow={oneRow}
         seqBlocks={seqBlocks}
         size={size}
         totalHeight={blockHeights.reduce((acc, h) => acc + h, 0)}

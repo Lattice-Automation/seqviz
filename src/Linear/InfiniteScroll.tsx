@@ -8,6 +8,7 @@ import { linearScroller } from "../style";
 interface InfiniteScrollProps {
   blockHeights: number[];
   bpsPerBlock: number;
+  oneRow: boolean;
   seqBlocks: JSX.Element[];
   size: Size;
   totalHeight: number;
@@ -287,6 +288,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   render() {
     const {
       blockHeights,
+      oneRow,
       seqBlocks,
       size: { width },
       totalHeight: height,
@@ -296,6 +298,13 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
     // find the height of the empty div needed to correctly position the rest
     const [firstRendered] = visibleBlocks;
     const spaceAbove = blockHeights.slice(0, firstRendered).reduce((acc, h) => acc + h, 0);
+
+    const containerStyle: React.CSSProperties = { width: "100%" };
+    if (oneRow) {
+      containerStyle.overflowX = "scroll";
+    } else {
+      containerStyle.height = height;
+    }
 
     return (
       <div
@@ -309,7 +318,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
         onMouseOver={this.handleMouseOver}
         onScroll={this.handleScrollOrResize}
       >
-        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={{ height, width: "100%" }}>
+        <div ref={this.insideDOM} className="la-vz-seqblock-container" style={containerStyle}>
           <div className="la-vz-seqblock-padding-top" style={{ height: spaceAbove, width: width || 0 }} />
           {visibleBlocks.map(i => seqBlocks[i])}
         </div>
