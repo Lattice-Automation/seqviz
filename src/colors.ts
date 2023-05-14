@@ -74,12 +74,12 @@ export const borderColorByIndex = (i: number) => COLOR_BORDER_MAP[COLORS[i % COL
 const darkerColorCache = {};
 
 /** darken a HEX color by 50% */
-export const darkerColor = (c: string): string | null => {
+export const darkerColor = (c: string): string => {
   if (darkerColorCache[c]) {
     return darkerColorCache[c];
   }
 
   const darkerColor = pSBC(-0.5, c);
   darkerColorCache[c] = darkerColor;
-  return darkerColor;
+  return darkerColor || c;
 };

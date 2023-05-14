@@ -3,6 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { CutSite, Size } from "../elements";
+import { cutSite, cutSiteHighlight, svgText } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**
@@ -61,6 +62,7 @@ export const CutSites = (props: {
                 className={`la-vz-cut-site-text ${c.c.id}-label`}
                 dominantBaseline="hanging"
                 id={c.c.id}
+                style={{ ...svgText, cursor: "pointer", fontSize: 12 }}
                 textAnchor="start"
                 x={c.label.x}
                 y={yDiff}
@@ -89,7 +91,7 @@ export const CutSites = (props: {
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff}
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
                     L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
-                style={c.c.color?.length ? { fill: c.c.color } : {}}
+                style={c.c.color?.length ? { ...cutSiteHighlight, fill: c.c.color } : cutSiteHighlight}
                 onMouseOut={() => onCutSiteHover(c.c.id, false)}
                 onMouseOver={() => onCutSiteHover(c.c.id, true)}
               />
@@ -100,6 +102,7 @@ export const CutSites = (props: {
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
                 d={`M ${c.top.x} ${lineYDiff} L ${c.top.x} ${lineYDiff + lineHeight}`}
+                style={cutSite}
               />
             )}
             {c.connector.render && zoom > 10 && (
@@ -107,12 +110,14 @@ export const CutSites = (props: {
                 className={`la-vz-cut-site ${c.c.id}`}
                 d={`M ${c.connector.x} ${lineYDiff + lineHeight}
                     L ${c.connector.x + c.connector.width} ${lineYDiff + lineHeight}`}
+                style={cutSite}
               />
             )}
             {c.bottom.render && zoom > 10 && (
               <path
                 className={`la-vz-cut-site ${c.c.id}`}
                 d={`M ${c.bottom.x} ${lineYDiff + lineHeight} L ${c.bottom.x} ${lineYDiff + 2 * lineHeight}`}
+                style={cutSite}
               />
             )}
           </g>

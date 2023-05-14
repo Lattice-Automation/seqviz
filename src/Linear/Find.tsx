@@ -3,6 +3,7 @@ import * as React from "react";
 import { InputRefFunc } from "../SelectionHandler";
 import { Range } from "../elements";
 import { randomID } from "../sequence";
+import { search } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 /**
@@ -112,7 +113,7 @@ const FindBlock = ({
       shapeRendering="crispEdges"
       stroke={listenerOnly ? "none" : "rgba(0, 0, 0, 0.5)"}
       strokeWidth={1}
-      style={listenerOnly ? { fill: "transparent" } : {}}
+      style={listenerOnly ? { fill: "transparent" } : search}
       width={width}
       x={x}
       y={y}

@@ -2,8 +2,9 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { NameRange, SeqType, Translation } from "../elements";
+import { SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
+import { translationAminoAcidLabel } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
 
 interface TranslationRowsProps {
@@ -16,9 +17,7 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
-  oneRow: boolean;
   seqType: SeqType;
-  stackedPositions: NameRange[][];
   translationRows: Translation[][];
   yDiff: number;
 }
@@ -254,6 +253,7 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
                   data-testid="la-vz-translation"
                   dominantBaseline="middle"
                   id={aaId}
+                  style={translationAminoAcidLabel}
                   textAnchor="middle"
                   x={bpCount * 0.5 * charWidth}
                   y={`${h / 2 + 1}`}
