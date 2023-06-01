@@ -264,7 +264,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     { seq, seqType }: SeqVizState
   ) => {
     // New accession or file provided, fetch and/or parse.
-    if (accession !== this.props.accession || file !== this.props.file || (this.props.seq && this.props.seq !== seq)) {
+    if (accession !== this.props.accession || file !== this.props.file || (this.props.seq && this.props.seq !== seq) || (this.props.seqType && this.props.seqType !== seqType)) {
       const input = this.parseInput();
       this.setState({
         annotations: input.annotations,
@@ -312,7 +312,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     seq: string;
     seqType: SeqType;
   } => {
-    const { annotations, compSeq, file, name = "", seq } = props || this.props;
+    const { annotations, compSeq, file, name = "", seq, seqType } = props || this.props;
 
     if (file) {
       // Parse a sequence file
@@ -323,24 +323,24 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
       const parsed = parseFile(file.toString(), parseOptions);
       if (parsed.length) {
-        const seqType = guessType(parsed[0].seq);
+        const parsedSeqType = seqType ?? guessType(parsed[0].seq);
         return {
           annotations: this.parseAnnotations(parsed[0].annotations, parsed[0].seq),
-          compSeq: complement(parsed[0].seq, seqType).compSeq,
+          compSeq: complement(parsed[0].seq, parsedSeqType).compSeq,
           name: parsed[0].name,
           seq: parsed[0].seq,
-          seqType,
+          seqType: parsedSeqType,
         };
       }
     } else if (seq) {
       // Fill in default props just using the seq
-      const seqType = guessType(seq);
+      const parsedSeqType = seqType ?? guessType(seq);
       return {
         annotations: this.parseAnnotations(annotations, seq),
-        compSeq: compSeq || complement(seq, seqType).compSeq,
+        compSeq: compSeq || complement(seq, parsedSeqType).compSeq,
         name,
         seq,
-        seqType,
+        seqType: parsedSeqType,
       };
     }
 
