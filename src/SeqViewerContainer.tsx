@@ -93,6 +93,13 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   shouldComponentUpdate = (nextProps: SeqViewerContainerProps, nextState: any) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
+  /** For externally managed selection states, scroll linear viewer when selection changes */
+  UNSAFE_componentWillReceiveProps(newProps: SeqViewerContainerProps) {
+    if (newProps.selection && this.props.selection?.start !== newProps.selection.start) {
+      this.setCentralIndex("LINEAR", newProps.selection.start);
+    }
+  }
+
   /**
    * Update the central index of the linear or circular viewer.
    */
