@@ -149,7 +149,7 @@ export class InfiniteHorizontalScroll extends React.PureComponent<
       this.scroller.current.scrollLeft = centerBlock.props.x;
     }
 
-    if (!isEqual(newVisibleBlocks, visibleBlocks)) {
+    if (newVisibleBlocks.length && !isEqual(newVisibleBlocks, visibleBlocks)) {
       this.setState({
         centralIndex: centralIndex,
         visibleBlocks: newVisibleBlocks,
@@ -307,7 +307,7 @@ export class InfiniteHorizontalScroll extends React.PureComponent<
         <div
           ref={this.insideDOM}
           className="la-vz-linear-one-row-seqblock-container"
-          style={{ display: "flex", flexDirection: "row", width }}
+          style={{ display: "flex", flexDirection: "row", width: Number.isNaN(width) ? "100%" : width }}
         >
           <div className="la-vz-seqblock-padding-left" style={{ height: height || 0, width: spaceLeft }} />
           {visibleBlocks.map(i => seqBlocks[i])}
