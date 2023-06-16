@@ -17,6 +17,7 @@ interface IndexProps {
   rotateCoor: (coor: Coor, degrees: number) => Coor;
   seq: string;
   seqLength: number;
+  showComplement: boolean;
   showIndex: boolean;
   size: Size;
   totalRows: number;
@@ -77,7 +78,7 @@ export class Index extends React.PureComponent<IndexProps> {
    * return a react element for the basepairs along the surface of the plasmid viewer
    */
   renderBasepairs = () => {
-    const { compSeq, findCoor, getRotation, lineHeight, radius, seq, seqLength } = this.props;
+    const { compSeq, findCoor, getRotation, lineHeight, radius, seq, seqLength, showComplement } = this.props;
     const { indexInc } = this.state;
     const centralIndex = this.context.circular;
 
@@ -102,17 +103,21 @@ export class Index extends React.PureComponent<IndexProps> {
           transform={getRotation(i)}
         >
           {seqForCircular.charAt(i)}
-        </text>,
-        <text
-          key={`la-vz-base-comp-${i}`}
-          {...findCoor(0, radius + lineHeight)}
-          dominantBaseline="middle"
-          style={svgText}
-          transform={getRotation(i)}
-        >
-          {compSeqForCircular.charAt(i)}
         </text>
       );
+      if (showComplement) {
+        basepairsToRender.push(
+          <text
+            key={`la-vz-base-comp-${i}`}
+            {...findCoor(0, radius + lineHeight)}
+            dominantBaseline="middle"
+            style={svgText}
+            transform={getRotation(i)}
+          >
+            {compSeqForCircular.charAt(i)}
+          </text>
+        );
+      }
     }
     return basepairsToRender;
   };
