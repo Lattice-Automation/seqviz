@@ -52,6 +52,7 @@ export interface CircularProps {
   rotateOnScroll: boolean;
   search: Range[];
   seq: string;
+  showComplement: boolean;
   showIndex: boolean;
   size: Size;
   yDiff: number;
@@ -309,8 +310,21 @@ export default class Circular extends React.Component<CircularProps, CircularSta
   };
 
   render() {
-    const { center, compSeq, cutSites, handleMouseEvent, inputRef, name, radius, search, seq, showIndex, size, yDiff } =
-      this.props;
+    const {
+      center,
+      compSeq,
+      cutSites,
+      handleMouseEvent,
+      inputRef,
+      name,
+      radius,
+      search,
+      seq,
+      showComplement,
+      showIndex,
+      size,
+      yDiff,
+    } = this.props;
     const { annotationsInRows, inlinedLabels, lineHeight, outerLabels, seqLength } = this.state;
 
     const { findCoor, genArc, getRotation, rotateCoor } = this;
@@ -356,6 +370,7 @@ export default class Circular extends React.Component<CircularProps, CircularSta
             compSeq={compSeq}
             name={name}
             seq={seq}
+            showComplement={showComplement}
             showIndex={showIndex}
             size={size}
             totalRows={totalRows}
