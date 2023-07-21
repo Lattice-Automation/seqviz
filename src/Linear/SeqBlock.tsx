@@ -28,6 +28,7 @@ export type FindXAndWidthElementType = (
 interface SeqBlockProps {
   annotationRows: Annotation[][];
   blockHeight: number;
+  blockWidth: number;
   bpColors?: { [key: number | string]: string };
   bpsPerBlock: number;
   charWidth: number;
@@ -43,6 +44,7 @@ interface SeqBlockProps {
   key: string;
   lineHeight: number;
   onUnmount: (a: string) => void;
+  oneRow: boolean;
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
@@ -50,7 +52,10 @@ interface SeqBlockProps {
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
+  stackedAnnotations: Annotation[][];
+  stackedTranslations: NameRange[][];
   translationRows: Translation[][];
+  x: number;
   y: number;
   zoom: { linear: number };
   zoomed: boolean;
@@ -174,7 +179,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       const start = Math.max(firstIndex, firstBase);
       const end = Math.min(lastIndex, lastBase);
 
-      width = size.width * ((end - start) / bpsPerBlock);
+      width = (end - start) * charWidth;
       width = Math.abs(width) || 0;
     } else if (firstBase + bpsPerBlock > seqLength && multiBlock) {
       // it's an element in the last SeqBlock, that doesn't span the whole width
@@ -229,6 +234,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       inputRef,
       lineHeight,
       onUnmount,
+      oneRow,
       searchRows,
       seq,
       seqFontSize,
@@ -236,6 +242,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       showComplement,
       showIndex,
       size,
+      stackedAnnotations,
+      stackedTranslations,
       translationRows,
       zoom,
       zoomed,
@@ -255,7 +263,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of cut sites
     const cutSiteYDiff = 0; // spacing for cutSite names
-    const cutSiteHeight = zoomed && cutSiteRows.length ? lineHeight : 0;
+    const cutSiteHeight = zoomed && (cutSiteRows.length || oneRow) ? lineHeight : 0;
 
     // height and yDiff of the sequence strand
     const indexYDiff = cutSiteYDiff + cutSiteHeight;
@@ -267,13 +275,13 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     // height and yDiff of translations
     const translationYDiff = compYDiff + compHeight;
-    const translationHeight = elementHeight * translationRows.length;
+    const translationHeight = elementHeight * (oneRow ? stackedTranslations.length : translationRows.length);
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
-    const annHeight = elementHeight * annotationRows.length;
+    const annHeight = elementHeight * (oneRow ? stackedAnnotations.length : annotationRows.length);
 
-    // height and ydiff of the index row.
+    // height and yDiff of the index row.
     const elementGap = annotationRows.length + translationRows.length ? 3 : 0;
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
@@ -296,7 +304,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           type: "SEQ",
           viewer: "LINEAR",
         })}
-        className="la-vz-seqblock"
+        className={oneRow ? "la-vz-linear-one-row-seqblock" : "la-vz-seqblock"}
         cursor="text"
         data-testid="la-vz-seqblock"
         display="block"
@@ -388,7 +396,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            oneRow={oneRow}
             seqBlockRef={this}
+            stackedPositions={stackedAnnotations}
             width={size.width}
             yDiff={annYDiff}
           />

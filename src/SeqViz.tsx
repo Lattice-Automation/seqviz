@@ -134,13 +134,13 @@ export interface SeqVizProps {
   showIndex?: boolean;
 
   /** extra style props to apply to the outermost div of SeqViz */
-  style?: Record<string, unknown>;
+  style?: React.CSSProperties;
 
   /** ranges of sequence that should have amino acid translations shown */
   translations?: { direction?: number; end: number; start: number }[];
 
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
-  viewer?: "linear" | "circular" | "both" | "both_flip";
+  viewer?: "linear" | "circular" | "both" | "both_flip" | "linear_one_row";
 
   /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {
@@ -434,11 +434,16 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       rotateOnScroll: !!this.props.rotateOnScroll,
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
-      translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
-        direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
-        end: t.start + Math.floor((t.end - t.start) / 3) * 3,
-        start: t.start % seq.length,
-      })),
+      translations: (translations || []).map(
+        t =>
+          ({
+            direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
+            end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+            id: randomID(),
+            name: randomID(),
+            start: t.start % seq.length,
+          } as NameRange)
+      ),
       viewer: this.props.viewer || "both",
       zoom: {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,

@@ -26,6 +26,7 @@ const viewerTypeOptions = [
   { key: "circular", text: "Circular", value: "circular" },
   { key: "linear", text: "Linear", value: "linear" },
   { key: "both_flip", text: "Both Flip", value: "both_flip" },
+  { key: "linear_one_row", text: "Linear One Row", value: "linear_one_row" },
 ];
 
 interface AppState {
@@ -49,7 +50,7 @@ interface AppState {
 export default class App extends React.Component<any, AppState> {
   state: AppState = {
     annotations: [],
-    customChildren: true,
+    customChildren: false,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
     search: { query: "ttnnnaat" },
@@ -65,7 +66,7 @@ export default class App extends React.Component<any, AppState> {
       { end: 1147, start: 736 },
       { end: 1885, start: 1165 },
     ],
-    viewer: "both",
+    viewer: "linear_one_row",
     zoom: 50,
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -226,7 +227,7 @@ export default class App extends React.Component<any, AppState> {
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
-                    viewer={this.state.viewer as "linear" | "circular"}
+                    viewer={this.state.viewer as "linear" | "linear_one_row" | "circular"}
                     zoom={{ linear: this.state.zoom }}
                   >
                     {customChildren}
