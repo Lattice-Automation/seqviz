@@ -35,6 +35,8 @@ const defaultProps = {
   showComplement: true,
   showIndex: true,
   size: { height: 600, width: 1200 },
+  stackedAnnotations: [],
+  stackedTranslations: [],
   translationRows: [],
   y: 0,
   zoom: { linear: 50 },

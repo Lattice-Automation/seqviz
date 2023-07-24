@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { SeqType, Translation } from "../elements";
+import { NameRange, SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
 import { translationAminoAcidLabel } from "../style";
 import { FindXAndWidthType } from "./SeqBlock";
@@ -17,7 +17,9 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: unknown) => void;
+  oneRow: boolean;
   seqType: SeqType;
+  stackedPositions: NameRange[][];
   translationRows: Translation[][];
   yDiff: number;
 }
@@ -33,14 +35,16 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
+  oneRow,
   seqType,
+  stackedPositions,
   translationRows,
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
     {translationRows.map((translations, i) => (
       <TranslationRow
-        key={`i-${firstBase}`}
+        key={`${i}-${firstBase}`}
         bpsPerBlock={bpsPerBlock}
         charWidth={charWidth}
         findXAndWidth={findXAndWidth}
@@ -51,7 +55,17 @@ export const TranslationRows = ({
         lastBase={lastBase}
         seqType={seqType}
         translations={translations}
-        y={yDiff + elementHeight * i}
+        y={
+          yDiff +
+          elementHeight *
+            (oneRow
+              ? Math.max(
+                  ...translations.map(
+                    t => stackedPositions.findIndex(row => row.some(item => item.id === t.id)) as number
+                  )
+                )
+              : i)
+        }
         onUnmount={onUnmount}
       />
     ))}

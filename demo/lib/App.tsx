@@ -26,6 +26,7 @@ const viewerTypeOptions = [
   { key: "circular", text: "Circular", value: "circular" },
   { key: "linear", text: "Linear", value: "linear" },
   { key: "both_flip", text: "Both Flip", value: "both_flip" },
+  { key: "linear_one_row", text: "Linear One Row", value: "linear_one_row" },
 ];
 
 interface AppState {
@@ -216,9 +217,8 @@ export default class App extends React.Component<any, AppState> {
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
                     enzymes={this.state.enzymes}
-                    highlights={[{ start: 0, end: 10 }]}
+                    highlights={[{ end: 10, start: 0 }]}
                     name={this.state.name}
-                    onSelection={selection => this.setState({ selection })}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
                     search={this.state.search}
                     selection={this.state.selection}
@@ -226,8 +226,9 @@ export default class App extends React.Component<any, AppState> {
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
-                    viewer={this.state.viewer as "linear" | "circular"}
+                    viewer={this.state.viewer as "linear" | "linear_one_row" | "circular"}
                     zoom={{ linear: this.state.zoom }}
+                    onSelection={selection => this.setState({ selection })}
                   >
                     {customChildren}
                   </SeqViz>

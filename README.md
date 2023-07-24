@@ -133,7 +133,7 @@ export default () => {
 
 #### `viewer (='both')`
 
-The type and orientation of the sequence viewers. One of `"linear" | "circular" | "both" | "both_flip"`. `both` means the circular viewer fills the left side of SeqViz, and the linear viewer fills the right. `both_flip` is the opposite: the linear viewer is on the left, and the circular viewer is on the right.
+The type and orientation of the sequence viewers. One of `"linear" | "circular" | "both" | "both_flip" | "linear_one_row"`. `both` means the circular viewer fills the left side of SeqViz, and the linear viewer fills the right. `both_flip` is the opposite: the linear viewer is on the left, and the circular viewer is on the right.  `linear_one_row` will render the entire linear sequence in a single row.
 
 #### `name (='')`
 

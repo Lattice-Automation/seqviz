@@ -8,7 +8,7 @@ export interface EventsHandlerProps {
   bpsPerBlock: number;
   children: React.ReactNode;
   copyEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
-  handleMouseEvent: (e: any) => void;
+  handleMouseEvent: (e: React.MouseEvent) => void;
   selection: Selection;
   seq: string;
   setSelection: (selection: Selection) => void;

@@ -43,7 +43,7 @@ export interface CircularProps {
   center: { x: number; y: number };
   compSeq: string;
   cutSites: CutSite[];
-  handleMouseEvent: (e: any) => void;
+  handleMouseEvent: (e: React.MouseEvent) => void;
   highlights: Highlight[];
   inputRef: InputRefFunc;
   name: string;

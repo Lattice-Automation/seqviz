@@ -6,7 +6,7 @@ import { EventHandler } from "./EventHandler";
 import Linear, { LinearProps } from "./Linear/Linear";
 import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
-import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
@@ -56,8 +56,8 @@ interface SeqViewerContainerProps {
   targetRef: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
-  translations: Range[];
-  viewer: "linear" | "circular" | "both" | "both_flip";
+  translations: NameRange[];
+  viewer: "linear" | "circular" | "both" | "both_flip" | "linear_one_row";
   width: number;
   zoom: { circular: number; linear: number };
 }
@@ -90,7 +90,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   }
 
   /** this is here because the size listener is returning a new "size" prop every time */
-  shouldComponentUpdate = (nextProps: SeqViewerContainerProps, nextState: any) =>
+  shouldComponentUpdate = (nextProps: SeqViewerContainerProps, nextState: SeqViewerContainerState) =>
     !isEqual(nextProps, this.props) || !isEqual(nextState, this.state);
 
   /**
@@ -152,6 +152,8 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       size.width /= 2;
     }
 
+    const oneRow = viewer.includes("one_row");
+
     const seqFontSize = Math.min(Math.round(zoom * 0.1 + 9.5), 18); // max 18px
 
     // otherwise the sequence needs to be cut into smaller subsequences
@@ -187,6 +189,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       charWidth,
       elementHeight,
       lineHeight,
+      oneRow,
       seqFontSize,
       size,
       zoom: { linear: zoom },
@@ -294,7 +297,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   ) : (
                     <>
                       {/* TODO: this sucks, some breaking refactor in future should get rid of it SeqViewer */}
-                      {viewer === "linear" && (
+                      {(viewer === "linear" || viewer === "linear_one_row") && (
                         <Linear
                           {...linearProps}
                           handleMouseEvent={handleMouseEvent}
