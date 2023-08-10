@@ -8,6 +8,7 @@ export interface EventsHandlerProps {
   bpsPerBlock: number;
   children: React.ReactNode;
   copyEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
+  selectAllEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   handleMouseEvent: (e: any) => void;
   selection: Selection;
   seq: string;
@@ -42,10 +43,14 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    * ["All", "Copy", "Up", "Right", "Down", "Left"]
    */
   keypressMap = (e: React.KeyboardEvent<HTMLElement>) => {
-    const { copyEvent } = this.props;
+    const { copyEvent, selectAllEvent } = this.props;
 
     if (copyEvent && copyEvent(e)) {
       return "Copy";
+    }
+
+    if (selectAllEvent && selectAllEvent(e)) {
+      return "SelectAll";
     }
 
     const { key, shiftKey } = e;
@@ -185,18 +190,13 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    * select all of the sequence
    */
   selectAllHotkey = () => {
-    const {
-      selection,
-      selection: { start },
-      setSelection,
-    } = this.props;
+    const { seq, selection, setSelection } = this.props;
 
     const newSelection = {
       ...selection,
       clockwise: true,
-      end: start,
-      ref: "ALL",
-      start: start, // ref to all means select the whole thing
+      start: 0,
+      end: seq.length,
     };
 
     setSelection(newSelection);
