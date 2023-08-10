@@ -34,6 +34,7 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
     if (!keyType) {
       return; // not recognized key
     }
+    e.preventDefault();
     this.handleSeqInteraction(keyType);
   };
 
