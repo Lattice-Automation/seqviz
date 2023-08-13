@@ -54,9 +54,6 @@ export interface SeqVizProps {
   /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the currently selected seq is copied */
   copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
 
-  /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the all seq is selected */
-  selectAllEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-
   /** a list of enzymes or enzyme names to digest the sequence with. see seqviz.Enzymes */
   enzymes?: (Enzyme | string)[];
 
@@ -106,6 +103,9 @@ export interface SeqVizProps {
     mismatch?: number;
     query: string;
   };
+
+  /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the all seq is selected */
+  selectAllEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
 
   /**
    * Externally managed selection.
@@ -181,7 +181,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     colors: [],
     compSeq: "",
     copyEvent: e => e.key === "c" && (e.metaKey || e.ctrlKey),
-    selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
     enzymes: [],
     enzymesCustom: {},
     name: "",
@@ -189,6 +188,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     onSelection: (_: Selection) => null,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
+    selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
     seq: "",
     showComplement: true,
     showIndex: true,

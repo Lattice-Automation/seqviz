@@ -36,7 +36,6 @@ interface SeqViewerContainerProps {
   children?: (props: CustomChildrenProps) => React.ReactNode;
   compSeq: string;
   copyEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-  selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   cutSites: CutSite[];
   height: number;
   highlights: Highlight[];
@@ -45,6 +44,7 @@ interface SeqViewerContainerProps {
   refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
   search: NameRange[];
+  selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   selection?: {
     clockwise?: boolean;
     end: number;
@@ -279,8 +279,8 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                 <EventHandler
                   bpsPerBlock={linearProps.bpsPerBlock}
                   copyEvent={this.props.copyEvent}
-                  selectAllEvent={this.props.selectAllEvent}
                   handleMouseEvent={handleMouseEvent}
+                  selectAllEvent={this.props.selectAllEvent}
                   selection={mergedSelection}
                   seq={seq}
                   setSelection={this.setSelection}
