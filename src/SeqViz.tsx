@@ -104,6 +104,9 @@ export interface SeqVizProps {
     query: string;
   };
 
+  /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the all seq is selected */
+  selectAllEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
+
   /**
    * Externally managed selection.
    *
@@ -185,6 +188,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     onSelection: (_: Selection) => null,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
+    selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
     seq: "",
     showComplement: true,
     showIndex: true,
@@ -415,6 +419,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     const props = {
       bpColors: this.props.bpColors || {},
       copyEvent: this.props.copyEvent || (() => false),
+      selectAllEvent: this.props.selectAllEvent || (() => false),
       cutSites: this.state.cutSites,
       highlights: (highlights || []).concat(highlightedRegions || []).map(
         (h, i): Highlight => ({

@@ -285,6 +285,10 @@ A callback executed after a search event. This is called once on initial render 
 
 A function returning whether to copy the viewer(s) current selection during a keyboard event. The default method copies sequence after any `ctrl+c` or `meta+c` keyboard events.
 
+#### `selectAllEvent (=(e: KeyboardEvent) => e.key === "a" && (e.metaKey || e.ctrlKey))`
+
+A function returning whether to select the whole sequence during a keyboard event. The default method select whole sequence after any `ctrl+a` or `meta+a` keyboard events.
+
 #### `showComplement (=true)`
 
 Whether to show the complement sequence.
