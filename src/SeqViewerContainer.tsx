@@ -41,6 +41,10 @@ interface SeqViewerContainerProps {
   highlights: Highlight[];
   name: string;
   onSelection: (selection: Selection) => void;
+  onHover: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onClick: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onDoubleClick: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onKeyPress: (event: KeyboardEvent, selection: Selection) => void;
   refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
   search: NameRange[];

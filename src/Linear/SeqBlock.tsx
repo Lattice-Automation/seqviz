@@ -191,6 +191,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * wrapping it in a textSpan with that color as a fill
    */
   seqTextSpan = (bp: string, i: number) => {
+    console.log(this.props);
     const { bpColors, charWidth, firstBase, id } = this.props;
 
     let color: string | undefined;

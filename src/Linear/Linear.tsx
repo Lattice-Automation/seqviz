@@ -163,6 +163,7 @@ export default class Linear extends React.Component<LinearProps> {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
         <SeqBlock
+          {...this.props}
           key={ids[i]}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
