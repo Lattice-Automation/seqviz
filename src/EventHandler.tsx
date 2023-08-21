@@ -13,6 +13,7 @@ export interface EventsHandlerProps {
   selection: Selection;
   seq: string;
   setSelection: (selection: Selection) => void;
+  onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
 }
 
 /**
@@ -30,12 +31,14 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    * action handler for a keyboard keypresses.
    */
   handleKeyPress = (e: React.KeyboardEvent<HTMLElement>) => {
+    const { onKeyPress, selection } = this.props;
     const keyType = this.keypressMap(e);
-    if (!keyType) {
+    if (!keyType && !onKeyPress) {
       return; // not recognized key
     }
     e.preventDefault();
     this.handleSeqInteraction(keyType);
+    onKeyPress(e, selection);
   };
 
   /**

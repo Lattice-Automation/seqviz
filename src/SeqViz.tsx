@@ -101,8 +101,8 @@ export interface SeqVizProps {
   /** a callback that's executed on double click on elements on the viewer. */
   onDoubleClick?: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
 
-  /** a callback that's executed on each click of the sequence viewer. */
-  onKeyPress?: (event: KeyboardEvent, selection: Selection) => void;
+  /** a callback that's executed on press keyboard buttons on the viewer. */
+  onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
 
   /** Refs associated with custom children. */
   refs?: SeqVizChildRefs;
@@ -198,10 +198,10 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     name: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
-    onHover: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
-    onClick: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
-    onDoubleClick: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
-    onKeyPress: (event: KeyboardEvent, selection: Selection) => null,
+    onHover: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
+    onClick: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
+    onDoubleClick: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
+    onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => {},
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
     selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
