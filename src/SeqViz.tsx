@@ -93,13 +93,13 @@ export interface SeqVizProps {
   onSelection?: (selection: Selection) => void;
 
   /** a callback that's executed on hover on emements in the viewer. */
-  onHover?: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
 
   /** a callback that's executed on click on elements in the viewer. */
-  onClick?: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
   /** a callback that's executed on double click on elements on the viewer. */
-  onDoubleClick?: (element: Selection, hover: boolean, view: "linear" | "circular", container: HTMLElement) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
   /** a callback that's executed on press keyboard buttons on the viewer. */
   onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
@@ -198,9 +198,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     name: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
-    onHover: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
-    onClick: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
-    onDoubleClick: (element: any, hover: boolean, view: "linear" | "circular", container: HTMLElement) => null,
+    onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: HTMLElement) => null,
+    onClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null,
+    onDoubleClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null,
     onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => {},
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },

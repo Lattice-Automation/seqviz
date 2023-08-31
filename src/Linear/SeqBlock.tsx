@@ -2,7 +2,9 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
+import { SEQVIZ_ELEMENTS_TYPES } from "../seqvizElementsTypes";
 import { seqBlock, svgText } from "../style";
+import { VIEWER_TYPES } from "../viewerTypes";
 import AnnotationRows from "./Annotations";
 import { CutSites } from "./CutSites";
 import Find from "./Find";
@@ -43,6 +45,9 @@ interface SeqBlockProps {
   key: string;
   lineHeight: number;
   onUnmount: (a: string) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: HTMLElement) => null;
+  onClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null;
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
@@ -191,8 +196,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * wrapping it in a textSpan with that color as a fill
    */
   seqTextSpan = (bp: string, i: number) => {
-    console.log(this.props);
-    const { bpColors, charWidth, firstBase, id } = this.props;
+    const { bpColors, bpsPerBlock, charWidth, firstBase, id, onHover, onClick, onDoubleClick } = this.props;
 
     let color: string | undefined;
     if (bpColors) {
@@ -204,10 +208,29 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         undefined;
     }
 
+    const key = i + bp + id;
+
+    const element = {
+      key: key,
+      start: firstBase,
+      end: firstBase + bpsPerBlock,
+      index: i,
+      type: SEQVIZ_ELEMENTS_TYPES.base,
+      viewer: VIEWER_TYPES.linear,
+    };
+
     return (
       // the +0.2 here and above is to offset the characters they're not right on the left edge. When they are,
       // other elements look like they're shifted too far to the right.
-      <tspan key={i + bp + id} fill={color || undefined} x={charWidth * i + charWidth * 0.2}>
+      <tspan
+        key={key}
+        fill={color || undefined}
+        x={charWidth * i + charWidth * 0.2}
+        onMouseEnter={e => onHover(element, true, "LINEAR", e.target as HTMLElement)}
+        onMouseLeave={e => onHover(element, false, "LINEAR", e.target as HTMLElement)}
+        onClick={e => onClick(element, false, true, e.target as HTMLElement)}
+        onDoubleClick={e => onDoubleClick(element, false, true, e.target as HTMLElement)}
+      >
         {bp}
       </tspan>
     );

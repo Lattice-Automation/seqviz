@@ -13,11 +13,13 @@ import {
   Sidebar,
 } from "semantic-ui-react";
 import seqparse from "seqparse";
+import { TextSpan } from "typescript";
 
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
+import { SEQVIZ_ELEMENTS_TYPES } from "../../src/seqvizElementsTypes";
 import Header from "./Header";
 import file from "./file";
 
@@ -33,6 +35,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
+  hoveredBase: number;
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -51,6 +54,7 @@ export default class App extends React.Component<any, AppState> {
     annotations: [],
     customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
+    hoveredBase: 0,
     name: "",
     search: { query: "ttnnnaat" },
     searchResults: {},
@@ -73,7 +77,7 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
-    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq, hoveredBase: 0 });
   };
 
   toggleSidebar = () => {
@@ -218,6 +222,16 @@ export default class App extends React.Component<any, AppState> {
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
+                    onHover={(element, hover, view, container) => {
+                      // console.log({ element, hover, view, container });
+                      if (element.type === SEQVIZ_ELEMENTS_TYPES.base) {
+                        if (hover) {
+                          this.setState({ hoveredBase: element.start + element.index + 1 });
+                        } else {
+                          this.setState({ hoveredBase: 0 });
+                        }
+                      }
+                    }}
                     onSelection={selection => this.setState({ selection })}
                     // onKeyPress={(e, selection) => console.log(e, selection)}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
@@ -234,6 +248,9 @@ export default class App extends React.Component<any, AppState> {
                   </SeqViz>
                 )}
               </div>
+              <footer>
+                <div>Over base {this.state.hoveredBase > 0 ? this.state.hoveredBase : "-"}</div>
+              </footer>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
