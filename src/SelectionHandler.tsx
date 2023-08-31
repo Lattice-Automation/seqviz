@@ -2,7 +2,7 @@ import * as React from "react";
 
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
-interface RefSelection extends Selection {
+export interface RefSelection extends Selection {
   viewer: "LINEAR" | "CIRCULAR";
 }
 

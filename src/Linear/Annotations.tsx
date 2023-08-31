@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFunc } from "../SelectionHandler";
+import { InputRefFunc, RefSelection } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { NameRange } from "../elements";
 import { annotation, annotationLabel } from "../style";
@@ -27,6 +27,9 @@ const AnnotationRows = (props: {
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
   width: number;
   yDiff: number;
@@ -43,6 +46,9 @@ const AnnotationRows = (props: {
         height={props.elementHeight}
         inputRef={props.inputRef}
         lastBase={props.lastBase}
+        onClick={props.onClick}
+        onDoubleClick={props.onDoubleClick}
+        onHover={props.onHover}
         seqBlockRef={props.seqBlockRef}
         width={props.width}
         y={props.yDiff + props.elementHeight * i}
@@ -66,6 +72,9 @@ const AnnotationRow = (props: {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
   width: number;
   y: number;
@@ -102,8 +111,12 @@ const SingleNamedElement = (props: {
   index: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
 }) => {
-  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase } = props;
+  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase, onClick, onDoubleClick, onHover } =
+    props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
@@ -186,6 +199,12 @@ const SingleNamedElement = (props: {
   const nameLength = name.length * 6.75; // aspect ratio of roboto mono is ~0.66
   const nameFits = nameLength < width - 15;
 
+  const annotationElement = {
+    ...element,
+    type: "ANNOTATION",
+    viewer: "LINEAR",
+  };
+
   return (
     <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
       <path
@@ -207,8 +226,20 @@ const SingleNamedElement = (props: {
         onBlur={() => {
           // do nothing
         }}
+        onClick={e => {
+          onClick(annotationElement, false, true, e.target as SVGGElement);
+        }}
+        onDoubleClick={e => {
+          onDoubleClick(annotationElement, false, true, e.target as SVGGElement);
+        }}
         onFocus={() => {
           // do nothing
+        }}
+        onMouseEnter={e => {
+          onHover(annotationElement, true, "LINEAR", e.target as SVGGElement);
+        }}
+        onMouseLeave={e => {
+          onHover(annotationElement, false, "LINEAR", e.target as SVGGElement);
         }}
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}

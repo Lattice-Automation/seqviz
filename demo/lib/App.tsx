@@ -13,6 +13,8 @@ import {
   Sidebar,
 } from "semantic-ui-react";
 import seqparse from "seqparse";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
 import { TextSpan } from "typescript";
 
 import Circular from "../../src/Circular/Circular";
@@ -222,6 +224,12 @@ export default class App extends React.Component<any, AppState> {
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
+                    onClick={(element, circular, linear, container) => {
+                      // console.log({ element, circular, linear, container });
+                    }}
+                    onDoubleClick={(element, circular, linear, container) => {
+                      // console.log({ element, circular, linear, container });
+                    }}
                     onHover={(element, hover, view, container) => {
                       // console.log({ element, hover, view, container });
                       if (element.type === SEQVIZ_ELEMENTS_TYPES.base) {
@@ -229,6 +237,32 @@ export default class App extends React.Component<any, AppState> {
                           this.setState({ hoveredBase: element.start + element.index + 1 });
                         } else {
                           this.setState({ hoveredBase: 0 });
+                        }
+                      } else if (element.type == SEQVIZ_ELEMENTS_TYPES.annotation) {
+                        if (hover) {
+                          if ((container as any)._tippy) {
+                            (container as any)._tippy?.show();
+                          } else {
+                            // you can pass some details with annotations to display in tippy
+                            tippy(container, {
+                              content: `
+                                <div>
+                                  <div>
+                                    <strong>Name</strong>: <span>${element.name}</span>
+                                  </div>
+                                  <div>
+                                    <strong>position</strong>: <span>[${element.start}-${element.end}]</span>
+                                  </div>
+                                  <div>
+                                    <strong>Length</strong>: <span>${element.end - element.start + 1}</span>
+                                  </div>
+                                </div>
+                              `,
+                              allowHTML: true,
+                            }).show();
+                          }
+                        } else {
+                          (container as any)._tippy?.hide();
                         }
                       }
                     }}

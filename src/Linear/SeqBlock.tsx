@@ -44,10 +44,10 @@ interface SeqBlockProps {
   inputRef: InputRefFunc;
   key: string;
   lineHeight: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: string) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: HTMLElement) => null;
-  onClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: HTMLElement) => null;
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
@@ -252,6 +252,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       id,
       inputRef,
       lineHeight,
+      onClick,
+      onDoubleClick,
+      onHover,
       onUnmount,
       searchRows,
       seq,
@@ -399,6 +402,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             seqType={seqType}
             translationRows={translationRows}
             yDiff={translationYDiff}
+            onClick={onClick}
+            onDoubleClick={onDoubleClick}
+            onHover={onHover}
             onUnmount={onUnmount}
           />
         )}
@@ -412,6 +418,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            onClick={onClick}
+            onDoubleClick={onDoubleClick}
+            onHover={onHover}
             seqBlockRef={this}
             width={size.width}
             yDiff={annYDiff}
