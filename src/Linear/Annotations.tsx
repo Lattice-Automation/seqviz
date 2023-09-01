@@ -28,6 +28,12 @@ const AnnotationRows = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
@@ -47,6 +53,7 @@ const AnnotationRows = (props: {
         inputRef={props.inputRef}
         lastBase={props.lastBase}
         onClick={props.onClick}
+        onContextMenu={props.onContextMenu}
         onDoubleClick={props.onDoubleClick}
         onHover={props.onHover}
         seqBlockRef={props.seqBlockRef}
@@ -73,6 +80,12 @@ const AnnotationRow = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
@@ -112,11 +125,28 @@ const SingleNamedElement = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
 }) => {
-  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase, onClick, onDoubleClick, onHover } =
-    props;
+  const {
+    element,
+    elements,
+    findXAndWidth,
+    firstBase,
+    index,
+    inputRef,
+    lastBase,
+    onClick,
+    onContextMenu,
+    onDoubleClick,
+    onHover,
+  } = props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
@@ -228,6 +258,9 @@ const SingleNamedElement = (props: {
         }}
         onClick={e => {
           onClick(annotationElement, false, true, e.target as SVGGElement);
+        }}
+        onContextMenu={e => {
+          onContextMenu(annotationElement, false, true, e);
         }}
         onDoubleClick={e => {
           onDoubleClick(annotationElement, false, true, e.target as SVGGElement);

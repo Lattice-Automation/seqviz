@@ -21,6 +21,12 @@ export interface LinearProps {
   inputRef: InputRefFunc;
   lineHeight: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (id: string) => void;
@@ -71,6 +77,7 @@ export default class Linear extends React.Component<LinearProps> {
       highlights,
       lineHeight,
       onClick,
+      onContextMenu,
       onDoubleClick,
       onHover,
       onUnmount,
@@ -198,6 +205,7 @@ export default class Linear extends React.Component<LinearProps> {
           zoom={zoom}
           zoomed={zoomed}
           onClick={onClick}
+          onContextMenu={onContextMenu}
           onDoubleClick={onDoubleClick}
           onHover={onHover}
           onUnmount={onUnmount}

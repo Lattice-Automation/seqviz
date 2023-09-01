@@ -45,6 +45,12 @@ interface SeqBlockProps {
   key: string;
   lineHeight: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: string) => void;
@@ -196,7 +202,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * wrapping it in a textSpan with that color as a fill
    */
   seqTextSpan = (bp: string, i: number) => {
-    const { bpColors, bpsPerBlock, charWidth, firstBase, id, onHover, onClick, onDoubleClick } = this.props;
+    const { bpColors, bpsPerBlock, charWidth, firstBase, id, onHover, onClick, onContextMenu, onDoubleClick } =
+      this.props;
 
     let color: string | undefined;
     if (bpColors) {
@@ -229,6 +236,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         onMouseEnter={e => onHover(element, true, "LINEAR", e.target as HTMLElement)}
         onMouseLeave={e => onHover(element, false, "LINEAR", e.target as HTMLElement)}
         onClick={e => onClick(element, false, true, e.target as HTMLElement)}
+        onContextMenu={e => onContextMenu(element, false, true, e)}
         onDoubleClick={e => onDoubleClick(element, false, true, e.target as HTMLElement)}
       >
         {bp}
@@ -253,6 +261,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       inputRef,
       lineHeight,
       onClick,
+      onContextMenu,
       onDoubleClick,
       onHover,
       onUnmount,
@@ -403,6 +412,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             translationRows={translationRows}
             yDiff={translationYDiff}
             onClick={onClick}
+            onContextMenu={onContextMenu}
             onDoubleClick={onDoubleClick}
             onHover={onHover}
             onUnmount={onUnmount}
@@ -419,6 +429,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             inputRef={inputRef}
             lastBase={lastBase}
             onClick={onClick}
+            onContextMenu={onContextMenu}
             onDoubleClick={onDoubleClick}
             onHover={onHover}
             seqBlockRef={this}

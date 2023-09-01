@@ -17,6 +17,12 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
@@ -36,6 +42,7 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onClick,
+  onContextMenu,
   onDoubleClick,
   onHover,
   onUnmount,
@@ -56,6 +63,7 @@ export const TranslationRows = ({
         inputRef={inputRef}
         lastBase={lastBase}
         onClick={onClick}
+        onContextMenu={onContextMenu}
         onDoubleClick={onDoubleClick}
         onHover={onHover}
         seqType={seqType}
@@ -81,6 +89,12 @@ const TranslationRow = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
@@ -109,6 +123,12 @@ interface SingleNamedElementProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
@@ -159,6 +179,7 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
       inputRef,
       lastBase,
       onClick,
+      onContextMenu,
       onDoubleClick,
       onHover,
       seqType,
@@ -254,6 +275,9 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
               transform={`translate(${x}, 0)`}
               onClick={e => {
                 onClick(aaElement, false, true, e.target as SVGGElement);
+              }}
+              onContextMenu={e => {
+                onContextMenu(aaElement, false, true, e);
               }}
               onDoubleClick={e => {
                 onDoubleClick(aaElement, false, true, e.target as SVGGElement);

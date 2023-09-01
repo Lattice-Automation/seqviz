@@ -98,6 +98,14 @@ export interface SeqVizProps {
   /** a callback that's executed on click on elements in the viewer. */
   onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
+  /** a callback that's executed on right click on elements in the viewer. */
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+
   /** a callback that's executed on double click on elements on the viewer. */
   onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
@@ -198,9 +206,15 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     name: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
-    onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => null,
-    onClick: (element: any, circular: boolean, linear: boolean, container: Element) => null,
-    onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => null,
+    onClick: (element: any, circular: boolean, linear: boolean, container: Element) => {},
+    onContextMenu: (
+      element: any,
+      circular: boolean,
+      linear: boolean,
+      event: React.MouseEvent<Element, MouseEvent>
+    ) => {},
+    onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => {},
+    onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => {},
     onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => {},
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
@@ -479,6 +493,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         }),
       onClick:
         this.props.onClick ||
+        (() => {
+          // do nothing
+        }),
+      onContextMenu:
+        this.props.onContextMenu ||
         (() => {
           // do nothing
         }),
