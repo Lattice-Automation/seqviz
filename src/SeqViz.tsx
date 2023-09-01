@@ -86,15 +86,6 @@ export interface SeqVizProps {
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
 
-  /** a callback that's executed on each change to the search parameters or sequence */
-  onSearch?: (search: Range[]) => void;
-
-  /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
-  onSelection?: (selection: Selection) => void;
-
-  /** a callback that's executed on hover on emements in the viewer. */
-  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
-
   /** a callback that's executed on click on elements in the viewer. */
   onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
@@ -109,8 +100,17 @@ export interface SeqVizProps {
   /** a callback that's executed on double click on elements on the viewer. */
   onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
 
+  /** a callback that's executed on hover on emements in the viewer. */
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+
   /** a callback that's executed on press keyboard buttons on the viewer. */
   onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
+
+  /** a callback that's executed on each change to the search parameters or sequence */
+  onSearch?: (search: Range[]) => void;
+
+  /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
+  onSelection?: (selection: Selection) => void;
 
   /** Refs associated with custom children. */
   refs?: SeqVizChildRefs;
@@ -204,8 +204,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
-    onSearch: (_: Range[]) => null,
-    onSelection: (_: Selection) => null,
     onClick: (element: any, circular: boolean, linear: boolean, container: Element) => {},
     onContextMenu: (
       element: any,
@@ -216,6 +214,8 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => {},
     onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => {},
     onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => {},
+    onSearch: (_: Range[]) => null,
+    onSelection: (_: Selection) => null,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
     selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
@@ -431,26 +431,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       start: a.start % (seq.length + 1),
     }));
 
-  handleHoverEvent = (element, hover, view, container) => {
-    const { onHover } = this.props;
-    onHover!(element, hover, view, container);
-  };
-
-  handleClickEvent = (element, circular, linear, event) => {
-    const { onClick } = this.props;
-    onClick!(element, circular, linear, event);
-  };
-
-  handleDoubleClickEvent = (element, circular, linear, event) => {
-    const { onDoubleClick } = this.props;
-    onDoubleClick!(element, circular, linear, event);
-  };
-
-  handleKeyPressEvent = (event, selection) => {
-    const { onKeyPress } = this.props;
-    onKeyPress!(event, selection);
-  };
-
   render() {
     const { highlightedRegions, highlights, showComplement, showIndex, style, zoom } = this.props;
     let { translations } = this.props;
@@ -481,16 +461,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
           start: h.start % (seq.length + 1),
         })
       ),
-      onSelection:
-        this.props.onSelection ||
-        (() => {
-          // do nothing
-        }),
-      onHover:
-        this.props.onHover ||
-        (() => {
-          // do nothing
-        }),
       onClick:
         this.props.onClick ||
         (() => {
@@ -506,8 +476,18 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         (() => {
           // do nothing
         }),
+      onHover:
+        this.props.onHover ||
+        (() => {
+          // do nothing
+        }),
       onKeyPress:
         this.props.onKeyPress ||
+        (() => {
+          // do nothing
+        }),
+      onSelection:
+        this.props.onSelection ||
         (() => {
           // do nothing
         }),

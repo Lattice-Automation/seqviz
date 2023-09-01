@@ -347,8 +347,10 @@ export default class App extends React.Component<any, AppState> {
                         }
                       }
                     }}
+                    onKeyPress={(e, selection) => {
+                      // console.log(e, selection)
+                    }}
                     onSelection={selection => this.setState({ selection })}
-                    // onKeyPress={(e, selection) => console.log(e, selection)}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
                     search={this.state.search}
                     selection={this.state.selection}
