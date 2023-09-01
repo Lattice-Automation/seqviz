@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Menu as ContextMenu, Item, Separator, Submenu, useContextMenu } from "react-contexify";
+import "react-contexify/dist/ReactContexify.css";
 import {
   Button,
   Checkbox,
@@ -24,6 +26,8 @@ import { AnnotationProp } from "../../src/elements";
 import { SEQVIZ_ELEMENTS_TYPES } from "../../src/seqvizElementsTypes";
 import Header from "./Header";
 import file from "./file";
+
+const CONTEXT_MENU_ID = "menu-id";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -77,10 +81,83 @@ export default class App extends React.Component<any, AppState> {
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
   circularRef: React.RefObject<HTMLDivElement> = React.createRef();
 
+  showContextMenu: (params: any) => void = () => {
+    //do nothing
+  };
+
   componentDidMount = async () => {
     const seq = await seqparse(file);
+
+    const { show } = useContextMenu({
+      id: CONTEXT_MENU_ID,
+    });
+
+    this.showContextMenu = show;
+
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq, hoveredBase: 0 });
   };
+
+  handleContextMenuAddForwardTranslation = ({ event, props, triggerEvent, data }) => {
+    // console.log(event, props, triggerEvent, data);
+    console.log(this.state.selection);
+    if (
+      !this.state.selection.start ||
+      !this.state.selection.end ||
+      !this.state.selection.length ||
+      this.state.selection.length === 0
+    ) {
+      this.state.translations.push({
+        direction: 1,
+        end: this.state.seq.length,
+        start: 0,
+      });
+    } else {
+      const { start, end, clockwise } = this.state.selection;
+      this.state.translations.push({
+        direction: 1,
+        end: clockwise ? end : start,
+        start: clockwise ? start : end,
+      });
+    }
+    this.setState({
+      translations: this.state.translations,
+    });
+  };
+
+  handleContextMenuAddReverseTranslation = ({ event, props, triggerEvent, data }) => {
+    // console.log(event, props, triggerEvent, data);
+    // console.log(this.state.selection);
+    if (
+      !this.state.selection.start ||
+      !this.state.selection.end ||
+      !this.state.selection.length ||
+      this.state.selection.length === 0
+    ) {
+      this.state.translations.push({
+        direction: 1,
+        end: this.state.seq.length,
+        start: 0,
+      });
+    } else {
+      const { start, end, clockwise } = this.state.selection;
+      this.state.translations.push({
+        direction: -1,
+        end: clockwise ? end : start,
+        start: clockwise ? start : end,
+      });
+    }
+    this.setState({
+      translations: this.state.translations,
+    });
+  };
+
+  displayContextMenu(e) {
+    // put whatever custom logic you need
+    // you can even decide to not display the Menu
+    this.showContextMenu({
+      event: e,
+    });
+  }
 
   toggleSidebar = () => {
     const { showSidebar } = this.state;
@@ -227,6 +304,10 @@ export default class App extends React.Component<any, AppState> {
                     onClick={(element, circular, linear, container) => {
                       // console.log({ element, circular, linear, container });
                     }}
+                    onContextMenu={(element, circular, linear, event) => {
+                      // console.log({ element, circular, linear, event });
+                      this.displayContextMenu(event);
+                    }}
                     onDoubleClick={(element, circular, linear, container) => {
                       // console.log({ element, circular, linear, container });
                     }}
@@ -288,6 +369,10 @@ export default class App extends React.Component<any, AppState> {
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        <ContextMenu id={CONTEXT_MENU_ID}>
+          <Item onClick={this.handleContextMenuAddForwardTranslation}>Add forward translations</Item>
+          <Item onClick={this.handleContextMenuAddReverseTranslation}>Add reverse translations</Item>
+        </ContextMenu>
       </div>
     );
   }
