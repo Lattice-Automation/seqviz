@@ -301,6 +301,12 @@ By default, the circular viewer rotates when scrolling over the viewer. That can
 
 See: [custom viewer positioning](#custom-viewer-positioning)
 
+#### `useExternalFonts (=true)`
+
+Whether to allow font loading from external sources. (Google Fonts)
+
+If set to false, fonts must be provided manually.
+
 ### Custom Viewer Positioning
 
 This makes use of the `children` and `refs` props to allow custom rendering of the sequence viewers. For example, to render the linear viewer above the circular viewer:
