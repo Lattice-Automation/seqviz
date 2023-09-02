@@ -202,7 +202,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
    * wrapping it in a textSpan with that color as a fill
    */
   seqTextSpan = (bp: string, i: number) => {
-    const { bpColors, bpsPerBlock, charWidth, firstBase, id, onHover, onClick, onContextMenu, onDoubleClick } =
+    const { bpColors, bpsPerBlock, charWidth, firstBase, id, onClick, onContextMenu, onDoubleClick, onHover } =
       this.props;
 
     let color: string | undefined;
@@ -219,9 +219,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     const element = {
       key: key,
-      start: firstBase,
       end: firstBase + bpsPerBlock,
       index: i,
+      start: firstBase,
       type: SEQVIZ_ELEMENTS_TYPES.base,
       viewer: VIEWER_TYPES.linear,
     };
@@ -233,11 +233,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         key={key}
         fill={color || undefined}
         x={charWidth * i + charWidth * 0.2}
-        onMouseEnter={e => onHover(element, true, "LINEAR", e.target as HTMLElement)}
-        onMouseLeave={e => onHover(element, false, "LINEAR", e.target as HTMLElement)}
         onClick={e => onClick(element, false, true, e.target as HTMLElement)}
         onContextMenu={e => onContextMenu(element, false, true, e)}
         onDoubleClick={e => onDoubleClick(element, false, true, e.target as HTMLElement)}
+        onMouseEnter={e => onHover(element, true, "LINEAR", e.target as HTMLElement)}
+        onMouseLeave={e => onHover(element, false, "LINEAR", e.target as HTMLElement)}
       >
         {bp}
       </tspan>
@@ -428,13 +428,13 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             fullSeq={fullSeq}
             inputRef={inputRef}
             lastBase={lastBase}
+            seqBlockRef={this}
+            width={size.width}
+            yDiff={annYDiff}
             onClick={onClick}
             onContextMenu={onContextMenu}
             onDoubleClick={onDoubleClick}
             onHover={onHover}
-            seqBlockRef={this}
-            width={size.width}
-            yDiff={annYDiff}
           />
         )}
         {zoomed && seqType !== "aa" ? (

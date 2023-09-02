@@ -62,13 +62,13 @@ export const TranslationRows = ({
         height={elementHeight * 0.9}
         inputRef={inputRef}
         lastBase={lastBase}
+        seqType={seqType}
+        translations={translations}
+        y={yDiff + elementHeight * i}
         onClick={onClick}
         onContextMenu={onContextMenu}
         onDoubleClick={onDoubleClick}
         onHover={onHover}
-        seqType={seqType}
-        translations={translations}
-        y={yDiff + elementHeight * i}
         onUnmount={onUnmount}
       />
     ))}

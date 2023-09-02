@@ -52,13 +52,13 @@ const AnnotationRows = (props: {
         height={props.elementHeight}
         inputRef={props.inputRef}
         lastBase={props.lastBase}
+        seqBlockRef={props.seqBlockRef}
+        width={props.width}
+        y={props.yDiff + props.elementHeight * i}
         onClick={props.onClick}
         onContextMenu={props.onContextMenu}
         onDoubleClick={props.onDoubleClick}
         onHover={props.onHover}
-        seqBlockRef={props.seqBlockRef}
-        width={props.width}
-        y={props.yDiff + props.elementHeight * i}
       />
     ))}
   </g>

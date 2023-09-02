@@ -9,11 +9,11 @@ export interface EventsHandlerProps {
   children: React.ReactNode;
   copyEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   handleMouseEvent: (e: any) => void;
+  onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
   selectAllEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   selection: Selection;
   seq: string;
   setSelection: (selection: Selection) => void;
-  onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
 }
 
 /**

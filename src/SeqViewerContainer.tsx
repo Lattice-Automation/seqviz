@@ -40,8 +40,6 @@ interface SeqViewerContainerProps {
   height: number;
   highlights: Highlight[];
   name: string;
-  onSelection: (selection: Selection) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
   onContextMenu: (
     element: any,
@@ -50,7 +48,9 @@ interface SeqViewerContainerProps {
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
   onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
+  onSelection: (selection: Selection) => void;
   refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
   search: NameRange[];
@@ -290,11 +290,11 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   bpsPerBlock={linearProps.bpsPerBlock}
                   copyEvent={this.props.copyEvent}
                   handleMouseEvent={handleMouseEvent}
-                  onKeyPress={this.props.onKeyPress}
                   selectAllEvent={this.props.selectAllEvent}
                   selection={mergedSelection}
                   seq={seq}
                   setSelection={this.setSelection}
+                  onKeyPress={this.props.onKeyPress}
                 >
                   {this.props.children ? (
                     this.props.children({

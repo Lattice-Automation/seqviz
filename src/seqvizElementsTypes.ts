@@ -1,10 +1,10 @@
 export const SEQVIZ_ELEMENTS_TYPES = {
-  seq: "SEQ",
-  annotation: "ANNOTATION",
-  find: "FIND",
-  enzyme: "ENZYME",
-  highlight: "HIGHLIGHT",
-  base: "BASE",
-  translation: "TRANSLATION",
   aminoacid: "AMINOACID",
+  annotation: "ANNOTATION",
+  base: "BASE",
+  enzyme: "ENZYME",
+  find: "FIND",
+  highlight: "HIGHLIGHT",
+  seq: "SEQ",
+  translation: "TRANSLATION",
 };
