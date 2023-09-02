@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFunc, RefSelection } from "../SelectionHandler";
+import { InputRefFunc } from "../SelectionHandler";
 import { COLOR_BORDER_MAP, darkerColor } from "../colors";
 import { NameRange } from "../elements";
 import { annotation, annotationLabel } from "../style";
