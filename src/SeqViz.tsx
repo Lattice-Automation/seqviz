@@ -231,10 +231,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
             families: ["Roboto Mono:300,400,500"],
           },
         });
-      } else {
-        if (!document.fonts.check("Roboto Mono")) {
-          console.warn("SeqViz: Use external fonts disabled but Roboto Mono not available!")
-        }
       }
     }
 
