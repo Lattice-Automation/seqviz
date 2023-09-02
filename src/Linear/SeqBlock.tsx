@@ -218,9 +218,9 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const key = i + bp + id;
 
     const element = {
-      key: key,
       end: firstBase + bpsPerBlock,
       index: i,
+      key: key,
       start: firstBase,
       type: SEQVIZ_ELEMENTS_TYPES.base,
       viewer: VIEWER_TYPES.linear,
