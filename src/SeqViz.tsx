@@ -221,7 +221,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    */
   componentDidMount(): void {
     if (typeof window !== "undefined") {
-      // Allow the user to choose weather to load fonts from Google Fonts or from another source
+      // Allow the user to choose whether to load fonts from Google Fonts or from another source
       if (this.props.useExternalFonts) {
         // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
         // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
