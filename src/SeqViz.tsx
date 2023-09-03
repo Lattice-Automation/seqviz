@@ -54,6 +54,12 @@ export interface SeqVizProps {
   /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the currently selected seq is copied */
   copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
 
+  /**
+   * if true SeqViz will not download fonts from external sites. Right now this only applies to Roboto Mono from Google Fonts. Set this
+   * to true if you want to host the font yourself or cannot make requests for external assets.
+   */
+  disableExternalFonts?: boolean;
+
   /** a list of enzymes or enzyme names to digest the sequence with. see seqviz.Enzymes */
   enzymes?: (Enzyme | string)[];
 
@@ -142,11 +148,6 @@ export interface SeqVizProps {
   /** ranges of sequence that should have amino acid translations shown */
   translations?: { direction?: number; end: number; start: number }[];
 
-  /**
-   * If false, SeqViz will not attempt to download fonts from external sites.
-   */
-  useExternalFonts?: boolean;
-
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
 
@@ -186,6 +187,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     colors: [],
     compSeq: "",
     copyEvent: e => e.key === "c" && (e.metaKey || e.ctrlKey),
+    disableExternalFonts: false,
     enzymes: [],
     enzymesCustom: {},
     name: "",
@@ -199,7 +201,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     showIndex: true,
     style: {},
     translations: [],
-    useExternalFonts: true,
     viewer: "both",
     zoom: { circular: 0, linear: 50 },
   };
@@ -221,7 +222,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   componentDidMount(): void {
     if (typeof window !== "undefined") {
       // Allow the user to choose whether to load fonts from Google Fonts or from another source
-      if (this.props.useExternalFonts) {
+      if (!this.props.disableExternalFonts) {
         // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
         // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
         /* eslint-disable */
