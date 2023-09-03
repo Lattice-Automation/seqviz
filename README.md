@@ -301,11 +301,9 @@ By default, the circular viewer rotates when scrolling over the viewer. That can
 
 See: [custom viewer positioning](#custom-viewer-positioning)
 
-#### `useExternalFonts (=true)`
+#### `disableExternalFonts (=false)`
 
-Whether to allow font loading from external sources. (Google Fonts)
-
-If set to false, fonts must be provided manually.
+If true, SeqViz will not download fonts from external sites. By default the library will attempt to download "Roboto Mono:300,400,500" after first mount.
 
 ### Custom Viewer Positioning
 
