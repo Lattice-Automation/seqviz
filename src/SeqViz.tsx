@@ -56,7 +56,7 @@ export interface SeqVizProps {
 
   /**
    * if true SeqViz will not download fonts from external sites. Right now this only applies to Roboto Mono from Google Fonts. Set this
-   * to true if you want to host the font yourself or cannot make requests for external assets.
+   * to true if you want to host the font yourself or cannot make requests for external assets. If true, you will need to host "Roboto Mono:300,400,500"
    */
   disableExternalFonts?: boolean;
 
