@@ -147,7 +147,6 @@ export interface SeqVizProps {
    */
   useExternalFonts?: boolean;
 
-
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
 
