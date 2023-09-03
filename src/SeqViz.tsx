@@ -142,6 +142,11 @@ export interface SeqVizProps {
   /** ranges of sequence that should have amino acid translations shown */
   translations?: { direction?: number; end: number; start: number }[];
 
+  /**
+   * If false, SeqViz will not attempt to download fonts from external sites.
+   */
+  useExternalFonts?: boolean;
+
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
   viewer?: "linear" | "circular" | "both" | "both_flip";
 
@@ -194,6 +199,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     showIndex: true,
     style: {},
     translations: [],
+    useExternalFonts: true,
     viewer: "both",
     zoom: { circular: 0, linear: 50 },
   };
@@ -213,15 +219,18 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * If an accession was provided, query it here.
    */
   componentDidMount(): void {
-    // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
-    // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
     if (typeof window !== "undefined") {
-      /* eslint-disable */
-      require("webfontloader").load({
-        google: {
-          families: ["Roboto Mono:300,400,500"],
-        },
-      });
+      // Allow the user to choose whether to load fonts from Google Fonts or from another source
+      if (this.props.useExternalFonts) {
+        // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
+        // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
+        /* eslint-disable */
+        require("webfontloader").load({
+          google: {
+            families: ["Roboto Mono:300,400,500"],
+          },
+        });
+      }
     }
 
     // Check if an accession was passed, we'll query it here if so
