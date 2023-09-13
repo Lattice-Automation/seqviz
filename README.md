@@ -297,6 +297,10 @@ Whether to show the complement sequence.
 
 By default, the circular viewer rotates when scrolling over the viewer. That can be disabled with rotateOnScroll: false.
 
+#### `disableExternalFonts (=false)`
+
+If true, SeqViz will not download fonts from external sites. By default the library will attempt to download "Roboto Mono:300,400,500" after first mount.
+
 #### `refs (={ circular: undefined, linear: undefined })`
 
 See: [custom viewer positioning](#custom-viewer-positioning)

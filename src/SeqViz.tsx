@@ -54,6 +54,12 @@ export interface SeqVizProps {
   /** a callback that is applied within SeqViz on each keyboard event. If it returns truthy, the currently selected seq is copied */
   copyEvent?: (event: React.KeyboardEvent<HTMLElement>) => boolean;
 
+  /**
+   * if true SeqViz will not download fonts from external sites. Right now this only applies to Roboto Mono from Google Fonts. Set this
+   * to true if you want to host the font yourself or cannot make requests for external assets. If true, you will need to host "Roboto Mono:300,400,500"
+   */
+  disableExternalFonts?: boolean;
+
   /** a list of enzymes or enzyme names to digest the sequence with. see seqviz.Enzymes */
   enzymes?: (Enzyme | string)[];
 
@@ -201,6 +207,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     colors: [],
     compSeq: "",
     copyEvent: e => e.key === "c" && (e.metaKey || e.ctrlKey),
+    disableExternalFonts: false,
     enzymes: [],
     enzymesCustom: {},
     name: "",
@@ -238,15 +245,18 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * If an accession was provided, query it here.
    */
   componentDidMount(): void {
-    // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
-    // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
     if (typeof window !== "undefined") {
-      /* eslint-disable */
-      require("webfontloader").load({
-        google: {
-          families: ["Roboto Mono:300,400,500"],
-        },
-      });
+      // Allow the user to choose whether to load fonts from Google Fonts or from another source
+      if (!this.props.disableExternalFonts) {
+        // Fetch Roboto Mono, the only font used by SeqViz (at the time of writing)
+        // https://github.com/typekit/webfontloader/issues/383#issuecomment-389627920
+        /* eslint-disable */
+        require("webfontloader").load({
+          google: {
+            families: ["Roboto Mono:300,400,500"],
+          },
+        });
+      }
     }
 
     // Check if an accession was passed, we'll query it here if so
