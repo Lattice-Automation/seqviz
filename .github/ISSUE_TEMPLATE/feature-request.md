@@ -1,15 +1,16 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
-**Summarize your feature idea. (Why)**
+**Summary of the feature idea**
 
 <!-- A clear and concise description of the problem statement. -->
 
-**Describe your preferred solution. (What)**
+**Description of the ideal solution**
 
-<!-- Optional. A clear and concise description of what you want to happen. -->
+<!-- A clear and concise description of what you want to happen. -->
