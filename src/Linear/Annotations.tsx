@@ -182,12 +182,24 @@ const SingleNamedElement = (props: {
     }
   }
 
-  // determine whether the element name fits within the width of the element
-  const nameLength = name.length * 6.75; // aspect ratio of roboto mono is ~0.66
-  const nameFits = nameLength < width - 15;
+  // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
+  const annotationCharacterWidth = 0.591 * 12;
+  const availableCharacters = Math.floor((width - 30) / annotationCharacterWidth);
+  // Ellipsize the name if it's too long.
+  let displayName;
+  if (name.length <= availableCharacters) {
+    displayName = name;
+  } else if (availableCharacters <= 3) {
+    // If there's only room for 3 characters, we can't ellipsize.
+    displayName = "";
+  } else {
+    displayName = `${name.slice(0, availableCharacters - 3)}...`;
+  }
 
   return (
     <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
+      {/* <title> provides a hover tooltip on most browsers */}
+      <title>{name}</title>
       <path
         ref={inputRef(element.id, {
           end: end,
@@ -213,30 +225,27 @@ const SingleNamedElement = (props: {
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
       />
-
-      {nameFits && (
-        <text
-          className="la-vz-annotation-label"
-          cursor="pointer"
-          dominantBaseline="middle"
-          fontSize={12}
-          id={element.id}
-          style={annotationLabel}
-          textAnchor="middle"
-          x={width / 2}
-          y={height / 2 + 1}
-          onBlur={() => {
-            // do nothing
-          }}
-          onFocus={() => {
-            // do nothing
-          }}
-          onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
-          onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
-        >
-          {name}
-        </text>
-      )}
+      <text
+        className="la-vz-annotation-label"
+        cursor="pointer"
+        dominantBaseline="middle"
+        fontSize={12}
+        id={element.id}
+        style={annotationLabel}
+        textAnchor="middle"
+        x={width / 2}
+        y={height / 2 + 1}
+        onBlur={() => {
+          // do nothing
+        }}
+        onFocus={() => {
+          // do nothing
+        }}
+        onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
+        onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+      >
+        {displayName}
+      </text>
     </g>
   );
 };
