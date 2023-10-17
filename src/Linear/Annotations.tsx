@@ -184,16 +184,19 @@ const SingleNamedElement = (props: {
 
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
   const annotationCharacterWidth = 0.591 * 12;
-  const availableCharacters = Math.floor((width - 30) / annotationCharacterWidth);
-  // Ellipsize the name if it's too long.
+  const availableCharacters = Math.floor((width - 40) / annotationCharacterWidth);
+  // Ellipsize or hide the name if it's too long.
   let displayName;
   if (name.length <= availableCharacters) {
     displayName = name;
-  } else if (availableCharacters <= 3) {
-    // If there's only room for 3 characters, we can't ellipsize.
-    displayName = "";
   } else {
-    displayName = `${name.slice(0, availableCharacters - 3)}...`;
+    const charactersToShow = availableCharacters - 1;
+    if (charactersToShow < 3) {
+      // If we can't show at least three characters, don't show any.
+      displayName = "";
+    } else {
+      displayName = `${name.slice(0, charactersToShow)}…`;
+    }
   }
 
   return (
