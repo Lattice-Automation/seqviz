@@ -70,11 +70,21 @@ export default class App extends React.Component<any, AppState> {
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
   circularRef: React.RefObject<HTMLDivElement> = React.createRef();
+  seqvizRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+    /*
+    Because React uses passive event handlers by default with wheel event which prevents using preventDefault(), 
+    so using refs is the solution for this issue to make event handler non-passive by adding event handler manually.
+    */
+    this.seqvizRef.current.addEventListener("wheel", this.handleMouseWheel, { passive: false });
   };
+
+  componentWillUnmount(): void {
+    this.seqvizRef.current.removeEventListener("wheel", this.handleMouseWheel);
+  }
 
   toggleSidebar = () => {
     const { showSidebar } = this.state;
@@ -97,6 +107,29 @@ export default class App extends React.Component<any, AppState> {
       this.setState({ enzymes: enzymes.filter(enz => enz !== e) });
     } else {
       this.setState({ enzymes: [...enzymes, e] });
+    }
+  };
+
+  zoom(zoomLevel) {
+    this.setState({ zoom: Math.min(Math.max(zoomLevel, 11), 100) });
+  }
+
+  zoomIn() {
+    this.zoom(this.state.zoom + 20);
+  }
+
+  zoomOut() {
+    this.zoom(this.state.zoom - 20);
+  }
+
+  handleMouseWheel = event => {
+    event.preventDefault();
+    if (event.ctrlKey) {
+      if (event.wheelDelta > 0) {
+        this.zoomIn();
+      } else if (event.wheelDelta < 0) {
+        this.zoomOut();
+      }
     }
   };
 
@@ -174,7 +207,7 @@ export default class App extends React.Component<any, AppState> {
               />
             </Menu.Item>
             <Menu.Item as="a">
-              <LinearZoomInput setZoom={zoom => this.setState({ zoom })} />
+              <LinearZoomInput zoom={this.state.zoom} setZoom={zoom => this.setState({ zoom })} />
             </Menu.Item>
             <Menu.Item as="a">
               <SearchQueryInput setQuery={query => this.setState({ search: { query } })} />
@@ -209,7 +242,7 @@ export default class App extends React.Component<any, AppState> {
                 toggleShowSelectionMeta={this.toggleShowSelectionMeta}
                 toggleSidebar={this.toggleSidebar}
               />
-              <div id="seqviewer">
+              <div id="seqviewer" ref={this.seqvizRef}>
                 {this.state.seq && (
                   <SeqViz
                     // accession="MN623123"
@@ -256,7 +289,7 @@ const ViewerTypeInput = ({ setType }: { setType: (viewType: string) => void }) =
   </div>
 );
 
-const LinearZoomInput = ({ setZoom }: { setZoom: (zoom: number) => void }) => (
+const LinearZoomInput = ({ zoom, setZoom }: { zoom: number; setZoom: (zoom: number) => void }) => (
   <div className="option" id="zoom">
     <span>Zoom</span>
     <input
@@ -266,6 +299,7 @@ const LinearZoomInput = ({ setZoom }: { setZoom: (zoom: number) => void }) => (
       max="100"
       min="1"
       type="range"
+      value={zoom}
       onChange={e => {
         setZoom(parseInt(e.target.value));
       }}
