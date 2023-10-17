@@ -294,7 +294,6 @@ const LinearZoomInput = ({ zoom, setZoom }: { zoom: number; setZoom: (zoom: numb
     <span>Zoom</span>
     <input
       className="slider"
-      defaultValue="50"
       id="zoom"
       max="100"
       min="1"
