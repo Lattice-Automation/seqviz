@@ -90,8 +90,7 @@ const AnnotationRow = (props: {
 
 /**
  * SingleNamedElement is a single rectangular element in the SeqBlock.
- * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index,
- * edge of blocks, etc.
+ * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index, edge of blocks, etc.
  */
 const SingleNamedElement = (props: {
   element: NameRange;
@@ -183,13 +182,13 @@ const SingleNamedElement = (props: {
   }
 
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
-  const annotationCharacterWidth = 0.591 * 12;
+  const fontSize = 12;
+  const annotationCharacterWidth = 0.591 * fontSize;
   const availableCharacters = Math.floor((width - 40) / annotationCharacterWidth);
+
   // Ellipsize or hide the name if it's too long.
-  let displayName;
-  if (name.length <= availableCharacters) {
-    displayName = name;
-  } else {
+  let displayName = name;
+  if (name.length > availableCharacters) {
     const charactersToShow = availableCharacters - 1;
     if (charactersToShow < 3) {
       // If we can't show at least three characters, don't show any.
@@ -232,7 +231,7 @@ const SingleNamedElement = (props: {
         className="la-vz-annotation-label"
         cursor="pointer"
         dominantBaseline="middle"
-        fontSize={12}
+        fontSize={fontSize}
         id={element.id}
         style={annotationLabel}
         textAnchor="middle"
