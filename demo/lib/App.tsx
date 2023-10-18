@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Menu as ContextMenu, Item, Separator, Submenu, useContextMenu } from "react-contexify";
+import "react-contexify/dist/ReactContexify.css";
 import {
   Button,
   Checkbox,
@@ -13,13 +15,19 @@ import {
   Sidebar,
 } from "semantic-ui-react";
 import seqparse from "seqparse";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
+import { TextSpan } from "typescript";
 
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
+import { SEQVIZ_ELEMENTS_TYPES } from "../../src/seqvizElementsTypes";
 import Header from "./Header";
 import file from "./file";
+
+const CONTEXT_MENU_ID = "menu-id";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -33,6 +41,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
+  hoveredBase: number;
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -51,6 +60,7 @@ export default class App extends React.Component<any, AppState> {
     annotations: [],
     customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
+    hoveredBase: 0,
     name: "",
     search: { query: "ttnnnaat" },
     searchResults: {},
@@ -71,10 +81,83 @@ export default class App extends React.Component<any, AppState> {
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
   circularRef: React.RefObject<HTMLDivElement> = React.createRef();
 
+  showContextMenu: (params: any) => void = () => {
+    //do nothing
+  };
+
   componentDidMount = async () => {
     const seq = await seqparse(file);
-    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+
+    const { show } = useContextMenu({
+      id: CONTEXT_MENU_ID,
+    });
+
+    this.showContextMenu = show;
+
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq, hoveredBase: 0 });
   };
+
+  handleContextMenuAddForwardTranslation = ({ event, props, triggerEvent, data }) => {
+    // console.log(event, props, triggerEvent, data);
+    console.log(this.state.selection);
+    if (
+      !this.state.selection.start ||
+      !this.state.selection.end ||
+      !this.state.selection.length ||
+      this.state.selection.length === 0
+    ) {
+      this.state.translations.push({
+        direction: 1,
+        end: this.state.seq.length,
+        start: 0,
+      });
+    } else {
+      const { start, end, clockwise } = this.state.selection;
+      this.state.translations.push({
+        direction: 1,
+        end: clockwise ? end : start,
+        start: clockwise ? start : end,
+      });
+    }
+    this.setState({
+      translations: this.state.translations,
+    });
+  };
+
+  handleContextMenuAddReverseTranslation = ({ event, props, triggerEvent, data }) => {
+    // console.log(event, props, triggerEvent, data);
+    // console.log(this.state.selection);
+    if (
+      !this.state.selection.start ||
+      !this.state.selection.end ||
+      !this.state.selection.length ||
+      this.state.selection.length === 0
+    ) {
+      this.state.translations.push({
+        direction: 1,
+        end: this.state.seq.length,
+        start: 0,
+      });
+    } else {
+      const { start, end, clockwise } = this.state.selection;
+      this.state.translations.push({
+        direction: -1,
+        end: clockwise ? end : start,
+        start: clockwise ? start : end,
+      });
+    }
+    this.setState({
+      translations: this.state.translations,
+    });
+  };
+
+  displayContextMenu(e) {
+    // put whatever custom logic you need
+    // you can even decide to not display the Menu
+    this.showContextMenu({
+      event: e,
+    });
+  }
 
   toggleSidebar = () => {
     const { showSidebar } = this.state;
@@ -218,6 +301,55 @@ export default class App extends React.Component<any, AppState> {
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
+                    onClick={(element, circular, linear, container) => {
+                      // console.log({ element, circular, linear, container });
+                    }}
+                    onContextMenu={(element, circular, linear, event) => {
+                      // console.log({ element, circular, linear, event });
+                      this.displayContextMenu(event);
+                    }}
+                    onDoubleClick={(element, circular, linear, container) => {
+                      // console.log({ element, circular, linear, container });
+                    }}
+                    onHover={(element, hover, view, container) => {
+                      // console.log({ element, hover, view, container });
+                      if (element.type === SEQVIZ_ELEMENTS_TYPES.base) {
+                        if (hover) {
+                          this.setState({ hoveredBase: element.start + element.index + 1 });
+                        } else {
+                          this.setState({ hoveredBase: 0 });
+                        }
+                      } else if (element.type == SEQVIZ_ELEMENTS_TYPES.annotation) {
+                        if (hover) {
+                          if ((container as any)._tippy) {
+                            (container as any)._tippy?.show();
+                          } else {
+                            // you can pass some details with annotations to display in tippy
+                            tippy(container, {
+                              content: `
+                                <div>
+                                  <div>
+                                    <strong>Name</strong>: <span>${element.name}</span>
+                                  </div>
+                                  <div>
+                                    <strong>position</strong>: <span>[${element.start}-${element.end}]</span>
+                                  </div>
+                                  <div>
+                                    <strong>Length</strong>: <span>${element.end - element.start + 1}</span>
+                                  </div>
+                                </div>
+                              `,
+                              allowHTML: true,
+                            }).show();
+                          }
+                        } else {
+                          (container as any)._tippy?.hide();
+                        }
+                      }
+                    }}
+                    onKeyPress={(e, selection) => {
+                      // console.log(e, selection)
+                    }}
                     onSelection={selection => this.setState({ selection })}
                     refs={{ circular: this.circularRef, linear: this.linearRef }}
                     search={this.state.search}
@@ -233,9 +365,16 @@ export default class App extends React.Component<any, AppState> {
                   </SeqViz>
                 )}
               </div>
+              <footer>
+                <div>Over base {this.state.hoveredBase > 0 ? this.state.hoveredBase : "-"}</div>
+              </footer>
             </div>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
+        <ContextMenu id={CONTEXT_MENU_ID}>
+          <Item onClick={this.handleContextMenuAddForwardTranslation}>Add forward translations</Item>
+          <Item onClick={this.handleContextMenuAddReverseTranslation}>Add reverse translations</Item>
+        </ContextMenu>
       </div>
     );
   }

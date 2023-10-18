@@ -27,6 +27,15 @@ const AnnotationRows = (props: {
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
   width: number;
   yDiff: number;
@@ -46,6 +55,10 @@ const AnnotationRows = (props: {
         seqBlockRef={props.seqBlockRef}
         width={props.width}
         y={props.yDiff + props.elementHeight * i}
+        onClick={props.onClick}
+        onContextMenu={props.onContextMenu}
+        onDoubleClick={props.onDoubleClick}
+        onHover={props.onHover}
       />
     ))}
   </g>
@@ -66,6 +79,15 @@ const AnnotationRow = (props: {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   seqBlockRef: unknown;
   width: number;
   y: number;
@@ -101,8 +123,29 @@ const SingleNamedElement = (props: {
   index: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
 }) => {
-  const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase } = props;
+  const {
+    element,
+    elements,
+    findXAndWidth,
+    firstBase,
+    index,
+    inputRef,
+    lastBase,
+    onClick,
+    onContextMenu,
+    onDoubleClick,
+    onHover,
+  } = props;
 
   const { color, direction, end, name, start } = element;
   const forward = direction === 1;
@@ -198,6 +241,12 @@ const SingleNamedElement = (props: {
     }
   }
 
+  const annotationElement = {
+    ...element,
+    type: "ANNOTATION",
+    viewer: "LINEAR",
+  };
+
   return (
     <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
       {/* <title> provides a hover tooltip on most browsers */}
@@ -221,8 +270,23 @@ const SingleNamedElement = (props: {
         onBlur={() => {
           // do nothing
         }}
+        onClick={e => {
+          onClick(annotationElement, false, true, e.target as SVGGElement);
+        }}
+        onContextMenu={e => {
+          onContextMenu(annotationElement, false, true, e);
+        }}
+        onDoubleClick={e => {
+          onDoubleClick(annotationElement, false, true, e.target as SVGGElement);
+        }}
         onFocus={() => {
           // do nothing
+        }}
+        onMouseEnter={e => {
+          onHover(annotationElement, true, "LINEAR", e.target as SVGGElement);
+        }}
+        onMouseLeave={e => {
+          onHover(annotationElement, false, "LINEAR", e.target as SVGGElement);
         }}
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}

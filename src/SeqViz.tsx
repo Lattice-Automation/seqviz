@@ -92,6 +92,26 @@ export interface SeqVizProps {
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
 
+  /** a callback that's executed on click on elements in the viewer. */
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+
+  /** a callback that's executed on right click on elements in the viewer. */
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+
+  /** a callback that's executed on double click on elements on the viewer. */
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+
+  /** a callback that's executed on hover on emements in the viewer. */
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+
+  /** a callback that's executed on press keyboard buttons on the viewer. */
+  onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
+
   /** a callback that's executed on each change to the search parameters or sequence */
   onSearch?: (search: Range[]) => void;
 
@@ -191,6 +211,11 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
+    onClick: () => {},
+    onContextMenu: () => {},
+    onDoubleClick: () => {},
+    onHover: () => {},
+    onKeyPress: () => {},
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
     rotateOnScroll: true,
@@ -441,6 +466,31 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
           start: h.start % (seq.length + 1),
         })
       ),
+      onClick:
+        this.props.onClick ||
+        (() => {
+          // do nothing
+        }),
+      onContextMenu:
+        this.props.onContextMenu ||
+        (() => {
+          // do nothing
+        }),
+      onDoubleClick:
+        this.props.onDoubleClick ||
+        (() => {
+          // do nothing
+        }),
+      onHover:
+        this.props.onHover ||
+        (() => {
+          // do nothing
+        }),
+      onKeyPress:
+        this.props.onKeyPress ||
+        (() => {
+          // do nothing
+        }),
       onSelection:
         this.props.onSelection ||
         (() => {

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
-interface RefSelection extends Selection {
+export interface RefSelection extends Selection {
   viewer: "LINEAR" | "CIRCULAR";
 }
 
@@ -204,6 +204,11 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
    * Handle a sequence selection on a linear viewer
    */
   handleLinearSeqEvent = (e: SeqVizMouseEvent, knownRange: { end: number; start: number }) => {
+    // don't reset selection on right click
+    if (e.button == 2) {
+      return;
+    }
+
     const selection = this.context;
 
     const currBase = this.calculateBaseLinear(e, knownRange);
