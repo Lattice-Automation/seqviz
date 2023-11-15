@@ -11,6 +11,7 @@ import {
   Input,
   Menu,
   Sidebar,
+  Modal
 } from "semantic-ui-react";
 import seqparse from "seqparse";
 
@@ -20,6 +21,7 @@ import SeqViz from "../../src/SeqViz";
 import { AnnotationProp } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
+
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -66,7 +68,7 @@ export default class App extends React.Component<any, AppState> {
       { end: 1885, start: 1165 },
     ],
     viewer: "both",
-    zoom: 50,
+    zoom: 50
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
   circularRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -99,6 +101,7 @@ export default class App extends React.Component<any, AppState> {
       this.setState({ enzymes: [...enzymes, e] });
     }
   };
+
 
   render() {
     let customChildren = null;
@@ -152,6 +155,8 @@ export default class App extends React.Component<any, AppState> {
         }
       };
     }
+
+
 
     return (
       <div style={{ height: "100vh" }}>
@@ -228,6 +233,7 @@ export default class App extends React.Component<any, AppState> {
                     translations={this.state.translations}
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
+                    primerDesign={true}
                   >
                     {customChildren}
                   </SeqViz>
