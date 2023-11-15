@@ -48,11 +48,12 @@
   ],
   "dependencies": {
     "react-resize-detector": "^7.1.2",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
     "seqparse": "^0.2.1",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "csstype": "^3.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
@@ -62,6 +63,7 @@
     "@types/xml2js": "^0.4.9",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
+    "csstype": "^3.1.2",
     "eslint": "^8.8.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.6.0",
