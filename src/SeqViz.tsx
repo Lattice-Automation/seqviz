@@ -99,6 +99,8 @@ export interface SeqVizProps {
   /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
   onSelection?: (selection: Selection) => void;
 
+  primerDesign?: boolean;
+
   /** Refs associated with custom children. */
   refs?: SeqVizChildRefs;
 
@@ -164,7 +166,6 @@ export interface SeqVizProps {
     /** how zoomed to make the linear viewer. default: 50 */
     linear?: number;
   };
-  primerDesign?: boolean;
 }
 
 export interface SeqVizState {
@@ -195,6 +196,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     name: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
+    primerDesign: false,
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
     selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
@@ -205,7 +207,6 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     translations: [],
     viewer: "both",
     zoom: { circular: 0, linear: 50 },
-    primerDesign: false,
   };
 
   constructor(props: SeqVizProps) {

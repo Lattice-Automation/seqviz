@@ -7,13 +7,14 @@ import { PrimerModal } from "./PrimerModal";
 import React = require("react");
 
 export interface Primer {
-  seq: any;
-  temp: number;
-  GCContent: string;
-  start: number;
   end: number;
+  GCContent: string;
   rev: boolean;
+  seq: any;
+  start: number;
+  temp: number;
 }
+
 export const PrimerDesign = props => {
   const [openModal, setOpenModal] = useState(false);
   const [primers, setPrimers] = useState<Primer[] | null>(null);
@@ -26,7 +27,7 @@ export const PrimerDesign = props => {
       gcCount = 0;
 
     for (let i = 0; i < sequence.length; i++) {
-      let nucleotide = sequence[i].toUpperCase();
+      const nucleotide = sequence[i].toUpperCase();
       if (nucleotide === "A" || nucleotide === "T") {
         atCount++;
       } else if (nucleotide === "G" || nucleotide === "C") {
@@ -196,20 +197,20 @@ export const PrimerDesign = props => {
         setOldPrimerSelect(sequence);
         setPrimers([
           {
-            seq: forward,
-            temp: fwdTemp,
-            GCContent: Math.round(GCContentFwd).toString() + "%",
-            start: startFwd,
             end: endFwd,
+            GCContent: Math.round(GCContentFwd).toString() + "%",
             rev: false,
+            seq: forward,
+            start: startFwd,
+            temp: fwdTemp,
           },
           {
-            seq: rev,
-            temp: revTemp,
-            GCContent: Math.round(GCContentRev).toString() + "%",
-            start: startRev,
             end: endRev,
+            GCContent: Math.round(GCContentRev).toString() + "%",
             rev: true,
+            seq: rev,
+            start: startRev,
+            temp: revTemp,
           },
         ]);
         setOpenModal(true);
@@ -226,10 +227,10 @@ export const PrimerDesign = props => {
 
     primers.forEach((primer: Primer) => {
       const primerAnnotation = {
-        id: randomID(),
         color: primer.rev ? "blue" : "red",
         direction: primer.rev ? -1 : 1,
         end: primer.end,
+        id: randomID(),
         name: primer.rev ? "primer-rev" : "primer-fwd",
         start: primer.start,
       };
@@ -274,7 +275,7 @@ export const PrimerDesign = props => {
   }, [props.selection]);
 
   return (
-    <div style={{ position: "absolute", top: 14, left: 250, zIndex: 10, width: "200px" }}>
+    <div style={{ left: 250, position: "absolute", top: 14, width: "200px", zIndex: 10 }}>
       {props.primerSelect !== "" && !editButton && (
         <Button
           color="blue"
@@ -298,10 +299,10 @@ export const PrimerDesign = props => {
       )}
       {primers && (
         <PrimerModal
-          open={openModal}
+          addPrimers={(data: Primer[]) => addPrimers(data)}
           closeModal={() => setOpenModal(false)}
           data={primers}
-          addPrimers={(data: Primer[]) => addPrimers(data)}
+          open={openModal}
           removePrimers={removePrimers}
         />
       )}
