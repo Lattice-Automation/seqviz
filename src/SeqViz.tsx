@@ -1,6 +1,7 @@
 import * as React from "react";
 import seqparse, { ParseOptions, parseFile } from "seqparse";
 
+import { PrimerDesign } from "./PrimerDesign/PrimerDesign";
 import SeqViewerContainer, { CustomChildrenProps, SeqVizChildRefs } from "./SeqViewerContainer";
 import { COLORS, colorByIndex } from "./colors";
 import digest from "./digest";
@@ -19,7 +20,6 @@ import { isEqual } from "./isEqual";
 import search from "./search";
 import { Selection } from "./selectionContext";
 import { complement, directionality, guessType, randomID } from "./sequence";
-import { PrimerDesign } from "./PrimerDesign/PrimerDesign";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
 export interface SeqVizProps {
@@ -205,7 +205,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     translations: [],
     viewer: "both",
     zoom: { circular: 0, linear: 50 },
-    primerDesign: false
+    primerDesign: false,
   };
 
   constructor(props: SeqVizProps) {
@@ -236,7 +236,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         });
       }
     }
-    
+
     // Check if an accession was passed, we'll query it here if so
     const { accession } = this.props;
     if (!accession || !accession.length) {
@@ -462,15 +462,22 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         circular: typeof zoom?.circular == "number" ? Math.min(Math.max(zoom.circular, 0), 100) : 0,
         linear: typeof zoom?.linear == "number" ? Math.min(Math.max(zoom.linear, 0), 100) : 50,
       },
-      primerDesign: false
+      primerDesign: false,
     };
 
     return (
       <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={{ height: "100%", width: "100%", ...style }}>
-        {this.props.primerDesign && this.props.selection?.start && <PrimerDesign selection={this.props.selection} seq={this.props.seq} annotations={this.state.annotations} 
-        primerSelect={this.props.seq?.slice(this.props.selection?.start, this.props.selection?.end)} setAnnotations={(data:Annotation[]) => { 
-          this.setState({annotations: data})
-          }} /> }
+        {this.props.primerDesign && this.props.selection?.start && (
+          <PrimerDesign
+            selection={this.props.selection}
+            seq={this.props.seq}
+            annotations={this.state.annotations}
+            primerSelect={this.props.seq?.slice(this.props.selection?.start, this.props.selection?.end)}
+            setAnnotations={(data: Annotation[]) => {
+              this.setState({ annotations: data });
+            }}
+          />
+        )}
         <SeqViewerContainer {...this.props} {...props} {...this.state} />
       </div>
     );
