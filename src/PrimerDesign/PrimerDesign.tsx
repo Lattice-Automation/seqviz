@@ -7,8 +7,8 @@ import { PrimerModal } from "./PrimerModal";
 import React = require("react");
 
 export interface Primer {
-  end: number;
   GCContent: string;
+  end: number;
   rev: boolean;
   seq: any;
   start: number;
@@ -197,20 +197,20 @@ export const PrimerDesign = props => {
         setOldPrimerSelect(sequence);
         setPrimers([
           {
-            end: endFwd,
             GCContent: Math.round(GCContentFwd).toString() + "%",
+            end: endFwd,
             rev: false,
             seq: forward,
             start: startFwd,
-            temp: fwdTemp,
+            temp: fwdTemp
           },
           {
-            end: endRev,
             GCContent: Math.round(GCContentRev).toString() + "%",
+            end: endRev,
             rev: true,
             seq: rev,
             start: startRev,
-            temp: revTemp,
+            temp: revTemp
           },
         ]);
         setOpenModal(true);
@@ -238,12 +238,12 @@ export const PrimerDesign = props => {
     });
 
     const targetAnnotation = {
-      id: randomID(),
       color: "green",
       direction: 1,
       end: props.selection.end,
+      id: randomID(),
       name: "target",
-      start: props.selection.start,
+      start: props.selection.start
     };
     if (!annotations.find((annotation: any) => annotation.id === target?.id)) {
       setTarget(targetAnnotation);
