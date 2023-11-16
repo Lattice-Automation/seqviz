@@ -202,7 +202,7 @@ export const PrimerDesign = props => {
             rev: false,
             seq: forward,
             start: startFwd,
-            temp: fwdTemp
+            temp: fwdTemp,
           },
           {
             GCContent: Math.round(GCContentRev).toString() + "%",
@@ -210,7 +210,7 @@ export const PrimerDesign = props => {
             rev: true,
             seq: rev,
             start: startRev,
-            temp: revTemp
+            temp: revTemp,
           },
         ]);
         setOpenModal(true);
@@ -243,7 +243,7 @@ export const PrimerDesign = props => {
       end: props.selection.end,
       id: randomID(),
       name: "target",
-      start: props.selection.start
+      start: props.selection.start,
     };
     if (!annotations.find((annotation: any) => annotation.id === target?.id)) {
       setTarget(targetAnnotation);
