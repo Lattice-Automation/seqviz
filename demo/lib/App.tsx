@@ -17,9 +17,11 @@ import seqparse from "seqparse";
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
-import { AnnotationProp } from "../../src/elements";
+import { AnnotationProp, Primer } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
+import { Direction } from "../../src/Linear/Primers";
+import { COLORS, chooseRandomColor } from "../../src/colors";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -33,6 +35,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
+  primers: Primer[]
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -52,6 +55,24 @@ export default class App extends React.Component<any, AppState> {
     customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
+    primers: [
+      {
+        color: chooseRandomColor(),
+        direction: Direction.FOWARD,
+        end: 653,
+        id: "527923581",
+        name: "pLtetO-1 fw primer",
+        start: 633,
+      }, 
+      {
+        color: chooseRandomColor(),
+        direction: Direction.REVERSE,
+        end: 706,
+        id: "527923582",
+        name: "pLtetO-1 rev primer",
+        start: 686,
+      }, 
+    ],
     search: { query: "ttnnnaat" },
     searchResults: {},
     selection: {},
@@ -73,6 +94,7 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
+
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
   };
 
@@ -215,6 +237,7 @@ export default class App extends React.Component<any, AppState> {
                     // accession="MN623123"
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
+                    primers={this.state.primers}
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}
