@@ -153,6 +153,19 @@ annotations = [
 
 In the example above, the "Strong promoter" would span the first to twenty-second base pair.
 
+#### `primers (=[])`
+
+An array of `Primer`s to render. Each `Primer` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the annotations. Set the primer's direction to `1` for forward primer and `-1` for reverse primer.
+
+```js
+primers = [
+  { start: 33, end: 53, name: "LacZ Foward Primer", direction: 1 },
+  { id: "18fbd562-9f87-4a17-aa20-b8448538cbe6", start: 3098, end: 3128, name: "LacZ Reverse Primer", direction: -1, color: "#FAA887" },
+];
+```
+
+In the example above, the foward and reverse primers of LacZ are define by the direction parameter. Notice that id and color could be optionally used.
+
 #### `translations (=[])`
 
 An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: `1` (FWD) or `-1` (REV).
