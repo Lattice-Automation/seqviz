@@ -164,7 +164,7 @@ primers = [
 ];
 ```
 
-In the example above, the foward and reverse primers of LacZ are define by the direction parameter. Notice that id and color could be optionally used.
+In the example above, the forward and reverse primers of LacZ are define by the direction parameter. Notice that color could be used optionally.
 
 #### `translations (=[])`
 
