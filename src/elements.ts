@@ -37,6 +37,7 @@ export interface PrimerProp {
   color?: string;
   direction: 1 | -1;
   end: number;
+  id?: string;
   name: string;
   start: number;
 }
