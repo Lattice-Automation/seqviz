@@ -176,7 +176,6 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
         if (e.shiftKey) {
           if (this.state.aminoAcidShiftStart) {
             selectionStart = this.state.aminoAcidShiftStart;
-            selectionEnd = selectionEnd;
           } else {
             this.setState({ aminoAcidShiftStart: selectionStart });
           }
