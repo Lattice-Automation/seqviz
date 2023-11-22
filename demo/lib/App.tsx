@@ -17,7 +17,8 @@ import seqparse from "seqparse";
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
-import { AnnotationProp } from "../../src/elements";
+import { chooseRandomColor } from "../../src/colors";
+import { AnnotationProp, Primer } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
 
@@ -33,6 +34,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
+  primers: Primer[];
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -52,6 +54,48 @@ export default class App extends React.Component<any, AppState> {
     customChildren: true,
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     name: "",
+    primers: [
+      {
+        color: chooseRandomColor(),
+        direction: 1,
+        end: 653,
+        id: "527923581",
+        name: "pLtetO-1 fw primer",
+        start: 633,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 706,
+        id: "5279asdf582",
+        name: "pLtetO-1 rev primer",
+        start: 686,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: 1,
+        end: 535,
+        id: "5279fd582",
+        name: "pLtetO-1 fwd primer",
+        start: 512,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 535,
+        id: "527923dfd582",
+        name: "pLtetO-1 rev primer",
+        start: 512,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 535,
+        id: "52792saf3582",
+        name: "pLtetO-1 rev primer",
+        start: 512,
+      },
+    ],
     search: { query: "ttnnnaat" },
     searchResults: {},
     selection: {},
@@ -73,6 +117,7 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
+
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
   };
 
@@ -215,6 +260,7 @@ export default class App extends React.Component<any, AppState> {
                     // accession="MN623123"
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
+                    primers={this.state.primers}
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}

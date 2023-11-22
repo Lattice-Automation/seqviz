@@ -3,6 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 
 import * as React from "react";
 
+import { SeqType } from "../elements";
 import { SeqBlock } from "./SeqBlock";
 
 const defaultProps = {
@@ -13,6 +14,7 @@ const defaultProps = {
   elementHeight: 16,
   firstBase: 0,
   forwardPrimerRows: [],
+  handleMouseEvent: () => {},
   highlightedRegions: [],
   highlights: [],
   id: "",
@@ -28,10 +30,13 @@ const defaultProps = {
   onUnmount: () => {
     // do nothing
   },
-  reversePrimerRows: [],
+  primerFwdRows: [],
+  primerRevRows: [],
+  primers: [],
   searchRows: [],
   selection: {},
   seqFontSize: 12,
+  seqType: "dna" as SeqType,
   showComplement: true,
   showIndex: true,
   size: { height: 600, width: 1200 },
@@ -52,7 +57,6 @@ describe("SeqBlock", () => {
   it("renders with a single block", async () => {
     const seq = "gcgaaaaatcaataaggaggcaacaagatgtgcgaaaaacatcttaatcatgcggtggagggtttctaatg";
     render(
-      // @ts-ignore
       <SeqBlock
         {...defaultProps}
         annotationRows={[
