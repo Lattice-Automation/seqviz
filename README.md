@@ -40,14 +40,14 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ### Linear and Circular Sequence Viewers
 
-- Annotations with names and colors
+- Annotations, primers, and highlights with names and colors
 - Amino acid translations
 - Enzyme cut sites
 - Searching with mismatches and highlighting
 
 ### Sequence and Element Selection
 
-- Selecting a range on the viewer(s), or clicking an `annotation`, `translation`, `cutSite` or `searchResult`, will highlight the selection and pass it to the `onSelection()` callback.
+- Selecting a range on the viewer(s), or clicking an `annotation`, `translation`, `primer`, `cutSite`, or `searchResult`, highlights the selection and passes it to the `onSelection()` callback.
 
 ## Usage
 
