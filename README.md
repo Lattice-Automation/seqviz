@@ -155,12 +155,12 @@ In the example above, the "Strong promoter" would span the first to twenty-secon
 
 #### `primers (=[])`
 
-An array of `Primer`s to render. Each `Primer` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the annotations. Set the primer's direction to `1` for forward primer and `-1` for reverse primer.
+An array of `Primer`s to render. Each `Primer` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the primers. Set the primer's direction to `1` for forward primer and `-1` for reverse primer.
 
 ```js
 primers = [
   { start: 33, end: 53, name: "LacZ Foward Primer", direction: 1 },
-  { id: "18fbd562-9f87-4a17-aa20-b8448538cbe6", start: 3098, end: 3128, name: "LacZ Reverse Primer", direction: -1, color: "#FAA887" },
+  { start: 3098, end: 3128, name: "LacZ Reverse Primer", direction: -1, color: "#FAA887" },
 ];
 ```
 

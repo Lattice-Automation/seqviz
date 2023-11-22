@@ -35,7 +35,7 @@ const PrimeRows = (props: {
   <g>
     {props.primerRows.map((primers: NameRange[], i: number) => (
       <PrimerRow
-        key={`annotation-linear-row-${primers[0].id}-${props.firstBase}-${props.lastBase}`}
+        key={`primer-linear-row-${primers[0].id}-${props.firstBase}-${props.lastBase}`}
         bpsPerBlock={props.bpsPerBlock}
         direction={props.direction}
         findXAndWidth={props.findXAndWidth}
@@ -75,7 +75,7 @@ const PrimerRow = (props: {
 }) => {
   return (
     <g
-      className="la-vz-linear-annotation-row"
+      className="la-vz-linear-primer-row"
       height={props.height * 0.8}
       transform={`translate(0, ${props.y})`}
       width={props.width}
@@ -84,8 +84,8 @@ const PrimerRow = (props: {
         .filter(a => a.direction == props.direction)
         .map((a, i) => (
           <SingleNamedElement
-            {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
-            key={`annotation-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
+            {...props} // include overflowLeft in the key to avoid two split primers in the same row from sharing a key
+            key={`primer-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
             element={a}
             elements={props.primers}
             index={i}
@@ -94,6 +94,7 @@ const PrimerRow = (props: {
     </g>
   );
 };
+
 /**
  * SingleNamedElement is a single rectangular element in the SeqBlock.
  * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index, edge of blocks, etc.
