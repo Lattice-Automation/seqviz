@@ -65,7 +65,6 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
   /** a map between the id of child elements and their associated SelectRanges */
   idToRange = new Map<string, Selection>();
 
-
   componentDidMount = () => {
     if (!document) return;
     document.addEventListener("mouseup", this.stopDrag);
@@ -174,18 +173,15 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
           selectionEnd = clockwise ? knownRange.end : knownRange.start;
         }
 
-        if(e.shiftKey){
-          if(this.state.aminoAcidShiftStart){
-            selectionStart = this.state.aminoAcidShiftStart
-            selectionEnd = selectionEnd
+        if (e.shiftKey) {
+          if (this.state.aminoAcidShiftStart) {
+            selectionStart = this.state.aminoAcidShiftStart;
+            selectionEnd = selectionEnd;
+          } else {
+            this.setState({ aminoAcidShiftStart: selectionStart });
           }
-          else{
-            this.setState({aminoAcidShiftStart: selectionStart})
-          }
-          
-        }
-        else{
-          this.setState({aminoAcidShiftStart: null})
+        } else {
+          this.setState({ aminoAcidShiftStart: null });
         }
 
         this.setSelection({
@@ -209,7 +205,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
           this.handleCircularSeqEvent(e);
         }
 
-        this.setState({aminoAcidShiftStart: null})
+        this.setState({ aminoAcidShiftStart: null });
 
         break;
       }

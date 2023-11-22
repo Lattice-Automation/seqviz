@@ -223,7 +223,7 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
    */
   handleMouseEvent = (e: React.MouseEvent<HTMLDivElement>) => {
     const { handleMouseEvent } = this.props;
-    if(e.shiftKey){
+    if (e.shiftKey) {
       this.handleCopy();
     }
     if (e.type === "mouseup") {
