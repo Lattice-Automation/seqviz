@@ -30,9 +30,9 @@ const defaultProps = {
   onUnmount: () => {
     // do nothing
   },
-  primers: [],
   primerFwdRows: [],
   primerRevRows: [],
+  primers: [],
   searchRows: [],
   selection: {},
   seqFontSize: 12,
