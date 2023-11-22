@@ -39,7 +39,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
   declare context: React.ContextType<typeof SelectionContext>;
 
   /** Only state is the selection range */
-  state = { ...defaultSelection };
+  state = { ...defaultSelection, aminoAcidShiftStart: null };
 
   /* previous base cursor is over, used in circular drag select */
   previousBase: null | number = null;
@@ -64,6 +64,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
 
   /** a map between the id of child elements and their associated SelectRanges */
   idToRange = new Map<string, Selection>();
+
 
   componentDidMount = () => {
     if (!document) return;
@@ -173,6 +174,20 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
           selectionEnd = clockwise ? knownRange.end : knownRange.start;
         }
 
+        if(e.shiftKey){
+          if(this.state.aminoAcidShiftStart){
+            selectionStart = this.state.aminoAcidShiftStart
+            selectionEnd = selectionEnd
+          }
+          else{
+            this.setState({aminoAcidShiftStart: selectionStart})
+          }
+          
+        }
+        else{
+          this.setState({aminoAcidShiftStart: null})
+        }
+
         this.setSelection({
           ...knownRange,
           clockwise: clockwise,
@@ -193,6 +208,8 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
         } else if (viewer === "CIRCULAR") {
           this.handleCircularSeqEvent(e);
         }
+
+        this.setState({aminoAcidShiftStart: null})
 
         break;
       }
