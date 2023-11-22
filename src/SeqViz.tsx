@@ -423,6 +423,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     if (seqType === "aa") {
       // TODO: during some grand future refactor, make this cleaner and more transparent to the user
       translations = [{ direction: 1, end: seq.length, start: 0 }];
+
     }
 
     // Since all the props are optional, we need to parse them to defaults.
@@ -451,7 +452,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
         direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
-        end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+        end: seqType === "aa" ? t.end : t.start + Math.floor((t.end - t.start) / 3) * 3,
         start: t.start % seq.length,
       })),
       viewer: this.props.viewer || "both",
