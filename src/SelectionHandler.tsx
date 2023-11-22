@@ -135,6 +135,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
       case "FIND":
       case "TRANSLATION":
       case "ENZYME":
+      case "PRIMER":
       case "HIGHLIGHT": {
         if (viewer !== "LINEAR" && setCentralIndex) {
           // if an element was clicked on the circular viewer, scroll the linear

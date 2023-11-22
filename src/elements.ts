@@ -32,7 +32,16 @@ export interface Translation extends NameRange {
   direction: -1 | 1;
 }
 
-/** Primer is a single primer for PCR. Not visualized right now. */
+/** PrimerProp is a single primer to visualize above/below the linear viewer. */
+export interface PrimerProp {
+  color?: string;
+  direction: 1 | -1;
+  end: number;
+  name: string;
+  start: number;
+}
+
+/** Primer is a single primer for PCR. */
 export interface Primer extends NameRange {
   color: string;
   direction: 1 | -1;

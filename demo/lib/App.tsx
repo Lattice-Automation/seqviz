@@ -17,11 +17,10 @@ import seqparse from "seqparse";
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
+import { chooseRandomColor } from "../../src/colors";
 import { AnnotationProp, Primer } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
-import { Direction } from "../../src/Linear/Primers";
-import { COLORS, chooseRandomColor } from "../../src/colors";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -35,7 +34,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
-  primers: Primer[]
+  primers: Primer[];
   search: { query: string };
   searchResults: any;
   selection: any;
@@ -58,20 +57,44 @@ export default class App extends React.Component<any, AppState> {
     primers: [
       {
         color: chooseRandomColor(),
-        direction: Direction.FOWARD,
+        direction: 1,
         end: 653,
         id: "527923581",
         name: "pLtetO-1 fw primer",
         start: 633,
-      }, 
+      },
       {
         color: chooseRandomColor(),
-        direction: Direction.REVERSE,
+        direction: -1,
         end: 706,
-        id: "527923582",
+        id: "5279asdf582",
         name: "pLtetO-1 rev primer",
         start: 686,
-      }, 
+      },
+      {
+        color: chooseRandomColor(),
+        direction: 1,
+        end: 535,
+        id: "5279fd582",
+        name: "pLtetO-1 fwd primer",
+        start: 512,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 535,
+        id: "527923dfd582",
+        name: "pLtetO-1 rev primer",
+        start: 512,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 535,
+        id: "52792saf3582",
+        name: "pLtetO-1 rev primer",
+        start: 512,
+      },
     ],
     search: { query: "ttnnnaat" },
     searchResults: {},

@@ -1,4 +1,3 @@
-
 import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
@@ -7,7 +6,7 @@ import { NameRange } from "../elements";
 import { annotation, annotationLabel } from "../style";
 import { FindXAndWidthElementType } from "./SeqBlock";
 
-const hoverOtherAnnotationRows = (className: string, opacity: number) => {
+const hoverOtherPrimerRows = (className: string, opacity: number) => {
   if (!document) return;
   const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
   for (let i = 0; i < elements.length; i += 1) {
@@ -15,24 +14,20 @@ const hoverOtherAnnotationRows = (className: string, opacity: number) => {
   }
 };
 
-export enum Direction {
-  FOWARD = 1,
-  REVERSE = -1
-}
 /**
  * Render each row of annotations into its own row.
  * This is not a default export for sake of the React component displayName.
  */
 const PrimeRows = (props: {
-  primerRows: NameRange[][];
-  direction: Direction
   bpsPerBlock: number;
+  direction: 1 | -1;
   elementHeight: number;
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
+  primerRows: NameRange[][];
   seqBlockRef: unknown;
   width: number;
   yDiff: number;
@@ -41,15 +36,15 @@ const PrimeRows = (props: {
     {props.primerRows.map((primers: NameRange[], i: number) => (
       <PrimerRow
         key={`annotation-linear-row-${primers[0].id}-${props.firstBase}-${props.lastBase}`}
-        primers={primers}
-        direction={props.direction}
         bpsPerBlock={props.bpsPerBlock}
+        direction={props.direction}
         findXAndWidth={props.findXAndWidth}
         firstBase={props.firstBase}
         fullSeq={props.fullSeq}
         height={props.elementHeight}
         inputRef={props.inputRef}
         lastBase={props.lastBase}
+        primers={primers}
         seqBlockRef={props.seqBlockRef}
         width={props.width}
         y={props.yDiff + props.elementHeight * i}
@@ -65,15 +60,15 @@ export default PrimeRows;
  * vertically stacked on top of one another in non-overlapping arrays.
  */
 const PrimerRow = (props: {
-  primers: NameRange[];
-  direction: Direction;
   bpsPerBlock: number;
+  direction: 1 | -1;
   findXAndWidth: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  primers: NameRange[];
   seqBlockRef: unknown;
   width: number;
   y: number;
@@ -85,19 +80,20 @@ const PrimerRow = (props: {
       transform={`translate(0, ${props.y})`}
       width={props.width}
     >
-      {props.primers.filter((a) => a.direction == props.direction).map((a, i) => (
-                <SingleNamedElement
-                  {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
-                  key={`annotation-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
-                  element={a}
-                  elements={props.primers}
-                  index={i}
-                />
-              )
-      )}
+      {props.primers
+        .filter(a => a.direction == props.direction)
+        .map((a, i) => (
+          <SingleNamedElement
+            {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
+            key={`annotation-linear-${a.id}-${i}-${props.firstBase}-${props.lastBase}`}
+            element={a}
+            elements={props.primers}
+            index={i}
+          />
+        ))}
     </g>
   );
-} 
+};
 /**
  * SingleNamedElement is a single rectangular element in the SeqBlock.
  * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index, edge of blocks, etc.
@@ -115,8 +111,8 @@ const SingleNamedElement = (props: {
   const { element, elements, findXAndWidth, firstBase, index, inputRef, lastBase } = props;
 
   const { color, direction, end, name, start } = element;
-  const forward = direction === Direction.FOWARD;
-  const reverse = direction === Direction.REVERSE;
+  const forward = direction === 1;
+  const reverse = direction === -1;
   const { overflowLeft, overflowRight, width, x: origX } = findXAndWidth(index, element, elements);
   const crossZero = start > end && end < firstBase;
 
@@ -125,22 +121,23 @@ const SingleNamedElement = (props: {
   const endREV = reverse && start >= firstBase && start <= lastBase;
 
   // create padding on either side, vertically, of an element
-  const height = props.height * 0.8;
+  const height = props.height * 0.7;
 
   const cW = 4; // jagged cutoff width
   const cH = height / 4; // jagged cutoff height
+  const aH = 3; // arrow height at edges of primers
   const [x, w] = [origX, width];
 
   // create the SVG path, starting at the topLeft and working clockwise
   // there is additional logic here for if the element overflows
   // to the left or right of this seqBlock, where a "jagged edge" is created
   const topLeft = "M 0 0";
-  let topRight = endFWD ? 
-    `
+  const topRight = endFWD
+    ? `
       L ${width - Math.min(8 * cW, w)} 0
-      L ${width - Math.min(8 * cW, w)} ${-1 * height}
-    ` :
-    `L ${width} 0`;
+      L ${width - Math.min(8 * cW, w)} ${-aH}
+    `
+    : `L ${width} 0`;
 
   let linePath = "";
 
@@ -167,7 +164,7 @@ const SingleNamedElement = (props: {
   } else if (endREV) {
     bottomLeft = `
         L ${Math.min(8 * cW, w)} ${height}
-        L ${Math.min(8 * cW, w)} ${height * 2}`; // arrow reverse
+        L ${Math.min(8 * cW, w)} ${height + aH}`; // arrow reverse
   }
 
   linePath = `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
@@ -223,10 +220,10 @@ const SingleNamedElement = (props: {
           name: element.name,
           ref: element.id,
           start: start,
-          type: "ANNOTATION",
+          type: "PRIMER",
           viewer: "LINEAR",
         })}
-        className={`${element.id} la-vz-annotation`}
+        className={`${element.id} la-vz-primer`}
         cursor="pointer"
         d={linePath}
         fill={color}
@@ -239,11 +236,11 @@ const SingleNamedElement = (props: {
         onFocus={() => {
           // do nothing
         }}
-        onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
-        onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+        onMouseOut={() => hoverOtherPrimerRows(element.id, 0.7)}
+        onMouseOver={() => hoverOtherPrimerRows(element.id, 1.0)}
       />
       <text
-        className="la-vz-annotation-label"
+        className="la-vz-primer-label"
         cursor="pointer"
         dominantBaseline="middle"
         fontSize={fontSize}
@@ -258,8 +255,8 @@ const SingleNamedElement = (props: {
         onFocus={() => {
           // do nothing
         }}
-        onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
-        onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
+        onMouseOut={() => hoverOtherPrimerRows(element.id, 0.7)}
+        onMouseOver={() => hoverOtherPrimerRows(element.id, 1.0)}
       >
         {displayName}
       </text>
