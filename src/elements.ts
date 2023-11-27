@@ -10,11 +10,31 @@ export interface NameRange extends Range {
   color?: string;
   id: string;
   name: string;
+  border?: "dashed" | "dotted" | "bold";
+  font?: Font;
+  svg?: string;
+  gradient?: Gradient;
+}
+
+interface Font {
+  fontFamily?: string;
+  fontSize: number;
+  fontWeight: number;
+  fontColor: string;
+}
+
+interface Gradient {
+  start: string;
+  stop: string;
 }
 
 /** AnnotationProp is an annotation provided to SeqViz via the annotations prop. */
 export interface AnnotationProp {
   color?: string;
+  border?: "dashed" | "dotted" | "bold";
+  font?: Font;
+  svg?: string;
+  gradient?: Gradient;
   direction?: number | string;
   end: number;
   name: string;

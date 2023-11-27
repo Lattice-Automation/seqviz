@@ -143,6 +143,35 @@ The name of the sequence/plasmid. Shown at the center of the circular viewer.
 
 An array of `Annotation`s to render. Each `Annotation` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the annotations. Set the annotation's direction to `1` for forward arrows and `-1` for reverse arrows.
 
+Optional Parameters:
+ - Annotation border styling: `"dashed" | "dotted" | "bold"`
+ ```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed"},
+];
+```
+ - Annotation font styling; user can change font family, font weight, or font color:
+ ```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {"fontFamily": "Times New Roman", "fontWeight": 800, "fontSize": 17, "fontColor": "red"}},
+];
+```
+ - Adding an svg icon to annotation; the available icons are part of the SBOL library and can be viewed in the `assets` folder under `src/assets/`, the name of the desired icon must exactly match the filename of the icon in the `assets` folder:
+ ```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {"fontFamily": "Times New Roman", "fontWeight": 800, "fontSize": 17, "fontColor": "red"}},
+  svg: 'promoter'
+];
+```
+  here `promoter` matches the name of the promoter icon file `promoter.png`
+ - Annotation background color gradient. User can enter a starting color and stopping color:
+```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {"fontFamily": "Times New Roman", "fontWeight": 800, "fontSize": 17, "fontColor": "red"}},
+  svg: 'promoter', gradient: {start: 'lightblue', stop: 'green'}
+];
+```
+
 ```js
 annotations = [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)

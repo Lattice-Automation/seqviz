@@ -24,7 +24,6 @@ export const svgText: CSS.Properties = {
   MozUserSelect: "none",
   WebkitUserSelect: "none",
   background: "none",
-  fill: "rgb(42, 42, 42)",
   fontFamily: "Roboto Mono, Monaco, monospace",
   msUserSelect: "none",
   userSelect: "none",
@@ -98,8 +97,6 @@ export const annotation: CSS.Properties = {
 
 export const annotationLabel: CSS.Properties = {
   ...svgText,
-  color: "rgb(42, 42, 42)",
-  fontWeight: 400,
   shapeRendering: "geometricPrecision",
   strokeLinejoin: "round",
   textRendering: "optimizeLegibility",
@@ -150,4 +147,10 @@ export const seqBlock: CSS.Properties = {
   overflow: "visible",
   padding: 0,
   width: "100%",
+};
+
+export const iconStyle: CSS.Properties = {
+  width: "25px",
+  height: "25px",
+  zIndex: 100,
 };
