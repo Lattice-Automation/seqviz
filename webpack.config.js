@@ -15,6 +15,13 @@ const cdnBuild = {
     rules: [
       { test: /\.(t|j)sx?$/, loader: "ts-loader", exclude: /node_modules/ },
       { test: /\.js$/, enforce: "pre", loader: "source-map-loader", exclude: /node_modules/ },
+      {
+        test: /\.(png|jpe?g|gif|jp2|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+        },
+      },
     ],
   },
   optimization: {
