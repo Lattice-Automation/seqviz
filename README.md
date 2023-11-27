@@ -172,6 +172,9 @@ annotations = [
 ];
 ```
 
+Example result of using optional annotation paramters:
+<img src="./demo/public/annotations-example.png" width="300" />
+
 ```js
 annotations = [
   { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
