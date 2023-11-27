@@ -143,7 +143,17 @@ The name of the sequence/plasmid. Shown at the center of the circular viewer.
 
 An array of `Annotation`s to render. Each `Annotation` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the annotations. Set the annotation's direction to `1` for forward arrows and `-1` for reverse arrows.
 
-Optional Parameters:
+```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
+  { start: 23, end: 273, name: "GFP" },
+  { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" },
+];
+```
+
+In the example above, the "Strong promoter" would span the first to twenty-second base pair.
+
+Optional Annotation Parameters:
  - Annotation border styling: `"dashed" | "dotted" | "bold"`
  ```js
 annotations = [
@@ -172,18 +182,15 @@ annotations = [
 ];
 ```
 
-Example result of using optional annotation paramters:
-<img src="./demo/public/annotations-example.png" width="300" />
-
+Example result of using optional annotation parameters:
 ```js
-annotations = [
-  { start: 0, end: 22, name: "Strong promoter", direction: 1 }, // [0, 22)
-  { start: 23, end: 273, name: "GFP" },
-  { start: 300, end: 325, name: "Weak promoter", direction: -1, color: "#FAA887" },
-];
+annotation['border'] = 'dashed';
+annotation['font'] = {"fontFamily": "Times New Roman", "fontWeight": 800, "fontSize": 17, "fontColor": 'blue'}
+annotation['svg'] = 'promoter'
+annotation['gradient'] = {start: 'lightblue', stop: 'green'}
 ```
-
-In the example above, the "Strong promoter" would span the first to twenty-second base pair.
+<br></br>
+<img src="./demo/public/annotations-example.png" width="500" />
 
 #### `primers (=[])`
 
