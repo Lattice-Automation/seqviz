@@ -185,10 +185,9 @@ const SingleNamedElement = (props: {
   let fontSize = 12;
   if (element.font?.fontSize) {
     // 19 is a subjective limit to fontSize that will fit inside bounds of annotation. If larger than 19, cap it.
-    if(element.font.fontSize > 19){
+    if (element.font.fontSize > 19) {
       fontSize = 19;
-    }
-    else{
+    } else {
       fontSize = element.font.fontSize;
     }
   }
@@ -223,9 +222,9 @@ const SingleNamedElement = (props: {
         break;
     }
   }
-  let borderColor:string | null = null
+  let borderColor: string | null = null;
   if (element.border?.borderColor) {
-    borderColor = element.border.borderColor
+    borderColor = element.border.borderColor;
   }
 
   let fontFamily: string | undefined = undefined;

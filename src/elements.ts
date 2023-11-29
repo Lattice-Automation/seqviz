@@ -23,7 +23,7 @@ interface Font {
 }
 
 interface Border {
-  style?: "dashed" | "dotted" | "bold"
+  style?: "dashed" | "dotted" | "bold";
   borderColor?: string;
 }
 
