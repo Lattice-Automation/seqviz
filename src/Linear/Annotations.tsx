@@ -184,7 +184,13 @@ const SingleNamedElement = (props: {
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
   let fontSize = 12;
   if (element.font?.fontSize) {
-    fontSize = element.font.fontSize;
+    // 19 is a subjective limit to fontSize that will fit inside bounds of annotation. If larger than 19, cap it.
+    if(element.font.fontSize > 19){
+      fontSize = 19;
+    }
+    else{
+      fontSize = element.font.fontSize;
+    }
   }
   const annotationCharacterWidth = 0.591 * fontSize;
   const availableCharacters = Math.floor((width - 40) / annotationCharacterWidth);
@@ -204,8 +210,8 @@ const SingleNamedElement = (props: {
   let strokeVal: string | null = null;
   let strokeWidth: string | null = null;
 
-  if (element.border) {
-    switch (element.border) {
+  if (element.border?.style) {
+    switch (element.border.style) {
       case "dashed":
         strokeVal = "5, 5";
         break;
@@ -216,6 +222,10 @@ const SingleNamedElement = (props: {
         strokeWidth = "2";
         break;
     }
+  }
+  let borderColor:string | null = null
+  if (element.border?.borderColor) {
+    borderColor = element.border.borderColor
   }
 
   let fontFamily: string | undefined = undefined;
@@ -230,11 +240,6 @@ const SingleNamedElement = (props: {
   }
   if (element.font?.fontColor) {
     fontColor = element.font.fontColor;
-  }
-
-  let svg: any = null;
-  if (element.svg) {
-    svg = require(`../assets/${element.svg}.png`);
   }
 
   return (
@@ -263,7 +268,7 @@ const SingleNamedElement = (props: {
         d={linePath}
         fill={element.gradient ? "url(#myGradient)" : color}
         id={element.id}
-        stroke={color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
+        stroke={borderColor ? borderColor : color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
         style={{ annotation }}
         stroke-dasharray={strokeVal}
         stroke-width={strokeWidth}
@@ -275,13 +280,6 @@ const SingleNamedElement = (props: {
         }}
         onMouseOut={() => hoverOtherAnnotationRows(element.id, 0.7)}
         onMouseOver={() => hoverOtherAnnotationRows(element.id, 1.0)}
-      />
-      <image
-        href={svg ? String(svg.default.src) : undefined}
-        x={width / 2 - (width / 2) * 0.6}
-        y={height / 2 - 8}
-        width="15px"
-        height="15px"
       />
       <text
         className="la-vz-annotation-label"

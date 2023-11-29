@@ -154,10 +154,10 @@ annotations = [
 In the example above, the "Strong promoter" would span the first to twenty-second base pair.
 
 Optional Annotation Parameters:
- - Annotation border styling: `"dashed" | "dotted" | "bold"`
+ - Annotation border styling; user can customize border style and border color:
  ```js
 annotations = [
-  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed"},
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: {style: "dashed", borderColor: 'purple'},
 ];
 ```
  - Annotation font styling; user can change font family, font weight, or font color:
@@ -166,13 +166,8 @@ annotations = [
   { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {fontFamily: "Times New Roman", fontWeight: 800, fontSize: 17, fontColor: 'blue'}},
 ];
 ```
- - Adding an svg icon to annotation; the available icons are part of the SBOL library and can be viewed in the `assets` folder under `src/assets/`, the name of the desired icon must exactly match the filename of the icon in the `assets` folder. In this example `promoter` matches the name of the promoter icon file `promoter.png`:
- ```js
-annotations = [
-  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {fontFamily: "Times New Roman", fontWeight: 800, fontSize: 17, fontColor: 'blue'}},
-  svg: 'promoter'
-];
-```
+ - Adding an svg icon to annotation: WIP
+
  - Annotation background color gradient. User can enter a starting color and stopping color:
 ```js
 annotations = [
@@ -180,15 +175,6 @@ annotations = [
   svg: 'promoter', gradient: {start: 'lightblue', stop: 'green'}
 ];
 ```
-
-Example result of using optional annotation parameters:
-```js
-annotation['border'] = 'dashed';
-annotation['font'] = {fontFamily: "Times New Roman", fontWeight: 800, fontSize: 17, fontColor: 'blue'}
-annotation['svg'] = 'promoter'
-annotation['gradient'] = {start: 'lightblue', stop: 'green'}
-```
-<img src="./demo/public/annotations-example.png" width="500" />
 
 #### `primers (=[])`
 
