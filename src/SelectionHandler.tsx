@@ -39,7 +39,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
   declare context: React.ContextType<typeof SelectionContext>;
 
   /** Only state is the selection range */
-  state = { ...defaultSelection, aminoAcidShiftStart: null };
+  state = { ...defaultSelection, aminoAcidShiftStart: null, prevAA: null };
 
   /* previous base cursor is over, used in circular drag select */
   previousBase: null | number = null;
@@ -128,7 +128,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
       return; // there isn't a known range with the id of the element
     }
     knownRange = { ...knownRange, end: knownRange.end || 0, start: knownRange.start || 0 };
-
+    
     const { direction, end, start, viewer } = knownRange;
     switch (knownRange.type) {
       case "ANNOTATION":
@@ -173,14 +173,24 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
           selectionEnd = clockwise ? knownRange.end : knownRange.start;
         }
 
+        
+        
         if (e.shiftKey) {
-          if (this.state.aminoAcidShiftStart) {
-            selectionStart = this.state.aminoAcidShiftStart;
-          } else {
-            this.setState({ aminoAcidShiftStart: selectionStart });
+          if(this.state.prevAA && selectionStart){
+            selectionStart = this.state.prevAA 
+            this.setState({ aminoAcidShiftStart: selectionStart});
           }
+          else{
+            if (this.state.aminoAcidShiftStart) {
+              console.log(this.state.aminoAcidShiftStart)
+              selectionStart = this.state.aminoAcidShiftStart;
+            } else {
+              this.setState({ aminoAcidShiftStart: selectionStart });
+            }
+          }
+          
         } else {
-          this.setState({ aminoAcidShiftStart: null });
+          this.setState({ aminoAcidShiftStart: null, prevAA: selectionStart });
         }
 
         this.setSelection({
