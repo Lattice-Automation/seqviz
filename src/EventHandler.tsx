@@ -289,9 +289,9 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
 
   render = () => (
     <div
+      ref={this.containerRef}
       className="la-vz-viewer-event-router"
       id="la-vz-event-router"
-      ref={this.containerRef}
       role="presentation"
       style={{
         display: "flex",
