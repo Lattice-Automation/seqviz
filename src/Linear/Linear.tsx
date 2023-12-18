@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
-import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size } from "../elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
@@ -21,6 +21,7 @@ export interface LinearProps {
   inputRef: InputRefFunc;
   lineHeight: number;
   onUnmount: (id: string) => void;
+  primers: Primer[];
   search: NameRange[];
   seq: string;
   seqFontSize: number;
@@ -35,13 +36,14 @@ export interface LinearProps {
 /**
  * A linear sequence viewer.
  *
- * Comprised of SeqBlock(s), which are themselves comprised of:
+ * Comprised of SeqBlock(s) which are comprised of:
  * 	text (seq)
  * 	Index (axis)
  * 	Annotations
  *  Finds
  *  Translations
  *  Selections
+ *  Primers
  */
 export default class Linear extends React.Component<LinearProps> {
   /**
@@ -68,6 +70,7 @@ export default class Linear extends React.Component<LinearProps> {
       highlights,
       lineHeight,
       onUnmount,
+      primers,
       search,
       seq,
       seqType,
@@ -97,15 +100,26 @@ export default class Linear extends React.Component<LinearProps> {
       : new Array(arrSize).fill([]);
 
     /**
-     * Vet the annotations for starts and ends at zero index
+     * Mutate elements that start or end at zero index
      */
-    const vetAnnotations = (annotations: Annotation[]) => {
+    function vetAnnotations<T extends NameRange>(annotations: T[]): T[] {
       annotations.forEach(ann => {
         if (ann.end === 0 && ann.start > ann.end) ann.end = seqLength;
         if (ann.start === seqLength && ann.end < ann.start) ann.start = 0;
       });
       return annotations;
-    };
+    }
+
+    const primerFwdRows = createMultiRows(
+      stackElements(vetAnnotations(primers.filter(p => p.direction === 1)), seq.length),
+      bpsPerBlock,
+      arrSize
+    );
+    const primerRevRows = createMultiRows(
+      stackElements(vetAnnotations(primers.filter(p => p.direction === -1)), seq.length),
+      bpsPerBlock,
+      arrSize
+    );
 
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
@@ -140,6 +154,12 @@ export default class Linear extends React.Component<LinearProps> {
       }
       if (zoomed) {
         blockHeight += showComplement ? lineHeight : 0; // double for complement + 2px margin
+      }
+      if (primerFwdRows[i].length) {
+        blockHeight += primerFwdRows[i].length * lineHeight;
+      }
+      if (primerRevRows[i].length) {
+        blockHeight += primerRevRows[i].length * lineHeight;
       }
       if (showIndex) {
         blockHeight += lineHeight; // another for index row
@@ -179,6 +199,8 @@ export default class Linear extends React.Component<LinearProps> {
           id={ids[i]}
           inputRef={this.props.inputRef}
           lineHeight={lineHeight}
+          primerFwdRows={primerFwdRows[i]}
+          primerRevRows={primerRevRows[i]}
           searchRows={searchRows[i]}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}

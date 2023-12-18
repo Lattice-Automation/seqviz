@@ -40,14 +40,14 @@ You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.lattice
 
 ### Linear and Circular Sequence Viewers
 
-- Annotations with names and colors
+- Annotations, primers, and highlights with names and colors
 - Amino acid translations
 - Enzyme cut sites
 - Searching with mismatches and highlighting
 
 ### Sequence and Element Selection
 
-- Selecting a range on the viewer(s), or clicking an `annotation`, `translation`, `cutSite` or `searchResult`, will highlight the selection and pass it to the `onSelection()` callback.
+- Selecting a range on the viewer(s), or clicking an `annotation`, `translation`, `primer`, `cutSite`, or `searchResult`, highlights the selection and passes it to the `onSelection()` callback.
 
 ## Usage
 
@@ -152,6 +152,19 @@ annotations = [
 ```
 
 In the example above, the "Strong promoter" would span the first to twenty-second base pair.
+
+#### `primers (=[])`
+
+An array of `Primer`s to render. Each `Primer` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the primers. Set the primer's direction to `1` for forward primer and `-1` for reverse primer.
+
+```js
+primers = [
+  { start: 33, end: 53, name: "LacZ Foward Primer", direction: 1 },
+  { start: 3098, end: 3128, name: "LacZ Reverse Primer", direction: -1, color: "#FAA887" },
+];
+```
+
+In the example above, the forward and reverse primers of LacZ are define by the direction parameter. Notice that color could be used optionally.
 
 #### `translations (=[])`
 

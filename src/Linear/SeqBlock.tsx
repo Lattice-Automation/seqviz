@@ -1,13 +1,14 @@
 import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
-import { Annotation, CutSite, Highlight, NameRange, Range, SeqType, Size, Translation } from "../elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType, Size, Translation } from "../elements";
 import { seqBlock, svgText } from "../style";
 import AnnotationRows from "./Annotations";
 import { CutSites } from "./CutSites";
 import Find from "./Find";
 import { Highlights } from "./Highlights";
 import IndexRow from "./Index";
+import PrimeRows from "./Primers";
 import Selection from "./Selection";
 import { TranslationRows } from "./Translations";
 
@@ -43,6 +44,8 @@ interface SeqBlockProps {
   key: string;
   lineHeight: number;
   onUnmount: (a: string) => void;
+  primerFwdRows: Primer[][];
+  primerRevRows: Primer[][];
   searchRows: Range[];
   seq: string;
   seqFontSize: number;
@@ -229,6 +232,8 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       inputRef,
       lineHeight,
       onUnmount,
+      primerFwdRows: primerFwdRows,
+      primerRevRows: primerRevRows,
       searchRows,
       seq,
       seqFontSize,
@@ -253,8 +258,12 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     const lastBase = firstBase + seq.length;
 
+    // height and yDiff of forward primers
+    const primerFwdYDiff = 0;
+    const primerFwdHeight = primerFwdRows.length ? elementHeight * primerFwdRows.length : 0;
+
     // height and yDiff of cut sites
-    const cutSiteYDiff = 0; // spacing for cutSite names
+    const cutSiteYDiff = primerFwdYDiff + primerFwdHeight; // spacing for cutSite names
     const cutSiteHeight = zoomed && cutSiteRows.length ? lineHeight : 0;
 
     // height and yDiff of the sequence strand
@@ -265,21 +274,36 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const compYDiff = indexYDiff + indexHeight;
     const compHeight = zoomed && showComplement ? lineHeight : 0;
 
+    // height and yDiff of reverse primers
+    const primerRevYDiff = compYDiff + compHeight;
+    const primerRevHeight = primerRevRows.length ? elementHeight * primerRevRows.length : 0;
+
     // height and yDiff of translations
-    const translationYDiff = compYDiff + compHeight;
+    const translationYDiff = primerRevYDiff + primerRevHeight;
     const translationHeight = elementHeight * translationRows.length;
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
     const annHeight = elementHeight * annotationRows.length;
 
-    // height and ydiff of the index row.
-    const elementGap = annotationRows.length + translationRows.length ? 3 : 0;
+    // height and ydiff of the index row
+    const elementGap =
+      primerRevRows.length + primerRevRows.length + annotationRows.length + translationRows.length ? 3 : 0;
+
     const indexRowYDiff = annYDiff + annHeight + elementGap;
 
     // calc the height necessary for the sequence selection
     // it starts 5 above the top of the SeqBlock
-    const selectHeight = cutSiteHeight + indexHeight + compHeight + translationHeight + annHeight + elementGap + 5;
+    const selectHeight =
+      primerFwdHeight +
+      cutSiteHeight +
+      indexHeight +
+      compHeight +
+      translationHeight +
+      annHeight +
+      primerRevHeight +
+      elementGap +
+      5;
     let selectEdgeHeight = selectHeight + 9; // +9 is the height of a tick + index row
 
     // needed because otherwise the selection height is very small
@@ -331,6 +355,22 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           selectHeight={selectHeight}
           onUnmount={onUnmount}
         />
+        {primerFwdRows.length && (
+          <PrimeRows
+            bpsPerBlock={bpsPerBlock}
+            direction={1}
+            elementHeight={elementHeight}
+            findXAndWidth={this.findXAndWidthElement}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            lastBase={lastBase}
+            primerRows={primerFwdRows}
+            seqBlockRef={this}
+            width={size.width}
+            yDiff={primerFwdYDiff}
+          />
+        )}
         <Highlights
           compYDiff={compYDiff - 3}
           findXAndWidth={this.findXAndWidthElement}
@@ -362,6 +402,22 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           listenerOnly={false}
           zoomed={zoomed}
         />
+        {primerRevRows.length && (
+          <PrimeRows
+            bpsPerBlock={bpsPerBlock}
+            direction={-1}
+            elementHeight={elementHeight}
+            findXAndWidth={this.findXAndWidthElement}
+            firstBase={firstBase}
+            fullSeq={fullSeq}
+            inputRef={inputRef}
+            lastBase={lastBase}
+            primerRows={primerRevRows}
+            seqBlockRef={this}
+            width={size.width}
+            yDiff={primerRevYDiff}
+          />
+        )}
         {translationRows.length && (
           <TranslationRows
             bpsPerBlock={bpsPerBlock}
@@ -393,6 +449,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             yDiff={annYDiff}
           />
         )}
+
         {zoomed && seqType !== "aa" ? (
           <text
             {...textProps}

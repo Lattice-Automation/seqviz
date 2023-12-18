@@ -1,7 +1,7 @@
 {
   "name": "seqviz",
   "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
-  "version": "3.9.1",
+  "version": "3.10.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "unpkg": "dist/seqviz.min.js",
@@ -55,7 +55,7 @@
     "csstype": "^3.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^28.1.4",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

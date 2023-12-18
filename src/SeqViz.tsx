@@ -12,6 +12,7 @@ import {
   Highlight,
   HighlightProp,
   NameRange,
+  PrimerProp,
   Range,
   SeqType,
 } from "./elements";
@@ -97,6 +98,9 @@ export interface SeqVizProps {
 
   /** a callback that's executed on each click of the sequence viewer. Selection includes meta about the selected element */
   onSelection?: (selection: Selection) => void;
+
+  /** a list of primers to render above or below the sequences. At the time of writing, only the Linear viewer is supported. */
+  primers: PrimerProp[];
 
   /** Refs associated with custom children. */
   refs?: SeqVizChildRefs;
@@ -197,6 +201,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     name: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
+    primers: [],
     rotateOnScroll: true,
     search: { mismatch: 0, query: "" },
     selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
@@ -430,7 +435,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     }));
 
   render() {
-    const { highlightedRegions, highlights, showComplement, showIndex, style } = this.props;
+    const { highlightedRegions, highlights, primers, showComplement, showIndex, style } = this.props;
     let { translations } = this.props;
     const { compSeq, seq, seqType, zoom } = this.state;
 
@@ -464,12 +469,13 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         (() => {
           // do nothing
         }),
+      primers: primers.map((p, i) => ({ color: colorByIndex(i), id: `primer${p.name}${i}${p.start}${p.end}`, ...p })),
       rotateOnScroll: !!this.props.rotateOnScroll,
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map((t): { direction: 1 | -1; end: number; start: number } => ({
         direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
-        end: t.start + Math.floor((t.end - t.start) / 3) * 3,
+        end: seqType === "aa" ? t.end : t.start + Math.floor((t.end - t.start) / 3) * 3,
         start: t.start % seq.length,
       })),
       viewer: this.props.viewer || "both",
