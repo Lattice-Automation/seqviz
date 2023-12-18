@@ -13,6 +13,8 @@ export interface EventsHandlerProps {
   selection: Selection;
   seq: string;
   setSelection: (selection: Selection) => void;
+  setLinearZoom: (zoom: number) => void;
+  zoom: number;
 }
 
 /**
@@ -25,6 +27,20 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
 
   clickedOnce: EventTarget | null = null;
   clickedTwice: EventTarget | null = null;
+
+  containerRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+  componentDidMount = () => {
+    /*
+    Because React uses passive event handlers by default with wheel event which prevents using preventDefault(), 
+    so using refs is the solution for this issue to make event handler non-passive by adding event handler manually.
+    */
+    this.containerRef.current?.addEventListener("wheel", this.handleMouseWheel, { passive: false });
+  };
+
+  componentWillUnmount(): void {
+    this.containerRef.current?.removeEventListener("wheel", this.handleMouseWheel);
+  }
 
   /**
    * action handler for a keyboard keypresses.
@@ -247,10 +263,35 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
     }
   };
 
+  updateLinearZoom(zoomLevel) {
+    const { setLinearZoom } = this.props;
+    setLinearZoom(Math.min(Math.max(zoomLevel, 11), 100));
+  }
+
+  zoomIn() {
+    this.updateLinearZoom(this.props.zoom + 20);
+  }
+
+  zoomOut() {
+    this.updateLinearZoom(this.props.zoom - 20);
+  }
+
+  handleMouseWheel = event => {
+    event.preventDefault();
+    if (event.ctrlKey) {
+      if (event.wheelDelta > 0) {
+        this.zoomIn();
+      } else if (event.wheelDelta < 0) {
+        this.zoomOut();
+      }
+    }
+  };
+
   render = () => (
     <div
       className="la-vz-viewer-event-router"
       id="la-vz-event-router"
+      ref={this.containerRef}
       role="presentation"
       style={{
         display: "flex",

@@ -70,21 +70,11 @@ export default class App extends React.Component<any, AppState> {
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
   circularRef: React.RefObject<HTMLDivElement> = React.createRef();
-  seqvizRef: React.RefObject<HTMLDivElement> = React.createRef();
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
     this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
-    /*
-    Because React uses passive event handlers by default with wheel event which prevents using preventDefault(), 
-    so using refs is the solution for this issue to make event handler non-passive by adding event handler manually.
-    */
-    this.seqvizRef.current.addEventListener("wheel", this.handleMouseWheel, { passive: false });
   };
-
-  componentWillUnmount(): void {
-    this.seqvizRef.current.removeEventListener("wheel", this.handleMouseWheel);
-  }
 
   toggleSidebar = () => {
     const { showSidebar } = this.state;
@@ -107,29 +97,6 @@ export default class App extends React.Component<any, AppState> {
       this.setState({ enzymes: enzymes.filter(enz => enz !== e) });
     } else {
       this.setState({ enzymes: [...enzymes, e] });
-    }
-  };
-
-  zoom(zoomLevel) {
-    this.setState({ zoom: Math.min(Math.max(zoomLevel, 11), 100) });
-  }
-
-  zoomIn() {
-    this.zoom(this.state.zoom + 20);
-  }
-
-  zoomOut() {
-    this.zoom(this.state.zoom - 20);
-  }
-
-  handleMouseWheel = event => {
-    event.preventDefault();
-    if (event.ctrlKey) {
-      if (event.wheelDelta > 0) {
-        this.zoomIn();
-      } else if (event.wheelDelta < 0) {
-        this.zoomOut();
-      }
     }
   };
 
@@ -242,7 +209,7 @@ export default class App extends React.Component<any, AppState> {
                 toggleShowSelectionMeta={this.toggleShowSelectionMeta}
                 toggleSidebar={this.toggleSidebar}
               />
-              <div id="seqviewer" ref={this.seqvizRef}>
+              <div id="seqviewer">
                 {this.state.seq && (
                   <SeqViz
                     // accession="MN623123"
