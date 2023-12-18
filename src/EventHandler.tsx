@@ -12,8 +12,8 @@ export interface EventsHandlerProps {
   selectAllEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   selection: Selection;
   seq: string;
-  setSelection: (selection: Selection) => void;
   setLinearZoom: (zoom: number) => void;
+  setSelection: (selection: Selection) => void;
   zoom: number;
 }
 

@@ -285,8 +285,8 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   selectAllEvent={this.props.selectAllEvent}
                   selection={mergedSelection}
                   seq={seq}
-                  setSelection={this.setSelection}
                   setLinearZoom={setLinearZoom}
+                  setSelection={this.setSelection}
                   zoom={zoom.linear}
                 >
                   {this.props.children ? (
