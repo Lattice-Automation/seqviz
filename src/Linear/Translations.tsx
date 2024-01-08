@@ -106,7 +106,6 @@ const TranslationRow = (props: {
           index={i}
         />
       </>
-
     ))}
   </>
 );
@@ -293,7 +292,6 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
   }
 }
 
-
 /**
  * SingleNamedElement is a single rectangular element in the SeqBlock.
  * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index, edge of blocks, etc.
@@ -313,12 +311,11 @@ const SingleNamedElementHandle = (props: {
   const { color, end, name, start } = element;
   const { width, x: origX } = findXAndWidthElement(index, element, elements);
 
-
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
   const fontSize = 12;
   const characterWidth = 0.591 * fontSize;
   // Use at most 1/4 of the width for the name handle.
-  const availableCharacters = Math.floor((width / 4) / characterWidth);
+  const availableCharacters = Math.floor(width / 4 / characterWidth);
 
   let displayName = name;
   if (name.length > availableCharacters) {
@@ -330,23 +327,22 @@ const SingleNamedElementHandle = (props: {
       displayName = `${name.slice(0, charactersToShow)}…`;
     }
   }
-  
-
 
   // What's needed for the display + margin at the start + margin at the end
-  const nameHandleMargin = 10
-  const nameHandleWidth = displayName.length * characterWidth + nameHandleMargin * 2
+  const nameHandleMargin = 10;
+  const nameHandleWidth = displayName.length * characterWidth + nameHandleMargin * 2;
 
   const x = origX;
   const w = width;
   const height = props.height;
 
-  
-  let linePath = ""
+  let linePath = "";
   // First rectangle that contains the name and has the whole height
   linePath += `M 0 0 L ${nameHandleWidth} 0 L ${nameHandleWidth} ${height} L 0 ${height}`;
   // Second rectangle with half the height and centered
-  linePath += `M ${nameHandleWidth} ${height / 4} L ${w} ${height / 4} L ${w} ${3 * height / 4} L ${nameHandleWidth} ${3 * height / 4}`;
+  linePath += `M ${nameHandleWidth} ${height / 4} L ${w} ${height / 4} L ${w} ${
+    (3 * height) / 4
+  } L ${nameHandleWidth} ${(3 * height) / 4}`;
 
   return (
     <g
@@ -404,4 +400,3 @@ const SingleNamedElementHandle = (props: {
     </g>
   );
 };
-
