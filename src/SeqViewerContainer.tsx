@@ -6,7 +6,7 @@ import { EventHandler } from "./EventHandler";
 import Linear, { LinearProps } from "./Linear/Linear";
 import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
-import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
 import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
 
