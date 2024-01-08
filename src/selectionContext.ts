@@ -4,6 +4,7 @@ type SelectionTypeEnum =
   | "ANNOTATION"
   | "FIND"
   | "TRANSLATION"
+  | "TRANSLATION_HANDLE"
   | "ENZYME"
   | "SEQ"
   | "AMINOACID"

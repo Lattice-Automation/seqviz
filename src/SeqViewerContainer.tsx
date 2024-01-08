@@ -58,7 +58,7 @@ interface SeqViewerContainerProps {
   targetRef: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
-  translations: Range[];
+  translations: NameRange[];
   viewer: "linear" | "circular" | "both" | "both_flip";
   width: number;
   zoom: { circular: number; linear: number };

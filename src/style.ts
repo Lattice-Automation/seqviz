@@ -105,6 +105,21 @@ export const annotationLabel: CSS.Properties = {
   textRendering: "optimizeLegibility",
 };
 
+export const translationHandle: CSS.Properties = {
+  fillOpacity: "0.7",
+  shapeRendering: "geometricPrecision",
+  strokeWidth: "0.5",
+};
+
+export const translationHandleLabel: CSS.Properties = {
+  ...svgText,
+  color: "rgb(42, 42, 42)",
+  fontWeight: 400,
+  shapeRendering: "geometricPrecision",
+  strokeLinejoin: "round",
+  textRendering: "optimizeLegibility",
+};
+
 export const translationAminoAcidLabel: CSS.Properties = {
   ...svgText,
   color: "rgb(42, 42, 42)",

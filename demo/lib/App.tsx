@@ -18,7 +18,7 @@ import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
 import { chooseRandomColor } from "../../src/colors";
-import { AnnotationProp, Primer } from "../../src/elements";
+import { AnnotationProp, Primer, TranslationProp } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
 
@@ -43,7 +43,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { direction?: 1 | -1; end: number; start: number }[];
+  translations: TranslationProp[];
   viewer: string;
   zoom: number;
 }
@@ -105,9 +105,9 @@ export default class App extends React.Component<any, AppState> {
     showSelectionMeta: false,
     showSidebar: false,
     translations: [
-      { direction: -1, end: 630, start: 6 },
+      { color: chooseRandomColor(), direction: -1, end: 630, name: "ORF 1", start: 6 },
       { end: 1147, start: 736 },
-      { end: 1885, start: 1165 },
+      { end: 1885, name: "ORF 2", start: 1165 },
     ],
     viewer: "both",
     zoom: 50,

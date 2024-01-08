@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
-import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType, Size } from "../elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, SeqType, Size } from "../elements";
 import { createMultiRows, createSingleRows, stackElements } from "../elementsToRows";
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
@@ -29,7 +29,7 @@ export interface LinearProps {
   showComplement: boolean;
   showIndex: boolean;
   size: Size;
-  translations: Range[];
+  translations: NameRange[];
   zoom: { linear: number };
 }
 
