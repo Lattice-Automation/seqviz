@@ -190,6 +190,8 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
           type: "AMINOACID",
           viewer: "LINEAR",
         })}
+        className="la-vz-linear-aa-translation"
+        data-testid="la-vz-linear-aa-translation"
         id={id}
         transform={`translate(0, ${y})`}
       >
