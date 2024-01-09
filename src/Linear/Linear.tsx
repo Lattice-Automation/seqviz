@@ -165,7 +165,7 @@ export default class Linear extends React.Component<LinearProps> {
         blockHeight += lineHeight; // another for index row
       }
       if (translationRows[i].length) {
-        blockHeight += translationRows[i].length * elementHeight;
+        blockHeight += translationRows[i].length * elementHeight * 2; // * 2 to account for the translation handle
       }
       if (annotationRows[i].length) {
         blockHeight += annotationRows[i].length * elementHeight;
