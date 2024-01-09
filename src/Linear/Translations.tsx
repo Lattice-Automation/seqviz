@@ -314,7 +314,7 @@ const SingleNamedElementHandle = (props: {
   const { width, x: origX } = findXAndWidthElement(index, element, elements);
 
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
-  const fontSize = 12;
+  const fontSize = 10;
   const characterWidth = 0.591 * fontSize;
   // Use at most 1/4 of the width for the name handle.
   const availableCharacters = Math.floor(width / 4 / characterWidth);
@@ -331,20 +331,28 @@ const SingleNamedElementHandle = (props: {
   }
 
   // What's needed for the display + margin at the start + margin at the end
-  const nameHandleMargin = 10;
-  const nameHandleWidth = displayName.length * characterWidth + nameHandleMargin * 2;
+  const nameHandleLeftMargin = 10;
+  const nameHandleWidth = displayName.length * characterWidth + nameHandleLeftMargin * 2;
 
   const x = origX;
   const w = width;
   const height = props.height;
+  const marginBottom = 3;
 
   let linePath = "";
   // First rectangle that contains the name and has the whole height
-  linePath += `M 0 0 L ${nameHandleWidth} 0 L ${nameHandleWidth} ${height} L 0 ${height}`;
-  // Second rectangle with half the height and centered
-  linePath += `M ${nameHandleWidth} ${height / 4} L ${w} ${height / 4} L ${w} ${
-    (3 * height) / 4
-  } L ${nameHandleWidth} ${(3 * height) / 4}`;
+  linePath += `M 0 0 
+                L ${nameHandleWidth} 0 
+                L ${nameHandleWidth} ${height - marginBottom} 
+                L 0 ${height - marginBottom}
+                Z`;
+
+  // Second rectangle with half the height and centered (minus half the margin at the bottom and half on top)
+  linePath += `M ${nameHandleWidth} ${height / 4 - marginBottom / 2} 
+                L ${w} ${height / 4 - marginBottom / 2} 
+                L ${w} ${(3 * height) / 4 - marginBottom / 2} 
+                L ${nameHandleWidth} ${(3 * height) / 4 - marginBottom / 2} 
+                Z`;
 
   return (
     <g
@@ -385,8 +393,8 @@ const SingleNamedElementHandle = (props: {
           id={element.id}
           style={translationHandleLabel}
           textAnchor="start"
-          x={nameHandleMargin}
-          y={height / 2 + 1}
+          x={nameHandleLeftMargin}
+          y={height / 2 - 1}
           onBlur={() => {
             // do nothing
           }}
