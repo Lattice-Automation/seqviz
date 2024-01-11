@@ -84,12 +84,19 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     this.state = {
       centralIndex: {
         circular: 0,
-        linear: 0,
+        linear: props?.selection?.start || 0,
         setCentralIndex: this.setCentralIndex,
       },
       selection: this.getSelection(defaultSelection, props.selection),
     };
   }
+
+  // If the selection prop updates, also scroll the lineaer view to the new selection
+  componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
+    if (this.props.selection?.start !== prevProps.selection?.start) {
+      this.setCentralIndex("LINEAR", this.props.selection?.start || 0);
+    }
+  };
 
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps: SeqViewerContainerProps, nextState: any) =>
