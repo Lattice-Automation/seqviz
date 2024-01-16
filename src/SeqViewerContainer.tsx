@@ -84,7 +84,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     this.state = {
       centralIndex: {
         circular: 0,
-        linear: props?.selection?.start || 0,
+        linear: 0,
         setCentralIndex: this.setCentralIndex,
       },
       selection: this.getSelection(defaultSelection, props.selection),
