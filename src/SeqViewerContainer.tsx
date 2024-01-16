@@ -93,7 +93,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
 
   // If the selection prop updates, also scroll the lineaer view to the new selection
   componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
-    if (this.props.selection?.start !== prevProps.selection?.start) {
+    if (this.props.selection?.start !== prevProps.selection?.start && this.props.selection?.start !== this.props.selection?.end) {
       this.setCentralIndex("LINEAR", this.props.selection?.start || 0);
     }
   };
