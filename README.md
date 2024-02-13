@@ -18,6 +18,8 @@
   <img align=top src="./demo/public/logos-genomeminer.png" width="220" />
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img align=top src="./demo/public/logos-corteva.jpeg" width="200" />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img align=top src="./demo/public/logos-betteromics.png" width="200" />
 </div>
 
 ## Table of Contents
