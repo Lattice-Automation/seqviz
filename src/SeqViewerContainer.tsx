@@ -8,7 +8,7 @@ import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
 import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
-import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
+import SelectionContext, { ExternalSelection, Selection, defaultSelection } from "./selectionContext";
 
 /**
  * This is the width in pixels of a character that's 12px
@@ -46,11 +46,7 @@ interface SeqViewerContainerProps {
   rotateOnScroll: boolean;
   search: NameRange[];
   selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-  selection?: {
-    clockwise?: boolean;
-    end: number;
-    start: number;
-  };
+  selection?: ExternalSelection;
   seq: string;
   seqType: SeqType;
   showComplement: boolean;
@@ -142,16 +138,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   /**
    * Returns the selection that was either a prop (optional) or the selection maintained in state.
    */
-  getSelection = (
-    state: Selection,
-    prop?:
-      | {
-          clockwise?: boolean;
-          end: number;
-          start: number;
-        }
-      | Selection
-  ): Selection => {
+  getSelection = (state: Selection, prop?: ExternalSelection): Selection => {
     if (prop) {
       return { ...prop, clockwise: typeof prop.clockwise === "undefined" || !!prop.clockwise, type: "" };
     }
