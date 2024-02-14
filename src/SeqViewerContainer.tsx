@@ -46,7 +46,13 @@ interface SeqViewerContainerProps {
   rotateOnScroll: boolean;
   search: NameRange[];
   selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-  selection?: Selection;
+  selection?:
+    | {
+        clockwise?: boolean;
+        end: number;
+        start: number;
+      }
+    | Selection;
   seq: string;
   seqType: SeqType;
   showComplement: boolean;
@@ -87,10 +93,15 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     };
   }
 
+  selectionIsProgramatic(selection: any): selection is Selection {
+    return !selection.type;
+  }
+
   // If the selection prop updates, also scroll the linear view to the new selection
   componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
     // Only scroll if the selection was done programatically, i.e.: has no type.
-    if (!this.props.selection?.type) {
+    // Check if props.selection is of Selection interface
+    if (this.selectionIsProgramatic(this.props.selection)) {
       if (
         this.props.selection?.start !== prevProps.selection?.start &&
         this.props.selection?.start !== this.props.selection?.end
@@ -132,7 +143,16 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   /**
    * Returns the selection that was either a prop (optional) or the selection maintained in state.
    */
-  getSelection = (state: Selection, prop?: Selection): Selection => {
+  getSelection = (
+    state: Selection,
+    prop?:
+      | {
+          clockwise?: boolean;
+          end: number;
+          start: number;
+        }
+      | Selection
+  ): Selection => {
     if (prop) {
       return { ...prop, clockwise: typeof prop.clockwise === "undefined" || !!prop.clockwise, type: "" };
     }
