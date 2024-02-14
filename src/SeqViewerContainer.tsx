@@ -132,10 +132,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   /**
    * Returns the selection that was either a prop (optional) or the selection maintained in state.
    */
-  getSelection = (
-    state: Selection,
-    prop?: Selection
-  ): Selection => {
+  getSelection = (state: Selection, prop?: Selection): Selection => {
     if (prop) {
       return { ...prop, clockwise: typeof prop.clockwise === "undefined" || !!prop.clockwise, type: "" };
     }
