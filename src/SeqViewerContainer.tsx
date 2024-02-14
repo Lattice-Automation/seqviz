@@ -46,13 +46,11 @@ interface SeqViewerContainerProps {
   rotateOnScroll: boolean;
   search: NameRange[];
   selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-  selection?:
-    | {
-        clockwise?: boolean;
-        end: number;
-        start: number;
-      }
-    | Selection;
+  selection?: {
+    clockwise?: boolean;
+    end: number;
+    start: number;
+  };
   seq: string;
   seqType: SeqType;
   showComplement: boolean;
