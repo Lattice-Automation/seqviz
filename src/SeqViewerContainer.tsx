@@ -94,13 +94,13 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   }
 
   selectionIsProgramatic(selection: any): selection is Selection {
+    // If the selection was done programatically, it has not type
     return !selection.type;
   }
 
   // If the selection prop updates, also scroll the linear view to the new selection
   componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
-    // Only scroll if the selection was done programatically, i.e.: has no type.
-    // Check if props.selection is of Selection interface
+    // Only scroll if the selection was done programatically
     if (this.selectionIsProgramatic(this.props.selection)) {
       if (
         this.props.selection?.start !== prevProps.selection?.start &&
