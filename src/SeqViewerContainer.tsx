@@ -100,7 +100,8 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
 
   // If the selection prop updates, also scroll the linear view to the new selection
   componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
-    // Only scroll if the selection was done programatically
+    // Only scroll if the selection was done passed in as a prop by a user of SeqViz. Otherwise the selection was
+    // made by the user clicking an element or selecting a range of sequences
     if (this.selectionIsProgramatic(this.props.selection)) {
       if (
         this.props.selection?.start !== prevProps.selection?.start &&
