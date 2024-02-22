@@ -22,11 +22,24 @@ import { AnnotationProp, Primer } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
 
+enum ViewerTypeOptions {
+  LINEAR="LINEAR",
+  CIRCULAR="CIRCULAR",
+  LINEAR_MAP="LINEAR_MAP",
+  BOTH_CIRCULAR="BOTH_CIRCULAR",
+  BOTH_FLIP_CIRCULAR="BOTH_FLIP_CIRCULAR",
+  BOTH_LINEAR_MAP="BOTH_LINEAR_MAP",
+  BOTH_FLIP_LINEAR_MAP="BOTH_FLIP_LINEAR_MAP"
+}
+
 const viewerTypeOptions = [
-  { key: "both", text: "Both", value: "both" },
-  { key: "circular", text: "Circular", value: "circular" },
-  { key: "linear", text: "Linear", value: "linear" },
-  { key: "both_flip", text: "Both Flip", value: "both_flip" },
+  { key: ViewerTypeOptions.CIRCULAR, text: "Circular", value: ViewerTypeOptions.CIRCULAR },
+  { key: ViewerTypeOptions.LINEAR, text: "Linear", value: ViewerTypeOptions.LINEAR },
+  { key: ViewerTypeOptions.LINEAR_MAP, text: "Linear Map", value: ViewerTypeOptions.LINEAR_MAP },
+  { key: ViewerTypeOptions.BOTH_CIRCULAR, text: "Circular + Linear", value: ViewerTypeOptions.BOTH_CIRCULAR },
+  { key: ViewerTypeOptions.BOTH_FLIP_CIRCULAR, text: "Linear + Circular", value: ViewerTypeOptions.BOTH_FLIP_CIRCULAR },
+  { key: ViewerTypeOptions.BOTH_LINEAR_MAP, text: "Linear Map + Linear", value: ViewerTypeOptions.BOTH_LINEAR_MAP },
+  { key: ViewerTypeOptions.BOTH_FLIP_LINEAR_MAP, text: "Linear  + Linear Map", value: ViewerTypeOptions.BOTH_FLIP_LINEAR_MAP }
 ];
 
 interface AppState {
