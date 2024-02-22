@@ -48,25 +48,33 @@ export const TranslationRows = ({
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
-    {translationRows.map((translations, i) => (
-      <TranslationRow
-        key={`i-${firstBase}`}
-        bpsPerBlock={bpsPerBlock}
-        charWidth={charWidth}
-        elementHeight={elementHeight}
-        findXAndWidth={findXAndWidth}
-        findXAndWidthElement={findXAndWidthElement}
-        firstBase={firstBase}
-        fullSeq={fullSeq}
-        height={elementHeight}
-        inputRef={inputRef}
-        lastBase={lastBase}
-        seqType={seqType}
-        translations={translations}
-        y={yDiff + elementHeight * 2 * i} // * 2 because we have two elements per row, the aminoacids and the handle
-        onUnmount={onUnmount}
-      />
-    ))}
+    {translationRows.map((translations, i) => {
+      // Add up the previous translation heights, taking into account if they have a handle or not
+      let currentElementY = yDiff;
+      for (let j = 0; j < i; j += 1) {
+        const multiplier = translationRows[j][0]["name"] ? 2 : 1;
+        currentElementY += elementHeight * multiplier;
+      }
+      return (
+        <TranslationRow
+          key={`i-${firstBase}`}
+          bpsPerBlock={bpsPerBlock}
+          charWidth={charWidth}
+          elementHeight={elementHeight}
+          findXAndWidth={findXAndWidth}
+          findXAndWidthElement={findXAndWidthElement}
+          firstBase={firstBase}
+          fullSeq={fullSeq}
+          height={elementHeight}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          seqType={seqType}
+          translations={translations}
+          y={currentElementY}
+          onUnmount={onUnmount}
+        />
+      );
+    })}
   </g>
 );
 
@@ -98,13 +106,15 @@ const TranslationRow = (props: {
           key={`translation-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
           translation={t}
         />
-        <SingleNamedElementHandle
-          {...props}
-          key={`translation-handle-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
-          element={t}
-          elements={props.translations}
-          index={i}
-        />
+        {t.name && (
+          <SingleNamedElementHandle
+            {...props}
+            key={`translation-handle-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
+            element={t}
+            elements={props.translations}
+            index={i}
+          />
+        )}
       </>
     ))}
   </>
@@ -319,8 +329,8 @@ const SingleNamedElementHandle = (props: {
   // Use at most 1/4 of the width for the name handle.
   const availableCharacters = Math.floor(width / 4 / characterWidth);
 
-  let displayName = name;
-  if (name.length > availableCharacters) {
+  let displayName = name ?? "";
+  if (name && name.length > availableCharacters) {
     const charactersToShow = availableCharacters - 1;
     if (charactersToShow < 3) {
       // If we can't show at least three characters, don't show any.

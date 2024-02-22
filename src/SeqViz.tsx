@@ -453,13 +453,16 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       showComplement: (!!compSeq && (typeof showComplement !== "undefined" ? showComplement : true)) || false,
       showIndex: !!showIndex,
       translations: (translations || []).map(
-        (t, i): { direction: 1 | -1; end: number; start: number; color: string; id: string; name: string } => ({
+        (
+          t,
+          i
+        ): { direction: 1 | -1; end: number; start: number; color: string; id: string; name: string | undefined } => ({
           direction: t.direction ? (t.direction < 0 ? -1 : 1) : 1,
           end: seqType === "aa" ? t.end : t.start + Math.floor((t.end - t.start) / 3) * 3,
           start: t.start % seq.length,
           color: t.color || colorByIndex(i, COLORS),
           id: `translation${t.name}${i}${t.start}${t.end}`,
-          name: t.name || `${t.start}-${t.end}`,
+          name: t.name,
         })
       ),
       viewer: this.props.viewer || "both",

@@ -170,7 +170,7 @@ In the example above, the forward and reverse primers of LacZ are define by the 
 
 #### `translations (=[])`
 
-An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: `1` (FWD) or `-1` (REV). It will also render a handle to select the entire range. A color and a name are optional for the handle. If no name is provided, start and end indices will be used as the name.
+An array of `translations`: sequence ranges to translate and render as amino acids sequences. Requires 0-based `start` (inclusive) and `end` (exclusive) indexes relative the DNA sequence. A direction is required: `1` (FWD) or `-1` (REV). It will also render a handle to select the entire range. A color and a name are optional for the handle. If no name is provided, the handle will not be rendered.
 
 ```js
 translations = [
