@@ -114,7 +114,7 @@ export const translationHandle: CSS.Properties = {
 export const translationHandleLabel: CSS.Properties = {
   ...svgText,
   color: "rgb(42, 42, 42)",
-  fontSize: "10",
+  fontSize: "9",
   fontWeight: 400,
   shapeRendering: "geometricPrecision",
   strokeLinejoin: "round",
