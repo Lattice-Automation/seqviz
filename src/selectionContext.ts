@@ -28,6 +28,12 @@ export interface Selection {
   viewer?: "LINEAR" | "CIRCULAR";
 }
 
+export interface ExternalSelection {
+  clockwise?: boolean;
+  end: number;
+  start: number;
+}
+
 /** Initial/default selection */
 export const defaultSelection: Selection = {
   clockwise: true,

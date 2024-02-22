@@ -19,7 +19,7 @@ import {
 } from "./elements";
 import { isEqual } from "./isEqual";
 import search from "./search";
-import { Selection } from "./selectionContext";
+import { ExternalSelection, Selection } from "./selectionContext";
 import { complement, directionality, guessType, randomID } from "./sequence";
 
 /** `SeqViz` props. See the README for more details. One of `seq`, `file` or `accession` is required. */
@@ -122,11 +122,7 @@ export interface SeqVizProps {
    * Externally managed selection.
    *
    * If passed, SeqViz uses this prop as the selection range, rather than the internally managed selection */
-  selection?: {
-    clockwise?: boolean;
-    end: number;
-    start: number;
-  };
+  selection?: ExternalSelection;
 
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
