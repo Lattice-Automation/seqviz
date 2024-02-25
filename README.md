@@ -155,6 +155,29 @@ annotations = [
 
 In the example above, the "Strong promoter" would span the first to twenty-second base pair.
 
+Optional Annotation Parameters:
+ - Annotation border styling; user can customize border style and border color:
+ ```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: {style: "dashed", borderColor: 'purple'},
+];
+```
+ - Annotation font styling; user can change font family, font weight, or font color:
+ ```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {fontFamily: "Times New Roman", fontWeight: 800, fontSize: 17, fontColor: 'blue'}},
+];
+```
+ - Adding an svg icon to annotation: WIP
+
+ - Annotation background color gradient. User can enter a starting color and stopping color:
+```js
+annotations = [
+  { start: 0, end: 22, name: "Strong promoter", direction: 1, border: "dashed", font: {fontFamily: "Times New Roman", fontWeight: 800, fontSize: 17, fontColor: 'blue'}},
+  svg: 'promoter', gradient: {start: 'lightblue', stop: 'green'}
+];
+```
+
 #### `primers (=[])`
 
 An array of `Primer`s to render. Each `Primer` requires 0-based start (inclusive) and end (exclusive) indexes. `name`s are rendered on top of the primers. Set the primer's direction to `1` for forward primer and `-1` for reverse primer.
