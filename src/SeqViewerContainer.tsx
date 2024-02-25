@@ -49,6 +49,7 @@ interface SeqViewerContainerProps {
   selection?: ExternalSelection;
   seq: string;
   seqType: SeqType;
+  setLinearZoom: (zoom: number) => void;
   showComplement: boolean;
   showIndex: boolean;
   targetRef: React.LegacyRef<HTMLDivElement>;
@@ -255,7 +256,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   };
 
   render() {
-    const { selection: selectionProp, seq, viewer } = this.props;
+    const { selection: selectionProp, seq, setLinearZoom, viewer, zoom } = this.props;
     const { centralIndex, selection } = this.state;
 
     const linearProps = this.linearProps();
@@ -293,7 +294,9 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
                   selectAllEvent={this.props.selectAllEvent}
                   selection={mergedSelection}
                   seq={seq}
+                  setLinearZoom={setLinearZoom}
                   setSelection={this.setSelection}
+                  zoom={zoom.linear}
                 >
                   {this.props.children ? (
                     this.props.children({
