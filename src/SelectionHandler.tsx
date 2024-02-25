@@ -39,7 +39,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
   declare context: React.ContextType<typeof SelectionContext>;
 
   /** Only state is the selection range */
-  state = { ...defaultSelection };
+  state = { ...defaultSelection, aminoAcidShiftStart: null, prevAA: null };
 
   /* previous base cursor is over, used in circular drag select */
   previousBase: null | number = null;
@@ -174,6 +174,21 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
           selectionEnd = clockwise ? knownRange.end : knownRange.start;
         }
 
+        if (e.shiftKey) {
+          if (this.state.prevAA && selectionStart) {
+            selectionStart = this.state.prevAA;
+            this.setState({ aminoAcidShiftStart: selectionStart });
+          } else {
+            if (this.state.aminoAcidShiftStart) {
+              selectionStart = this.state.aminoAcidShiftStart;
+            } else {
+              this.setState({ aminoAcidShiftStart: selectionStart });
+            }
+          }
+        } else {
+          this.setState({ aminoAcidShiftStart: null, prevAA: selectionStart });
+        }
+
         this.setSelection({
           ...knownRange,
           clockwise: clockwise,
@@ -194,6 +209,8 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
         } else if (viewer === "CIRCULAR") {
           this.handleCircularSeqEvent(e);
         }
+
+        this.setState({ aminoAcidShiftStart: null });
 
         break;
       }
