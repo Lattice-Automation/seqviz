@@ -351,19 +351,15 @@ const SingleNamedElementHandle = (props: {
   const marginTop = 2;
 
   let linePath = "";
-  // First rectangle that contains the name and has the whole height
   linePath += `M 0 ${marginTop} 
-                L ${nameHandleWidth} ${marginTop} 
-                L ${nameHandleWidth} ${height - marginBottom} 
-                L 0 ${height - marginBottom}
-                Z`;
-
-  // Second rectangle with half the height and centered (minus half the margin at the bottom and half on top)
-  linePath += `M ${nameHandleWidth} ${height / 4 - marginBottom / 2 + marginTop / 2} 
-                L ${w} ${height / 4 - marginBottom / 2 + marginTop / 2} 
-                L ${w} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2} 
-                L ${nameHandleWidth} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2} 
-                Z`;
+              L ${nameHandleWidth} ${marginTop}
+              L ${nameHandleWidth} ${height / 4 - marginBottom / 2 + marginTop / 2}
+              L ${w} ${height / 4 - marginBottom / 2 + marginTop / 2} 
+              L ${w} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2} 
+              L ${nameHandleWidth} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2}  
+              L ${nameHandleWidth} ${height - marginBottom} 
+              L 0 ${height - marginBottom}
+              Z`;
 
   return (
     <g
