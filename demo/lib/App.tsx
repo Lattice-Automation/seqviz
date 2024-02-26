@@ -98,7 +98,7 @@ export default class App extends React.Component<any, AppState> {
     showSidebar: false,
     translations: [
       { color: chooseRandomColor(), direction: -1, end: 630, name: "ORF 1", start: 6 },
-      { end: 1147, start: 736 },
+      { end: 1147, name: "", start: 736 },
       { end: 1885, name: "ORF 2", start: 1165 },
     ],
     viewer: "both",

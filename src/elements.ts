@@ -9,7 +9,7 @@ export interface Range {
 export interface NameRange extends Range {
   color?: string;
   id: string;
-  name?: string;
+  name: string;
 }
 
 /** AnnotationProp is an annotation provided to SeqViz via the annotations prop. */
@@ -21,12 +21,12 @@ export interface AnnotationProp {
   start: number;
 }
 
-/** AnnotationProp is an annotation provided to SeqViz via the annotations prop. */
+/** TranslationProp is an translation provided to SeqViz via the translation prop. */
 export interface TranslationProp {
   color?: string;
   direction?: number;
   end: number;
-  name?: string;
+  name: string;
   start: number;
 }
 
