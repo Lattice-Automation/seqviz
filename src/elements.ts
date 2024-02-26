@@ -21,6 +21,15 @@ export interface AnnotationProp {
   start: number;
 }
 
+/** TranslationProp is an translation provided to SeqViz via the translation prop. */
+export interface TranslationProp {
+  color?: string;
+  direction?: number;
+  end: number;
+  name: string;
+  start: number;
+}
+
 /** Annotation is an annotation after parsing. */
 export interface Annotation extends NameRange {
   color: string;

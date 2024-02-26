@@ -134,6 +134,7 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
       case "ANNOTATION":
       case "FIND":
       case "TRANSLATION":
+      case "TRANSLATION_HANDLE":
       case "ENZYME":
       case "PRIMER":
       case "HIGHLIGHT": {

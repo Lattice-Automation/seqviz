@@ -2,16 +2,25 @@ import * as React from "react";
 
 import { InputRefFunc } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
-import { SeqType, Translation } from "../elements";
+import { NameRange, SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
-import { translationAminoAcidLabel } from "../style";
-import { FindXAndWidthType } from "./SeqBlock";
+import { translationAminoAcidLabel, translationHandle, translationHandleLabel } from "../style";
+import { FindXAndWidthElementType, FindXAndWidthType } from "./SeqBlock";
+
+const hoverOtherTranshlationHandleRows = (className: string, opacity: number) => {
+  if (!document) return;
+  const elements = document.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>;
+  for (let i = 0; i < elements.length; i += 1) {
+    elements[i].style.fillOpacity = `${opacity}`;
+  }
+};
 
 interface TranslationRowsProps {
   bpsPerBlock: number;
   charWidth: number;
   elementHeight: number;
   findXAndWidth: FindXAndWidthType;
+  findXAndWidthElement: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   inputRef: InputRefFunc;
@@ -28,6 +37,7 @@ export const TranslationRows = ({
   charWidth,
   elementHeight,
   findXAndWidth,
+  findXAndWidthElement,
   firstBase,
   fullSeq,
   inputRef,
@@ -38,23 +48,33 @@ export const TranslationRows = ({
   yDiff,
 }: TranslationRowsProps) => (
   <g className="la-vz-linear-translation" data-testid="la-vz-linear-translation">
-    {translationRows.map((translations, i) => (
-      <TranslationRow
-        key={`i-${firstBase}`}
-        bpsPerBlock={bpsPerBlock}
-        charWidth={charWidth}
-        findXAndWidth={findXAndWidth}
-        firstBase={firstBase}
-        fullSeq={fullSeq}
-        height={elementHeight * 0.9}
-        inputRef={inputRef}
-        lastBase={lastBase}
-        seqType={seqType}
-        translations={translations}
-        y={yDiff + elementHeight * i}
-        onUnmount={onUnmount}
-      />
-    ))}
+    {translationRows.map((translations, i) => {
+      // Add up the previous translation heights, taking into account if they have a handle or not
+      let currentElementY = yDiff;
+      for (let j = 0; j < i; j += 1) {
+        const multiplier = translationRows[j][0]["name"] ? 2 : 1;
+        currentElementY += elementHeight * multiplier;
+      }
+      return (
+        <TranslationRow
+          key={`i-${firstBase}`}
+          bpsPerBlock={bpsPerBlock}
+          charWidth={charWidth}
+          elementHeight={elementHeight}
+          findXAndWidth={findXAndWidth}
+          findXAndWidthElement={findXAndWidthElement}
+          firstBase={firstBase}
+          fullSeq={fullSeq}
+          height={elementHeight}
+          inputRef={inputRef}
+          lastBase={lastBase}
+          seqType={seqType}
+          translations={translations}
+          y={currentElementY}
+          onUnmount={onUnmount}
+        />
+      );
+    })}
   </g>
 );
 
@@ -65,7 +85,9 @@ export const TranslationRows = ({
 const TranslationRow = (props: {
   bpsPerBlock: number;
   charWidth: number;
+  elementHeight: number;
   findXAndWidth: FindXAndWidthType;
+  findXAndWidthElement: FindXAndWidthElementType;
   firstBase: number;
   fullSeq: string;
   height: number;
@@ -78,16 +100,27 @@ const TranslationRow = (props: {
 }) => (
   <>
     {props.translations.map((t, i) => (
-      <SingleNamedElement
-        {...props} // include overflowLeft in the key to avoid two split annotations in the same row from sharing a key
-        key={`translation-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
-        translation={t}
-      />
+      <>
+        <SingleNamedElementAminoacids
+          {...props}
+          key={`translation-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
+          translation={t}
+        />
+        {t.name && (
+          <SingleNamedElementHandle
+            {...props}
+            key={`translation-handle-linear-${t.id}-${i}-${props.firstBase}-${props.lastBase}`}
+            element={t}
+            elements={props.translations}
+            index={i}
+          />
+        )}
+      </>
     ))}
   </>
 );
 
-interface SingleNamedElementProps {
+interface SingleNamedElementAminoacidsProps {
   bpsPerBlock: number;
   charWidth: number;
   findXAndWidth: FindXAndWidthType;
@@ -106,7 +139,7 @@ interface SingleNamedElementProps {
  * A single row for translations of DNA into Amino Acid sequences so a user can
  * see the resulting protein or peptide sequence in the viewer
  */
-class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
+class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElementAminoacidsProps> {
   AAs: string[] = [];
 
   // on unmount, clear all AA references.
@@ -167,6 +200,8 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
           type: "AMINOACID",
           viewer: "LINEAR",
         })}
+        className="la-vz-linear-aa-translation"
+        data-testid="la-vz-linear-aa-translation"
         id={id}
         transform={`translate(0, ${y})`}
       >
@@ -268,3 +303,118 @@ class SingleNamedElement extends React.PureComponent<SingleNamedElementProps> {
     );
   }
 }
+
+/**
+ * SingleNamedElement is a single rectangular element in the SeqBlock.
+ * It does a bunch of stuff to avoid edge-cases from wrapping around the 0-index, edge of blocks, etc.
+ */
+const SingleNamedElementHandle = (props: {
+  element: NameRange;
+  elementHeight: number;
+  elements: NameRange[];
+  findXAndWidthElement: FindXAndWidthElementType;
+  height: number;
+  index: number;
+  inputRef: InputRefFunc;
+  y: number;
+}) => {
+  const { element, elementHeight, elements, findXAndWidthElement, index, inputRef, y } = props;
+
+  const { color, end, name, start } = element;
+  const { width, x: origX } = findXAndWidthElement(index, element, elements);
+
+  // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
+  const fontSize = 9;
+  const characterWidth = 0.591 * fontSize;
+  // Use at most 1/4 of the width for the name handle.
+  const availableCharacters = Math.floor(width / 4 / characterWidth);
+
+  let displayName = name ?? "";
+  if (name && name.length > availableCharacters) {
+    const charactersToShow = availableCharacters - 1;
+    if (charactersToShow < 3) {
+      // If we can't show at least three characters, don't show any.
+      displayName = "";
+    } else {
+      displayName = `${name.slice(0, charactersToShow)}…`;
+    }
+  }
+
+  // What's needed for the display + margin at the start + margin at the end
+  const nameHandleLeftMargin = 10;
+  const nameHandleWidth = displayName.length * characterWidth + nameHandleLeftMargin * 2;
+
+  const x = origX;
+  const w = width;
+  const height = props.height;
+  const marginBottom = 2;
+  const marginTop = 2;
+
+  let linePath = "";
+  linePath += `M 0 ${marginTop} 
+              L ${nameHandleWidth} ${marginTop}
+              L ${nameHandleWidth} ${height / 4 - marginBottom / 2 + marginTop / 2}
+              L ${w} ${height / 4 - marginBottom / 2 + marginTop / 2} 
+              L ${w} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2} 
+              L ${nameHandleWidth} ${(3 * height) / 4 - marginBottom / 2 + marginTop / 2}  
+              L ${nameHandleWidth} ${height - marginBottom} 
+              L 0 ${height - marginBottom}
+              Z`;
+
+  return (
+    <g
+      ref={inputRef(element.id, {
+        end,
+        name,
+        start,
+        type: "TRANSLATION_HANDLE",
+        viewer: "LINEAR",
+      })}
+      id={element.id}
+      transform={`translate(0, ${y + elementHeight})`}
+    >
+      <g id={element.id} transform={`translate(${x}, 0)`}>
+        {/* <title> provides a hover tooltip on most browsers */}
+        <title>{name}</title>
+        <path
+          className={`${element.id} la-vz-translation-handle`}
+          cursor="pointer"
+          d={linePath}
+          fill={color}
+          id={element.id}
+          stroke={color}
+          style={translationHandle}
+          onBlur={() => {
+            // do nothing
+          }}
+          onFocus={() => {
+            // do nothing
+          }}
+          onMouseOut={() => hoverOtherTranshlationHandleRows(element.id, 0.7)}
+          onMouseOver={() => hoverOtherTranshlationHandleRows(element.id, 1.0)}
+        />
+        <text
+          className="la-vz-handle-label"
+          cursor="pointer"
+          dominantBaseline="middle"
+          fontSize={fontSize}
+          id={element.id}
+          style={translationHandleLabel}
+          textAnchor="start"
+          x={nameHandleLeftMargin}
+          y={height / 2 + 1}
+          onBlur={() => {
+            // do nothing
+          }}
+          onFocus={() => {
+            // do nothing
+          }}
+          onMouseOut={() => hoverOtherTranshlationHandleRows(element.id, 0.7)}
+          onMouseOver={() => hoverOtherTranshlationHandleRows(element.id, 1.0)}
+        >
+          {displayName}
+        </text>
+      </g>
+    </g>
+  );
+};

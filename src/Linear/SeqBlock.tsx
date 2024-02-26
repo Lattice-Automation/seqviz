@@ -279,8 +279,13 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const primerRevHeight = primerRevRows.length ? elementHeight * primerRevRows.length : 0;
 
     // height and yDiff of translations
+    // elementHeight * 2 is to account for the translation handle. If no name, don't show the handle
     const translationYDiff = primerRevYDiff + primerRevHeight;
-    const translationHeight = elementHeight * translationRows.length;
+    let translationHeight = 0;
+    for (let i = 0; i < translationRows.length; i++) {
+      const multiplier = translationRows[i][0]["name"] ? 2 : 1;
+      translationHeight += elementHeight * multiplier;
+    }
 
     // height and yDiff of annotations
     const annYDiff = translationYDiff + translationHeight;
@@ -424,6 +429,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             charWidth={charWidth}
             elementHeight={elementHeight}
             findXAndWidth={this.findXAndWidth}
+            findXAndWidthElement={this.findXAndWidthElement}
             firstBase={firstBase}
             fullSeq={fullSeq}
             inputRef={inputRef}

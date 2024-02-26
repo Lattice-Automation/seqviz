@@ -6,7 +6,7 @@ import { EventHandler } from "./EventHandler";
 import Linear, { LinearProps } from "./Linear/Linear";
 import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
-import { Annotation, CutSite, Highlight, NameRange, Primer, Range, SeqType } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
 import SelectionContext, { ExternalSelection, Selection, defaultSelection } from "./selectionContext";
 
@@ -54,7 +54,7 @@ interface SeqViewerContainerProps {
   targetRef: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
-  translations: Range[];
+  translations: NameRange[];
   viewer: "linear" | "circular" | "both" | "both_flip";
   width: number;
   zoom: { circular: number; linear: number };
