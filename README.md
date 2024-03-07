@@ -79,6 +79,7 @@ export default () => (
     name="J23100"
     seq="TTGACGGCTAGCTCAGTCCTAGGTACAGTGCTAGC"
     annotations={[{ name: "promoter", start: 0, end: 34, direction: 1, color: "blue" }]}
+    style={{ height: "100vh", width: "100vw" }}
   />
 );
 ```
