@@ -10,6 +10,7 @@ import {
   Image,
   Input,
   Menu,
+  Message,
   Sidebar,
 } from "semantic-ui-react";
 import seqparse from "seqparse";
@@ -21,6 +22,7 @@ import { chooseRandomColor } from "../../src/colors";
 import { AnnotationProp, Primer, TranslationProp } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
+import { useEffect, useState } from "react";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
@@ -28,6 +30,11 @@ const viewerTypeOptions = [
   { key: "linear", text: "Linear", value: "linear" },
   { key: "both_flip", text: "Both Flip", value: "both_flip" },
 ];
+
+interface Message {
+  positive: boolean
+  visible: boolean
+}
 
 interface AppState {
   annotations: AnnotationProp[];
@@ -45,6 +52,7 @@ interface AppState {
   showSidebar: boolean;
   translations: TranslationProp[];
   viewer: string;
+  message: Message;
   zoom: number;
 }
 
@@ -101,6 +109,10 @@ export default class App extends React.Component<any, AppState> {
       { end: 1147, name: "", start: 736 },
       { end: 1885, name: "ORF 2", start: 1165 },
     ],
+    message: {
+      positive: true,
+      visible: false
+    },
     viewer: "both",
     zoom: 50,
   };
@@ -121,6 +133,34 @@ export default class App extends React.Component<any, AppState> {
   toggleShowSelectionMeta = () => {
     const { showSelectionMeta } = this.state;
     this.setState({ showSelectionMeta: !showSelectionMeta });
+  };
+
+  sendToMPI = async () => {
+    try {
+      const { seq, name, annotations } = this.state;
+      const response = await fetch(`https://mpi.f4hcvcnn7c36k.us-east-1.cs.amazonlightsail.com/sequences`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ seq, name, type: "dna", annotations }),
+      });
+      const res = await response.json();
+      if (res.statusCode && res.statusCode != 201) {
+        throw "Not possible to export sequence."
+      }
+      this.setState({ message: { positive: true, visible: true } })
+    } catch (e) {
+      this.setState({ message: { positive: false, visible: true } })
+    }
+
+    this.closeMessage()
+  };
+
+  closeMessage = () => {
+    setTimeout(() => {
+      this.setState({ message: { positive: true, visible: false } });
+    }, 3000);
   };
 
   handleHide = () => {
@@ -192,6 +232,7 @@ export default class App extends React.Component<any, AppState> {
 
     return (
       <div style={{ height: "100vh" }}>
+        <Alert visible={this.state.message.visible} positive={this.state.message.positive} />
         <Sidebar.Pushable className="sidebar-container">
           <Sidebar
             animation="overlay"
@@ -245,6 +286,7 @@ export default class App extends React.Component<any, AppState> {
                 showSelectionMeta={this.state.showSelectionMeta}
                 toggleShowSelectionMeta={this.toggleShowSelectionMeta}
                 toggleSidebar={this.toggleSidebar}
+                sendToMPI={this.sendToMPI}
               />
               <div id="seqviewer">
                 {this.state.seq && (
@@ -441,3 +483,25 @@ const SidebarFooter = () => (
     </p>
   </div>
 );
+
+const Alert = ({ visible, positive }) => {
+  if (visible) {
+    if (positive) {
+      return (
+        <Message id="alert-message" positive>
+          <p>
+            Sequence successfully exported to MPI.
+          </p>
+        </Message>
+      );
+    }
+    return (
+      <Message id="alert-message" negative>
+        <p>
+          Error exporting sequence to MPI. Try again later.
+        </p>
+      </Message>
+    );
+  }
+};
+

@@ -375,6 +375,19 @@ input#part-input {
   padding-right: 16px !important;
   margin: auto 0 !important;
   vertical-align: middle;
+}
+
+#alert-message {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.mpi-block {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  margin: auto 0 !important;
+  vertical-align: middle;
   flex: 1;
 }
 
@@ -400,6 +413,21 @@ input#part-input {
   color: white !important;
   transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
   box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24) !important;
+}
+
+#mpi-button {
+  margin: 0;
+  padding: 10px 12px;
+  width: 120px;
+  background: #f0f0f0;
+  border-radius: 0.25rem;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  box-shadow: 0 1px 3px rgba(124, 124, 124, 0.12), 0 1px 2px rgba(124, 124, 124, 0.24) !important;
+  background-color: #14b7db !important;
+  color: white !important;
+}
+#mpi-button:hover {
+  background: #11a3c4 !important;
 }
 
 #header-meta {

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button, Icon, Image, Popup } from "semantic-ui-react";
 
-const Header = ({ selection, showSelectionMeta, toggleShowSelectionMeta, toggleSidebar }) => (
+const Header = ({ selection, showSelectionMeta, toggleShowSelectionMeta, toggleSidebar, sendToMPI }) => (
   <div className="header" id="app-header">
     <div id="header-primary">
       <Popup
@@ -16,6 +16,9 @@ const Header = ({ selection, showSelectionMeta, toggleShowSelectionMeta, toggleS
       <ToggleSelectionMetaButton
         showSelectionMeta={showSelectionMeta}
         toggleShowSelectionMeta={toggleShowSelectionMeta}
+      />
+      <ExportToMPI
+        sendToMPI={sendToMPI}
       />
       <a href="https://github.com/Lattice-Automation/seqviz" id="github-link" rel="noopener noreferrer" target="_blank">
         <Icon name="github" size="large" />
@@ -36,6 +39,14 @@ const ToggleSelectionMetaButton = ({ showSelectionMeta, toggleShowSelectionMeta 
   <div className="meta-toggle">
     <Button active={!showSelectionMeta} id="meta-button" toggle onClick={toggleShowSelectionMeta}>
       {showSelectionMeta ? "HIDE META" : "SHOW META"}
+    </Button>
+  </div>
+);
+
+const ExportToMPI = ({ sendToMPI }) => (
+  <div className="mpi-block">
+    <Button id="mpi-button" onClick={sendToMPI}>
+      Export to MPI
     </Button>
   </div>
 );
