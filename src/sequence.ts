@@ -1,4 +1,4 @@
-import { Range, SeqType } from "./elements";
+import { NameRange, SeqType } from "./elements";
 
 /**
  * Map of nucleotide bases
@@ -297,7 +297,7 @@ export const translate = (seqInput: string, seqType: SeqType): string => {
 /**
  * for each translation (range + direction) and the input sequence, convert it to a translation and amino acid sequence
  */
-export const createTranslations = (translations: Range[], seq: string, seqType: SeqType) => {
+export const createTranslations = (translations: NameRange[], seq: string, seqType: SeqType) => {
   // elongate the original sequence to account for translations that cross the zero index
   const seqDoubled = seq + seq;
   const bpPerBlock = seqType === "aa" ? 1 : 3;
@@ -329,8 +329,6 @@ export const createTranslations = (translations: Range[], seq: string, seqType: 
     }
 
     return {
-      id: randomID(),
-      name: "translation",
       ...t,
       AAseq: aaSeq,
       end: tEnd,

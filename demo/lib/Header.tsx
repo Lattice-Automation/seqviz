@@ -74,7 +74,7 @@ const SelectionMetaRow = ({ selection }) => {
           <div className="meta-datum">
             <p id="field">RANGE</p>
             <p id="value">
-              {start} - {end}
+              {start + 1} - {end + 1}
             </p>
           </div>
         )}

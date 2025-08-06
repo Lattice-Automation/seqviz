@@ -20,10 +20,8 @@ interface CutSitesProps {
 }
 
 export const CutSites = (props: CutSitesProps) => {
-  let { cutSites } = props;
+  const { cutSites } = props;
   if (!cutSites.length) return null;
-
-  cutSites = cutSites.filter(c => c.end > c.start);
 
   const calculateLinePath = (index: number, startRadius: number, endRadius: number): string => {
     const { findCoor } = props;
@@ -55,13 +53,17 @@ const SingleCutSite = (props: {
   const { id, start } = cutSite;
   let { end, fcut, rcut } = cutSite;
 
-  // crosses the zero index
-  if (start + fcut > end + rcut) {
-    end = start > end ? end + seqLength : end;
-    if (fcut > rcut) {
-      rcut += seqLength;
-    } else {
+  // If any of the end or cut values are greater than the start, it's corssing the zero index
+  if (start > end || start > fcut || start > rcut) {
+    // So add the length of the sequence to all values that are crossing the zero index
+    if (start > end) {
+      end += seqLength;
+    }
+    if (start > fcut) {
       fcut += seqLength;
+    }
+    if (start > rcut) {
+      rcut += seqLength;
     }
   }
 

@@ -21,6 +21,15 @@ export interface AnnotationProp {
   start: number;
 }
 
+/** TranslationProp is an translation provided to SeqViz via the translation prop. */
+export interface TranslationProp {
+  color?: string;
+  direction?: number;
+  end: number;
+  name: string;
+  start: number;
+}
+
 /** Annotation is an annotation after parsing. */
 export interface Annotation extends NameRange {
   color: string;
@@ -32,7 +41,17 @@ export interface Translation extends NameRange {
   direction: -1 | 1;
 }
 
-/** Primer is a single primer for PCR. Not visualized right now. */
+/** PrimerProp is a single primer to visualize above/below the linear viewer. */
+export interface PrimerProp {
+  color?: string;
+  direction: 1 | -1;
+  end: number;
+  id?: string;
+  name: string;
+  start: number;
+}
+
+/** Primer is a single primer for PCR. */
 export interface Primer extends NameRange {
   color: string;
   direction: 1 | -1;

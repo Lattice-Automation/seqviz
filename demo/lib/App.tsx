@@ -22,7 +22,8 @@ import { TextSpan } from "typescript";
 import Circular from "../../src/Circular/Circular";
 import Linear from "../../src/Linear/Linear";
 import SeqViz from "../../src/SeqViz";
-import { AnnotationProp } from "../../src/elements";
+import { chooseRandomColor } from "../../src/colors";
+import { AnnotationProp, Primer, TranslationProp } from "../../src/elements";
 import { SEQVIZ_ELEMENTS_TYPES } from "../../src/seqvizElementsTypes";
 import Header from "./Header";
 import file from "./file";
@@ -41,6 +42,7 @@ interface AppState {
   customChildren: boolean;
   enzymes: any[];
   name: string;
+  primers: Primer[];
   hoveredBase: number;
   search: { query: string };
   searchResults: any;
@@ -50,7 +52,7 @@ interface AppState {
   showIndex: boolean;
   showSelectionMeta: boolean;
   showSidebar: boolean;
-  translations: { direction?: 1 | -1; end: number; start: number }[];
+  translations: TranslationProp[];
   viewer: string;
   zoom: number;
 }
@@ -62,6 +64,40 @@ export default class App extends React.Component<any, AppState> {
     enzymes: ["PstI", "EcoRI", "XbaI", "SpeI"],
     hoveredBase: 0,
     name: "",
+    primers: [
+      {
+        color: chooseRandomColor(),
+        direction: 1,
+        end: 653,
+        id: "527923581",
+        name: "pLtetO-1 fw primer",
+        start: 633,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 706,
+        id: "5279asdf582",
+        name: "pLtetO-1 rev primer",
+        start: 686,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: 1,
+        end: 535,
+        id: "5279fd582",
+        name: "pLtetO-1 fwd primer",
+        start: 512,
+      },
+      {
+        color: chooseRandomColor(),
+        direction: -1,
+        end: 535,
+        id: "527923dfd582",
+        name: "pLtetO-1 rev primer",
+        start: 512,
+      },
+    ],
     search: { query: "ttnnnaat" },
     searchResults: {},
     selection: {},
@@ -71,9 +107,9 @@ export default class App extends React.Component<any, AppState> {
     showSelectionMeta: false,
     showSidebar: false,
     translations: [
-      { direction: -1, end: 630, start: 6 },
-      { end: 1147, start: 736 },
-      { end: 1885, start: 1165 },
+      { color: chooseRandomColor(), direction: -1, end: 630, name: "ORF 1", start: 6 },
+      { end: 1147, name: "", start: 736 },
+      { end: 1885, name: "ORF 2", start: 1165 },
     ],
     viewer: "both",
     zoom: 50,
@@ -87,6 +123,8 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
+
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
 
     const { show } = useContextMenu({
       id: CONTEXT_MENU_ID,
@@ -298,6 +336,7 @@ export default class App extends React.Component<any, AppState> {
                     // accession="MN623123"
                     key={`${this.state.viewer}${this.state.customChildren}`}
                     annotations={this.state.annotations}
+                    primers={this.state.primers}
                     enzymes={this.state.enzymes}
                     highlights={[{ start: 0, end: 10 }]}
                     name={this.state.name}

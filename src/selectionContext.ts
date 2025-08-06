@@ -1,6 +1,16 @@
 import * as React from "react";
 
-type SelectionTypeEnum = "ANNOTATION" | "FIND" | "TRANSLATION" | "ENZYME" | "SEQ" | "AMINOACID" | "HIGHLIGHT" | "";
+type SelectionTypeEnum =
+  | "ANNOTATION"
+  | "FIND"
+  | "TRANSLATION"
+  | "TRANSLATION_HANDLE"
+  | "ENZYME"
+  | "SEQ"
+  | "AMINOACID"
+  | "HIGHLIGHT"
+  | "PRIMER"
+  | "";
 
 /* Selection holds meta about the viewer(s) active selection. */
 export interface Selection {
@@ -16,6 +26,12 @@ export interface Selection {
   start?: number;
   type: SelectionTypeEnum;
   viewer?: "LINEAR" | "CIRCULAR";
+}
+
+export interface ExternalSelection {
+  clockwise?: boolean;
+  end: number;
+  start: number;
 }
 
 /** Initial/default selection */

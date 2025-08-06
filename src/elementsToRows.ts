@@ -159,16 +159,7 @@ export const createSingleRows = <T extends NameRange>(
 
   // assign each element to its respective array
   for (let i = 0; i < elements.length; i += 1) {
-    let { end, start } = elements[i];
-
-    // special case for enzymes that have cut-sites away from recog (BsaI)
-    // @ts-expect-error this is some hack for cut-sites
-    if (elements[i].fcut !== undefined) {
-      // @ts-expect-error this is some hack for cut-sites
-      const { fcut, rcut } = elements[i];
-      start = fcut > end || fcut < start ? fcut : start;
-      end = rcut > end || rcut < start ? rcut : end;
-    }
+    const { end, start } = elements[i];
 
     if (start < end) {
       let k = Math.floor(start / rowLength);

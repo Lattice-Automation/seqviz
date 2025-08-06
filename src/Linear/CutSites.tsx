@@ -40,7 +40,7 @@ export const CutSites = (props: {
     // TODO: remove this exclusion of cut-sites that cross the zero index after even more
     // zero-index accounting. This file is already hairy enough, so not in a rush to add zero-index
     // accounting here, yet.
-    cutSites.filter(c => c.end > c.start),
+    cutSites,
     firstBase,
     lastBase,
     findXAndWidth
@@ -162,9 +162,6 @@ const enhanceCutSites = (
   findXAndWidth: FindXAndWidthType
 ): CutSiteEnhanced[] =>
   cutSites.map((c: CutSite) => {
-    const { x: topX } = findXAndWidth(c.fcut, c.fcut);
-    const { x: bottomX } = findXAndWidth(c.rcut, c.rcut);
-
     // Prevent double rendering of cut-site lines across SeqBlocks. Without the shenanigans below,
     // if a cut site lands on the last or first base of a SeqBlock, it will also render at the end of a SeqBlock
     // and the start of the next. Below, we only show a cut if 1. it's wholly within this SeqBlock or
@@ -184,14 +181,53 @@ const enhanceCutSites = (
       showBottomLine = true;
     }
 
+    // Special case for cut sites that cross the zero index
+    let enhancedCutSite = c;
+    if (c.end < c.start) {
+      // If this is the part of the cut site that is on the last block
+      if (c.start > firstBase && c.start < lastBase) {
+        // Use the last base of the block to close the cut site
+        enhancedCutSite = { ...c, end: lastBase };
+        //If cuts are on the other block, use the last base as cut instead
+        if (c.fcut < c.start) {
+          enhancedCutSite = { ...enhancedCutSite, fcut: lastBase };
+        }
+        if (c.rcut < c.start) {
+          enhancedCutSite = { ...enhancedCutSite, rcut: lastBase };
+        }
+      } else {
+        // This is the part of the cut site that is on the first block, use the first base as the start of the cut site
+        enhancedCutSite = { ...c, start: firstBase };
+        // If cuts are on the other block, use the first base as cut instead
+        if (c.fcut > c.end) {
+          enhancedCutSite = { ...enhancedCutSite, fcut: firstBase };
+        }
+        if (c.rcut > c.end) {
+          enhancedCutSite = { ...enhancedCutSite, rcut: firstBase };
+        }
+      }
+    }
+
+    const { x: topX } = findXAndWidth(enhancedCutSite.fcut, enhancedCutSite.fcut);
+    const { x: bottomX } = findXAndWidth(enhancedCutSite.rcut, enhancedCutSite.rcut);
+
     return {
       bottom: {
         render: showBottomLine,
         x: bottomX,
       },
       c,
-      connector: calcConnector(c, topX, bottomX, firstBase, lastBase, showTopLine, showBottomLine, findXAndWidth),
-      highlight: calcHighlight(c, firstBase, lastBase, findXAndWidth),
+      connector: calcConnector(
+        enhancedCutSite,
+        topX,
+        bottomX,
+        firstBase,
+        lastBase,
+        showTopLine,
+        showBottomLine,
+        findXAndWidth
+      ),
+      highlight: calcHighlight(enhancedCutSite, firstBase, lastBase, findXAndWidth),
       top: {
         render: showTopLine,
         x: topX,

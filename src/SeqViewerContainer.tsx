@@ -6,9 +6,9 @@ import { EventHandler } from "./EventHandler";
 import Linear, { LinearProps } from "./Linear/Linear";
 import SelectionHandler, { InputRefFunc } from "./SelectionHandler";
 import CentralIndexContext from "./centralIndexContext";
-import { Annotation, CutSite, Highlight, NameRange, Range, SeqType } from "./elements";
+import { Annotation, CutSite, Highlight, NameRange, Primer, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
-import SelectionContext, { Selection, defaultSelection } from "./selectionContext";
+import SelectionContext, { ExternalSelection, Selection, defaultSelection } from "./selectionContext";
 
 /**
  * This is the width in pixels of a character that's 12px
@@ -51,15 +51,12 @@ interface SeqViewerContainerProps {
   onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
   onSelection: (selection: Selection) => void;
+  primers: Primer[];
   refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
   search: NameRange[];
   selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
-  selection?: {
-    clockwise?: boolean;
-    end: number;
-    start: number;
-  };
+  selection?: ExternalSelection;
   seq: string;
   seqType: SeqType;
   showComplement: boolean;
@@ -67,7 +64,7 @@ interface SeqViewerContainerProps {
   targetRef: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
-  translations: Range[];
+  translations: NameRange[];
   viewer: "linear" | "circular" | "both" | "both_flip";
   width: number;
   zoom: { circular: number; linear: number };
@@ -99,6 +96,26 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       selection: this.getSelection(defaultSelection, props.selection),
     };
   }
+
+  selectionIsProgramatic(selection: any): selection is Selection {
+    // If the selection was done programatically, it has not type
+    if (selection) return !selection.type;
+    return false;
+  }
+
+  // If the selection prop updates, also scroll the linear view to the new selection
+  componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
+    // Only scroll if the selection was done passed in as a prop by a user of SeqViz. Otherwise the selection was
+    // made by the user clicking an element or selecting a range of sequences
+    if (this.selectionIsProgramatic(this.props.selection)) {
+      if (
+        this.props.selection?.start !== prevProps.selection?.start &&
+        this.props.selection?.start !== this.props.selection?.end
+      ) {
+        this.setCentralIndex("LINEAR", this.props.selection?.start || 0);
+      }
+    }
+  };
 
   /** this is here because the size listener is returning a new "size" prop every time */
   shouldComponentUpdate = (nextProps: SeqViewerContainerProps, nextState: any) =>
@@ -132,14 +149,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   /**
    * Returns the selection that was either a prop (optional) or the selection maintained in state.
    */
-  getSelection = (
-    state: Selection,
-    prop?: {
-      clockwise?: boolean;
-      end: number;
-      start: number;
-    }
-  ): Selection => {
+  getSelection = (state: Selection, prop?: ExternalSelection): Selection => {
     if (prop) {
       return { ...prop, clockwise: typeof prop.clockwise === "undefined" || !!prop.clockwise, type: "" };
     }
