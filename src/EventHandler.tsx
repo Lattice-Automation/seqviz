@@ -9,7 +9,7 @@ export interface EventsHandlerProps {
   children: React.ReactNode;
   copyEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   handleMouseEvent: (e: any) => void;
-  onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
   selectAllEvent: (e: React.KeyboardEvent<HTMLElement>) => boolean;
   selection: Selection;
   seq: string;
@@ -38,7 +38,7 @@ export class EventHandler extends React.PureComponent<EventsHandlerProps> {
     }
     e.preventDefault();
     this.handleSeqInteraction(keyType);
-    onKeyPress(e, selection);
+    onKeyPress?.(e, selection);
   };
 
   /**

@@ -45,15 +45,15 @@ interface SeqBlockProps {
   inputRef: InputRefFunc;
   key: string;
   lineHeight: number;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: string) => void;
   primerFwdRows: Primer[][];
   primerRevRows: Primer[][];
@@ -236,11 +236,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         key={key}
         fill={color || undefined}
         x={charWidth * i + charWidth * 0.2}
-        onClick={e => onClick(element, false, true, e.target as HTMLElement)}
-        onContextMenu={e => onContextMenu(element, false, true, e)}
-        onDoubleClick={e => onDoubleClick(element, false, true, e.target as HTMLElement)}
-        onMouseEnter={e => onHover(element, true, "LINEAR", e.target as HTMLElement)}
-        onMouseLeave={e => onHover(element, false, "LINEAR", e.target as HTMLElement)}
+        onClick={e => onClick?.(element, false, true, e.target as HTMLElement)}
+        onContextMenu={e => onContextMenu?.(element, false, true, e)}
+        onDoubleClick={e => onDoubleClick?.(element, false, true, e.target as HTMLElement)}
+        onMouseEnter={e => onHover?.(element, true, "LINEAR", e.target as HTMLElement)}
+        onMouseLeave={e => onHover?.(element, false, "LINEAR", e.target as HTMLElement)}
       >
         {bp}
       </tspan>

@@ -20,15 +20,15 @@ export interface LinearProps {
   highlights: Highlight[];
   inputRef: InputRefFunc;
   lineHeight: number;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (id: string) => void;
   primers: Primer[];
   search: NameRange[];

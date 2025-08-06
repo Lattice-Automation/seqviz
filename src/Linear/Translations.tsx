@@ -25,15 +25,15 @@ interface TranslationRowsProps {
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translationRows: Translation[][];
@@ -110,15 +110,15 @@ const TranslationRow = (props: {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translations: Translation[];
@@ -155,15 +155,15 @@ interface SingleNamedElementAminoacidsProps {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translation: Translation;
@@ -309,19 +309,19 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
               id={aaId}
               transform={`translate(${x}, 0)`}
               onClick={e => {
-                onClick(aaElement, false, true, e.target as SVGGElement);
+                onClick?.(aaElement, false, true, e.target as SVGGElement);
               }}
               onContextMenu={e => {
-                onContextMenu(aaElement, false, true, e);
+                onContextMenu?.(aaElement, false, true, e);
               }}
               onDoubleClick={e => {
-                onDoubleClick(aaElement, false, true, e.target as SVGGElement);
+                onDoubleClick?.(aaElement, false, true, e.target as SVGGElement);
               }}
               onMouseEnter={e => {
-                onHover(aaElement, true, "LINEAR", e.target as SVGGElement);
+                onHover?.(aaElement, true, "LINEAR", e.target as SVGGElement);
               }}
               onMouseLeave={e => {
-                onHover(aaElement, false, "LINEAR", e.target as SVGGElement);
+                onHover?.(aaElement, false, "LINEAR", e.target as SVGGElement);
               }}
             >
               <path

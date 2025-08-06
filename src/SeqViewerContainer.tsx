@@ -40,16 +40,16 @@ interface SeqViewerContainerProps {
   height: number;
   highlights: Highlight[];
   name: string;
-  onClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onContextMenu: (
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
     element: any,
     circular: boolean,
     linear: boolean,
     event: React.MouseEvent<Element, MouseEvent>
   ) => void;
-  onDoubleClick: (element: any, circular: boolean, linear: boolean, container: Element) => void;
-  onHover: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
-  onKeyPress: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
+  onKeyPress?: (event: React.KeyboardEvent<HTMLElement>, selection: Selection) => void;
   onSelection: (selection: Selection) => void;
   primers: Primer[];
   refs?: SeqVizChildRefs;
