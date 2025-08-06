@@ -148,6 +148,7 @@ export default class App extends React.Component<any, AppState> {
         direction: 1,
         end: this.state.seq.length,
         start: 0,
+        name: "",
       });
     } else {
       const { start, end, clockwise } = this.state.selection;
@@ -155,6 +156,7 @@ export default class App extends React.Component<any, AppState> {
         direction: 1,
         end: clockwise ? end : start,
         start: clockwise ? start : end,
+        name: "",
       });
     }
     this.setState({
@@ -175,6 +177,7 @@ export default class App extends React.Component<any, AppState> {
         direction: 1,
         end: this.state.seq.length,
         start: 0,
+        name: "",
       });
     } else {
       const { start, end, clockwise } = this.state.selection;
@@ -182,6 +185,7 @@ export default class App extends React.Component<any, AppState> {
         direction: -1,
         end: clockwise ? end : start,
         start: clockwise ? start : end,
+        name: "",
       });
     }
     this.setState({
