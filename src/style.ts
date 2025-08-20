@@ -38,6 +38,7 @@ export const search: CSS.Properties = {
 export const highlight: CSS.Properties = {
   cursor: "pointer",
   fill: "rgba(255, 251, 7, 0.25)",
+  fillOpacity: 0.25,
   strokeWidth: "1",
 };
 

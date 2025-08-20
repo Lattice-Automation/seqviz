@@ -7,6 +7,7 @@ import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
 import { InfiniteScroll } from "./InfiniteScroll";
 import { SeqBlock } from "./SeqBlock";
+import { SearchResult } from "../search";
 
 export interface LinearProps {
   annotations: Annotation[];
@@ -21,8 +22,9 @@ export interface LinearProps {
   inputRef: InputRefFunc;
   lineHeight: number;
   onUnmount: (id: string) => void;
+  styleAtIndex?: (index: number) => React.CSSProperties;
   primers: Primer[];
-  search: NameRange[];
+  search: SearchResult[];
   seq: string;
   seqFontSize: number;
   seqType: SeqType;
@@ -127,8 +129,12 @@ export default class Linear extends React.Component<LinearProps> {
       arrSize
     );
 
-    const searchRows: NameRange[][] =
-      search && search.length ? createSingleRows(search, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
+    const nucleicAcidSearch = search.filter(s => s.sequenceType === "dna" || s.sequenceType === "rna");
+    const nucleicAcidSearchRows: NameRange[][] =
+      nucleicAcidSearch && nucleicAcidSearch.length ? createSingleRows(nucleicAcidSearch, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
+    const aminoAcidSearch = search.filter(s => s.sequenceType === "aa");
+    const aminoAcidSearchRows: NameRange[][] =
+      aminoAcidSearch && aminoAcidSearch.length ? createSingleRows(aminoAcidSearch, bpsPerBlock, arrSize) : new Array(arrSize).fill([]);
 
     const highlightRows = createSingleRows(highlights, bpsPerBlock, arrSize);
 
@@ -201,7 +207,8 @@ export default class Linear extends React.Component<LinearProps> {
           lineHeight={lineHeight}
           primerFwdRows={primerFwdRows[i]}
           primerRevRows={primerRevRows[i]}
-          searchRows={searchRows[i]}
+          nucleicAcidSearchRows={nucleicAcidSearchRows[i]}
+          aminoAcidSearchRows={aminoAcidSearchRows[i]}
           seq={seqs[i]}
           seqFontSize={this.props.seqFontSize}
           seqType={seqType}
@@ -213,6 +220,7 @@ export default class Linear extends React.Component<LinearProps> {
           zoom={zoom}
           zoomed={zoomed}
           onUnmount={onUnmount}
+          styleAtIndex={this.props.styleAtIndex}
         />
       );
       yDiff += blockHeights[i];

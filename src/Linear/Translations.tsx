@@ -26,6 +26,7 @@ interface TranslationRowsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: string) => void;
+  styleAtIndex?: (i: number) => React.CSSProperties;
   seqType: SeqType;
   translationRows: Translation[][];
   yDiff: number;
@@ -43,6 +44,7 @@ export const TranslationRows = ({
   inputRef,
   lastBase,
   onUnmount,
+  styleAtIndex,
   seqType,
   translationRows,
   yDiff,
@@ -72,6 +74,7 @@ export const TranslationRows = ({
           translations={translations}
           y={currentElementY}
           onUnmount={onUnmount}
+          styleAtIndex={styleAtIndex || (() => ({}))}
         />
       );
     })}
@@ -94,6 +97,7 @@ const TranslationRow = (props: {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: string) => void;
+  styleAtIndex: (i: number) => React.CSSProperties;
   seqType: SeqType;
   translations: Translation[];
   y: number;
@@ -130,6 +134,7 @@ interface SingleNamedElementAminoacidsProps {
   inputRef: InputRefFunc;
   lastBase: number;
   onUnmount: (a: string) => void;
+  styleAtIndex: (i: number) => React.CSSProperties;
   seqType: SeqType;
   translation: Translation;
   y: number;
@@ -176,6 +181,7 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
       height: h,
       inputRef,
       lastBase,
+      styleAtIndex,
       seqType,
       translation,
       y,
@@ -278,6 +284,7 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
                   cursor: "pointer",
                   opacity: 0.7,
                   strokeWidth: 0.8,
+                  ...styleAtIndex(i),
                 }}
               />
 

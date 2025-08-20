@@ -9,6 +9,7 @@ import CentralIndexContext from "./centralIndexContext";
 import { Annotation, CutSite, Highlight, NameRange, Primer, SeqType } from "./elements";
 import { isEqual } from "./isEqual";
 import SelectionContext, { ExternalSelection, Selection, defaultSelection } from "./selectionContext";
+import { SearchResult } from "./search";
 
 /**
  * This is the width in pixels of a character that's 12px
@@ -44,7 +45,7 @@ interface SeqViewerContainerProps {
   primers: Primer[];
   refs?: SeqVizChildRefs;
   rotateOnScroll: boolean;
-  search: NameRange[];
+  search: SearchResult[];
   selectAllEvent: (event: React.KeyboardEvent<HTMLElement>) => boolean;
   selection?: ExternalSelection;
   seq: string;

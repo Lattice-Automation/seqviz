@@ -27,6 +27,11 @@ export type FindXAndWidthElementType = (
   elements: NameRange[]
 ) => { overflowLeft: boolean; overflowRight: boolean; width: number; x: number };
 
+// Magic numbers to vertically center find results relative to the nucleic
+// acid or amino acid sequence row. In pixels.
+const OFFSET_TO_CENTER_AA = -2;
+const OFFSET_TO_CENTER_NA = -3;
+
 interface SeqBlockProps {
   annotationRows: Annotation[][];
   blockHeight: number;
@@ -45,9 +50,11 @@ interface SeqBlockProps {
   key: string;
   lineHeight: number;
   onUnmount: (a: string) => void;
+  styleAtIndex?: (i: number) => React.CSSProperties;
   primerFwdRows: Primer[][];
   primerRevRows: Primer[][];
-  searchRows: Range[];
+  nucleicAcidSearchRows: Range[];
+  aminoAcidSearchRows: Range[];
   seq: string;
   seqFontSize: number;
   seqType: SeqType;
@@ -233,9 +240,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       inputRef,
       lineHeight,
       onUnmount,
+      styleAtIndex,
       primerFwdRows: primerFwdRows,
       primerRevRows: primerRevRows,
-      searchRows,
+      nucleicAcidSearchRows,
+      aminoAcidSearchRows,
       seq,
       seqFontSize,
       seqType,
@@ -409,11 +418,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           />
         )}
         <Highlights
-          compYDiff={compYDiff - 3}
+          compYDiff={compYDiff + OFFSET_TO_CENTER_NA}
           findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           highlights={highlights}
-          indexYDiff={indexYDiff - 3}
+          indexYDiff={indexYDiff + OFFSET_TO_CENTER_NA}
           inputRef={inputRef}
           lastBase={lastBase}
           lineHeight={lineHeight}
@@ -428,11 +437,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           selectEdgeHeight={selectEdgeHeight}
         />
         <Find
-          compYDiff={compYDiff - 3}
-          filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
+          compYDiff={compYDiff + OFFSET_TO_CENTER_NA}
+          filteredRows={showComplement ? nucleicAcidSearchRows : nucleicAcidSearchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          indexYDiff={indexYDiff - 3}
+          indexYDiff={indexYDiff + OFFSET_TO_CENTER_NA}
           inputRef={inputRef}
           lastBase={lastBase}
           lineHeight={lineHeight}
@@ -456,21 +465,36 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           />
         )}
         {translationRows.length && (
-          <TranslationRows
-            bpsPerBlock={bpsPerBlock}
-            charWidth={charWidth}
-            elementHeight={elementHeight}
-            findXAndWidth={this.findXAndWidth}
-            findXAndWidthElement={this.findXAndWidthElement}
-            firstBase={firstBase}
-            fullSeq={fullSeq}
-            inputRef={inputRef}
-            lastBase={lastBase}
-            seqType={seqType}
-            translationRows={translationRows}
-            yDiff={translationYDiff}
-            onUnmount={onUnmount}
-          />
+          <>
+            <TranslationRows
+              bpsPerBlock={bpsPerBlock}
+              charWidth={charWidth}
+              elementHeight={elementHeight}
+              findXAndWidth={this.findXAndWidth}
+              findXAndWidthElement={this.findXAndWidthElement}
+              firstBase={firstBase}
+              fullSeq={fullSeq}
+              inputRef={inputRef}
+              lastBase={lastBase}
+              seqType={seqType}
+              translationRows={translationRows}
+              yDiff={translationYDiff}
+              onUnmount={onUnmount}
+              styleAtIndex={styleAtIndex}
+            />
+            <Find
+              compYDiff={translationYDiff + OFFSET_TO_CENTER_AA}
+              filteredRows={aminoAcidSearchRows}
+              findXAndWidth={this.findXAndWidth}
+              firstBase={firstBase}
+              indexYDiff={translationYDiff + OFFSET_TO_CENTER_AA}
+              inputRef={inputRef}
+              lastBase={lastBase}
+              lineHeight={lineHeight}
+              listenerOnly={false}
+              zoomed={zoomed}
+            />
+          </>
         )}
         {annotationRows.length && (
           <AnnotationRows
@@ -521,16 +545,16 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
             lastBase={lastBase}
             lineHeight={lineHeight}
             size={size}
-            yDiff={cutSiteYDiff - 3}
+            yDiff={cutSiteYDiff + OFFSET_TO_CENTER_NA}
             zoom={zoom}
           />
         )}
         <Find
-          compYDiff={compYDiff - 3}
-          filteredRows={showComplement ? searchRows : searchRows.filter(r => r.direction === 1)}
+          compYDiff={compYDiff + OFFSET_TO_CENTER_NA}
+          filteredRows={showComplement ? nucleicAcidSearchRows : nucleicAcidSearchRows.filter(r => r.direction === 1)}
           findXAndWidth={this.findXAndWidth}
           firstBase={firstBase}
-          indexYDiff={indexYDiff - 3}
+          indexYDiff={indexYDiff + OFFSET_TO_CENTER_NA}
           inputRef={inputRef}
           lastBase={lastBase}
           lineHeight={lineHeight}
@@ -538,11 +562,11 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
           zoomed={zoomed}
         />
         <Highlights
-          compYDiff={compYDiff - 3}
+          compYDiff={compYDiff + OFFSET_TO_CENTER_NA}
           findXAndWidth={this.findXAndWidthElement}
           firstBase={firstBase}
           highlights={highlights}
-          indexYDiff={indexYDiff - 3}
+          indexYDiff={indexYDiff + OFFSET_TO_CENTER_NA}
           inputRef={inputRef}
           lastBase={lastBase}
           lineHeight={lineHeight}

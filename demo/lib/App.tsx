@@ -218,13 +218,13 @@ export default class App extends React.Component<any, AppState> {
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput
-                label="Show complement"
+                label="Show complement?"
                 name="showComplement"
                 set={(showComplement: boolean) => this.setState({ showComplement })}
               />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
-              <CheckboxInput label="Show index" name="index" set={showIndex => this.setState({ showIndex })} />
+              <CheckboxInput label="Show index?" name="index" set={showIndex => this.setState({ showIndex })} />
             </Menu.Item>
             <Menu.Item as="a" className="options-checkbox">
               <CheckboxInput

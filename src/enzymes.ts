@@ -24,6 +24,12 @@ import { Enzyme } from "./elements";
  * ```
  */
 const enzymes: { [key: string]: Enzyme } = {
+  aari: {
+    fcut: 11,
+    name: 'AarI',
+    rcut: 15,
+    rseq: 'CACCTGCNNNNNNNN',
+  },
   aatii: {
     fcut: 5,
     name: "AatII",
@@ -1115,6 +1121,12 @@ const enzymes: { [key: string]: Enzyme } = {
     name: "PaeR7I",
     rcut: 5,
     rseq: "CTCGAG",
+  },
+  paqci: {
+    fcut: 11,
+    name: 'PaqCI',
+    rcut: 15,
+    rseq: 'CACCTGCNNNNNNNN',
   },
   pcii: {
     fcut: 1,

@@ -88,7 +88,7 @@ const SingleCutSite = (props: {
           type: "ENZYME",
           viewer: "CIRCULAR",
         })}
-        className="la-vz-cut-site"
+        className={`la-vz-cut-site ${id}`}
         cursor="pointer"
         d={genArc({
           innerRadius: botR,

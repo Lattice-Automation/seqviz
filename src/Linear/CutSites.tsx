@@ -91,7 +91,7 @@ export const CutSites = (props: {
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff}
                     L ${c.highlight.x + c.highlight.width} ${lineYDiff + 2 * lineHeight}
                     L ${c.highlight.x} ${lineYDiff + 2 * lineHeight} Z`}
-                style={c.c.color?.length ? { ...cutSiteHighlight, fill: c.c.color } : cutSiteHighlight}
+                style={c.c.enzyme.color?.length ? { ...cutSiteHighlight, fill: c.c.enzyme.color } : cutSiteHighlight}
                 onMouseOut={() => onCutSiteHover(c.c.id, false)}
                 onMouseOver={() => onCutSiteHover(c.c.id, true)}
               />
@@ -367,8 +367,8 @@ const withLabels = (cutSites: CutSiteEnhanced[], size: Size): CutSiteLabelled[] 
  * on hover, an enzyme recognition site should have an opacity of 0.5. 0 otherwise
  * on hover, an enzyme name should have opacity 1.0, 0 otherwise
  */
-const onCutSiteHover = (className: string, on = false) => {
-  if (!document) return;
+export const onCutSiteHover = (className: string, on = false) => {
+  if (!(document && className)) return;
 
   let elements = document.getElementsByClassName(`${className}-label`) as HTMLCollectionOf<HTMLElement>;
   for (let i = 0; i < elements.length; i += 1) {

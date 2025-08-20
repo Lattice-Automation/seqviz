@@ -18,7 +18,7 @@ import {
   TranslationProp,
 } from "./elements";
 import { isEqual } from "./isEqual";
-import search from "./search";
+import search, { SearchResult } from "./search";
 import { ExternalSelection, Selection } from "./selectionContext";
 import { complement, directionality, guessType, randomID } from "./sequence";
 
@@ -146,6 +146,8 @@ export interface SeqVizProps {
   /** extra style props to apply to the outermost div of SeqViz */
   style?: Record<string, unknown>;
 
+  styleAtIndex?: (i: number) => React.CSSProperties;
+
   /** ranges of sequence that should have amino acid translations shown */
   translations?: TranslationProp[];
 
@@ -171,7 +173,7 @@ export interface SeqVizState {
   compSeq: string;
   cutSites: CutSite[];
   name: string;
-  search: NameRange[];
+  search: SearchResult[];
   seq: string;
   seqType: SeqType;
 }
@@ -377,14 +379,14 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
   /**
    * Search for the query sequence in the part sequence, set in state.
    */
-  search = (props: SeqVizProps, seq: string): { search: NameRange[] } => {
-    const { onSearch, search: searchProp, seqType } = props;
+  search = (props: SeqVizProps, seq: string): { search: SearchResult[] } => {
+    const { onSearch, search: searchProp, translations, seqType } = props;
 
     if (!searchProp || !seq || !seq.length) {
       return { search: [] };
     }
 
-    const results = search(searchProp.query, searchProp.mismatch, seq, seqType || guessType(seq));
+    const results = search(searchProp.query, searchProp.mismatch, seq, seqType || guessType(seq), translations ?? []);
     if (this.state && isEqual(results, this.state.search)) {
       return { search: this.state.search };
     }
@@ -424,7 +426,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // If the seqType is aa, make the entire sequence the "translation"
     if (seqType === "aa") {
       // TODO: during some grand future refactor, make this cleaner and more transparent to the user
-      translations = [{ direction: 1, end: seq.length, start: 0, name: "translation" }];
+      translations = [{ direction: 1, end: seq.length, start: 0, name: '' }];
     }
 
     // Since all the props are optional, we need to parse them to defaults.

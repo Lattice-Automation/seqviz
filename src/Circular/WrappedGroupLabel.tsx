@@ -1,4 +1,5 @@
 import * as React from "react";
+import { onCutSiteHover } from "../Linear/CutSites";
 
 import { CHAR_WIDTH } from "../SeqViewerContainer";
 import { circularLabel, svgText } from "../style";
@@ -122,8 +123,14 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
                   style={circularLabel}
                   tabIndex={-1}
                   y={groupCoor.y + (i + 0.5) * lineHeight}
-                  onMouseLeave={() => setHoveredLabelUnderline(l.id || "", false)}
-                  onMouseOver={() => setHoveredLabelUnderline(l.id || "", true)}
+                  onMouseLeave={() => {
+                    setHoveredLabelUnderline(l.id || "", false)
+                    onCutSiteHover(l.id!, false)
+                  }}
+                  onMouseOver={() => {
+                    setHoveredLabelUnderline(l.id || "", true);
+                    onCutSiteHover(l.id!, true)
+                  }}
                 >
                   {l.name}
                 </tspan>

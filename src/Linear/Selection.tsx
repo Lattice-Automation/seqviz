@@ -231,7 +231,10 @@ class Block extends React.PureComponent<BlockProps> {
 
     return (
       <>
-        <rect {...blockProps} width={width ? width + 1 : undefined} x={x || undefined} />
+        {/**
+         * The original code was returning undefined for width not rounded up
+        */}
+        <rect {...blockProps} width={width != null ? Math.floor(width + 1) : undefined} x={x || undefined} />
         {secondBlock}
       </>
     );

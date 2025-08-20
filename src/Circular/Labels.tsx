@@ -5,6 +5,7 @@ import { Coor, Size } from "../elements";
 import { circularLabel, circularLabelLine } from "../style";
 import { GenArcFunc, ILabel, RENDER_SEQ_LENGTH_CUTOFF } from "./Circular";
 import { WrappedGroupLabel, setHoveredLabelUnderline } from "./WrappedGroupLabel";
+import { onCutSiteHover } from "../Linear/CutSites";
 
 interface LabelWithCoors {
   label: ILabel;
@@ -322,8 +323,14 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
                   dominantBaseline="middle"
                   style={circularLabel}
                   textAnchor={g.textAnchor}
-                  onMouseEnter={() => setHoveredLabelUnderline(first.id || "", true)}
-                  onMouseLeave={() => setHoveredLabelUnderline(first.id || "", false)}
+                  onMouseEnter={() => {
+                    setHoveredLabelUnderline(first.id || "", true)
+                    onCutSiteHover(first.id!, true)
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredLabelUnderline(first.id || "", false)
+                    onCutSiteHover(first.id!, false)
+                  }}
                 >
                   {g.name}
                 </text>
