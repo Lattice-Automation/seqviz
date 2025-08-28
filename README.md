@@ -20,6 +20,8 @@
   <img align=top src="./demo/public/logos-corteva.jpeg" width="200" />
   &nbsp; &nbsp; &nbsp; &nbsp;
   <img align=top src="./demo/public/logos-betteromics.png" width="200" />
+  &nbsp; &nbsp; &nbsp; &nbsp;
+  <img align=top src="./demo/public/logos-igem.png" width="70" />
 </div>
 
 ## Table of Contents
