@@ -174,6 +174,10 @@ export interface SeqVizState {
   search: NameRange[];
   seq: string;
   seqType: SeqType;
+  zoom: {
+    circular: number;
+    linear: number;
+  };
 }
 
 /**
@@ -215,6 +219,10 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       ...seq,
       ...this.search(props, seq.seq),
       ...this.cut(seq.seq, seq.seqType),
+      zoom: {
+        circular: this.props.zoom!.circular!,
+        linear: this.props.zoom!.linear!,
+      },
     };
   }
 
@@ -275,7 +283,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    */
   componentDidUpdate = (
     // previous props
-    { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
+    { accession = "", annotations, enzymes, enzymesCustom, file, search, zoom }: SeqVizProps,
     // previous state
     { seq, seqType }: SeqVizState
   ) => {
@@ -316,6 +324,16 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     if (!isEqual(annotations, this.props.annotations)) {
       this.setState({
         annotations: this.parseAnnotations(this.props.annotations, this.props.seq),
+      });
+    }
+
+    // zoom changed outside SeqViz
+    if (!isEqual(zoom, this.props.zoom)) {
+      this.setState({
+        zoom: {
+          circular: this.props.zoom?.circular ?? this.state.zoom.circular,
+          linear: this.props.zoom?.linear ?? this.state.zoom.linear,
+        },
       });
     }
   };
@@ -414,9 +432,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     }));
 
   render() {
-    const { highlightedRegions, highlights, primers, showComplement, showIndex, style, zoom } = this.props;
+    const { highlightedRegions, highlights, primers, showComplement, showIndex, style } = this.props;
     let { translations } = this.props;
-    const { compSeq, seq, seqType } = this.state;
+    const { compSeq, seq, seqType, zoom } = this.state;
 
     // This is an unfortunate bit of seq checking. We could get a seq directly or from a file parsed to a part.
     if (!seq) return <div className="la-vz-seqviz" />;
@@ -472,7 +490,19 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
 
     return (
       <div className="la-vz-seqviz" data-testid="la-vz-seqviz" style={{ height: "100%", width: "100%", ...style }}>
-        <SeqViewerContainer {...this.props} {...props} {...this.state} />
+        <SeqViewerContainer
+          {...this.props}
+          {...props}
+          {...this.state}
+          setLinearZoom={(linearZoom: number) => {
+            this.setState({
+              zoom: {
+                circular: this.state.zoom.circular,
+                linear: linearZoom,
+              },
+            });
+          }}
+        />
       </div>
     );
   }

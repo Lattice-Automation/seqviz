@@ -211,7 +211,7 @@ export default class App extends React.Component<any, AppState> {
               />
             </Menu.Item>
             <Menu.Item as="a">
-              <LinearZoomInput setZoom={zoom => this.setState({ zoom })} />
+              <LinearZoomInput zoom={this.state.zoom} setZoom={zoom => this.setState({ zoom })} />
             </Menu.Item>
             <Menu.Item as="a">
               <SearchQueryInput setQuery={query => this.setState({ search: { query } })} />
@@ -294,16 +294,16 @@ const ViewerTypeInput = ({ setType }: { setType: (viewType: string) => void }) =
   </div>
 );
 
-const LinearZoomInput = ({ setZoom }: { setZoom: (zoom: number) => void }) => (
+const LinearZoomInput = ({ zoom, setZoom }: { zoom: number; setZoom: (zoom: number) => void }) => (
   <div className="option" id="zoom">
     <span>Zoom</span>
     <input
       className="slider"
-      defaultValue="50"
       id="zoom"
       max="100"
       min="1"
       type="range"
+      value={zoom}
       onChange={e => {
         setZoom(parseInt(e.target.value));
       }}
