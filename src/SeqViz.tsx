@@ -277,13 +277,14 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // previous props
     { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
     // previous state
-    { seq, seqType }: SeqVizState
+    { seq, seqType, name }: SeqVizState
   ) => {
     // New accession or file provided, fetch and/or parse.
     if (
       accession !== this.props.accession ||
       file !== this.props.file ||
       (this.props.seq && this.props.seq !== seq) ||
+      (this.props.name && this.props.name !== name) ||
       (this.props.seqType && this.props.seqType !== seqType)
     ) {
       const input = this.parseInput();
