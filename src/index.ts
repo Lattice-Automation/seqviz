@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot, Root } from "react-dom/client";
 import { renderToString as reactRenderToString } from "react-dom/server";
 
 import Circular from "./Circular/Circular";
@@ -28,7 +28,7 @@ export type { LinearProps } from "./Linear/Linear";
  */
 const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) => {
   // used to keep track of whether to re-render after a "set" call
-  let rendered = false;
+  let root: Root | null = null;
   // get the HTML element by ID or use as is if passed directly
   let domElement: HTMLElement | null;
   if (!document) return;
@@ -48,8 +48,10 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
    * Render the Viewer to the element passed
    */
   const render = () => {
-    rendered = true;
-    ReactDOM.render(viewer, domElement);
+    if (!root && domElement) {
+      root = createRoot(domElement);
+    }
+    root?.render(viewer);
     return viewer;
   };
 
@@ -67,8 +69,8 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
     options = { ...options, ...state };
     viewer = React.createElement(SeqViz, options, null);
 
-    if (rendered) {
-      ReactDOM.render(viewer, domElement);
+    if (root) {
+      root.render(viewer);
     }
     return viewer;
   };

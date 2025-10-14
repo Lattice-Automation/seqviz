@@ -173,7 +173,7 @@ class Block extends React.PureComponent<BlockProps> {
 
     let x: number | null = null;
     let width: number | null = null;
-    let secondBlock: JSX.Element | null = null;
+    let secondBlock: React.ReactElement | null = null;
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {

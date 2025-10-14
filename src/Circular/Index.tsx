@@ -92,7 +92,7 @@ export class Index extends React.PureComponent<IndexProps> {
       lastBase += seqLength;
     }
 
-    const basepairsToRender: JSX.Element[] = [];
+    const basepairsToRender: React.ReactElement[] = [];
     for (let i = firstBase; i <= lastBase; i += 1) {
       basepairsToRender.push(
         <text
@@ -186,7 +186,7 @@ export class Index extends React.PureComponent<IndexProps> {
     const subtitleStyle = {
       fill: "gray",
       fontSize: 12,
-      textAnchor: "middle",
+      textAnchor: "middle" as const,
     };
 
     // generate the full circle around the edge of the plasmid

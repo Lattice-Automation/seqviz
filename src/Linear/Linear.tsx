@@ -6,7 +6,7 @@ import { createMultiRows, createSingleRows, stackElements } from "../elementsToR
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
 import { InfiniteScroll } from "./InfiniteScroll";
-import { SeqBlock } from "./SeqBlock";
+import { SeqBlock, SeqBlockProps } from "./SeqBlock";
 
 export interface LinearProps {
   annotations: Annotation[];
@@ -177,7 +177,7 @@ export default class Linear extends React.Component<LinearProps> {
       blockHeights[i] = blockHeight;
     }
 
-    const seqBlocks: JSX.Element[] = [];
+    const seqBlocks: React.ReactElement<SeqBlockProps>[] = [];
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;

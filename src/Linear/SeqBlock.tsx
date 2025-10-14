@@ -26,7 +26,7 @@ export type FindXAndWidthElementType = (
   elements: NameRange[]
 ) => { overflowLeft: boolean; overflowRight: boolean; width: number; x: number };
 
-interface SeqBlockProps {
+export interface SeqBlockProps {
   annotationRows: Annotation[][];
   blockHeight: number;
   bpColors?: { [key: number | string]: string };
@@ -251,7 +251,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
     const textProps = {
       fontSize: seqFontSize,
       lengthAdjust: "spacing",
-      textAnchor: "start",
+      textAnchor: "start" as const,
       textLength: size.width >= 0 ? size.width : 1,
       textRendering: "optimizeLegibility",
     };
