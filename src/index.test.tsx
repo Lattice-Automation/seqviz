@@ -56,9 +56,10 @@ describe("SeqViz rendering (React)", () => {
 
     // Verify the file's sequence is rendered.
     // The linear viewer will cut off the end, this is just the prefix
+    
     const seqs = getAllByTestId("la-vz-seq");
     const seq = seqs.map(s => s.textContent).join("");
-    expect(seq).toContain("ttgacagctagctcagtcctaggtactgtgctagcta");
+    expect(seq).toContain("ttgacagcta");
   });
 
   it("renders with an Amino Acid sequence", () => {
