@@ -366,18 +366,12 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   }
 }
 
-// Wrapper component to use the modern useResizeDetector hook
-const SeqViewerContainerWithResize: React.FC<Omit<SeqViewerContainerProps, 'height' | 'width' | 'targetRef'>> = (props) => {
+const SeqViewerContainerWithResize: React.FC<
+  Omit<SeqViewerContainerProps, "height" | "width" | "targetRef">
+> = props => {
   const { height, ref, width } = useResizeDetector();
-  
-  return (
-    <SeqViewerContainer
-      {...props}
-      height={height || 0}
-      targetRef={ref}
-      width={width || 0}
-    />
-  );
+
+  return <SeqViewerContainer {...props} height={height || 0} targetRef={ref} width={width || 0} />;
 };
 
 export default SeqViewerContainerWithResize;

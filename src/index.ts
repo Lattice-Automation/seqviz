@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createRoot, Root } from "react-dom/client";
+import { Root, createRoot } from "react-dom/client";
 import { renderToString as reactRenderToString } from "react-dom/server";
 
 import Circular from "./Circular/Circular";
