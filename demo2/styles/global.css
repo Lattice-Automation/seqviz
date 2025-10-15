@@ -1,0 +1,41 @@
+body {
+  width: auto !important;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+div,
+input,
+label,
+button {
+  font-family: Roboto Mono, Monaco, monospace;
+  font-size: 1.1rem;
+}
+
+h1 {
+  font-family: Roboto Mono, Monaco, monospace;
+}
+
+#seqviewer {
+  height: calc(100% - 64px);
+  width: 100%;
+  margin: 0px;
+  flex: 1 1 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+

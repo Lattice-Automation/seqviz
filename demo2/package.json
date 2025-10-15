@@ -1,0 +1,48 @@
+{
+  "name": "seqviz-demo2",
+  "homepage": ".",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "next build && next export",
+    "fix": "prettier ./lib/** ./pages/** --write && eslint lib --ext ts,tsx --fix",
+    "lint": "prettier ./lib/** --check && eslint lib --ext ts,tsx --quiet",
+    "start": "open http://localhost:3011/ && next dev -p 3011",
+    "dev": "next dev -p 3011"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^7.0.0",
+    "@mui/material": "^7.0.0",
+    "@mui/material-nextjs": "^7.0.0",
+    "browserslist": "^4.21.3",
+    "history": "^4.10.1",
+    "lodash": "^4.17.21",
+    "next": "^15.5.5",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "seqparse": "^0.2.1",
+    "typescript": "^5.5.0"
+  },
+  "browserslist": {
+    "production": [
+      ">1%"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.184",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.0",
+    "prettier": "^3.2.0",
+    "webpack": "^5.94.0"
+  }
+}
