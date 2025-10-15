@@ -232,7 +232,7 @@ export class Labels extends React.Component<LabelsProps, LabelsState> {
 
       // check whether any of these attempted new labels overlaps with the neighbors
       const overlapWithNeighbors = newLabels.some(l =>
-        [leftNeighbor, rightNeighbor].some(n => n && Math.abs(n.textCoor.y - l.textCoor.y) < 15)
+        [leftNeighbor, rightNeighbor].some(n => n && Math.abs(n.textCoor.y - l.textCoor.y) < 15),
       );
       if (overlapWithNeighbors) return acc.concat(g); // just bail and return the original grouping
       return acc.concat(...newLabels); // add the newly created labels

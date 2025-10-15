@@ -193,7 +193,7 @@ class Block extends React.PureComponent<BlockProps> {
         } else {
           ({ width, x } = findXAndWidth(
             start > lastBase ? firstBase : Math.max(firstBase, start),
-            end < firstBase ? lastBase : Math.min(lastBase, end)
+            end < firstBase ? lastBase : Math.min(lastBase, end),
           ));
         }
       }

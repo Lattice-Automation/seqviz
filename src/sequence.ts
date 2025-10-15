@@ -267,7 +267,7 @@ export const directionality = (direction: number | string | undefined): -1 | 0 |
 
 const rnaCodonToAminoAcid = Object.keys(dnaCodonToAminoAcid).reduce(
   (acc, k) => ({ ...acc, [k.replace(/T/gi, "U")]: dnaCodonToAminoAcid[k] }),
-  {}
+  {},
 );
 
 /**

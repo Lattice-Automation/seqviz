@@ -64,7 +64,7 @@ export class Index extends React.PureComponent<IndexProps> {
       t =>
         Math.abs(centralIndex - t) < tickTolerance ||
         Math.abs(centralIndex + seqLength - t) < tickTolerance ||
-        Math.abs(centralIndex - seqLength - t) < tickTolerance
+        Math.abs(centralIndex - seqLength - t) < tickTolerance,
     );
     return { indexInc, ticks };
   };
@@ -103,7 +103,7 @@ export class Index extends React.PureComponent<IndexProps> {
           transform={getRotation(i)}
         >
           {seqForCircular.charAt(i)}
-        </text>
+        </text>,
       );
       if (showComplement) {
         basepairsToRender.push(
@@ -115,7 +115,7 @@ export class Index extends React.PureComponent<IndexProps> {
             transform={getRotation(i)}
           >
             {compSeqForCircular.charAt(i)}
-          </text>
+          </text>,
         );
       }
     }

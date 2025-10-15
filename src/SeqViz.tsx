@@ -277,7 +277,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     // previous props
     { accession = "", annotations, enzymes, enzymesCustom, file, search }: SeqVizProps,
     // previous state
-    { seq, seqType, name }: SeqVizState
+    { seq, seqType, name }: SeqVizState,
   ) => {
     // New accession or file provided, fetch and/or parse.
     if (
@@ -326,7 +326,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
    * If an accession is provided, query a remote repository and parse the sequence and annotations.
    */
   parseInput = (
-    props?: SeqVizProps
+    props?: SeqVizProps,
   ): {
     annotations: Annotation[];
     compSeq: string;
@@ -443,7 +443,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
           id: `highlight-${i}-${h.start}-${h.end}`,
           name: "",
           start: h.start % (seq.length + 1),
-        })
+        }),
       ),
       onSelection:
         this.props.onSelection ||
@@ -462,7 +462,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
           color: t.color || colorByIndex(i, COLORS),
           id: `translation${t.name}${i}${t.start}${t.end}`,
           name: t.name,
-        })
+        }),
       ),
       viewer: this.props.viewer || "both",
       zoom: {

@@ -57,7 +57,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   componentDidUpdate = (
     prevProps: InfiniteScrollProps,
     prevState: InfiniteScrollState,
-    snapshot: InfiniteScrollSnapshot
+    snapshot: InfiniteScrollSnapshot,
   ) => {
     if (!this.scroller.current) {
       // scroller not mounted yet
@@ -123,7 +123,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
 
     // find the first block that contains the new central index
     const centerBlockIndex = seqBlocks.findIndex(
-      block => block.props.firstBase <= centralIndex && block.props.firstBase + bpsPerBlock >= centralIndex
+      block => block.props.firstBase <= centralIndex && block.props.firstBase + bpsPerBlock >= centralIndex,
     );
 
     // build up the list of blocks that are visible just beneath this first block

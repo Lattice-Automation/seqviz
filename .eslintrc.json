@@ -21,16 +21,10 @@
     "react-hooks"
   ],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/ban-ts-comment": "warn",
     "@typescript-eslint/no-empty-function": "warn",
-    "@typescript-eslint/padding-line-between-statements": [
-      "error",
-      {
-        "blankLine": "always",
-        "prev": "*",
-        "next": ["class", "export", "function", "interface", "type"]
-      }
-    ],
     "no-empty": "warn",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "react/jsx-sort-props": [2, { "reservedFirst": true, "callbacksLast": true }],

@@ -113,18 +113,18 @@ export default class Linear extends React.Component<LinearProps> {
     const primerFwdRows = createMultiRows(
       stackElements(vetAnnotations(primers.filter(p => p.direction === 1)), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
     const primerRevRows = createMultiRows(
       stackElements(vetAnnotations(primers.filter(p => p.direction === -1)), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
 
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
 
     const searchRows: NameRange[][] =
@@ -213,7 +213,7 @@ export default class Linear extends React.Component<LinearProps> {
           zoom={zoom}
           zoomed={zoomed}
           onUnmount={onUnmount}
-        />
+        />,
       );
       yDiff += blockHeights[i];
     }

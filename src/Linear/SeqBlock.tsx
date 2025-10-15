@@ -14,7 +14,7 @@ import { TranslationRows } from "./Translations";
 
 export type FindXAndWidthType = (
   n1?: number | null,
-  n2?: number | null
+  n2?: number | null,
 ) => {
   width: number;
   x: number;
@@ -23,7 +23,7 @@ export type FindXAndWidthType = (
 export type FindXAndWidthElementType = (
   i: number,
   element: NameRange,
-  elements: NameRange[]
+  elements: NameRange[],
 ) => { overflowLeft: boolean; overflowRight: boolean; width: number; x: number };
 
 export interface SeqBlockProps {
@@ -117,7 +117,7 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
       // this is very similar to the Block rendering logic in ../Selection/Selection.jsx
       ({ width, x } = this.findXAndWidth(
         start > lastBase ? firstBase : Math.max(firstBase, start),
-        end < firstBase ? lastBase : Math.min(lastBase, end)
+        end < firstBase ? lastBase : Math.min(lastBase, end),
       ));
 
       // if this is the first part of element that crosses the zero index
