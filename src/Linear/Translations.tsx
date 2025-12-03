@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { InputRefFunc } from "../SelectionHandler";
+import { InputRefFunc, RefSelection } from "../SelectionHandler";
 import { borderColorByIndex, colorByIndex } from "../colors";
 import { NameRange, SeqType, Translation } from "../elements";
 import { randomID } from "../sequence";
@@ -25,6 +25,15 @@ interface TranslationRowsProps {
   fullSeq: string;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translationRows: Translation[][];
@@ -42,6 +51,10 @@ export const TranslationRows = ({
   fullSeq,
   inputRef,
   lastBase,
+  onClick,
+  onContextMenu,
+  onDoubleClick,
+  onHover,
   onUnmount,
   seqType,
   translationRows,
@@ -71,6 +84,10 @@ export const TranslationRows = ({
           seqType={seqType}
           translations={translations}
           y={currentElementY}
+          onClick={onClick}
+          onContextMenu={onContextMenu}
+          onDoubleClick={onDoubleClick}
+          onHover={onHover}
           onUnmount={onUnmount}
         />
       );
@@ -93,6 +110,15 @@ const TranslationRow = (props: {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translations: Translation[];
@@ -117,6 +143,15 @@ interface SingleNamedElementAminoacidsProps {
   height: number;
   inputRef: InputRefFunc;
   lastBase: number;
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (a: unknown) => void;
   seqType: SeqType;
   translation: Translation;
@@ -164,6 +199,10 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
       height: h,
       inputRef,
       lastBase,
+      onClick,
+      onContextMenu,
+      onDoubleClick,
+      onHover,
       seqType,
       translation,
       y,
@@ -243,18 +282,35 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
           // arrow are facing
           const path = this.genPath(bpCount, direction === 1 ? 1 : -1);
 
+          const aaElement: RefSelection = {
+            end: AAEnd,
+            parent: { ...translation, type: "TRANSLATION" },
+            start: AAStart,
+            type: "AMINOACID",
+            viewer: "LINEAR",
+          };
+
           return (
             <g
               key={aaId}
-              ref={inputRef(aaId, {
-                end: AAEnd,
-                parent: { ...translation, type: "TRANSLATION" },
-                start: AAStart,
-                type: "AMINOACID",
-                viewer: "LINEAR",
-              })}
+              ref={inputRef(aaId, aaElement)}
               id={aaId}
               transform={`translate(${x}, 0)`}
+              onClick={e => {
+                onClick?.(aaElement, false, true, e.target as SVGGElement);
+              }}
+              onContextMenu={e => {
+                onContextMenu?.(aaElement, false, true, e);
+              }}
+              onDoubleClick={e => {
+                onDoubleClick?.(aaElement, false, true, e.target as SVGGElement);
+              }}
+              onMouseEnter={e => {
+                onHover?.(aaElement, true, "LINEAR", e.target as SVGGElement);
+              }}
+              onMouseLeave={e => {
+                onHover?.(aaElement, false, "LINEAR", e.target as SVGGElement);
+              }}
             >
               <path
                 d={path}

@@ -20,6 +20,15 @@ export interface LinearProps {
   highlights: Highlight[];
   inputRef: InputRefFunc;
   lineHeight: number;
+  onClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onContextMenu?: (
+    element: any,
+    circular: boolean,
+    linear: boolean,
+    event: React.MouseEvent<Element, MouseEvent>
+  ) => void;
+  onDoubleClick?: (element: any, circular: boolean, linear: boolean, container: Element) => void;
+  onHover?: (element: any, hover: boolean, view: "LINEAR" | "CIRCULAR", container: Element) => void;
   onUnmount: (id: string) => void;
   primers: Primer[];
   search: NameRange[];
@@ -69,6 +78,10 @@ export default class Linear extends React.Component<LinearProps> {
       elementHeight,
       highlights,
       lineHeight,
+      onClick,
+      onContextMenu,
+      onDoubleClick,
+      onHover,
       onUnmount,
       primers,
       search,
@@ -183,6 +196,7 @@ export default class Linear extends React.Component<LinearProps> {
       const firstBase = i * bpsPerBlock;
       seqBlocks.push(
         <SeqBlock
+          {...this.props}
           key={ids[i]}
           annotationRows={annotationRows[i]}
           blockHeight={blockHeights[i]}
@@ -212,6 +226,10 @@ export default class Linear extends React.Component<LinearProps> {
           y={yDiff}
           zoom={zoom}
           zoomed={zoomed}
+          onClick={onClick}
+          onContextMenu={onContextMenu}
+          onDoubleClick={onDoubleClick}
+          onHover={onHover}
           onUnmount={onUnmount}
         />
       );
