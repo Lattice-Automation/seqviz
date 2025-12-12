@@ -21,12 +21,14 @@ import { chooseRandomColor } from "../../src/colors";
 import { AnnotationProp, Primer, TranslationProp } from "../../src/elements";
 import Header from "./Header";
 import file from "./file";
+import fileAlignment from "./fileAlignment";
 
 const viewerTypeOptions = [
   { key: "both", text: "Both", value: "both" },
   { key: "circular", text: "Circular", value: "circular" },
   { key: "linear", text: "Linear", value: "linear" },
   { key: "both_flip", text: "Both Flip", value: "both_flip" },
+  { key: "alignment", text: "Alignment", value: "alignment" },
 ];
 
 interface AppState {
@@ -39,6 +41,7 @@ interface AppState {
   searchResults: any;
   selection: any;
   seq: string;
+  sequenceToCompare: string;
   showComplement: boolean;
   showIndex: boolean;
   showSelectionMeta: boolean;
@@ -92,6 +95,7 @@ export default class App extends React.Component<any, AppState> {
     searchResults: {},
     selection: {},
     seq: "",
+    sequenceToCompare: "",
     showComplement: true,
     showIndex: true,
     showSelectionMeta: false,
@@ -101,7 +105,7 @@ export default class App extends React.Component<any, AppState> {
       { end: 1147, name: "", start: 736 },
       { end: 1885, name: "ORF 2", start: 1165 },
     ],
-    viewer: "both",
+    viewer: "alignment",
     zoom: 50,
   };
   linearRef: React.RefObject<HTMLDivElement> = React.createRef();
@@ -109,8 +113,9 @@ export default class App extends React.Component<any, AppState> {
 
   componentDidMount = async () => {
     const seq = await seqparse(file);
+    const sequenceToCompare = await seqparse(fileAlignment);
 
-    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq });
+    this.setState({ annotations: seq.annotations, name: seq.name, seq: seq.seq, sequenceToCompare: sequenceToCompare.seq });
   };
 
   toggleSidebar = () => {
@@ -261,13 +266,14 @@ export default class App extends React.Component<any, AppState> {
                     search={this.state.search}
                     selection={this.state.selection}
                     seq={this.state.seq}
+                    sequenceToCompare={this.state.sequenceToCompare}
                     showComplement={this.state.showComplement}
                     showIndex={this.state.showIndex}
                     translations={this.state.translations}
                     viewer={this.state.viewer as "linear" | "circular"}
                     zoom={{ linear: this.state.zoom }}
                   >
-                    {customChildren}
+                    {/* {customChildren} */}
                   </SeqViz>
                 )}
               </div>
@@ -283,7 +289,7 @@ const ViewerTypeInput = ({ setType }: { setType: (viewType: string) => void }) =
   <div className="option" id="topology">
     <span>Topology</span>
     <Dropdown
-      defaultValue="both"
+      defaultValue="alignment"
       fluid
       options={viewerTypeOptions}
       selection

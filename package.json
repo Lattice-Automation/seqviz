@@ -48,6 +48,8 @@
   ],
   "dependencies": {
     "react-resize-detector": "^7.1.2",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.5",
     "seqparse": "^0.2.1",
     "webfontloader": "^1.6.28"
   },

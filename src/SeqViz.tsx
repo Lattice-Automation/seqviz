@@ -93,6 +93,7 @@ export interface SeqVizProps {
 
   /** the name of the sequence to show in the middle of the circular viewer */
   name?: string;
+  nameToCompare?: string;
 
   /** a callback that's executed on each change to the search parameters or sequence */
   onSearch?: (search: Range[]) => void;
@@ -126,6 +127,9 @@ export interface SeqVizProps {
 
   /** a sequence to render. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this */
   seq?: string;
+  
+  /** a sequence to compare in the alignment. Can be DNA, RNA, or an amino acid sequence. Setting accession or file overrides this  */
+  sequenceToCompare?: string;
 
   /** the type of the sequence. If this isn't passed, the type is guessed */
   seqType?: "dna" | "rna" | "aa";
@@ -150,7 +154,7 @@ export interface SeqVizProps {
   translations?: TranslationProp[];
 
   /** the orientation of the viewer(s). "both", the default, has a circular viewer on left and a linear viewer on right. */
-  viewer?: "linear" | "circular" | "both" | "both_flip";
+  viewer?: "linear" | "circular" | "both" | "both_flip" | "alignment";
 
   /** how large to make the sequence and elements [0,100]. A larger zoom increases the size of text and elements for that viewer. */
   zoom?: {
@@ -171,8 +175,10 @@ export interface SeqVizState {
   compSeq: string;
   cutSites: CutSite[];
   name: string;
+  nameToCompare: string;
   search: NameRange[];
   seq: string;
+  sequenceToCompare?: string;
   seqType: SeqType;
 }
 
@@ -192,6 +198,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     enzymes: [],
     enzymesCustom: {},
     name: "",
+    nameToCompare: "",
     onSearch: (_: Range[]) => null,
     onSelection: (_: Selection) => null,
     primers: [],
@@ -199,6 +206,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     search: { mismatch: 0, query: "" },
     selectAllEvent: e => e.key === "a" && (e.metaKey || e.ctrlKey),
     seq: "",
+    sequenceToCompare: "",
     showComplement: true,
     showIndex: true,
     style: {},
