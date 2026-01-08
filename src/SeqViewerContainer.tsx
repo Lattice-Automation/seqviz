@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useResizeDetector } from "react-resize-detector";
+import { useResizeDetector } from "@lattice-automation/react-resize-detector";
 
 import Circular, { CircularProps } from "./Circular/Circular";
 import { EventHandler } from "./EventHandler";

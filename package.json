@@ -47,7 +47,7 @@
     "not dead"
   ],
   "dependencies": {
-    "react-resize-detector": "github:Lattice-Automation/react-resize-detector#adding-older-peer-dependencies",
+    "@lattice-automation/react-resize-detector": "^12.3.0",
     "seqparse": "^0.2.1",
     "webfontloader": "^1.6.28"
   },
@@ -88,7 +88,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.6 || ^17.0.0 || ^18.0.0"
+    "react": "^16.8.6 || ^17.0.0 || ^18.0.0 || ^19.0.0",
+    "react-dom": "^16.8.6 || ^17.0.0 || ^18.0.0 || ^19.0.0"
   }
 }
