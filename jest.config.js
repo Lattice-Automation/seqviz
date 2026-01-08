@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: "jsdom",
   // Added this because react-resize-detector uses ES Modules which Jest doesn't support.
   transformIgnorePatterns: [
-    "node_modules/(?!(react-resize-detector)/)",
+    "node_modules/(?!(@lattice-automation/react-resize-detector)/)",
   ],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
