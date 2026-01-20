@@ -72,7 +72,7 @@ export const WrappedGroupLabel = (props: WrappedGroupLabelProps) => {
   const groupHeight = labelRows.length * lineHeight;
   const groupWidth = labelRows.reduce(
     (max, row, i) => Math.max(max, calcRowWidth(row) - (i === labelRows.length - 1 ? CHAR_WIDTH : 0)), // no comma on last row, correct
-    0
+    0,
   );
   // add one CHAR_WIDTH padding to all sides of label box
   const [rectHeight, rectWidth] = [groupHeight, groupWidth].map(x => x + 2 * CHAR_WIDTH);

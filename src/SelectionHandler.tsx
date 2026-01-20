@@ -19,7 +19,7 @@ export interface SelectionHandlerProps {
   children: (
     inputRef: InputRefFunc,
     handleMouseEvent: (e: SeqVizMouseEvent) => void,
-    onUnmount: (ref: string) => void
+    onUnmount: (ref: string) => void,
   ) => React.ReactNode;
   seq: string;
   setCentralIndex: (viewer: "LINEAR" | "CIRCULAR", index: number) => void;

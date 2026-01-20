@@ -148,7 +148,7 @@ export const createSingleRows = <T extends NameRange>(
   elements: T[],
   rowLength: number,
   rowCount: number,
-  duplicateIdsAllowed = true
+  duplicateIdsAllowed = true,
 ): T[][] => {
   const newArr: T[][] = new Array(rowCount);
 

@@ -75,7 +75,7 @@ export class Annotations extends React.PureComponent<AnnotationsProps> {
                     lineHeight={lineHeight}
                     seqLength={this.props.seqLength}
                   />
-                ))
+                )),
               );
             }, [])}
           </g>

@@ -173,7 +173,7 @@ class Block extends React.PureComponent<BlockProps> {
 
     let x: number | null = null;
     let width: number | null = null;
-    let secondBlock: JSX.Element | null = null;
+    let secondBlock: React.ReactElement | null = null;
     if (clockwise && end > start) {
       // does not cross the zero index, FWD direction
       if (start <= lastBase && end > firstBase) {
@@ -193,7 +193,7 @@ class Block extends React.PureComponent<BlockProps> {
         } else {
           ({ width, x } = findXAndWidth(
             start > lastBase ? firstBase : Math.max(firstBase, start),
-            end < firstBase ? lastBase : Math.min(lastBase, end)
+            end < firstBase ? lastBase : Math.min(lastBase, end),
           ));
         }
       }

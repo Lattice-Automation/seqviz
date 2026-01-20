@@ -74,7 +74,7 @@ describe("SeqBlock", () => {
         compSeq="cgctttttagttattcctccgttgttctacacgctttttgtagaattagtacgccacctcccaaagattac"
         fullSeq={seq}
         seq={seq}
-      />
+      />,
     );
 
     // Verify it was rendered with the test seq

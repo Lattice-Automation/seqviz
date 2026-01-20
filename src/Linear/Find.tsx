@@ -86,7 +86,7 @@ const FindBlock = ({
   if (start > end) {
     ({ width, x } = findXAndWidth(
       start > lastBase ? firstBase : Math.max(firstBase, start),
-      end < firstBase ? lastBase : Math.min(lastBase, end)
+      end < firstBase ? lastBase : Math.min(lastBase, end),
     ));
   }
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withResizeDetector } from "react-resize-detector";
+import { useResizeDetector } from "@lattice-automation/react-resize-detector";
 
 import Circular, { CircularProps } from "./Circular/Circular";
 import { EventHandler } from "./EventHandler";
@@ -51,7 +51,7 @@ interface SeqViewerContainerProps {
   seqType: SeqType;
   showComplement: boolean;
   showIndex: boolean;
-  targetRef: React.LegacyRef<HTMLDivElement>;
+  targetRef?: React.LegacyRef<HTMLDivElement>;
   /** testSize is a forced height/width that overwrites anything from sizeMe. For testing */
   testSize?: { height: number; width: number };
   translations: NameRange[];
@@ -366,4 +366,12 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   }
 }
 
-export default withResizeDetector(SeqViewerContainer);
+const SeqViewerContainerWithResize: React.FC<
+  Omit<SeqViewerContainerProps, "height" | "width" | "targetRef">
+> = props => {
+  const { height, ref, width } = useResizeDetector();
+
+  return <SeqViewerContainer {...props} height={height || 0} targetRef={ref} width={width || 0} />;
+};
+
+export default SeqViewerContainerWithResize;

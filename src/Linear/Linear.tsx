@@ -6,7 +6,7 @@ import { createMultiRows, createSingleRows, stackElements } from "../elementsToR
 import { isEqual } from "../isEqual";
 import { createTranslations } from "../sequence";
 import { InfiniteScroll } from "./InfiniteScroll";
-import { SeqBlock } from "./SeqBlock";
+import { SeqBlock, SeqBlockProps } from "./SeqBlock";
 
 export interface LinearProps {
   annotations: Annotation[];
@@ -113,18 +113,18 @@ export default class Linear extends React.Component<LinearProps> {
     const primerFwdRows = createMultiRows(
       stackElements(vetAnnotations(primers.filter(p => p.direction === 1)), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
     const primerRevRows = createMultiRows(
       stackElements(vetAnnotations(primers.filter(p => p.direction === -1)), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
 
     const annotationRows = createMultiRows(
       stackElements(vetAnnotations(annotations), seq.length),
       bpsPerBlock,
-      arrSize
+      arrSize,
     );
 
     const searchRows: NameRange[][] =
@@ -177,7 +177,7 @@ export default class Linear extends React.Component<LinearProps> {
       blockHeights[i] = blockHeight;
     }
 
-    const seqBlocks: JSX.Element[] = [];
+    const seqBlocks: React.ReactElement<SeqBlockProps>[] = [];
     let yDiff = 0;
     for (let i = 0; i < arrSize; i += 1) {
       const firstBase = i * bpsPerBlock;
@@ -213,7 +213,7 @@ export default class Linear extends React.Component<LinearProps> {
           zoom={zoom}
           zoomed={zoomed}
           onUnmount={onUnmount}
-        />
+        />,
       );
       yDiff += blockHeights[i];
     }

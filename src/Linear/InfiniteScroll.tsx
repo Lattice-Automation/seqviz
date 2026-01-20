@@ -4,11 +4,12 @@ import CentralIndexContext from "../centralIndexContext";
 import { Size } from "../elements";
 import { isEqual } from "../isEqual";
 import { linearScroller } from "../style";
+import { SeqBlockProps } from "./SeqBlock";
 
 interface InfiniteScrollProps {
   blockHeights: number[];
   bpsPerBlock: number;
-  seqBlocks: JSX.Element[];
+  seqBlocks: React.ReactElement<SeqBlockProps>[];
   size: Size;
   totalHeight: number;
 }
@@ -34,8 +35,8 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   static context: React.ContextType<typeof CentralIndexContext>;
   declare context: React.ContextType<typeof CentralIndexContext>;
 
-  scroller: React.RefObject<HTMLDivElement> = React.createRef(); // ref to a div for scrolling
-  insideDOM: React.RefObject<HTMLDivElement> = React.createRef(); // ref to a div inside the scroller div
+  scroller: React.RefObject<HTMLDivElement | null> = React.createRef(); // ref to a div for scrolling
+  insideDOM: React.RefObject<HTMLDivElement | null> = React.createRef(); // ref to a div inside the scroller div
   timeoutID;
 
   constructor(props: InfiniteScrollProps) {
@@ -56,7 +57,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
   componentDidUpdate = (
     prevProps: InfiniteScrollProps,
     prevState: InfiniteScrollState,
-    snapshot: InfiniteScrollSnapshot
+    snapshot: InfiniteScrollSnapshot,
   ) => {
     if (!this.scroller.current) {
       // scroller not mounted yet
@@ -122,7 +123,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
 
     // find the first block that contains the new central index
     const centerBlockIndex = seqBlocks.findIndex(
-      block => block.props.firstBase <= centralIndex && block.props.firstBase + bpsPerBlock >= centralIndex
+      block => block.props.firstBase <= centralIndex && block.props.firstBase + bpsPerBlock >= centralIndex,
     );
 
     // build up the list of blocks that are visible just beneath this first block
