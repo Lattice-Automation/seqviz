@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && next export",
+    "build": "next build",
     "deploy": "npm update seqviz && npm run build && aws s3 sync ./out s3://lattice-tools-s3/seqviz --delete && aws cloudfront create-invalidation --distribution-id E3NMX6D92LFTAV --paths '/seqviz/*'",
     "fix": "prettier ./lib/** ./pages/** --write && eslint lib --ext ts,tsx --fix",
     "lint": "prettier ./lib/** --check && eslint lib --ext ts,tsx --quiet",
