@@ -4,6 +4,7 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
+  basePath: '/seqviz',
   images: {
     unoptimized: true,
   },
