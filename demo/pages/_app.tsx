@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>SeqViz - by Lattice Automation</title>
 
+        <link rel="icon" href="/seqviz/favicon.ico" />
         <meta name="Description" content="DNA Sequence Visualizer by Lattice Automation" />
         <meta name="google" content="notranslate" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
