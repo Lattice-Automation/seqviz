@@ -7,7 +7,6 @@
   "unpkg": "dist/seqviz.min.js",
   "scripts": {
     "build": "rm -rf ./dist && webpack",
-    "demo": "cd demo && npm run deploy",
     "fix": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
     "lint": "prettier ./src/** --check && eslint src --ext ts,tsx --quiet",
     "minor": "./release.sh minor",
