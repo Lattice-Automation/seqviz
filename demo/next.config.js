@@ -4,7 +4,7 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   output: 'export',
-  basePath: '/seqviz',
+  // basePath: '/seqviz', // Removed for Amplify root deployment
   images: {
     unoptimized: true,
   },

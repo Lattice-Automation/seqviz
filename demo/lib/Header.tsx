@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({
 
         <Box sx={{ pl: 2 }}>
           <img
-            src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png"
+            src="https://seqviz.latticeautomation.com/seqviz-logo.png"
             alt="SeqViz"
             style={{ height: "48px" }}
           />

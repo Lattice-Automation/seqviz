@@ -479,7 +479,7 @@ const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) => (
   >
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <img
-        src="https://tools.latticeautomation.com/seqviz/seqviz-logo.png"
+        src="https://seqviz.latticeautomation.com/seqviz-logo.png"
         alt="SeqViz"
         style={{ height: "36px", marginRight: "16px" }}
       />
@@ -503,7 +503,7 @@ const SidebarFooter = () => (
   >
     <Divider sx={{ mb: 2 }} />
     <img
-      src="https://tools.latticeautomation.com/seqviz/lattice-brand.png"
+      src="https://seqviz.latticeautomation.com/lattice-brand.png"
       alt="Lattice Automation"
       style={{ height: "64px", margin: "0 auto 8px auto" }}
     />
