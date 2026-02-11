@@ -38,7 +38,7 @@
 
 ## Demo
 
-You can see a demo at [tools.latticeautomation.com/seqviz](https://tools.latticeautomation.com/seqviz). The source is in [/demo](./demo).
+You can see a demo at [seqviz.latticeautomation.com/](https://seqviz.latticeautomation.com/). The source is in [/demo](./demo).
 
 ## Features
 
