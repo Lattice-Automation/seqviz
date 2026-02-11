@@ -16,9 +16,6 @@ npm run test
 # build the package
 npm run build
 
-# build and deploy the demo
-npm run demo
-
 # bump the package version
 npm version "$1" --git-tag-version
 
