@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Root, createRoot } from "react-dom/client";
-import { renderToString as reactRenderToString } from "react-dom/server";
 
 import Circular from "./Circular/Circular";
 import Linear from "./Linear/Linear";
@@ -10,7 +9,7 @@ import enzymes from "./enzymes";
 /**
  * Export a React component directly for React-based development
  */
-export { SeqViz, Linear, Circular, enzymes as Enzymes };
+export { Circular, enzymes as Enzymes, Linear, SeqViz };
 
 export default SeqViz;
 
@@ -59,7 +58,12 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
    * Return an HTML string representation of the viewer
    */
   const renderToString = () => {
-    return reactRenderToString(viewer);
+    // Lazy-load react-dom/server to avoid eager import at module scope.
+    // react-dom/server depends on Node built-ins (util.TextEncoder) that
+    // crash in Vite/Rollup browser builds. See: #293
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const ReactDOMServer = require("react-dom/server");
+    return ReactDOMServer.renderToString(viewer);
   };
 
   /**
