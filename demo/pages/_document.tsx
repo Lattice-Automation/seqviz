@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link rel="canonical" href="https://seqviz.latticeautomation.com/" />
           <DocumentHeadTags {...this.props} />
         </Head>
         <body>
