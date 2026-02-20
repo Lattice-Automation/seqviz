@@ -40,7 +40,7 @@
     "@types/lodash": "^4.14.184",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.6",
     "prettier": "^3.2.0",
     "webpack": "^5.94.0"
