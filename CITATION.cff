@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: SeqViz
+message: "If you use this software, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: Timmons
+    given-names: Joshua
+    affiliation: Lattice Automation
+  - family-names: Vigliecca
+    given-names: Guzman
+    affiliation: Lattice Automation
+  - family-names: LeShane
+    given-names: Kevin
+    affiliation: Lattice Automation
+version: 3.10.16
+date-released: 2020-02-03
+license: MIT
+url: https://github.com/Lattice-Automation/seqviz
+repository-code: https://github.com/Lattice-Automation/seqviz
