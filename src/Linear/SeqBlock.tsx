@@ -132,9 +132,10 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
         overflowRight = true;
       }
     } else if (start === end) {
-      // the element circles the entire plasmid and we aren't currently in a SeqBlock
-      // where the element starts or ends
-      ({ width, x } = this.findXAndWidth(start, end + fullSeq.length));
+      // the element circles the entire plasmid — span the entire block
+      ({ width, x } = this.findXAndWidth(firstBase, lastBase));
+      overflowLeft = true;
+      overflowRight = true;
     }
 
     return { overflowLeft, overflowRight, width, x };
