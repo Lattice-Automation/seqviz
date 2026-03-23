@@ -77,9 +77,30 @@ export interface SeqBlockProps {
 export class SeqBlock extends React.PureComponent<SeqBlockProps> {
   static defaultProps = {};
 
+  componentDidMount = () => {
+    this.registerSelf();
+  };
+
+  componentDidUpdate = (prevProps: SeqBlockProps) => {
+    if (prevProps.id !== this.props.id || prevProps.firstBase !== this.props.firstBase) {
+      this.registerSelf();
+    }
+  };
+
   componentWillUnmount = () => {
     const { id, onUnmount } = this.props;
     onUnmount(id);
+  };
+
+  registerSelf = () => {
+    const { firstBase, id, inputRef, seq } = this.props;
+    inputRef(id, {
+      end: firstBase + seq.length,
+      ref: id,
+      start: firstBase,
+      type: "SEQ",
+      viewer: "LINEAR",
+    });
   };
 
   /**
@@ -319,13 +340,6 @@ export class SeqBlock extends React.PureComponent<SeqBlockProps> {
 
     return (
       <svg
-        ref={inputRef(id, {
-          end: lastBase,
-          ref: id,
-          start: firstBase,
-          type: "SEQ",
-          viewer: "LINEAR",
-        })}
         className="la-vz-seqblock"
         cursor="text"
         data-testid="la-vz-seqblock"
