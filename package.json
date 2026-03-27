@@ -47,7 +47,7 @@
   ],
   "dependencies": {
     "@lattice-automation/react-resize-detector": "^12.3.0",
-    "seqparse": "^0.2.1",
+    "seqparse": "^0.2.2",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
