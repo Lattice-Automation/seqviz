@@ -95,6 +95,16 @@ export default class SelectionHandler extends React.PureComponent<SelectionHandl
    * it stores the id of all elements
    **/
   inputRef = (ref: string, selectRange: Selection) => {
+    // Don't let a LINEAR registration overwrite a CIRCULAR one. When both viewers
+    // are visible, the linear view re-renders with the previous visibleBlocks
+    // (before scrollToCentralIndex updates them), so an annotation that was just
+    // scrolled to in linear briefly re-registers as LINEAR — overwriting the
+    // circular registration. On the next circular click the viewer field is
+    // "LINEAR", which blocks setCentralIndex. Keeping CIRCULAR as the canonical
+    // viewer prevents this.
+    if (selectRange.viewer === "LINEAR" && this.idToRange.get(ref)?.viewer === "CIRCULAR") {
+      return;
+    }
     this.idToRange.set(ref, { ref, ...selectRange });
   };
 
