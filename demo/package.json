@@ -19,7 +19,7 @@
     "@mui/material-nextjs": "^7.0.0",
     "browserslist": "^4.21.3",
     "history": "^4.10.1",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "next": "^15.5.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
