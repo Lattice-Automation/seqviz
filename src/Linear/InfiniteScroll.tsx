@@ -16,6 +16,7 @@ interface InfiniteScrollProps {
 
 interface InfiniteScrollState {
   centralIndex: number;
+  scrollToken: number;
   visibleBlocks: number[];
 }
 
@@ -44,6 +45,7 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
 
     this.state = {
       centralIndex: 0,
+      scrollToken: 0,
       // start off with first 5 blocks shown
       visibleBlocks: new Array(Math.min(5, props.seqBlocks.length)).fill(null).map((_, i) => i),
     };
@@ -65,9 +67,9 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
     }
 
     const { seqBlocks, size } = this.props;
-    const { centralIndex, visibleBlocks } = this.state;
+    const { centralIndex, scrollToken, visibleBlocks } = this.state;
 
-    if (this.context && centralIndex !== this.context.linear) {
+    if (this.context && (centralIndex !== this.context.linear || scrollToken !== this.context.linearScrollToken)) {
       this.scrollToCentralIndex();
     } else if (!isEqual(prevProps.size, size) || seqBlocks.length !== prevProps.seqBlocks.length) {
       this.handleScrollOrResize(); // reset
@@ -154,12 +156,16 @@ export class InfiniteScroll extends React.PureComponent<InfiniteScrollProps, Inf
       this.scroller.current.scrollTop = centerBlock.props.y - blockHeights[0] / 2;
     }
 
-    if (!isEqual(newVisibleBlocks, visibleBlocks)) {
-      this.setState({
-        centralIndex: centralIndex,
-        visibleBlocks: newVisibleBlocks,
-      });
+    // Always sync centralIndex and scrollToken so componentDidUpdate doesn't
+    // re-trigger scrollToCentralIndex on the next render.
+    const newState: Partial<InfiniteScrollState> = {
+      centralIndex: centralIndex,
+      scrollToken: this.context.linearScrollToken,
+    };
+    if (!isEqual(newVisibleBlocks, visibleBlocks) && newVisibleBlocks.length > 0) {
+      newState.visibleBlocks = newVisibleBlocks;
     }
+    this.setState(newState as InfiniteScrollState);
   };
 
   /**
