@@ -102,10 +102,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     if (this.selectionIsProgramatic(this.props.selection)) {
       const sel = this.props.selection;
       const prevSel = prevProps.selection;
-      if (
-        (sel?.start !== prevSel?.start || sel?.end !== prevSel?.end) &&
-        sel?.start !== sel?.end
-      ) {
+      if ((sel?.start !== prevSel?.start || sel?.end !== prevSel?.end) && sel?.start !== sel?.end) {
         this.setCentralIndex("LINEAR", sel?.start || 0);
       }
     }
