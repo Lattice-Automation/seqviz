@@ -64,6 +64,7 @@ export interface SeqViewerContainerState {
   centralIndex: {
     circular: number;
     linear: number;
+    linearScrollToken: number;
     setCentralIndex: (type: "LINEAR" | "CIRCULAR", value: number) => void;
   };
   selection: Selection;
@@ -81,6 +82,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       centralIndex: {
         circular: 0,
         linear: 0,
+        linearScrollToken: 0,
         setCentralIndex: this.setCentralIndex,
       },
       selection: this.getSelection(defaultSelection, props.selection),
@@ -98,11 +100,10 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     // Only scroll if the selection was done passed in as a prop by a user of SeqViz. Otherwise the selection was
     // made by the user clicking an element or selecting a range of sequences
     if (this.selectionIsProgramatic(this.props.selection)) {
-      if (
-        this.props.selection?.start !== prevProps.selection?.start &&
-        this.props.selection?.start !== this.props.selection?.end
-      ) {
-        this.setCentralIndex("LINEAR", this.props.selection?.start || 0);
+      const sel = this.props.selection;
+      const prevSel = prevProps.selection;
+      if ((sel?.start !== prevSel?.start || sel?.end !== prevSel?.end) && sel?.start !== sel?.end) {
+        this.setCentralIndex("LINEAR", sel?.start || 0);
       }
     }
   };
@@ -119,11 +120,23 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
       throw new Error(`Unknown central index type: ${type}`);
     }
 
-    if (this.state.centralIndex[type.toLowerCase()] === value) {
-      return; // nothing changed
+    if (type === "LINEAR") {
+      // Always update and increment the scroll token so InfiniteScroll scrolls
+      // even when the target position hasn't changed (e.g. re-clicking the same
+      // annotation after manually scrolling the linear view away).
+      this.setState({
+        centralIndex: {
+          ...this.state.centralIndex,
+          linear: value,
+          linearScrollToken: this.state.centralIndex.linearScrollToken + 1,
+        },
+      });
+    } else {
+      if (this.state.centralIndex.circular === value) {
+        return; // nothing changed
+      }
+      this.setState({ centralIndex: { ...this.state.centralIndex, circular: value } });
     }
-
-    this.setState({ centralIndex: { ...this.state.centralIndex, [type.toLowerCase()]: value } });
   };
 
   /**
