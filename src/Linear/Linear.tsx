@@ -104,6 +104,7 @@ export default class Linear extends React.Component<LinearProps> {
      */
     function vetAnnotations<T extends NameRange>(annotations: T[]): T[] {
       annotations.forEach(ann => {
+        if (ann.end > seqLength) ann.end = ann.end % seqLength;
         if (ann.end === 0 && ann.start > ann.end) ann.end = seqLength;
         if (ann.start === seqLength && ann.end < ann.start) ann.start = 0;
       });
