@@ -410,7 +410,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       ...a,
       color: a.color || colorByIndex(i, COLORS),
       direction: directionality(a.direction),
-      end: a.end % (seq.length + 1),
+      end: a.end > seq.length ? a.end % seq.length : a.end,
       start: a.start % (seq.length + 1),
     }));
 
@@ -439,7 +439,7 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
         (h, i): Highlight => ({
           ...h,
           direction: 1,
-          end: h.end % (seq.length + 1),
+          end: h.end > seq.length ? h.end % seq.length : h.end,
           id: `highlight-${i}-${h.start}-${h.end}`,
           name: "",
           start: h.start % (seq.length + 1),
