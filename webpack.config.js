@@ -59,9 +59,9 @@ const cdnBuild = {
 };
 
 /**
- * npmBuild is the same as CDN build except node_modules are ignored as externals and the output filename differs.
+ * nodeBuild is the same as CDN build except node_modules are ignored as externals and the output filename differs.
  */
-const npmBuild = Object.assign({}, cdnBuild, {
+const nodeBuild = Object.assign({}, cdnBuild, {
   mode: "none",
   devtool: "source-map",
   optimization: {
@@ -81,4 +81,23 @@ const npmBuild = Object.assign({}, cdnBuild, {
   externals: [nodeExternals({ modulesDir: path.join(__dirname, "node_modules") })],
 });
 
-module.exports = [cdnBuild, npmBuild];
+/**
+ * browserBuild is the same as nodeBuild but built from the browser entrypoint
+ * (src/index.browser.ts), which never references react-dom/server.
+ */
+const browserBuild = Object.assign({}, nodeBuild, {
+  entry: path.join(__dirname, "src", "index.browser.ts"),
+  output: {
+    globalObject: "this",
+    filename: "index.browser.js",
+    library: {
+      name: package.name,
+      type: "umd",
+    },
+    path: path.join(__dirname, "dist"),
+    publicPath: "/dist/",
+    umdNamedDefine: true,
+  },
+});
+
+module.exports = [cdnBuild, nodeBuild, browserBuild];

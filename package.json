@@ -3,8 +3,24 @@
   "description": "A viewer for DNA, RNA, and protein sequences that supports many input formats",
   "version": "3.10.22",
   "main": "dist/index.js",
+  "browser": "dist/index.browser.js",
   "types": "dist/index.d.ts",
   "unpkg": "dist/seqviz.min.js",
+  "exports": {
+    ".": {
+      "browser": {
+        "types": "./dist/index.browser.d.ts",
+        "default": "./dist/index.browser.js"
+      },
+      "node": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
+  },
   "scripts": {
     "build": "rm -rf ./dist && webpack",
     "fix": "prettier ./src/** --write && eslint src --ext ts,tsx --fix",
