@@ -18,10 +18,9 @@ export type { CircularProps } from "./Circular/Circular";
 export type { LinearProps } from "./Linear/Linear";
 
 /**
- * Return a Viewer object with three properties:
+ * Return a Viewer object with two properties:
  *  - `render` to an HTML element
  *  - `setState(options)` to update the viewer's internal state
- *  - `renderToString` to return an HTML representation of the Viewer
  */
 const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) => {
   const baseViewer = createBaseViewer(element, options);
@@ -29,22 +28,8 @@ const Viewer = (element: string | HTMLElement = "root", options: SeqVizProps) =>
 
   const { render, setState } = baseViewer;
 
-  /**
-   * Return an HTML string representation of the viewer
-   */
-  const renderToString = () => {
-    // Lazy-load react-dom/server to avoid eager import at module scope.
-    // react-dom/server depends on Node built-ins (util.TextEncoder) that
-    // crash in Vite/Rollup browser builds. See: #293
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const ReactDOMServer = require("react-dom/server");
-    // read `baseViewer.element` (not a destructured copy) so it reflects the latest setState
-    return ReactDOMServer.renderToString(baseViewer.element);
-  };
-
   return {
     render,
-    renderToString,
     setState,
   };
 };
