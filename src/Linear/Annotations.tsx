@@ -182,7 +182,15 @@ const SingleNamedElement = (props: {
   }
 
   // 0.591 is our best approximation of Roboto Mono's aspect ratio (width / height).
-  const fontSize = 12;
+  let fontSize = 12;
+  if (element.font?.fontSize) {
+    // 19 is a subjective limit to fontSize that will fit inside bounds of annotation. If larger than 19, cap it.
+    if (element.font.fontSize > 19) {
+      fontSize = 19;
+    } else {
+      fontSize = element.font.fontSize;
+    }
+  }
   const annotationCharacterWidth = 0.591 * fontSize;
   const availableCharacters = Math.floor((width - 40) / annotationCharacterWidth);
 
@@ -198,10 +206,53 @@ const SingleNamedElement = (props: {
     }
   }
 
+  let strokeVal: string | null = null;
+  let strokeWidth: string | null = null;
+
+  if (element.border?.style) {
+    switch (element.border.style) {
+      case "dashed":
+        strokeVal = "5, 5";
+        break;
+      case "dotted":
+        strokeVal = "1, 5";
+        break;
+      case "bold":
+        strokeWidth = "2";
+        break;
+    }
+  }
+  let borderColor: string | null = null;
+  if (element.border?.borderColor) {
+    borderColor = element.border.borderColor;
+  }
+
+  let fontFamily: string | undefined = undefined;
+  let fontWeight: number = 400;
+  let fontColor: string = "rgb(42, 42, 42)";
+
+  if (element.font?.fontFamily) {
+    fontFamily = element.font.fontFamily;
+  }
+  if (element.font?.fontWeight) {
+    fontWeight = element.font.fontWeight;
+  }
+  if (element.font?.fontColor) {
+    fontColor = element.font.fontColor;
+  }
+
   return (
     <g id={element.id} transform={`translate(${x}, ${0.1 * height})`}>
       {/* <title> provides a hover tooltip on most browsers */}
       <title>{name}</title>
+      {element.gradient && (
+        <defs>
+          <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color={element.gradient.start} />
+            <stop offset="100%" stop-color={element.gradient.stop} />
+          </linearGradient>
+        </defs>
+      )}
       <path
         ref={inputRef(element.id, {
           end: end,
@@ -214,10 +265,12 @@ const SingleNamedElement = (props: {
         className={`${element.id} la-vz-annotation`}
         cursor="pointer"
         d={linePath}
-        fill={color}
+        fill={element.gradient ? "url(#myGradient)" : color}
         id={element.id}
-        stroke={color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
-        style={annotation}
+        stroke={borderColor ? borderColor : color ? COLOR_BORDER_MAP[color] || darkerColor(color) : "gray"}
+        style={{ annotation }}
+        stroke-dasharray={strokeVal}
+        stroke-width={strokeWidth}
         onBlur={() => {
           // do nothing
         }}
@@ -233,7 +286,7 @@ const SingleNamedElement = (props: {
         dominantBaseline="middle"
         fontSize={fontSize}
         id={element.id}
-        style={annotationLabel}
+        style={{ ...annotationLabel, fontFamily, fontWeight, fill: fontColor }}
         textAnchor="middle"
         x={width / 2}
         y={height / 2 + 1}
