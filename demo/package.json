@@ -15,7 +15,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^7.0.0",
-    "@mui/material": "^7.0.0",
+    "@mui/material": "^9.4.0",
     "@mui/material-nextjs": "^7.0.0",
     "browserslist": "^4.29.0",
     "history": "^4.10.1",
