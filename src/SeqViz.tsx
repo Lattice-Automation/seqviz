@@ -435,16 +435,14 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
       copyEvent: this.props.copyEvent || (() => false),
       selectAllEvent: this.props.selectAllEvent || (() => false),
       cutSites: this.state.cutSites,
-      highlights: (highlights || []).concat(highlightedRegions || []).map(
-        (h, i): Highlight => ({
-          ...h,
-          direction: 1,
-          end: h.end > seq.length ? h.end % seq.length : h.end,
-          id: `highlight-${i}-${h.start}-${h.end}`,
-          name: "",
-          start: h.start % (seq.length + 1),
-        }),
-      ),
+      highlights: (highlights || []).concat(highlightedRegions || []).map((h, i): Highlight => ({
+        ...h,
+        direction: 1,
+        end: h.end > seq.length ? h.end % seq.length : h.end,
+        id: `highlight-${i}-${h.start}-${h.end}`,
+        name: "",
+        start: h.start % (seq.length + 1),
+      })),
       onSelection:
         this.props.onSelection ||
         (() => {
