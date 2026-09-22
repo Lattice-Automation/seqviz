@@ -128,7 +128,7 @@ interface SingleNamedElementAminoacidsProps {
  * see the resulting protein or peptide sequence in the viewer
  */
 class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElementAminoacidsProps> {
-  AAs: string[] = [];
+  AAs = new Map<number, string>();
 
   // on unmount, clear all AA references.
   componentWillUnmount = () => {
@@ -175,9 +175,11 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
     // otherwise, each amino-acid covers three bases.
     const bpPerBlockCount = seqType === "aa" ? 1 : 3;
 
-    // substring and split only the amino acids that are relevant to this
-    // particular sequence block
-    const AAs = AAseq.split("");
+    // Keep absolute residue indexes when slicing to this row, including partial codons.
+    // Wrapped translations retain the circular coordinate handling below.
+    const firstAA = start < end ? Math.max(0, Math.floor((firstBase - start) / bpPerBlockCount)) : 0;
+    const lastAA = start < end ? Math.max(0, Math.ceil((lastBase - start) / bpPerBlockCount)) : AAseq.length;
+    const AAs = AAseq.slice(firstAA, lastAA).split("");
     return (
       <g
         ref={inputRef(id, {
@@ -193,10 +195,8 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
         id={id}
         transform={`translate(0, ${y})`}
       >
-        {AAs.map((a, i) => {
-          // generate and store an id reference (that's used for selection)
-          const aaId = randomID();
-          this.AAs.push(aaId);
+        {AAs.map((a, offset) => {
+          const i = firstAA + offset;
 
           // calculate the start and end point of each amino acid
           // modulo needed here for translations that cross zero index
@@ -222,6 +222,13 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
           // the amino acid doesn't fit within this SeqBlock (even partially)
           if (AAStart >= lastBase || AAEnd <= firstBase) return null;
 
+          // Allocate IDs only for rendered residues and reuse them across updates.
+          let aaId = this.AAs.get(i);
+          if (!aaId) {
+            aaId = randomID();
+            this.AAs.set(i, aaId);
+          }
+
           let showAminoAcidLabel = true; // whether to show amino acids abbreviation
           let bpCount = bpPerBlockCount; // start off assuming the full thing is shown
           if (AAStart < firstBase) {
@@ -246,13 +253,17 @@ class SingleNamedElementAminoacids extends React.PureComponent<SingleNamedElemen
           return (
             <g
               key={aaId}
-              ref={inputRef(aaId, {
-                end: AAEnd,
-                parent: { ...translation, type: "TRANSLATION" },
-                start: AAStart,
-                type: "AMINOACID",
-                viewer: "LINEAR",
-              })}
+              ref={node => {
+                // Register on mount, including StrictMode's simulated remount.
+                if (node)
+                  inputRef(aaId, {
+                    end: AAEnd,
+                    parent: { ...translation, type: "TRANSLATION" },
+                    start: AAStart,
+                    type: "AMINOACID",
+                    viewer: "LINEAR",
+                  });
+              }}
               id={aaId}
               transform={`translate(${x}, 0)`}
             >
