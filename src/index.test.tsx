@@ -111,4 +111,16 @@ describe("SeqViz rendering (React)", () => {
     expect(seqValue).toEqual(seq);
     expect(compSeqValue).toEqual(compSeq);
   });
+
+  it("re-renders a named empty sequence without an update loop", () => {
+    const { container, rerender } = render(<SeqViz name="draft" seq="" viewer="linear" />);
+    rerender(<SeqViz name="draft" seq="" viewer="linear" />);
+    expect(container.querySelector(".la-vz-seqviz")).toBeTruthy();
+  });
+
+  it("re-renders an empty non-DNA sequence without an update loop", () => {
+    const { container, rerender } = render(<SeqViz seq="" seqType="rna" viewer="linear" />);
+    rerender(<SeqViz seq="" seqType="rna" viewer="linear" />);
+    expect(container.querySelector(".la-vz-seqviz")).toBeTruthy();
+  });
 });

@@ -369,9 +369,9 @@ export default class SeqViz extends React.Component<SeqVizProps, SeqVizState> {
     return {
       annotations: [],
       compSeq: "",
-      name: "",
+      name,
       seq: "",
-      seqType: "dna",
+      seqType: seqType ?? "dna",
     };
   };
 
