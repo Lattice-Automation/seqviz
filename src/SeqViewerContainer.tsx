@@ -75,6 +75,9 @@ export interface SeqViewerContainerState {
  * the linear and circular sequence viewers. The Header is an example
  */
 class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqViewerContainerState> {
+  /** The range last sent through onSelection, used to tell a controlled round-trip from a programmatic selection */
+  lastEmittedSelection: Pick<Selection, "end" | "start"> | null = null;
+
   constructor(props: SeqViewerContainerProps) {
     super(props);
 
@@ -89,22 +92,20 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
     };
   }
 
-  selectionIsProgramatic(selection: any): selection is Selection {
-    // If the selection was done programatically, it has not type
-    if (selection) return !selection.type;
-    return false;
-  }
-
   // If the selection prop updates, also scroll the linear view to the new selection
   componentDidUpdate = (prevProps: SeqViewerContainerProps) => {
-    // Only scroll if the selection was done passed in as a prop by a user of SeqViz. Otherwise the selection was
-    // made by the user clicking an element or selecting a range of sequences
-    if (this.selectionIsProgramatic(this.props.selection)) {
-      const sel = this.props.selection;
-      const prevSel = prevProps.selection;
-      if ((sel?.start !== prevSel?.start || sel?.end !== prevSel?.end) && sel?.start !== sel?.end) {
-        this.setCentralIndex("LINEAR", sel?.start || 0);
-      }
+    const sel = this.props.selection;
+    const prevSel = prevProps.selection;
+    if (sel?.start === prevSel?.start && sel?.end === prevSel?.end) return;
+
+    // Only scroll if the selection was set by a user of SeqViz. If the prop just echoes what we sent through
+    // onSelection, the selection was made in the viewer (scrolling would move the content under the cursor mid-drag).
+    const isEcho = sel?.start === this.lastEmittedSelection?.start && sel?.end === this.lastEmittedSelection?.end;
+    if (isEcho) return;
+
+    this.lastEmittedSelection = null;
+    if (sel?.start !== sel?.end) {
+      this.setCentralIndex("LINEAR", sel?.start || 0);
     }
   };
 
@@ -145,6 +146,7 @@ class SeqViewerContainer extends React.Component<SeqViewerContainerProps, SeqVie
   setSelection = (selection: Selection) => {
     // If the user passed a selection, do not update our state here
     const { parent: _, ref: __, ...rest } = selection;
+    this.lastEmittedSelection = { end: selection.end, start: selection.start };
     if (!this.props.selection) this.setState({ selection });
     if (this.props.onSelection) this.props.onSelection(rest);
   };
